@@ -46,8 +46,10 @@
 
     <properties>
         <lwjgl.version>3.3.0</lwjgl.version>
+        <pngdecoder.version>1.0</pngdecoder.version>
         <lwjgl.natives>${native.target}</lwjgl.natives>
         <kotlin.version>1.5.31</kotlin.version>
+
     </properties>
 
     <dependencyManagement>
@@ -105,6 +107,11 @@
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
             <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.l33tlabs.twl</groupId>
+            <artifactId>pngdecoder</artifactId>
+            <version>${pngdecoder.version}</version>
         </dependency>
     </dependencies>
 
