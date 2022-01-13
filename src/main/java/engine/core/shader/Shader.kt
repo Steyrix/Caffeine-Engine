@@ -1,7 +1,6 @@
 package engine.core.shader
 
-import org.lwjgl.opengl.GL20.glCreateProgram
-import org.lwjgl.opengl.GL20.glGetUniformLocation
+import org.lwjgl.opengl.GL33C.*
 import java.lang.IllegalStateException
 
 class Shader {

@@ -1,7 +1,6 @@
 package engine.core.texture
 
-import org.lwjgl.opengl.GL11.*
-import org.lwjgl.opengl.GL30.glGenerateMipmap
+import org.lwjgl.opengl.GL33C.*
 import org.lwjgl.system.MemoryStack.stackPush
 import java.nio.ByteBuffer
 import org.lwjgl.stb.STBImage.*
