@@ -1,7 +1,9 @@
 package engine.core.render2D
 
 import engine.core.texture.Texture2D
-import org.lwjgl.opengl.GL46.*
+import org.lwjgl.opengl.GL20.glEnableVertexAttribArray
+import org.lwjgl.opengl.GL20.glVertexAttribPointer
+import org.lwjgl.opengl.GL30.*
 import java.nio.FloatBuffer
 import java.nio.IntBuffer
 

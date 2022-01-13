@@ -1,6 +1,5 @@
 package engine.core.window
 
-import org.lwjgl.glfw.Callbacks
 import org.lwjgl.glfw.Callbacks.glfwFreeCallbacks
 import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.glfw.GLFWErrorCallback

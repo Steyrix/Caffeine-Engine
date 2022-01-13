@@ -1,6 +1,7 @@
 package engine.core.shader
 
-import org.lwjgl.opengl.GL46.*
+import org.lwjgl.opengl.GL20.glCreateProgram
+import org.lwjgl.opengl.GL20.glGetUniformLocation
 import java.lang.IllegalStateException
 
 class Shader {
@@ -16,7 +17,7 @@ class Shader {
         }
     }
 
-    fun createUniform() {
-
+    fun createUniform(uniformName: String) {
+        val uniformLocation = glGetUniformLocation(id, uniformName)
     }
 }
