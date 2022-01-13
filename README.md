@@ -7,6 +7,6 @@ However, I aim to create usable simple engine, that will, hopefully, allow me to
 My first iteration of engine-creating can be seen in simple-jogl-engine repository, which is based on JOGL,
 his project, on the other hand, will use LWJGL OpenGL binding, since the latter is not as dead as the former.
 
-####Used technologies: 
+#### Used technologies: 
 - OpenGL
 - GLFW
