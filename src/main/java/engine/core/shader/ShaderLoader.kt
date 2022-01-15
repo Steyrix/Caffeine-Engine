@@ -5,6 +5,7 @@ import java.nio.file.Files
 import kotlin.io.path.Path
 
 object ShaderLoader {
+
     fun loadFromFile(
         vertexShaderFilePath: String,
         fragmentShaderFilePath: String

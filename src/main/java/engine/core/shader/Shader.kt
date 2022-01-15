@@ -8,6 +8,7 @@ import java.lang.IllegalStateException
 
 // TODO: move exception messages to constants
 class Shader {
+
     companion object {
         private const val INFO_LOG_MAX_LENGHT = 1024
         private const val MATRIX4F_VALUE_SIZE = 16
