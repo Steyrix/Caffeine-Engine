@@ -7,8 +7,12 @@ import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
 
 // TODO: move exception messages to constants
-// TODO: move magic numbers to constants
 class Shader {
+    companion object {
+        private const val INFO_LOG_MAX_LENGHT = 1024
+        private const val MATRIX4F_VALUE_SIZE = 16
+    }
+
     private val programId = glCreateProgram()
     private var vertexShaderId = 0
     private var fragmentShaderId = 0
@@ -37,7 +41,7 @@ class Shader {
             glUniformMatrix4fv(
                 uniforms[uniformName]!!,
                 false,
-                value.get(it.mallocFloat(16))
+                value.get(it.mallocFloat(MATRIX4F_VALUE_SIZE))
             )
         }
     }
@@ -76,7 +80,9 @@ class Shader {
         glCompileShader(shaderId)
 
         if (glGetShaderi(shaderId, GL_COMPILE_STATUS) == 0) {
-            throw IllegalStateException("Could not compile shader: ${glGetShaderInfoLog(shaderId, 1024)}")
+            throw IllegalStateException(
+                "Could not compile shader: ${glGetShaderInfoLog(shaderId, INFO_LOG_MAX_LENGHT)}"
+            )
         }
 
         glAttachShader(programId, shaderId)
@@ -87,7 +93,9 @@ class Shader {
     fun link() {
         glLinkProgram(programId)
         if (glGetProgrami(programId, GL_LINK_STATUS) == 0) {
-            throw IllegalStateException("Could not link shader: ${glGetShaderInfoLog(programId, 1024)}")
+            throw IllegalStateException(
+                "Could not link shader: ${glGetShaderInfoLog(programId, INFO_LOG_MAX_LENGHT)}"
+            )
         }
 
         if (vertexShaderId != 0) {
@@ -100,7 +108,9 @@ class Shader {
 
         glValidateProgram(programId)
         if (glGetProgrami(programId, GL_VALIDATE_STATUS) == 0) {
-            throw IllegalStateException("Could not validate shader: ${glGetShaderInfoLog(programId, 1024)}")
+            throw IllegalStateException(
+                "Could not validate shader: ${glGetShaderInfoLog(programId, INFO_LOG_MAX_LENGHT)}"
+            )
         }
     }
 
