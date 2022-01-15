@@ -1,5 +1,6 @@
 package engine.core.shader
 
+import org.joml.Matrix4f
 import org.lwjgl.opengl.GL33C.*
 import java.lang.IllegalStateException
 
@@ -18,5 +19,9 @@ class Shader {
 
     fun createUniform(uniformName: String) {
         val uniformLocation = glGetUniformLocation(id, uniformName)
+    }
+
+    fun setUniform(uniformName: String, value: Matrix4f) {
+
     }
 }
