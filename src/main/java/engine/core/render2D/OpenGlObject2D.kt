@@ -12,53 +12,14 @@ import java.nio.IntBuffer
 open class OpenGlObject2D(
         bufferParamsCount: Int,
         dataArrays: List<FloatArray>,
-        private val verticesCount: Int,
+        verticesCount: Int,
         private val texture: Texture2D?
-) {
-
-    private var buffersFilled: Int = 0
-    private val buffers = IntBuffer.allocate(bufferParamsCount)
-    private val vertexArray = IntBuffer.allocate(1)
-
-    private val paramsCount = mutableListOf<Int>()
+): Vertexed2D(bufferParamsCount, dataArrays, verticesCount) {
 
     var boundingBox: BoundingBox? = null
     private val boundingBoxBuffer: IntBuffer = IntBuffer.allocate(1)
     private val boundingBoxVertexArray = IntBuffer.allocate(1)
     private val boundingBoxVerticesCount = 8
-
-    init {
-        initBuffers(dataArrays, bufferParamsCount)
-        initVertexArray()
-    }
-
-    private fun initBuffers(
-        dataArrays: List<FloatArray>,
-        bufferParamsCount: Int
-    ) {
-        require(dataArrays.size == bufferParamsCount)
-        glGenBuffers(IntBuffer.allocate(buffers.capacity()))
-
-        dataArrays.forEach {
-            val floatBuffer = FloatBuffer.wrap(it)
-
-            glBindBuffer(GL_ARRAY_BUFFER, buffers.get(buffersFilled++))
-            glBufferData(GL_ARRAY_BUFFER, floatBuffer, GL_STATIC_DRAW)
-
-            paramsCount.add(it.size / verticesCount)
-        }
-    }
-
-    private fun initVertexArray() {
-        glGenVertexArrays(vertexArray)
-        glBindVertexArray(vertexArray.get(0))
-
-        for (attribIndex in 0 until buffersFilled) {
-            glEnableVertexAttribArray(attribIndex)
-            glBindBuffer(GL_ARRAY_BUFFER, buffers.get(attribIndex))
-            glVertexAttribPointer(attribIndex, paramsCount[attribIndex], GL_FLOAT, false, 0 , 0)
-        }
-    }
 
     fun draw(x: Float, y: Float, xSize: Float, ySize: Float, rotationAngle: Float, shader: Shader) {
         shader.bind()
