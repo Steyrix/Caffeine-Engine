@@ -2,12 +2,16 @@ package engine.feature.collision.boundingbox
 
 import engine.feature.geometry.Point2D
 
-open class IntersectableBox(
-        var posX: Float,
-        var posY: Float,
-        var width: Float,
-        var height: Float
-) {
+interface IntersectableBox {
+
+    var posX: Float
+
+    var posY: Float
+
+    var width: Float
+
+    var height: Float
+
     val rightX: Float
         get() = posX + width
 
