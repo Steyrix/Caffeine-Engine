@@ -1,4 +1,4 @@
-package engine.feature
+package engine.feature.matrix
 
 import org.joml.Matrix4f
 import org.joml.Vector3f
