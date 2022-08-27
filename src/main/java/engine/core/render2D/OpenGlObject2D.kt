@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL33C.*
 import java.nio.FloatBuffer
 import java.nio.IntBuffer
 
-//TODO: Derive from Bounding Box
+//TODO: Create Drawable2D class to encapsulate vertex buffer and vertex array logic
 open class OpenGlObject2D(
         bufferParamsCount: Int,
         dataArrays: List<FloatArray>,
@@ -37,7 +37,7 @@ open class OpenGlObject2D(
         bufferParamsCount: Int
     ) {
         require(dataArrays.size == bufferParamsCount)
-        glGenBuffers(IntBuffer.allocate(1))
+        glGenBuffers(IntBuffer.allocate(buffers.capacity()))
 
         dataArrays.forEach {
             val floatBuffer = FloatBuffer.wrap(it)
