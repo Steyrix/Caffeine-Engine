@@ -1,121 +1,38 @@
 package engine.feature.collision.boundingbox
 
-import engine.feature.geometry.Point2D
+import engine.feature.util.Buffer
+import org.lwjgl.opengl.GL33C.*
+import java.nio.FloatBuffer
+import java.nio.IntBuffer
 
 // TODO: Implement cloneable interface
 // TODO: Implement collider pattern
 open class BoundingBox(
-        var posX: Float,
-        var posY: Float,
-        var width: Float,
-        var height: Float,
-) {
-    val rightX: Float
-        get() = posX + width
+        posX: Float,
+        posY: Float,
+        width: Float,
+        height: Float,
+) : IntersectableBox(posX, posY, width, height) {
 
-    val bottomY: Float
-        get() = posY + height
+    val vertexBuffer = IntBuffer.allocate(1)
+    val vertexArray = IntBuffer.allocate(1)
 
-    fun setPosition(nX: Float, nY: Float) {
-        posX = nX
-        posY = nY
+    fun initVertexBuffer() {
+        glGenBuffers(IntBuffer.allocate(1))
+
+        val bbVerticesArray = Buffer.RECTANGLE_VERTICES
+        val bbVerticesBuffer = FloatBuffer.wrap(bbVerticesArray)
+
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer.get(0))
+        glBufferData(GL_ARRAY_BUFFER, bbVerticesBuffer, GL_STATIC_DRAW)
     }
 
-    fun intersectsX(anotherBox: BoundingBox) = posX < anotherBox.rightX || rightX > anotherBox.posX
+    fun initVertexArray() {
+        glGenVertexArrays(vertexArray)
+        glBindVertexArray(vertexArray.get(0))
 
-
-    fun intersectsY(anotherBox: BoundingBox) = posY < anotherBox.bottomY || bottomY > anotherBox.posY
-
-    fun intersects(anotherBox: BoundingBox) = intersectsX(anotherBox) && intersectsY(anotherBox)
-
-    fun containsEveryPointOf(vararg points: Point2D): Boolean {
-        points.forEach {
-            val doesNotContain = it.x > rightX
-                    || it.x < posX
-                    || it.y > bottomY
-                    || it.y < posY
-            if (doesNotContain) {
-                return false
-            }
-
-        }
-        return true
+        glEnableVertexAttribArray(0)
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer.get(0))
+        glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, 0)
     }
-
-    fun containsNumberOfPoints(numberOfPoints: Int, strict: Boolean, points: List<Point2D>): Boolean {
-        if (numberOfPoints <= 0) {
-            return true
-        }
-
-        var cnt = 0
-        points.forEach {
-            val strictCondition = it.x < rightX
-                    && it.x > posX
-                    && it.y < bottomY
-                    && it.y > posY
-
-            val nonStrictCondition = it.x in posX..rightX
-                    && it.y <= bottomY
-                    && it.y >= posY
-
-            if (strict) {
-                if (strictCondition) {
-                    cnt++
-                }
-            } else {
-                if (nonStrictCondition) {
-                    cnt++
-                }
-            }
-        }
-
-        return cnt >= numberOfPoints
-    }
-
-    fun containsAnyPointOf(strict: Boolean, points: List<Point2D>): Boolean {
-        points.forEach {
-            val strictCondition = it.x < rightX
-                    && it.x > posX
-                    && it.y < bottomY
-                    && it.y > posY
-
-            val nonStrictCondition = it.x in posX..rightX
-                    && it.y <= bottomY
-                    && it.y >= posY
-
-            if (strict) {
-                if (strictCondition) {
-                    return true
-                }
-            } else {
-                if (nonStrictCondition) {
-                    return true
-                }
-            }
-        }
-
-        return false
-    }
-
-    fun containsPoint(strict: Boolean, pointFS: ArrayList<Point2D>): Boolean {
-        return containsAnyPointOf(strict, pointFS)
-    }
-
-    fun getIntersectionWidth(anotherBox: BoundingBox): Float {
-        return if (anotherBox.posX >= posX) {
-            -(rightX - anotherBox.posX)
-        } else {
-            anotherBox.rightX - posX
-        }
-    }
-
-    fun getIntersectionHeight(anotherBox: BoundingBox): Float {
-        return if (anotherBox.posY >= posY) {
-            -(bottomY - anotherBox.posY)
-        } else {
-            anotherBox.bottomY - posY
-        }
-    }
-
-    override fun toString() = "posX:$posX; posY:$posY; rightX:$rightX; bottomY:$bottomY"
 }
