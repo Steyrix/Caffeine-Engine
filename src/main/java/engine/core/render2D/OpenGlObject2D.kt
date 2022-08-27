@@ -2,6 +2,7 @@ package engine.core.render2D
 
 import engine.core.shader.Shader
 import engine.core.texture.Texture2D
+import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.matrix.MatrixComputer
 import org.lwjgl.opengl.GL33C.*
 import java.nio.FloatBuffer
@@ -19,12 +20,12 @@ open class OpenGlObject2D(
     private val buffers = IntBuffer.allocate(bufferParamsCount)
     private val vertexArray = IntBuffer.allocate(1)
 
-    private val boxBuffer: IntBuffer = IntBuffer.allocate(1)
-    private val boxVertexArray = IntBuffer.allocate(1)
-
-    private val boxVerticesCount = 8
-
     private val paramsCount = mutableListOf<Int>()
+
+    var boundingBox: BoundingBox? = null
+    private val boundingBoxBuffer: IntBuffer = IntBuffer.allocate(1)
+    private val boundingBoxVertexArray = IntBuffer.allocate(1)
+    private val boundingBoxVerticesCount = 8
 
     init {
         initBuffers(dataArrays, bufferParamsCount)
