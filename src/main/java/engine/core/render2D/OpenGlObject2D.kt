@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL33C.*
 import java.nio.FloatBuffer
 import java.nio.IntBuffer
 
+//TODO: Derive from Bounding Box
 open class OpenGlObject2D(
         bufferParamsCount: Int,
         dataArrays: List<FloatArray>,
