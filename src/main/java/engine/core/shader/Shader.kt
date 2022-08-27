@@ -12,6 +12,15 @@ class Shader {
     companion object {
         private const val INFO_LOG_MAX_LENGHT = 1024
         private const val MATRIX4F_VALUE_SIZE = 16
+
+        const val VAR_KEY_MODEL = "model"
+        const val VAR_KEY_PROJECTION = "projection"
+        const val VAR_KEY_TEXTURE_SAMPLE = "textureSample"
+        const val VAR_KEY_TEXTURE_ARRAY = "textureArray"
+        const val VAR_KEY_X_OFFSET = "xOffset"
+        const val VAR_KEY_Y_OFFSET = "yOffset"
+        const val VAR_KEY_FRAME_X = "frameNumberX"
+        const val VAR_KEY_FRAME_Y = "frameNumberY"
     }
 
     private val programId = glCreateProgram()
