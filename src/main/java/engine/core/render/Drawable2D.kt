@@ -6,5 +6,11 @@ import engine.core.update.Updatable2D
 interface Drawable2D : Updatable2D {
 
     var shader: Shader?
-    fun draw2D()
+
+    val innerDrawableComponents: MutableList<Drawable2D>
+    fun draw2D() {
+        innerDrawableComponents.forEach {
+            it.draw2D()
+        }
+    }
 }

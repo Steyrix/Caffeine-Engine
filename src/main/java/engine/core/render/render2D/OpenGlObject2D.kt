@@ -22,6 +22,7 @@ open class OpenGlObject2D(
     override var xSize: Float = 0f
     override var ySize: Float = 0f
     override var rotationAngle: Float = 0f
+    override val innerDrawableComponents: MutableList<Drawable2D> = mutableListOf()
 
     var boundingBox: BoundingBox? = null
     private val boundingBoxBuffer: IntBuffer = IntBuffer.allocate(1)
@@ -40,6 +41,7 @@ open class OpenGlObject2D(
             glBindVertexArray(vertexArray.get(0))
             glDrawArrays(GL_TRIANGLES, 0, verticesCount)
         }
+        super.draw2D()
     }
 
     fun dispose() {
