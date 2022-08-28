@@ -1,5 +1,6 @@
 package engine.core.render.render2D
 
+import engine.core.render.Drawable
 import engine.core.shader.Shader
 import engine.core.texture.Texture2D
 import engine.feature.collision.boundingbox.BoundingBox
@@ -13,14 +14,21 @@ open class OpenGlObject2D(
         dataArrays: List<FloatArray>,
         verticesCount: Int,
         private val texture: Texture2D?
-): Vertexed2D(bufferParamsCount, dataArrays, verticesCount) {
+): Vertexed2D(bufferParamsCount, dataArrays, verticesCount), Drawable {
 
     var boundingBox: BoundingBox? = null
     private val boundingBoxBuffer: IntBuffer = IntBuffer.allocate(1)
     private val boundingBoxVertexArray = IntBuffer.allocate(1)
     private val boundingBoxVerticesCount = 8
 
-    fun draw(x: Float, y: Float, xSize: Float, ySize: Float, rotationAngle: Float, shader: Shader) {
+    override fun draw(
+            x: Float,
+            y: Float,
+            xSize: Float,
+            ySize: Float,
+            rotationAngle: Float,
+            shader: Shader
+    ) {
         shader.bind()
 
         val model = MatrixComputer.getResultMatrix(x, y, xSize, ySize, rotationAngle)
