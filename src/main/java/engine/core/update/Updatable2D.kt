@@ -7,6 +7,7 @@ interface Updatable2D {
     var ySize: Float
     var rotationAngle: Float
 
+    // Each component should use its own set of parameters to update itself and its inner components
     fun update(
             x: Float,
             y: Float,
