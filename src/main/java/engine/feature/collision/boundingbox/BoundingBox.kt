@@ -1,6 +1,6 @@
 package engine.feature.collision.boundingbox
 
-import engine.core.render.Drawable
+import engine.core.render.Drawable2D
 import engine.core.render.render2D.Vertexed2D
 import engine.core.shader.Shader
 import engine.feature.util.Buffer
@@ -12,7 +12,7 @@ open class BoundingBox(
         override var posY: Float,
         override var width: Float,
         override var height: Float,
-) : IntersectableBox, Drawable,
+) : IntersectableBox, Drawable2D,
         Vertexed2D(
                 bufferParamsCount = 1,
                 dataArrays = listOf(Buffer.RECTANGLE_VERTICES),

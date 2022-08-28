@@ -1,6 +1,6 @@
 package engine.core.render.render2D
 
-import engine.core.render.Drawable
+import engine.core.render.Drawable2D
 import engine.core.shader.Shader
 import engine.core.texture.Texture2D
 import engine.feature.collision.boundingbox.BoundingBox
@@ -14,7 +14,7 @@ open class OpenGlObject2D(
         dataArrays: List<FloatArray>,
         verticesCount: Int,
         private val texture: Texture2D?
-): Vertexed2D(bufferParamsCount, dataArrays, verticesCount), Drawable {
+): Vertexed2D(bufferParamsCount, dataArrays, verticesCount), Drawable2D {
 
     override var shader: Shader? = null
 

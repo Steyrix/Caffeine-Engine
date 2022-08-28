@@ -2,7 +2,7 @@ package engine.core.render
 
 import engine.core.shader.Shader
 
-interface Drawable {
+interface Drawable2D {
 
     var shader: Shader?
     fun draw2D(
