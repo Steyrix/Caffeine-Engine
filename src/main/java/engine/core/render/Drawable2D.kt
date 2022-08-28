@@ -1,8 +1,9 @@
 package engine.core.render
 
 import engine.core.shader.Shader
+import engine.core.update.Updatable2D
 
-interface Drawable2D {
+interface Drawable2D : Updatable2D {
 
     var shader: Shader?
     fun draw2D(
