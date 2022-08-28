@@ -6,11 +6,5 @@ import engine.core.update.Updatable2D
 interface Drawable2D : Updatable2D {
 
     var shader: Shader?
-    fun draw2D(
-            x: Float,
-            y: Float,
-            xSize: Float,
-            ySize: Float,
-            rotationAngle: Float
-    )
+    fun draw2D()
 }

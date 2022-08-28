@@ -17,19 +17,18 @@ open class OpenGlObject2D(
 ): Vertexed2D(bufferParamsCount, dataArrays, verticesCount), Drawable2D {
 
     override var shader: Shader? = null
+    override var x: Float = 0f
+    override var y: Float = 0f
+    override var xSize: Float = 0f
+    override var ySize: Float = 0f
+    override var rotationAngle: Float = 0f
 
     var boundingBox: BoundingBox? = null
     private val boundingBoxBuffer: IntBuffer = IntBuffer.allocate(1)
     private val boundingBoxVertexArray = IntBuffer.allocate(1)
     private val boundingBoxVerticesCount = 8
 
-    override fun draw2D(
-            x: Float,
-            y: Float,
-            xSize: Float,
-            ySize: Float,
-            rotationAngle: Float
-    ) {
+    override fun draw2D() {
         shader?.let {
             it.bind()
 
