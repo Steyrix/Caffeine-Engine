@@ -4,6 +4,7 @@ import engine.core.shader.Shader
 
 interface Drawable {
 
+    var shader: Shader?
     fun draw(
             x: Float,
             y: Float,

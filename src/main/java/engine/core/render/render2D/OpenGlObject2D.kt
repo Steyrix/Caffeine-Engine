@@ -16,6 +16,8 @@ open class OpenGlObject2D(
         private val texture: Texture2D?
 ): Vertexed2D(bufferParamsCount, dataArrays, verticesCount), Drawable {
 
+    override var shader: Shader? = null
+
     var boundingBox: BoundingBox? = null
     private val boundingBoxBuffer: IntBuffer = IntBuffer.allocate(1)
     private val boundingBoxVertexArray = IntBuffer.allocate(1)
@@ -29,16 +31,17 @@ open class OpenGlObject2D(
             rotationAngle: Float,
             shader: Shader
     ) {
-        shader.bind()
+        shader.let {
+            it.bind()
 
-        val model = MatrixComputer.getResultMatrix(x, y, xSize, ySize, rotationAngle)
+            val model = MatrixComputer.getResultMatrix(x, y, xSize, ySize, rotationAngle)
 
-        // TODO: Define texture state
+            // TODO: Define texture state
+            shader.setUniform(Shader.VAR_KEY_MODEL, model)
 
-        shader.setUniform(Shader.VAR_KEY_MODEL, model)
-
-        glBindVertexArray(vertexArray.get(0))
-        glDrawArrays(GL_TRIANGLES, 0, verticesCount)
+            glBindVertexArray(vertexArray.get(0))
+            glDrawArrays(GL_TRIANGLES, 0, verticesCount)
+        }
     }
 
     fun dispose() {
