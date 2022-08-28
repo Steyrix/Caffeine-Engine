@@ -23,21 +23,20 @@ open class OpenGlObject2D(
     private val boundingBoxVertexArray = IntBuffer.allocate(1)
     private val boundingBoxVerticesCount = 8
 
-    override fun draw(
+    override fun draw2D(
             x: Float,
             y: Float,
             xSize: Float,
             ySize: Float,
-            rotationAngle: Float,
-            shader: Shader
+            rotationAngle: Float
     ) {
-        shader.let {
+        shader?.let {
             it.bind()
 
             val model = MatrixComputer.getResultMatrix(x, y, xSize, ySize, rotationAngle)
 
             // TODO: Define texture state
-            shader.setUniform(Shader.VAR_KEY_MODEL, model)
+            it.setUniform(Shader.VAR_KEY_MODEL, model)
 
             glBindVertexArray(vertexArray.get(0))
             glDrawArrays(GL_TRIANGLES, 0, verticesCount)
