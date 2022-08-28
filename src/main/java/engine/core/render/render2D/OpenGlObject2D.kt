@@ -3,6 +3,7 @@ package engine.core.render.render2D
 import engine.core.render.Drawable2D
 import engine.core.shader.Shader
 import engine.core.texture.Texture2D
+import engine.core.update.SetOf2DParameters
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.matrix.MatrixComputer
 import org.lwjgl.opengl.GL33C.*
@@ -41,6 +42,13 @@ open class OpenGlObject2D(
             glDrawArrays(GL_TRIANGLES, 0, verticesCount)
         }
         super.draw2D()
+    }
+
+    // I temporarily assume each i-indexed inner component should expect (i + 1)-indexed set of parameters
+    fun updateComponent(parameters: List<SetOf2DParameters>) {
+        if (parameters.isEmpty()) return
+
+        this.update(parameters.first())
     }
 
     fun dispose() {

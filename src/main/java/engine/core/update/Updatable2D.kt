@@ -8,17 +8,11 @@ interface Updatable2D {
     var rotationAngle: Float
 
     // Each component should use its own set of parameters to update itself and its inner components
-    fun update(
-            x: Float,
-            y: Float,
-            xSize: Float,
-            ySize: Float,
-            rotationAngle: Float
-    ) {
-        this.x = x
-        this.y = x
-        this.xSize = xSize
-        this.ySize = ySize
-        this.rotationAngle = rotationAngle
+    fun update(parameters: SetOf2DParameters) {
+        x = parameters.x
+        y = parameters.y
+        xSize = parameters.xSize
+        ySize = parameters.ySize
+        rotationAngle = parameters.rotationAngle
     }
 }
