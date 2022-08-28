@@ -8,7 +8,6 @@ import engine.feature.matrix.MatrixComputer
 import org.lwjgl.opengl.GL33C.*
 import java.nio.IntBuffer
 
-//TODO: Create Drawable2D class to encapsulate vertex buffer and vertex array logic
 open class OpenGlObject2D(
         bufferParamsCount: Int,
         dataArrays: List<FloatArray>,
