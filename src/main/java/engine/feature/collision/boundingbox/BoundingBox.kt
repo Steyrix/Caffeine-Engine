@@ -17,7 +17,7 @@ open class BoundingBox(
                 bufferParamsCount = 1,
                 dataArrays = listOf(Buffer.RECTANGLE_VERTICES),
                 verticesCount = 8) {
-    override fun draw(
+    override fun draw2D(
             x: Float,
             y: Float,
             xSize: Float,

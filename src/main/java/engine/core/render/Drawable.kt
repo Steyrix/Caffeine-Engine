@@ -5,12 +5,11 @@ import engine.core.shader.Shader
 interface Drawable {
 
     var shader: Shader?
-    fun draw(
+    fun draw2D(
             x: Float,
             y: Float,
             xSize: Float,
             ySize: Float,
-            rotationAngle: Float,
-            shader: Shader
+            rotationAngle: Float
     )
 }
