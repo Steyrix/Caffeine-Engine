@@ -1,11 +1,10 @@
-package engine.core.render2D
+package engine.core.render.render2D
 
 import engine.core.shader.Shader
 import engine.core.texture.Texture2D
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.matrix.MatrixComputer
 import org.lwjgl.opengl.GL33C.*
-import java.nio.FloatBuffer
 import java.nio.IntBuffer
 
 //TODO: Create Drawable2D class to encapsulate vertex buffer and vertex array logic

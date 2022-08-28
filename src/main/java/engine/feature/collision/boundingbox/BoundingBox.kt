@@ -1,6 +1,6 @@
 package engine.feature.collision.boundingbox
 
-import engine.core.render2D.Vertexed2D
+import engine.core.render.render2D.Vertexed2D
 import engine.feature.util.Buffer
 
 // TODO: Implement cloneable interface

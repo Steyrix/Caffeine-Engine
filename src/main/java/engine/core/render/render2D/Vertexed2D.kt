@@ -1,4 +1,4 @@
-package engine.core.render2D
+package engine.core.render.render2D
 
 import org.lwjgl.opengl.GL33C.*
 import java.nio.FloatBuffer
