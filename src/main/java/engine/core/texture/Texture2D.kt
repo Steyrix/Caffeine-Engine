@@ -1,9 +1,6 @@
 package engine.core.texture
 
 import org.lwjgl.opengl.GL33C.*
-import org.lwjgl.system.MemoryStack.stackPush
-import java.nio.ByteBuffer
-import org.lwjgl.stb.STBImage.*
 
 
 class Texture2D(
@@ -12,7 +9,7 @@ class Texture2D(
 
     companion object {
         fun createInstance(src: String): Texture2D {
-            return Texture2D(TextureLoader.loadTexture(src))
+            return Texture2D(TextureLoader.loadTexture2D(src))
         }
     }
 

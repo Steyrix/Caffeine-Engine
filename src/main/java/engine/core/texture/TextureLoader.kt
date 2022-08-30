@@ -1,6 +1,5 @@
 package engine.core.texture
 
-import org.lwjgl.opengl.GL33C
 import org.lwjgl.stb.STBImage
 import org.lwjgl.system.MemoryStack
 import java.nio.ByteBuffer
@@ -8,7 +7,7 @@ import org.lwjgl.opengl.GL33C.*
 
 object TextureLoader {
 
-    fun loadTexture(src: String): Int {
+    fun loadTexture2D(src: String): Int {
         val width: Int
         val height: Int
 
