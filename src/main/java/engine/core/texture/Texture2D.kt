@@ -54,6 +54,10 @@ class Texture2D(
         glBindTexture(id, GL_TEXTURE_2D)
     }
 
+    fun setParameter(name: Int, value: Int) {
+        glTexParameteri(GL_TEXTURE_2D, name, value)
+    }
+
     fun getId(): Int {
         return id
     }
