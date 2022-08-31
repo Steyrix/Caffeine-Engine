@@ -2,6 +2,7 @@ package engine.core.render.render2D
 
 import engine.core.render.Drawable2D
 import engine.core.shader.Shader
+import engine.core.texture.ArrayTexture2D
 import engine.core.texture.Texture2D
 import engine.core.update.SetOf2DParameters
 import engine.feature.collision.boundingbox.BoundingBox
@@ -13,7 +14,8 @@ open class OpenGlObject2D(
         bufferParamsCount: Int,
         dataArrays: List<FloatArray>,
         verticesCount: Int,
-        texture: Texture2D?
+        var texture: Texture2D? = null,
+        var arrayTexture: ArrayTexture2D? = null
 ): Vertexed2D(bufferParamsCount, dataArrays, verticesCount), Drawable2D {
 
     override var shader: Shader? = null
@@ -28,24 +30,6 @@ open class OpenGlObject2D(
     private val boundingBoxBuffer: IntBuffer = IntBuffer.allocate(1)
     private val boundingBoxVertexArray = IntBuffer.allocate(1)
     private val boundingBoxVerticesCount = 8
-
-    var texture: Texture2D? = texture
-        set(value) {
-            field = value
-            initTextureIfNeeded()
-        }
-    init {
-        initTextureIfNeeded()
-    }
-
-    private fun initTextureIfNeeded() {
-        texture?.let {
-            it.setParameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR)
-            it.setParameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR)
-            it.setParameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
-            it.setParameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
-        }
-    }
 
     override fun draw2D() {
         shader?.let {
