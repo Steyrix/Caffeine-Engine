@@ -14,7 +14,7 @@ class Texture2D(
     }
 
     fun bind() {
-        glBindTexture(id, GL_TEXTURE_2D)
+        glBindTexture(GL_TEXTURE_2D, id)
     }
 
     fun setParameter(name: Int, value: Int) {

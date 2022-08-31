@@ -3,15 +3,20 @@ package engine.core.texture
 import org.lwjgl.stb.STBImage
 import org.lwjgl.system.MemoryStack
 import java.nio.ByteBuffer
-import org.lwjgl.opengl.GL33C.*
+import org.lwjgl.opengl.GL42C.*
+
+data class LoadingResult(
+        val width: Int,
+        val height: Int,
+        val buffer: ByteBuffer
+)
 
 object TextureLoader {
 
-    fun loadTexture2D(src: String): Int {
+    private fun loadViaStbi(src: String): LoadingResult {
+        val buff: ByteBuffer
         val width: Int
         val height: Int
-
-        val buff: ByteBuffer
 
         MemoryStack.stackPush().use {
             val tWidth = it.mallocInt(1)
@@ -26,16 +31,95 @@ object TextureLoader {
             height = tHeight.get()
         }
 
+        return LoadingResult(
+                width,
+                height,
+                buff
+        )
+    }
+    fun loadTexture2D(src: String): Int {
+        val loadingResult = loadViaStbi(src)
+
+        val width = loadingResult.width
+        val height = loadingResult.height
+        val buff = loadingResult.buffer
+
         val id: Int = glGenTextures()
-        glBindTexture(id, GL_TEXTURE_2D)
+        glBindTexture(GL_TEXTURE_2D, id)
 
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1)
 
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0,
-                GL_RGBA, GL_UNSIGNED_BYTE, buff)
+        glTexImage2D(
+                GL_TEXTURE_2D,
+                0,
+                GL_RGBA,
+                width,
+                height,
+                0,
+                GL_RGBA,
+                GL_UNSIGNED_BYTE,
+                buff
+        )
         glGenerateMipmap(GL_TEXTURE_2D)
+        glBindTexture(GL_TEXTURE_2D, 0)
 
         STBImage.stbi_image_free(buff)
+
+        return id
+    }
+
+    fun loadArrayTexture2D(
+            sources: List<String>,
+            layersCount: Int
+    ): Int {
+        var width = 0
+        var height = 0
+        val buffers = mutableListOf<ByteBuffer>()
+
+        sources.forEach { src ->
+            val result = loadViaStbi(src)
+            buffers.add(result.buffer)
+            width = result.width
+            height = result.height
+        }
+
+        val id: Int = glGenTextures()
+        glBindTexture(GL_TEXTURE_2D_ARRAY, id)
+        glTexStorage3D(
+                GL_TEXTURE_2D_ARRAY,
+                1,
+                GL_RGBA8,
+                width,
+                height,
+                layersCount
+        )
+
+        buffers.forEachIndexed { index, byteBuffer ->
+            glTexSubImage3D(
+                    GL_TEXTURE_2D_ARRAY,
+                    index,
+                    0,
+                    0,
+                    0,
+                    width,
+                    height,
+                    1,
+                    GL_RGBA,
+                    GL_UNSIGNED_BYTE,
+                    byteBuffer
+            )
+        }
+
+        glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+        glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR)
+        glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
+        glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
+
+        glBindTexture(GL_TEXTURE_2D_ARRAY, 0)
+
+        buffers.forEach {
+            STBImage.stbi_image_free(it)
+        }
 
         return id
     }
