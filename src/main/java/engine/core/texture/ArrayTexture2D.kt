@@ -2,11 +2,10 @@ package engine.core.texture
 
 import org.lwjgl.opengl.GL42C.*
 
-// TODO: implement
 class ArrayTexture2D(
-        private var id: Int,
+        override val id: Int,
         val layersCount: Int
-) {
+) : Texture {
 
     companion object {
         fun createInstance(
@@ -19,6 +18,7 @@ class ArrayTexture2D(
             )
         }
     }
+
     init {
         bind()
         glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
@@ -28,16 +28,12 @@ class ArrayTexture2D(
         unbind()
     }
 
-    fun bind() {
+    override fun bind() {
         glBindTexture(GL_TEXTURE_2D_ARRAY, id)
     }
 
-    fun unbind() {
+    override fun unbind() {
         glBindTexture(GL_TEXTURE_2D_ARRAY, 0)
-    }
-
-    fun getId(): Int {
-        return id
     }
 
     fun dispose() {
