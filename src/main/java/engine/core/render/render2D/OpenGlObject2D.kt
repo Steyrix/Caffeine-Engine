@@ -7,6 +7,7 @@ import engine.core.texture.Texture2D
 import engine.core.update.SetOf2DParameters
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.matrix.MatrixComputer
+import org.lwjgl.opengl.GL20C
 import org.lwjgl.opengl.GL33C.*
 import java.nio.IntBuffer
 
@@ -31,13 +32,14 @@ open class OpenGlObject2D(
     private val boundingBoxVertexArray = IntBuffer.allocate(1)
     private val boundingBoxVerticesCount = 8
 
+    private var textureUniformName: String = ""
     override fun draw2D() {
         shader?.let {
             it.bind()
 
             val model = MatrixComputer.getResultMatrix(x, y, xSize, ySize, rotationAngle)
 
-            // TODO: Define texture state
+            defineTextureState()
             it.setUniform(Shader.VAR_KEY_MODEL, model)
 
             glBindVertexArray(vertexArray.get(0))
@@ -56,5 +58,27 @@ open class OpenGlObject2D(
     fun dispose() {
         glDeleteBuffers(buffers)
         glDeleteVertexArrays(vertexArray)
+    }
+
+    private fun defineTextureState() {
+        if (texture != null) {
+            textureUniformName = Shader.VAR_TEXTURE_SAMPLE
+            bindTexture()
+        } else if (arrayTexture != null) {
+            textureUniformName = Shader.VAR_TEXTURE_ARRAY
+            bindArrayTexture()
+        }
+    }
+
+    private fun bindTexture() {
+        glActiveTexture(GL_TEXTURE0)
+        texture!!.bind()
+        shader!!.setUniform(textureUniformName, 0)
+    }
+
+    private fun bindArrayTexture() {
+        glActiveTexture(GL_TEXTURE0)
+        arrayTexture!!.bind()
+        shader!!.setUniform(textureUniformName, 0)
     }
 }

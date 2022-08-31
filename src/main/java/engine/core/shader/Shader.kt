@@ -21,6 +21,9 @@ class Shader {
         const val VAR_KEY_Y_OFFSET = "yOffset"
         const val VAR_KEY_FRAME_X = "frameNumberX"
         const val VAR_KEY_FRAME_Y = "frameNumberY"
+
+        const val VAR_TEXTURE_SAMPLE = "textureSample"
+        const val VAR_TEXTURE_ARRAY = "textureArray"
     }
 
     private val programId = glCreateProgram()
