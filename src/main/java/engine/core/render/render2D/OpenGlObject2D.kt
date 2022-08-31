@@ -7,7 +7,6 @@ import engine.core.texture.Texture2D
 import engine.core.update.SetOf2DParameters
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.matrix.MatrixComputer
-import org.lwjgl.opengl.GL20C
 import org.lwjgl.opengl.GL33C.*
 import java.nio.IntBuffer
 
@@ -80,5 +79,9 @@ open class OpenGlObject2D(
         glActiveTexture(GL_TEXTURE0)
         arrayTexture!!.bind()
         shader!!.setUniform(textureUniformName, 0)
+    }
+
+    fun isTextured(): Boolean {
+        return texture != null || arrayTexture != null
     }
 }
