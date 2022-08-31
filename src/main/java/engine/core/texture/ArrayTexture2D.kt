@@ -1,5 +1,7 @@
 package engine.core.texture
 
+import org.lwjgl.opengl.GL42C.*
+
 // TODO: implement
 class ArrayTexture2D(
         private var id: Int,
@@ -17,5 +19,28 @@ class ArrayTexture2D(
             )
         }
     }
+    init {
+        bind()
+        glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+        glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR)
+        glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
+        glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
+        unbind()
+    }
 
+    fun bind() {
+        glBindTexture(GL_TEXTURE_2D_ARRAY, id)
+    }
+
+    fun unbind() {
+        glBindTexture(GL_TEXTURE_2D_ARRAY, 0)
+    }
+
+    fun getId(): Int {
+        return id
+    }
+
+    fun dispose() {
+        glDeleteTextures(id)
+    }
 }

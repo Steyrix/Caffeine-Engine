@@ -14,14 +14,20 @@ class Texture2D(
     }
 
     init {
+        bind()
         setParameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR)
         setParameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR)
         setParameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
         setParameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
+        unbind()
     }
 
     fun bind() {
         glBindTexture(GL_TEXTURE_2D, id)
+    }
+
+    fun unbind() {
+        glBindTexture(GL_TEXTURE_2D, 0)
     }
 
     fun setParameter(name: Int, value: Int) {
