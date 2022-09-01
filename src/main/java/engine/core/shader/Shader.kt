@@ -36,11 +36,12 @@ class Shader {
     }
 
     fun createUniform(uniformName: String) {
+        println("Creating uniform $uniformName")
         val uniformLocation = glGetUniformLocation(programId, uniformName)
         if (uniformLocation < 0) {
             throw IllegalArgumentException("Could not find uniform with name $uniformName")
         }
-
+        println("Created $uniformName")
         uniforms[uniformName] = uniformLocation
     }
 
@@ -140,8 +141,9 @@ class Shader {
     }
 
     private fun checkForUniformNameExists(uniformName: String) {
-        require(uniforms.containsKey(uniformName)) {
+        if (!uniforms.containsKey(uniformName)) {
             createUniform(uniformName)
         }
+        // else throw IllegalArgumentException("Went wrong")
     }
 }

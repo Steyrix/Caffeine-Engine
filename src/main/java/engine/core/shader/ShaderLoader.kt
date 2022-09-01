@@ -16,6 +16,7 @@ object ShaderLoader {
             val charset = Charset.defaultCharset()
             createVertexShader(String(encodedVertexShader, charset))
             createFragmentShader(String(encodedFragmentShader, charset))
+            link()
         }
     }
 }

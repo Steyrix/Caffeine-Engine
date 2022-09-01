@@ -39,6 +39,7 @@ open class OpenGlObject2D(
             val model = MatrixComputer.getResultMatrix(x, y, xSize, ySize, rotationAngle)
 
             defineTextureState()
+            shader!!.bind()
             it.setUniform(Shader.VAR_KEY_MODEL, model)
 
             glBindVertexArray(vertexArrayHandle)
@@ -74,12 +75,14 @@ open class OpenGlObject2D(
     private fun bindTexture() {
         glActiveTexture(GL_TEXTURE0)
         texture!!.bind()
+        shader!!.bind()
         shader!!.setUniform(textureUniformName, 0)
     }
 
     private fun bindArrayTexture() {
         glActiveTexture(GL_TEXTURE0)
         arrayTexture!!.bind()
+        shader!!.bind()
         shader!!.setUniform(textureUniformName, 0)
     }
 

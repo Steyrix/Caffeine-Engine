@@ -32,6 +32,7 @@ open class Vertexed2D(
 
             val floatBuffer = BufferUtils.createFloatBuffer(2 * it.size)
             floatBuffer.put(it)
+            floatBuffer.flip()
 
             glBindBuffer(GL_ARRAY_BUFFER, bufferHandles[buffersFilled++])
             glBufferData(GL_ARRAY_BUFFER, floatBuffer, GL_STATIC_DRAW)
