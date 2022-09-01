@@ -41,7 +41,7 @@ open class OpenGlObject2D(
             defineTextureState()
             it.setUniform(Shader.VAR_KEY_MODEL, model)
 
-            glBindVertexArray(vertexArray.get(0))
+            glBindVertexArray(vertexArrayHandle)
             glDrawArrays(GL_TRIANGLES, 0, verticesCount)
         }
         super.draw2D()
@@ -55,16 +55,18 @@ open class OpenGlObject2D(
     }
 
     fun dispose() {
-        glDeleteBuffers(buffers)
-        glDeleteVertexArrays(vertexArray)
+        bufferHandles.forEach {
+            glDeleteBuffers(it)
+        }
+        glDeleteVertexArrays(vertexArrayHandle)
     }
 
     private fun defineTextureState() {
         if (texture != null) {
-            textureUniformName = Shader.VAR_TEXTURE_SAMPLE
+            textureUniformName = Shader.VAR_KEY_TEXTURE_SAMPLE
             bindTexture()
         } else if (arrayTexture != null) {
-            textureUniformName = Shader.VAR_TEXTURE_ARRAY
+            textureUniformName = Shader.VAR_KEY_TEXTURE_ARRAY
             bindArrayTexture()
         }
     }
