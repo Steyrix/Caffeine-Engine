@@ -1,8 +1,7 @@
 package engine.core.render.render2D
 
+import org.lwjgl.BufferUtils
 import org.lwjgl.opengl.GL33C.*
-import java.nio.FloatBuffer
-import java.nio.IntBuffer
 
 open class Vertexed2D(
         bufferParamsCount: Int,
@@ -11,8 +10,8 @@ open class Vertexed2D(
 ) {
 
     private var buffersFilled: Int = 0
-    protected val buffers: IntBuffer = IntBuffer.allocate(bufferParamsCount)
-    protected val vertexArray: IntBuffer = IntBuffer.allocate(1)
+    protected val bufferHandles: MutableList<Int> = mutableListOf()
+    protected var vertexArrayHandle: Int = 0
 
     private val paramsCount = mutableListOf<Int>()
 
@@ -26,12 +25,15 @@ open class Vertexed2D(
             bufferParamsCount: Int
     ) {
         require(dataArrays.size == bufferParamsCount)
-        glGenBuffers(IntBuffer.allocate(buffers.capacity()))
 
         dataArrays.forEach {
-            val floatBuffer = FloatBuffer.wrap(it)
+            val bufferHandle = glGenBuffers()
+            bufferHandles.add(bufferHandle)
 
-            glBindBuffer(GL_ARRAY_BUFFER, buffers.get(buffersFilled++))
+            val floatBuffer = BufferUtils.createFloatBuffer(2 * it.size)
+            floatBuffer.put(it)
+
+            glBindBuffer(GL_ARRAY_BUFFER, bufferHandles[buffersFilled++])
             glBufferData(GL_ARRAY_BUFFER, floatBuffer, GL_STATIC_DRAW)
 
             paramsCount.add(it.size / verticesCount)
@@ -39,12 +41,12 @@ open class Vertexed2D(
     }
 
     private fun initVertexArray() {
-        glGenVertexArrays(vertexArray)
-        glBindVertexArray(vertexArray.get(0))
+        vertexArrayHandle = glGenVertexArrays()
+        glBindVertexArray(vertexArrayHandle)
 
         for (attribIndex in 0 until buffersFilled) {
             glEnableVertexAttribArray(attribIndex)
-            glBindBuffer(GL_ARRAY_BUFFER, buffers.get(attribIndex))
+            glBindBuffer(GL_ARRAY_BUFFER, bufferHandles[attribIndex])
             glVertexAttribPointer(attribIndex, paramsCount[attribIndex], GL_FLOAT, false, 0, 0)
         }
     }
