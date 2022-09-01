@@ -19,6 +19,7 @@ open class BoundingBox(
                 verticesCount = 8) {
 
     override var shader: Shader? = null
+    override val innerDrawableComponents: MutableList<Drawable2D> = mutableListOf()
     override var x: Float = 0f
     override var y: Float = 0f
     override var xSize: Float = 0f
