@@ -8,49 +8,12 @@
     <artifactId>Caffeine-Engine</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <profiles>
-        <profile>
-            <id>windows-profile</id>
-            <activation>
-                <os>
-                    <family>Windows</family>
-                </os>
-            </activation>
-            <properties>
-                <native.target>natives-windows</native.target>
-            </properties>
-        </profile>
-        <profile>
-            <id>linux-profile</id>
-            <activation>
-                <os>
-                    <family>Linux</family>
-                </os>
-            </activation>
-            <properties>
-                <native.target>natives-linux</native.target>
-            </properties>
-        </profile>
-        <profile>
-            <id>OSX-profile</id>
-            <activation>
-                <os>
-                    <family>mac</family>
-                </os>
-            </activation>
-            <properties>
-                <native.target>natives-macos</native.target>
-            </properties>
-        </profile>
-    </profiles>
-
     <properties>
-        <lwjgl.version>3.3.0</lwjgl.version>
-        <joml.version>1.10.2</joml.version>
+        <lwjgl.version>3.3.1</lwjgl.version>
+        <joml.version>1.10.4</joml.version>
+        <lwjgl.natives>natives-macos-arm64</lwjgl.natives>
         <pngdecoder.version>1.0</pngdecoder.version>
-        <lwjgl.natives>${native.target}</lwjgl.natives>
         <kotlin.version>1.5.31</kotlin.version>
-
     </properties>
 
     <dependencyManagement>
@@ -103,11 +66,15 @@
             <version>${lwjgl.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.lwjgl</groupId>
+            <artifactId>lwjgl-stb</artifactId>
+            <classifier>${lwjgl.natives}</classifier>
+        </dependency>
+        <dependency>
             <groupId>org.joml</groupId>
             <artifactId>joml</artifactId>
             <version>${joml.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-test</artifactId>
