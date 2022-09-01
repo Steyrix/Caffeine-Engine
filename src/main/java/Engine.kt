@@ -9,7 +9,7 @@ class Engine(
     private var scene: Scene
 ) : Runnable {
 
-    private var window = Window()
+    private var window = Window(500, 500)
     private val timer = Timer()
     private var gameLoop: GameLoop = FixedStepGameLoop(window, timer)
 
@@ -22,9 +22,16 @@ class Engine(
         try {
             init()
             gameLoop.loop(
-                    inputFunc = { scene.input(window) },
-                    renderFunc = { scene.render(window) },
-                    updateFunc = { deltaTime -> scene.update(deltaTime) }
+                    inputFunc = {
+                        scene.input(window)
+                    },
+                    renderFunc = {
+                        scene.render(window)
+                        window.update()
+                    },
+                    updateFunc = { deltaTime ->
+                        scene.update(deltaTime)
+                    }
             )
         } catch (e: Exception) {
             e.printStackTrace()
