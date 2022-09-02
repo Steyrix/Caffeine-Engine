@@ -27,9 +27,10 @@ open class OpenGlObject2D(
     override val innerDrawableComponents: MutableList<Drawable2D> = mutableListOf()
 
     var boundingBox: BoundingBox? = null
-    private val boundingBoxBuffer: IntBuffer = IntBuffer.allocate(1)
-    private val boundingBoxVertexArray = IntBuffer.allocate(1)
-    private val boundingBoxVerticesCount = 8
+    set(value) {
+        if (value != null) innerDrawableComponents.add(value)
+        field = value
+    }
 
     private var textureUniformName: String = ""
     override fun draw2D() {
@@ -39,7 +40,6 @@ open class OpenGlObject2D(
             val model = MatrixComputer.getResultMatrix(x, y, xSize, ySize, rotationAngle)
 
             defineTextureState()
-            shader!!.bind()
             it.setUniform(Shader.VAR_KEY_MODEL, model)
 
             glBindVertexArray(vertexArrayHandle)
