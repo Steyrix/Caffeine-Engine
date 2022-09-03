@@ -1,6 +1,5 @@
 package engine.core.render.render2D
 
-import engine.core.render.Drawable2D
 import engine.core.shader.Shader
 import engine.core.texture.ArrayTexture2D
 import engine.core.texture.Texture2D

@@ -1,6 +1,6 @@
 package engine.feature.collision.boundingbox
 
-import engine.core.render.Drawable2D
+import engine.core.render.render2D.Drawable2D
 import engine.core.render.render2D.Vertexed2D
 import engine.core.shader.Shader
 import engine.feature.matrix.MatrixComputer
