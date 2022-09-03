@@ -92,6 +92,6 @@ class LabyrinthDemo(
         glClear(GL_COLOR_BUFFER_BIT)
         glClearColor(0.5f, 0.5f, 0.5f, 0.5f)
 
-        mainCharacter?.draw2D()
+        mainCharacter?.draw()
     }
 }

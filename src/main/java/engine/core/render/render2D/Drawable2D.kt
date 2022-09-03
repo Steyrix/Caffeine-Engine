@@ -9,9 +9,9 @@ interface Drawable2D : Drawable, Updatable2D {
     var shader: Shader?
 
     val innerDrawableComponents: MutableList<Drawable2D>
-    fun draw2D() {
+    fun draw() {
         innerDrawableComponents.forEach {
-            it.draw2D()
+            it.draw()
         }
     }
 }

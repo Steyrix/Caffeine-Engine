@@ -31,7 +31,7 @@ open class OpenGlObject2D(
     }
 
     private var textureUniformName: String = ""
-    override fun draw2D() {
+    override fun draw() {
         shader?.let {
             it.bind()
 
@@ -43,7 +43,7 @@ open class OpenGlObject2D(
             glBindVertexArray(vertexArrayHandle)
             glDrawArrays(GL_TRIANGLES, 0, verticesCount)
         }
-        super.draw2D()
+        super.draw()
     }
 
     // I temporarily assume each i-indexed inner component should expect (i + 1)-indexed set of parameters

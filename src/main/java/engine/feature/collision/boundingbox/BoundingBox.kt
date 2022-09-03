@@ -24,7 +24,7 @@ open class BoundingBox(
     override val innerDrawableComponents: MutableList<Drawable2D> = mutableListOf()
     override var rotationAngle: Float = 0f
 
-    override fun draw2D() {
+    override fun draw() {
         shader?.let {
             it.bind()
 
