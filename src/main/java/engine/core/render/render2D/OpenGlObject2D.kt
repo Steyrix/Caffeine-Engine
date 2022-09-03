@@ -8,7 +8,6 @@ import engine.core.update.SetOf2DParameters
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.matrix.MatrixComputer
 import org.lwjgl.opengl.GL33C.*
-import java.nio.IntBuffer
 
 open class OpenGlObject2D(
         bufferParamsCount: Int,
@@ -53,6 +52,11 @@ open class OpenGlObject2D(
         if (parameters.isEmpty()) return
 
         this.update(parameters.first())
+        parameters.drop(0)
+
+        parameters.forEachIndexed { i, it ->
+            innerDrawableComponents[i].update(it)
+        }
     }
 
     fun dispose() {
