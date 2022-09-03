@@ -3,7 +3,7 @@ package engine.core.render.render2D
 import engine.core.shader.Shader
 import engine.core.texture.ArrayTexture2D
 import engine.core.texture.Texture2D
-import engine.core.update.SetOf2DParameters
+import engine.core.update.update2D.SetOf2DParameters
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.matrix.MatrixComputer
 import org.lwjgl.opengl.GL33C.*

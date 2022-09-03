@@ -1,4 +1,6 @@
-package engine.core.update
+package engine.core.update.update2D
+
+import engine.core.update.SetOfParameters
 
 data class SetOf2DParameters(
         var x: Float,

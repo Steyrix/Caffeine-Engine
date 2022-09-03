@@ -1,4 +1,4 @@
-package engine.core.update
+package engine.core.update.update2D
 
 interface Updatable2D {
     var x: Float
