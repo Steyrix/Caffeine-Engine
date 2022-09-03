@@ -6,4 +6,4 @@ data class SetOf2DParameters(
         var xSize: Float,
         var ySize: Float,
         var rotationAngle: Float
-)
+) : SetOfParameters
