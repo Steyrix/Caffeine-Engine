@@ -35,6 +35,9 @@ class LabyrinthDemo(
 
         val boxVertexShaderPath = this.javaClass.getResource("/shaders/boundingBoxVertexShader.glsl")!!.path
         val boxFragmentShaderPath = this.javaClass.getResource("/shaders/boundingBoxFragmentShader.glsl")!!.path
+        val characterVertexShaderPath = this.javaClass.getResource("/shaders/animVertexShader.glsl")!!.path
+        val characterFragmentShaderPath = this.javaClass.getResource("/shaders/animFragmentShader.glsl")!!.path
+
         characterBoundingBox = BoundingBox(
                 x = 100f,
                 y = 100f,
@@ -44,10 +47,10 @@ class LabyrinthDemo(
             shader = ShaderLoader.loadFromFile(
                     vertexShaderFilePath = boxVertexShaderPath,
                     fragmentShaderFilePath = boxFragmentShaderPath
-            )
-
-            shader!!.bind()
-            shader!!.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection!!)
+            ).also {
+                it.bind()
+                it.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection!!)
+            }
         }
 
         val frameSizeX = 0.1f
@@ -61,22 +64,19 @@ class LabyrinthDemo(
                 verticesCount = 6,
                 texture = Texture2D.createInstance(texturePath),
                 arrayTexture = null
-        )
-
-        val vertexShaderPath = this.javaClass.getResource("/shaders/animVertexShader.glsl")!!.path
-        val fragmentShaderPath = this.javaClass.getResource("/shaders/animFragmentShader.glsl")!!.path
-        mainCharacter?.let { openGlObject ->
-            openGlObject.boundingBox = characterBoundingBox
-            openGlObject.x = 100f
-            openGlObject.y = 100f
-            openGlObject.xSize = 100f
-            openGlObject.ySize = 100f
-            openGlObject.shader = ShaderLoader.loadFromFile(
-                    vertexShaderFilePath = vertexShaderPath,
-                    fragmentShaderFilePath = fragmentShaderPath
-            )
-            openGlObject.shader!!.bind()
-            openGlObject.shader!!.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection!!)
+        ).apply {
+            boundingBox = characterBoundingBox
+            x = 100f
+            y = 100f
+            xSize = 100f
+            ySize = 100f
+            shader = ShaderLoader.loadFromFile(
+                    vertexShaderFilePath = characterVertexShaderPath,
+                    fragmentShaderFilePath = characterFragmentShaderPath
+            ).also {
+                it.bind()
+                it.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection!!)
+            }
         }
     }
 
