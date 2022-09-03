@@ -9,7 +9,7 @@ interface Drawable2D : Drawable, Updatable2D {
     var shader: Shader?
 
     val innerDrawableComponents: MutableList<Drawable2D>
-    fun draw() {
+    override fun draw() {
         innerDrawableComponents.forEach {
             it.draw()
         }

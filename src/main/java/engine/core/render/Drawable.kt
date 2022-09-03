@@ -1,3 +1,5 @@
 package engine.core.render
 
-interface Drawable
+interface Drawable {
+    fun draw()
+}
