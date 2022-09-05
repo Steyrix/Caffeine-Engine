@@ -3,23 +3,26 @@ package engine.feature.text
 import engine.core.render.render2D.OpenGlObject2D
 import engine.core.shader.Shader
 import engine.core.texture.Texture2D
-import engine.core.texture.TextureLoader
 import engine.feature.geometry.Point2D
 import engine.feature.text.data.Font
 import engine.feature.util.Buffer
 import java.awt.Dimension
 import java.io.IOException
 
-class TextRenderer private constructor(
+class TextRenderer(
         private val textureAtlas: Texture2D?,
         private val characterCoordinates: HashMap<Char, Point2D>?,
-        private val charSize: Dimension
+        private val charSize: Dimension,
+        private var textShader: Shader
 ) {
     companion object {
         // TODO: error text to constants, remove exception handling
-        fun getInstance(charSize: Dimension,
-                        textureFilePath: String,
-                        characters: MutableList<Char>): TextRenderer {
+        fun getInstance(
+                charSize: Dimension,
+                textureFilePath: String,
+                characters: MutableList<Char>,
+                initialShader: Shader
+        ): TextRenderer {
             var textureAtlas: Texture2D? = null
             var characterCoordinates: HashMap<Char, Point2D>? = null
 
@@ -36,7 +39,7 @@ class TextRenderer private constructor(
                 characterCoordinates = null
             }
 
-            return TextRenderer(textureAtlas!!, characterCoordinates!!, charSize)
+            return TextRenderer(textureAtlas!!, characterCoordinates!!, charSize, initialShader)
         }
 
         private fun generateMap(charSize: Dimension,
@@ -79,6 +82,9 @@ class TextRenderer private constructor(
     val isValid: Boolean
         get() = this.textureAtlas != null && this.characterCoordinates != null
 
+    override fun toString(): String =
+            "Text renderer with " + characterCoordinates!!.size + " characters. \n" + characterCoordinates.toString()
+
     // TODO: implement modifiable horizontal and vertical gaps
     fun drawText(
             text: String,
@@ -104,8 +110,7 @@ class TextRenderer private constructor(
             drawCharacter(
                     char = c,
                     fontSize = fontSize,
-                    pos = Point2D(horizontalPos, verticalPos),
-                    shader
+                    pos = Point2D(horizontalPos, verticalPos)
             )
         }
     }
@@ -118,40 +123,6 @@ class TextRenderer private constructor(
             pos: Point2D
     ) {
 
-    }
-
-    // TODO: remove shader from parameter list
-    private fun drawCharacter(
-            char: Char,
-            fontSize: Dimension,
-            pos: Point2D,
-            textShader: Shader
-    ) {
-        val glObject: OpenGlObject2D
-
-        if (!cache.containsKey(char)) {
-            val uvCoordinates = getCharUV(char)
-            val bufferData = Buffer.RECTANGLE_INDICES
-            glObject = OpenGlObject2D(
-                    bufferParamsCount = 2,
-                    dataArrays = listOf(uvCoordinates, bufferData),
-                    verticesCount = 6,
-                    texture = textureAtlas
-            ).apply {
-                x = pos.x
-                y = pos.y
-                xSize = fontSize.getWidth().toFloat()
-                ySize = fontSize.getHeight().toFloat()
-                rotationAngle = 0f
-                shader = textShader
-            }
-
-            cache[char] = glObject
-        } else {
-            glObject = cache[char]!!
-        }
-
-        glObject.draw()
     }
 
     private fun getCharUV(c: Char): FloatArray {
@@ -184,6 +155,40 @@ class TextRenderer private constructor(
         )
     }
 
-    override fun toString(): String =
-            "Text renderer with " + characterCoordinates!!.size + " characters. \n" + characterCoordinates.toString()
+    fun setShader(shader: Shader) {
+        textShader = shader
+    }
+
+    // TODO: remove shader from parameter list
+    private fun drawCharacter(
+            char: Char,
+            fontSize: Dimension,
+            pos: Point2D
+    ) {
+        val glObject: OpenGlObject2D
+
+        if (!cache.containsKey(char)) {
+            val uvCoordinates = getCharUV(char)
+            val bufferData = Buffer.RECTANGLE_INDICES
+            glObject = OpenGlObject2D(
+                    bufferParamsCount = 2,
+                    dataArrays = listOf(uvCoordinates, bufferData),
+                    verticesCount = 6,
+                    texture = textureAtlas
+            ).apply {
+                x = pos.x
+                y = pos.y
+                xSize = fontSize.getWidth().toFloat()
+                ySize = fontSize.getHeight().toFloat()
+                rotationAngle = 0f
+                shader = textShader
+            }
+
+            cache[char] = glObject
+        } else {
+            glObject = cache[char]!!
+        }
+
+        glObject.draw()
+    }
 }
