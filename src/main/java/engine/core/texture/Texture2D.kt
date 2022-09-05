@@ -1,11 +1,14 @@
 package engine.core.texture
 
+import org.lwjgl.opengl.GL11C
 import org.lwjgl.opengl.GL33C.*
+import java.awt.Dimension
 
 class Texture2D(
         override val id: Int
 ) : Texture {
 
+    val dimension: Dimension
     companion object {
         fun createInstance(src: String): Texture2D {
             return Texture2D(TextureLoader.loadTexture2D(src))
@@ -14,6 +17,7 @@ class Texture2D(
 
     init {
         bind()
+        dimension = getSize()
         setParameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR)
         setParameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR)
         setParameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
@@ -29,11 +33,22 @@ class Texture2D(
         glBindTexture(GL_TEXTURE_2D, 0)
     }
 
+    fun getHeight(): Float {
+        return glGetTexParameterf(id, GL_TEXTURE_HEIGHT)
+    }
+
     fun setParameter(name: Int, value: Int) {
         glTexParameteri(GL_TEXTURE_2D, name, value)
     }
 
     fun dispose() {
         glDeleteTextures(id)
+    }
+
+    private fun getSize(): Dimension {
+        val array = intArrayOf()
+        glGetTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_WIDTH, array)
+        glGetTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_HEIGHT, array)
+        return Dimension(array.first(), array.last())
     }
 }
