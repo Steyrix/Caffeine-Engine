@@ -33,10 +33,6 @@ class Texture2D(
         glBindTexture(GL_TEXTURE_2D, 0)
     }
 
-    fun getHeight(): Float {
-        return glGetTexParameterf(id, GL_TEXTURE_HEIGHT)
-    }
-
     fun setParameter(name: Int, value: Int) {
         glTexParameteri(GL_TEXTURE_2D, name, value)
     }
