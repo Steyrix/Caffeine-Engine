@@ -8,7 +8,7 @@ class Texture2D(
         override val id: Int
 ) : Texture {
 
-    val dimension: Dimension
+    private val dimension: Dimension
     companion object {
         fun createInstance(src: String): Texture2D {
             return Texture2D(TextureLoader.loadTexture2D(src))
@@ -43,6 +43,14 @@ class Texture2D(
 
     fun dispose() {
         glDeleteTextures(id)
+    }
+
+    fun getWidthF(): Float {
+        return dimension.width.toFloat()
+    }
+
+    fun getHeightF(): Float {
+        return dimension.height.toFloat()
     }
 
     private fun getSize(): Dimension {
