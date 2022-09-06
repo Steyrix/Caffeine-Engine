@@ -15,7 +15,6 @@ class TextRenderer(
         private var textShader: Shader
 ) {
     companion object {
-        private const val IO_ERROR_TEXT = "IO error. File cannot be read"
         private const val ATLAS_WRONG_FORMAT_ERROR_TEXT = "Invalid texture atlas format"
         private const val NULL_COORDINATES_MAP_ERROR_TEXT = "Character coordinates map is null"
         private const val NULL_ATLAS_ERROR_TEXT = "Texture atlas is null"
