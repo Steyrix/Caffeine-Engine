@@ -1,13 +1,12 @@
 package engine.feature.text
 
+import com.sun.media.sound.InvalidFormatException
 import engine.core.render.render2D.OpenGlObject2D
 import engine.core.shader.Shader
 import engine.core.texture.Texture2D
 import engine.feature.geometry.Point2D
-import engine.feature.text.data.Font
 import engine.feature.util.Buffer
 import java.awt.Dimension
-import java.io.IOException
 
 class TextRenderer(
         private val textureAtlas: Texture2D?,
@@ -16,6 +15,10 @@ class TextRenderer(
         private var textShader: Shader
 ) {
     companion object {
+        private const val IO_ERROR_TEXT = "IO error. File cannot be read"
+        private const val ATLAS_WRONG_FORMAT_ERROR_TEXT = "Invalid texture atlas format"
+        private const val NULL_COORDINATES_MAP_ERROR_TEXT = "Character coordinates map is null"
+        private const val NULL_ATLAS_ERROR_TEXT = "Texture atlas is null"
         // TODO: error text to constants, remove exception handling
         fun getInstance(
                 charSize: Dimension,
@@ -23,21 +26,8 @@ class TextRenderer(
                 characters: MutableList<Char>,
                 initialShader: Shader
         ): TextRenderer {
-            var textureAtlas: Texture2D? = null
-            var characterCoordinates: HashMap<Char, Point2D>? = null
-
-            try {
-                textureAtlas = Texture2D.createInstance(textureFilePath)
-                characterCoordinates = generateMap(charSize, textureAtlas, characters)
-            } catch (e: IOException) {
-                println("IO error. File can not be read")
-                e.printStackTrace()
-                textureAtlas = null
-            } catch (e: IllegalArgumentException) {
-                println("Font texture atlas has wrong format")
-                e.printStackTrace()
-                characterCoordinates = null
-            }
+            val textureAtlas: Texture2D = Texture2D.createInstance(textureFilePath)
+            val characterCoordinates = generateMap(charSize, textureAtlas, characters)
 
             return TextRenderer(textureAtlas!!, characterCoordinates!!, charSize, initialShader)
         }
@@ -58,9 +48,9 @@ class TextRenderer(
                 yStep = (textureAtlas.getHeightF() / charSize.getHeight()).toInt()
                 charsCount = xStep * yStep
                 if (charsCount != characters.size)
-                    throw IllegalArgumentException("Invalid texture atlas format")
+                    throw InvalidFormatException(ATLAS_WRONG_FORMAT_ERROR_TEXT)
             } else
-                throw IllegalArgumentException("Invalid texture atlas format")
+                throw InvalidFormatException(ATLAS_WRONG_FORMAT_ERROR_TEXT)
 
             var j = 0
             var k = 0
@@ -89,8 +79,7 @@ class TextRenderer(
     fun drawText(
             text: String,
             fontSize: Dimension,
-            pos: Point2D,
-            shader: Shader
+            pos: Point2D
     ) {
         var x = 0
         var y = 0
@@ -115,25 +104,15 @@ class TextRenderer(
         }
     }
 
-    // TODO: implement
-    fun drawText(
-            text: String,
-            font: Font,
-            fontSize: Dimension,
-            pos: Point2D
-    ) {
-
-    }
-
     private fun getCharUV(c: Char): FloatArray {
         val curr = if (characterCoordinates != null) {
             characterCoordinates[c] ?: throw Exception("character $c coordinates not found in map")
         } else {
-            throw Exception("character coordinates map is null")
+            throw NullPointerException(NULL_COORDINATES_MAP_ERROR_TEXT)
         }
 
         if (textureAtlas == null) {
-            throw Exception("texture atlas is null")
+            throw NullPointerException(NULL_ATLAS_ERROR_TEXT)
         }
 
         val width = (charSize.getWidth() / textureAtlas.getWidthF()).toFloat()
@@ -159,7 +138,6 @@ class TextRenderer(
         textShader = shader
     }
 
-    // TODO: remove shader from parameter list
     private fun drawCharacter(
             char: Char,
             fontSize: Dimension,
