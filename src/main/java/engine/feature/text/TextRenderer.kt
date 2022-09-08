@@ -39,6 +39,10 @@ class TextRenderer(
     override fun toString(): String =
             "Text renderer with " + characterCoordinates!!.size + " characters. \n" + characterCoordinates.toString()
 
+    fun setShader(shader: Shader) {
+        textShader = shader
+    }
+
     // TODO: implement modifiable horizontal and vertical gaps
     fun drawText(
             text: String,
@@ -96,10 +100,6 @@ class TextRenderer(
                 width * (curr.x + 1),
                 height * (curr.y + 1)
         )
-    }
-
-    fun setShader(shader: Shader) {
-        textShader = shader
     }
 
     private fun drawCharacter(
