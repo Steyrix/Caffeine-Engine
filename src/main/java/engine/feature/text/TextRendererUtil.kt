@@ -1,9 +1,9 @@
 package engine.feature.text
 
-import com.sun.media.sound.InvalidFormatException
 import engine.core.texture.Texture2D
 import engine.feature.geometry.Point2D
 import java.awt.Dimension
+import java.util.InvalidPropertiesFormatException
 
 internal object TextRendererUtil {
     private const val ATLAS_WRONG_FORMAT_ERROR_TEXT = "Invalid texture atlas format"
@@ -24,9 +24,9 @@ internal object TextRendererUtil {
             yStep = (textureAtlas.getHeightF() / charSize.getHeight()).toInt()
             charsCount = xStep * yStep
             if (charsCount != characters.size)
-                throw InvalidFormatException(ATLAS_WRONG_FORMAT_ERROR_TEXT)
+                throw InvalidPropertiesFormatException(ATLAS_WRONG_FORMAT_ERROR_TEXT)
         } else
-            throw InvalidFormatException(ATLAS_WRONG_FORMAT_ERROR_TEXT)
+            throw InvalidPropertiesFormatException(ATLAS_WRONG_FORMAT_ERROR_TEXT)
 
         var j = 0
         var k = 0
