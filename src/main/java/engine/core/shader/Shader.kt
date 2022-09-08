@@ -116,11 +116,13 @@ class Shader {
         if (fragmentShaderId != 0) {
             glDetachShader(programId, fragmentShaderId)
         }
+    }
 
+    fun validate() {
         glValidateProgram(programId)
         if (glGetProgrami(programId, GL_VALIDATE_STATUS) == 0) {
             throw IllegalStateException(
-                "Could not validate shader: ${glGetShaderInfoLog(programId, INFO_LOG_MAX_LENGHT)}"
+                    "Could not validate shader: ${glGetShaderInfoLog(programId, INFO_LOG_MAX_LENGHT)}"
             )
         }
     }
