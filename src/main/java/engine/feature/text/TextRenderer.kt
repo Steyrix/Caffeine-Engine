@@ -58,8 +58,8 @@ class TextRenderer(
                 continue
             }
 
-            val horizontalShift = (fontSize.getWidth() * x++).toFloat()
-            val verticalShift = (fontSize.getHeight() * y).toFloat()
+            val horizontalShift = (fontSize.getWidth() / 1.5 * x++).toFloat()
+            val verticalShift = (fontSize.getHeight() / 2 * y).toFloat()
 
             val horizontalPos = pos.x + horizontalShift
             val verticalPos = pos.y + verticalShift
@@ -125,6 +125,8 @@ class TextRenderer(
             glObject = cache[char]!!.apply {
                 x = pos.x
                 y = pos.y
+                xSize = fontSize.getWidth().toFloat()
+                ySize = fontSize.getHeight().toFloat()
             }
         }
 
