@@ -122,7 +122,10 @@ class TextRenderer(
 
             cache[char] = glObject
         } else {
-            glObject = cache[char]!!
+            glObject = cache[char]!!.apply {
+                x = pos.x
+                y = pos.y
+            }
         }
 
         glObject.draw()
