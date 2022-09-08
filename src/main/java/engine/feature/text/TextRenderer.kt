@@ -87,18 +87,12 @@ class TextRenderer(
         val height = (charSize.getHeight() / textureAtlas.getHeightF()).toFloat()
 
         return floatArrayOf(
-                width * curr.x,
-                height * curr.y,
-                width * (curr.x + 1),
-                height * (curr.y + 1),
-                width * curr.x,
-                height * (curr.y + 1),
-                width * curr.x,
-                height * curr.y,
-                width * (curr.x + 1),
-                height * curr.y,
-                width * (curr.x + 1),
-                height * (curr.y + 1)
+                width * curr.x,       height * curr.y,
+                width * (curr.x + 1), height * (curr.y + 1),
+                width * curr.x,       height * (curr.y + 1),
+                width * curr.x,       height * curr.y,
+                width * (curr.x + 1), height * curr.y,
+                width * (curr.x + 1), height * (curr.y + 1)
         )
     }
 
