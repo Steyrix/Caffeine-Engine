@@ -40,6 +40,8 @@ open class OpenGlObject2D(
             defineTextureState()
             it.setUniform(Shader.VAR_KEY_MODEL, model)
 
+            it.validate()
+
             glBindVertexArray(vertexArrayHandle)
             glDrawArrays(GL_TRIANGLES, 0, verticesCount)
         }
