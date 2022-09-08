@@ -21,7 +21,7 @@ class LabyrinthDemo(
 
     private var mainCharacter: OpenGlObject2D? = null
     private var characterBoundingBox: BoundingBox? = null
-    private var renderProjection: Matrix4f? = null
+    override var renderProjection: Matrix4f? = null
 
     override fun init() {
         renderProjection = Matrix4f().ortho(
