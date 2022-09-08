@@ -2,12 +2,12 @@ package engine.feature.util
 
 object Buffer {
     val RECTANGLE_INDICES = floatArrayOf(
-            0f, 1f,
-            1f, 0f,
             0f, 0f,
-            0f, 1f,
             1f, 1f,
-            1f, 0f)
+            0f, 1f,
+            0f, 0f,
+            1f, 0f,
+            1f, 1f)
 
     val RECTANGLE_VERTICES = getVerticesScaled()
 
