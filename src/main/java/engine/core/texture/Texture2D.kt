@@ -50,7 +50,7 @@ class Texture2D(
     }
 
     private fun getSize(): Dimension {
-        val array = intArrayOf()
+        val array = IntArray(2)
         glGetTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_WIDTH, array)
         glGetTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_HEIGHT, array)
         return Dimension(array.first(), array.last())
