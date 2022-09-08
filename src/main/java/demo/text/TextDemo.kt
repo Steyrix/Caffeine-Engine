@@ -63,8 +63,14 @@ class TextDemo(
 
         textRenderer?.drawText(
                 text = textToDisplay,
-                fontSize = Dimension(50, 50),
+                fontSize = Dimension(25, 25),
                 pos = Point2D(0f, 0f)
+        )
+
+        textRenderer?.drawText(
+                text = textToDisplay,
+                fontSize = Dimension(40, 50),
+                pos = Point2D(0f, 30f)
         )
     }
 }
