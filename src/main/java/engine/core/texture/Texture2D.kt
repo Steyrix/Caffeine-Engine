@@ -1,6 +1,5 @@
 package engine.core.texture
 
-import org.lwjgl.opengl.GL11C
 import org.lwjgl.opengl.GL33C.*
 import java.awt.Dimension
 
@@ -50,9 +49,10 @@ class Texture2D(
     }
 
     private fun getSize(): Dimension {
-        val array = IntArray(2)
-        glGetTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_WIDTH, array)
-        glGetTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_HEIGHT, array)
-        return Dimension(array.first(), array.last())
+        val arrayW = IntArray(1)
+        val arrayH = IntArray(1)
+        glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, arrayW)
+        glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, arrayH)
+        return Dimension(arrayW.first(), arrayH.first())
     }
 }
