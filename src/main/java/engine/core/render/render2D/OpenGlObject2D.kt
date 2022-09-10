@@ -1,5 +1,6 @@
 package engine.core.render.render2D
 
+import engine.core.entity.Entity
 import engine.core.shader.Shader
 import engine.core.texture.ArrayTexture2D
 import engine.core.texture.Texture2D
@@ -14,7 +15,7 @@ open class OpenGlObject2D(
         verticesCount: Int,
         var texture: Texture2D? = null,
         var arrayTexture: ArrayTexture2D? = null
-): Vertexed2D(bufferParamsCount, dataArrays, verticesCount), Drawable2D {
+): Vertexed2D(bufferParamsCount, dataArrays, verticesCount), Drawable2D, Entity {
 
     override var shader: Shader? = null
     override var x: Float = 0f
