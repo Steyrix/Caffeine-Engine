@@ -1,10 +1,12 @@
 package demo.labyrinth
 
+import engine.core.entity.CompositeEntity
 import engine.core.render.render2D.OpenGlObject2D
 import engine.core.scene.Scene
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
 import engine.core.texture.Texture2D
+import engine.core.update.SetOfParameters
 import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.util.Buffer
@@ -19,8 +21,11 @@ class LabyrinthDemo(
     private val presets = LabyrinthPresets()
     private val characterAnimations = presets.characterPresets.animation.animations
 
-    private var mainCharacter: OpenGlObject2D? = null
+    private var graphicalObject: OpenGlObject2D? = null
     private var characterBoundingBox: BoundingBox? = null
+
+    private var character: CompositeEntity = CompositeEntity()
+    private var characterParams: SetOfParameters = object : SetOfParameters {}
     override var renderProjection: Matrix4f? = null
 
     override fun init() {
@@ -58,7 +63,7 @@ class LabyrinthDemo(
         val mainCharacterUV = Buffer.getRectangleSectorVertices(frameSizeX, frameSizeY)
 
         val texturePath = this.javaClass.getResource("/textures/base_character.png")!!.path
-        mainCharacter = OpenGlObject2D(
+        graphicalObject = OpenGlObject2D(
                 bufferParamsCount = 2,
                 dataArrays = listOf(Buffer.RECTANGLE_INDICES, mainCharacterUV),
                 verticesCount = 6,
@@ -78,6 +83,10 @@ class LabyrinthDemo(
                 it.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection!!)
             }
         }
+
+        character.addComponent(
+                graphicalObject!!, characterParams
+        )
     }
 
     override fun input(window: Window) {
@@ -92,6 +101,7 @@ class LabyrinthDemo(
         glClear(GL_COLOR_BUFFER_BIT)
         glClearColor(0.5f, 0.5f, 0.5f, 0.5f)
 
-        mainCharacter?.draw()
+        // graphicalObject?.draw()
+        character.draw()
     }
 }
