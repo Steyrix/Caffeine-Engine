@@ -8,6 +8,7 @@ import engine.feature.text.TextRendererUtil.generateMap
 import engine.feature.util.Buffer
 import java.awt.Dimension
 
+// TODO: ability to reduce gaps between letters and make it look natural
 class TextRenderer(
         private val textureAtlas: Texture2D?,
         private val characterCoordinates: HashMap<Char, Point2D>?,
