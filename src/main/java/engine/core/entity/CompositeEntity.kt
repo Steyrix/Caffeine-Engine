@@ -1,7 +1,6 @@
 package engine.core.entity
 
 import engine.core.render.Drawable
-import engine.core.render.render2D.Drawable2D
 import engine.core.update.SetOfParameters
 import engine.core.update.Updatable
 
@@ -15,7 +14,7 @@ class CompositeEntity(
                 .forEach { (it as Drawable).draw() }
     }
 
-    // TODO: magic logic - rethink it
+    // TODO: magic logic - rethink it, should it be some kind of map?
     fun update(parameters: MutableList<SetOfParameters>) {
         var parametersIndex = 0
 
