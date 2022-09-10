@@ -21,7 +21,7 @@ class CompositeEntity : Entity {
     }
 
     fun draw() {
-        components
+        components.keys
                 .filter { it is Drawable }
                 .forEach { (it as Drawable).draw() }
     }
