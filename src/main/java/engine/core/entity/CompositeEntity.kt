@@ -4,9 +4,21 @@ import engine.core.render.Drawable
 import engine.core.update.SetOfParameters
 import engine.core.update.Updatable
 
-class CompositeEntity(
-        private val components: MutableList<Entity>
-) : Entity {
+/*
+    Ah, so, each component will have a reference to its properties.
+    Therefore, update of the properties and following call of an update method
+    will result in proper update of component.
+ */
+class CompositeEntity : Entity {
+
+    private val components: HashMap<Entity, SetOfParameters> = hashMapOf()
+
+    fun addComponent(
+            component: Entity,
+            parameters: SetOfParameters
+    ) {
+        components[component] = parameters
+    }
 
     fun draw() {
         components
@@ -14,12 +26,9 @@ class CompositeEntity(
                 .forEach { (it as Drawable).draw() }
     }
 
-    // TODO: magic logic - rethink it, should it be some kind of map?
-    fun update(parameters: MutableList<SetOfParameters>) {
-        var parametersIndex = 0
-
-        components.filter { it is Updatable }.forEach {
-            (it as Updatable).update(parameters[parametersIndex++])
+    fun update() {
+        components.entries.forEach {
+            (it.key as Updatable).update(it.value)
         }
     }
 }
