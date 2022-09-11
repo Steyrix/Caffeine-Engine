@@ -11,7 +11,7 @@ import engine.core.window.Window
     Therefore, update of the properties and following call of an update method
     will result in proper update of component.
  */
-class CompositeEntity : Entity {
+open class CompositeEntity : Entity {
 
     private val components: HashMap<Entity, SetOfParameters> = hashMapOf()
 
@@ -30,7 +30,9 @@ class CompositeEntity : Entity {
 
     fun update() {
         components.entries.forEach {
-            (it.key as Updatable).update(it.value)
+            if (it.key is Updatable) {
+                (it.key as Updatable).update(it.value)
+            }
         }
     }
 
