@@ -4,7 +4,7 @@ import engine.core.entity.Entity
 import engine.core.shader.Shader
 import engine.core.texture.ArrayTexture2D
 import engine.core.texture.Texture2D
-import engine.core.update.update2D.SetOf2DParameters
+import engine.core.update.SetOfParameters
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.matrix.MatrixComputer
 import org.lwjgl.opengl.GL33C.*
@@ -49,16 +49,11 @@ open class OpenGlObject2D(
         super.draw()
     }
 
-    // I temporarily assume each i-indexed inner component should expect (i + 1)-indexed set of parameters
-    fun updateComponent(parameters: List<SetOf2DParameters>) {
-        if (parameters.isEmpty()) return
-
-        this.update(parameters.first())
-        parameters.drop(0)
-
-        parameters.forEachIndexed { i, it ->
-            innerDrawableComponents[i].update(it)
+    override fun update(parameters: SetOfParameters) {
+        innerDrawableComponents.forEach {
+            it.update(parameters)
         }
+        super.update(parameters)
     }
 
     fun dispose() {
