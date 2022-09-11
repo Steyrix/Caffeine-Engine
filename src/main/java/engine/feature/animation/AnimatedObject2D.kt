@@ -3,7 +3,7 @@ package engine.feature.animation
 import engine.core.render.render2D.OpenGlObject2D
 import engine.core.shader.Shader
 
-class AnimatedObject(
+class AnimatedObject2D(
         private var frameSizeX: Float,
         private var frameSizeY: Float,
         private val animations: MutableList<BasicAnimation>
