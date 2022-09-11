@@ -5,7 +5,6 @@ import engine.core.render.Drawable
 import engine.core.update.SetOfParameters
 import engine.core.update.Updatable
 import engine.core.window.Window
-import org.lwjgl.glfw.GLFW.*
 
 /*
     Ah, so, each component will have a reference to its properties.
