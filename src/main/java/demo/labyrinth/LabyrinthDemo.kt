@@ -24,8 +24,7 @@ class LabyrinthDemo(
     private var graphicalObject: OpenGlObject2D? = null
     private var characterBoundingBox: BoundingBox? = null
 
-    private var character: CompositeEntity = CompositeEntity()
-    private var characterParams: SetOfParameters = object : SetOfParameters {}
+    private var character: CompositeEntity? = null
     override var renderProjection: Matrix4f? = null
 
     override fun init() {
@@ -84,17 +83,17 @@ class LabyrinthDemo(
             }
         }
 
-        character.addComponent(
-                graphicalObject!!, characterParams
+        character = Player(
+                drawableComponent = graphicalObject!!
         )
     }
 
     override fun input(window: Window) {
-       //
+        character?.input(window)
     }
 
     override fun update(deltaTime: Float) {
-        //
+        character?.update()
     }
 
     override fun render(window: Window) {
@@ -102,6 +101,6 @@ class LabyrinthDemo(
         glClearColor(0.5f, 0.5f, 0.5f, 0.5f)
 
         // graphicalObject?.draw()
-        character.draw()
+        character?.draw()
     }
 }
