@@ -8,7 +8,7 @@ import engine.core.update.update2D.SetOf2DParameters
 import engine.core.window.Window
 import org.lwjgl.glfw.GLFW
 
-class PlayerController(
+private class PlayerController(
         private val params: SetOf2DParameters
 ): Controllable, Entity {
     override fun input(window: Window) {
@@ -16,7 +16,6 @@ class PlayerController(
             params.y += 10f
         }
     }
-
 }
 
 class Player(
