@@ -1,17 +1,18 @@
 package engine.feature.animation
 
+import engine.core.entity.Entity
 import engine.core.render.render2D.OpenGlObject2D
 import engine.core.shader.Shader
 
-class AnimatedObject2D(
+class AnimationHolder2D(
         private var frameSizeX: Float,
         private var frameSizeY: Float,
         private val animations: MutableList<BasicAnimation>
-) {
+): Entity {
     private var currentAnimation: BasicAnimation = animations.first()
 
-    fun defineAnimationVariables(graphicalObject: OpenGlObject2D, shader: Shader) {
-        if (graphicalObject.isTextured()) {
+    fun defineAnimationVariables(target: OpenGlObject2D, shader: Shader) {
+        if (target.isTextured()) {
             shader.setUniform(Shader.VAR_KEY_X_OFFSET, currentAnimation.currentFrameX * frameSizeX)
             shader.setUniform(Shader.VAR_KEY_FRAME_X, currentAnimation.currentFrameX + 1)
             shader.setUniform(Shader.VAR_KEY_Y_OFFSET, currentAnimation.currentFrameY * frameSizeY)
