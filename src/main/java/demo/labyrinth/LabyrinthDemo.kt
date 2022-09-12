@@ -2,7 +2,6 @@ package demo.labyrinth
 
 import engine.core.entity.CompositeEntity
 import engine.core.render.render2D.AnimatedObject2D
-import engine.core.render.render2D.OpenGlObject2D
 import engine.core.scene.Scene
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
@@ -98,7 +97,7 @@ class LabyrinthDemo(
     }
 
     override fun update(deltaTime: Float) {
-        character?.update()
+        character?.update(deltaTime)
     }
 
     override fun render(window: Window) {

@@ -3,6 +3,8 @@ package engine.feature.collision.boundingbox
 import engine.core.render.render2D.Drawable2D
 import engine.core.render.render2D.Vertexed2D
 import engine.core.shader.Shader
+import engine.core.update.SetOf2DParameters
+import engine.core.update.SetOfParameters
 import engine.feature.matrix.MatrixComputer
 import engine.feature.util.Buffer
 import org.lwjgl.opengl.GL33C.*
@@ -14,7 +16,8 @@ open class BoundingBox(
         override var y: Float,
         override var xSize: Float,
         override var ySize: Float,
-) : IntersectableBox, Drawable2D,
+        var rotationAngle: Float = 0f
+) : IntersectableBox,
         Vertexed2D(
                 bufferParamsCount = 1,
                 dataArrays = listOf(Buffer.RECTANGLE_VERTICES),
@@ -22,7 +25,6 @@ open class BoundingBox(
 
     override var shader: Shader? = null
     override val innerDrawableComponents: MutableList<Drawable2D> = mutableListOf()
-    override var rotationAngle: Float = 0f
 
     override fun draw() {
         shader?.let {
@@ -33,6 +35,18 @@ open class BoundingBox(
 
             glBindVertexArray(vertexArrayHandle)
             glDrawArrays(GL_LINES, 0, verticesCount)
+        }
+    }
+
+    override fun updateParameters(parameters: SetOfParameters) {
+        if (parameters is SetOf2DParameters) {
+            parameters.let {
+                x = it.x
+                y = it.y
+                xSize = it.xSize
+                ySize = it.ySize
+                rotationAngle = it.rotationAngle
+            }
         }
     }
 }

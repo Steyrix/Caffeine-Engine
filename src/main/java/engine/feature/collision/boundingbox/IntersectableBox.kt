@@ -5,6 +5,11 @@ import engine.feature.geometry.Point2D
 
 interface IntersectableBox : Drawable2D {
 
+    var x: Float
+    var y: Float
+    var xSize: Float
+    var ySize: Float
+
     val rightX: Float
         get() = x + xSize
 

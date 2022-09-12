@@ -1,5 +1,5 @@
 package engine.core.update
 
 interface Updatable {
-    fun update(parameters: SetOfParameters)
+    fun update(deltaTime: Float) = Unit
 }

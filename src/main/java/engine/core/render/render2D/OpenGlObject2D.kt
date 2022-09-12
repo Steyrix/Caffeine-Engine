@@ -4,6 +4,7 @@ import engine.core.entity.Entity
 import engine.core.shader.Shader
 import engine.core.texture.ArrayTexture2D
 import engine.core.texture.Texture2D
+import engine.core.update.SetOf2DParameters
 import engine.core.update.SetOfParameters
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.matrix.MatrixComputer
@@ -19,11 +20,11 @@ open class OpenGlObject2D(
 
     override var shader: Shader? = null
 
-    override var x: Float = 0f
-    override var y: Float = 0f
-    override var xSize: Float = 0f
-    override var ySize: Float = 0f
-    override var rotationAngle: Float = 0f
+    var x: Float = 0f
+    var y: Float = 0f
+    var xSize: Float = 0f
+    var ySize: Float = 0f
+    var rotationAngle: Float = 0f
 
     override val innerDrawableComponents: MutableList<Drawable2D> = mutableListOf()
 
@@ -52,11 +53,19 @@ open class OpenGlObject2D(
         super.draw()
     }
 
-    override fun update(parameters: SetOfParameters) {
+    override fun updateParameters(parameters: SetOfParameters) {
         innerDrawableComponents.forEach {
-            it.update(parameters)
+            it.updateParameters(parameters)
         }
-        super.update(parameters)
+        if (parameters is SetOf2DParameters) {
+            parameters.let {
+                x = it.x
+                y = it.y
+                xSize = it.xSize
+                ySize = it.ySize
+                rotationAngle = it.rotationAngle
+            }
+        }
     }
 
     fun dispose() {
