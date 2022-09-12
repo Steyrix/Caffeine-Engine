@@ -28,7 +28,7 @@ open class CompositeEntity : Entity {
                 .forEach { (it as Drawable).draw() }
     }
 
-    open fun update() {
+    open fun update(deltaTime: Float) {
         components.entries.forEach {
             if (it.key is Updatable) {
                 (it.key as Updatable).update(it.value)
