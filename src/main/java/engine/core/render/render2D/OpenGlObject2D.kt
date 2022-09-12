@@ -18,11 +18,13 @@ open class OpenGlObject2D(
 ): Vertexed2D(bufferParamsCount, dataArrays, verticesCount), Drawable2D, Entity {
 
     override var shader: Shader? = null
+
     override var x: Float = 0f
     override var y: Float = 0f
     override var xSize: Float = 0f
     override var ySize: Float = 0f
     override var rotationAngle: Float = 0f
+
     override val innerDrawableComponents: MutableList<Drawable2D> = mutableListOf()
 
     var boundingBox: BoundingBox? = null
@@ -32,6 +34,7 @@ open class OpenGlObject2D(
     }
 
     private var textureUniformName: String = ""
+
     override fun draw() {
         shader?.let {
             it.bind()
