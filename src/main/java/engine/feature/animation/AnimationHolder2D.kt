@@ -11,7 +11,7 @@ class AnimationHolder2D(
 ): Entity {
     private var currentAnimation: BasicAnimation = animations.first()
 
-    fun defineAnimationVariables(target: OpenGlObject2D, shader: Shader) {
+    fun updateAnimationUniforms(target: OpenGlObject2D, shader: Shader) {
         if (target.isTextured()) {
             shader.setUniform(Shader.VAR_KEY_X_OFFSET, currentAnimation.currentFrameX * frameSizeX)
             shader.setUniform(Shader.VAR_KEY_FRAME_X, currentAnimation.currentFrameX + 1)
