@@ -5,12 +5,13 @@ import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.update.SetOf2DParameters
+import engine.core.update.Updatable
 import engine.core.window.Window
 import org.lwjgl.glfw.GLFW
 
 private class PlayerController(
         private val params: SetOf2DParameters
-): Controllable, Entity {
+): Controllable, Entity, Updatable {
 
     var velocityX = 0f
     var velocityY = 0f
@@ -20,6 +21,17 @@ private class PlayerController(
         } else {
             velocityY = 0f
         }
+
+        if (window.isKeyPressed(GLFW.GLFW_KEY_D)) {
+            velocityX = 10f
+        } else {
+            velocityX = 0f
+        }
+    }
+
+    override fun update(deltaTime: Float) {
+        params.x += velocityX * deltaTime
+        params.y += velocityY * deltaTime
     }
 }
 
