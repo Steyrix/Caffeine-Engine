@@ -1,12 +1,14 @@
 package demo.labyrinth
 
 import engine.core.entity.CompositeEntity
+import engine.core.render.render2D.AnimatedObject2D
 import engine.core.render.render2D.OpenGlObject2D
 import engine.core.scene.Scene
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
 import engine.core.texture.Texture2D
 import engine.core.window.Window
+import engine.feature.animation.AnimationHolder2D
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.util.Buffer
 import org.joml.Matrix4f
@@ -20,7 +22,7 @@ class LabyrinthDemo(
     private val presets = LabyrinthPresets()
     private val characterAnimations = presets.characterPresets.animation.animations
 
-    private var graphicalObject: OpenGlObject2D? = null
+    private var graphicalObject: AnimatedObject2D? = null
     private var characterBoundingBox: BoundingBox? = null
 
     private var character: CompositeEntity? = null
@@ -69,12 +71,13 @@ class LabyrinthDemo(
         val mainCharacterUV = Buffer.getRectangleSectorVertices(frameSizeX, frameSizeY)
 
         val texturePath = this.javaClass.getResource("/textures/base_character.png")!!.path
-        graphicalObject = OpenGlObject2D(
+        graphicalObject = AnimatedObject2D(
                 bufferParamsCount = 2,
                 dataArrays = listOf(Buffer.RECTANGLE_INDICES, mainCharacterUV),
                 verticesCount = 6,
                 texture = Texture2D.createInstance(texturePath),
-                arrayTexture = null
+                arrayTexture = null,
+                animationHolder = AnimationHolder2D(frameSizeX, frameSizeY, characterAnimations)
         ).apply {
             boundingBox = characterBoundingBox
             x = 100f

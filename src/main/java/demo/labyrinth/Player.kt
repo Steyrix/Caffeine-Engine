@@ -3,6 +3,7 @@ package demo.labyrinth
 import engine.core.controllable.Controllable
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
+import engine.core.render.render2D.AnimatedObject2D
 import engine.core.render.render2D.OpenGlObject2D
 import engine.core.update.update2D.SetOf2DParameters
 import engine.core.window.Window
@@ -19,7 +20,7 @@ private class PlayerController(
 }
 
 class Player(
-        drawableComponent: OpenGlObject2D
+        drawableComponent: AnimatedObject2D
 ) : CompositeEntity() {
 
     private val params = SetOf2DParameters(
