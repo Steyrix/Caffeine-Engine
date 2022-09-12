@@ -6,7 +6,6 @@ import engine.core.scene.Scene
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
 import engine.core.texture.Texture2D
-import engine.core.update.SetOfParameters
 import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.util.Buffer
@@ -37,6 +36,14 @@ class LabyrinthDemo(
                 1f
         )
 
+        initCharacterGraphics()
+
+        character = Player(
+                drawableComponent = graphicalObject!!
+        )
+    }
+
+    private fun initCharacterGraphics() {
         val boxVertexShaderPath = this.javaClass.getResource("/shaders/boundingBoxVertexShader.glsl")!!.path
         val boxFragmentShaderPath = this.javaClass.getResource("/shaders/boundingBoxFragmentShader.glsl")!!.path
         val characterVertexShaderPath = this.javaClass.getResource("/shaders/animVertexShader.glsl")!!.path
@@ -82,12 +89,7 @@ class LabyrinthDemo(
                 it.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection!!)
             }
         }
-
-        character = Player(
-                drawableComponent = graphicalObject!!
-        )
     }
-
     override fun input(window: Window) {
         character?.input(window)
     }
