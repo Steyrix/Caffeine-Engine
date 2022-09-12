@@ -4,17 +4,21 @@ import engine.core.controllable.Controllable
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
-import engine.core.render.render2D.OpenGlObject2D
-import engine.core.update.update2D.SetOf2DParameters
+import engine.core.update.SetOf2DParameters
 import engine.core.window.Window
 import org.lwjgl.glfw.GLFW
 
 private class PlayerController(
         private val params: SetOf2DParameters
 ): Controllable, Entity {
+
+    var velocityX = 0f
+    var velocityY = 0f
     override fun input(window: Window) {
         if (window.isKeyPressed(GLFW.GLFW_KEY_S)) {
-            params.y += 10f
+            velocityY = 10f
+        } else {
+            velocityY = 0f
         }
     }
 }

@@ -1,5 +1,6 @@
 package engine.core.update.update2D
 
+import engine.core.update.SetOf2DParameters
 import engine.core.update.SetOfParameters
 import engine.core.update.Updatable
 
