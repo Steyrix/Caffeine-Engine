@@ -9,8 +9,8 @@ class BasicAnimation(
         private val timeLimit: Float
 ) {
 
-    internal var currentFrameX: Int = 1
-    internal var currentFrameY: Int = 1
+    internal var currentFrameX: Int = 0
+    internal var currentFrameY: Int = 0
 
     private var playFunction: ((Float, Int, Int, Int, Int) -> Unit)? = null
 
