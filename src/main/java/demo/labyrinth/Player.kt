@@ -13,25 +13,31 @@ private class PlayerController(
         private val params: SetOf2DParameters
 ): Controllable, Entity, Updatable {
 
+    var modifier = 20f
+
     var velocityX = 0f
     var velocityY = 0f
     override fun input(window: Window) {
         if (window.isKeyPressed(GLFW.GLFW_KEY_S)) {
             velocityY = 10f
+        } else if (window.isKeyPressed(GLFW.GLFW_KEY_W)) {
+            velocityY = -10f
         } else {
             velocityY = 0f
         }
 
         if (window.isKeyPressed(GLFW.GLFW_KEY_D)) {
             velocityX = 10f
+        } else if (window.isKeyPressed(GLFW.GLFW_KEY_A)) {
+            velocityX = -10f
         } else {
             velocityX = 0f
         }
     }
 
     override fun update(deltaTime: Float) {
-        params.x += velocityX * deltaTime
-        params.y += velocityY * deltaTime
+        params.x += velocityX * deltaTime * modifier
+        params.y += velocityY * deltaTime * modifier
     }
 }
 
