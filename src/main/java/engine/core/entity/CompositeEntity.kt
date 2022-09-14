@@ -14,7 +14,7 @@ import engine.core.window.Window
  */
 open class CompositeEntity : Entity, Updatable {
 
-    private val components: HashMap<Entity, SetOfParameters> = hashMapOf()
+    protected val components: HashMap<Entity, SetOfParameters> = hashMapOf()
 
     fun addComponent(
             component: Entity,
