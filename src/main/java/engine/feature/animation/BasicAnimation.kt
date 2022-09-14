@@ -6,12 +6,10 @@ class BasicAnimation(
         private val usedLayerId: Int,
         private val framesCountX: Int,
         private val framesCountY: Int,
+        internal var currentFrameX: Int,
+        internal var currentFrameY: Int,
         private val timeLimit: Float
 ) {
-
-    internal var currentFrameX: Int = 0
-    internal var currentFrameY: Int = 0
-
     private var playFunction: ((Float, Int, Int, Int, Int) -> Unit)? = null
 
     private var lastPosX: Int = framesCountX
@@ -33,9 +31,6 @@ class BasicAnimation(
             return
         }
 
-        // Default animation sequence
-        // At first, iterate through texture atlas horizontally. When row's end is reached, increment row index
-        // And iterate through the next row.
         accumulatedTime += deltaTime
         if (accumulatedTime >= timeLimit) {
             accumulatedTime = 0f
