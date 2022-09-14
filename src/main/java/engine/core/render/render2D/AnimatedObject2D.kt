@@ -5,6 +5,7 @@ import engine.core.texture.ArrayTexture2D
 import engine.core.texture.Texture2D
 import engine.core.update.Updatable
 import engine.feature.animation.AnimationHolder2D
+import engine.feature.animation.BasicAnimation
 
 class AnimatedObject2D(
         bufferParamsCount: Int,
@@ -22,5 +23,9 @@ class AnimatedObject2D(
             animationHolder.updateAnimationUniforms(this, it)
         }
         animationHolder.playAnimation(deltaTime)
+    }
+
+    fun setAnimation(animation: BasicAnimation) {
+        animationHolder.setAnimation(animation)
     }
 }
