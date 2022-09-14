@@ -8,7 +8,7 @@ class AnimationHolder2D(
         private var frameSizeX: Float,
         private var frameSizeY: Float,
         private val animations: MutableList<BasicAnimation>
-): Entity {
+) : Entity {
     private var currentAnimation: BasicAnimation = animations.first()
 
     fun updateAnimationUniforms(target: OpenGlObject2D, shader: Shader) {
@@ -28,9 +28,7 @@ class AnimationHolder2D(
         currentAnimation.play(deltaTime)
     }
 
-    fun setAnimation(a: BasicAnimation) {
-        if (animations.contains(a)) {
-            currentAnimation = a
-        }
+    fun setAnimationByKey(key: String) {
+        currentAnimation = animations.firstOrNull { it.name == key } ?: currentAnimation
     }
 }
