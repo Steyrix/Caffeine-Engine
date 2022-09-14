@@ -17,27 +17,57 @@ private class PlayerController(
 
     var velocityX = 0f
     var velocityY = 0f
+
+    var isWalking = false
+    var isJumping = false
     override fun input(window: Window) {
-        if (window.isKeyPressed(GLFW.GLFW_KEY_S)) {
-            velocityY = 10f
+        velocityY = if (window.isKeyPressed(GLFW.GLFW_KEY_S)) {
+            10f
         } else if (window.isKeyPressed(GLFW.GLFW_KEY_W)) {
-            velocityY = -10f
+            -10f
         } else {
-            velocityY = 0f
+            0f
         }
 
-        if (window.isKeyPressed(GLFW.GLFW_KEY_D)) {
-            velocityX = 10f
+        velocityX = if (window.isKeyPressed(GLFW.GLFW_KEY_D)) {
+            10f
         } else if (window.isKeyPressed(GLFW.GLFW_KEY_A)) {
-            velocityX = -10f
+            -10f
         } else {
-            velocityX = 0f
+            0f
         }
     }
 
     override fun update(deltaTime: Float) {
         params.x += velocityX * deltaTime * modifier
         params.y += velocityY * deltaTime * modifier
+        processState()
+    }
+
+    private fun processState() {
+        if (velocityX != 0f && !isWalking) {
+            isWalking = true
+        }
+
+        if (velocityX == 0f) {
+            isWalking = false
+        }
+
+        if (velocityY != 0f && !isJumping) {
+            isJumping = true
+        }
+
+        if (velocityY == 0f) {
+            isJumping = false
+        }
+    }
+    fun getAnimationKey(): String {
+        return if (isWalking || isJumping) {
+            if (isJumping) AnimationKey.JUMP
+            else AnimationKey.WALK
+        } else {
+            AnimationKey.IDLE
+        }
     }
 }
 
@@ -65,5 +95,15 @@ class Player(
                 component = controller,
                 parameters = params
         )
+    }
+
+    override fun update(deltaTime: Float) {
+        super.update(deltaTime)
+
+        components
+                .filter { it.key is AnimatedObject2D }
+                .forEach {
+                    (it.key as AnimatedObject2D).setAnimationByKey(controller.getAnimationKey())
+                }
     }
 }
