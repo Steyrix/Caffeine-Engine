@@ -19,6 +19,7 @@ class AnimatedObject2D(
 
     override fun update(deltaTime: Float) {
         shader?.let {
+            it.bind()
             animationHolder.updateAnimationUniforms(this, it)
         }
         animationHolder.playAnimation(deltaTime)
