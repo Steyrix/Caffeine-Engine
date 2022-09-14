@@ -17,8 +17,23 @@ data class CharacterPresets(
 
 data class AnimationsPresets(
         val animations: MutableList<BasicAnimation> = mutableListOf(
-                BasicAnimation(AnimationKey.IDLE, 1, 0, 1, 1, 100f),
-                BasicAnimation(AnimationKey.WALK, 2, 0, 6, 1, 100f),
-                BasicAnimation(AnimationKey.JUMP, 3, 0, 3, 1, 200f)
+                BasicAnimation(
+                        AnimationKey.IDLE,
+                        1, 0, 1, 1, 0, 0, 1f
+                ),
+                BasicAnimation(
+                        AnimationKey.WALK,
+                        2, 0, 6, 1, 1, 0, 0.2f
+                ).apply {
+                        setFirstPosX(1)
+                        setLastPosX(6)
+                },
+                BasicAnimation(
+                        AnimationKey.JUMP,
+                        3, 0, 3, 1, 7, 1, 0.5f
+                ).apply {
+                        setFirstPosX(7)
+                        setLastPosX(9)
+                }
         )
 )
