@@ -12,7 +12,7 @@ class AnimatedObject2D(
         verticesCount: Int,
         texture: Texture2D? = null,
         arrayTexture: ArrayTexture2D? = null,
-        protected val animationHolder: AnimationHolder2D
+        private val animationHolder: AnimationHolder2D
 ) : OpenGlObject2D(bufferParamsCount, dataArrays, verticesCount, texture, arrayTexture), Updatable {
 
     override var shader: Shader? = null
