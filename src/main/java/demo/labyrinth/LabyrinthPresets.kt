@@ -48,7 +48,7 @@ data class CampfirePresets(
                 mutableListOf(
                         BasicAnimation(
                             AnimationKey.BURN,
-                            4, 0, 4, 1, 0, 0, 0.2f
+                            4, 0, 4, 1, 0, 0, 0.1f
                         )
                 )
         )
