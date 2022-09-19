@@ -1,6 +1,7 @@
 package engine.core.shader
 
 import org.joml.Matrix4f
+import org.joml.Vector2f
 import org.lwjgl.opengl.GL33C.*
 import org.lwjgl.system.MemoryStack
 import java.lang.IllegalArgumentException
@@ -12,6 +13,7 @@ class Shader {
     companion object {
         private const val INFO_LOG_MAX_LENGHT = 1024
         private const val MATRIX4F_VALUE_SIZE = 16
+        private const val VECTOR2F_VALUE_SIZE = 8
 
         const val VAR_KEY_MODEL = "model"
         const val VAR_KEY_PROJECTION = "projection"
@@ -53,6 +55,18 @@ class Shader {
                 uniforms[uniformName]!!,
                 false,
                 value.get(it.mallocFloat(MATRIX4F_VALUE_SIZE))
+            )
+        }
+    }
+
+    fun setUniform(uniformName: String, value: Vector2f) {
+        MemoryStack.stackPush().use {
+            checkForUniformNameExists(uniformName)
+
+            glUniformMatrix4fv(
+                    uniforms[uniformName]!!,
+                    false,
+                    value.get(it.mallocFloat(VECTOR2F_VALUE_SIZE))
             )
         }
     }
