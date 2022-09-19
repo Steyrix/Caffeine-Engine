@@ -1,13 +1,15 @@
 #version 330
 in vec2 fragmentUV;
-in vec2 lightSourcePos;
-in vec2 worldPos;
+in vec4 pos;
+layout(origin_upper_left) in vec4 gl_FragCoord;
 out vec4 fColor;
+uniform vec2 lightSourcePos;
 uniform sampler2D textureSample;
 void main(void)
 {
-    fColor = texture(textureSample, fragmentUV).rgba * vec4(0.5, 0.5, 0.5, 1.0);
-    fColor = fColor * 1.0/distance(lightSourcePos, worldPos);
+    float lightIntensity = 1.0/distance(pos.xy, lightSourcePos);
+    vec4 lightCol = vec4(lightIntensity, lightIntensity, lightIntensity, 1.0);
+    fColor = texture(textureSample, fragmentUV).rgba * lightCol;
 
     if(fColor.a <= 0){
         discard;
