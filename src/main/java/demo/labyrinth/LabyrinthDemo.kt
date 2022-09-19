@@ -3,6 +3,7 @@ package demo.labyrinth
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
+import engine.core.render.render2D.OpenGlObject2D
 import engine.core.scene.Scene
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
@@ -13,6 +14,7 @@ import engine.feature.animation.AnimationHolder2D
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.util.Buffer
 import org.joml.Matrix4f
+import org.joml.Vector2f
 import org.lwjgl.opengl.GL33C.*
 
 class LabyrinthDemo(
@@ -32,6 +34,8 @@ class LabyrinthDemo(
 
     private var campfire: CompositeEntity? = null
     private var campfireGraphicalComponent: AnimatedObject2D? = null
+
+    private var background: OpenGlObject2D? = null
 
     override fun init() {
         renderProjection = Matrix4f().ortho(
@@ -62,6 +66,37 @@ class LabyrinthDemo(
                         rotationAngle = 0f
                 )
         )
+
+        initBackgroundGraphics()
+    }
+
+    private fun initBackgroundGraphics() {
+        val vertexShaderPath = this.javaClass.getResource("/shaders/lightingVertexShader.glsl")!!.path
+        val fragmentShaderPath = this.javaClass.getResource("/shaders/lightingFragmentShader.glsl")!!.path
+
+        val texturePath = this.javaClass.getResource("/textures/grass_texture.png")!!.path
+        val uv = Buffer.getRectangleSectorVertices(1f, 1f)
+        background = OpenGlObject2D(
+                bufferParamsCount = 2,
+                dataArrays = listOf(Buffer.RECTANGLE_INDICES, uv),
+                verticesCount = 6,
+                texture = Texture2D.createInstance(texturePath),
+                arrayTexture = null
+        ).apply {
+            boundingBox = characterBoundingBox
+            x = 0f
+            y = 0f
+            xSize = screenWidth
+            ySize = screenHeight
+            shader = ShaderLoader.loadFromFile(
+                    vertexShaderFilePath = vertexShaderPath,
+                    fragmentShaderFilePath = fragmentShaderPath
+            ).also {
+                it.bind()
+                it.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection!!)
+                it.setUniform("lightSourcePos", Vector2f(500f, 500f))
+            }
+        }
     }
 
     private fun initCharacterGraphics() {
@@ -156,6 +191,7 @@ class LabyrinthDemo(
         glClear(GL_COLOR_BUFFER_BIT)
         glClearColor(0.5f, 0.5f, 0.5f, 0.5f)
 
+        background?.draw()
         // graphicalObject?.draw()
         character?.draw()
         campfire?.draw()
