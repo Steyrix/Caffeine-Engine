@@ -34,6 +34,9 @@ class LabyrinthDemo(
 
     private var campfire: CompositeEntity? = null
     private var campfireGraphicalComponent: AnimatedObject2D? = null
+    private val campfireParameters: SetOf2DParameters = SetOf2DParameters(
+            300f, 300f, 75f, 75f, 0f
+    )
 
     private var background: OpenGlObject2D? = null
 
@@ -58,13 +61,7 @@ class LabyrinthDemo(
         campfire = object : CompositeEntity() {}
         campfire?.addComponent(
                 component = campfireGraphicalComponent as Entity,
-                parameters = SetOf2DParameters(
-                        x = 500f,
-                        y = 500f,
-                        xSize = 75f,
-                        ySize = 75f,
-                        rotationAngle = 0f
-                )
+                parameters = campfireParameters
         )
 
         initBackgroundGraphics()
@@ -94,7 +91,19 @@ class LabyrinthDemo(
             ).also {
                 it.bind()
                 it.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection!!)
-                it.setUniform("lightSourcePos", Vector2f(500f, 500f))
+
+                // TODO: move math to shaders
+                val screenCenterX: Float = screenWidth / 2
+                val screenCenterY: Float = screenHeight / 2
+                val lightSourceXLocation =
+                        campfireParameters.x / screenWidth - screenCenterX / screenWidth - (campfireParameters.xSize * 1.5f) / screenWidth
+
+                val lightSourceYLocation =
+                        screenCenterY / screenHeight - campfireParameters.y / screenHeight + (campfireParameters.ySize * 1.5f) / screenHeight
+
+                println("$lightSourceXLocation | $lightSourceYLocation")
+                println("${campfireParameters.x} | ${campfireParameters.y}")
+                it.setUniform("lightSourcePos", Vector2f(lightSourceXLocation, lightSourceYLocation))
             }
         }
     }
@@ -165,10 +174,6 @@ class LabyrinthDemo(
                 arrayTexture = null,
                 animationHolder = AnimationHolder2D(frameSizeX, frameSizeY, campfireAnimations)
         ).apply {
-            x = 500f
-            y = 500f
-            xSize = 50f
-            ySize = 50f
             shader = ShaderLoader.loadFromFile(
                     vertexShaderFilePath = vertexShaderPath,
                     fragmentShaderFilePath = fragmentShaderPath
