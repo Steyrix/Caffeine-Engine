@@ -6,6 +6,7 @@ out vec4 fColor;
 uniform vec2 screenSize;
 uniform vec2 lightSourceSize;
 uniform vec2 lightSourceCoords;
+uniform float lightIntensityCap;
 uniform sampler2D textureSample;
 void main(void)
 {
@@ -28,8 +29,8 @@ void main(void)
         lightIntensity = 0;
     }
 
-    if(lightIntensity >= 3) {
-        lightIntensity = 3;
+    if(lightIntensity >= lightIntensityCap) {
+        lightIntensity = lightIntensityCap;
     }
     vec4 lightCol = vec4(lightIntensity, lightIntensity, lightIntensity, 1.0);
     fColor = texture(textureSample, fragmentUV).rgba * lightCol;

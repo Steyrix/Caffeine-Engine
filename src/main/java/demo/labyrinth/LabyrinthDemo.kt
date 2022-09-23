@@ -35,8 +35,13 @@ class LabyrinthDemo(
     private var campfire: CompositeEntity? = null
     private var campfireGraphicalComponent: AnimatedObject2D? = null
     private val campfireParameters: SetOf2DParameters = SetOf2DParameters(
-            200f, 600f, 70f, 70f, 0f
+            450f, 450f, 75f, 75f, 0f
     )
+    private var accumulated = 0f
+    private var timeLimit = 0.1f
+    private var lightIntensityCap = 3f
+    private val lightIntensityCaps = listOf(3f, 2.95f, 2.9f)
+    private var current = 0
 
     private var background: OpenGlObject2D? = null
 
@@ -95,6 +100,7 @@ class LabyrinthDemo(
                 it.setUniform("screenSize", Vector2f(screenWidth, screenHeight))
                 it.setUniform("lightSourceSize", Vector2f(campfireParameters.xSize, campfireParameters.ySize))
                 it.setUniform("lightSourceCoords", Vector2f(campfireParameters.x, campfireParameters.y))
+                it.setUniform("lightIntensityCap", lightIntensityCap)
             }
         }
     }
@@ -181,6 +187,18 @@ class LabyrinthDemo(
     override fun update(deltaTime: Float) {
         character?.update(deltaTime)
         campfire?.update(deltaTime)
+
+        accumulated += deltaTime
+        if (accumulated >= timeLimit) {
+            accumulated = 0f
+            if (current + 1 >= lightIntensityCaps.size) {
+                current = 0
+            } else current++
+            background?.shader?.let {
+                it.bind()
+                it.setUniform("lightIntensityCap", lightIntensityCaps[current])
+            }
+        }
     }
 
     override fun render(window: Window) {
