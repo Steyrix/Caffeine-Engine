@@ -35,7 +35,7 @@ class LabyrinthDemo(
     private var campfire: CompositeEntity? = null
     private var campfireGraphicalComponent: AnimatedObject2D? = null
     private val campfireParameters: SetOf2DParameters = SetOf2DParameters(
-            300f, 300f, 75f, 75f, 0f
+            500f, 500f, 75f, 75f, 0f
     )
 
     private var background: OpenGlObject2D? = null
@@ -92,18 +92,9 @@ class LabyrinthDemo(
                 it.bind()
                 it.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection!!)
 
-                // TODO: move math to shaders
-                val screenCenterX: Float = screenWidth / 2
-                val screenCenterY: Float = screenHeight / 2
-                val lightSourceXLocation =
-                        campfireParameters.x / screenWidth - screenCenterX / screenWidth - (campfireParameters.xSize * 1.5f) / screenWidth
-
-                val lightSourceYLocation =
-                        screenCenterY / screenHeight - campfireParameters.y / screenHeight + (campfireParameters.ySize * 1.5f) / screenHeight
-
-                println("$lightSourceXLocation | $lightSourceYLocation")
-                println("${campfireParameters.x} | ${campfireParameters.y}")
-                it.setUniform("lightSourcePos", Vector2f(lightSourceXLocation, lightSourceYLocation))
+                it.setUniform("screenSize", Vector2f(screenWidth, screenHeight))
+                it.setUniform("lightSourceSize", Vector2f(campfireParameters.xSize, campfireParameters.ySize))
+                it.setUniform("lightSourceCoords", Vector2f(campfireParameters.x, campfireParameters.y))
             }
         }
     }
