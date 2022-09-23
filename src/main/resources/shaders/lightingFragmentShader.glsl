@@ -11,18 +11,23 @@ void main(void)
 {
     vec2 screenCenter = vec2(screenSize.x / 2, screenSize.y / 2);
 
+    float horizontalDiff = -lightSourceSize.x / 2;
+    float verticalDiff = lightSourceSize.y;
+
     float lightSourceX =
-    (lightSourceCoords.x - screenCenter.x + lightSourceSize.x) / screenSize.x;
+    (lightSourceCoords.x - horizontalDiff) / screenSize.x * 2 - 1;
 
     float lightSourceY =
-    (lightSourceCoords.y - screenCenter.y - lightSourceSize.y) / screenSize.y;
+    (-lightSourceCoords.y - verticalDiff) / screenSize.y * 2 + 1;
 
     vec2 lightSourcePos = vec2(lightSourceX, lightSourceY);
 
     float lightIntensity = 1.0/distance(lightSourcePos, pos.xy);
+
     if(lightIntensity >= 100) {
         lightIntensity = 0;
     }
+
     if(lightIntensity >= 3) {
         lightIntensity = 3;
     }

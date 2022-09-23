@@ -35,7 +35,7 @@ class LabyrinthDemo(
     private var campfire: CompositeEntity? = null
     private var campfireGraphicalComponent: AnimatedObject2D? = null
     private val campfireParameters: SetOf2DParameters = SetOf2DParameters(
-            500f, 500f, 75f, 75f, 0f
+            200f, 600f, 70f, 70f, 0f
     )
 
     private var background: OpenGlObject2D? = null
