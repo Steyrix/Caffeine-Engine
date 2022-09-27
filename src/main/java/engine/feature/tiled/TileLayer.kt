@@ -7,6 +7,7 @@ import engine.core.update.SetOfParameters
 import engine.feature.geometry.Point2D
 
 class TileLayer(
+        val name: String,
         val widthInTiles: Int,
         heightInTiles: Int,
         val tileIdsData: List<Int>,
@@ -75,5 +76,11 @@ class TileLayer(
         graphicalComponent = genGraphicalComponent(this)
     }
 
-    override fun updateParameters(parameters: SetOfParameters) = Unit
+    override fun updateParameters(parameters: SetOfParameters) {
+        graphicalComponent.updateParameters(parameters)
+    }
+
+    override fun draw() {
+        graphicalComponent.draw()
+    }
 }
