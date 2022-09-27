@@ -25,13 +25,10 @@ void main(void)
 
     float lightIntensity = 1.0/distance(lightSourcePos, pos.xy);
 
-    if(lightIntensity >= 100) {
-        lightIntensity = 0;
-    }
-
     if(lightIntensity >= lightIntensityCap) {
         lightIntensity = lightIntensityCap;
     }
+
     vec4 lightCol = vec4(lightIntensity, lightIntensity, lightIntensity, 1.0);
     fColor = texture(textureSample, fragmentUV).rgba * lightCol;
 
