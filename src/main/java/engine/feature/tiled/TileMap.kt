@@ -7,15 +7,17 @@ import engine.core.update.SetOfParameters
 import kotlin.math.roundToInt
 
 class TileMap(
-        val set: TileSet,
         layers: MutableList<TileLayer>,
         override var shader: Shader?,
-        override val innerDrawableComponents: MutableList<Drawable2D>
 ): Drawable2D {
 
     companion object {
         private const val NOT_FOUND = -1
     }
+
+    override val innerDrawableComponents: MutableList<Drawable2D> = mutableListOf()
+
+    private val set: TileSet
 
     private val layersMap = layers.associateBy { it.name }
 
@@ -23,6 +25,10 @@ class TileMap(
     private var absoluteWidth: Float = 0f
 
     init {
+        if (layers.isEmpty()) throw IllegalStateException("Cannot initialize map with empty list of layers")
+
+        set = layers.first().set
+
         layers.forEach {
             innerDrawableComponents.add(it)
         }
