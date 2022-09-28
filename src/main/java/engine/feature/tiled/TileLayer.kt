@@ -11,7 +11,7 @@ class TileLayer(
         val widthInTiles: Int,
         heightInTiles: Int,
         val tileIdsData: List<Int>,
-        private val set: TileSet,
+        internal val set: TileSet,
         override var shader: Shader?,
         override val innerDrawableComponents: MutableList<Drawable2D>
 ): Drawable2D {
