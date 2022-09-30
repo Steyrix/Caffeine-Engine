@@ -10,7 +10,7 @@ object XmlParser {
     private const val ERROR_MSG_NOT_FOUND = "The file supplied is not found!"
     private const val ERROR_MSG_PARSE_ERR = "Unable to parse xml file"
 
-    fun getDocument(xmlFile: File): Document? {
+    fun getDocument(xmlFile: File): Document {
         if (!xmlFile.exists()) {
             throw IllegalArgumentException(ERROR_MSG_NOT_FOUND)
         }
