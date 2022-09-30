@@ -1,5 +1,6 @@
 package engine.feature.tiled
 
+import engine.core.entity.Entity
 import engine.core.render.render2D.Drawable2D
 import engine.core.shader.Shader
 import engine.core.update.SetOf2DParameters
@@ -9,7 +10,7 @@ import kotlin.math.roundToInt
 class TileMap(
         layers: MutableList<TileLayer>,
         override var shader: Shader?,
-): Drawable2D {
+): Drawable2D, Entity {
 
     companion object {
         private const val NOT_FOUND = -1
