@@ -51,7 +51,8 @@ internal object TiledResourceParser {
         val mapTileSetNode = doc.getElementsByTagName(TILE_SET)
         val mapTileSetAttribs = mapTileSetNode!!.item(0).attributes
         val tileSetPath = mapTileSetAttribs.getNamedItem(SOURCE).nodeValue
-        val tileSetFile = File(tileSetPath)
+
+        val tileSetFile = File(this.javaClass.getResource(tileSetPath)!!.path)
 
         val document = XmlParser.getDocument(tileSetFile)!!
 
@@ -112,6 +113,7 @@ internal object TiledResourceParser {
                         .item(i)
                         .textContent
                         .replace("\n", "")
+                        .replace(" ", "")
                         .split(",")
                         .map { it.toInt() - 1 })
             }
