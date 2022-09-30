@@ -11,9 +11,7 @@ class TileLayer(
         val widthInTiles: Int,
         heightInTiles: Int,
         val tileIdsData: List<Int>,
-        internal val set: TileSet,
-        override var shader: Shader?,
-        override val innerDrawableComponents: MutableList<Drawable2D>
+        internal val set: TileSet
 ): Drawable2D {
 
     companion object {
@@ -65,6 +63,13 @@ class TileLayer(
                     set.relativeTileWidth * (pos.x + 1), set.relativeTileHeight * pos.y)
         }
     }
+
+    override var shader: Shader? = null
+        set(value) {
+            field = value
+            graphicalComponent.shader = value
+        }
+    override val innerDrawableComponents: MutableList<Drawable2D> = mutableListOf()
 
     private var initialWidth = 0f
     private var initialHeight = 0f

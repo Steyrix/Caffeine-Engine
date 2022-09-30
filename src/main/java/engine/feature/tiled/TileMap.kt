@@ -9,12 +9,19 @@ import kotlin.math.roundToInt
 
 class TileMap(
         layers: MutableList<TileLayer>,
-        override var shader: Shader?,
-): Drawable2D, Entity {
+) : Drawable2D, Entity {
 
     companion object {
         private const val NOT_FOUND = -1
     }
+
+    override var shader: Shader? = null
+        set(value) {
+            field = value
+            innerDrawableComponents.forEach {
+                it.shader = value
+            }
+        }
 
     override val innerDrawableComponents: MutableList<Drawable2D> = mutableListOf()
 

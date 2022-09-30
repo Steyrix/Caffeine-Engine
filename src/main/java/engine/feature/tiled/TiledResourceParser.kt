@@ -42,8 +42,7 @@ internal object TiledResourceParser {
         val tileSet = retrieveTileSet(document)
 
         return TileMap(
-                layers = retrieveLayers(mapWidth, mapHeight, document, tileSet),
-                shader = null,
+                layers = retrieveLayers(mapWidth, mapHeight, document, tileSet)
         )
     }
 
@@ -94,9 +93,8 @@ internal object TiledResourceParser {
                             widthInTiles = widthInTiles,
                             heightInTiles = heightInTiles,
                             tileIdsData = data,
-                            set = tileSet,
-                            shader = null,
-                            innerDrawableComponents = mutableListOf())
+                            set = tileSet
+                    )
             )
         }
 
