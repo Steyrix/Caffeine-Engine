@@ -19,7 +19,7 @@ class TileSet(
                 out.add(Tile(uv))
             }
 
-            return TilesUtil.rotateTiles(out, set.textureColumnCount)
+            return out
         }
     }
 
@@ -31,16 +31,19 @@ class TileSet(
     internal fun getTileByNumber(numberInSet: Int) = tiles[numberInSet]
 
     private fun getTileUvByNumber(numberInSet: Int): FloatArray {
+        val x = tileWidthPx / texture2D.getWidthF()
+        val y = tileHeightPx / texture2D.getHeightF()
+
         val currentRow = (numberInSet / textureColumnCount).toFloat()
         val currentColumn = (numberInSet % textureColumnCount).toFloat()
 
         return floatArrayOf(
-                currentColumn * relativeTileWidth, currentRow * relativeTileHeight,
-                (currentColumn + 1) * relativeTileWidth, (currentRow + 1) * relativeTileHeight,
-                currentColumn * relativeTileWidth, (currentRow + 1) * relativeTileHeight,
-                currentColumn * relativeTileWidth, currentRow * relativeTileHeight,
-                (currentColumn + 1) * relativeTileWidth, currentRow * relativeTileHeight,
-                (currentColumn + 1) * relativeTileWidth, (currentRow + 1) * relativeTileHeight
+                currentColumn * x, (currentRow + 1) * y,
+                (currentColumn + 1) * x, currentRow * y,
+                currentColumn * x, currentRow * y,
+                currentColumn * x, (currentRow + 1) * y,
+                (currentColumn + 1) * x, (currentRow + 1) * y,
+                (currentColumn + 1) * x, currentRow * y
         )
     }
 }
