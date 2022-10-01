@@ -33,7 +33,9 @@ class Texture2D(
     }
 
     fun setParameter(name: Int, value: Int) {
+        bind()
         glTexParameteri(GL_TEXTURE_2D, name, value)
+        unbind()
     }
 
     fun dispose() {
