@@ -1,6 +1,8 @@
 package engine.feature.tiled
 
 import engine.core.texture.Texture2D
+import org.lwjgl.opengl.GL11.*
+import org.lwjgl.opengl.GL33C
 import org.w3c.dom.Document
 import org.w3c.dom.Node
 import java.io.File
@@ -68,6 +70,8 @@ internal object TiledResourceParser {
         val texturePath = this.javaClass.getResource(sourcePath)!!.path
         val texture = Texture2D.createInstance(texturePath)
 
+        texture.setParameter(GL_TEXTURE_MIN_FILTER, GL_NEAREST)
+        texture.setParameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST)
         return TileSet(tileWidth.toFloat(), tileHeight.toFloat(), texture, tileCount.toInt(), columnCount.toInt())
     }
 
