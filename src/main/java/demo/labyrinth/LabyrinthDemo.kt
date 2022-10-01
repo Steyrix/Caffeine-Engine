@@ -12,10 +12,13 @@ import engine.core.update.SetOf2DParameters
 import engine.core.window.Window
 import engine.feature.animation.AnimationHolder2D
 import engine.feature.collision.boundingbox.BoundingBox
+import engine.feature.tiled.TileMap
+import engine.feature.tiled.TiledResourceParser
 import engine.feature.util.Buffer
 import org.joml.Matrix4f
 import org.joml.Vector2f
 import org.lwjgl.opengl.GL33C.*
+import java.io.File
 
 class LabyrinthDemo(
         val screenWidth: Float,
@@ -37,13 +40,18 @@ class LabyrinthDemo(
     private val campfireParameters: SetOf2DParameters = SetOf2DParameters(
             450f, 450f, 75f, 75f, 0f
     )
+
+    private var map: CompositeEntity? = null
+    private var mapGraphicalComponent: TileMap? = null
+    private val mapParameters: SetOf2DParameters = SetOf2DParameters(
+            x = 0f, y = 0f, xSize = screenWidth, ySize = screenHeight, rotationAngle = 0f
+    )
+
     private var accumulated = 0f
     private var timeLimit = 0.1f
     private var lightIntensityCap = 3f
     private val lightIntensityCaps = listOf(3f, 2.95f, 2.9f)
     private var current = 0
-
-    private var background: OpenGlObject2D? = null
 
     override fun init() {
         renderProjection = Matrix4f().ortho(
@@ -56,52 +64,43 @@ class LabyrinthDemo(
         )
 
         initCharacterGraphics()
-
         character = Player(
                 drawableComponent = characterGraphicalComponent!!
         )
 
         initCampfireGraphics()
-
         campfire = object : CompositeEntity() {}
         campfire?.addComponent(
                 component = campfireGraphicalComponent as Entity,
                 parameters = campfireParameters
         )
 
-        initBackgroundGraphics()
+        initTileMapGraphics()
+        map = object  : CompositeEntity() {}
+        map?.addComponent(
+                component = mapGraphicalComponent as Entity,
+                parameters = mapParameters
+        )
     }
 
-    private fun initBackgroundGraphics() {
+    private fun initTileMapGraphics() {
         val vertexShaderPath = this.javaClass.getResource("/shaders/lightingVertexShader.glsl")!!.path
         val fragmentShaderPath = this.javaClass.getResource("/shaders/lightingFragmentShader.glsl")!!.path
 
-        val texturePath = this.javaClass.getResource("/textures/grass_texture.png")!!.path
-        val uv = Buffer.getRectangleSectorVertices(1f, 1f)
-        background = OpenGlObject2D(
-                bufferParamsCount = 2,
-                dataArrays = listOf(Buffer.RECTANGLE_INDICES, uv),
-                verticesCount = 6,
-                texture = Texture2D.createInstance(texturePath),
-                arrayTexture = null
-        ).apply {
-            boundingBox = characterBoundingBox
-            x = 0f
-            y = 0f
-            xSize = screenWidth
-            ySize = screenHeight
-            shader = ShaderLoader.loadFromFile(
-                    vertexShaderFilePath = vertexShaderPath,
-                    fragmentShaderFilePath = fragmentShaderPath
-            ).also {
-                it.bind()
-                it.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection!!)
+        mapGraphicalComponent = TiledResourceParser.createTileMapFromXml(
+                File(this.javaClass.getResource("/tiled/cave_level.xml")!!.path)
+        )
+        mapGraphicalComponent?.shader = ShaderLoader.loadFromFile(
+                vertexShaderFilePath = vertexShaderPath,
+                fragmentShaderFilePath = fragmentShaderPath
+        ).also {
+            it.bind()
+            it.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection!!)
 
-                it.setUniform("screenSize", Vector2f(screenWidth, screenHeight))
-                it.setUniform("lightSourceSize", Vector2f(campfireParameters.xSize, campfireParameters.ySize))
-                it.setUniform("lightSourceCoords", Vector2f(campfireParameters.x, campfireParameters.y))
-                it.setUniform("lightIntensityCap", lightIntensityCap)
-            }
+            it.setUniform("screenSize", Vector2f(screenWidth, screenHeight))
+            it.setUniform("lightSourceSize", Vector2f(campfireParameters.xSize, campfireParameters.ySize))
+            it.setUniform("lightSourceCoords", Vector2f(campfireParameters.x, campfireParameters.y))
+            it.setUniform("lightIntensityCap", lightIntensityCap)
         }
     }
 
@@ -187,6 +186,7 @@ class LabyrinthDemo(
     override fun update(deltaTime: Float) {
         character?.update(deltaTime)
         campfire?.update(deltaTime)
+        map?.update(deltaTime)
 
         accumulated += deltaTime
         if (accumulated >= timeLimit) {
@@ -194,7 +194,7 @@ class LabyrinthDemo(
             if (current + 1 >= lightIntensityCaps.size) {
                 current = 0
             } else current++
-            background?.shader?.let {
+            mapGraphicalComponent?.shader?.let {
                 it.bind()
                 it.setUniform("lightIntensityCap", lightIntensityCaps[current])
             }
@@ -203,10 +203,11 @@ class LabyrinthDemo(
 
     override fun render(window: Window) {
         glClear(GL_COLOR_BUFFER_BIT)
-        glClearColor(0.5f, 0.5f, 0.5f, 0.5f)
+        glClearColor(0f, 0.5f, 0f, 0.5f)
 
-        background?.draw()
+        // background?.draw()
         // graphicalObject?.draw()
+        map?.draw()
         character?.draw()
         campfire?.draw()
     }
