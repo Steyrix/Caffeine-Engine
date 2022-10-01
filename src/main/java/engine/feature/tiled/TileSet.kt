@@ -23,16 +23,15 @@ class TileSet(
         }
     }
 
-    private val tiles = generateTiles(this)
-
     internal val relativeTileWidth = tileWidthPx / texture2D.getWidthF()
     internal val relativeTileHeight = tileHeightPx / texture2D.getHeightF()
 
+    private val tiles = generateTiles(this)
     internal fun getTileByNumber(numberInSet: Int) = tiles[numberInSet]
 
     private fun getTileUvByNumber(numberInSet: Int): FloatArray {
-        val x = tileWidthPx / texture2D.getWidthF()
-        val y = tileHeightPx / texture2D.getHeightF()
+        val x = relativeTileWidth
+        val y = relativeTileHeight
 
         val currentRow = (numberInSet / textureColumnCount).toFloat()
         val currentColumn = (numberInSet % textureColumnCount).toFloat()
