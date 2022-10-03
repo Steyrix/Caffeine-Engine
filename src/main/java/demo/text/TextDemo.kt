@@ -12,8 +12,8 @@ import org.lwjgl.opengl.GL33C.*
 import java.awt.Dimension
 
 class TextDemo(
-        val screenWidth: Float,
-        val screenHeight: Float
+        override val screenWidth: Float,
+        override val screenHeight: Float
 ) : Scene {
 
     override var renderProjection: Matrix4f? = null

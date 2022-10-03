@@ -4,6 +4,9 @@ import engine.core.window.Window
 import org.joml.Matrix4f
 
 interface Scene {
+
+    val screenWidth: Float
+    val screenHeight: Float
     fun init()
 
     fun input(window: Window)

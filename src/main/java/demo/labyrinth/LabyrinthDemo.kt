@@ -21,8 +21,8 @@ import org.lwjgl.opengl.GL33C.*
 import java.io.File
 
 class LabyrinthDemo(
-        val screenWidth: Float,
-        val screenHeight: Float
+        override val screenWidth: Float,
+        override val screenHeight: Float
 ) : Scene {
 
     private val presets = LabyrinthPresets()
@@ -38,7 +38,7 @@ class LabyrinthDemo(
     private var campfire: CompositeEntity? = null
     private var campfireGraphicalComponent: AnimatedObject2D? = null
     private val campfireParameters: SetOf2DParameters = SetOf2DParameters(
-            450f, 450f, 75f, 75f, 0f
+            250f, 60f, 50f, 50f, 0f
     )
 
     private var map: CompositeEntity? = null
@@ -113,8 +113,8 @@ class LabyrinthDemo(
         characterBoundingBox = BoundingBox(
                 x = 100f,
                 y = 100f,
-                xSize = 100f,
-                ySize = 100f
+                xSize = 60f,
+                ySize = 60f
         ).apply {
             shader = ShaderLoader.loadFromFile(
                     vertexShaderFilePath = boxVertexShaderPath,
@@ -141,8 +141,8 @@ class LabyrinthDemo(
             boundingBox = characterBoundingBox
             x = 100f
             y = 100f
-            xSize = 100f
-            ySize = 100f
+            xSize = 60f
+            ySize = 60f
             shader = ShaderLoader.loadFromFile(
                     vertexShaderFilePath = characterVertexShaderPath,
                     fragmentShaderFilePath = characterFragmentShaderPath

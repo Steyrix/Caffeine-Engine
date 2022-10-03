@@ -9,7 +9,7 @@ class Engine(
     private var scene: Scene
 ) : Runnable {
 
-    private var window = Window(1000, 1000)
+    private var window = Window(scene.screenWidth.toInt(), scene.screenHeight.toInt())
     private val timer = Timer()
     private var gameLoop: GameLoop = FixedStepGameLoop(window, timer)
 
