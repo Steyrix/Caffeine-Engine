@@ -1,8 +1,8 @@
 package engine.feature.tiled
 
 import engine.core.texture.Texture2D
+import engine.feature.tiled.property.*
 import org.lwjgl.opengl.GL11.*
-import org.lwjgl.opengl.GL33C
 import org.w3c.dom.Document
 import org.w3c.dom.Node
 import java.io.File
@@ -16,13 +16,13 @@ internal object TiledResourceParser {
 
     private const val PROPERTIES = "properties"
     private const val PROPERTY = "property"
-//    private const val PROPERTY_TYPE = "type"
-//    private const val PROPERTY_VALUE = "value"
+    private const val PROPERTY_TYPE = "type"
+    private const val PROPERTY_VALUE = "value"
     private const val PROPERTY_NAME = "name"
-//    private const val BOOL = "bool"
-//    private const val STRING = "string"
-//    private const val INT = "int"
-//    private const val FLOAT = "float"
+    private const val BOOL = "bool"
+    private const val STRING = "string"
+    private const val INT = "int"
+    private const val FLOAT = "float"
 
     private const val LAYER = "layer"
 
@@ -87,8 +87,8 @@ internal object TiledResourceParser {
         for (layerIndex in 0 until layers.length) {
             val currentLayer = layers.item(layerIndex)
             val data = retrieveData(currentLayer)
-//            val properties = retrieveProperties(currentLayer)
-//            val primitiveProperties = convertToPrimitiveProperties(properties)
+            val properties = retrieveProperties(currentLayer)
+            val primitiveProperties = convertToPrimitiveProperties(properties)
             val name = currentLayer.attributes.getNamedItem(PROPERTY_NAME).nodeValue
 
             out.add(
@@ -133,7 +133,7 @@ internal object TiledResourceParser {
             if (nodes.item(propertyParentNodeIndex).nodeName == PROPERTIES) {
                 val properties = nodes.item(propertyParentNodeIndex).childNodes
 
-                for(propertyChildNodeIndex in 0 until properties.length) {
+                for (propertyChildNodeIndex in 0 until properties.length) {
                     if (properties.item(propertyChildNodeIndex).nodeName == PROPERTY)
                         out.add(properties.item(propertyChildNodeIndex))
                 }
@@ -145,26 +145,25 @@ internal object TiledResourceParser {
         return out
     }
 
-    // todo implement
-//    private fun convertToPrimitiveProperties(list: ArrayList<Node>): ArrayList<LayerProperty<out Any>> {
-//        val out = ArrayList<LayerProperty<out Any>>()
-//
-//        list.forEach {
-//            val propertyName = it.attributes.getNamedItem(PROPERTY_NAME).nodeValue
-//            val propertyType = it.attributes.getNamedItem(PROPERTY_TYPE).nodeValue
-//            val propertyValue = it.attributes.getNamedItem(PROPERTY_VALUE).nodeValue
-//
-//            val propertyField = when (propertyType) {
-//                BOOL -> BooleanProperty(propertyName, propertyValue.toBoolean())
-//                FLOAT -> FloatProperty(propertyName, propertyValue.toFloat())
-//                INT -> IntProperty(propertyName, propertyValue.toInt())
-//                STRING -> StringProperty(propertyName, propertyValue)
-//                else -> throw Exception()
-//            }
-//
-//            out.add(propertyField)
-//        }
-//
-//        return out
-//    }
+    private fun convertToPrimitiveProperties(list: ArrayList<Node>): ArrayList<Property> {
+        val out = ArrayList<Property>()
+
+        list.forEach {
+            val propertyName = it.attributes.getNamedItem(PROPERTY_NAME).nodeValue
+            val propertyType = it.attributes.getNamedItem(PROPERTY_TYPE).nodeValue
+            val propertyValue = it.attributes.getNamedItem(PROPERTY_VALUE).nodeValue
+
+            val propertyField = when (propertyType) {
+                BOOL -> BooleanProperty(propertyValue.toBoolean(), propertyName)
+                FLOAT -> FloatProperty(propertyValue.toFloat(), propertyName)
+                INT -> IntProperty(propertyValue.toInt(), propertyName)
+                STRING -> StringProperty(propertyValue, propertyName)
+                else -> throw Exception()
+            }
+
+            out.add(propertyField)
+        }
+
+        return out
+    }
 }
