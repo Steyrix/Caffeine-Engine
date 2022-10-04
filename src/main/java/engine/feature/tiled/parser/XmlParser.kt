@@ -1,4 +1,4 @@
-package engine.feature.tiled
+package engine.feature.tiled.parser
 
 import org.w3c.dom.Document
 import java.io.File

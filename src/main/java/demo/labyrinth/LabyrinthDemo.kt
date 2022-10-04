@@ -3,7 +3,6 @@ package demo.labyrinth
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
-import engine.core.render.render2D.OpenGlObject2D
 import engine.core.scene.Scene
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
@@ -13,7 +12,7 @@ import engine.core.window.Window
 import engine.feature.animation.AnimationHolder2D
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.tiled.TileMap
-import engine.feature.tiled.TiledResourceParser
+import engine.feature.tiled.parser.TiledResourceParser
 import engine.feature.util.Buffer
 import org.joml.Matrix4f
 import org.joml.Vector2f

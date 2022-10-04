@@ -1,6 +1,9 @@
-package engine.feature.tiled
+package engine.feature.tiled.parser
 
 import engine.core.texture.Texture2D
+import engine.feature.tiled.TileLayer
+import engine.feature.tiled.TileMap
+import engine.feature.tiled.TileSet
 import engine.feature.tiled.property.*
 import org.lwjgl.opengl.GL11.*
 import org.w3c.dom.Document
