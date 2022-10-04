@@ -97,7 +97,8 @@ internal object TiledResourceParser {
                             widthInTiles = widthInTiles,
                             heightInTiles = heightInTiles,
                             tileIdsData = data,
-                            set = tileSet
+                            set = tileSet,
+                            properties = primitiveProperties
                     )
             )
         }

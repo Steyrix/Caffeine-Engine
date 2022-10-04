@@ -5,13 +5,15 @@ import engine.core.render.render2D.OpenGlObject2D
 import engine.core.shader.Shader
 import engine.core.update.SetOfParameters
 import engine.feature.geometry.Point2D
+import engine.feature.tiled.property.Property
 
 class TileLayer(
         val name: String,
         val widthInTiles: Int,
         heightInTiles: Int,
         val tileIdsData: List<Int>,
-        internal val set: TileSet
+        internal val set: TileSet,
+        private val properties: ArrayList<Property>
 ): Drawable2D {
 
     companion object {
