@@ -12,31 +12,6 @@ import java.io.File
 
 internal object TiledResourceParser {
 
-    private const val MAP = "map"
-    private const val MAP_WIDTH = "width"
-    private const val MAP_HEIGHT = "height"
-    private const val DATA = "data"
-
-    private const val PROPERTIES = "properties"
-    private const val PROPERTY = "property"
-    private const val PROPERTY_TYPE = "type"
-    private const val PROPERTY_VALUE = "value"
-    private const val PROPERTY_NAME = "name"
-    private const val BOOL = "bool"
-    private const val STRING = "string"
-    private const val INT = "int"
-    private const val FLOAT = "float"
-
-    private const val LAYER = "layer"
-
-    private const val SOURCE = "source"
-    private const val TILE_SET = "tileset"
-    private const val TILE_WIDTH = "tilewidth"
-    private const val TILE_HEIGHT = "tileheight"
-    private const val TILE_COUNT = "tilecount"
-    private const val COLUMN_COUNT = "columns"
-    private const val IMAGE = "image"
-
     fun createTileMapFromXml(xmlFile: File): TileMap {
         val document = XmlParser.getDocument(xmlFile)
         val mapNode = document!!.getElementsByTagName(MAP)
