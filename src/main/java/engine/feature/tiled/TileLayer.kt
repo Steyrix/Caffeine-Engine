@@ -10,7 +10,7 @@ import engine.feature.tiled.property.Property
 class TileLayer(
         val name: String,
         val widthInTiles: Int,
-        heightInTiles: Int,
+        val heightInTiles: Int,
         val tileIdsData: List<Int>,
         internal val set: TileSet,
         private val properties: ArrayList<Property>
@@ -89,5 +89,10 @@ class TileLayer(
 
     override fun draw() {
         graphicalComponent.draw()
+    }
+
+    fun getTileNumberByIndex(index: Int): Int {
+        return if (index <= tileIdsData.size - 1) tileIdsData[index]
+        else -1
     }
 }

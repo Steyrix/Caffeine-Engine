@@ -54,11 +54,11 @@ class TileMap(
         val widthInTiles = layer.widthInTiles
 
         val currentTileWidth = absoluteWidth / layer.widthInTiles
-        val currentTileHeight = absoluteHeight / layer.widthInTiles
+        val currentTileHeight = absoluteHeight / layer.heightInTiles
 
         val xTileNumber = getTilePosition(currentTileWidth, posX)
         val yTileNumber = getTilePosition(currentTileHeight, posY)
-        return yTileNumber * widthInTiles + xTileNumber
+        return layer.getTileNumberByIndex(yTileNumber * widthInTiles + xTileNumber)
     }
 
     private fun getTilePosition(tileSize: Float, pos: Float): Int {
