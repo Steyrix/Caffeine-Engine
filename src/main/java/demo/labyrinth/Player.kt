@@ -69,19 +69,23 @@ private class PlayerController(
             AnimationKey.IDLE
         }
     }
+
+    fun dropVelocity() {
+        println("DROP")
+        if (velocityX != 0f) {
+            params.x -= velocityX * modifier * 0.05f
+            velocityX = 0f
+        }
+        if (velocityY != 0f) velocityY = 0f
+    }
 }
 
 class Player(
-        drawableComponent: AnimatedObject2D
+        drawableComponent: AnimatedObject2D,
+        private val params: SetOf2DParameters
 ) : CompositeEntity() {
 
-    private val params = SetOf2DParameters(
-            x = 0f,
-            y = 0f,
-            xSize = 50f,
-            ySize = 50f,
-            rotationAngle = 0f
-    )
+
 
     private val controller = PlayerController(params)
 
@@ -105,5 +109,9 @@ class Player(
                 .forEach {
                     (it.key as AnimatedObject2D).setAnimationByKey(controller.getAnimationKey())
                 }
+    }
+
+    fun collide() {
+        controller.dropVelocity()
     }
 }

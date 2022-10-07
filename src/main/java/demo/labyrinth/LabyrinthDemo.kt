@@ -32,12 +32,20 @@ class LabyrinthDemo(
     private var characterBoundingBox: BoundingBox? = null
 
     private var character: CompositeEntity? = null
+    private var characterParameters = SetOf2DParameters(
+            x = 30f,
+            y = 30f,
+            xSize = 50f,
+            ySize = 50f,
+            rotationAngle = 0f
+    )
+
     override var renderProjection: Matrix4f? = null
 
     private var campfire: CompositeEntity? = null
     private var campfireGraphicalComponent: AnimatedObject2D? = null
     private val campfireParameters: SetOf2DParameters = SetOf2DParameters(
-            250f, 60f, 50f, 50f, 0f
+            500f, 500f, 50f, 50f, 0f
     )
 
     private var map: CompositeEntity? = null
@@ -64,7 +72,8 @@ class LabyrinthDemo(
 
         initCharacterGraphics()
         character = Player(
-                drawableComponent = characterGraphicalComponent!!
+                drawableComponent = characterGraphicalComponent!!,
+                params = characterParameters
         )
 
         initCampfireGraphics()
@@ -197,6 +206,14 @@ class LabyrinthDemo(
                 it.bind()
                 it.setUniform("lightIntensityCap", lightIntensityCaps[current])
             }
+        }
+
+        val charPosX = characterParameters.x
+        val charPosY = characterParameters.y
+
+//        println(mapGraphicalComponent?.getTileIndexInLayer(charPosX, charPosY, "Tile Layer 1"))
+        if (mapGraphicalComponent?.getTileIndexInLayer(charPosX, charPosY, "Walking Layer") != -1) {
+            (character as Player).collide()
         }
     }
 
