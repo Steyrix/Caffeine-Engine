@@ -2,6 +2,6 @@ package engine.core.update.update2D
 
 import engine.core.update.SetOfParameters
 
-interface Parameterized2D {
+interface Parameterized {
     fun updateParameters(parameters: SetOfParameters)
 }

@@ -4,7 +4,7 @@ import engine.core.controllable.Controllable
 import engine.core.render.Drawable
 import engine.core.update.SetOfParameters
 import engine.core.update.Updatable
-import engine.core.update.update2D.Parameterized2D
+import engine.core.update.update2D.Parameterized
 import engine.core.window.Window
 
 /*
@@ -36,8 +36,8 @@ open class CompositeEntity : Entity, Updatable {
             }
 
             // TODO switch to global interface
-            if (it.key is Parameterized2D) {
-                (it.key as Parameterized2D).updateParameters(it.value)
+            if (it.key is Parameterized) {
+                (it.key as Parameterized).updateParameters(it.value)
             }
         }
     }
