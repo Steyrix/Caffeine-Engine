@@ -18,6 +18,8 @@ class BoundingBoxCollider(
             parameters.x -= horizontalDiff
             parameters.y -= verticalDiff
         }
+
+        intersectedBox = null
     }
 
     override fun isColliding(entity: Entity): Boolean {
