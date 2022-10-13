@@ -1,5 +1,6 @@
 package engine.feature.collision.boundingbox
 
+import engine.core.entity.Entity
 import engine.core.render.render2D.Drawable2D
 import engine.core.render.render2D.Vertexed2D
 import engine.core.shader.Shader
@@ -17,7 +18,7 @@ open class BoundingBox(
         override var xSize: Float,
         override var ySize: Float,
         var rotationAngle: Float = 0f
-) : IntersectableBox,
+) : IntersectableBox, Entity,
         Vertexed2D(
                 bufferParamsCount = 1,
                 dataArrays = listOf(Buffer.RECTANGLE_VERTICES),
