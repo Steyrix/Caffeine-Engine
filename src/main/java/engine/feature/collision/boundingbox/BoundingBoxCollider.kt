@@ -13,7 +13,10 @@ class BoundingBoxCollider(
 
     override fun reactToCollision() {
         intersectedBox?.let {
-
+            val horizontalDiff = box.getIntersectionWidth(it)
+            val verticalDiff = box.getIntersectionHeight(it)
+            parameters.x -= horizontalDiff
+            parameters.y -= verticalDiff
         }
     }
 
