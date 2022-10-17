@@ -56,10 +56,10 @@ class LabyrinthDemo(
             x = 0f, y = 0f, xSize = screenWidth, ySize = screenHeight, rotationAngle = 0f
     )
 
-    private var someObject: CompositeEntity? = null
-    private var someObjectGraphicalComponent: OpenGlObject2D? = null
-    private val someObjectParameters: SetOf2DParameters = SetOf2DParameters(
-            x = 200f, y = 200f, xSize = 100f, ySize = 100f, rotationAngle = 0f
+    private var crate: CompositeEntity? = null
+    private var crateGraphicalComponent: OpenGlObject2D? = null
+    private val crateParameters: SetOf2DParameters = SetOf2DParameters(
+            x = 400f, y = 150f, xSize = 70f, ySize = 70f, rotationAngle = 0f
     )
 
     private var accumulated = 0f
@@ -82,6 +82,13 @@ class LabyrinthDemo(
         character = Player(
                 drawableComponent = characterGraphicalComponent!!,
                 params = characterParameters
+        )
+
+        initCrateGraphics()
+        crate = object : CompositeEntity() {}
+        crate?.addComponent(
+                component = crateGraphicalComponent as Entity,
+                parameters = crateParameters
         )
 
         initCampfireGraphics()
@@ -171,14 +178,14 @@ class LabyrinthDemo(
         }
     }
 
-    private fun initCrateObjectGraphics() {
+    private fun initCrateGraphics() {
         val vertexShaderPath = this.javaClass.getResource("/shaders/texturedVertexShader.glsl")!!.path
         val fragmentShaderPath = this.javaClass.getResource("/shaders/texturedFragmentShader.glsl")!!.path
 
         val uv = Buffer.getRectangleSectorVertices(1.0f, 1.0f)
 
         val texturePath = this.javaClass.getResource("/textures/obj_crate.png")!!.path
-        someObjectGraphicalComponent = OpenGlObject2D(
+        crateGraphicalComponent = OpenGlObject2D(
                 bufferParamsCount = 2,
                 dataArrays = listOf(Buffer.RECTANGLE_INDICES, uv),
                 verticesCount = 6,
@@ -227,6 +234,7 @@ class LabyrinthDemo(
 
     override fun update(deltaTime: Float) {
         character?.update(deltaTime)
+        crate?.update(deltaTime)
         campfire?.update(deltaTime)
         map?.update(deltaTime)
 
@@ -258,6 +266,7 @@ class LabyrinthDemo(
         // graphicalObject?.draw()
         map?.draw()
         character?.draw()
+        crate?.draw()
         campfire?.draw()
     }
 }
