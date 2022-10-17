@@ -3,7 +3,7 @@ package engine.feature.tiled
 import engine.core.entity.Entity
 import engine.core.render.render2D.Drawable2D
 import engine.core.shader.Shader
-import engine.core.update.SetOf2DParameters
+import engine.core.update.SetOfStatic2DParameters
 import engine.core.update.SetOfParameters
 import kotlin.math.roundToInt
 
@@ -71,7 +71,7 @@ class TileMap(
     }
 
     override fun updateParameters(parameters: SetOfParameters) {
-        if (parameters is SetOf2DParameters) {
+        if (parameters is SetOfStatic2DParameters) {
             absoluteWidth = parameters.xSize
             absoluteHeight = parameters.ySize
         }

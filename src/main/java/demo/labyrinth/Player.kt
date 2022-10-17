@@ -4,24 +4,21 @@ import engine.core.controllable.Controllable
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
-import engine.core.update.SetOf2DParameters
+import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.Updatable
 import engine.core.window.Window
 import org.lwjgl.glfw.GLFW
 
 private class PlayerController(
-        private val params: SetOf2DParameters
+        private val params: SetOf2DParametersWithVelocity
 ): Controllable, Entity, Updatable {
 
     var modifier = 20f
 
-    var velocityX = 0f
-    var velocityY = 0f
-
     var isWalking = false
     var isJumping = false
     override fun input(window: Window) {
-        velocityY = if (window.isKeyPressed(GLFW.GLFW_KEY_S)) {
+        params.velocityY = if (window.isKeyPressed(GLFW.GLFW_KEY_S)) {
             10f
         } else if (window.isKeyPressed(GLFW.GLFW_KEY_W)) {
             -10f
@@ -29,7 +26,7 @@ private class PlayerController(
             0f
         }
 
-        velocityX = if (window.isKeyPressed(GLFW.GLFW_KEY_D)) {
+        params.velocityX = if (window.isKeyPressed(GLFW.GLFW_KEY_D)) {
             10f
         } else if (window.isKeyPressed(GLFW.GLFW_KEY_A)) {
             -10f
@@ -39,25 +36,27 @@ private class PlayerController(
     }
 
     override fun update(deltaTime: Float) {
-        params.x += velocityX * deltaTime * modifier
-        params.y += velocityY * deltaTime * modifier
+        println("Velocities: ${params.velocityX * deltaTime * modifier} / ${params.velocityY}")
+
+        params.x += params.velocityX * deltaTime * modifier
+        params.y += params.velocityY * deltaTime * modifier
         processState()
     }
 
     private fun processState() {
-        if (velocityX != 0f && !isWalking) {
+        if (params.velocityX != 0f && !isWalking) {
             isWalking = true
         }
 
-        if (velocityX == 0f) {
+        if (params.velocityX == 0f) {
             isWalking = false
         }
 
-        if (velocityY != 0f && !isJumping) {
+        if (params.velocityY != 0f && !isJumping) {
             isJumping = true
         }
 
-        if (velocityY == 0f) {
+        if (params.velocityY == 0f) {
             isJumping = false
         }
     }
@@ -71,18 +70,17 @@ private class PlayerController(
     }
 
     fun dropVelocity() {
-        println("DROP")
-        if (velocityX != 0f) {
-            params.x -= velocityX * modifier * 0.05f
-            velocityX = 0f
+        if (params.velocityX != 0f) {
+            params.x -= params.velocityX * modifier * 0.05f
+            params.velocityX = 0f
         }
-        if (velocityY != 0f) velocityY = 0f
+        if (params.velocityY != 0f) params.velocityY = 0f
     }
 }
 
 class Player(
         drawableComponent: AnimatedObject2D,
-        private val params: SetOf2DParameters
+        private val params: SetOf2DParametersWithVelocity
 ) : CompositeEntity() {
 
 

@@ -4,7 +4,7 @@ import engine.core.entity.Entity
 import engine.core.render.render2D.Drawable2D
 import engine.core.render.render2D.Vertexed2D
 import engine.core.shader.Shader
-import engine.core.update.SetOf2DParameters
+import engine.core.update.SetOfStatic2DParameters
 import engine.core.update.SetOfParameters
 import engine.feature.matrix.MatrixComputer
 import engine.feature.util.Buffer
@@ -40,7 +40,7 @@ open class BoundingBox(
     }
 
     override fun updateParameters(parameters: SetOfParameters) {
-        if (parameters is SetOf2DParameters) {
+        if (parameters is SetOfStatic2DParameters) {
             parameters.let {
                 x = it.x
                 y = it.y

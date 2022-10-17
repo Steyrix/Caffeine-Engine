@@ -4,7 +4,8 @@ import engine.core.entity.Entity
 import engine.core.shader.Shader
 import engine.core.texture.ArrayTexture2D
 import engine.core.texture.Texture2D
-import engine.core.update.SetOf2DParameters
+import engine.core.update.SetOf2DParametersWithVelocity
+import engine.core.update.SetOfStatic2DParameters
 import engine.core.update.SetOfParameters
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.matrix.MatrixComputer
@@ -54,11 +55,24 @@ open class OpenGlObject2D(
     }
 
     override fun updateParameters(parameters: SetOfParameters) {
-        innerDrawableComponents.forEach {
-            it.updateParameters(parameters)
+        var mutableParams = parameters
+
+        if (parameters is SetOf2DParametersWithVelocity) {
+            mutableParams = SetOfStatic2DParameters(
+                    parameters.x,
+                    parameters.y,
+                    parameters.xSize,
+                    parameters.ySize,
+                    parameters.rotationAngle
+            )
         }
-        if (parameters is SetOf2DParameters) {
-            parameters.let {
+
+        innerDrawableComponents.forEach {
+            it.updateParameters(mutableParams)
+        }
+
+        if (mutableParams is SetOfStatic2DParameters) {
+            mutableParams.let {
                 x = it.x
                 y = it.y
                 xSize = it.xSize

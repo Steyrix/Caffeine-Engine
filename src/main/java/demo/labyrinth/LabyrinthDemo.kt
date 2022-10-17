@@ -8,7 +8,8 @@ import engine.core.scene.Scene
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
 import engine.core.texture.Texture2D
-import engine.core.update.SetOf2DParameters
+import engine.core.update.SetOfStatic2DParameters
+import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.window.Window
 import engine.feature.animation.AnimationHolder2D
 import engine.feature.collision.boundingbox.BoundingBox
@@ -33,12 +34,14 @@ class LabyrinthDemo(
     private var characterGraphicalComponent: AnimatedObject2D? = null
     private var characterBoundingBox: BoundingBox? = null
     private var character: CompositeEntity? = null
-    private var characterParameters = SetOf2DParameters(
+    private var characterParameters = SetOf2DParametersWithVelocity(
             x = 30f,
             y = 30f,
             xSize = 50f,
             ySize = 50f,
-            rotationAngle = 0f
+            rotationAngle = 0f,
+            velocityX = 0f,
+            velocityY = 0f
     )
     private var collider: BoundingBoxCollider? = null
 
@@ -46,19 +49,20 @@ class LabyrinthDemo(
 
     private var campfire: CompositeEntity? = null
     private var campfireGraphicalComponent: AnimatedObject2D? = null
-    private val campfireParameters: SetOf2DParameters = SetOf2DParameters(
+    private val campfireParameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
             500f, 500f, 50f, 50f, 0f
     )
 
     private var map: CompositeEntity? = null
     private var mapGraphicalComponent: TileMap? = null
-    private val mapParameters: SetOf2DParameters = SetOf2DParameters(
+    private val mapParameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
             x = 0f, y = 0f, xSize = screenWidth, ySize = screenHeight, rotationAngle = 0f
     )
 
+    private var crateBoundingBox: BoundingBox? = null
     private var crate: CompositeEntity? = null
     private var crateGraphicalComponent: OpenGlObject2D? = null
-    private val crateParameters: SetOf2DParameters = SetOf2DParameters(
+    private val crateParameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
             x = 400f, y = 150f, xSize = 70f, ySize = 70f, rotationAngle = 0f
     )
 
@@ -179,11 +183,27 @@ class LabyrinthDemo(
     }
 
     private fun initCrateGraphics() {
+        val boxVertexShaderPath = this.javaClass.getResource("/shaders/boundingBoxVertexShader.glsl")!!.path
+        val boxFragmentShaderPath = this.javaClass.getResource("/shaders/boundingBoxFragmentShader.glsl")!!.path
         val vertexShaderPath = this.javaClass.getResource("/shaders/texturedVertexShader.glsl")!!.path
         val fragmentShaderPath = this.javaClass.getResource("/shaders/texturedFragmentShader.glsl")!!.path
 
-        val uv = Buffer.getRectangleSectorVertices(1.0f, 1.0f)
+        crateBoundingBox = BoundingBox(
+                x = 400f,
+                y = 150f,
+                xSize = 70f,
+                ySize = 70f
+        ).apply {
+            shader = ShaderLoader.loadFromFile(
+                    vertexShaderFilePath = boxVertexShaderPath,
+                    fragmentShaderFilePath = boxFragmentShaderPath
+            ).also {
+                it.bind()
+                it.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection!!)
+            }
+        }
 
+        val uv = Buffer.getRectangleSectorVertices(1.0f, 1.0f)
         val texturePath = this.javaClass.getResource("/textures/obj_crate.png")!!.path
         crateGraphicalComponent = OpenGlObject2D(
                 bufferParamsCount = 2,
@@ -192,6 +212,7 @@ class LabyrinthDemo(
                 texture = Texture2D.createInstance(texturePath),
                 arrayTexture = null
         ).apply {
+            boundingBox = crateBoundingBox
             shader = ShaderLoader.loadFromFile(
                     vertexShaderFilePath = vertexShaderPath,
                     fragmentShaderFilePath = fragmentShaderPath
@@ -235,6 +256,8 @@ class LabyrinthDemo(
     override fun update(deltaTime: Float) {
         character?.update(deltaTime)
         crate?.update(deltaTime)
+        detectCollisions()
+
         campfire?.update(deltaTime)
         map?.update(deltaTime)
 
@@ -256,6 +279,12 @@ class LabyrinthDemo(
 //        if (mapGraphicalComponent?.getTileIndexInLayer(charPosX, charPosY, "Walking Layer") != -1) {
 //            (character as Player).collide()
 //        }
+    }
+
+    private fun detectCollisions() {
+        if (collider?.isColliding(crateBoundingBox as Entity) == true) {
+            collider?.reactToCollision()
+        }
     }
 
     override fun render(window: Window) {
