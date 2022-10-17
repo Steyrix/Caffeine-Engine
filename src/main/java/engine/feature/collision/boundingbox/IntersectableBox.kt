@@ -21,10 +21,10 @@ interface IntersectableBox : Drawable2D {
         y = nY
     }
 
-    fun intersectsX(anotherBox: BoundingBox) = x < anotherBox.rightX || rightX > anotherBox.x
+    fun intersectsX(anotherBox: BoundingBox) = x < anotherBox.rightX && rightX > anotherBox.x
 
 
-    fun intersectsY(anotherBox: BoundingBox) = y < anotherBox.bottomY || bottomY > anotherBox.y
+    fun intersectsY(anotherBox: BoundingBox) = y < anotherBox.bottomY && bottomY > anotherBox.y
 
     fun intersects(anotherBox: BoundingBox) = intersectsX(anotherBox) && intersectsY(anotherBox)
 
