@@ -36,8 +36,6 @@ private class PlayerController(
     }
 
     override fun update(deltaTime: Float) {
-        println("Velocities: ${params.velocityX * deltaTime * modifier} / ${params.velocityY}")
-
         params.x += params.velocityX * deltaTime * modifier
         params.y += params.velocityY * deltaTime * modifier
         processState()
