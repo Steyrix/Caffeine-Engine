@@ -3,6 +3,7 @@ package demo.labyrinth
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
+import engine.core.render.render2D.OpenGlObject2D
 import engine.core.scene.Scene
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
@@ -11,6 +12,7 @@ import engine.core.update.SetOf2DParameters
 import engine.core.window.Window
 import engine.feature.animation.AnimationHolder2D
 import engine.feature.collision.boundingbox.BoundingBox
+import engine.feature.collision.boundingbox.BoundingBoxCollider
 import engine.feature.tiled.TileMap
 import engine.feature.tiled.parser.TiledResourceParser
 import engine.feature.util.Buffer
@@ -30,7 +32,6 @@ class LabyrinthDemo(
 
     private var characterGraphicalComponent: AnimatedObject2D? = null
     private var characterBoundingBox: BoundingBox? = null
-
     private var character: CompositeEntity? = null
     private var characterParameters = SetOf2DParameters(
             x = 30f,
@@ -39,6 +40,7 @@ class LabyrinthDemo(
             ySize = 50f,
             rotationAngle = 0f
     )
+    private var collider: BoundingBoxCollider? = null
 
     override var renderProjection: Matrix4f? = null
 
@@ -52,6 +54,12 @@ class LabyrinthDemo(
     private var mapGraphicalComponent: TileMap? = null
     private val mapParameters: SetOf2DParameters = SetOf2DParameters(
             x = 0f, y = 0f, xSize = screenWidth, ySize = screenHeight, rotationAngle = 0f
+    )
+
+    private var someObject: CompositeEntity? = null
+    private var someObjectGraphicalComponent: OpenGlObject2D? = null
+    private val someObjectParameters: SetOf2DParameters = SetOf2DParameters(
+            x = 200f, y = 200f, xSize = 100f, ySize = 100f, rotationAngle = 0f
     )
 
     private var accumulated = 0f
@@ -133,6 +141,8 @@ class LabyrinthDemo(
             }
         }
 
+        collider = BoundingBoxCollider(characterBoundingBox!!, characterParameters)
+
         val frameSizeX = 0.1f
         val frameSizeY = 0.333f
         val mainCharacterUV = Buffer.getRectangleSectorVertices(frameSizeX, frameSizeY)
@@ -154,6 +164,30 @@ class LabyrinthDemo(
             shader = ShaderLoader.loadFromFile(
                     vertexShaderFilePath = characterVertexShaderPath,
                     fragmentShaderFilePath = characterFragmentShaderPath
+            ).also {
+                it.bind()
+                it.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection!!)
+            }
+        }
+    }
+
+    private fun initCrateObjectGraphics() {
+        val vertexShaderPath = this.javaClass.getResource("/shaders/texturedVertexShader.glsl")!!.path
+        val fragmentShaderPath = this.javaClass.getResource("/shaders/texturedFragmentShader.glsl")!!.path
+
+        val uv = Buffer.getRectangleSectorVertices(1.0f, 1.0f)
+
+        val texturePath = this.javaClass.getResource("/textures/obj_crate.png")!!.path
+        someObjectGraphicalComponent = OpenGlObject2D(
+                bufferParamsCount = 2,
+                dataArrays = listOf(Buffer.RECTANGLE_INDICES, uv),
+                verticesCount = 6,
+                texture = Texture2D.createInstance(texturePath),
+                arrayTexture = null
+        ).apply {
+            shader = ShaderLoader.loadFromFile(
+                    vertexShaderFilePath = vertexShaderPath,
+                    fragmentShaderFilePath = fragmentShaderPath
             ).also {
                 it.bind()
                 it.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection!!)
@@ -208,13 +242,12 @@ class LabyrinthDemo(
             }
         }
 
-        val charPosX = characterParameters.x
-        val charPosY = characterParameters.y
+//        val charPosX = characterParameters.x
+//        val charPosY = characterParameters.y
 
-//        println(mapGraphicalComponent?.getTileIndexInLayer(charPosX, charPosY, "Tile Layer 1"))
-        if (mapGraphicalComponent?.getTileIndexInLayer(charPosX, charPosY, "Walking Layer") != -1) {
-            (character as Player).collide()
-        }
+//        if (mapGraphicalComponent?.getTileIndexInLayer(charPosX, charPosY, "Walking Layer") != -1) {
+//            (character as Player).collide()
+//        }
     }
 
     override fun render(window: Window) {
