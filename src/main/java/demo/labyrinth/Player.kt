@@ -18,20 +18,16 @@ private class PlayerController(
     var isWalking = false
     var isJumping = false
     override fun input(window: Window) {
-        params.velocityY = if (window.isKeyPressed(GLFW.GLFW_KEY_S)) {
-            10f
-        } else if (window.isKeyPressed(GLFW.GLFW_KEY_W)) {
-            -10f
-        } else {
-            0f
+        params.velocityY = when {
+            window.isKeyPressed(GLFW.GLFW_KEY_S) -> 10f
+            window.isKeyPressed(GLFW.GLFW_KEY_W) -> -10f
+            else -> 0f
         }
 
-        params.velocityX = if (window.isKeyPressed(GLFW.GLFW_KEY_D)) {
-            10f
-        } else if (window.isKeyPressed(GLFW.GLFW_KEY_A)) {
-            -10f
-        } else {
-            0f
+        params.velocityX = when {
+            window.isKeyPressed(GLFW.GLFW_KEY_D) -> 10f
+            window.isKeyPressed(GLFW.GLFW_KEY_A) -> -10f
+            else -> 0f
         }
     }
 
