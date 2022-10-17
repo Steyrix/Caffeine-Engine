@@ -13,6 +13,7 @@ class BoundingBoxCollider(
 
     override fun reactToCollision() {
         intersectedBox?.let {
+            // todo remove vertical difference on horizontal collision and vice versa
             val horizontalDiff = box.getIntersectionWidth(it)
             val verticalDiff = box.getIntersectionHeight(it)
             println("Collision detected: $horizontalDiff / $verticalDiff")
