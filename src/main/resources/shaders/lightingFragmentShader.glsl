@@ -16,10 +16,10 @@ void main(void)
     float verticalDiff = lightSourceSize.y;
 
     float lightSourceX =
-    (lightSourceCoords.x - horizontalDiff) / screenSize.x * 2 - 1;
+        (lightSourceCoords.x - horizontalDiff) / screenSize.x * 2 - 1;
 
     float lightSourceY =
-    (-lightSourceCoords.y - verticalDiff) / screenSize.y * 2 + 1;
+        (-lightSourceCoords.y - verticalDiff) / screenSize.y * 2 + 1;
 
     vec2 lightSourcePos = vec2(lightSourceX, lightSourceY);
 
