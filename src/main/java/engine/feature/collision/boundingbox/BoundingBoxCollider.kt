@@ -17,12 +17,12 @@ class BoundingBoxCollider(
             val horizontalDiff = box.getIntersectionWidth(it)
             val verticalDiff = box.getIntersectionHeight(it)
             println("Collision detected: $horizontalDiff / $verticalDiff")
-            if (horizontalDiff != 0f) {
+            if (horizontalDiff != 0f && parameters.velocityX != 0f) {
                 parameters.velocityX = 0f
                 parameters.x -= horizontalDiff
             }
 
-            if (verticalDiff != 0f) {
+            if (verticalDiff != 0f && parameters.velocityY != 0f) {
                 parameters.velocityY = 0f
                 parameters.y -= verticalDiff
             }
