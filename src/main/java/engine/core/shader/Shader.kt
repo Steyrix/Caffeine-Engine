@@ -36,7 +36,7 @@ class Shader {
         }
     }
 
-    fun createUniform(uniformName: String) {
+    private fun createUniform(uniformName: String) {
         val uniformLocation = glGetUniformLocation(programId, uniformName)
         if (uniformLocation < 0) {
             throw IllegalArgumentException("Could not find uniform with name $uniformName")
@@ -92,7 +92,7 @@ class Shader {
         fragmentShaderId = createShader(shaderCode, GL_FRAGMENT_SHADER)
     }
 
-    protected fun createShader(shaderCode: String, shaderType: Int): Int {
+    private fun createShader(shaderCode: String, shaderType: Int): Int {
         val shaderId = glCreateShader(shaderType)
         if (shaderId == 0) {
             throw IllegalStateException("Could not create shader with type $shaderType")
