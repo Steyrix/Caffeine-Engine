@@ -28,7 +28,7 @@ interface IntersectableBox : Drawable2D {
 
     fun intersects(anotherBox: BoundingBox) = intersectsX(anotherBox) && intersectsY(anotherBox)
 
-    fun containsEveryPointOf(vararg points: Point2D): Boolean {
+    fun containsEveryPointOf(points: List<Point2D>): Boolean {
         points.forEach {
             val doesNotContain = it.x > rightX
                     || it.x < x
