@@ -19,9 +19,10 @@ class TiledCollider(
         parameters.velocityY = 0f
     }
 
+    // todo define which state will be colliding -1 or not -1
     override fun isColliding(entity: Entity): Boolean {
         (entity as? TileMap)?.let {
-            if (it.getTileIndexInLayer(parameters.x, parameters.y, collisionLayerName) != -1) {
+            if (it.getTileIndexInLayer(parameters.x, parameters.y, collisionLayerName) == -1) {
                 reactToCollision()
                 return true
             } else {
