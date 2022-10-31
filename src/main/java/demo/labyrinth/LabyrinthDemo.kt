@@ -16,6 +16,8 @@ import engine.feature.collision.Collider
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.collision.boundingbox.BoundingBoxCollider
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
+import engine.feature.collision.tiled.TiledCollider
+import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.tiled.TileMap
 import engine.feature.tiled.parser.TiledResourceParser
 import engine.feature.util.Buffer
@@ -29,7 +31,8 @@ class LabyrinthDemo(
         override val screenHeight: Float
 ) : Scene {
 
-    private val collisionContext = BoundingBoxCollisionContext()
+    private val bbCollisionContext = BoundingBoxCollisionContext()
+    private val tiledCollisionContext = TiledCollisionContext()
 
     private val presets = LabyrinthPresets()
     private val characterAnimations = presets.characterPresets.animation.animations
@@ -47,7 +50,8 @@ class LabyrinthDemo(
             velocityX = 0f,
             velocityY = 0f
     )
-    private var characterCollider: BoundingBoxCollider? = null
+    private var bbCharacterCollider: BoundingBoxCollider? = null
+    private var tiledCharacterCollider: TiledCollider? = null
 
     override var renderProjection: Matrix4f? = null
 
@@ -117,8 +121,11 @@ class LabyrinthDemo(
     }
 
     private fun initPhysics() {
-        collisionContext.addEntity(crateBoundingBox as Entity)
-        collisionContext.addCollider(characterCollider as Collider)
+        bbCollisionContext.addEntity(crateBoundingBox as Entity)
+        bbCollisionContext.addCollider(bbCharacterCollider as Collider)
+
+        tiledCollisionContext.addEntity(mapGraphicalComponent as Entity)
+        tiledCollisionContext.addCollider(tiledCharacterCollider as Collider)
     }
 
     private fun initTileMapGraphics() {
@@ -163,7 +170,8 @@ class LabyrinthDemo(
             }
         }
 
-        characterCollider = BoundingBoxCollider(characterBoundingBox!!, characterParameters)
+        bbCharacterCollider = BoundingBoxCollider(characterBoundingBox!!, characterParameters)
+        tiledCharacterCollider = TiledCollider(characterParameters, "Walking Layer")
 
         val frameSizeX = 0.1f
         val frameSizeY = 0.333f
@@ -267,7 +275,8 @@ class LabyrinthDemo(
     override fun update(deltaTime: Float) {
         character?.update(deltaTime)
         crate?.update(deltaTime)
-        collisionContext.update()
+        bbCollisionContext.update()
+        tiledCollisionContext.update()
 
         campfire?.update(deltaTime)
         map?.update(deltaTime)
