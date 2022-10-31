@@ -15,6 +15,8 @@ class TiledCollider(
     override fun reactToCollision() {
         parameters.x = previousTilePos?.x ?: parameters.x
         parameters.y = previousTilePos?.y ?: parameters.y
+        parameters.velocityX = 0f
+        parameters.velocityY = 0f
     }
 
     override fun isColliding(entity: Entity): Boolean {
