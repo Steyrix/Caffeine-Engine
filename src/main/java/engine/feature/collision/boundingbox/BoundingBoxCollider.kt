@@ -13,19 +13,17 @@ class BoundingBoxCollider(
 
     override fun reactToCollision() {
         intersectedBox?.let {
-            // todo remove vertical difference on horizontal collision and vice versa
             val horizontalDiff = box.getIntersectionWidth(it)
             val verticalDiff = box.getIntersectionHeight(it)
+
             if (isHorizontalContact()) {
                 if (horizontalDiff != 0f) {
                     parameters.x += horizontalDiff + 2
                     parameters.velocityX = 0f
                 }
-            } else {
+            } else if (isVerticalContact()) {
                 if (verticalDiff != 0f) {
-                    parameters.y += verticalDiff
-                }
-                if (parameters.velocityY != 0f) {
+                    parameters.y += verticalDiff + 2
                     parameters.velocityY = 0f
                 }
             }
@@ -50,6 +48,14 @@ class BoundingBoxCollider(
         intersectedBox?.let {
             return it.isContainingNumberOf(numberForContact, false, box.getLeftCollisionPoints())
                     || it.isContainingNumberOf(numberForContact, false, box.getRightCollisionPoints())
+        } ?: return false
+    }
+
+    private fun isVerticalContact(): Boolean {
+        val numberForContact = 2
+        intersectedBox?.let {
+            return it.isContainingNumberOf(numberForContact, false, box.getTopCollisionPoints())
+                    || it.isContainingNumberOf(numberForContact, false, box.getBottomCollisionPoints())
         } ?: return false
     }
 }
