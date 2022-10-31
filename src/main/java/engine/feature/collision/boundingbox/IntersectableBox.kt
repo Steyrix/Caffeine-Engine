@@ -83,15 +83,8 @@ interface IntersectableBox : Drawable2D {
                     && it.y <= bottomY
                     && it.y >= y
 
-            if (strict) {
-                if (strictCondition) {
-                    return true
-                }
-            } else {
-                if (nonStrictCondition) {
-                    return true
-                }
-            }
+            if (strict && strictCondition) return true
+            if (!strict && nonStrictCondition) return true
         }
 
         return false
