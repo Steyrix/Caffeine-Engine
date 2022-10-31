@@ -47,7 +47,7 @@ class BoundingBoxCollider(
 
     private fun isHorizontalContact(): Boolean {
         intersectedBox?.let {
-            return it.containsAnyPointOf(false, box.getHorizontalContactPointSet())
+            return it.isContainingOneOf(false, box.getHorizontalContactPointSet())
         } ?: return false
     }
 }

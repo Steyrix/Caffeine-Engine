@@ -28,7 +28,7 @@ interface IntersectableBox : Drawable2D {
 
     fun intersects(anotherBox: BoundingBox) = intersectsX(anotherBox) && intersectsY(anotherBox)
 
-    fun containsEveryPointOf(points: List<Point2D>): Boolean {
+    fun isContainingEveryOf(points: List<Point2D>): Boolean {
         points.forEach {
             val doesNotContain = it.x > rightX
                     || it.x < x
@@ -42,56 +42,29 @@ interface IntersectableBox : Drawable2D {
         return true
     }
 
-    fun containsNumberOfPoints(numberOfPoints: Int, strict: Boolean, points: List<Point2D>): Boolean {
+    fun isContainingNumberOf(numberOfPoints: Int, isStrict: Boolean, points: List<Point2D>): Boolean {
         if (numberOfPoints <= 0) {
             return true
         }
 
         var cnt = 0
         points.forEach {
-            val strictCondition = it.x < rightX
-                    && it.x > x
-                    && it.y < bottomY
-                    && it.y > y
-
-            val nonStrictCondition = it.x in x..rightX
-                    && it.y <= bottomY
-                    && it.y >= y
-
-            if (strict) {
-                if (strictCondition) {
-                    cnt++
-                }
-            } else {
-                if (nonStrictCondition) {
-                    cnt++
-                }
-            }
+            if (isPointInBox(it, isStrict)) cnt++
         }
 
         return cnt >= numberOfPoints
     }
 
-    fun containsAnyPointOf(strict: Boolean, points: List<Point2D>): Boolean {
+    fun isContainingOneOf(isStrict: Boolean, points: List<Point2D>): Boolean {
         points.forEach {
-            val strictCondition = it.x < rightX
-                    && it.x > x
-                    && it.y < bottomY
-                    && it.y > y
-
-            val nonStrictCondition = it.x in x..rightX
-                    && it.y <= bottomY
-                    && it.y >= y
-
-            if (strict && strictCondition) return true
-            if (!strict && nonStrictCondition) return true
+            if (isPointInBox(it, isStrict)) return true
         }
 
         return false
     }
 
     fun containsPoint(strict: Boolean, pointFS: ArrayList<Point2D>): Boolean {
-        return containsAnyPointOf(strict, pointFS)
+        return isContainingOneOf(strict, pointFS)
     }
 
     fun getIntersectionWidth(anotherBox: BoundingBox): Float {
@@ -107,6 +80,19 @@ interface IntersectableBox : Drawable2D {
             -(bottomY - anotherBox.y)
         } else {
             anotherBox.bottomY - y
+        }
+    }
+
+    private fun isPointInBox(point: Point2D, isStrict: Boolean): Boolean {
+        return if (isStrict) {
+            point.x < rightX
+            && point.x > x
+            && point.y < bottomY
+            && point.y > y
+        } else {
+            point.x in x..rightX
+            && point.y <= bottomY
+            && point.y >= y
         }
     }
 }
