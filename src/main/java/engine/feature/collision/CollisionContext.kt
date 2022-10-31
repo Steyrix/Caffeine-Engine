@@ -16,5 +16,12 @@ interface CollisionContext {
         entities.add(entity)
     }
 
-    fun update()
+    // todo N^2 optimize
+    fun update() {
+        colliders.forEach { collider ->
+            entities.forEach { entity ->
+                if (collider.isColliding(entity)) collider.reactToCollision()
+            }
+        }
+    }
 }

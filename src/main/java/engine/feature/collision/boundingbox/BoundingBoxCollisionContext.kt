@@ -19,13 +19,4 @@ class BoundingBoxCollisionContext : CollisionContext {
         if (entity !is BoundingBox) return
         super.addEntity(entity)
     }
-
-    // todo N^2 optimize
-    override fun update() {
-        colliders.forEach { collider ->
-            entities.forEach { entity ->
-                if (collider.isColliding(entity)) collider.reactToCollision()
-            }
-        }
-    }
 }
