@@ -12,8 +12,10 @@ import engine.core.update.SetOfStatic2DParameters
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.window.Window
 import engine.feature.animation.AnimationHolder2D
+import engine.feature.collision.Collider
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.collision.boundingbox.BoundingBoxCollider
+import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.tiled.TileMap
 import engine.feature.tiled.parser.TiledResourceParser
 import engine.feature.util.Buffer
@@ -26,6 +28,8 @@ class LabyrinthDemo(
         override val screenWidth: Float,
         override val screenHeight: Float
 ) : Scene {
+
+    private val collisionContext = BoundingBoxCollisionContext()
 
     private val presets = LabyrinthPresets()
     private val characterAnimations = presets.characterPresets.animation.animations
@@ -43,7 +47,7 @@ class LabyrinthDemo(
             velocityX = 0f,
             velocityY = 0f
     )
-    private var collider: BoundingBoxCollider? = null
+    private var characterCollider: BoundingBoxCollider? = null
 
     override var renderProjection: Matrix4f? = null
 
@@ -108,6 +112,13 @@ class LabyrinthDemo(
                 component = mapGraphicalComponent as Entity,
                 parameters = mapParameters
         )
+
+        initPhysics()
+    }
+
+    private fun initPhysics() {
+        collisionContext.addEntity(crateBoundingBox as Entity)
+        collisionContext.addCollider(characterCollider as Collider)
     }
 
     private fun initTileMapGraphics() {
@@ -152,7 +163,7 @@ class LabyrinthDemo(
             }
         }
 
-        collider = BoundingBoxCollider(characterBoundingBox!!, characterParameters)
+        characterCollider = BoundingBoxCollider(characterBoundingBox!!, characterParameters)
 
         val frameSizeX = 0.1f
         val frameSizeY = 0.333f
@@ -256,7 +267,7 @@ class LabyrinthDemo(
     override fun update(deltaTime: Float) {
         character?.update(deltaTime)
         crate?.update(deltaTime)
-        detectCollisions()
+        collisionContext.update()
 
         campfire?.update(deltaTime)
         map?.update(deltaTime)
@@ -279,12 +290,6 @@ class LabyrinthDemo(
 //        if (mapGraphicalComponent?.getTileIndexInLayer(charPosX, charPosY, "Walking Layer") != -1) {
 //            (character as Player).collide()
 //        }
-    }
-
-    private fun detectCollisions() {
-        if (collider?.isColliding(crateBoundingBox as Entity) == true) {
-            collider?.reactToCollision()
-        }
     }
 
     override fun render(window: Window) {
