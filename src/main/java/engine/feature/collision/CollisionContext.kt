@@ -8,7 +8,11 @@ interface CollisionContext {
 
     val entities: MutableList<Entity>
 
-    fun add(entity: Entity) {
+    fun addCollider(collider: Collider) {
+        colliders.add(collider)
+    }
+
+    fun addEntity(entity: Entity) {
         entities.add(entity)
     }
 
