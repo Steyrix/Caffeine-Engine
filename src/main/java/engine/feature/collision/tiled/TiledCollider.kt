@@ -3,17 +3,18 @@ package engine.feature.collision.tiled
 import engine.core.entity.Entity
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.collision.Collider
+import engine.feature.geometry.Point2D
 import engine.feature.tiled.TileMap
 
-// todo identify which tile is previous
-// todo return to previous tile as reaction to collision
 class TiledCollider(
         private val parameters: SetOf2DParametersWithVelocity,
         private val collisionLayerName: String
 ) : Collider {
 
+    private var previousTilePos: Point2D? = null
     override fun reactToCollision() {
-        TODO("Not yet implemented")
+        parameters.x = previousTilePos?.x ?: parameters.x
+        parameters.y = previousTilePos?.y ?: parameters.y
     }
 
     override fun isColliding(entity: Entity): Boolean {
@@ -21,6 +22,8 @@ class TiledCollider(
             if (it.getTileIndexInLayer(parameters.x, parameters.y, collisionLayerName) != -1) {
                 reactToCollision()
                 return true
+            } else {
+                previousTilePos = Point2D(parameters.x, parameters.y)
             }
         }
 
