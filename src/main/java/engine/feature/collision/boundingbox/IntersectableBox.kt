@@ -62,10 +62,6 @@ interface IntersectableBox : Drawable2D {
         return false
     }
 
-    fun containsPoint(strict: Boolean, pointFS: ArrayList<Point2D>): Boolean {
-        return isContainingOneOf(strict, pointFS)
-    }
-
     fun getIntersectionWidth(anotherBox: BoundingBox): Float {
         return if (anotherBox.x >= x) {
             -(rightX - anotherBox.x)
