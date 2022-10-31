@@ -42,12 +42,9 @@ interface IntersectableBox : Drawable2D {
     }
 
     fun isContainingNumberOf(numberOfPoints: Int, isStrict: Boolean, points: List<Point2D>): Boolean {
-        if (numberOfPoints <= 0) {
-            return true
-        }
-
         var cnt = 0
         points.forEach {
+            if (cnt == numberOfPoints) return true
             if (isPointInBox(it, isStrict)) cnt++
         }
 
