@@ -26,3 +26,19 @@ fun BoundingBox.getHorizontalContactPointSet() = listOf(
         Point2D(x, y + ySize / 2),
         Point2D(rightX, y + ySize / 2)
 )
+
+fun BoundingBox.getLeftCollisionPoints() = listOf(
+        Point2D(x, y),
+        Point2D(x, y + ySize / 4),
+        Point2D(x, y + ySize / 2),
+        Point2D(x, bottomY - ySize / 4),
+        Point2D(x, bottomY)
+)
+
+fun BoundingBox.getRightCollisionPoints() = listOf(
+        Point2D(rightX, y),
+        Point2D(rightX, y + ySize / 4),
+        Point2D(rightX, y + ySize / 2),
+        Point2D(rightX, bottomY - ySize / 4),
+        Point2D(rightX, bottomY)
+)
