@@ -46,8 +46,10 @@ class BoundingBoxCollider(
     }
 
     private fun isHorizontalContact(): Boolean {
+        val numberForContact = 2
         intersectedBox?.let {
-            return it.isContainingOneOf(false, box.getHorizontalContactPointSet())
+            return it.isContainingNumberOf(numberForContact, false, box.getLeftCollisionPoints())
+                    || it.isContainingNumberOf(numberForContact, false, box.getRightCollisionPoints())
         } ?: return false
     }
 }
