@@ -63,7 +63,7 @@ class TileMap(
 
     private fun getTilePosition(tileSize: Float, pos: Float): Int {
         val roundedPos = pos.roundToInt()
-        if (roundedPos == 0) {
+        if (roundedPos == 0 || tileSize == 0f) {
             return 0
         }
 
