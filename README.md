@@ -14,5 +14,5 @@ his project, on the other hand, will use LWJGL OpenGL binding, since the latter 
 ## TODO List:
 - Encapsulate initializations of LabyrinthDemo
 - Wrap shader uniforms (create some kind of class for it)
-- Think of some kind of collision/physics context in which interactions will be observed
+- Think of some kind of collision which interactions will be observed :white_check_mark:
 - Implement speculative collider
