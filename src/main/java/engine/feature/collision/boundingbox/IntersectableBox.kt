@@ -21,12 +21,11 @@ interface IntersectableBox : Drawable2D {
         y = nY
     }
 
-    fun intersectsX(anotherBox: BoundingBox) = x < anotherBox.rightX && rightX > anotherBox.x
+    fun isIntersectingByX(anotherBox: BoundingBox) = x < anotherBox.rightX && rightX > anotherBox.x
 
+    fun isIntersectingByY(anotherBox: BoundingBox) = y < anotherBox.bottomY && bottomY > anotherBox.y
 
-    fun intersectsY(anotherBox: BoundingBox) = y < anotherBox.bottomY && bottomY > anotherBox.y
-
-    fun intersects(anotherBox: BoundingBox) = intersectsX(anotherBox) && intersectsY(anotherBox)
+    fun isIntersecting(anotherBox: BoundingBox) = isIntersectingByX(anotherBox) && isIntersectingByY(anotherBox)
 
     fun isContainingEveryOf(points: List<Point2D>): Boolean {
         points.forEach {
