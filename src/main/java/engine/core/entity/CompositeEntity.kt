@@ -21,6 +21,7 @@ open class CompositeEntity : Entity, Updatable {
             parameters: SetOfParameters
     ) {
         components[component] = parameters
+        component.onAdd()
     }
 
     fun draw() {

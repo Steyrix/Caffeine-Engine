@@ -1,3 +1,5 @@
 package engine.core.entity
 
-interface Entity
+interface Entity {
+    fun onAdd() {}
+}
