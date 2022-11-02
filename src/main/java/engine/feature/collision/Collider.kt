@@ -2,8 +2,14 @@ package engine.feature.collision
 
 import engine.core.entity.Entity
 
-interface Collider {
+interface Collider : Entity {
     fun reactToCollision()
 
     fun isColliding(entity: Entity): Boolean
+
+    var collisionContext: CollisionContext
+
+    override fun onAdd() {
+        collisionContext.addCollider(this)
+    }
 }

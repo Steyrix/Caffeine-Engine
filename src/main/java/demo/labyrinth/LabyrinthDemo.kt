@@ -12,7 +12,6 @@ import engine.core.update.SetOfStatic2DParameters
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.window.Window
 import engine.feature.animation.AnimationHolder2D
-import engine.feature.collision.Collider
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.collision.boundingbox.BoundingBoxCollider
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
@@ -121,11 +120,18 @@ class LabyrinthDemo(
     }
 
     private fun initPhysics() {
-        bbCollisionContext.addEntity(crateBoundingBox as Entity)
-        bbCollisionContext.addCollider(bbCharacterCollider as Collider)
+        character?.addComponent(
+                bbCharacterCollider as Entity,
+                parameters = characterParameters
+        )
 
+        character?.addComponent(
+                tiledCharacterCollider as Entity,
+                parameters = characterParameters
+        )
+
+        bbCollisionContext.addEntity(crateBoundingBox as Entity)
         tiledCollisionContext.addEntity(mapGraphicalComponent as Entity)
-        tiledCollisionContext.addCollider(tiledCharacterCollider as Collider)
     }
 
     private fun initTileMapGraphics() {
@@ -173,8 +179,8 @@ class LabyrinthDemo(
             }
         }
 
-        bbCharacterCollider = BoundingBoxCollider(characterBoundingBox!!, characterParameters)
-        tiledCharacterCollider = TiledCollider(characterParameters, "Walking Layer")
+        bbCharacterCollider = BoundingBoxCollider(characterBoundingBox!!, characterParameters, bbCollisionContext)
+        tiledCharacterCollider = TiledCollider(characterParameters, "Walking Layer", tiledCollisionContext)
 
         val frameSizeX = 0.1f
         val frameSizeY = 0.333f

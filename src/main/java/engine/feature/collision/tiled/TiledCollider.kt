@@ -3,12 +3,14 @@ package engine.feature.collision.tiled
 import engine.core.entity.Entity
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.collision.Collider
+import engine.feature.collision.CollisionContext
 import engine.feature.geometry.Point2D
 import engine.feature.tiled.TileMap
 
 class TiledCollider(
         private val parameters: SetOf2DParametersWithVelocity,
-        private val collisionLayerName: String
+        private val collisionLayerName: String,
+        override var collisionContext: CollisionContext
 ) : Collider {
 
     private var previousTilePos: Point2D? = null
