@@ -310,8 +310,8 @@ class LabyrinthDemo(
         // background?.draw()
         // graphicalObject?.draw()
         map?.draw()
-        character?.draw()
         crate?.draw()
         campfire?.draw()
+        character?.draw()
     }
 }
