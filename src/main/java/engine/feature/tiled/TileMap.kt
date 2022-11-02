@@ -29,6 +29,15 @@ class TileMap(
 
     private val layersMap = layers.associateBy { it.name }
 
+    /*
+        Represents the size of map relative to the screen size
+     */
+    val relativeHeight: Float
+    val relativeWidth: Float
+
+    /*
+        Represents the absolute size of map in pixels
+     */
     private var absoluteHeight: Float = 0f
     private var absoluteWidth: Float = 0f
 
@@ -37,37 +46,38 @@ class TileMap(
 
         set = layers.first().set
 
+        relativeHeight = layers.first().heightInTiles * set.relativeTileHeight
+        relativeWidth = layers.first().widthInTiles * set.relativeTileWidth
+
         layers.forEach {
             innerDrawableComponents.add(it)
         }
     }
-
-    fun getTileWidth() = set.relativeTileWidth
-
-    fun getTileHeight() = set.relativeTileHeight
 
     fun getLayerByName(name: String): TileLayer = layersMap[name]
             ?: throw IllegalStateException("Layer with name $name not found")
 
     fun getTileIndexInLayer(posX: Float, posY: Float, layerName: String): Int {
         val layer = layersMap[layerName] ?: return NOT_FOUND
-        val widthInTiles = layer.widthInTiles
 
-        val currentTileWidth = absoluteWidth / layer.widthInTiles
-        val currentTileHeight = absoluteHeight / layer.heightInTiles
+        val absoluteTileWidth = relativeWidth / layer.widthInTiles * absoluteWidth
+        val absoluteTileHeight = relativeHeight / layer.heightInTiles * absoluteHeight
 
-        val xTileNumber = getTilePosition(currentTileWidth, posX)
-        val yTileNumber = getTilePosition(currentTileHeight, posY)
-        return layer.getTileNumberByIndex(yTileNumber * widthInTiles + xTileNumber)
+        val xTileNumber = getTilePosition(absoluteTileWidth, posX)
+        val yTileNumber = getTilePosition(absoluteTileHeight, posY)
+
+        if (xTileNumber < 0 || yTileNumber < 0) return -1
+        return layer.getTileNumberByIndex(yTileNumber * layer.widthInTiles + xTileNumber)
     }
 
     private fun getTilePosition(tileSize: Float, pos: Float): Int {
         val roundedPos = pos.roundToInt()
-        if (roundedPos == 0 || tileSize == 0f) {
+        val roundedTileSize = tileSize.roundToInt()
+        if (roundedPos == 0 || roundedTileSize == 0) {
             return 0
         }
 
-        return roundedPos / tileSize.roundToInt()
+        return roundedPos / roundedTileSize
     }
 
     override fun updateParameters(parameters: SetOfParameters) {
