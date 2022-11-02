@@ -23,8 +23,11 @@ class TiledCollider(
         (entity as? TileMap)?.let {
             val centerX = parameters.x + parameters.xSize / 2
             val centerY = parameters.y + parameters.ySize / 2
+            val bottomY = parameters.y + parameters.ySize
 
-            if (it.getTileIndexInLayer(centerX, centerY, collisionLayerName) <= 0) {
+            val isCenterColliding = it.getTileIndexInLayer(centerX, centerY, collisionLayerName) <= 0
+            val isBottomColliding = it.getTileIndexInLayer(centerX, bottomY, collisionLayerName) <= 0
+            if (isCenterColliding || isBottomColliding) {
                 reactToCollision()
                 return true
             } else {
