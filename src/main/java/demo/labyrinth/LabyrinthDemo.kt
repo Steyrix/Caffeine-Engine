@@ -58,7 +58,7 @@ class LabyrinthDemo(
     private var campfire: CompositeEntity? = null
     private var campfireGraphicalComponent: AnimatedObject2D? = null
     private val campfireParameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
-            500f, 500f, 50f, 50f, 0f
+            900f, 750f, 50f, 50f, 0f
     )
 
     private var map: CompositeEntity? = null
@@ -71,7 +71,7 @@ class LabyrinthDemo(
     private var crate: CompositeEntity? = null
     private var crateGraphicalComponent: OpenGlObject2D? = null
     private val crateParameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
-            x = 400f, y = 150f, xSize = 70f, ySize = 70f, rotationAngle = 0f
+            x = 400f, y = 150f, xSize = 50f, ySize = 50f, rotationAngle = 0f
     )
 
     private var accumulated = 0f
