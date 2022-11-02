@@ -147,6 +147,9 @@ class LabyrinthDemo(
             it.setUniform("lightSourceCoords", Vector2f(campfireParameters.x, campfireParameters.y))
             it.setUniform("lightIntensityCap", lightIntensityCap)
         }
+
+        mapParameters.xSize = screenWidth / mapGraphicalComponent!!.relativeWidth
+        mapParameters.ySize = screenHeight / mapGraphicalComponent!!.relativeHeight
     }
 
     private fun initCharacterGraphics() {
@@ -292,13 +295,6 @@ class LabyrinthDemo(
                 it.setUniform("lightIntensityCap", lightIntensityCaps[current])
             }
         }
-
-//        val charPosX = characterParameters.x
-//        val charPosY = characterParameters.y
-
-//        if (mapGraphicalComponent?.getTileIndexInLayer(charPosX, charPosY, "Walking Layer") != -1) {
-//            (character as Player).collide()
-//        }
     }
 
     override fun render(window: Window) {
