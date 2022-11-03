@@ -307,8 +307,6 @@ class LabyrinthDemo(
         glClear(GL_COLOR_BUFFER_BIT)
         glClearColor(0f, 0.5f, 0f, 0.5f)
 
-        // background?.draw()
-        // graphicalObject?.draw()
         map?.draw()
         crate?.draw()
         campfire?.draw()
