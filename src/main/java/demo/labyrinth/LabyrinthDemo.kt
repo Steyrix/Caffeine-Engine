@@ -184,15 +184,12 @@ class LabyrinthDemo(
 
         val frameSizeX = 0.1f
         val frameSizeY = 0.333f
-        val mainCharacterUV = Buffer.getRectangleSectorVertices(frameSizeX, frameSizeY)
 
         val texturePath = this.javaClass.getResource("/textures/base_character.png")!!.path
         characterGraphicalComponent = AnimatedObject2D(
-                bufferParamsCount = 2,
-                dataArrays = listOf(Buffer.RECTANGLE_INDICES, mainCharacterUV),
-                verticesCount = 6,
+                frameSizeX,
+                frameSizeY,
                 texture = Texture2D.createInstance(texturePath),
-                arrayTexture = null,
                 animationHolder = AnimationHolder2D(frameSizeX, frameSizeY, characterAnimations)
         ).apply {
             boundingBox = characterBoundingBox
