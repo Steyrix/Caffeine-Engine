@@ -5,6 +5,7 @@ import engine.core.texture.ArrayTexture2D
 import engine.core.texture.Texture2D
 import engine.core.update.Updatable
 import engine.feature.animation.AnimationHolder2D
+import engine.feature.animation.BasicAnimation
 import engine.feature.util.Buffer
 
 class AnimatedObject2D(
@@ -20,28 +21,28 @@ class AnimatedObject2D(
             frameSizeX: Float,
             frameSizeY: Float,
             texture: Texture2D?,
-            animationHolder: AnimationHolder2D
+            animations: MutableList<BasicAnimation>
     ) : this(
             bufferParamsCount = 2,
             dataArrays = listOf(Buffer.RECTANGLE_INDICES, Buffer.getRectangleSectorVertices(frameSizeX, frameSizeY)),
             verticesCount = 6,
             texture,
             arrayTexture = null,
-            animationHolder
+            animationHolder = AnimationHolder2D(frameSizeX, frameSizeY, animations)
     )
 
     constructor(
             frameSizeX: Float,
             frameSizeY: Float,
             arrayTexture: ArrayTexture2D?,
-            animationHolder: AnimationHolder2D
+            animations: MutableList<BasicAnimation>
     ) : this(
             bufferParamsCount = 2,
             dataArrays = listOf(Buffer.RECTANGLE_INDICES, Buffer.getRectangleSectorVertices(frameSizeX, frameSizeY)),
             verticesCount = 6,
             texture = null,
             arrayTexture,
-            animationHolder
+            animationHolder = AnimationHolder2D(frameSizeX, frameSizeY, animations)
     )
 
     override var shader: Shader? = null

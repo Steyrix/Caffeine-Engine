@@ -190,7 +190,7 @@ class LabyrinthDemo(
                 frameSizeX,
                 frameSizeY,
                 texture = Texture2D.createInstance(texturePath),
-                animationHolder = AnimationHolder2D(frameSizeX, frameSizeY, characterAnimations)
+                animations = characterAnimations
         ).apply {
             boundingBox = characterBoundingBox
             x = 100f
