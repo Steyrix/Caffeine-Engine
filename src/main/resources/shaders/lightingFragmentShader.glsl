@@ -29,6 +29,10 @@ void main(void)
         lightIntensity = lightIntensityCap;
     }
 
+    if(lightIntensity <= 1) {
+        lightIntensity = 1;
+    }
+
     vec4 lightCol = vec4(lightIntensity, lightIntensity, lightIntensity, 1.0);
     fColor = texture(textureSample, fragmentUV).rgba * lightCol;
 
