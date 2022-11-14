@@ -1,7 +1,5 @@
 package demo.labyrinth
 
-import demo.labyrinth.Character.boundingBox
-import demo.labyrinth.Character.graphicalComponent
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
@@ -49,7 +47,7 @@ class LabyrinthDemo(
 
         initCharacterGraphics()
         Character.it = Player(
-                drawableComponent = graphicalComponent!!,
+                drawableComponent = Character.graphicalComponent!!,
                 params = characterParameters
         )
 
@@ -131,7 +129,7 @@ class LabyrinthDemo(
 
     private fun initCharacterGraphics() {
 
-        boundingBox = BoundingBox(
+        Character.boundingBox = BoundingBox(
                 x = 100f,
                 y = 100f,
                 xSize = 60f,
@@ -141,7 +139,7 @@ class LabyrinthDemo(
         }
 
         Character.boxCollider =
-                BoundingBoxCollider(boundingBox!!, characterParameters, bbCollisionContext)
+                BoundingBoxCollider(Character.boundingBox!!, characterParameters, bbCollisionContext)
         Character.tiledCollider =
                 TiledCollider(characterParameters, "Walking Layer", tiledCollisionContext)
 
@@ -149,7 +147,7 @@ class LabyrinthDemo(
         val frameSizeY = 0.333f
 
         val texturePath = this.javaClass.getResource("/textures/base_character.png")!!.path
-        graphicalComponent = AnimatedObject2D(
+        Character.graphicalComponent = AnimatedObject2D(
                 frameSizeX,
                 frameSizeY,
                 texture = Texture2D.createInstance(texturePath),
