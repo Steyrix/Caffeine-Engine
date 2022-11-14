@@ -58,12 +58,6 @@ class LabyrinthDemo(
 
     private val skeletons: MutableList<CompositeEntity> = mutableListOf()
 
-    private var accumulated = 0f
-    private var timeLimit = 0.1f
-    private var lightIntensityCap = 3f
-    private val lightIntensityCaps = listOf(3f, 2.95f, 2.9f)
-    private var current = 0
-
     private val animVertexShaderPath = this.javaClass.getResource("/shaders/animVertexShader.glsl")!!.path
     private val animFragmentShaderPath = this.javaClass.getResource("/shaders/animFragmentShader.glsl")!!.path
 

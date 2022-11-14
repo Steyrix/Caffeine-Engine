@@ -27,6 +27,12 @@ val crateParameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
         x = 400f, y = 150f, xSize = 50f, ySize = 50f, rotationAngle = 0f
 )
 
+var accumulated = 0f
+var timeLimit = 0.1f
+var lightIntensityCap = 3f
+val lightIntensityCaps = listOf(3f, 2.95f, 2.9f)
+var current = 0
+
 val skeletonParameters: List<SetOf2DParametersWithVelocity> = listOf(
 
 )
