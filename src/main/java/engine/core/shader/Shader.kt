@@ -4,10 +4,7 @@ import org.joml.Matrix4f
 import org.joml.Vector2f
 import org.lwjgl.opengl.GL33C.*
 import org.lwjgl.system.MemoryStack
-import java.lang.IllegalArgumentException
-import java.lang.IllegalStateException
 
-// TODO: move exception messages to constants
 class Shader {
 
     companion object {
