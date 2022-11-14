@@ -10,15 +10,14 @@ import engine.core.scene.Scene
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
 import engine.core.texture.Texture2D
+import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.window.Window
-import engine.feature.animation.AnimationHolder2D
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.collision.boundingbox.BoundingBoxCollider
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.collision.tiled.TiledCollider
 import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.tiled.parser.TiledResourceParser
-import engine.feature.util.Buffer
 import org.joml.Matrix4f
 import org.joml.Vector2f
 import org.lwjgl.opengl.GL33C.*
@@ -37,11 +36,6 @@ class LabyrinthDemo(
     private val campfireAnimations = presets.campfirePresets.animation.animations
 
     override var renderProjection: Matrix4f? = null
-
-    private val skeletons: MutableList<CompositeEntity> = mutableListOf()
-
-    private val animVertexShaderPath = this.javaClass.getResource("/shaders/animVertexShader.glsl")!!.path
-    private val animFragmentShaderPath = this.javaClass.getResource("/shaders/animFragmentShader.glsl")!!.path
 
     override fun init() {
         renderProjection = Matrix4f().ortho(
@@ -80,6 +74,18 @@ class LabyrinthDemo(
                 component = Map.graphicalComponent as Entity,
                 parameters = Map.parameters
         )
+
+        initSkeletons()
+        Skeletons.graphicalComponents.forEachIndexed { i, it ->
+            Skeletons.it.add(
+                    CompositeEntity().also { entity ->
+                        entity.addComponent(
+                                component = it,
+                                parameters = Skeletons.parameters[i]
+                        )
+                    }
+            )
+        }
 
         initPhysics()
     }
@@ -124,8 +130,6 @@ class LabyrinthDemo(
     }
 
     private fun initCharacterGraphics() {
-        val boxVertexShaderPath = this.javaClass.getResource("/shaders/boundingBoxVertexShader.glsl")!!.path
-        val boxFragmentShaderPath = this.javaClass.getResource("/shaders/boundingBoxFragmentShader.glsl")!!.path
 
         boundingBox = BoundingBox(
                 x = 100f,
@@ -133,13 +137,7 @@ class LabyrinthDemo(
                 xSize = 60f,
                 ySize = 60f
         ).apply {
-            shader = ShaderLoader.loadFromFile(
-                    vertexShaderFilePath = boxVertexShaderPath,
-                    fragmentShaderFilePath = boxFragmentShaderPath
-            ).also {
-                it.bind()
-                it.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection!!)
-            }
+            shader = ShaderController.createBoundingBoxShader(renderProjection!!)
         }
 
         Character.boxCollider =
@@ -162,102 +160,85 @@ class LabyrinthDemo(
             y = 100f
             xSize = 60f
             ySize = 60f
-            shader = ShaderLoader.loadFromFile(
-                    vertexShaderFilePath = animVertexShaderPath,
-                    fragmentShaderFilePath = animFragmentShaderPath
-            ).also {
-                it.bind()
-                it.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection!!)
-            }
+            shader = ShaderController.createAnimationShader(renderProjection!!)
         }
     }
 
     private fun initCrateGraphics() {
-        val boxVertexShaderPath = this.javaClass.getResource("/shaders/boundingBoxVertexShader.glsl")!!.path
-        val boxFragmentShaderPath = this.javaClass.getResource("/shaders/boundingBoxFragmentShader.glsl")!!.path
-        val vertexShaderPath = this.javaClass.getResource("/shaders/texturedVertexShader.glsl")!!.path
-        val fragmentShaderPath = this.javaClass.getResource("/shaders/texturedFragmentShader.glsl")!!.path
-
         Crate.boundingBox = BoundingBox(
                 x = 400f,
                 y = 150f,
                 xSize = 70f,
                 ySize = 70f
         ).apply {
-            shader = ShaderLoader.loadFromFile(
-                    vertexShaderFilePath = boxVertexShaderPath,
-                    fragmentShaderFilePath = boxFragmentShaderPath
-            ).also {
-                it.bind()
-                it.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection!!)
-            }
+            shader = ShaderController.createBoundingBoxShader(renderProjection!!)
         }
 
-        val uv = Buffer.getRectangleSectorVertices(1.0f, 1.0f)
         val texturePath = this.javaClass.getResource("/textures/obj_crate.png")!!.path
         Crate.graphicalComponent = OpenGlObject2D(
-                bufferParamsCount = 2,
-                dataArrays = listOf(Buffer.RECTANGLE_INDICES, uv),
-                verticesCount = 6,
-                texture = Texture2D.createInstance(texturePath),
-                arrayTexture = null
+                texture2D = Texture2D.createInstance(texturePath),
         ).apply {
             boundingBox = Crate.boundingBox
-            shader = ShaderLoader.loadFromFile(
-                    vertexShaderFilePath = vertexShaderPath,
-                    fragmentShaderFilePath = fragmentShaderPath
-            ).also {
-                it.bind()
-                it.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection!!)
-            }
+            shader = ShaderController.createTexturedShader(renderProjection!!)
         }
     }
 
     private fun initCampfireGraphics() {
         val frameSizeX = 0.2f
         val frameSizeY = 1.0f
-        val uv = Buffer.getRectangleSectorVertices(frameSizeX, frameSizeY)
 
         val texturePath = this.javaClass.getResource("/textures/camp_fire_texture.png")!!.path
         Campfire.graphicalComponent = AnimatedObject2D(
-                bufferParamsCount = 2,
-                dataArrays = listOf(Buffer.RECTANGLE_INDICES, uv),
-                verticesCount = 6,
+                frameSizeX = frameSizeX,
+                frameSizeY = frameSizeY,
                 texture = Texture2D.createInstance(texturePath),
-                arrayTexture = null,
-                animationHolder = AnimationHolder2D(frameSizeX, frameSizeY, campfireAnimations)
+                animations = campfireAnimations
         ).apply {
-            shader = ShaderLoader.loadFromFile(
-                    vertexShaderFilePath = animVertexShaderPath,
-                    fragmentShaderFilePath = animFragmentShaderPath
-            ).also {
-                it.bind()
-                it.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection!!)
-            }
+            shader = ShaderController.createAnimationShader(renderProjection!!)
         }
     }
 
     private fun initSkeletons() {
         val frameSizeX = 0.1f
-        val frameSizeY = 0.16f
-        val uv = Buffer.getRectangleSectorVertices(frameSizeX, frameSizeY)
+        val frameSizeY = 0.1f
         val texturePath = this.javaClass.getResource("/textures/base_skeleton.png")!!.path
 
-        val skeletonObject = AnimatedObject2D(
-                bufferParamsCount = 2,
-                dataArrays = listOf(Buffer.RECTANGLE_INDICES, uv),
-                verticesCount = 6,
-                texture = Texture2D.createInstance(texturePath),
-                arrayTexture = null,
-                animationHolder = AnimationHolder2D(frameSizeX, frameSizeY, campfireAnimations)
-        ).apply {
-            shader = ShaderLoader.loadFromFile(
-                    vertexShaderFilePath = animVertexShaderPath,
-                    fragmentShaderFilePath = animFragmentShaderPath
-            ).also {
-                it.bind()
-                it.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection!!)
+        for (i in 0 .. 1) {
+            Skeletons.parameters.add(
+                    SetOf2DParametersWithVelocity(
+                            x = 150f + (100 * i),
+                            y = 120f,
+                            xSize = 50f,
+                            ySize = 50f,
+                            rotationAngle = 0f,
+                            velocityX = 0f,
+                            velocityY = 0f
+                    )
+            )
+        }
+
+        for (i in 0..1) {
+            val box = BoundingBox(
+                    x = 150f + (100 * i),
+                    y = 120f,
+                    xSize = 50f,
+                    ySize = 50f,
+                    rotationAngle = 0f
+            ).apply {
+                shader = ShaderController.createBoundingBoxShader(renderProjection!!)
             }
+
+            val skeletonObject = AnimatedObject2D(
+                    frameSizeX = frameSizeX,
+                    frameSizeY = frameSizeY,
+                    texture = Texture2D.createInstance(texturePath),
+                    animations = characterAnimations
+            ).apply {
+                boundingBox = box
+                shader = ShaderController.createAnimationShader(renderProjection!!)
+            }
+
+            Skeletons.graphicalComponents.add(skeletonObject)
         }
     }
 
@@ -267,6 +248,7 @@ class LabyrinthDemo(
 
     override fun update(deltaTime: Float) {
         Character.update(deltaTime)
+        Skeletons.update(deltaTime)
         Crate.it?.update(deltaTime)
         bbCollisionContext.update()
         tiledCollisionContext.update()
@@ -295,5 +277,6 @@ class LabyrinthDemo(
         Crate.draw()
         Campfire.draw()
         Character.draw()
+        Skeletons.draw()
     }
 }
