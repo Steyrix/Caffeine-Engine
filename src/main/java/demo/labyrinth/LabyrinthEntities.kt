@@ -3,6 +3,7 @@ package demo.labyrinth
 import engine.core.entity.CompositeEntity
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.render.render2D.OpenGlObject2D
+import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.collision.boundingbox.BoundingBoxCollider
@@ -73,6 +74,25 @@ object Crate : GameObject {
 
     override fun draw() {
         it?.draw()
+    }
+
+}
+
+object Skeletons : GameObject {
+    val it: MutableList<CompositeEntity> = mutableListOf()
+    val graphicalComponents: MutableList<AnimatedObject2D> = mutableListOf()
+    val boxes: MutableList<BoundingBox> = mutableListOf()
+    val parameters: MutableList<SetOf2DParametersWithVelocity> = mutableListOf()
+    override fun update(deltaTime: Float) {
+        it.forEach { entity ->
+            entity.update(deltaTime)
+        }
+    }
+
+    override fun draw() {
+        it.forEach { entity ->
+            entity.draw()
+        }
     }
 
 }
