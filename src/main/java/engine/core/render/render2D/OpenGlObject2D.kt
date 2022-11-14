@@ -9,6 +9,7 @@ import engine.core.update.SetOfStatic2DParameters
 import engine.core.update.SetOfParameters
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.matrix.MatrixComputer
+import engine.feature.util.Buffer
 import org.lwjgl.opengl.GL33C.*
 
 open class OpenGlObject2D(
@@ -18,6 +19,22 @@ open class OpenGlObject2D(
         var texture: Texture2D? = null,
         var arrayTexture: ArrayTexture2D? = null
 ): Vertexed2D(bufferParamsCount, dataArrays, verticesCount), Drawable2D, Entity {
+
+    constructor(texture2D: Texture2D) : this(
+            bufferParamsCount = 2,
+            dataArrays = listOf(Buffer.RECTANGLE_INDICES, Buffer.getRectangleSectorVertices(1.0f, 1.0f)),
+            verticesCount = 6,
+            texture = texture2D,
+            arrayTexture = null
+    )
+
+    constructor(arrayTexture2D: ArrayTexture2D) : this(
+            bufferParamsCount = 2,
+            dataArrays = listOf(Buffer.RECTANGLE_INDICES, Buffer.getRectangleSectorVertices(1.0f, 1.0f)),
+            verticesCount = 6,
+            texture = null,
+            arrayTexture = arrayTexture2D
+    )
 
     override var shader: Shader? = null
 
