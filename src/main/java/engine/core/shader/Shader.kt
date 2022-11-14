@@ -32,14 +32,14 @@ class Shader {
 
     init {
         if (programId == 0) {
-            throw IllegalStateException("Could not create shader program")
+            throw ShaderNotCreatedException()
         }
     }
 
     private fun createUniform(uniformName: String) {
         val uniformLocation = glGetUniformLocation(programId, uniformName)
         if (uniformLocation < 0) {
-            throw IllegalArgumentException("Could not find uniform with name $uniformName")
+            throw UniformNotFoundException(uniformName)
         }
         uniforms[uniformName] = uniformLocation
     }
@@ -95,16 +95,14 @@ class Shader {
     private fun createShader(shaderCode: String, shaderType: Int): Int {
         val shaderId = glCreateShader(shaderType)
         if (shaderId == 0) {
-            throw IllegalStateException("Could not create shader with type $shaderType")
+            throw IllegalShaderTypeException(shaderType)
         }
 
         glShaderSource(shaderId, shaderCode)
         glCompileShader(shaderId)
 
         if (glGetShaderi(shaderId, GL_COMPILE_STATUS) == 0) {
-            throw IllegalStateException(
-                "Could not compile shader: ${glGetShaderInfoLog(shaderId, INFO_LOG_MAX_LENGHT)}"
-            )
+            throw ShaderCompilationFailedException(glGetShaderInfoLog(shaderId, INFO_LOG_MAX_LENGHT))
         }
 
         glAttachShader(programId, shaderId)
@@ -115,9 +113,7 @@ class Shader {
     fun link() {
         glLinkProgram(programId)
         if (glGetProgrami(programId, GL_LINK_STATUS) == 0) {
-            throw IllegalStateException(
-                "Could not link shader: ${glGetShaderInfoLog(programId, INFO_LOG_MAX_LENGHT)}"
-            )
+            throw ShaderLinkFailedException(glGetShaderInfoLog(programId, INFO_LOG_MAX_LENGHT))
         }
 
         if (vertexShaderId != 0) {
@@ -132,9 +128,7 @@ class Shader {
     fun validate() {
         glValidateProgram(programId)
         if (glGetProgrami(programId, GL_VALIDATE_STATUS) == 0) {
-            throw IllegalStateException(
-                    "Could not validate shader: ${glGetShaderInfoLog(programId, INFO_LOG_MAX_LENGHT)}"
-            )
+            throw ShaderValidationFailedException(glGetShaderInfoLog(programId, INFO_LOG_MAX_LENGHT))
         }
     }
 
