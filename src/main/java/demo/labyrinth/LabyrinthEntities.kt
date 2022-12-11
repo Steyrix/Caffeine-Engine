@@ -80,8 +80,6 @@ object Crate : GameObject {
 
 object Skeletons : GameObject {
     val it: MutableList<CompositeEntity> = mutableListOf()
-    val graphicalComponents: MutableList<AnimatedObject2D> = mutableListOf()
-    val boxes: MutableList<BoundingBox> = mutableListOf()
     val parameters: MutableList<SetOf2DParametersWithVelocity> = mutableListOf()
     override fun update(deltaTime: Float) {
         it.forEach { entity ->
