@@ -29,9 +29,8 @@ class LabyrinthDemo(
     private val bbCollisionContext = BoundingBoxCollisionContext()
     private val tiledCollisionContext = TiledCollisionContext()
 
-    private val presets = LabyrinthPresets()
-    private val characterAnimations = presets.characterPresets.animation.animations
-    private val campfireAnimations = presets.campfirePresets.animation.animations
+    private val characterAnimations = CharacterPresets.animation
+    private val campfireAnimations = CampfirePresets.animation
 
     override var renderProjection: Matrix4f? = null
 
