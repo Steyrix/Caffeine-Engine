@@ -1,4 +1,4 @@
-package demo.labyrinth
+package demo.labyrinth.data
 
 import engine.core.entity.CompositeEntity
 import engine.core.render.render2D.AnimatedObject2D

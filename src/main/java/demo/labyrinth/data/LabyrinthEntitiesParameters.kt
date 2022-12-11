@@ -1,4 +1,4 @@
-package demo.labyrinth
+package demo.labyrinth.data
 
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfStatic2DParameters

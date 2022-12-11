@@ -1,4 +1,4 @@
-package demo.labyrinth
+package demo.labyrinth.data
 
 import engine.feature.animation.BasicAnimation
 

@@ -1,4 +1,4 @@
-package demo.labyrinth
+package demo.labyrinth.data
 
 /* Lighting shaders variables */
 

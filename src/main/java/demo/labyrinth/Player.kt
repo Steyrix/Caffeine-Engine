@@ -1,5 +1,6 @@
 package demo.labyrinth
 
+import demo.labyrinth.data.AnimationKey
 import engine.core.controllable.Controllable
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity

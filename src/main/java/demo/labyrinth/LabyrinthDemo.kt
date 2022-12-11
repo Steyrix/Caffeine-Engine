@@ -1,5 +1,7 @@
 package demo.labyrinth
 
+import demo.labyrinth.data.*
+import demo.labyrinth.data.Map
 import engine.core.scene.Scene
 import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext

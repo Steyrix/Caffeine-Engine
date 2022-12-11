@@ -1,5 +1,7 @@
-package demo.labyrinth
+package demo.labyrinth.data
 
+import demo.labyrinth.Player
+import demo.labyrinth.ShaderController
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
