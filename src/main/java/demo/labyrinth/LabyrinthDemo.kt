@@ -35,6 +35,7 @@ class LabyrinthDemo(
 
     override var renderProjection: Matrix4f? = null
 
+    // todo all initializations to seperate file
     override fun init() {
         renderProjection = Matrix4f().ortho(
                 0f,
@@ -211,6 +212,7 @@ class LabyrinthDemo(
             ).apply {
                 shader = ShaderController.createBoundingBoxShader(renderProjection!!)
             }
+            Skeletons.boxes.add(box)
 
             val skeletonObject = AnimatedObject2D(
                     frameSizeX = frameSizeX,
@@ -240,6 +242,7 @@ class LabyrinthDemo(
         Campfire.update(deltaTime)
         Map.update(deltaTime)
 
+        // todo: move out
         accumulated += deltaTime
         if (accumulated >= timeLimit) {
             accumulated = 0f
