@@ -69,8 +69,6 @@ class Player(
         params: SetOf2DParametersWithVelocity
 ) : CompositeEntity() {
 
-
-
     private val controller = PlayerController(params)
 
     init {
