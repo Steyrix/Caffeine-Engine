@@ -51,19 +51,6 @@ class LabyrinthDemo(
 
         Campfire.update(deltaTime)
         Map.update(deltaTime)
-
-        // todo: move out
-        accumulated += deltaTime
-        if (accumulated >= timeLimit) {
-            accumulated = 0f
-            if (current + 1 >= lightIntensityCaps.size) {
-                current = 0
-            } else current++
-            Map.graphicalComponent?.shader?.let {
-                it.bind()
-                it.setUniform("lightIntensityCap", lightIntensityCaps[current])
-            }
-        }
     }
 
     override fun render(window: Window) {

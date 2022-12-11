@@ -55,6 +55,18 @@ object Map : GameObject {
 
     override fun update(deltaTime: Float) {
         it?.update(deltaTime)
+
+        accumulated += deltaTime
+        if (accumulated >= timeLimit) {
+            accumulated = 0f
+            if (current + 1 >= lightIntensityCaps.size) {
+                current = 0
+            } else current++
+            graphicalComponent?.shader?.let {
+                it.bind()
+                it.setUniform("lightIntensityCap", lightIntensityCaps[current])
+            }
+        }
     }
 
     override fun draw() {
