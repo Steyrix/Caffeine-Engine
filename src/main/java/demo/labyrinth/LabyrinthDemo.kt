@@ -8,7 +8,6 @@ import engine.core.scene.Scene
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
 import engine.core.texture.Texture2D
-import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.collision.boundingbox.BoundingBoxCollider
@@ -28,9 +27,6 @@ class LabyrinthDemo(
 
     private val bbCollisionContext = BoundingBoxCollisionContext()
     private val tiledCollisionContext = TiledCollisionContext()
-
-    private val characterAnimations = CharacterPresets.animation
-    private val campfireAnimations = CampfirePresets.animation
 
     override var renderProjection: Matrix4f? = null
 
