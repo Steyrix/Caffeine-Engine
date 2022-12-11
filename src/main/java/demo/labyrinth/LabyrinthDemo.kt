@@ -79,7 +79,7 @@ class LabyrinthDemo(
                     CompositeEntity().also { entity ->
                         entity.addComponent(
                                 component = it,
-                                parameters = Skeletons.parameters[i]
+                                parameters = skeletonParameters[i]
                         )
                     }
             )
@@ -200,20 +200,6 @@ class LabyrinthDemo(
         val frameSizeX = 0.1f
         val frameSizeY = 0.1f
         val texturePath = this.javaClass.getResource("/textures/base_skeleton.png")!!.path
-
-        for (i in 0 .. 1) {
-            Skeletons.parameters.add(
-                    SetOf2DParametersWithVelocity(
-                            x = 150f + (100 * i),
-                            y = 120f,
-                            xSize = 50f,
-                            ySize = 50f,
-                            rotationAngle = 0f,
-                            velocityX = 0f,
-                            velocityY = 0f
-                    )
-            )
-        }
 
         for (i in 0..1) {
             val box = BoundingBox(

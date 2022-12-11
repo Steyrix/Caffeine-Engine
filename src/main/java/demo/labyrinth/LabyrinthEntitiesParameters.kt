@@ -28,5 +28,22 @@ val crateParameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
 )
 
 val skeletonParameters: List<SetOf2DParametersWithVelocity> = listOf(
-
+        SetOf2DParametersWithVelocity(
+                x = 150f,
+                y = 120f,
+                xSize = 50f,
+                ySize = 50f,
+                rotationAngle = 0f,
+                velocityX = 0f,
+                velocityY = 0f
+        ),
+        SetOf2DParametersWithVelocity(
+                x = 250f,
+                y = 120f,
+                xSize = 50f,
+                ySize = 50f,
+                rotationAngle = 0f,
+                velocityX = 0f,
+                velocityY = 0f
+        )
 )
