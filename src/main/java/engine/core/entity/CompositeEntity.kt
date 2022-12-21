@@ -36,7 +36,6 @@ open class CompositeEntity : Entity, Updatable {
                 (it.key as Updatable).update(deltaTime)
             }
 
-            // TODO switch to global interface
             if (it.key is Parameterized) {
                 (it.key as Parameterized).updateParameters(it.value)
             }
