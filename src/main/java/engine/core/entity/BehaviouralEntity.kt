@@ -6,7 +6,8 @@ import engine.core.entity.behavior.SimpleBehavior
 import engine.core.update.SetOfParameters
 
 class BehaviouralEntity(
-        private var behavior: Behavior
+        private var behavior: Behavior,
+        private var parameters: SetOfParameters
 ) : CompositeEntity() {
 
     fun setBehavior(behavior: Behavior) {
@@ -37,6 +38,11 @@ class BehaviouralEntity(
             deltaTime: Float,
             isLoop: Boolean
     ) {
-
+        if (isLoop) {
+            val current = behavior as LoopedBehavior
+            if (current.loopCondition.invoke(parameters)) {
+                current.parameterChanging.invoke(deltaTime, parameters)
+            }
+        }
     }
 }
