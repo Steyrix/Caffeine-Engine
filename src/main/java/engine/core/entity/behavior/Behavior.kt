@@ -9,7 +9,6 @@ data class SimpleBehavior(
 ) : Behavior()
 
 data class LoopedBehavior(
-        val isLoop: Boolean = false,
         val loopCondition: (SetOfParameters) -> Boolean,
         val parameterChanging: (SetOfParameters) -> Unit,
 ) : Behavior()
