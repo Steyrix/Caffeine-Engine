@@ -24,20 +24,19 @@ class BehaviouralEntity(
                 processBehavior(
                         deltaTime,
                         false
-                ) { false }
+                )
             is LoopedBehavior ->
                 processBehavior(
                         deltaTime,
-                        true,
-                        (behavior as LoopedBehavior).loopCondition)
+                        true
+                )
         }
     }
 
     private fun processBehavior(
             deltaTime: Float,
-            isLoop: Boolean,
-            loopCondition: (SetOfParameters) -> Boolean
+            isLoop: Boolean
     ) {
-        // TODO: implement
+
     }
 }
