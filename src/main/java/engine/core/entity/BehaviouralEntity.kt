@@ -41,7 +41,7 @@ class BehaviouralEntity(
         if (isLoop) {
             val current = behavior as LoopedBehavior
             if (current.loopCondition.invoke(parameters)) {
-                current.parameterChanging.invoke(deltaTime, parameters)
+                current.parameterChanging.invoke(deltaTime, parameters, current.constraints)
             }
         }
     }
