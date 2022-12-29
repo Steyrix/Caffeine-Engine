@@ -1,8 +1,6 @@
 package engine.core.entity
 
 import engine.core.entity.behavior.Behavior
-import engine.core.entity.behavior.LoopedBehavior
-import engine.core.entity.behavior.SimpleBehavior
 import engine.core.update.SetOfParameters
 
 class BehaviouralEntity(
@@ -20,29 +18,9 @@ class BehaviouralEntity(
     }
 
     private fun behave(deltaTime: Float) {
-        when (behavior) {
-            is SimpleBehavior ->
-                processBehavior(
-                        deltaTime,
-                        false
-                )
-            is LoopedBehavior ->
-                processBehavior(
-                        deltaTime,
-                        true
-                )
-        }
-    }
-
-    private fun processBehavior(
-            deltaTime: Float,
-            isLoop: Boolean
-    ) {
-        if (isLoop) {
-            val current = behavior as LoopedBehavior
-            if (current.loopCondition.invoke(parameters)) {
-                current.parameterChanging.invoke(deltaTime, parameters, current.constraints)
-            }
-        }
+        behavior.execute(
+                deltaTime,
+                listOf(parameters)
+        )
     }
 }
