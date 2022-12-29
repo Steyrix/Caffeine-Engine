@@ -11,13 +11,16 @@ class SimpleController2D(
         private val params: SetOf2DParametersWithVelocity,
         private var absVelocityY: Float = 0f,
         private var absVelocityX: Float = 0f,
-        private var modifier: Float = 20f
+        private var modifier: Float = 20f,
+        private var isControlledByUser: Boolean = false
 ) : Controllable, Entity, Updatable {
 
     private var isWalking = false
     private var isJumping = false
 
     override fun input(window: Window) {
+        if (!isControlledByUser) return
+
         params.velocityY = when {
             window.isKeyPressed(GLFW.GLFW_KEY_S) -> absVelocityY
             window.isKeyPressed(GLFW.GLFW_KEY_W) -> -absVelocityY

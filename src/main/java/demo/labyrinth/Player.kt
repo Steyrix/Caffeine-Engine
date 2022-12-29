@@ -14,7 +14,8 @@ class Player(
             params,
             absVelocityY = 10f,
             absVelocityX = 10f,
-            modifier = 20f
+            modifier = 20f,
+            isControlledByUser = true
     )
 
     init {
