@@ -1,76 +1,21 @@
 package demo.labyrinth
 
-import demo.labyrinth.data.AnimationKey
-import engine.core.controllable.Controllable
+import engine.core.controllable.SimpleController2D
 import engine.core.entity.CompositeEntity
-import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.update.SetOf2DParametersWithVelocity
-import engine.core.update.Updatable
-import engine.core.window.Window
-import org.lwjgl.glfw.GLFW
-
-private class PlayerController(
-        private val params: SetOf2DParametersWithVelocity
-): Controllable, Entity, Updatable {
-
-    var modifier = 20f
-
-    var isWalking = false
-    var isJumping = false
-    override fun input(window: Window) {
-        params.velocityY = when {
-            window.isKeyPressed(GLFW.GLFW_KEY_S) -> 10f
-            window.isKeyPressed(GLFW.GLFW_KEY_W) -> -10f
-            else -> 0f
-        }
-
-        params.velocityX = when {
-            window.isKeyPressed(GLFW.GLFW_KEY_D) -> 10f
-            window.isKeyPressed(GLFW.GLFW_KEY_A) -> -10f
-            else -> 0f
-        }
-    }
-
-    override fun update(deltaTime: Float) {
-        params.x += params.velocityX * deltaTime * modifier
-        params.y += params.velocityY * deltaTime * modifier
-        processState()
-    }
-
-    private fun processState() {
-        if (params.velocityX != 0f && !isWalking) {
-            isWalking = true
-        }
-
-        if (params.velocityX == 0f) {
-            isWalking = false
-        }
-
-        if (params.velocityY != 0f && !isJumping) {
-            isJumping = true
-        }
-
-        if (params.velocityY == 0f) {
-            isJumping = false
-        }
-    }
-    fun getAnimationKey(): String {
-        return if (isWalking || isJumping) {
-            if (isJumping) AnimationKey.JUMP
-            else AnimationKey.WALK
-        } else {
-            AnimationKey.IDLE
-        }
-    }
-}
 
 class Player(
         drawableComponent: AnimatedObject2D,
         params: SetOf2DParametersWithVelocity
 ) : CompositeEntity() {
 
-    private val controller = PlayerController(params)
+    private val controller = SimpleController2D(
+            params,
+            absVelocityY = 10f,
+            absVelocityX = 10f,
+            modifier = 20f
+    )
 
     init {
         addComponent(
