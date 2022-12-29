@@ -12,10 +12,14 @@ class ConstrainedBehavior2D(
 ) : Behavior {
 
     override fun execute(deltaTime: Float, params: SetOfParameters) {
+
         val parameters = params as SetOf2DParametersWithVelocity
 
         behaviorParams.movementX += deltaTime * parameters.velocityX
         behaviorParams.movementY += deltaTime * parameters.velocityY
+
+        parameters.x += behaviorParams.movementX
+        parameters.y += behaviorParams.movementY
 
         if (abs(behaviorParams.movementX) >= horizontalCap) {
             behaviorParams.movementX = 0f
