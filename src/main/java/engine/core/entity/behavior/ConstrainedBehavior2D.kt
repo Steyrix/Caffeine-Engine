@@ -11,23 +11,25 @@ class ConstrainedBehavior2D(
         private var behaviorParams: Behavior2DParameters
 ) : Behavior {
 
+    private var accumulatedMovementX = 0f
+    private var accumulatedMovementY = 0f
     override fun execute(deltaTime: Float, params: SetOfParameters) {
 
         val parameters = params as SetOf2DParametersWithVelocity
 
-        behaviorParams.movementX += deltaTime * parameters.velocityX
-        behaviorParams.movementY += deltaTime * parameters.velocityY
+        behaviorParams.movementX = deltaTime * parameters.velocityX
+        behaviorParams.movementY = deltaTime * parameters.velocityY
 
-        parameters.x += behaviorParams.movementX
-        parameters.y += behaviorParams.movementY
+        accumulatedMovementX += behaviorParams.movementX
+        accumulatedMovementY += behaviorParams.movementY
 
-        if (abs(behaviorParams.movementX) >= horizontalCap) {
-            behaviorParams.movementX = 0f
+        if (abs(accumulatedMovementX) >= horizontalCap) {
+            accumulatedMovementX = 0f
             parameters.velocityX *= -1
         }
 
-        if (abs(behaviorParams.movementY) >= verticalCap) {
-            behaviorParams.movementY = 0f
+        if (abs(accumulatedMovementY) >= verticalCap) {
+            accumulatedMovementY = 0f
             parameters.velocityY *= -1
         }
     }
