@@ -1,14 +1,17 @@
 package demo.labyrinth.skeleton
 
 import engine.core.controllable.SimpleController2D
-import engine.core.entity.CompositeEntity
+import engine.core.entity.BehaviouralEntity
+import engine.core.entity.behavior.Behavior
+
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.update.SetOf2DParametersWithVelocity
 
 class Skeleton(
         drawableComponent: AnimatedObject2D,
-        params: SetOf2DParametersWithVelocity
-) : CompositeEntity() {
+        params: SetOf2DParametersWithVelocity,
+        behavior: Behavior
+) : BehaviouralEntity(behavior, params) {
 
     private val controller = SimpleController2D(
             params,
