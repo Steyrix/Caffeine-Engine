@@ -26,7 +26,7 @@ fun getMapParameters(screenWidth: Float, screenHeight:Float): SetOfStatic2DParam
 }
 
 val crateParameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
-        x = 400f, y = 150f, xSize = 50f, ySize = 50f, rotationAngle = 0f
+        x = 400f, y = 430f, xSize = 50f, ySize = 50f, rotationAngle = 0f
 )
 
 val skeletonParameters: List<SetOf2DParametersWithVelocity> = listOf(
@@ -51,7 +51,7 @@ val skeletonParameters: List<SetOf2DParametersWithVelocity> = listOf(
 )
 
 val skeletonBehavior1 = ConstrainedBehavior2D(
-    horizontalCap = 10f,
+    horizontalCap = 20f,
         verticalCap = 200f,
         behaviorParams = Behavior2DParameters(
                 movementX = 0f,
@@ -60,7 +60,7 @@ val skeletonBehavior1 = ConstrainedBehavior2D(
 )
 
 val skeletonBehavior2 = ConstrainedBehavior2D(
-        horizontalCap = 10f,
+        horizontalCap = 20f,
         verticalCap = 200f,
         behaviorParams = Behavior2DParameters(
                 movementX = 0f,
