@@ -3,7 +3,7 @@ package engine.core.entity
 import engine.core.entity.behavior.Behavior
 import engine.core.update.SetOfParameters
 
-class BehaviouralEntity(
+open class BehaviouralEntity(
         private var behavior: Behavior,
         private var parameters: SetOfParameters
 ) : CompositeEntity() {
