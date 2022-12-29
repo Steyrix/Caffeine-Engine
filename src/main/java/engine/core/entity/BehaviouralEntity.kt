@@ -20,7 +20,7 @@ class BehaviouralEntity(
     private fun behave(deltaTime: Float) {
         behavior.execute(
                 deltaTime,
-                listOf(parameters)
+                parameters
         )
     }
 }

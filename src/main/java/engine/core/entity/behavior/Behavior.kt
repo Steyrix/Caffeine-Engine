@@ -5,6 +5,6 @@ import engine.core.update.SetOfParameters
 interface Behavior {
     fun execute(
             deltaTime: Float,
-            params: List<SetOfParameters>
+            params: SetOfParameters
     )
 }
