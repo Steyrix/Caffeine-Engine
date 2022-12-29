@@ -2,6 +2,7 @@ package demo.labyrinth.data
 
 import demo.labyrinth.Player
 import demo.labyrinth.ShaderController
+import engine.core.entity.BehaviouralEntity
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
@@ -207,7 +208,10 @@ object LabyrinthInitializer {
             }
 
             Skeletons.it.add(
-                    CompositeEntity().also { entity ->
+                    BehaviouralEntity(
+                            behavior = skeletonBehaviors[i],
+                            parameters = skeletonParameters[i]
+                    ).also { entity ->
                         entity.addComponent(
                                 component = skeletonObject,
                                 parameters = skeletonParameters[i]

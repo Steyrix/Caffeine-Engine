@@ -1,5 +1,6 @@
 package demo.labyrinth.data
 
+import engine.core.entity.BehaviouralEntity
 import engine.core.entity.CompositeEntity
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.render.render2D.OpenGlObject2D
@@ -91,7 +92,7 @@ object Crate : GameObject {
 }
 
 object Skeletons : GameObject {
-    val it: MutableList<CompositeEntity> = mutableListOf()
+    val it: MutableList<BehaviouralEntity> = mutableListOf()
     val parameters: MutableList<SetOf2DParametersWithVelocity> = mutableListOf()
     override fun update(deltaTime: Float) {
         it.forEach { entity ->
