@@ -22,7 +22,5 @@ data class SetOf2DParametersWithVelocity(
 
 data class Behavior2DParameters(
         var movementX: Float,
-        var movementY: Float,
-        var velocityX: Float,
-        var velocityY: Float
+        var movementY: Float
 ) : SetOfParameters()
