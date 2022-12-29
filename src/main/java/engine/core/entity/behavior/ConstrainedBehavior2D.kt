@@ -7,7 +7,7 @@ class ConstrainedBehavior2D(
     private var accumulatedMovementY: Float
 ) : Behavior {
 
-    override fun execute(deltaTime: Float, params: List<SetOfParameters>) {
+    override fun execute(deltaTime: Float, params: SetOfParameters) {
         TODO("Not yet implemented")
     }
 }
