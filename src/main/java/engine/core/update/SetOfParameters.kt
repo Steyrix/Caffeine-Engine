@@ -1,6 +1,6 @@
 package engine.core.update
 
-interface SetOfParameters
+sealed class SetOfParameters
 
 data class SetOfStatic2DParameters(
         var x: Float,
@@ -8,7 +8,7 @@ data class SetOfStatic2DParameters(
         var xSize: Float,
         var ySize: Float,
         var rotationAngle: Float
-) : SetOfParameters
+) : SetOfParameters()
 
 data class SetOf2DParametersWithVelocity(
         var x: Float,
@@ -18,4 +18,4 @@ data class SetOf2DParametersWithVelocity(
         var rotationAngle: Float,
         var velocityX: Float,
         var velocityY: Float
-) : SetOfParameters
+) : SetOfParameters()
