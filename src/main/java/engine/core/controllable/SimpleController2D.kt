@@ -8,22 +8,25 @@ import engine.core.window.Window
 import org.lwjgl.glfw.GLFW
 
 class SimpleController2D(
-        private val params: SetOf2DParametersWithVelocity
+        private val params: SetOf2DParametersWithVelocity,
+        private var absVelocityY: Float = 0f,
+        private var absVelocityX: Float = 0f,
+        private var modifier: Float = 20f
 ) : Controllable, Entity, Updatable {
-    var modifier = 20f
-    var isWalking = false
-    var isJumping = false
+
+    private var isWalking = false
+    private var isJumping = false
 
     override fun input(window: Window) {
         params.velocityY = when {
-            window.isKeyPressed(GLFW.GLFW_KEY_S) -> 10f
-            window.isKeyPressed(GLFW.GLFW_KEY_W) -> -10f
+            window.isKeyPressed(GLFW.GLFW_KEY_S) -> absVelocityY
+            window.isKeyPressed(GLFW.GLFW_KEY_W) -> -absVelocityY
             else -> 0f
         }
 
         params.velocityX = when {
-            window.isKeyPressed(GLFW.GLFW_KEY_D) -> 10f
-            window.isKeyPressed(GLFW.GLFW_KEY_A) -> -10f
+            window.isKeyPressed(GLFW.GLFW_KEY_D) -> absVelocityX
+            window.isKeyPressed(GLFW.GLFW_KEY_A) -> -absVelocityX
             else -> 0f
         }
     }
