@@ -12,7 +12,10 @@ his project, on the other hand, will use LWJGL OpenGL binding, since the latter 
 - GLFW
 
 ## TODO List:
-- Encapsulate initializations of LabyrinthDemo
+- Encapsulate initializations of LabyrinthDemo :white_check_mark:
 - Wrap shader uniforms (create some kind of class for it)
 - Think of some kind of collision which interactions will be observed :white_check_mark:
 - Implement speculative collider
+- Think of storing animation frame in a set of parameters
+- Preprocess tiled map to implement simple AI
+- Improve composite entity pattern
