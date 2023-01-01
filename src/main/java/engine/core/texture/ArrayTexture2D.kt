@@ -3,8 +3,7 @@ package engine.core.texture
 import org.lwjgl.opengl.GL42C.*
 
 class ArrayTexture2D(
-        override val id: Int,
-        val layersCount: Int
+        override val id: Int
 ) : Texture {
 
     companion object {
@@ -13,8 +12,7 @@ class ArrayTexture2D(
                 layersCount: Int
         ): ArrayTexture2D {
             return ArrayTexture2D(
-                    TextureLoader.loadArrayTexture2D(sources, layersCount),
-                    layersCount
+                    TextureLoader.loadArrayTexture2D(sources, layersCount)
             )
         }
     }
