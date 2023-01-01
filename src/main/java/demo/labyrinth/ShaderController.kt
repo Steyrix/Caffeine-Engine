@@ -31,6 +31,19 @@ object ShaderController {
         }
     }
 
+    fun createAnimationShaderWithTexArray(projection: Matrix4f): Shader {
+        val vertexPath = this.javaClass.getResource("/shaders/animTexArrayVertexShader.glsl")!!.path
+        val fragmentPath = this.javaClass.getResource("/shaders/animTexArrayFragmentShader.glsl")!!.path
+
+        return ShaderLoader.loadFromFile(
+                vertexShaderFilePath = vertexPath,
+                fragmentShaderFilePath = fragmentPath
+        ).also {
+            it.bind()
+            it.setUniform(Shader.VAR_KEY_PROJECTION, projection)
+        }
+    }
+
     fun createTexturedShader(projection: Matrix4f): Shader {
         val vertexPath = this.javaClass.getResource("/shaders/texturedVertexShader.glsl")!!.path
         val fragmentPath = this.javaClass.getResource("/shaders/texturedFragmentShader.glsl")!!.path
