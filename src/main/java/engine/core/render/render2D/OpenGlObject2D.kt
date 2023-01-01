@@ -133,4 +133,9 @@ open class OpenGlObject2D(
     fun isTextured(): Boolean {
         return texture != null || arrayTexture != null
     }
+
+    fun setArrayTextureLayer(idx: Int) {
+        shader!!.bind()
+        shader!!.setUniform(textureUniformName, idx)
+    }
 }
