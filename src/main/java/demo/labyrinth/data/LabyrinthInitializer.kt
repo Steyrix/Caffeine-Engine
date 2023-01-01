@@ -9,6 +9,7 @@ import engine.core.render.render2D.AnimatedObject2D
 import engine.core.render.render2D.OpenGlObject2D
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
+import engine.core.texture.ArrayTexture2D
 import engine.core.texture.Texture2D
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.collision.boundingbox.BoundingBoxCollider
@@ -113,12 +114,18 @@ object LabyrinthInitializer {
 
         val frameSizeX = 0.1f
         val frameSizeY = 0.333f
-        val texturePath = this.javaClass.getResource("/textures/base_character.png")!!.path
+        val texturePathFirst = this.javaClass.getResource("/textures/base_character.png")!!.path
+        val texturePathSecond = this.javaClass.getResource("/textures/base_character_2.png")!!.path
+
+        val textureArray = ArrayTexture2D.createInstance(
+                listOf(texturePathFirst, texturePathSecond),
+                2
+        )
 
         Character.graphicalComponent = AnimatedObject2D(
                 frameSizeX,
                 frameSizeY,
-                texture = Texture2D.createInstance(texturePath),
+                arrayTexture = textureArray,
                 animations = characterAnimations
         ).apply {
             boundingBox = Character.boundingBox
@@ -126,7 +133,7 @@ object LabyrinthInitializer {
             y = 100f
             xSize = 60f
             ySize = 60f
-            shader = ShaderController.createAnimationShader(renderProjection!!)
+            shader = ShaderController.createAnimationShaderWithTexArray(renderProjection!!)
         }
 
         Character.it = Player(
