@@ -17,6 +17,8 @@ class ArrayTexture2D(
         }
     }
 
+    override val bindTarget = GL_TEXTURE_2D_ARRAY
+
     init {
         bind()
         glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
@@ -24,14 +26,6 @@ class ArrayTexture2D(
         glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
         glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
         unbind()
-    }
-
-    override fun bind() {
-        glBindTexture(GL_TEXTURE_2D_ARRAY, id)
-    }
-
-    override fun unbind() {
-        glBindTexture(GL_TEXTURE_2D_ARRAY, 0)
     }
 
     fun dispose() {

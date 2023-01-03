@@ -7,6 +7,8 @@ class Texture2D(
         override val id: Int
 ) : Texture {
 
+    override val bindTarget = GL_TEXTURE_2D
+
     private val dimension: Dimension
     companion object {
         fun createInstance(src: String): Texture2D {
@@ -20,14 +22,6 @@ class Texture2D(
         setParameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR)
         setParameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
         setParameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
-    }
-
-    override fun bind() {
-        glBindTexture(GL_TEXTURE_2D, id)
-    }
-
-    override fun unbind() {
-        glBindTexture(GL_TEXTURE_2D, 0)
     }
 
     fun dispose() {
