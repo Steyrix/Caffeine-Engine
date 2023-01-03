@@ -15,13 +15,11 @@ class Texture2D(
     }
 
     init {
-        bind()
         dimension = getSize()
         setParameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR)
         setParameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR)
         setParameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
         setParameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
-        unbind()
     }
 
     override fun bind() {
@@ -51,10 +49,12 @@ class Texture2D(
     }
 
     private fun getSize(): Dimension {
+        bind()
         val arrayW = IntArray(1)
         val arrayH = IntArray(1)
         glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, arrayW)
         glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, arrayH)
+        unbind()
         return Dimension(arrayW.first(), arrayH.first())
     }
 }
