@@ -30,12 +30,6 @@ class Texture2D(
         glBindTexture(GL_TEXTURE_2D, 0)
     }
 
-    fun setParameter(name: Int, value: Int) {
-        bind()
-        glTexParameteri(GL_TEXTURE_2D, name, value)
-        unbind()
-    }
-
     fun dispose() {
         glDeleteTextures(id)
     }
