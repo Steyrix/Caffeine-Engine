@@ -5,14 +5,19 @@ import org.lwjgl.opengl.GL33C.*
 // TODO use specific import instead of wildcard
 interface Texture {
     val id: Int
+    val bindTarget: Int
 
-    fun bind()
+    fun bind() {
+        glBindTexture(bindTarget, id)
+    }
 
-    fun unbind()
+    fun unbind() {
+        glBindTexture(bindTarget, 0)
+    }
 
     fun setParameter(name: Int, value: Int) {
         bind()
-        glTexParameteri(GL_TEXTURE_2D, name, value)
+        glTexParameteri(bindTarget, name, value)
         unbind()
     }
 }
