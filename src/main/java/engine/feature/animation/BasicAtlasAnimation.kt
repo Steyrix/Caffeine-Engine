@@ -1,7 +1,7 @@
 package engine.feature.animation
 
 class BasicAtlasAnimation(
-        val name: String,
+        override val name: String,
         private val animationId: Int,
         val usedLayerId: Int,
         private val framesCountX: Int,
@@ -9,7 +9,7 @@ class BasicAtlasAnimation(
         internal var currentFrameX: Int,
         internal var currentFrameY: Int,
         private val timeLimit: Float
-) {
+) : Animation {
     private var playFunction: ((Float, Int, Int, Int, Int) -> Unit)? = null
 
     private var lastPosX: Int = framesCountX
@@ -24,7 +24,7 @@ class BasicAtlasAnimation(
         addNewAnimToMap(this)
     }
 
-    fun play(deltaTime: Float) {
+    override fun play(deltaTime: Float) {
 
         playFunction?.let {
             it.invoke(deltaTime, currentFrameX, currentFrameY, firstPosX, firstPosY)

@@ -1,11 +1,11 @@
 package engine.feature.animation
 
 class SequenceAtlasAnimation(
-        val name: String,
+        override val name: String,
         private val frames: List<FrameParameters>,
         initialIndex: Int = 0,
         private val timeLimit: Float
-) {
+) : Animation {
 
     private var accumulatedTime: Float = 0f
     private var currIndex = 0
@@ -24,7 +24,7 @@ class SequenceAtlasAnimation(
         currIndex = initialIndex
     }
 
-    fun play(deltaTime: Float) {
+    override fun play(deltaTime: Float) {
         if (currentFrame == null) return
 
         accumulatedTime += deltaTime
