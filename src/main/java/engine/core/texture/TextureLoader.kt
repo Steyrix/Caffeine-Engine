@@ -97,13 +97,13 @@ object TextureLoader {
         buffers.forEachIndexed { index, byteBuffer ->
             glTexSubImage3D(
                     GL_TEXTURE_2D_ARRAY,
+                    0,
+                    0,
+                    0,
                     index,
-                    0,
-                    0,
-                    0,
                     width,
                     height,
-                    1,
+                    layersCount,
                     GL_RGBA,
                     GL_UNSIGNED_BYTE,
                     byteBuffer
