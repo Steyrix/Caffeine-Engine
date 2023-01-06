@@ -15,6 +15,7 @@ class Shader {
         const val VAR_KEY_PROJECTION = "projection"
         const val VAR_KEY_TEXTURE_SAMPLE = "textureSample"
         const val VAR_KEY_TEXTURE_ARRAY = "textureArray"
+        const val VAR_KEY_TEXTURE_ARRAY_LAYER = "textureArrayLayer"
         const val VAR_KEY_X_OFFSET = "xOffset"
         const val VAR_KEY_Y_OFFSET = "yOffset"
         const val VAR_KEY_FRAME_X = "frameNumberX"
