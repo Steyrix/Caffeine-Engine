@@ -124,7 +124,7 @@ open class OpenGlObject2D(
     }
 
     private fun bindArrayTexture() {
-        glActiveTexture(GL_TEXTURE0)
+        // glActiveTexture(GL_TEXTURE0)
         arrayTexture!!.bind()
         shader!!.bind()
         shader!!.setUniform(textureUniformName, 0)
@@ -132,12 +132,5 @@ open class OpenGlObject2D(
 
     fun isTextured(): Boolean {
         return texture != null || arrayTexture != null
-    }
-
-    // TODO this method does not belong here, create interface for it
-    fun setArrayTextureLayer(idx: Int) {
-        if (arrayTexture == null || textureUniformName.isEmpty()) return
-        shader!!.bind()
-        shader!!.setUniform(textureUniformName, idx)
     }
 }
