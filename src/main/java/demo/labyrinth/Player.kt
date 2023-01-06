@@ -38,7 +38,6 @@ class Player(
                 .forEach {
                     (it.key as AnimatedObject2D).apply {
                         setAnimationByKey(controller.getAnimationKey())
-                        setArrayTextureLayer(controller.getTextureArrayLayer())
                     }
                 }
     }

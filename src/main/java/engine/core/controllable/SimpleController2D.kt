@@ -17,7 +17,7 @@ class SimpleController2D(
 
     private var isWalking = false
     private var isJumping = false
-    private var layerIdx = 0
+    private var isDirectionRight = true
 
     override fun input(window: Window) {
         if (!isControlledByUser) return
@@ -29,8 +29,14 @@ class SimpleController2D(
         }
 
         params.velocityX = when {
-            window.isKeyPressed(GLFW.GLFW_KEY_D) -> absVelocityX
-            window.isKeyPressed(GLFW.GLFW_KEY_A) -> -absVelocityX
+            window.isKeyPressed(GLFW.GLFW_KEY_D) -> {
+                isDirectionRight = true
+                absVelocityX
+            }
+            window.isKeyPressed(GLFW.GLFW_KEY_A) -> {
+                isDirectionRight = false
+                -absVelocityX
+            }
             else -> 0f
         }
     }
@@ -57,21 +63,17 @@ class SimpleController2D(
         if (params.velocityY == 0f) {
             isJumping = false
         }
-
-        if (params.velocityX > 0f) layerIdx = 0
-        if (params.velocityX < 0f) layerIdx = 1
     }
 
+    // todo: remove coupling
     fun getAnimationKey(): String {
-        return if (isWalking || isJumping) {
-            if (isJumping) AnimationKey.JUMP
-            else AnimationKey.WALK
-        } else {
-            AnimationKey.IDLE
+        return when {
+            isJumping && isDirectionRight -> AnimationKey.JUMP_R
+            isJumping && !isDirectionRight -> AnimationKey.JUMP_L
+            isWalking && isDirectionRight -> AnimationKey.WALK_R
+            isWalking && !isDirectionRight -> AnimationKey.WALK_L
+            isDirectionRight -> AnimationKey.IDLE_R
+            else -> AnimationKey.IDLE_L
         }
-    }
-
-    fun getTextureArrayLayer(): Int {
-        return layerIdx
     }
 }
