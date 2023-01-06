@@ -7,9 +7,9 @@ import engine.core.shader.Shader
 class AnimationHolder2D(
         private var frameSizeX: Float,
         private var frameSizeY: Float,
-        private val animations: MutableList<BasicAnimation>
+        private val animations: MutableList<BasicAtlasAnimation>
 ) : Entity {
-    private var currentAnimation: BasicAnimation = animations.first()
+    private var currentAnimation: BasicAtlasAnimation = animations.first()
 
     fun updateAnimationUniforms(target: OpenGlObject2D, shader: Shader) {
         if (target.isTextured()) {

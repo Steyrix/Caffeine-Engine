@@ -1,6 +1,6 @@
 package engine.feature.animation
 
-class BasicAnimation(
+class BasicAtlasAnimation(
         val name: String,
         private val animationId: Int,
         val usedLayerId: Int,
@@ -93,13 +93,13 @@ class BasicAnimation(
     }
 
     companion object {
-        private val map = HashMap<String, BasicAnimation>()
+        private val map = HashMap<String, BasicAtlasAnimation>()
 
-        fun addNewAnimToMap(a: BasicAnimation) {
+        fun addNewAnimToMap(a: BasicAtlasAnimation) {
             map[a.name] = a
         }
 
-        fun animForName(animName: String): BasicAnimation? {
+        fun animForName(animName: String): BasicAtlasAnimation? {
             return map[animName]
         }
     }

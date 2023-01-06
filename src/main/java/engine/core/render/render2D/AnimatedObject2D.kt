@@ -5,7 +5,7 @@ import engine.core.texture.ArrayTexture2D
 import engine.core.texture.Texture2D
 import engine.core.update.Updatable
 import engine.feature.animation.AnimationHolder2D
-import engine.feature.animation.BasicAnimation
+import engine.feature.animation.BasicAtlasAnimation
 import engine.feature.util.Buffer
 
 class AnimatedObject2D(
@@ -21,7 +21,7 @@ class AnimatedObject2D(
             frameSizeX: Float,
             frameSizeY: Float,
             texture: Texture2D?,
-            animations: MutableList<BasicAnimation>
+            animations: MutableList<BasicAtlasAnimation>
     ) : this(
             bufferParamsCount = 2,
             dataArrays = listOf(Buffer.RECTANGLE_INDICES, Buffer.getRectangleSectorVertices(frameSizeX, frameSizeY)),
@@ -35,7 +35,7 @@ class AnimatedObject2D(
             frameSizeX: Float,
             frameSizeY: Float,
             arrayTexture: ArrayTexture2D?,
-            animations: MutableList<BasicAnimation>
+            animations: MutableList<BasicAtlasAnimation>
     ) : this(
             bufferParamsCount = 2,
             dataArrays = listOf(Buffer.RECTANGLE_INDICES, Buffer.getRectangleSectorVertices(frameSizeX, frameSizeY)),

@@ -1,6 +1,6 @@
 package demo.labyrinth.data
 
-import engine.feature.animation.BasicAnimation
+import engine.feature.animation.BasicAtlasAnimation
 
 object AnimationKey {
     const val WALK_R = "WALK_R"
@@ -13,18 +13,18 @@ object AnimationKey {
 }
 
 val characterAnimations = mutableListOf(
-        BasicAnimation(
+        BasicAtlasAnimation(
                 AnimationKey.IDLE_R,
                 1, 0, 1, 1, 0, 0, 1f
         ),
-        BasicAnimation(
+        BasicAtlasAnimation(
                 AnimationKey.WALK_R,
                 2, 0, 6, 1, 1, 0, 0.2f
         ).apply {
             setFirstPosX(1)
             setLastPosX(6)
         },
-        BasicAnimation(
+        BasicAtlasAnimation(
                 AnimationKey.JUMP_R,
                 3, 0, 3, 1, 7, 1, 0.5f
         ).apply {
@@ -32,18 +32,18 @@ val characterAnimations = mutableListOf(
             setLastPosX(9)
         },
 
-        BasicAnimation(
+        BasicAtlasAnimation(
                 AnimationKey.IDLE_L,
                 4, 0, 1, 1, 9, 3, 1f
         ),
-        BasicAnimation(
+        BasicAtlasAnimation(
                 AnimationKey.WALK_L,
                 5, 0, 6, 1, 8, 3, 0.2f
         ).apply {
             setFirstPosX(8)
             setLastPosX(3)
         },
-        BasicAnimation(
+        BasicAtlasAnimation(
                 AnimationKey.JUMP_L,
                 6, 0, 3, 1, 0, 4, 0.5f
         ).apply {
@@ -54,7 +54,7 @@ val characterAnimations = mutableListOf(
 
 val campfireAnimations =
         mutableListOf(
-                BasicAnimation(
+                BasicAtlasAnimation(
                         AnimationKey.BURN,
                         100, 0, 4, 1, 0, 0, 0.1f
                 )
