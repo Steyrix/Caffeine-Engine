@@ -36,7 +36,10 @@ class Player(
         components
                 .filter { it.key is AnimatedObject2D }
                 .forEach {
-                    (it.key as AnimatedObject2D).setAnimationByKey(controller.getAnimationKey())
+                    (it.key as AnimatedObject2D).apply {
+                        setAnimationByKey(controller.getAnimationKey())
+                        setArrayTextureLayer(controller.getTextureArrayLayer())
+                    }
                 }
     }
 }
