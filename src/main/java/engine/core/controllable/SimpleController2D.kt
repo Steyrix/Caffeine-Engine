@@ -17,6 +17,7 @@ class SimpleController2D(
 
     private var isWalking = false
     private var isJumping = false
+    private var layerIdx = 0
 
     override fun input(window: Window) {
         if (!isControlledByUser) return
@@ -56,6 +57,9 @@ class SimpleController2D(
         if (params.velocityY == 0f) {
             isJumping = false
         }
+
+        if (params.velocityX > 0f) layerIdx = 0
+        if (params.velocityX < 0f) layerIdx = 1
     }
 
     fun getAnimationKey(): String {
@@ -65,5 +69,9 @@ class SimpleController2D(
         } else {
             AnimationKey.IDLE
         }
+    }
+
+    fun getTextureArrayLayer(): Int {
+        return layerIdx
     }
 }
