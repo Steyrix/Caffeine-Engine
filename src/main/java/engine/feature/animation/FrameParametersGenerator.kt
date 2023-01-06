@@ -1,6 +1,6 @@
 package engine.feature.animation
 
-object SequenceAnimationGenerator {
+object FrameParametersGenerator {
 
     fun generate(
             xRange: Pair<Int, Int>,
