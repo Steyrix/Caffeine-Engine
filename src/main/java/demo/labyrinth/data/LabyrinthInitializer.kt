@@ -124,7 +124,7 @@ object LabyrinthInitializer {
                 frameSizeX,
                 frameSizeY,
                 texture = textureArray,
-                animations = characterAnimations
+                animations = characterAnimations2
         ).apply {
             boundingBox = Character.boundingBox
             x = 100f
@@ -174,7 +174,7 @@ object LabyrinthInitializer {
                 frameSizeX = frameSizeX,
                 frameSizeY = frameSizeY,
                 texture = Texture2D.createInstance(texturePath),
-                animations = campfireAnimations
+                animations = campfireAnimations2
         ).apply {
             shader = ShaderController.createAnimationShader(renderProjection)
         }
@@ -206,7 +206,7 @@ object LabyrinthInitializer {
                     frameSizeX = frameSizeX,
                     frameSizeY = frameSizeY,
                     texture = Texture2D.createInstance(texturePath),
-                    animations = characterAnimations
+                    animations = characterAnimations2
             ).apply {
                 boundingBox = box
                 shader = ShaderController.createAnimationShader(renderProjection)

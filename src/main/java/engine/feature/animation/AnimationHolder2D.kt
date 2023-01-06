@@ -5,21 +5,18 @@ import engine.core.render.render2D.OpenGlObject2D
 import engine.core.shader.Shader
 
 class AnimationHolder2D(
-        private var frameSizeX: Float,
-        private var frameSizeY: Float,
-        private val animations: MutableList<BasicAtlasAnimation>
+        private val animations: MutableList<SequenceAtlasAnimation>
 ) : Entity {
-    private var currentAnimation: BasicAtlasAnimation = animations.first()
+    private var currentAnimation: SequenceAtlasAnimation = animations.first()
 
     fun updateAnimationUniforms(target: OpenGlObject2D, shader: Shader) {
         if (target.isTextured()) {
-            target.arrayTexture?.let {
-                shader.setUniform(Shader.VAR_KEY_TEXTURE_ARRAY_LAYER, currentAnimation.usedLayerId)
-            }
-            shader.setUniform(Shader.VAR_KEY_X_OFFSET, currentAnimation.currentFrameX * frameSizeX)
-            shader.setUniform(Shader.VAR_KEY_FRAME_X, currentAnimation.currentFrameX + 1)
-            shader.setUniform(Shader.VAR_KEY_Y_OFFSET, currentAnimation.currentFrameY * frameSizeY)
-            shader.setUniform(Shader.VAR_KEY_FRAME_Y, currentAnimation.currentFrameY + 1)
+            val params = currentAnimation.currentFrame!!
+
+            shader.setUniform(Shader.VAR_KEY_X_OFFSET, params.xOffset)
+            shader.setUniform(Shader.VAR_KEY_FRAME_X, params.frameNumberX)
+            shader.setUniform(Shader.VAR_KEY_Y_OFFSET, params.yOffset)
+            shader.setUniform(Shader.VAR_KEY_FRAME_Y, params.frameNumberY)
         }
     }
 

@@ -4,8 +4,10 @@ import engine.core.shader.Shader
 import engine.core.texture.ArrayTexture2D
 import engine.core.texture.Texture2D
 import engine.core.update.Updatable
+import engine.feature.animation.Animation
 import engine.feature.animation.AnimationHolder2D
 import engine.feature.animation.BasicAtlasAnimation
+import engine.feature.animation.SequenceAtlasAnimation
 import engine.feature.util.Buffer
 
 class AnimatedObject2D(
@@ -21,28 +23,28 @@ class AnimatedObject2D(
             frameSizeX: Float,
             frameSizeY: Float,
             texture: Texture2D?,
-            animations: MutableList<BasicAtlasAnimation>
+            animations: MutableList<SequenceAtlasAnimation>
     ) : this(
             bufferParamsCount = 2,
             dataArrays = listOf(Buffer.RECTANGLE_INDICES, Buffer.getRectangleSectorVertices(frameSizeX, frameSizeY)),
             verticesCount = 6,
             texture,
             arrayTexture = null,
-            animationHolder = AnimationHolder2D(frameSizeX, frameSizeY, animations)
+            animationHolder = AnimationHolder2D(animations)
     )
 
     constructor(
             frameSizeX: Float,
             frameSizeY: Float,
             arrayTexture: ArrayTexture2D?,
-            animations: MutableList<BasicAtlasAnimation>
+            animations: MutableList<SequenceAtlasAnimation>
     ) : this(
             bufferParamsCount = 2,
             dataArrays = listOf(Buffer.RECTANGLE_INDICES, Buffer.getRectangleSectorVertices(frameSizeX, frameSizeY)),
             verticesCount = 6,
             texture = null,
             arrayTexture,
-            animationHolder = AnimationHolder2D(frameSizeX, frameSizeY, animations)
+            animationHolder = AnimationHolder2D(animations)
     )
 
     override var shader: Shader? = null
