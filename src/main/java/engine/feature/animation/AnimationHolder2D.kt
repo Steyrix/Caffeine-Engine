@@ -4,6 +4,7 @@ import engine.core.entity.Entity
 import engine.core.render.render2D.OpenGlObject2D
 import engine.core.shader.Shader
 
+// TODO: think of a way to use different Animation.kt implementations
 class AnimationHolder2D(
         private val animations: MutableList<SequenceAtlasAnimation>
 ) : Entity {
