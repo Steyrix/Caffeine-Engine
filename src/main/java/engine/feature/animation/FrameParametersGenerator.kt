@@ -15,12 +15,27 @@ object FrameParametersGenerator {
         var yFirst = yRange.first
         val yLast = yRange.second
 
-        while (yFirst <= yLast) {
+        val yAscending = yFirst <= yLast
+        val xAscending = xFirst <= xLast
+
+        val yConditionFunc: () -> Boolean = if (yFirst <= yLast) {
+            { yFirst <= yLast }
+        } else {
+            { yFirst >= yLast }
+        }
+
+        val xConditionFunc: () -> Boolean = if (xFirst <= xLast) {
+            { xFirst <= xLast }
+        } else {
+            { xFirst >= xLast }
+        }
+
+        while (yConditionFunc.invoke()) {
 
             val frameY = yFirst + 1
             val yOffset = yFirst * frameSizeY
 
-            while (xFirst <= xLast) {
+            while (xConditionFunc.invoke()) {
                 val frameX = xFirst + 1
                 val xOffset = xFirst * frameSizeX
 
@@ -33,10 +48,10 @@ object FrameParametersGenerator {
                         )
                 )
 
-                xFirst++
+                if (xAscending) xFirst++ else xFirst--
             }
 
-            yFirst++
+            if (yAscending) yFirst++ else yFirst--
         }
 
         return out.toList()
