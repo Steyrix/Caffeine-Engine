@@ -17,7 +17,6 @@ class BasicAnimation(
 
     private var firstPosX: Int = 1
     private val firstPosY: Int = 1
-    private val shouldInc = lastPosX >= firstPosX
 
     private var accumulatedTime: Float = 0f
 
@@ -43,25 +42,25 @@ class BasicAnimation(
                     if (isMultiFramedByY()) {
                         if (isLastFrameY())
                             currentFrameY = firstPosY
-                        else if (shouldInc)
+                        else if (shouldInc())
                             currentFrameY++
                         else
                             currentFrameY --
                     }
-                } else if (shouldInc)
+                } else if (shouldInc())
                     currentFrameX++
                 else currentFrameX--
             }
         }
     }
 
-    private fun isLastFrameX() = if (shouldInc) {
+    private fun isLastFrameX() = if (shouldInc()) {
         currentFrameX + 1 > lastPosX
     } else {
         currentFrameX - 1 < lastPosX
     }
 
-    private fun isLastFrameY() = if (shouldInc) {
+    private fun isLastFrameY() = if (shouldInc()) {
         currentFrameY + 1 > lastPosY
     } else {
         currentFrameY - 1 < lastPosY
@@ -70,6 +69,8 @@ class BasicAnimation(
     private fun isMultiFramedByX() = framesCountX != 1
 
     private fun isMultiFramedByY() = framesCountY != 1
+
+    private fun shouldInc() = lastPosX >= firstPosX
 
     fun setFirstPosX(posX: Int) {
         firstPosX = posX

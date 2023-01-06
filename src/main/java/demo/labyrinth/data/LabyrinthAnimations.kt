@@ -34,13 +34,13 @@ val characterAnimations = mutableListOf(
 
         BasicAnimation(
                 AnimationKey.IDLE_L,
-                4, 0, 1, 1, 8, 3, 1f
+                4, 0, 1, 1, 9, 3, 1f
         ),
         BasicAnimation(
                 AnimationKey.WALK_L,
-                5, 0, 6, 1, 7, 3, 0.2f
+                5, 0, 6, 1, 8, 3, 0.2f
         ).apply {
-            setFirstPosX(7)
+            setFirstPosX(8)
             setLastPosX(3)
         },
         BasicAnimation(

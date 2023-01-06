@@ -113,19 +113,17 @@ object LabyrinthInitializer {
                 TiledCollider(characterParameters, "Walking Layer", tiledCollisionContext)
 
         val frameSizeX = 0.1f
-        val frameSizeY = 0.333f
+        val frameSizeY = 0.166f
         val texturePathFirst = this.javaClass.getResource("/textures/base_character.png")!!.path
-        val texturePathSecond = this.javaClass.getResource("/textures/base_character_2.png")!!.path
 
-        val textureArray = ArrayTexture2D.createInstance(
-                listOf(texturePathFirst, texturePathSecond),
-                2
+        val textureArray = Texture2D.createInstance(
+                texturePathFirst
         )
 
         Character.graphicalComponent = AnimatedObject2D(
                 frameSizeX,
                 frameSizeY,
-                arrayTexture = textureArray,
+                texture = textureArray,
                 animations = characterAnimations
         ).apply {
             boundingBox = Character.boundingBox
@@ -133,7 +131,7 @@ object LabyrinthInitializer {
             y = 100f
             xSize = 60f
             ySize = 60f
-            shader = ShaderController.createAnimationShaderWithTexArray(renderProjection!!)
+            shader = ShaderController.createAnimationShader(renderProjection!!)
         }
 
         Character.it = Player(
