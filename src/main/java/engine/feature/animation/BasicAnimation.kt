@@ -3,7 +3,7 @@ package engine.feature.animation
 class BasicAnimation(
         val name: String,
         private val animationId: Int,
-        private val usedLayerId: Int,
+        val usedLayerId: Int,
         private val framesCountX: Int,
         private val framesCountY: Int,
         internal var currentFrameX: Int,
@@ -17,6 +17,7 @@ class BasicAnimation(
 
     private var firstPosX: Int = 1
     private val firstPosY: Int = 1
+    private val shouldInc = lastPosX >= firstPosX
 
     private var accumulatedTime: Float = 0f
 
@@ -42,18 +43,29 @@ class BasicAnimation(
                     if (isMultiFramedByY()) {
                         if (isLastFrameY())
                             currentFrameY = firstPosY
-                        else
+                        else if (shouldInc)
                             currentFrameY++
+                        else
+                            currentFrameY --
                     }
-                } else
+                } else if (shouldInc)
                     currentFrameX++
+                else currentFrameX--
             }
         }
     }
 
-    private fun isLastFrameX() = currentFrameX + 1 > lastPosX
+    private fun isLastFrameX() = if (shouldInc) {
+        currentFrameX + 1 > lastPosX
+    } else {
+        currentFrameX - 1 < lastPosX
+    }
 
-    private fun isLastFrameY() = currentFrameY + 1 > lastPosY
+    private fun isLastFrameY() = if (shouldInc) {
+        currentFrameY + 1 > lastPosY
+    } else {
+        currentFrameY - 1 < lastPosY
+    }
 
     private fun isMultiFramedByX() = framesCountX != 1
 
