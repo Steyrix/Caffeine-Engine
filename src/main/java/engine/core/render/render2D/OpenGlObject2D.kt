@@ -136,7 +136,7 @@ open class OpenGlObject2D(
 
     // TODO this method does not belong here, create interface for it
     fun setArrayTextureLayer(idx: Int) {
-        if (arrayTexture == null) return
+        if (arrayTexture == null || textureUniformName.isEmpty()) return
         shader!!.bind()
         shader!!.setUniform(textureUniformName, idx)
     }
