@@ -1,6 +1,6 @@
 package demo.labyrinth.data
 
-import engine.feature.animation.BasicAtlasAnimation
+import engine.feature.animation.Animation
 import engine.feature.animation.FrameParametersGenerator
 import engine.feature.animation.SequenceAtlasAnimation
 
@@ -14,7 +14,7 @@ object AnimationKey {
     const val BURN = "BURN"
 }
 
-val characterAnimations2 = mutableListOf(
+val characterAnimations2 = mutableListOf<Animation>(
         SequenceAtlasAnimation(
                 AnimationKey.IDLE_R,
                 FrameParametersGenerator.generate(Pair(0,0), Pair(0,0), 0.1f, 0.166f),
@@ -48,7 +48,7 @@ val characterAnimations2 = mutableListOf(
 
 )
 
-val campfireAnimations2 = mutableListOf(
+val campfireAnimations2 = mutableListOf<Animation>(
         SequenceAtlasAnimation(
                 AnimationKey.BURN,
                 FrameParametersGenerator.generate(Pair(0,3), Pair(0,0), 0.2f, 1.0f),

@@ -23,7 +23,7 @@ class AnimatedObject2D(
             frameSizeX: Float,
             frameSizeY: Float,
             texture: Texture2D?,
-            animations: MutableList<SequenceAtlasAnimation>
+            animations: MutableList<Animation>
     ) : this(
             bufferParamsCount = 2,
             dataArrays = listOf(Buffer.RECTANGLE_INDICES, Buffer.getRectangleSectorVertices(frameSizeX, frameSizeY)),
@@ -37,7 +37,7 @@ class AnimatedObject2D(
             frameSizeX: Float,
             frameSizeY: Float,
             arrayTexture: ArrayTexture2D?,
-            animations: MutableList<SequenceAtlasAnimation>
+            animations: MutableList<Animation>
     ) : this(
             bufferParamsCount = 2,
             dataArrays = listOf(Buffer.RECTANGLE_INDICES, Buffer.getRectangleSectorVertices(frameSizeX, frameSizeY)),

@@ -6,9 +6,9 @@ import engine.core.shader.Shader
 
 // TODO: think of a way to use different Animation.kt implementations
 class AnimationHolder2D(
-        private val animations: MutableList<SequenceAtlasAnimation>
+        private val animations: MutableList<Animation>
 ) : Entity {
-    private var currentAnimation: SequenceAtlasAnimation = animations.first()
+    private var currentAnimation: Animation = animations.first()
 
     fun updateAnimationUniforms(target: OpenGlObject2D, shader: Shader) {
         if (target.isTextured()) {
