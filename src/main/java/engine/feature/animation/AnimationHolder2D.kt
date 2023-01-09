@@ -12,12 +12,7 @@ class AnimationHolder2D(
 
     fun updateAnimationUniforms(target: OpenGlObject2D, shader: Shader) {
         if (target.isTextured()) {
-            val params = currentAnimation.currentFrame!!
-
-            shader.setUniform(Shader.VAR_KEY_X_OFFSET, params.xOffset)
-            shader.setUniform(Shader.VAR_KEY_FRAME_X, params.frameNumberX)
-            shader.setUniform(Shader.VAR_KEY_Y_OFFSET, params.yOffset)
-            shader.setUniform(Shader.VAR_KEY_FRAME_Y, params.frameNumberY)
+            currentAnimation.setUniforms(shader)
         }
     }
 
