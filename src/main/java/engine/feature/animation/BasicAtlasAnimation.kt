@@ -1,5 +1,7 @@
 package engine.feature.animation
 
+import engine.core.shader.Shader
+
 class BasicAtlasAnimation(
         override val name: String,
         private val animationId: Int,
@@ -52,6 +54,10 @@ class BasicAtlasAnimation(
                 else currentFrameX--
             }
         }
+    }
+
+    override fun setUniforms(shader: Shader) {
+
     }
 
     private fun isLastFrameX() = if (shouldInc()) {

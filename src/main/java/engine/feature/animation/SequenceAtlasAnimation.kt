@@ -1,5 +1,7 @@
 package engine.feature.animation
 
+import engine.core.shader.Shader
+
 class SequenceAtlasAnimation(
         override val name: String,
         private val frames: List<FrameParameters>,
@@ -41,5 +43,9 @@ class SequenceAtlasAnimation(
 
             currentFrame = frames[currIndex]
         }
+    }
+
+    override fun setUniforms(shader: Shader) {
+        TODO("Not yet implemented")
     }
 }
