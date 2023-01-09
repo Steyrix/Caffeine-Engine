@@ -12,7 +12,7 @@ class SequenceAtlasAnimation(
     private var accumulatedTime: Float = 0f
     private var currIndex = 0
 
-    var currentFrame: FrameParameters? = null
+    private var currentFrame: FrameParameters? = null
 
     init {
         if (frames.isNotEmpty()) {
@@ -46,6 +46,11 @@ class SequenceAtlasAnimation(
     }
 
     override fun setUniforms(shader: Shader) {
-        TODO("Not yet implemented")
+        currentFrame?.let {
+            shader.setUniform(Shader.VAR_KEY_X_OFFSET, it.xOffset)
+            shader.setUniform(Shader.VAR_KEY_FRAME_X, it.frameNumberX)
+            shader.setUniform(Shader.VAR_KEY_Y_OFFSET, it.yOffset)
+            shader.setUniform(Shader.VAR_KEY_FRAME_Y, it.frameNumberY)
+        }
     }
 }
