@@ -56,8 +56,12 @@ class BasicAtlasAnimation(
         }
     }
 
+    // TODO: complete implementation
     override fun setUniforms(shader: Shader) {
-
+        // shader.setUniform(Shader.VAR_KEY_X_OFFSET, params.xOffset)
+        shader.setUniform(Shader.VAR_KEY_FRAME_X, currentFrameX)
+        // shader.setUniform(Shader.VAR_KEY_Y_OFFSET, params.yOffset)
+        shader.setUniform(Shader.VAR_KEY_FRAME_Y, currentFrameY)
     }
 
     private fun isLastFrameX() = if (shouldInc()) {
