@@ -39,4 +39,15 @@ object Buffer {
             0f, verticalScale,
             0f, 0f
     )
+
+    fun getColorBuffer(r: Float, g: Float, b: Float) = floatArrayOf(
+            r, g, b, r, g, b,
+            r, g, b, r, g, b,
+            r, g, b, r, g, b,
+            r, g, b, r, g, b,
+            r, g, b, r, g, b,
+            r, g, b, r, g, b,
+            r, g, b, r, g, b,
+            r, g, b, r, g, b,
+    )
 }
