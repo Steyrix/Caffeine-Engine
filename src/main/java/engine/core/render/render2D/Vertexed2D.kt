@@ -27,18 +27,32 @@ open class Vertexed2D(
         require(dataArrays.size == bufferParamsCount)
 
         dataArrays.forEach {
-            val bufferHandle = glGenBuffers()
-            bufferHandles.add(bufferHandle)
-
-            val floatBuffer = BufferUtils.createFloatBuffer(2 * it.size)
-            floatBuffer.put(it)
-            floatBuffer.flip()
-
-            glBindBuffer(GL_ARRAY_BUFFER, bufferHandles[buffersFilled++])
-            glBufferData(GL_ARRAY_BUFFER, floatBuffer, GL_STATIC_DRAW)
-
-            paramsCount.add(it.size / verticesCount)
+            initFloatBuffer(it)
         }
+    }
+
+    private fun initFloatBuffer(
+            dataArray: FloatArray
+    ) {
+        val bufferHandle = glGenBuffers()
+        bufferHandles.add(bufferHandle)
+
+        val floatBuffer = BufferUtils.createFloatBuffer(2 * dataArray.size)
+        floatBuffer.put(dataArray)
+        floatBuffer.flip()
+
+        glBindBuffer(GL_ARRAY_BUFFER, bufferHandles[buffersFilled++])
+        glBufferData(GL_ARRAY_BUFFER, floatBuffer, GL_STATIC_DRAW)
+
+        paramsCount.add(dataArray.size / verticesCount)
+    }
+
+    private fun initVertexFloatAttribute(
+            location: Int
+    ) {
+        glEnableVertexAttribArray(location)
+        glBindBuffer(GL_ARRAY_BUFFER, bufferHandles[location])
+        glVertexAttribPointer(location, paramsCount[location], GL_FLOAT, false, 0, 0)
     }
 
     private fun initVertexArray() {
@@ -46,9 +60,7 @@ open class Vertexed2D(
         glBindVertexArray(vertexArrayHandle)
 
         for (attribIndex in 0 until buffersFilled) {
-            glEnableVertexAttribArray(attribIndex)
-            glBindBuffer(GL_ARRAY_BUFFER, bufferHandles[attribIndex])
-            glVertexAttribPointer(attribIndex, paramsCount[attribIndex], GL_FLOAT, false, 0, 0)
+            initVertexFloatAttribute(attribIndex)
         }
     }
 }
