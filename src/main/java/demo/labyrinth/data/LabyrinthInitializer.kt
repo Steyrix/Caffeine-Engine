@@ -126,7 +126,6 @@ object LabyrinthInitializer {
                 texture = textureArray,
                 animations = characterAnimations2
         ).apply {
-            boundingBox = Character.boundingBox
             x = 100f
             y = 100f
             xSize = 60f
@@ -138,6 +137,10 @@ object LabyrinthInitializer {
                 drawableComponent = Character.graphicalComponent!!,
                 params = characterParameters
         )
+
+        Character.boundingBox?.let { box ->
+            Character.it?.addComponent(box, characterParameters)
+        }
     }
 
     private fun initCrateGraphics(renderProjection: Matrix4f) {
@@ -154,15 +157,19 @@ object LabyrinthInitializer {
         Crate.graphicalComponent = OpenGlObject2D(
                 texture2D = Texture2D.createInstance(texturePath),
         ).apply {
-            boundingBox = Crate.boundingBox
             shader = ShaderController.createTexturedShader(renderProjection)
         }
 
         Crate.it = object : CompositeEntity() {}
+
         Crate.it?.addComponent(
                 component = Crate.graphicalComponent as Entity,
                 parameters = crateParameters
         )
+
+        Crate.boundingBox?.let { box ->
+            Crate.it?.addComponent(box, crateParameters)
+        }
     }
 
     private fun initCampfireGraphics(renderProjection: Matrix4f) {
@@ -208,7 +215,6 @@ object LabyrinthInitializer {
                     texture = Texture2D.createInstance(texturePath),
                     animations = characterAnimations2
             ).apply {
-                boundingBox = box
                 shader = ShaderController.createAnimationShader(renderProjection)
             }
 
