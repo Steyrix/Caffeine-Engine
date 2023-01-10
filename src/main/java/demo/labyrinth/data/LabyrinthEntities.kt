@@ -105,5 +105,4 @@ object Skeletons : GameObject {
             entity.draw()
         }
     }
-
 }
