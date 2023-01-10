@@ -46,6 +46,7 @@ open class OpenGlObject2D(
 
     override val innerDrawableComponents: MutableList<Drawable2D> = mutableListOf()
 
+    // TODO move out
     var boundingBox: BoundingBox? = null
     set(value) {
         if (value != null) innerDrawableComponents.add(value)
