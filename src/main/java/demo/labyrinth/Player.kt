@@ -6,7 +6,7 @@ import engine.core.render.render2D.AnimatedObject2D
 import engine.core.update.SetOf2DParametersWithVelocity
 
 class Player(
-        drawableComponent: AnimatedObject2D,
+        private val drawableComponent: AnimatedObject2D,
         params: SetOf2DParametersWithVelocity
 ) : CompositeEntity() {
 
@@ -32,13 +32,6 @@ class Player(
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
-
-        components
-                .filter { it.key is AnimatedObject2D }
-                .forEach {
-                    (it.key as AnimatedObject2D).apply {
-                        setAnimationByKey(controller.getAnimationKey())
-                    }
-                }
+        drawableComponent.setAnimationByKey(controller.getAnimationKey())
     }
 }
