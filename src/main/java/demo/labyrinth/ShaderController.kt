@@ -56,4 +56,17 @@ object ShaderController {
             it.setUniform(Shader.VAR_KEY_PROJECTION, projection)
         }
     }
+
+    fun createPrimitiveShader(projection: Matrix4f): Shader {
+        val vertexPath = this.javaClass.getResource("/shaders/primitiveVertexShader.glsl")!!.path
+        val fragmentPath = this.javaClass.getResource("/shaders/primitiveFragmentShader.glsl")!!.path
+
+        return ShaderLoader.loadFromFile(
+                vertexShaderFilePath = vertexPath,
+                fragmentShaderFilePath = fragmentPath
+        ).also {
+            it.bind()
+            it.setUniform(Shader.VAR_KEY_PROJECTION, projection)
+        }
+    }
 }
