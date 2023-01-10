@@ -7,7 +7,6 @@ import engine.core.texture.Texture2D
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfStatic2DParameters
 import engine.core.update.SetOfParameters
-import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.matrix.MatrixComputer
 import engine.feature.util.Buffer
 import org.lwjgl.opengl.GL33C.*
@@ -45,13 +44,6 @@ open class OpenGlObject2D(
     var rotationAngle: Float = 0f
 
     override val innerDrawableComponents: MutableList<Drawable2D> = mutableListOf()
-
-    // TODO move out
-    var boundingBox: BoundingBox? = null
-    set(value) {
-        if (value != null) innerDrawableComponents.add(value)
-        field = value
-    }
 
     private var textureUniformName: String = ""
 
