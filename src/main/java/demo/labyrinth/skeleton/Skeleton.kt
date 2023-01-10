@@ -8,7 +8,7 @@ import engine.core.render.render2D.AnimatedObject2D
 import engine.core.update.SetOf2DParametersWithVelocity
 
 class Skeleton(
-        drawableComponent: AnimatedObject2D,
+        private val drawableComponent: AnimatedObject2D,
         params: SetOf2DParametersWithVelocity,
         behavior: Behavior
 ) : BehaviouralEntity(behavior, params) {
@@ -35,11 +35,6 @@ class Skeleton(
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
-
-        components
-                .filter { it.key is AnimatedObject2D }
-                .forEach {
-                    (it.key as AnimatedObject2D).setAnimationByKey(controller.getAnimationKey())
-                }
+        drawableComponent.setAnimationByKey(controller.getAnimationKey())
     }
 }
