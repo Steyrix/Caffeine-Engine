@@ -14,37 +14,41 @@ import engine.core.window.Window
  */
 open class CompositeEntity : Entity, Updatable {
 
-    protected val components: HashMap<Entity, SetOfParameters> = hashMapOf()
+    protected val parametersMap: HashMap<SetOfParameters, MutableList<Entity>> = hashMapOf()
 
     fun addComponent(
             component: Entity,
             parameters: SetOfParameters
     ) {
-        components[component] = parameters
+        parametersMap
+                .getOrPut(parameters) { mutableListOf() }
+                .add(component)
+
         component.onAdd()
     }
 
     fun draw() {
-        components.keys
-                .filter { it is Drawable }
-                .forEach { (it as Drawable).draw() }
+        parametersMap.entries.forEach {
+            it.value.forEach { entity ->
+                (entity as? Drawable)?.draw()
+            }
+        }
     }
 
     override fun update(deltaTime: Float) {
-        components.entries.forEach {
-            if (it.key is Updatable) {
-                (it.key as Updatable).update(deltaTime)
-            }
-
-            if (it.key is Parameterized) {
-                (it.key as Parameterized).updateParameters(it.value)
+        parametersMap.entries.forEach {
+            it.value.forEach { entity ->
+                (entity as? Updatable)?.update(deltaTime)
+                (entity as? Parameterized)?.updateParameters(it.key)
             }
         }
     }
 
     fun input(window: Window) {
-        components.keys
-                .filter { it is Controllable }
-                .forEach { (it as Controllable).input(window) }
+        parametersMap.entries.forEach {
+            it.value.forEach { entity ->
+                (entity as? Controllable)?.input(window)
+            }
+        }
     }
 }
