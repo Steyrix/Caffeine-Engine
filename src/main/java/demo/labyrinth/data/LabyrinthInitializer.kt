@@ -1,5 +1,6 @@
 package demo.labyrinth.data
 
+import demo.labyrinth.HealthBar
 import demo.labyrinth.Player
 import demo.labyrinth.ShaderController
 import demo.labyrinth.skeleton.Skeleton
@@ -9,7 +10,6 @@ import engine.core.render.render2D.AnimatedObject2D
 import engine.core.render.render2D.OpenGlObject2D
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
-import engine.core.texture.ArrayTexture2D
 import engine.core.texture.Texture2D
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.collision.boundingbox.BoundingBoxCollider
@@ -30,6 +30,7 @@ object LabyrinthInitializer {
             boundingBoxCollisionContext: BoundingBoxCollisionContext,
             tiledCollisionContext: TiledCollisionContext
     ) {
+        initHealthBarGraphics(renderProjection)
         initCharacterGraphics(renderProjection, boundingBoxCollisionContext, tiledCollisionContext)
         initCrateGraphics(renderProjection)
         initCampfireGraphics(renderProjection)
@@ -92,6 +93,21 @@ object LabyrinthInitializer {
         )
     }
 
+    private fun initHealthBarGraphics(renderProjection: Matrix4f): HealthBar {
+        val textureFilePath = this.javaClass.getResource("/textures/healthbar.png")!!.path
+
+        val graphicalComponent =
+                OpenGlObject2D(Texture2D.createInstance(textureFilePath)).apply {
+                    shader = ShaderController.createTexturedShader(renderProjection)
+                }
+
+        val out = HealthBar(characterParameters, hpBarPatameters).also {
+            it.addComponent(graphicalComponent, hpBarPatameters)
+        }
+
+        return out
+    }
+
     private fun initCharacterGraphics(
             renderProjection: Matrix4f,
             bbCollisionContext: BoundingBoxCollisionContext,
@@ -141,6 +157,10 @@ object LabyrinthInitializer {
         Character.boundingBox?.let { box ->
             Character.it?.addComponent(box, characterParameters)
         }
+
+        Character.it?.addComponent(
+                initHealthBarGraphics(renderProjection), characterParameters
+        )
     }
 
     private fun initCrateGraphics(renderProjection: Matrix4f) {
