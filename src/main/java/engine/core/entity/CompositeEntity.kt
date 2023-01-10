@@ -8,9 +8,9 @@ import engine.core.update.update2D.Parameterized
 import engine.core.window.Window
 
 /*
-    Ah, so, each component will have a reference to its properties.
-    Therefore, update of the properties and following call of an update method
-    will result in proper update of component.
+    Each set of parameters which is held by the composite entity can be modified
+    by several inner entities. So whenever set of parameters changes, according
+    entities will be updated.
  */
 open class CompositeEntity : Entity, Updatable {
 
