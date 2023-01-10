@@ -31,6 +31,7 @@ open class CompositeEntity : Entity, Updatable {
         parametersMap.entries.forEach {
             it.value.forEach { entity ->
                 (entity as? Drawable)?.draw()
+                (entity as? CompositeEntity)?.draw()
             }
         }
     }
