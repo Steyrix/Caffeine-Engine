@@ -222,7 +222,7 @@ object LabyrinthInitializer {
 
     private fun initSkeletons(renderProjection: Matrix4f) {
         val frameSizeX = 0.1f
-        val frameSizeY = 0.1f
+        val frameSizeY = 0.083f
         val texturePath = this.javaClass.getResource("/textures/base_skeleton.png")!!.path
 
         for (i in 0..1) {
@@ -240,7 +240,7 @@ object LabyrinthInitializer {
                     frameSizeX = frameSizeX,
                     frameSizeY = frameSizeY,
                     texture = Texture2D.createInstance(texturePath),
-                    animations = characterAnimations
+                    animations = skeletonAnimations
             ).apply {
                 shader = ShaderController.createAnimationShader(renderProjection)
             }

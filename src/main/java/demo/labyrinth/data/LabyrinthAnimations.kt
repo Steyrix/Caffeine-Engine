@@ -11,6 +11,14 @@ object AnimationKey {
     const val IDLE_L = "IDLE_L"
     const val JUMP_R = "JUMP_R"
     const val JUMP_L = "JUMP_L"
+
+    const val WALK_R_SKEL = "WALK_R_S"
+    const val WALK_L_SKEL = "WALK_L_S"
+    const val IDLE_R_SKEL = "IDLE_R_S"
+    const val IDLE_L_SKEL = "IDLE_L_S"
+    const val JUMP_R_SKEL = "JUMP_R_S"
+    const val JUMP_L_SKEL = "JUMP_L_S"
+
     const val BURN = "BURN"
 }
 
@@ -46,6 +54,39 @@ val characterAnimations = mutableListOf<Animation>(
                 timeLimit = 0.5f
         ),
 
+)
+
+val skeletonAnimations = mutableListOf<Animation>(
+        SequenceAtlasAnimation(
+                AnimationKey.IDLE_R_SKEL,
+                FrameParametersGenerator.generate(Pair(0,0), Pair(0,0), 0.1f, 0.166f),
+                timeLimit = 1f
+        ),
+        SequenceAtlasAnimation(
+                AnimationKey.IDLE_L_SKEL,
+                FrameParametersGenerator.generate(Pair(9,9), Pair(6,6), 0.1f, 0.166f),
+                timeLimit = 1f
+        ),
+        SequenceAtlasAnimation(
+                AnimationKey.WALK_R_SKEL,
+                FrameParametersGenerator.generate(Pair(1,6), Pair(0,0), 0.1f, 0.166f),
+                timeLimit = 0.2f
+        ),
+        SequenceAtlasAnimation(
+                AnimationKey.WALK_L_SKEL,
+                FrameParametersGenerator.generate(Pair(8,3), Pair(6,6), 0.1f, 0.166f),
+                timeLimit = 0.2f
+        ),
+        SequenceAtlasAnimation(
+                AnimationKey.JUMP_R_SKEL,
+                FrameParametersGenerator.generate(Pair(7,9), Pair(1,1), 0.1f, 0.166f),
+                timeLimit = 0.5f
+        ),
+        SequenceAtlasAnimation(
+                AnimationKey.JUMP_L_SKEL,
+                FrameParametersGenerator.generate(Pair(0,2), Pair(7,7), 0.1f, 0.166f),
+                timeLimit = 0.5f
+        )
 )
 
 val campfireAnimationss = mutableListOf<Animation>(
