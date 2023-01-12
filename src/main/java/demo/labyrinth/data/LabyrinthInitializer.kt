@@ -6,6 +6,7 @@ import demo.labyrinth.ShaderController
 import demo.labyrinth.skeleton.Skeleton
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
+import engine.core.render.primitive.Rectangle
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.render.render2D.OpenGlObject2D
 import engine.core.shader.Shader
@@ -96,13 +97,19 @@ object LabyrinthInitializer {
     private fun initHealthBarGraphics(renderProjection: Matrix4f): HealthBar {
         val textureFilePath = this.javaClass.getResource("/textures/healthbar.png")!!.path
 
-        val graphicalComponent =
+        val hpBarContainer =
                 OpenGlObject2D(Texture2D.createInstance(textureFilePath)).apply {
                     shader = ShaderController.createTexturedShader(renderProjection)
                 }
 
-        val out = HealthBar(characterParameters, hpBarPatameters).also {
-            it.addComponent(graphicalComponent, hpBarPatameters)
+        val hpBarContent =
+                Rectangle(1f, 0f, 0f).apply {
+                    shader = ShaderController.createPrimitiveShader(renderProjection)
+                }
+
+        val out = HealthBar(characterParameters, hpBarPatameters, hpBarContentParameters).also {
+            it.addComponent(hpBarContainer, hpBarPatameters)
+            it.addComponent(hpBarContent, hpBarContentParameters)
         }
 
         return out
@@ -140,7 +147,7 @@ object LabyrinthInitializer {
                 frameSizeX,
                 frameSizeY,
                 texture = textureArray,
-                animations = characterAnimations2
+                animations = characterAnimations
         ).apply {
             x = 100f
             y = 100f
@@ -201,7 +208,7 @@ object LabyrinthInitializer {
                 frameSizeX = frameSizeX,
                 frameSizeY = frameSizeY,
                 texture = Texture2D.createInstance(texturePath),
-                animations = campfireAnimations2
+                animations = campfireAnimationss
         ).apply {
             shader = ShaderController.createAnimationShader(renderProjection)
         }
@@ -233,7 +240,7 @@ object LabyrinthInitializer {
                     frameSizeX = frameSizeX,
                     frameSizeY = frameSizeY,
                     texture = Texture2D.createInstance(texturePath),
-                    animations = characterAnimations2
+                    animations = characterAnimations
             ).apply {
                 shader = ShaderController.createAnimationShader(renderProjection)
             }
@@ -243,7 +250,9 @@ object LabyrinthInitializer {
                             behavior = skeletonBehaviors[i],
                             params = skeletonParameters[i],
                             drawableComponent = skeletonObject
-                    )
+                    ).also {
+                        it.addComponent(box, skeletonParameters[i])
+                    }
             )
         }
     }

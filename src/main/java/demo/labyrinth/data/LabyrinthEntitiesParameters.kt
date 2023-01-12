@@ -13,6 +13,14 @@ var hpBarPatameters = SetOfStatic2DParameters(
         rotationAngle = 0f
 )
 
+var hpBarContentParameters = SetOfStatic2DParameters(
+        x = 0f,
+        y = 0f,
+        xSize = 50f,
+        ySize = 15f,
+        rotationAngle = 0f
+)
+
 var characterParameters = SetOf2DParametersWithVelocity(
         x = 30f,
         y = 30f,

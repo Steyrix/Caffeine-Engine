@@ -14,7 +14,7 @@ object AnimationKey {
     const val BURN = "BURN"
 }
 
-val characterAnimations2 = mutableListOf<Animation>(
+val characterAnimations = mutableListOf<Animation>(
         SequenceAtlasAnimation(
                 AnimationKey.IDLE_R,
                 FrameParametersGenerator.generate(Pair(0,0), Pair(0,0), 0.1f, 0.166f),
@@ -48,7 +48,7 @@ val characterAnimations2 = mutableListOf<Animation>(
 
 )
 
-val campfireAnimations2 = mutableListOf<Animation>(
+val campfireAnimationss = mutableListOf<Animation>(
         SequenceAtlasAnimation(
                 AnimationKey.BURN,
                 FrameParametersGenerator.generate(Pair(0,3), Pair(0,0), 0.2f, 1.0f),
