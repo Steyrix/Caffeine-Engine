@@ -6,8 +6,8 @@ import org.joml.Matrix4f
 
 object ShaderController {
     fun createBoundingBoxShader(projection: Matrix4f): Shader {
-        val vertexPath = this.javaClass.getResource("/shaders/boundingBoxVertexShader.glsl")!!.path
-        val fragmentPath = this.javaClass.getResource("/shaders/boundingBoxFragmentShader.glsl")!!.path
+        val vertexPath = this.javaClass.getResource("/shaders/boundingBoxShaders/boundingBoxVertexShader.glsl")!!.path
+        val fragmentPath = this.javaClass.getResource("/shaders/boundingBoxShaders/boundingBoxFragmentShader.glsl")!!.path
 
         return ShaderLoader.loadFromFile(
                 vertexShaderFilePath = vertexPath,
@@ -19,8 +19,8 @@ object ShaderController {
     }
 
     fun createAnimationShader(projection: Matrix4f): Shader {
-        val vertexPath = this.javaClass.getResource("/shaders/animVertexShader.glsl")!!.path
-        val fragmentPath = this.javaClass.getResource("/shaders/animFragmentShader.glsl")!!.path
+        val vertexPath = this.javaClass.getResource("/shaders/animationShaders/animVertexShader.glsl")!!.path
+        val fragmentPath = this.javaClass.getResource("/shaders/animationShaders/animFragmentShader.glsl")!!.path
 
         return ShaderLoader.loadFromFile(
                 vertexShaderFilePath = vertexPath,
@@ -32,8 +32,8 @@ object ShaderController {
     }
 
     fun createAnimationShaderWithTexArray(projection: Matrix4f): Shader {
-        val vertexPath = this.javaClass.getResource("/shaders/animTexArrayVertexShader.glsl")!!.path
-        val fragmentPath = this.javaClass.getResource("/shaders/animTexArrayFragmentShader.glsl")!!.path
+        val vertexPath = this.javaClass.getResource("/shaders/animationShaders/animTexArrayVertexShader.glsl")!!.path
+        val fragmentPath = this.javaClass.getResource("/shaders/animationShaders/animTexArrayFragmentShader.glsl")!!.path
 
         return ShaderLoader.loadFromFile(
                 vertexShaderFilePath = vertexPath,
@@ -45,8 +45,8 @@ object ShaderController {
     }
 
     fun createTexturedShader(projection: Matrix4f): Shader {
-        val vertexPath = this.javaClass.getResource("/shaders/texturedVertexShader.glsl")!!.path
-        val fragmentPath = this.javaClass.getResource("/shaders/texturedFragmentShader.glsl")!!.path
+        val vertexPath = this.javaClass.getResource("/shaders/texturedShaders/texturedVertexShader.glsl")!!.path
+        val fragmentPath = this.javaClass.getResource("/shaders/texturedShaders/texturedFragmentShader.glsl")!!.path
 
         return ShaderLoader.loadFromFile(
                 vertexShaderFilePath = vertexPath,
@@ -58,8 +58,8 @@ object ShaderController {
     }
 
     fun createPrimitiveShader(projection: Matrix4f): Shader {
-        val vertexPath = this.javaClass.getResource("/shaders/primitiveVertexShader.glsl")!!.path
-        val fragmentPath = this.javaClass.getResource("/shaders/primitiveFragmentShader.glsl")!!.path
+        val vertexPath = this.javaClass.getResource("/shaders/primitiveShaders/primitiveVertexShader.glsl")!!.path
+        val fragmentPath = this.javaClass.getResource("/shaders/primitiveShaders/primitiveFragmentShader.glsl")!!.path
 
         return ShaderLoader.loadFromFile(
                 vertexShaderFilePath = vertexPath,

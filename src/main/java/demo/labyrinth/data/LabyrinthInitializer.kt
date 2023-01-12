@@ -1,12 +1,11 @@
 package demo.labyrinth.data
 
-import demo.labyrinth.HealthBar
+import demo.labyrinth.hp.HealthBar
 import demo.labyrinth.Player
 import demo.labyrinth.ShaderController
 import demo.labyrinth.skeleton.Skeleton
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
-import engine.core.render.primitive.Rectangle
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.render.render2D.OpenGlObject2D
 import engine.core.shader.Shader
@@ -65,8 +64,8 @@ object LabyrinthInitializer {
     ) {
         Map.parameters = getMapParameters(screenWidth, screenHeight)
 
-        val vertexShaderPath = this.javaClass.getResource("/shaders/lightingVertexShader.glsl")!!.path
-        val fragmentShaderPath = this.javaClass.getResource("/shaders/lightingFragmentShader.glsl")!!.path
+        val vertexShaderPath = this.javaClass.getResource("/shaders/lightingShaders/lightingVertexShader.glsl")!!.path
+        val fragmentShaderPath = this.javaClass.getResource("/shaders/lightingShaders/lightingFragmentShader.glsl")!!.path
 
         Map.graphicalComponent = TiledResourceParser.createTileMapFromXml(
                 File(this.javaClass.getResource("/tiled/cave_level.xml")!!.path)
@@ -95,24 +94,7 @@ object LabyrinthInitializer {
     }
 
     private fun initHealthBarGraphics(renderProjection: Matrix4f): HealthBar {
-        val textureFilePath = this.javaClass.getResource("/textures/healthbar.png")!!.path
-
-        val hpBarContainer =
-                OpenGlObject2D(Texture2D.createInstance(textureFilePath)).apply {
-                    shader = ShaderController.createTexturedShader(renderProjection)
-                }
-
-        val hpBarContent =
-                Rectangle(1f, 0f, 0f).apply {
-                    shader = ShaderController.createPrimitiveShader(renderProjection)
-                }
-
-        val out = HealthBar(characterParameters, hpBarPatameters, hpBarContentParameters).also {
-            it.addComponent(hpBarContainer, hpBarPatameters)
-            it.addComponent(hpBarContent, hpBarContentParameters)
-        }
-
-        return out
+        return HealthBar(characterParameters, hpBarPatameters, renderProjection)
     }
 
     private fun initCharacterGraphics(

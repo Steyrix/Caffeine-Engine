@@ -30,8 +30,8 @@ class TextDemo(
                 1f
         )
 
-        val vertexShaderPath = this.javaClass.getResource("/shaders/textRenderVertexShader.glsl")!!.path
-        val fragmentShaderPath = this.javaClass.getResource("/shaders/textRenderFragmentShader.glsl")!!.path
+        val vertexShaderPath = this.javaClass.getResource("/shaders/textShaders/textRenderVertexShader.glsl")!!.path
+        val fragmentShaderPath = this.javaClass.getResource("/shaders/textShaders/textRenderFragmentShader.glsl")!!.path
 
         val textureAtlasPath = this.javaClass.getResource("/textures/simpleFontAtlas.png")!!.path
 
