@@ -19,3 +19,4 @@ his project, on the other hand, will use LWJGL OpenGL binding, since the latter 
 - Think of storing animation frame in a set of parameters
 - Preprocess tiled map to implement simple AI
 - Improve composite entity pattern
+- Create shader with ability to modify UV and offset withotu use of animating (e.g. hp bar)
