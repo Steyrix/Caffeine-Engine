@@ -59,32 +59,32 @@ val characterAnimations = mutableListOf<Animation>(
 val skeletonAnimations = mutableListOf<Animation>(
         SequenceAtlasAnimation(
                 AnimationKey.IDLE_R_SKEL,
-                FrameParametersGenerator.generate(Pair(0,0), Pair(0,0), 0.1f, 0.166f),
+                FrameParametersGenerator.generate(Pair(0,0), Pair(0,0), 0.1f, 0.083f),
                 timeLimit = 1f
         ),
         SequenceAtlasAnimation(
                 AnimationKey.IDLE_L_SKEL,
-                FrameParametersGenerator.generate(Pair(9,9), Pair(6,6), 0.1f, 0.166f),
+                FrameParametersGenerator.generate(Pair(9,9), Pair(6,6), 0.1f, 0.083f),
                 timeLimit = 1f
         ),
         SequenceAtlasAnimation(
                 AnimationKey.WALK_R_SKEL,
-                FrameParametersGenerator.generate(Pair(1,6), Pair(0,0), 0.1f, 0.166f),
+                FrameParametersGenerator.generate(Pair(1,6), Pair(0,0), 0.1f, 0.083f),
                 timeLimit = 0.2f
         ),
         SequenceAtlasAnimation(
                 AnimationKey.WALK_L_SKEL,
-                FrameParametersGenerator.generate(Pair(8,3), Pair(6,6), 0.1f, 0.166f),
+                FrameParametersGenerator.generate(Pair(8,3), Pair(6,6), 0.1f, 0.083f),
                 timeLimit = 0.2f
         ),
         SequenceAtlasAnimation(
                 AnimationKey.JUMP_R_SKEL,
-                FrameParametersGenerator.generate(Pair(7,9), Pair(1,1), 0.1f, 0.166f),
+                FrameParametersGenerator.generate(Pair(7,9), Pair(1,1), 0.1f, 0.083f),
                 timeLimit = 0.5f
         ),
         SequenceAtlasAnimation(
                 AnimationKey.JUMP_L_SKEL,
-                FrameParametersGenerator.generate(Pair(0,2), Pair(7,7), 0.1f, 0.166f),
+                FrameParametersGenerator.generate(Pair(0,2), Pair(7,7), 0.1f, 0.083f),
                 timeLimit = 0.5f
         )
 )

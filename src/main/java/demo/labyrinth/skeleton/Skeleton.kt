@@ -13,12 +13,9 @@ class Skeleton(
         behavior: Behavior
 ) : BehaviouralEntity(behavior, params) {
 
-    private val controller = SimpleController2D(
+    private val controller = SkeletonController(
             params,
-            absVelocityY = 10f,
-            absVelocityX = 10f,
             modifier = 20f,
-            isControlledByUser = false
     )
 
     init {
