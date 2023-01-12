@@ -7,6 +7,7 @@ import engine.core.update.Updatable
 import engine.core.window.Window
 import org.lwjgl.glfw.GLFW
 
+// TODO make reusable
 class SimpleController2D(
         private val params: SetOf2DParametersWithVelocity,
         private var absVelocityY: Float = 0f,
