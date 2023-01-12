@@ -19,9 +19,12 @@ open class OpenGlObject2D(
         var arrayTexture: ArrayTexture2D? = null
 ): Vertexed2D(bufferParamsCount, dataArrays, verticesCount), Drawable2D, Entity {
 
-    constructor(texture2D: Texture2D) : this(
+    constructor(
+            texture2D: Texture2D,
+            uv: FloatArray = Buffer.getRectangleSectorVertices(1.0f, 1.0f)
+    ) : this(
             bufferParamsCount = 2,
-            dataArrays = listOf(Buffer.RECTANGLE_INDICES, Buffer.getRectangleSectorVertices(1.0f, 1.0f)),
+            dataArrays = listOf(Buffer.RECTANGLE_INDICES, uv),
             verticesCount = 6,
             texture = texture2D,
             arrayTexture = null
