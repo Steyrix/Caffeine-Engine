@@ -7,7 +7,6 @@ import engine.core.texture.Texture2D
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfStatic2DParameters
 import org.joml.Matrix4f
-import kotlin.random.Random
 
 class HealthBar(
         private val characterParams: SetOf2DParametersWithVelocity,
@@ -15,7 +14,12 @@ class HealthBar(
         private val projection: Matrix4f
 ) : CompositeEntity() {
 
+    companion object {
+        private const val SHADER_UNIFORM_NAME = "filled"
+    }
+
     private val graphicalComponent: OpenGlObject2D
+    private var filled: Float = 1.0f
 
     init {
         val textureFilePath = this.javaClass.getResource("/textures/healthbar_atlas.png")!!.path
@@ -40,7 +44,7 @@ class HealthBar(
 
         graphicalComponent.shader?.let {
             it.bind()
-            it.setUniform("filled", Random.nextFloat())
+            it.setUniform(SHADER_UNIFORM_NAME, filled)
         }
     }
 }
