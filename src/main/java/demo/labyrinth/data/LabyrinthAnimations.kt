@@ -11,6 +11,8 @@ object AnimationKey {
     const val IDLE_L = "IDLE_L"
     const val JUMP_R = "JUMP_R"
     const val JUMP_L = "JUMP_L"
+    const val STRIKE_R = "STRIKE_R"
+    const val STRIKE_L = "STRIKE_L"
 
     const val WALK_R_SKEL = "WALK_R_S"
     const val WALK_L_SKEL = "WALK_L_S"
@@ -52,6 +54,16 @@ val characterAnimations = mutableListOf<Animation>(
                 AnimationKey.JUMP_L,
                 FrameParametersGenerator.generate(Pair(0,2), Pair(4,4), 0.1f, 0.166f),
                 timeLimit = 0.5f
+        ),
+        SequenceAtlasAnimation(
+                AnimationKey.STRIKE_R,
+                FrameParametersGenerator.generate(Pair(6,8), Pair(2,2), 0.1f, 0.166f),
+                timeLimit = 0.1f
+        ),
+        SequenceAtlasAnimation(
+                AnimationKey.STRIKE_L,
+                FrameParametersGenerator.generate(Pair(3,1), Pair(5,5), 0.1f, 0.166f),
+                timeLimit = 0.1f
         ),
 
 )
