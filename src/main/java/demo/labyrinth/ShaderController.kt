@@ -57,9 +57,9 @@ object ShaderController {
         }
     }
 
-    fun createPrimitiveShader(projection: Matrix4f): Shader {
-        val vertexPath = this.javaClass.getResource("/shaders/primitiveShaders/primitiveVertexShader.glsl")!!.path
-        val fragmentPath = this.javaClass.getResource("/shaders/primitiveShaders/primitiveFragmentShader.glsl")!!.path
+    fun createHpBarShader(projection: Matrix4f): Shader {
+        val vertexPath = this.javaClass.getResource("/shaders/texturedShaders/hpBarVertexShader.glsl")!!.path
+        val fragmentPath = this.javaClass.getResource("/shaders/texturedShaders/hpBarFragmentShader.glsl")!!.path
 
         return ShaderLoader.loadFromFile(
                 vertexShaderFilePath = vertexPath,
