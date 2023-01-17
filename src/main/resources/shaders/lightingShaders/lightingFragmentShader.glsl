@@ -1,6 +1,8 @@
 #version 330
+
 in vec2 fragmentUV;
 in vec4 pos;
+
 out vec4 fColor;
 
 uniform vec2 screenSize;
@@ -8,6 +10,7 @@ uniform vec2 lightSourceSize;
 uniform vec2 lightSourceCoords;
 uniform float lightIntensityCap;
 uniform sampler2D textureSample;
+
 void main(void)
 {
     vec2 screenCenter = vec2(screenSize.x / 2, screenSize.y / 2);
