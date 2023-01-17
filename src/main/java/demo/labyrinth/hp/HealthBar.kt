@@ -29,6 +29,7 @@ class HealthBar(
         addComponent(graphicalComponent, barParams)
     }
 
+    // TODO assign filled value from external environment
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
 
