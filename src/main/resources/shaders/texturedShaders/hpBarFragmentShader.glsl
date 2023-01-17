@@ -11,4 +11,8 @@ void main(void) {
     float offset = fragmentUV.x > filled ? 0.5 : 0.0;
     vec2 texCoord = vec2(fragmentUV.x, fragmentUV.y / 2 + offset);
     fColor = texture(textureSample, texCoord);
+
+    if(fColor.a <= 0) {
+        discard;
+    }
 }
