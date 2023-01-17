@@ -58,10 +58,10 @@ class SimpleController2D(
                 isStriking = false
                 strikeAccumulatedTime = 0f
             }
+        } else {
+            params.x += params.velocityX * deltaTime * modifier
+            params.y += params.velocityY * deltaTime * modifier
         }
-
-        params.x += params.velocityX * deltaTime * modifier
-        params.y += params.velocityY * deltaTime * modifier
         processState()
     }
 
