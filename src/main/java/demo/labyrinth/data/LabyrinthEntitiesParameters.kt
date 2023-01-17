@@ -8,7 +8,7 @@ import engine.core.update.SetOfStatic2DParameters
 var hpBarPatameters = SetOfStatic2DParameters(
         x = 0f,
         y = 0f,
-        xSize = 50f,
+        xSize = 75f,
         ySize = 25f,
         rotationAngle = 0f
 )
