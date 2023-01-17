@@ -19,9 +19,17 @@ class SimpleController2D(
     private var isWalking = false
     private var isJumping = false
     private var isDirectionRight = true
+    private var isStriking = false
+
+    private val strikeTimeLimit = 0.3f
+    private var strikeAccumulatedTime = 0f
 
     override fun input(window: Window) {
         if (!isControlledByUser) return
+
+        if (window.isKeyPressed(GLFW.GLFW_KEY_F) && !isStriking) {
+            isStriking = true
+        }
 
         params.velocityY = when {
             window.isKeyPressed(GLFW.GLFW_KEY_S) -> absVelocityY
@@ -43,12 +51,29 @@ class SimpleController2D(
     }
 
     override fun update(deltaTime: Float) {
+        if (isStriking) {
+            strikeAccumulatedTime += deltaTime
+
+            if (strikeAccumulatedTime >= strikeTimeLimit) {
+                isStriking = false
+                strikeAccumulatedTime = 0f
+            }
+        }
+
         params.x += params.velocityX * deltaTime * modifier
         params.y += params.velocityY * deltaTime * modifier
         processState()
     }
 
     private fun processState() {
+        if (isStriking) {
+            isWalking = false
+            isJumping = false
+            params.velocityX = 0f
+            params.velocityY = 0f
+            return
+        }
+
         if (params.velocityX != 0f && !isWalking) {
             isWalking = true
         }
@@ -69,6 +94,8 @@ class SimpleController2D(
     // todo: remove coupling
     fun getAnimationKey(): String {
         return when {
+            isStriking && isDirectionRight -> AnimationKey.STRIKE_R
+            isStriking && !isDirectionRight -> AnimationKey.STRIKE_L
             isJumping && isDirectionRight -> AnimationKey.JUMP_R
             isJumping && !isDirectionRight -> AnimationKey.JUMP_L
             isWalking && isDirectionRight -> AnimationKey.WALK_R
