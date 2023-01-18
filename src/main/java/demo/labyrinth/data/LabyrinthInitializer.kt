@@ -32,8 +32,8 @@ object LabyrinthInitializer {
             boundingBoxCollisionContext: BoundingBoxCollisionContext,
             tiledCollisionContext: TiledCollisionContext
     ) {
-        initCharacterGraphics(renderProjection, boundingBoxCollisionContext, tiledCollisionContext)
         initCrateGraphics(renderProjection)
+        initCharacterGraphics(renderProjection, boundingBoxCollisionContext, tiledCollisionContext)
         initCampfireGraphics(renderProjection)
         initTileMapGraphics(renderProjection, screenWidth, screenHeight)
         initSkeletons(renderProjection)
@@ -44,15 +44,9 @@ object LabyrinthInitializer {
             bbCollisionContext: BoundingBoxCollisionContext,
             tiledCollisionContext: TiledCollisionContext
     ) {
-        Character.it?.addComponent(
-                Character.boxCollider as Entity,
-                parameters = characterParameters
-        )
 
-        Character.it?.addComponent(
-                Character.tiledCollider as Entity,
-                parameters = characterParameters
-        )
+        Character.addComponent(Character.boxCollider, characterParameters)
+        Character.addComponent(Character.tiledCollider, characterParameters)
 
         bbCollisionContext.addEntity(Crate.boundingBox as Entity)
         tiledCollisionContext.addEntity(Map.graphicalComponent as Entity)
@@ -88,14 +82,7 @@ object LabyrinthInitializer {
         Map.parameters.ySize = screenHeight / Map.graphicalComponent!!.relativeHeight
 
         Map.it = object  : CompositeEntity() {}
-        Map.it?.addComponent(
-                component = Map.graphicalComponent as Entity,
-                parameters = Map.parameters
-        )
-    }
-
-    private fun createHealthBar(params: SetOfParameters, renderProjection: Matrix4f): HealthBar {
-        return HealthBar(params, hpBarPatameters, renderProjection)
+        Map.addComponent(Map.graphicalComponent, Map.parameters)
     }
 
     private fun initCharacterGraphics(
@@ -114,7 +101,12 @@ object LabyrinthInitializer {
         }
 
         Character.boxCollider =
-                BoundingBoxCollider(Character.boundingBox!!, characterParameters, bbCollisionContext)
+                BoundingBoxCollider(
+                        Character.boundingBox!!,
+                        characterParameters,
+                        bbCollisionContext
+                ) { box -> characterOnCollision(box) }
+
         Character.tiledCollider =
                 TiledCollider(characterParameters, "Walking Layer", tiledCollisionContext)
 
@@ -143,19 +135,13 @@ object LabyrinthInitializer {
                 drawableComponent = Character.graphicalComponent!!,
                 params = characterParameters
         )
+        Character.hp = HealthBar(characterParameters, hpBarPatameters1, renderProjection)
 
-        Character.boundingBox?.let { box ->
-            Character.it?.addComponent(box, characterParameters)
-        }
-
-        Character.it?.addComponent(
-                createHealthBar(characterParameters, renderProjection), characterParameters
-        )
+        Character.addComponent(Character.boundingBox, characterParameters)
+        Character.addComponent(Character.hp, characterParameters)
     }
 
     private fun initCrateGraphics(renderProjection: Matrix4f) {
-        val crateHp = createHealthBar(crateParameters, renderProjection)
-
         Crate.boundingBox = BoundingBox(
                 x = 400f,
                 y = 150f,
@@ -174,18 +160,11 @@ object LabyrinthInitializer {
 
         Crate.it = object : CompositeEntity() {}
 
-        Crate.it?.addComponent(
-                component = Crate.graphicalComponent as Entity,
-                parameters = crateParameters
-        )
+        Crate.hp = HealthBar(crateParameters, hpBarPatameters2, renderProjection)
 
-        Crate.it?.addComponent(
-                crateHp, crateParameters
-        )
-
-        Crate.boundingBox?.let { box ->
-            Crate.it?.addComponent(box, crateParameters)
-        }
+        Crate.addComponent(Crate.graphicalComponent, crateParameters)
+        Crate.addComponent(Crate.hp, crateParameters)
+        Crate.addComponent(Crate.boundingBox, crateParameters)
     }
 
     private fun initCampfireGraphics(renderProjection: Matrix4f) {
@@ -203,10 +182,7 @@ object LabyrinthInitializer {
         }
 
         Campfire.it = object : CompositeEntity() {}
-        Campfire.it?.addComponent(
-                component = Campfire.graphicalComponent as Entity,
-                parameters = campfireParameters
-        )
+        Campfire.addComponent(Campfire.graphicalComponent, campfireParameters)
     }
 
     private fun initSkeletons(renderProjection: Matrix4f) {
@@ -243,6 +219,18 @@ object LabyrinthInitializer {
                         it.addComponent(box, skeletonParameters[i])
                     }
             )
+        }
+    }
+
+    private fun characterOnCollision(box: BoundingBox) {
+        if (box == Crate.boundingBox) {
+            val player = Character.it as Player
+
+            if (player.isAttacking()) {
+                Crate.hp?.let {
+                    it.filled = 0.8f
+                }
+            }
         }
     }
 }

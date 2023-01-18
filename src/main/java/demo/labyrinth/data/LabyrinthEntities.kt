@@ -1,10 +1,13 @@
 package demo.labyrinth.data
 
+import demo.labyrinth.hp.HealthBar
 import engine.core.entity.BehaviouralEntity
 import engine.core.entity.CompositeEntity
+import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.render.render2D.OpenGlObject2D
 import engine.core.update.SetOf2DParametersWithVelocity
+import engine.core.update.SetOfParameters
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.collision.boundingbox.BoundingBoxCollider
@@ -12,50 +15,44 @@ import engine.feature.collision.tiled.TiledCollider
 import engine.feature.tiled.TileMap
 
 interface GameObject {
-    fun update(deltaTime: Float)
+    var it: CompositeEntity?
+    fun update(deltaTime: Float) {
+        it?.update(deltaTime)
+    }
 
-    fun draw()
+    fun draw() {
+        it?.draw()
+    }
+
+    fun addComponent(entity: Entity?, params: SetOfParameters) {
+        if (entity == null) return
+        it?.addComponent(entity, params)
+    }
 }
 
 object Character : GameObject {
+    override var it: CompositeEntity? = null
     var graphicalComponent: AnimatedObject2D? = null
     var boundingBox: BoundingBox? = null
-    var it: CompositeEntity? = null
+    var hp: HealthBar? = null
     var boxCollider: BoundingBoxCollider? = null
     var tiledCollider: TiledCollider? = null
-
-    override fun update(deltaTime: Float) {
-        it?.update(deltaTime)
-    }
-
-    override fun draw() {
-        it?.draw()
-    }
 }
 
 object Campfire : GameObject {
-    var it: CompositeEntity? = null
+    override var it: CompositeEntity? = null
     var graphicalComponent: AnimatedObject2D? = null
-
-    override fun update(deltaTime: Float) {
-        it?.update(deltaTime)
-    }
-
-    override fun draw() {
-        it?.draw()
-    }
-
 }
 
 object Map : GameObject {
-    var it: CompositeEntity? = null
+    override var it: CompositeEntity? = null
     var graphicalComponent: TileMap? = null
     var parameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
             0f, 0f, 0f, 0f, 0f
     )
 
     override fun update(deltaTime: Float) {
-        it?.update(deltaTime)
+        super.update(deltaTime)
 
         accumulated += deltaTime
         if (accumulated >= timeLimit) {
@@ -69,38 +66,25 @@ object Map : GameObject {
             }
         }
     }
-
-    override fun draw() {
-        it?.draw()
-    }
-
 }
 
 object Crate : GameObject {
+    override var it: CompositeEntity? = null
     var boundingBox: BoundingBox? = null
-    var it: CompositeEntity? = null
     var graphicalComponent: OpenGlObject2D? = null
-
-    override fun update(deltaTime: Float) {
-        it?.update(deltaTime)
-    }
-
-    override fun draw() {
-        it?.draw()
-    }
-
+    var hp: HealthBar? = null
 }
 
-object Skeletons : GameObject {
+object Skeletons {
     val it: MutableList<BehaviouralEntity> = mutableListOf()
     val parameters: MutableList<SetOf2DParametersWithVelocity> = mutableListOf()
-    override fun update(deltaTime: Float) {
+    fun update(deltaTime: Float) {
         it.forEach { entity ->
             entity.update(deltaTime)
         }
     }
 
-    override fun draw() {
+    fun draw() {
         it.forEach { entity ->
             entity.draw()
         }
