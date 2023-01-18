@@ -73,6 +73,27 @@ object Crate : GameObject {
     var boundingBox: BoundingBox? = null
     var graphicalComponent: OpenGlObject2D? = null
     var hp: HealthBar? = null
+
+    private var isHittable = true
+    private const val hitCooldownTime = 0.3f
+    private var accumulatedTime = 0f
+
+    fun takeDamage() {
+        if (!isHittable) return
+        isHittable = false
+        hp?.let {
+            it.filled -= 0.1f
+        }
+    }
+
+    override fun update(deltaTime: Float) {
+        if (!isHittable) accumulatedTime += deltaTime
+        if (accumulatedTime >= hitCooldownTime) {
+            accumulatedTime = 0f
+            isHittable = true
+        }
+        super.update(deltaTime)
+    }
 }
 
 object Skeletons {
