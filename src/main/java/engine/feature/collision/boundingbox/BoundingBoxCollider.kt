@@ -8,7 +8,8 @@ import engine.feature.collision.CollisionContext
 class BoundingBoxCollider(
         private val box: BoundingBox,
         private val parameters: SetOf2DParametersWithVelocity,
-        override var collisionContext: CollisionContext
+        override var collisionContext: CollisionContext,
+        private val onCollision: (BoundingBox) -> Unit = {}
 ) : Collider {
 
     private var intersectedBox: BoundingBox? = null
@@ -38,6 +39,7 @@ class BoundingBoxCollider(
         (entity as? BoundingBox)?.let {
             if (box.isIntersecting(it)) {
                 intersectedBox = it
+                onCollision(it)
                 return true
             }
         }
