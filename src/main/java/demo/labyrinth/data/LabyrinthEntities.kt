@@ -73,6 +73,7 @@ object Crate : GameObject {
     var boundingBox: BoundingBox? = null
     var graphicalComponent: OpenGlObject2D? = null
     var hp: HealthBar? = null
+    var isAlive = true
 
     private var isHittable = true
     private const val hitCooldownTime = 0.3f
@@ -83,6 +84,10 @@ object Crate : GameObject {
         isHittable = false
         hp?.let {
             it.filled -= 0.1f
+
+            if (it.filled <= 0f) {
+                isAlive = false
+            }
         }
     }
 
