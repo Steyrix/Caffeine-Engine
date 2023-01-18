@@ -11,8 +11,6 @@ import engine.core.render.render2D.OpenGlObject2D
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
 import engine.core.texture.Texture2D
-import engine.core.update.SetOf2DParametersWithVelocity
-import engine.core.update.SetOfParameters
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.collision.boundingbox.BoundingBoxCollider
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
@@ -227,9 +225,7 @@ object LabyrinthInitializer {
             val player = Character.it as Player
 
             if (player.isAttacking()) {
-                Crate.hp?.let {
-                    it.filled = 0.8f
-                }
+                Crate.takeDamage()
             }
         }
     }
