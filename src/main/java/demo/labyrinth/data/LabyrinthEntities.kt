@@ -91,7 +91,14 @@ object Crate : GameObject {
         }
     }
 
+    override fun draw() {
+        if (!isAlive) return
+        super.draw()
+    }
+
+    // TODO move out of collision context
     override fun update(deltaTime: Float) {
+        if (!isAlive) return
         if (!isHittable) accumulatedTime += deltaTime
         if (accumulatedTime >= hitCooldownTime) {
             accumulatedTime = 0f
