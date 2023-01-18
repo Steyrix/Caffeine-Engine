@@ -92,7 +92,6 @@ class SimpleController2D(
         }
     }
 
-    // todo: remove coupling
     fun getAnimationKey(): String {
         return when {
             isStriking && isDirectionRight -> AnimationKey.STRIKE_R
