@@ -4,7 +4,6 @@ import demo.labyrinth.ShaderController
 import engine.core.entity.CompositeEntity
 import engine.core.render.render2D.OpenGlObject2D
 import engine.core.texture.Texture2D
-import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfParameters
 import engine.core.update.SetOfStatic2DParameters
 import org.joml.Matrix4f
@@ -20,7 +19,7 @@ class HealthBar(
     }
 
     private val graphicalComponent: OpenGlObject2D
-    private var filled: Float = 1.0f
+    var filled: Float = 1.0f
 
     init {
         val textureFilePath = this.javaClass.getResource("/textures/healthbar_atlas.png")!!.path
