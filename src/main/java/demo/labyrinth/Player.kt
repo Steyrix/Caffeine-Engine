@@ -33,4 +33,6 @@ class Player(
         super.update(deltaTime)
         drawableComponent.setAnimationByKey(controller.getAnimationKey())
     }
+
+    fun isAttacking() = controller.isStriking
 }
