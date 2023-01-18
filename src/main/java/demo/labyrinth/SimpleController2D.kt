@@ -1,6 +1,7 @@
-package engine.core.controllable
+package demo.labyrinth
 
 import demo.labyrinth.data.AnimationKey
+import engine.core.controllable.Controllable
 import engine.core.entity.Entity
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.Updatable

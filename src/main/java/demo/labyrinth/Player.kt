@@ -1,6 +1,5 @@
 package demo.labyrinth
 
-import engine.core.controllable.SimpleController2D
 import engine.core.entity.CompositeEntity
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.update.SetOf2DParametersWithVelocity

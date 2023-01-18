@@ -1,6 +1,5 @@
 package demo.labyrinth.skeleton
 
-import engine.core.controllable.SimpleController2D
 import engine.core.entity.BehaviouralEntity
 import engine.core.entity.behavior.Behavior
 
