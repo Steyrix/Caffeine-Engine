@@ -20,7 +20,7 @@ class SimpleController2D(
     private var isWalking = false
     private var isJumping = false
     private var isDirectionRight = true
-    private var isStriking = false
+    var isStriking = false
 
     private val strikeTimeLimit = 0.3f
     private var strikeAccumulatedTime = 0f
