@@ -5,11 +5,12 @@ import engine.core.entity.CompositeEntity
 import engine.core.render.render2D.OpenGlObject2D
 import engine.core.texture.Texture2D
 import engine.core.update.SetOf2DParametersWithVelocity
+import engine.core.update.SetOfParameters
 import engine.core.update.SetOfStatic2DParameters
 import org.joml.Matrix4f
 
 class HealthBar(
-        private val characterParams: SetOf2DParametersWithVelocity,
+        private val objParams: SetOfParameters,
         private val barParams: SetOfStatic2DParameters,
         private val projection: Matrix4f
 ) : CompositeEntity() {
@@ -37,7 +38,7 @@ class HealthBar(
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
 
-        with(characterParams) {
+        with(objParams) {
             barParams.x = this.x - ((barParams.xSize - this.xSize) / 2)
             barParams.y = this.y - 2 - barParams.ySize
         }

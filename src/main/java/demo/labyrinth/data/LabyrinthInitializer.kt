@@ -11,6 +11,8 @@ import engine.core.render.render2D.OpenGlObject2D
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
 import engine.core.texture.Texture2D
+import engine.core.update.SetOf2DParametersWithVelocity
+import engine.core.update.SetOfParameters
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.collision.boundingbox.BoundingBoxCollider
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
@@ -30,7 +32,6 @@ object LabyrinthInitializer {
             boundingBoxCollisionContext: BoundingBoxCollisionContext,
             tiledCollisionContext: TiledCollisionContext
     ) {
-        initHealthBarGraphics(renderProjection)
         initCharacterGraphics(renderProjection, boundingBoxCollisionContext, tiledCollisionContext)
         initCrateGraphics(renderProjection)
         initCampfireGraphics(renderProjection)
@@ -93,8 +94,8 @@ object LabyrinthInitializer {
         )
     }
 
-    private fun initHealthBarGraphics(renderProjection: Matrix4f): HealthBar {
-        return HealthBar(characterParameters, hpBarPatameters, renderProjection)
+    private fun createHealthBar(params: SetOfParameters, renderProjection: Matrix4f): HealthBar {
+        return HealthBar(params, hpBarPatameters, renderProjection)
     }
 
     private fun initCharacterGraphics(
@@ -148,11 +149,13 @@ object LabyrinthInitializer {
         }
 
         Character.it?.addComponent(
-                initHealthBarGraphics(renderProjection), characterParameters
+                createHealthBar(characterParameters, renderProjection), characterParameters
         )
     }
 
     private fun initCrateGraphics(renderProjection: Matrix4f) {
+        val crateHp = createHealthBar(crateParameters, renderProjection)
+
         Crate.boundingBox = BoundingBox(
                 x = 400f,
                 y = 150f,
@@ -174,6 +177,10 @@ object LabyrinthInitializer {
         Crate.it?.addComponent(
                 component = Crate.graphicalComponent as Entity,
                 parameters = crateParameters
+        )
+
+        Crate.it?.addComponent(
+                crateHp, crateParameters
         )
 
         Crate.boundingBox?.let { box ->
