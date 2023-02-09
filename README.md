@@ -16,7 +16,7 @@ his project, on the other hand, will use LWJGL OpenGL binding, since the latter 
 - Wrap shader uniforms (create some kind of class for it)
 - Think of some kind of collision which interactions will be observed :white_check_mark:
 - Implement speculative collider
-- Think of storing animation frame in a set of parameters
-- Preprocess tiled map to implement simple AI
-- Improve composite entity pattern
+- Think of storing animation frame in a set of parameters :white_check_mark:
+- Preprocess tiled map to implement simple AI 
+- Improve composite entity pattern :white_check_mark:
 - Create shader with ability to modify UV and offset withotu use of animating (e.g. hp bar)
