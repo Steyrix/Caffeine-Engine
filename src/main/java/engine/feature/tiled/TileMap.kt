@@ -57,7 +57,7 @@ class TileMap(
     fun getLayerByName(name: String): TileLayer = layersMap[name]
             ?: throw IllegalStateException("Layer with name $name not found")
 
-    fun getTileIndexInLayer(posX: Float, posY: Float, layerName: String): Int {
+    fun getTileValue(posX: Float, posY: Float, layerName: String): Int {
         val layer = layersMap[layerName] ?: return NOT_FOUND
 
         val absoluteTileWidth = relativeWidth / layer.widthInTiles * absoluteWidth

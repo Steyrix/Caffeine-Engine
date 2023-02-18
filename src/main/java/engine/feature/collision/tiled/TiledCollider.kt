@@ -27,8 +27,8 @@ class TiledCollider(
             val centerY = parameters.y + parameters.ySize / 2
             val bottomY = parameters.y + parameters.ySize
 
-            val isCenterColliding = it.getTileIndexInLayer(centerX, centerY, collisionLayerName) <= 0
-            val isBottomColliding = it.getTileIndexInLayer(centerX, bottomY, collisionLayerName) <= 0
+            val isCenterColliding = it.getTileValue(centerX, centerY, collisionLayerName) <= 0
+            val isBottomColliding = it.getTileValue(centerX, bottomY, collisionLayerName) <= 0
             if (isCenterColliding || isBottomColliding) {
                 reactToCollision()
                 return true
