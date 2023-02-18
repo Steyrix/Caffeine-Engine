@@ -17,7 +17,7 @@ his project, on the other hand, will use LWJGL OpenGL binding, since the latter 
 - Think of some kind of collision which interactions will be observed :white_check_mark:
 - Implement speculative collider
 - Think of storing animation frame in a set of parameters :white_check_mark:
-- Preprocess tiled map to implement simple AI 
+- Preprocess tiled map to implement simple AI :white_check_mark:
 - Improve composite entity pattern :white_check_mark:
 
 ## AI TODO List:
