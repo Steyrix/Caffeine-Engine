@@ -78,6 +78,8 @@ class TileLayer(
     private var initialHeight = 0f
     private val graphicalComponent: OpenGlObject2D
 
+    private val graph: HashMap<Int, MutableList<Int>> = hashMapOf()
+
     init {
         initialWidth = (widthInTiles * set.tileWidthPx)
         initialHeight = (heightInTiles * set.tileHeightPx)
