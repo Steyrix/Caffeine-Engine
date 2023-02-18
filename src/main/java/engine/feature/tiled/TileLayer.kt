@@ -4,7 +4,6 @@ import engine.core.render.render2D.Drawable2D
 import engine.core.render.render2D.OpenGlObject2D
 import engine.core.shader.Shader
 import engine.core.update.SetOfParameters
-import engine.feature.geometry.Point2D
 import engine.feature.tiled.property.Property
 
 class TileLayer(
@@ -32,8 +31,8 @@ class TileLayer(
     init {
         initialWidth = (widthInTiles * set.tileWidthPx)
         initialHeight = (heightInTiles * set.tileHeightPx)
-        graphicalComponent = TileUtil.genGraphicalComponent(this)
-        graph = TileUtil.generateTileGraph(this)
+        graphicalComponent = TileLayerInitializer.genGraphicalComponent(this)
+        graph = TileLayerInitializer.generateTileGraph(this)
     }
 
     override fun updateParameters(parameters: SetOfParameters) {

@@ -3,7 +3,7 @@ package engine.feature.tiled
 import engine.core.render.render2D.OpenGlObject2D
 import engine.feature.geometry.Point2D
 
-object TileUtil {
+object TileLayerInitializer {
     private const val EMPTY_TILE_ID = -1
 
     internal fun genGraphicalComponent(
