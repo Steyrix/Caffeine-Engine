@@ -106,12 +106,13 @@ class TileLayer(
     private var initialHeight = 0f
     private val graphicalComponent: OpenGlObject2D
 
-    private val graph: HashMap<Int, MutableList<Int>> = hashMapOf()
+    private val graph: HashMap<Int, MutableList<Int>>
 
     init {
         initialWidth = (widthInTiles * set.tileWidthPx)
         initialHeight = (heightInTiles * set.tileHeightPx)
         graphicalComponent = genGraphicalComponent(this)
+        graph = generateTileGraph(this)
     }
 
     override fun updateParameters(parameters: SetOfParameters) {
