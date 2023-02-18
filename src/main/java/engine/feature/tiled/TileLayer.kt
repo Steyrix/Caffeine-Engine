@@ -49,6 +49,18 @@ class TileLayer(
             )
         }
 
+        // TODO: implement
+        private fun generateTileGraph(layer: TileLayer): HashMap<Int, MutableList<Int>> {
+            val out = hashMapOf<Int, MutableList<Int>>()
+
+            val data = layer.tileIdsData
+            for (num in data.indices) {
+
+            }
+
+            return out
+        }
+
         private fun getPositionByTileIndex(num: Int, widthInTiles: Int): Point2D {
             val x: Int = num % widthInTiles
             val y: Int = num / widthInTiles
