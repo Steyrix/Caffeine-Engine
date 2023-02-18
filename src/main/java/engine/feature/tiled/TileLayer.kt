@@ -7,7 +7,6 @@ import engine.core.update.SetOfParameters
 import engine.feature.geometry.Point2D
 import engine.feature.tiled.property.Property
 
-// TODO: implement graph representation of a tile layer
 class TileLayer(
         val name: String,
         val widthInTiles: Int,
