@@ -19,3 +19,9 @@ his project, on the other hand, will use LWJGL OpenGL binding, since the latter 
 - Think of storing animation frame in a set of parameters :white_check_mark:
 - Preprocess tiled map to implement simple AI 
 - Improve composite entity pattern :white_check_mark:
+
+## AI TODO List:
+- Think of how to determine the vector of movement from tile to tile in a given path
+- Implement sliding window for representing a path as a graph, each vertex of which can represent multiple tiles
+- Implement path traversing behavior, which will be responsible for object moving between graph vertices
+- Shortest path finding algorithm (should use Dijkstra)
