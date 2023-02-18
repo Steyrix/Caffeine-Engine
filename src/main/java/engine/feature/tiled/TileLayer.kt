@@ -17,6 +17,7 @@ class TileLayer(
         private val properties: ArrayList<Property>
 ): Drawable2D {
 
+    // TODO: probably should move this to separate file
     companion object {
         private const val EMPTY_TILE_ID = -1
 
