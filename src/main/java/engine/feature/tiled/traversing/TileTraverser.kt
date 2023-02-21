@@ -15,7 +15,7 @@ class TileTraverser(
 
     }
 
-    fun getShortestPath(): List<Int> {
+    fun getPathToTile(tileIndex: Int): List<Int> {
         // djikstra
         return emptyList()
     }
