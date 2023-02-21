@@ -47,4 +47,9 @@ class TileLayer(
         return if (index <= tileIdsData.size - 1) tileIdsData[index]
         else -1
     }
+
+    fun getPathToTile(): List<Int> {
+        // djikstra
+        return emptyList()
+    }
 }
