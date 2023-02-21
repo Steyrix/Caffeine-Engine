@@ -27,8 +27,7 @@ class TileLayer(
     private var initialHeight = 0f
     private val graphicalComponent: OpenGlObject2D
 
-    private val graph: MutableMap<Int, MutableList<Int>>
-        get() = Collections.unmodifiableMap(field)
+    val graph: Map<Int, List<Int>>
 
     init {
         initialWidth = (widthInTiles * set.tileWidthPx)
