@@ -23,18 +23,9 @@ class TileLayer(
         }
     override val innerDrawableComponents: MutableList<Drawable2D> = mutableListOf()
 
-    private var initialWidth = 0f
-    private var initialHeight = 0f
-    private val graphicalComponent: OpenGlObject2D
+    private val graphicalComponent: OpenGlObject2D = TileLayerInitializer.genGraphicalComponent(this)
 
-    val graph: Map<Int, List<Int>>
-
-    init {
-        initialWidth = (widthInTiles * set.tileWidthPx)
-        initialHeight = (heightInTiles * set.tileHeightPx)
-        graphicalComponent = TileLayerInitializer.genGraphicalComponent(this)
-        graph = TileLayerInitializer.generateTileGraph(this)
-    }
+    val graph: Map<Int, List<Int>> = TileLayerInitializer.generateTileGraph(this)
 
     override fun updateParameters(parameters: SetOfParameters) {
         graphicalComponent.updateParameters(parameters)
