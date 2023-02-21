@@ -19,6 +19,9 @@ class TileTraverser(
         currentPath?.let {
             if (it.last() == currentIndex || it.isEmpty()) return
 
+            // todo determine in which way to move to reach next
+            val next = it.first()
+            params.velocityX = 0f
         }
         // do moving
     }
