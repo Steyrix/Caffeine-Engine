@@ -8,6 +8,10 @@ class TileTraverser(
         private val entity: Entity
 ) {
 
+    fun moveTo(tileIndex: Int) {
+
+    }
+
     fun traverse() {
         // do moving
     }
