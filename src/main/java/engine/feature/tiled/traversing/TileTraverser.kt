@@ -1,6 +1,7 @@
 package engine.feature.tiled.traversing
 
 import engine.core.entity.Entity
+import java.util.Queue
 
 class TileTraverser(
         private var currentIndex: Int,
@@ -8,16 +9,18 @@ class TileTraverser(
         private val entity: Entity
 ) {
 
-    fun moveTo(tileIndex: Int) {
+    private var currentPath: ArrayDeque<Int>? = null
 
+    fun moveTo(tileIndex: Int) {
+        currentPath = getPathToTile(tileIndex)
     }
 
     fun traverse() {
         // do moving
     }
 
-    private fun getPathToTile(tileIndex: Int): List<Int> {
+    private fun getPathToTile(tileIndex: Int): ArrayDeque<Int> {
         // djikstra
-        return emptyList()
+        return ArrayDeque()
     }
 }
