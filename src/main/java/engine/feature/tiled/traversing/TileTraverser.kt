@@ -4,11 +4,9 @@ import engine.core.entity.Entity
 import engine.feature.tiled.TileMap
 
 class TileTraverser(
-        map: TileMap,
+        tileGraph: Map<Int, MutableList<Int>>,
         entity: Entity
 ) {
-
-
 
     fun moveToTile(
             map: TileMap,
@@ -19,7 +17,6 @@ class TileTraverser(
 
     fun getShortestPath(): List<Int> {
         // djikstra
-
         return emptyList()
     }
 }
