@@ -2,10 +2,12 @@ package engine.feature.tiled.traversing
 
 import engine.core.entity.CompositeEntity
 import engine.core.update.SetOf2DParametersWithVelocity
+import engine.feature.tiled.TileMap
 
 class TileTraverser(
         private var currentIndex: Int,
         private val tileGraph: Map<Int, MutableList<Int>>,
+        private val tileMap: TileMap,
         private val params: SetOf2DParametersWithVelocity
 ): CompositeEntity() {
 
