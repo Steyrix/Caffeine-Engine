@@ -1,21 +1,18 @@
 package engine.feature.tiled.traversing
 
 import engine.core.entity.Entity
-import engine.feature.tiled.TileMap
 
 class TileTraverser(
-        tileGraph: Map<Int, MutableList<Int>>,
-        entity: Entity
+        private var currentIndex: Int,
+        private val tileGraph: Map<Int, MutableList<Int>>,
+        private val entity: Entity
 ) {
 
-    fun moveToTile(
-            map: TileMap,
-            tileIndex: Int
-    ) {
-
+    fun traverse() {
+        // do moving
     }
 
-    fun getPathToTile(tileIndex: Int): List<Int> {
+    private fun getPathToTile(tileIndex: Int): List<Int> {
         // djikstra
         return emptyList()
     }
