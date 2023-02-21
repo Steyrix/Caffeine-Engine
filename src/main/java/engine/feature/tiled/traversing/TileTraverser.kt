@@ -1,11 +1,12 @@
 package engine.feature.tiled.traversing
 
 import engine.core.entity.CompositeEntity
-import engine.core.entity.Entity
+import engine.core.update.SetOf2DParametersWithVelocity
+
 class TileTraverser(
         private var currentIndex: Int,
         private val tileGraph: Map<Int, MutableList<Int>>,
-        private val entity: Entity
+        private val params: SetOf2DParametersWithVelocity
 ): CompositeEntity() {
 
     private var currentPath: ArrayDeque<Int>? = null
@@ -15,6 +16,10 @@ class TileTraverser(
     }
 
     fun traverse() {
+        currentPath?.let {
+            if (it.last() == currentIndex || it.isEmpty()) return
+
+        }
         // do moving
     }
 
@@ -25,5 +30,6 @@ class TileTraverser(
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
+        traverse()
     }
 }
