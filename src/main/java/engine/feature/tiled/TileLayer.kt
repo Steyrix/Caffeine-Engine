@@ -5,6 +5,7 @@ import engine.core.render.render2D.OpenGlObject2D
 import engine.core.shader.Shader
 import engine.core.update.SetOfParameters
 import engine.feature.tiled.property.Property
+import java.util.Collections
 
 class TileLayer(
         val name: String,
@@ -26,7 +27,8 @@ class TileLayer(
     private var initialHeight = 0f
     private val graphicalComponent: OpenGlObject2D
 
-    private val graph: HashMap<Int, MutableList<Int>>
+    private val graph: MutableMap<Int, MutableList<Int>>
+        get() = Collections.unmodifiableMap(field)
 
     init {
         initialWidth = (widthInTiles * set.tileWidthPx)
@@ -46,10 +48,5 @@ class TileLayer(
     fun getTileNumberByIndex(index: Int): Int {
         return if (index <= tileIdsData.size - 1) tileIdsData[index]
         else -1
-    }
-
-    fun getPathToTile(): List<Int> {
-        // djikstra
-        return emptyList()
     }
 }
