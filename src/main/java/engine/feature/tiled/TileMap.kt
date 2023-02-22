@@ -40,14 +40,21 @@ class TileMap(
      */
     private var absoluteHeight: Float = 0f
     private var absoluteWidth: Float = 0f
+    private var absoluteTileWidth: Float = 0f
+    private var absoluteTileHeight: Float = 0f
+    private var widthInTiles: Int = 0
+    private var heightInTiles: Int = 0
 
     init {
         if (layers.isEmpty()) throw IllegalStateException("Cannot initialize map with empty list of layers")
 
         set = layers.first().set
 
-        relativeHeight = layers.first().heightInTiles * set.relativeTileHeight
-        relativeWidth = layers.first().widthInTiles * set.relativeTileWidth
+        widthInTiles = layers.first().widthInTiles
+        heightInTiles = layers.first().heightInTiles
+
+        relativeHeight = heightInTiles * set.relativeTileHeight
+        relativeWidth = widthInTiles * set.relativeTileWidth
 
         layers.forEach {
             innerDrawableComponents.add(it)
@@ -103,6 +110,8 @@ class TileMap(
         if (parameters is SetOfStatic2DParameters) {
             absoluteWidth = parameters.xSize
             absoluteHeight = parameters.ySize
+            absoluteTileWidth = relativeWidth / widthInTiles * absoluteWidth
+            absoluteTileHeight = relativeHeight / heightInTiles * absoluteHeight
         }
 
         innerDrawableComponents.forEach {
