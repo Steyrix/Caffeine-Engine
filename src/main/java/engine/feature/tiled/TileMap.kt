@@ -79,15 +79,15 @@ class TileMap(
     }
 
     fun getTileIndex(posX: Float, posY: Float): Int {
-        val xTileNumber = getTilePosition(absoluteTileWidth, posX)
-        val yTileNumber = getTilePosition(absoluteTileHeight, posY)
+        val xTileNumber = getTileAlignmentInMap(absoluteTileWidth, posX)
+        val yTileNumber = getTileAlignmentInMap(absoluteTileHeight, posY)
 
         if (xTileNumber < 0 || yTileNumber < 0) return -1
 
         return yTileNumber * widthInTiles + xTileNumber
     }
 
-    private fun getTilePosition(tileSize: Float, pos: Float): Int {
+    private fun getTileAlignmentInMap(tileSize: Float, pos: Float): Int {
         val roundedPos = pos.roundToInt()
         val roundedTileSize = tileSize.roundToInt()
         if (roundedPos == 0 || roundedTileSize == 0) {
