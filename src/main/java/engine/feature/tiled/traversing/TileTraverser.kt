@@ -6,7 +6,7 @@ import engine.feature.tiled.TileMap
 
 class TileTraverser(
         private var lastIndex: Int,
-        private val tileGraph: Map<Int, MutableList<Int>>,
+        private val tileGraph: Map<Int, List<Int>>,
         private val tileMap: TileMap,
         private val params: SetOf2DParametersWithVelocity
 ): CompositeEntity() {
@@ -14,10 +14,16 @@ class TileTraverser(
     private var currentPath: ArrayDeque<Int>? = null
 
     fun moveTo(tileIndex: Int) {
-        currentPath = getPathToTile(tileIndex)
+        val start = tileMap.getTileIndex(params.x, params.y)
+
+        currentPath = ShortestPath.pathTo(
+                tileGraph,
+                start,
+                tileIndex
+        )
     }
 
-    fun traverse() {
+    private fun traverse() {
         currentPath?.let {
             if (it.last() == lastIndex || it.isEmpty()) return
 
@@ -43,11 +49,6 @@ class TileTraverser(
                 }
             }
         }
-    }
-
-    private fun getPathToTile(tileIndex: Int): ArrayDeque<Int> {
-
-        return ArrayDeque()
     }
 
     override fun update(deltaTime: Float) {
