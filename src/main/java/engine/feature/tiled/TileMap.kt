@@ -7,6 +7,7 @@ import engine.core.update.SetOfStatic2DParameters
 import engine.core.update.SetOfParameters
 import kotlin.math.roundToInt
 
+// TODO: remove doc for properties and rename them for clearance
 class TileMap(
         layers: MutableList<TileLayer>,
 ) : Drawable2D, Entity {
