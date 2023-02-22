@@ -39,8 +39,16 @@ class TileMap(
      */
     private var absoluteHeight: Float = 0f
     private var absoluteWidth: Float = 0f
+
+    /*
+        Represents the absolute size of tile in pixels
+     */
     private var absoluteTileWidth: Float = 0f
     private var absoluteTileHeight: Float = 0f
+
+    /*
+        Represents the number of rows and columns of tiles in the map
+     */
     private var widthInTiles: Int = 0
     private var heightInTiles: Int = 0
 
