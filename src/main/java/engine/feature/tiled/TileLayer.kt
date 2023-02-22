@@ -5,7 +5,6 @@ import engine.core.render.render2D.OpenGlObject2D
 import engine.core.shader.Shader
 import engine.core.update.SetOfParameters
 import engine.feature.tiled.property.Property
-import java.util.Collections
 
 class TileLayer(
         val name: String,
@@ -35,7 +34,7 @@ class TileLayer(
         graphicalComponent.draw()
     }
 
-    fun getTileNumberByIndex(index: Int): Int {
+    fun getTileValueByIndex(index: Int): Int {
         return if (index <= tileIdsData.size - 1) tileIdsData[index]
         else -1
     }
