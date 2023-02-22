@@ -5,6 +5,7 @@ import engine.core.render.render2D.Drawable2D
 import engine.core.shader.Shader
 import engine.core.update.SetOfStatic2DParameters
 import engine.core.update.SetOfParameters
+import engine.feature.geometry.Point2D
 import kotlin.math.roundToInt
 
 // TODO: remove doc for properties and rename them for clearance
@@ -76,6 +77,15 @@ class TileMap(
         val layer = layersMap[layerName] ?: return NOT_FOUND
         val index = getTileIndex(posX, posY)
         return layer.getTileValueByIndex(index)
+    }
+
+    fun getTilePosition(index: Int): Point2D {
+        val yTileNumber = index / heightInTiles + 1
+        val xTileNumber = widthInTiles - index % heightInTiles
+
+        val y = yTileNumber * (absoluteTileHeight - 1) + absoluteTileHeight / 2
+        val x = xTileNumber * (absoluteTileWidth - 1) + absoluteTileWidth / 2
+        return Point2D(x, y)
     }
 
     fun getTileIndex(posX: Float, posY: Float): Int {
