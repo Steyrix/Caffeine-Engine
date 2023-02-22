@@ -5,7 +5,7 @@ import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.tiled.TileMap
 
 class TileTraverser(
-        private var currentIndex: Int,
+        private var lastIndex: Int,
         private val tileGraph: Map<Int, MutableList<Int>>,
         private val tileMap: TileMap,
         private val params: SetOf2DParametersWithVelocity
@@ -19,17 +19,34 @@ class TileTraverser(
 
     fun traverse() {
         currentPath?.let {
-            if (it.last() == currentIndex || it.isEmpty()) return
+            if (it.last() == lastIndex || it.isEmpty()) return
 
-            // todo determine in which way to move to reach next
-            val next = it.first()
-            params.velocityX = 0f
+            val currentIndex = tileMap.getTileIndex(params.x, params.y)
+            if(currentIndex != lastIndex) {
+                it.removeFirst()
+                lastIndex = currentIndex
+
+                if (it.isNotEmpty()) {
+                    val nextPos = tileMap.getTilePosition(it.first())
+
+                    if (nextPos.x > params.x) {
+                        params.velocityX = 10f
+                    } else {
+                        params.velocityX = 0f
+                    }
+
+                    if (nextPos.y > params.y) {
+                        params.velocityY = 10f
+                    } else {
+                        params.velocityY = 0f
+                    }
+                }
+            }
         }
-        // do moving
     }
 
     private fun getPathToTile(tileIndex: Int): ArrayDeque<Int> {
-        // djikstra
+
         return ArrayDeque()
     }
 
