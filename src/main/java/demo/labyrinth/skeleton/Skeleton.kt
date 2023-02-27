@@ -5,11 +5,13 @@ import engine.core.entity.behavior.Behavior
 
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.update.SetOf2DParametersWithVelocity
+import engine.feature.tiled.traversing.TileTraverser
 
 class Skeleton(
         private val drawableComponent: AnimatedObject2D,
         params: SetOf2DParametersWithVelocity,
-        behavior: Behavior
+        behavior: Behavior,
+        tileTraverser: TileTraverser
 ) : BehaviouralEntity(behavior, params) {
 
     private val controller = SkeletonController(
@@ -25,6 +27,11 @@ class Skeleton(
 
         addComponent(
                 component = controller,
+                parameters = params
+        )
+
+        addComponent(
+                component = tileTraverser,
                 parameters = params
         )
     }
