@@ -47,9 +47,15 @@ object Campfire : GameObject {
 object GameMap : GameObject {
     override var it: CompositeEntity? = null
     var graphicalComponent: TileMap? = null
+    set(value) {
+        graph = value?.getGraphOfLayer("Walking Layer")
+        field = value
+    }
+
     var parameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
             0f, 0f, 0f, 0f, 0f
     )
+    var graph: Map<Int, List<Int>>? = null
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)

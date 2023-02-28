@@ -16,7 +16,9 @@ import engine.feature.collision.boundingbox.BoundingBoxCollider
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.collision.tiled.TiledCollider
 import engine.feature.collision.tiled.TiledCollisionContext
+import engine.feature.tiled.TileMap
 import engine.feature.tiled.parser.TiledResourceParser
+import engine.feature.tiled.traversing.TileTraverser
 import org.joml.Matrix4f
 import org.joml.Vector2f
 import java.io.File
@@ -212,8 +214,13 @@ object LabyrinthInitializer {
                     Skeleton(
                             behavior = skeletonBehaviors[i],
                             params = skeletonParameters[i],
-                            drawableComponent = skeletonObject
-                            // todo implement
+                            drawableComponent = skeletonObject,
+                            tileTraverser = TileTraverser(
+                                    0,
+                                    GameMap.graph!!,
+                                    GameMap.it as TileMap,
+                                    skeletonParameters[i]
+                            )
                     ).also {
                         it.addComponent(box, skeletonParameters[i])
                     }
