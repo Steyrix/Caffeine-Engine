@@ -2,6 +2,7 @@ package engine.feature.tiled.traversing
 
 import engine.core.entity.CompositeEntity
 import engine.core.update.SetOf2DParametersWithVelocity
+import engine.feature.geometry.Point2D
 import engine.feature.tiled.TileMap
 
 class TileTraverser(
@@ -13,13 +14,14 @@ class TileTraverser(
 
     private var currentPath: ArrayDeque<Int>? = null
 
-    fun moveTo(tileIndex: Int) {
+    fun moveTo(targetPos: Point2D) {
         val start = tileMap.getTileIndex(params.x, params.y)
+        val destination = tileMap.getTileIndex(targetPos.x, targetPos.y)
 
         currentPath = ShortestPath.pathTo(
                 tileGraph,
                 start,
-                tileIndex
+                destination
         )
     }
 
