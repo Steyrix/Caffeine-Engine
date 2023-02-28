@@ -14,7 +14,7 @@ open class BehaviouralEntity(
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
-        behave(deltaTime)
+        // behave(deltaTime)
     }
 
     private fun behave(deltaTime: Float) {
