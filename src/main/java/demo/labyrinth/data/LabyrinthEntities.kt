@@ -13,6 +13,7 @@ import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.collision.boundingbox.BoundingBoxCollider
 import engine.feature.collision.tiled.TiledCollider
 import engine.feature.tiled.TileMap
+import engine.feature.tiled.traversing.TileTraverser
 
 interface GameObject {
     var it: CompositeEntity?
@@ -128,4 +129,13 @@ object Skeletons {
             entity.draw()
         }
     }
+}
+
+fun createTileTraverser(params: SetOf2DParametersWithVelocity): TileTraverser {
+    return TileTraverser(
+            0,
+            GameMap.graph!!,
+            GameMap.graphicalComponent!!,
+            params
+    )
 }

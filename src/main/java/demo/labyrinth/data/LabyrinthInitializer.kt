@@ -215,12 +215,7 @@ object LabyrinthInitializer {
                             behavior = skeletonBehaviors[i],
                             params = skeletonParameters[i],
                             drawableComponent = skeletonObject,
-                            tileTraverser = TileTraverser(
-                                    0,
-                                    GameMap.graph!!,
-                                    GameMap.it as TileMap,
-                                    skeletonParameters[i]
-                            )
+                            tileTraverser = createTileTraverser(skeletonParameters[i])
                     ).also {
                         it.addComponent(box, skeletonParameters[i])
                     }
