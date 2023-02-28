@@ -5,13 +5,15 @@ import engine.core.entity.behavior.Behavior
 
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.update.SetOf2DParametersWithVelocity
+import engine.feature.geometry.Point2D
 import engine.feature.tiled.traversing.TileTraverser
 
 class Skeleton(
         private val drawableComponent: AnimatedObject2D,
         params: SetOf2DParametersWithVelocity,
         behavior: Behavior,
-        tileTraverser: TileTraverser
+        private val tileTraverser: TileTraverser,
+        private val playerParams: SetOf2DParametersWithVelocity
 ) : BehaviouralEntity(behavior, params) {
 
     private val controller = SkeletonController(
@@ -38,6 +40,7 @@ class Skeleton(
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
+        tileTraverser.moveTo(Point2D(playerParams.x, playerParams.y))
         drawableComponent.setAnimationByKey(controller.getAnimationKey())
     }
 }

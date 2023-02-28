@@ -49,7 +49,7 @@ object GameMap : GameObject {
     override var it: CompositeEntity? = null
     var graphicalComponent: TileMap? = null
     set(value) {
-        graph = value?.getGraphOfLayer("Walking Layer")
+        graph = value?.getGraphOfLayer("Tile Layer 1")
         field = value
     }
 
@@ -133,7 +133,6 @@ object Skeletons {
 
 fun createTileTraverser(params: SetOf2DParametersWithVelocity): TileTraverser {
     return TileTraverser(
-            0,
             GameMap.graph!!,
             GameMap.graphicalComponent!!,
             params
