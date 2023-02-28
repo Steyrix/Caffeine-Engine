@@ -53,7 +53,7 @@ val skeletonParameters: List<SetOf2DParametersWithVelocity> = listOf(
                 xSize = 50f,
                 ySize = 50f,
                 rotationAngle = 0f,
-                velocityX = 10f,
+                velocityX = 0f,
                 velocityY = 0f
         ),
         SetOf2DParametersWithVelocity(
@@ -62,7 +62,7 @@ val skeletonParameters: List<SetOf2DParametersWithVelocity> = listOf(
                 xSize = 50f,
                 ySize = 50f,
                 rotationAngle = 0f,
-                velocityX = 10f,
+                velocityX = 0f,
                 velocityY = 0f
         )
 )
