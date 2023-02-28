@@ -1,7 +1,7 @@
 package demo.labyrinth
 
 import demo.labyrinth.data.*
-import demo.labyrinth.data.Map
+import demo.labyrinth.data.GameMap
 import engine.core.scene.Scene
 import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
@@ -50,14 +50,14 @@ class LabyrinthDemo(
         tiledCollisionContext.update()
 
         Campfire.update(deltaTime)
-        Map.update(deltaTime)
+        GameMap.update(deltaTime)
     }
 
     override fun render(window: Window) {
         glClear(GL_COLOR_BUFFER_BIT)
         glClearColor(0f, 0.5f, 0f, 0.5f)
 
-        Map.draw()
+        GameMap.draw()
         Crate.draw()
         Campfire.draw()
         Character.draw()

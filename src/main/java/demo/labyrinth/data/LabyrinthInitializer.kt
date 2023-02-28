@@ -47,7 +47,7 @@ object LabyrinthInitializer {
         Character.addComponent(Character.tiledCollider, characterParameters)
 
         bbCollisionContext.addEntity(Crate.boundingBox as Entity)
-        tiledCollisionContext.addEntity(Map.graphicalComponent as Entity)
+        tiledCollisionContext.addEntity(GameMap.graphicalComponent as Entity)
     }
 
     private fun initTileMapGraphics(
@@ -55,15 +55,15 @@ object LabyrinthInitializer {
             screenWidth: Float,
             screenHeight: Float
     ) {
-        Map.parameters = getMapParameters(screenWidth, screenHeight)
+        GameMap.parameters = getMapParameters(screenWidth, screenHeight)
 
         val vertexShaderPath = this.javaClass.getResource("/shaders/lightingShaders/lightingVertexShader.glsl")!!.path
         val fragmentShaderPath = this.javaClass.getResource("/shaders/lightingShaders/lightingFragmentShader.glsl")!!.path
 
-        Map.graphicalComponent = TiledResourceParser.createTileMapFromXml(
+        GameMap.graphicalComponent = TiledResourceParser.createTileMapFromXml(
                 File(this.javaClass.getResource("/tiled/cave_level.xml")!!.path)
         )
-        Map.graphicalComponent?.shader = ShaderLoader.loadFromFile(
+        GameMap.graphicalComponent?.shader = ShaderLoader.loadFromFile(
                 vertexShaderFilePath = vertexShaderPath,
                 fragmentShaderFilePath = fragmentShaderPath
         ).also {
@@ -76,11 +76,11 @@ object LabyrinthInitializer {
             it.setUniform("lightIntensityCap", lightIntensityCap)
         }
 
-        Map.parameters.xSize = screenWidth / Map.graphicalComponent!!.relativeWidth
-        Map.parameters.ySize = screenHeight / Map.graphicalComponent!!.relativeHeight
+        GameMap.parameters.xSize = screenWidth / GameMap.graphicalComponent!!.relativeWidth
+        GameMap.parameters.ySize = screenHeight / GameMap.graphicalComponent!!.relativeHeight
 
-        Map.it = object  : CompositeEntity() {}
-        Map.addComponent(Map.graphicalComponent, Map.parameters)
+        GameMap.it = object  : CompositeEntity() {}
+        GameMap.addComponent(GameMap.graphicalComponent, GameMap.parameters)
     }
 
     private fun initCharacterGraphics(
@@ -213,6 +213,7 @@ object LabyrinthInitializer {
                             behavior = skeletonBehaviors[i],
                             params = skeletonParameters[i],
                             drawableComponent = skeletonObject
+                            // todo implement
                     ).also {
                         it.addComponent(box, skeletonParameters[i])
                     }

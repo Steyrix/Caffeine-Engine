@@ -44,7 +44,7 @@ object Campfire : GameObject {
     var graphicalComponent: AnimatedObject2D? = null
 }
 
-object Map : GameObject {
+object GameMap : GameObject {
     override var it: CompositeEntity? = null
     var graphicalComponent: TileMap? = null
     var parameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
