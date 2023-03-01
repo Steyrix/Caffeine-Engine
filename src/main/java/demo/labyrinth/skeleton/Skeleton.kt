@@ -46,7 +46,12 @@ class Skeleton(
 
         accumulatedTime += deltaTime
         if (accumulatedTime >= chaseTimeLimit) {
-            tileTraverser.moveTo(Point2D(playerParams.x, playerParams.y))
+            tileTraverser.moveTo(
+                    Point2D(
+                            playerParams.x + playerParams.xSize / 2,
+                            playerParams.y + playerParams.ySize / 2
+                    )
+            )
             accumulatedTime = 0f
         }
 
