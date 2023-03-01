@@ -76,8 +76,8 @@ object LabyrinthInitializer {
             it.setUniform("lightIntensityCap", lightIntensityCap)
         }
 
-        GameMap.parameters.xSize = screenWidth / GameMap.graphicalComponent!!.relativeWidth
-        GameMap.parameters.ySize = screenHeight / GameMap.graphicalComponent!!.relativeHeight
+        GameMap.parameters.xSize = screenWidth / GameMap.graphicalComponent!!.relativeMapWidth
+        GameMap.parameters.ySize = screenHeight / GameMap.graphicalComponent!!.relativeMapHeight
 
         GameMap.it = object  : CompositeEntity() {}
         GameMap.addComponent(GameMap.graphicalComponent, GameMap.parameters)
@@ -188,7 +188,7 @@ object LabyrinthInitializer {
         val frameSizeY = 0.083f
         val texturePath = this.javaClass.getResource("/textures/base_skeleton.png")!!.path
 
-        for (i in 0..1) {
+        for (i in 0..0) {
             val box = BoundingBox(
                     x = 150f + (100 * i),
                     y = 120f,
