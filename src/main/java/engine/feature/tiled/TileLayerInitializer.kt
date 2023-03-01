@@ -41,21 +41,26 @@ object TileLayerInitializer {
 
         for (num in data.indices) {
             out[num] = mutableListOf()
+            if (data[num] != EMPTY_TILE_ID) {
+                if (num != data.size - 1) {
+                    val target = num + 1
+                    if (data[target] != EMPTY_TILE_ID) out[num]?.add(target)
+                }
 
-            if (num != data.size - 1) { // if not last
-                out[num]?.add(num + 1)
-            }
+                if (num != 0) {
+                    val target = num - 1
+                    if (data[target] != EMPTY_TILE_ID) out[num]?.add(target)
+                }
 
-            if (num != 0) { // if not first
-                out[num]?.add(num - 1)
-            }
+                if (num + layer.widthInTiles < data.size) {
+                    val target = num + layer.widthInTiles
+                    if (data[target] != EMPTY_TILE_ID) out[num]?.add(target)
+                }
 
-            if (num + layer.widthInTiles < data.size) { // if there is something below
-                out[num]?.add(num + layer.widthInTiles)
-            }
-
-            if (num - layer.widthInTiles >= 0) { // if there is something above
-                out[num]?.add(num - layer.widthInTiles)
+                if (num - layer.widthInTiles >= 0) {
+                    val target = num - layer.widthInTiles
+                    if (data[target] != EMPTY_TILE_ID) out[num]?.add(target)
+                }
             }
         }
 
