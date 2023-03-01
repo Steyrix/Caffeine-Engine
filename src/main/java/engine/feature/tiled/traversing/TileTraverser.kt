@@ -22,6 +22,7 @@ class TileTraverser(
 
         if (currentDestination == destination) return
         currentDestination = destination
+        dropVelocity()
 
         currentPath = ShortestPath.pathTo(
                 tileGraph,
@@ -32,7 +33,10 @@ class TileTraverser(
 
     private fun traverse() {
         currentPath?.let {
-            if (it.isEmpty()) return
+            if (it.isEmpty()) {
+                dropVelocity()
+                return
+            }
 
             var node = it.first()
             while (it.isNotEmpty() && tileIsReached(node)) {
@@ -59,8 +63,7 @@ class TileTraverser(
                     else -> 0f
                 }
             } else {
-                params.velocityY = 0f
-                params.velocityX = 0f
+                dropVelocity()
             }
         }
     }
@@ -89,5 +92,10 @@ class TileTraverser(
 
     private fun isVerticalDiffInsignificant(y: Float): Boolean {
         return abs(y - params.y) < 1f
+    }
+
+    private fun dropVelocity() {
+        params.velocityY = 0f
+        params.velocityX = 0f
     }
 }
