@@ -16,6 +16,10 @@ interface CollisionContext {
         entities.add(entity)
     }
 
+    fun removeEntity(entity: Entity) {
+        entities.remove(entity)
+    }
+
     // todo N^2 optimize
     fun update() {
         colliders.forEach { collider ->
