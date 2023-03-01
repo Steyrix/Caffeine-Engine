@@ -83,13 +83,12 @@ class TileMap(
         return layer.getTileValueByIndex(index)
     }
 
-    // todo: this method does not work correctly
     fun getTilePosition(index: Int): Point2D {
         val rowIndex = index / widthInTiles
         val columnIndex = widthInTiles - index % widthInTiles
 
-        val x = (columnIndex - 1) * absoluteTileWidth * set.relativeTileWidth
-        val y = (rowIndex - 1) * absoluteMapHeight * set.relativeTileHeight
+        val x = columnIndex * absoluteTileWidth * set.relativeTileWidth
+        val y = rowIndex * absoluteMapHeight * set.relativeTileHeight
 
         return Point2D(x, y)
     }
