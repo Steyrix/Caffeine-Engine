@@ -21,7 +21,8 @@ his project, on the other hand, will use LWJGL OpenGL binding, since the latter 
 - Improve composite entity pattern :white_check_mark:
 
 ## AI TODO List:
-- Think of how to determine the vector of movement from tile to tile in a given path
+- Think of how to determine the vector of movement from tile to tile in a given path :white_check_mark:
 - Implement sliding window for representing a path as a graph, each vertex of which can represent multiple tiles
-- Implement path traversing behavior, which will be responsible for object moving between graph vertices
-- Shortest path finding algorithm (should use Dijkstra)
+- Implement path traversing behavior, which will be responsible for object moving between graph vertices :white_check_mark:
+- Shortest path finding algorithm :white_check_mark:
+- Fix retraversing graph nodes in TileTraverser
