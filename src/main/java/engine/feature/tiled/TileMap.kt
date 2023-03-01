@@ -85,9 +85,9 @@ class TileMap(
 
     fun getTilePosition(index: Int): Point2D {
         val rowIndex = index / widthInTiles
-        val columnIndex = widthInTiles - index % widthInTiles
+        val columnIndex = index - rowIndex * widthInTiles
 
-        val x = columnIndex * absoluteTileWidth * set.relativeTileWidth
+        val x = columnIndex * absoluteMapWidth * set.relativeTileWidth
         val y = rowIndex * absoluteMapHeight * set.relativeTileHeight
 
         return Point2D(x, y)
