@@ -16,6 +16,9 @@ class Skeleton(
         private val playerParams: SetOf2DParametersWithVelocity
 ) : BehaviouralEntity(behavior, params) {
 
+    private val chaseTimeLimit = 1f
+    private var accumulatedTime = 0f
+
     private val controller = SkeletonController(
             params,
             modifier = 20f,
@@ -40,7 +43,13 @@ class Skeleton(
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
-        tileTraverser.moveTo(Point2D(playerParams.x, playerParams.y))
+
+        accumulatedTime += deltaTime
+        if (accumulatedTime >= chaseTimeLimit) {
+            tileTraverser.moveTo(Point2D(playerParams.x, playerParams.y))
+            accumulatedTime = 0f
+        }
+
         drawableComponent.setAnimationByKey(controller.getAnimationKey())
     }
 }
