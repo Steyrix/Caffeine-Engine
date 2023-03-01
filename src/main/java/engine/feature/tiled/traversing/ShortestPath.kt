@@ -7,6 +7,8 @@ object ShortestPath {
             start: Int,
             destination: Int
     ): ArrayDeque<Int> {
+        if (graph[destination].isNullOrEmpty() || graph[start].isNullOrEmpty()) return ArrayDeque()
+
         val out = ArrayDeque<Int>()
         val dist = IntArray(graph.size) { Int.MAX_VALUE }
         val pred = IntArray(graph.size) { -1 }
