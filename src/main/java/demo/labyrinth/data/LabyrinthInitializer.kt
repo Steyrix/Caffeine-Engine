@@ -188,7 +188,7 @@ object LabyrinthInitializer {
         val frameSizeY = 0.083f
         val texturePath = this.javaClass.getResource("/textures/base_skeleton.png")!!.path
 
-        for (i in 0..0) {
+        for (i in 0..1) {
             val box = BoundingBox(
                     x = 150f + (100 * i),
                     y = 120f,
