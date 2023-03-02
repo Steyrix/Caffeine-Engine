@@ -43,13 +43,7 @@ class TileTraverser(
                 return
             }
 
-            var node = it.first()
-            while (it.isNotEmpty() && tileIsReached(node)) {
-                it.removeFirst()
-                if (it.isNotEmpty()) {
-                    node = it.first()
-                }
-            }
+            val node = getActualNode(it)
 
             if (it.isNotEmpty()) {
                 modifyVelocity(node)
@@ -57,6 +51,18 @@ class TileTraverser(
                 dropVelocity()
             }
         }
+    }
+
+    private fun getActualNode(it: ArrayDeque<Int>): Int {
+        var node = it.first()
+        while (it.isNotEmpty() && tileIsReached(node)) {
+            it.removeFirst()
+            if (it.isNotEmpty()) {
+                node = it.first()
+            }
+        }
+
+        return node
     }
 
     private fun modifyVelocity(tileIndex: Int) {
