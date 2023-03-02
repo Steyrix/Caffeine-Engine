@@ -16,6 +16,11 @@ class TileTraverser(
     private var currentDestination: Int = -1
     private var velocity = 5f
 
+    override fun update(deltaTime: Float) {
+        super.update(deltaTime)
+        traverse()
+    }
+
     fun moveTo(targetPos: Point2D) {
         val start = tileMap.getTileIndex(params.x, params.y)
         val destination = tileMap.getTileIndex(targetPos.x, targetPos.y)
@@ -47,30 +52,29 @@ class TileTraverser(
             }
 
             if (it.isNotEmpty()) {
-                val nextPos = tileMap.getTilePosition(node)
-
-                params.velocityX = when {
-                    isHorizontalDiffInsignificant(nextPos.x) -> 0f
-                    nextPos.x > params.x -> velocity
-                    nextPos.x < params.x -> -velocity
-                    else -> 0f
-                }
-
-                params.velocityY = when {
-                    isVerticalDiffInsignificant(nextPos.y) -> 0f
-                    nextPos.y > params.y -> velocity
-                    nextPos.y < params.y -> -velocity
-                    else -> 0f
-                }
+                modifyVelocity(node)
             } else {
                 dropVelocity()
             }
         }
     }
 
-    override fun update(deltaTime: Float) {
-        super.update(deltaTime)
-        traverse()
+    private fun modifyVelocity(tileIndex: Int) {
+        val nextPos = tileMap.getTilePosition(tileIndex)
+
+        params.velocityX = when {
+            isHorizontalDiffInsignificant(nextPos.x) -> 0f
+            nextPos.x > params.x -> velocity
+            nextPos.x < params.x -> -velocity
+            else -> 0f
+        }
+
+        params.velocityY = when {
+            isVerticalDiffInsignificant(nextPos.y) -> 0f
+            nextPos.y > params.y -> velocity
+            nextPos.y < params.y -> -velocity
+            else -> 0f
+        }
     }
 
     private fun tileIsReached(tileIndex: Int): Boolean {
