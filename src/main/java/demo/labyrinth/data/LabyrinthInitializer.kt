@@ -103,7 +103,7 @@ object LabyrinthInitializer {
                         Character.boundingBox!!,
                         characterParameters,
                         bbCollisionContext
-                ) { box -> characterOnCollision(box) }
+                )
 
         Character.tiledCollider =
                 TiledCollider(characterParameters, "Walking Layer", tiledCollisionContext)
@@ -221,13 +221,9 @@ object LabyrinthInitializer {
         }
     }
 
-    private fun characterOnCollision(box: BoundingBox) {
-        if (box == Crate.boundingBox) {
-            val player = Character.it as Player
-
-            if (player.isAttacking()) {
-                Crate.takeDamage()
-            }
-        }
-    }
+//    private fun characterOnCollision(box: BoundingBox) {
+//        if (box == Crate.boundingBox) {
+//            val player = Character.it as Player
+//        }
+//    }
 }
