@@ -8,7 +8,6 @@ import engine.core.update.Updatable
 import engine.core.window.Window
 import org.lwjgl.glfw.GLFW
 
-// TODO make reusable
 class SimpleController2D(
         private val params: SetOf2DParametersWithVelocity,
         private var absVelocityY: Float = 0f,
@@ -17,34 +16,38 @@ class SimpleController2D(
         private var isControlledByUser: Boolean = false
 ) : Controllable, Entity, Updatable {
 
-    private var isWalking = false
-    private var isJumping = false
-    private var isDirectionRight = true
-    var isStriking = false
+    enum class Direction {
+        RIGHT,
+        LEFT,
+        UP,
+        DOWN
+    }
 
-    private val strikeTimeLimit = 0.3f
-    private var strikeAccumulatedTime = 0f
+    private var isWalking = false
+    private var direction = Direction.RIGHT
 
     override fun input(window: Window) {
         if (!isControlledByUser) return
 
-        if (window.isKeyPressed(GLFW.GLFW_KEY_F) && !isStriking) {
-            isStriking = true
-        }
-
         params.velocityY = when {
-            window.isKeyPressed(GLFW.GLFW_KEY_S) -> absVelocityY
-            window.isKeyPressed(GLFW.GLFW_KEY_W) -> -absVelocityY
+            window.isKeyPressed(GLFW.GLFW_KEY_S) -> {
+                direction = Direction.DOWN
+                absVelocityY
+            }
+            window.isKeyPressed(GLFW.GLFW_KEY_W) -> {
+                direction = Direction.UP
+                -absVelocityY
+            }
             else -> 0f
         }
 
         params.velocityX = when {
             window.isKeyPressed(GLFW.GLFW_KEY_D) -> {
-                isDirectionRight = true
+                direction = Direction.RIGHT
                 absVelocityX
             }
             window.isKeyPressed(GLFW.GLFW_KEY_A) -> {
-                isDirectionRight = false
+                direction = Direction.LEFT
                 -absVelocityX
             }
             else -> 0f
@@ -52,56 +55,34 @@ class SimpleController2D(
     }
 
     override fun update(deltaTime: Float) {
-        if (isStriking) {
-            strikeAccumulatedTime += deltaTime
-
-            if (strikeAccumulatedTime >= strikeTimeLimit) {
-                isStriking = false
-                strikeAccumulatedTime = 0f
-            }
-        } else {
-            params.x += params.velocityX * deltaTime * modifier
-            params.y += params.velocityY * deltaTime * modifier
-        }
+        params.x += params.velocityX * deltaTime * modifier
+        params.y += params.velocityY * deltaTime * modifier
         processState()
     }
 
     private fun processState() {
-        if (isStriking) {
-            isWalking = false
-            isJumping = false
-            params.velocityX = 0f
-            params.velocityY = 0f
-            return
-        }
-
-        if (params.velocityX != 0f && !isWalking) {
+        if ((params.velocityX != 0f || params.velocityY != 0f) && !isWalking) {
             isWalking = true
         }
 
-        if (params.velocityX == 0f) {
+        if (params.velocityY == 0f && params.velocityX == 0f) {
             isWalking = false
-        }
-
-        if (params.velocityY != 0f && !isJumping) {
-            isJumping = true
-        }
-
-        if (params.velocityY == 0f) {
-            isJumping = false
         }
     }
 
     fun getAnimationKey(): String {
-        return when {
-            isStriking && isDirectionRight -> AnimationKey.STRIKE_R
-            isStriking && !isDirectionRight -> AnimationKey.STRIKE_L
-            isJumping && isDirectionRight -> AnimationKey.WALK_U
-            isJumping && !isDirectionRight -> AnimationKey.WALK_D
-            isWalking && isDirectionRight -> AnimationKey.WALK_R
-            isWalking && !isDirectionRight -> AnimationKey.WALK_L
-            isDirectionRight -> AnimationKey.IDLE_R
-            else -> AnimationKey.IDLE_L
+        return if (isWalking) {
+            when (direction) {
+                Direction.RIGHT -> AnimationKey.WALK_R
+                Direction.LEFT -> AnimationKey.WALK_L
+                Direction.UP -> AnimationKey.WALK_U
+                Direction.DOWN -> AnimationKey.WALK_D
+            }
+        } else when (direction) {
+            Direction.RIGHT -> AnimationKey.IDLE_R
+            Direction.LEFT -> AnimationKey.IDLE_L
+            Direction.UP -> AnimationKey.IDLE_U
+            Direction.DOWN -> AnimationKey.IDLE_D
         }
     }
 }
