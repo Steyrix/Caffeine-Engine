@@ -32,6 +32,14 @@ class GoblinController(
         if (params.velocityY == 0f && params.velocityX == 0f) {
             isWalking = false
         }
+
+        direction = when {
+            params.velocityX > 0f -> Direction.RIGHT
+            params.velocityX < 0f -> Direction.LEFT
+            params.velocityY > 0f -> Direction.DOWN
+            params.velocityY < 0f -> Direction.UP
+            else -> direction
+        }
     }
 
     fun getAnimationKey(): String {
