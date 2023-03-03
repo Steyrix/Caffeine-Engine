@@ -1,7 +1,5 @@
 package demo.labyrinth.data
 
-import engine.core.entity.behavior.ConstrainedBehavior2D
-import engine.core.update.Behavior2DParameters
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfStatic2DParameters
 
@@ -66,23 +64,3 @@ val skeletonParameters: List<SetOf2DParametersWithVelocity> = listOf(
                 velocityY = 0f
         )
 )
-
-val skeletonBehavior1 = ConstrainedBehavior2D(
-    horizontalCap = 20f,
-        verticalCap = 200f,
-        behaviorParams = Behavior2DParameters(
-                movementX = 0f,
-                movementY = 0f
-        )
-)
-
-val skeletonBehavior2 = ConstrainedBehavior2D(
-        horizontalCap = 20f,
-        verticalCap = 200f,
-        behaviorParams = Behavior2DParameters(
-                movementX = 0f,
-                movementY = 0f
-        )
-)
-
-val skeletonBehaviors = listOf(skeletonBehavior1, skeletonBehavior2)
