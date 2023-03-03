@@ -184,8 +184,8 @@ object LabyrinthInitializer {
     }
 
     private fun initGoblins(renderProjection: Matrix4f) {
-        val frameSizeX = 0.1f
-        val frameSizeY = 0.083f
+        val frameSizeX = 0.09f
+        val frameSizeY = 0.2f
         val texturePath = this.javaClass.getResource("/textures/goblin.png")!!.path
 
         for (i in 0..1) {
