@@ -1,8 +1,7 @@
 package demo.labyrinth.skeleton
 
-import engine.core.entity.BehaviouralEntity
+import engine.core.entity.CompositeEntity
 import engine.core.entity.behavior.Behavior
-
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.geometry.Point2D
@@ -14,7 +13,7 @@ class Skeleton(
         behavior: Behavior,
         private val tileTraverser: TileTraverser,
         private val playerParams: SetOf2DParametersWithVelocity
-) : BehaviouralEntity(behavior, params) {
+) : CompositeEntity() {
 
     private val chaseTimeLimit = 1f
     private var accumulatedTime = 0f
