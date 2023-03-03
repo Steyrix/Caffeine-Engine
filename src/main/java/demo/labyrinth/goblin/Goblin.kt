@@ -1,4 +1,4 @@
-package demo.labyrinth.skeleton
+package demo.labyrinth.goblin
 
 import engine.core.entity.CompositeEntity
 import engine.core.render.render2D.AnimatedObject2D
@@ -6,7 +6,7 @@ import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.geometry.Point2D
 import engine.feature.tiled.traversing.TileTraverser
 
-class Skeleton(
+class Goblin(
         private val drawableComponent: AnimatedObject2D,
         params: SetOf2DParametersWithVelocity,
         private val tileTraverser: TileTraverser,
@@ -16,7 +16,7 @@ class Skeleton(
     private val chaseTimeLimit = 1f
     private var accumulatedTime = 0f
 
-    private val controller = SkeletonController(
+    private val controller = GoblinController(
             params,
             modifier = 20f,
     )

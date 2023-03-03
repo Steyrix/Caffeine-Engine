@@ -3,7 +3,7 @@ package demo.labyrinth.data
 import demo.labyrinth.hp.HealthBar
 import demo.labyrinth.Player
 import demo.labyrinth.ShaderController
-import demo.labyrinth.skeleton.Skeleton
+import demo.labyrinth.goblin.Goblin
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
@@ -34,7 +34,7 @@ object LabyrinthInitializer {
         initCharacterGraphics(renderProjection, boundingBoxCollisionContext, tiledCollisionContext)
         initCampfireGraphics(renderProjection)
         initTileMapGraphics(renderProjection, screenWidth, screenHeight)
-        initSkeletons(renderProjection)
+        initGoblins(renderProjection)
         initPhysics(boundingBoxCollisionContext, tiledCollisionContext)
     }
 
@@ -183,10 +183,10 @@ object LabyrinthInitializer {
         Campfire.addComponent(Campfire.graphicalComponent, campfireParameters)
     }
 
-    private fun initSkeletons(renderProjection: Matrix4f) {
+    private fun initGoblins(renderProjection: Matrix4f) {
         val frameSizeX = 0.1f
         val frameSizeY = 0.083f
-        val texturePath = this.javaClass.getResource("/textures/base_skeleton.png")!!.path
+        val texturePath = this.javaClass.getResource("/textures/goblin.png")!!.path
 
         for (i in 0..1) {
             val box = BoundingBox(
@@ -199,28 +199,27 @@ object LabyrinthInitializer {
                 shader = ShaderController.createBoundingBoxShader(renderProjection)
             }
 
-            val skeletonObject = AnimatedObject2D(
+            val animatedObject = AnimatedObject2D(
                     frameSizeX = frameSizeX,
                     frameSizeY = frameSizeY,
                     texture = Texture2D.createInstance(texturePath),
-                    animations = skeletonAnimations
+                    animations = goblinsAnimations
             ).apply {
                 shader = ShaderController.createAnimationShader(renderProjection)
             }
 
-            Skeletons.it.add(
-                    Skeleton(
-                            params = skeletonParameters[i],
-                            drawableComponent = skeletonObject,
-                            tileTraverser = createTileTraverser(skeletonParameters[i]),
+            Goblins.it.add(
+                    Goblin(
+                            params = goblinParameters[i],
+                            drawableComponent = animatedObject,
+                            tileTraverser = createTileTraverser(goblinParameters[i]),
                             playerParams = characterParameters
                     ).also {
-                        it.addComponent(box, skeletonParameters[i])
+                        it.addComponent(box, goblinParameters[i])
                     }
             )
         }
     }
-
 //    private fun characterOnCollision(box: BoundingBox) {
 //        if (box == Crate.boundingBox) {
 //            val player = Character.it as Player

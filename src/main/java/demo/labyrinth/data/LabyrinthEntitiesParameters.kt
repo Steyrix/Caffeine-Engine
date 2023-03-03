@@ -44,7 +44,7 @@ val crateParameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
         x = 400f, y = 430f, xSize = 50f, ySize = 50f, rotationAngle = 0f
 )
 
-val skeletonParameters: List<SetOf2DParametersWithVelocity> = listOf(
+val goblinParameters: List<SetOf2DParametersWithVelocity> = listOf(
         SetOf2DParametersWithVelocity(
                 x = 150f,
                 y = 120f,

@@ -44,7 +44,7 @@ class LabyrinthDemo(
 
     override fun update(deltaTime: Float) {
         Character.update(deltaTime)
-        Skeletons.update(deltaTime)
+        Goblins.update(deltaTime)
         Crate.update(deltaTime)
         bbCollisionContext.update()
         tiledCollisionContext.update()
@@ -61,6 +61,6 @@ class LabyrinthDemo(
         Crate.draw()
         Campfire.draw()
         Character.draw()
-        Skeletons.draw()
+        Goblins.draw()
     }
 }

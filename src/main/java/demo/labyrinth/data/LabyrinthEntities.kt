@@ -114,7 +114,7 @@ object Crate : GameObject {
     }
 }
 
-object Skeletons {
+object Goblins {
     val it: MutableList<CompositeEntity> = mutableListOf()
     val parameters: MutableList<SetOf2DParametersWithVelocity> = mutableListOf()
     fun update(deltaTime: Float) {
