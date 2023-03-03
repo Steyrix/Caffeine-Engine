@@ -2,6 +2,7 @@ package demo.labyrinth
 
 import demo.labyrinth.data.AnimationKey
 import engine.core.controllable.Controllable
+import engine.core.controllable.Direction
 import engine.core.entity.Entity
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.Updatable
@@ -15,13 +16,6 @@ class SimpleController2D(
         private var modifier: Float = 20f,
         private var isControlledByUser: Boolean = false
 ) : Controllable, Entity, Updatable {
-
-    enum class Direction {
-        RIGHT,
-        LEFT,
-        UP,
-        DOWN
-    }
 
     private var isWalking = false
     private var direction = Direction.RIGHT
