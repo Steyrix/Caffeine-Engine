@@ -96,8 +96,8 @@ class SimpleController2D(
         return when {
             isStriking && isDirectionRight -> AnimationKey.STRIKE_R
             isStriking && !isDirectionRight -> AnimationKey.STRIKE_L
-            isJumping && isDirectionRight -> AnimationKey.JUMP_R
-            isJumping && !isDirectionRight -> AnimationKey.JUMP_L
+            isJumping && isDirectionRight -> AnimationKey.WALK_U
+            isJumping && !isDirectionRight -> AnimationKey.WALK_D
             isWalking && isDirectionRight -> AnimationKey.WALK_R
             isWalking && !isDirectionRight -> AnimationKey.WALK_L
             isDirectionRight -> AnimationKey.IDLE_R

@@ -108,9 +108,9 @@ object LabyrinthInitializer {
         Character.tiledCollider =
                 TiledCollider(characterParameters, "Walking Layer", tiledCollisionContext)
 
-        val frameSizeX = 0.1f
-        val frameSizeY = 0.166f
-        val texturePathFirst = this.javaClass.getResource("/textures/base_character.png")!!.path
+        val frameSizeX = 0.111f
+        val frameSizeY = 0.25f
+        val texturePathFirst = this.javaClass.getResource("/textures/character_front_walk.png")!!.path
 
         val textureArray = Texture2D.createInstance(
                 texturePathFirst
