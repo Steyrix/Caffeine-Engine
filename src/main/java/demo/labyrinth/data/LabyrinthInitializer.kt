@@ -210,7 +210,6 @@ object LabyrinthInitializer {
 
             Skeletons.it.add(
                     Skeleton(
-                            behavior = skeletonBehaviors[i],
                             params = skeletonParameters[i],
                             drawableComponent = skeletonObject,
                             tileTraverser = createTileTraverser(skeletonParameters[i]),

@@ -1,7 +1,6 @@
 package demo.labyrinth.data
 
 import demo.labyrinth.hp.HealthBar
-import engine.core.entity.BehaviouralEntity
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
@@ -116,7 +115,7 @@ object Crate : GameObject {
 }
 
 object Skeletons {
-    val it: MutableList<BehaviouralEntity> = mutableListOf()
+    val it: MutableList<CompositeEntity> = mutableListOf()
     val parameters: MutableList<SetOf2DParametersWithVelocity> = mutableListOf()
     fun update(deltaTime: Float) {
         it.forEach { entity ->
