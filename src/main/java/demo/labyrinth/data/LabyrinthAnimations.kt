@@ -52,22 +52,22 @@ val characterAnimations = mutableListOf<Animation>(
         SequenceAtlasAnimation(
                 AnimationKey.WALK_R,
                 FrameParametersGenerator.generate(Pair(1,8), Pair(3,3), 0.111f, 0.25f),
-                timeLimit = 0.2f
+                timeLimit = 0.05f
         ),
         SequenceAtlasAnimation(
                 AnimationKey.WALK_L,
                 FrameParametersGenerator.generate(Pair(8,1), Pair(1,1), 0.111f, 0.25f),
-                timeLimit = 0.2f
+                timeLimit = 0.05f
         ),
         SequenceAtlasAnimation(
                 AnimationKey.WALK_U,
                 FrameParametersGenerator.generate(Pair(1,8), Pair(0,0), 0.111f, 0.25f),
-                timeLimit = 0.2f
+                timeLimit = 0.05f
         ),
         SequenceAtlasAnimation(
                 AnimationKey.WALK_D,
                 FrameParametersGenerator.generate(Pair(1,8), Pair(2,2), 0.111f, 0.25f),
-                timeLimit = 0.2f
+                timeLimit = 0.05f
         ),
 )
 
@@ -95,22 +95,22 @@ val goblinsAnimations = mutableListOf<Animation>(
         SequenceAtlasAnimation(
                 AnimationKey.GOBLIN_WALK_R,
                 FrameParametersGenerator.generate(Pair(0,5), Pair(1,1), 0.09f, 0.2f),
-                timeLimit = 0.2f
+                timeLimit = 0.05f
         ),
         SequenceAtlasAnimation(
                 AnimationKey.GOBLIN_WALK_L,
                 FrameParametersGenerator.generate(Pair(0,5), Pair(3,3), 0.09f, 0.2f),
-                timeLimit = 0.2f
+                timeLimit = 0.05f
         ),
         SequenceAtlasAnimation(
                 AnimationKey.GOBLIN_WALK_U,
                 FrameParametersGenerator.generate(Pair(0,5), Pair(2,2), 0.09f, 0.2f),
-                timeLimit = 0.2f
+                timeLimit = 0.05f
         ),
         SequenceAtlasAnimation(
                 AnimationKey.GOBLIN_WALK_D,
                 FrameParametersGenerator.generate(Pair(0,5), Pair(0,0), 0.09f, 0.2f),
-                timeLimit = 0.2f
+                timeLimit = 0.05f
         ),
 )
 
