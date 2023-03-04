@@ -34,6 +34,7 @@ class TileTraverser(
                 start,
                 destination
         )
+        println("Path created: $currentPath")
     }
 
     private fun traverse() {
@@ -46,6 +47,7 @@ class TileTraverser(
             val node = getActualNode(it)
 
             if (it.isNotEmpty()) {
+                println("Traversing to node: $node")
                 modifyVelocity(node)
             } else {
                 dropVelocity()
@@ -83,6 +85,7 @@ class TileTraverser(
         }
     }
 
+    // TODO: predict tile reach
     private fun tileIsReached(tileIndex: Int): Boolean {
         val pos = tileMap.getTilePosition(tileIndex)
 
