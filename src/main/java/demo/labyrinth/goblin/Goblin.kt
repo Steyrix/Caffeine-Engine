@@ -1,6 +1,7 @@
 package demo.labyrinth.goblin
 
 import engine.core.entity.CompositeEntity
+import engine.core.loop.AccumulatedTimeEvent
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.geometry.Point2D
@@ -13,8 +14,16 @@ class Goblin(
         private val playerParams: SetOf2DParametersWithVelocity
 ) : CompositeEntity() {
 
-    private val chaseTimeLimit = 1f
-    private var accumulatedTime = 0f
+    private val startChasing = AccumulatedTimeEvent(
+        timeLimit = 1f
+    ) {
+        tileTraverser.moveTo(
+                Point2D(
+                        playerParams.x + playerParams.xSize / 2,
+                        playerParams.y + playerParams.ySize / 2
+                )
+        )
+    }
 
     private val controller = GoblinController(
             params,
@@ -40,18 +49,7 @@ class Goblin(
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
-
-        accumulatedTime += deltaTime
-        if (accumulatedTime >= chaseTimeLimit) {
-            tileTraverser.moveTo(
-                    Point2D(
-                            playerParams.x + playerParams.xSize / 2,
-                            playerParams.y + playerParams.ySize / 2
-                    )
-            )
-            accumulatedTime = 0f
-        }
-
+        startChasing.schedule(deltaTime)
         drawableComponent.setAnimationByKey(controller.getAnimationKey())
     }
 }
