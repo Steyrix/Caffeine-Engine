@@ -33,7 +33,7 @@ class Behavior2DParameters(
         var movementY: Float
 )
 
-fun SetOf2DParametersWithVelocity.getCenterPoint(): Point2D {
+fun SetOfParameters.getCenterPoint(): Point2D {
     return Point2D(
          x + xSize / 2,
             y + ySize / 2
