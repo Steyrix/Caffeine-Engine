@@ -1,5 +1,7 @@
 package engine.core.update
 
+import engine.feature.geometry.Point2D
+
 interface SetOfParameters {
     var x: Float
     var y: Float
@@ -30,3 +32,10 @@ class Behavior2DParameters(
         var movementX: Float,
         var movementY: Float
 )
+
+fun SetOf2DParametersWithVelocity.getCenterPoint(): Point2D {
+    return Point2D(
+         x + xSize / 2,
+            y + ySize / 2
+    )
+}
