@@ -59,7 +59,7 @@ object GameMap : GameObject {
     var graph: Map<Int, List<Int>>? = null
 
     private val lightBlinking = AccumulatedTimeEvent(
-            timeLimit = timeLimit
+            timeLimit = lightBlinkingTimeLimit
     ) {
         if (current + 1 >= lightIntensityCaps.size) {
             current = 0

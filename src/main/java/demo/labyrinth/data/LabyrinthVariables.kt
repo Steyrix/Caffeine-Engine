@@ -1,10 +1,7 @@
 package demo.labyrinth.data
 
 /* Lighting shaders variables */
-
-var accumulated = 0f
-
-var timeLimit = 0.1f
+var lightBlinkingTimeLimit = 0.1f
 
 var lightIntensityCap = 3f
 
