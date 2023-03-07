@@ -12,8 +12,12 @@ class TileTraverser(
         private val params: SetOf2DParametersWithVelocity
 ) : CompositeEntity() {
 
-    private var currentPath: ArrayDeque<Int>? = null
-    private var currentDestination: Int = -1
+    companion object {
+        private const val INDEX_NOT_FOUND = -1
+    }
+
+    private var currentPath: ArrayDeque<Int> = ArrayDeque()
+    private var currentDestination: Int = INDEX_NOT_FOUND
     private var velocity = 5f
 
     override fun update(deltaTime: Float) {
@@ -22,36 +26,54 @@ class TileTraverser(
     }
 
     fun moveTo(targetPos: Point2D) {
-        val start = tileMap.getTileIndex(params.x, params.y)
         val destination = tileMap.getTileIndex(targetPos.x, targetPos.y)
 
         if (currentDestination == destination) return
+
+        val start = tileMap.getTileIndex(params.x, params.y)
         currentDestination = destination
         dropVelocity()
 
-        currentPath = ShortestPath.pathTo(
+        val nextPath = ShortestPath.pathTo(
                 tileGraph,
                 start,
                 destination
         )
-        println("Path created: $currentPath")
+
+        extendCurrentPath(nextPath)
+    }
+
+    private fun extendCurrentPath(nextPath: ArrayDeque<Int>) {
+        if (nextPath.isNotEmpty()) {
+
+            val indexOfJoin = if (currentPath.isEmpty()) {
+                INDEX_NOT_FOUND
+            } else {
+                nextPath.indexOf(currentPath.last())
+            }
+
+            if (indexOfJoin != -1) {
+                val toAdd = nextPath.filterIndexed { index, _ -> index > indexOfJoin }
+                currentPath.addAll(toAdd)
+            } else {
+                currentPath.clear()
+                currentPath.addAll(nextPath)
+            }
+        }
     }
 
     private fun traverse() {
-        currentPath?.let {
-            if (it.isEmpty()) {
-                dropVelocity()
-                return
-            }
+        if (currentPath.isEmpty()) {
+            dropVelocity()
+            return
+        }
 
-            val node = getActualNode(it)
+        val node = getActualNode(currentPath)
 
-            if (it.isNotEmpty()) {
-                println("Traversing to node: $node")
-                modifyVelocity(node)
-            } else {
-                dropVelocity()
-            }
+        if (currentPath.isNotEmpty()) {
+            modifyVelocity(node)
+        } else {
+            dropVelocity()
         }
     }
 
@@ -85,7 +107,6 @@ class TileTraverser(
         }
     }
 
-    // TODO: predict tile reach
     private fun tileIsReached(tileIndex: Int): Boolean {
         val pos = tileMap.getTilePosition(tileIndex)
 
