@@ -3,6 +3,7 @@ package demo.labyrinth.data
 import demo.labyrinth.hp.HealthBar
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
+import engine.core.loop.AccumulatedTimeEvent
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.render.render2D.OpenGlObject2D
 import engine.core.update.SetOf2DParametersWithVelocity
@@ -57,20 +58,21 @@ object GameMap : GameObject {
     )
     var graph: Map<Int, List<Int>>? = null
 
+    private val lightBlinking = AccumulatedTimeEvent(
+            timeLimit = timeLimit
+    ) {
+        if (current + 1 >= lightIntensityCaps.size) {
+            current = 0
+        } else current++
+        graphicalComponent?.shader?.let {
+            it.bind()
+            it.setUniform("lightIntensityCap", lightIntensityCaps[current])
+        }
+    }
+
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
-
-        accumulated += deltaTime
-        if (accumulated >= timeLimit) {
-            accumulated = 0f
-            if (current + 1 >= lightIntensityCaps.size) {
-                current = 0
-            } else current++
-            graphicalComponent?.shader?.let {
-                it.bind()
-                it.setUniform("lightIntensityCap", lightIntensityCaps[current])
-            }
-        }
+        lightBlinking.schedule(deltaTime)
     }
 }
 
