@@ -4,7 +4,7 @@ import engine.core.entity.CompositeEntity
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.update.SetOf2DParametersWithVelocity
-import engine.feature.geometry.Point2D
+import engine.core.update.getCenterPoint
 import engine.feature.tiled.traversing.TileTraverser
 
 class Goblin(
@@ -16,14 +16,7 @@ class Goblin(
 
     private val startChasing = AccumulatedTimeEvent(
         timeLimit = 1f
-    ) {
-        tileTraverser.moveTo(
-                Point2D(
-                        playerParams.x + playerParams.xSize / 2,
-                        playerParams.y + playerParams.ySize / 2
-                )
-        )
-    }
+    ) { tileTraverser.moveTo(playerParams.getCenterPoint()) }
 
     private val controller = GoblinController(
             params,
