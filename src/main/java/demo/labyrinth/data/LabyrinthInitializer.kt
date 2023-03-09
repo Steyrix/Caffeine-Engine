@@ -46,7 +46,7 @@ object LabyrinthInitializer {
         Character.addComponent(Character.boxCollider, characterParameters)
         Character.addComponent(Character.tiledCollider, characterParameters)
 
-        bbCollisionContext.addEntity(Crate.boundingBox as Entity)
+        // bbCollisionContext.addEntity(Crate.boundingBox as Entity)
         tiledCollisionContext.addEntity(GameMap.graphicalComponent as Entity)
     }
 
@@ -61,7 +61,7 @@ object LabyrinthInitializer {
         val fragmentShaderPath = this.javaClass.getResource("/shaders/lightingShaders/lightingFragmentShader.glsl")!!.path
 
         GameMap.graphicalComponent = TiledResourceParser.createTileMapFromXml(
-                File(this.javaClass.getResource("/tiled/cave_level.xml")!!.path)
+                File(this.javaClass.getResource("/tiled/port_map.xml")!!.path)
         )
         GameMap.graphicalComponent?.shader = ShaderLoader.loadFromFile(
                 vertexShaderFilePath = vertexShaderPath,
@@ -106,7 +106,10 @@ object LabyrinthInitializer {
                 )
 
         Character.tiledCollider =
-                TiledCollider(characterParameters, "Walking Layer", tiledCollisionContext)
+                TiledCollider(
+                        characterParameters,
+                        listOf("unwalking_layer", "obstacles_layer"),
+                        tiledCollisionContext)
 
         val frameSizeX = 0.111f
         val frameSizeY = 0.25f

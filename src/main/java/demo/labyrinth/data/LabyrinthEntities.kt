@@ -49,7 +49,7 @@ object GameMap : GameObject {
     override var it: CompositeEntity? = null
     var graphicalComponent: TileMap? = null
     set(value) {
-        graph = value?.getGraphOfLayer("Walking Layer")
+        graph = value?.getGraphOfLayer("walking_layer")
         field = value
     }
 

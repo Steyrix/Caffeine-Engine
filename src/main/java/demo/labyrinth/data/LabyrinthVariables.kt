@@ -3,8 +3,8 @@ package demo.labyrinth.data
 /* Lighting shaders variables */
 var lightBlinkingTimeLimit = 0.1f
 
-var lightIntensityCap = 3f
+var lightIntensityCap = 2f
 
-val lightIntensityCaps = listOf(3f, 2.95f, 2.9f)
+val lightIntensityCaps = listOf(2f, 1.95f, 1.9f)
 
 var current = 0
