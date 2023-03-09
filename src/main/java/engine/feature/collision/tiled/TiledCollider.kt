@@ -9,7 +9,7 @@ import engine.feature.tiled.TileMap
 
 class TiledCollider(
         private val parameters: SetOf2DParametersWithVelocity,
-        private val walkingLayerNames: List<String>,
+        private val collisionLayers: List<String>,
         override var collisionContext: CollisionContext
 ) : Collider {
 
@@ -30,9 +30,9 @@ class TiledCollider(
             var isCenterColliding = false
             var isBottomColliding = false
 
-            walkingLayerNames.forEach { layer ->
-                if (it.getTileValue(centerX, centerY, layer) <= 0) isCenterColliding = true
-                if (it.getTileValue(centerX, bottomY, layer) <= 0) isBottomColliding = true
+            collisionLayers.forEach { layer ->
+                if (it.getTileValue(centerX, centerY, layer) > 0) isCenterColliding = true
+                if (it.getTileValue(centerX, bottomY, layer) > 0) isBottomColliding = true
             }
 
             if (isCenterColliding || isBottomColliding) {
