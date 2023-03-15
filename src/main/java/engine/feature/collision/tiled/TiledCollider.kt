@@ -27,12 +27,12 @@ class TiledCollider(
             val centerY = parameters.y + parameters.ySize / 2
             val bottomY = parameters.y + parameters.ySize
 
-            var isCenterColliding = false
-            var isBottomColliding = false
+            var isCenterColliding = true
+            var isBottomColliding = true
 
             nonCollisionLayers.forEach { layer ->
-                if (it.getTileValue(centerX, centerY, layer) > 0) isCenterColliding = true
-                if (it.getTileValue(centerX, bottomY, layer) > 0) isBottomColliding = true
+                if (it.getTileValue(centerX, centerY, layer) > 0) isCenterColliding = false
+                if (it.getTileValue(centerX, bottomY, layer) > 0) isBottomColliding = false
             }
 
             if (isCenterColliding || isBottomColliding) {
