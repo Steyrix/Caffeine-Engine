@@ -177,7 +177,7 @@ object LabyrinthInitializer {
                 frameSizeX = frameSizeX,
                 frameSizeY = frameSizeY,
                 texture = Texture2D.createInstance(texturePath),
-                animations = campfireAnimationss
+                animations = campfireAnimations
         ).apply {
             shader = ShaderController.createAnimationShader(renderProjection)
         }
