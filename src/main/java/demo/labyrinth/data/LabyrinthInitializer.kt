@@ -109,6 +109,7 @@ object LabyrinthInitializer {
                 TiledCollider(
                         characterParameters,
                         listOf("walking_layer", "walkable_objects_layer"),
+                        listOf("obstacles_layer"),
                         tiledCollisionContext)
 
         val frameSizeX = 0.111f
