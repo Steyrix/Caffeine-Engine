@@ -7,6 +7,8 @@ import engine.feature.collision.CollisionContext
 import engine.feature.geometry.Point2D
 import engine.feature.tiled.TileMap
 
+private const val EMPTY_TILE_VALUE = 0
+
 class TiledCollider(
         private val parameters: SetOf2DParametersWithVelocity,
         private val nonCollisionLayers: List<String>,
@@ -32,14 +34,14 @@ class TiledCollider(
             var isBottomColliding = true
 
             nonCollisionLayers.forEach { layer ->
-                if (it.getTileValue(centerX, centerY, layer) >= 0) isCenterColliding = false
-                if (it.getTileValue(centerX, bottomY, layer) >= 0) isBottomColliding = false
+                if (it.getTileValue(centerX, centerY, layer) >= EMPTY_TILE_VALUE) isCenterColliding = false
+                if (it.getTileValue(centerX, bottomY, layer) >= EMPTY_TILE_VALUE) isBottomColliding = false
             }
 
             if (obstacleLayers.isNotEmpty()) {
                 obstacleLayers.forEach { layer ->
-                    if (it.getTileValue(centerX, centerY, layer) >= 0) isCenterColliding = true
-                    if (it.getTileValue(centerX, bottomY, layer) >= 0) isBottomColliding = true
+                    if (it.getTileValue(centerX, centerY, layer) >= EMPTY_TILE_VALUE) isCenterColliding = true
+                    if (it.getTileValue(centerX, bottomY, layer) >= EMPTY_TILE_VALUE) isBottomColliding = true
                 }
             }
 
