@@ -147,6 +147,6 @@ class TileTraverser(
     }
 
     override fun reactToCollision() {
-        // isMovingCooldown = true
+        isMovingCooldown = true
     }
 }
