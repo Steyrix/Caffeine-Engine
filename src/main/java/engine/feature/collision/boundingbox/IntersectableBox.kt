@@ -1,6 +1,8 @@
 package engine.feature.collision.boundingbox
 
 import engine.core.render.render2D.Drawable2D
+import engine.core.update.SetOf2DParametersWithVelocity
+import engine.core.update.SetOfParameters
 import engine.feature.geometry.Point2D
 
 interface IntersectableBox : Drawable2D {
@@ -22,10 +24,14 @@ interface IntersectableBox : Drawable2D {
     }
 
     fun isIntersectingByX(anotherBox: BoundingBox) = x < anotherBox.rightX && rightX > anotherBox.x
+    fun isIntersectingByX(params: SetOfParameters) = x < (params.x + params.xSize) && rightX > params.x
 
     fun isIntersectingByY(anotherBox: BoundingBox) = y < anotherBox.bottomY && bottomY > anotherBox.y
+    fun isIntersectingByY(params: SetOfParameters) = y < (params.y + params.ySize) && bottomY > params.y
 
     fun isIntersecting(anotherBox: BoundingBox) = isIntersectingByX(anotherBox) && isIntersectingByY(anotherBox)
+
+    fun isIntersecting(params: SetOfParameters) = isIntersectingByX(params) && isIntersectingByY(params)
 
     fun isContainingEveryOf(points: List<Point2D>): Boolean {
         points.forEach {
