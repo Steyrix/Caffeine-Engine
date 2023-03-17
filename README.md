@@ -25,4 +25,5 @@ his project, on the other hand, will use LWJGL OpenGL binding, since the latter 
 - Implement sliding window for representing a path as a graph, each vertex of which can represent multiple tiles
 - Implement path traversing behavior, which will be responsible for object moving between graph vertices :white_check_mark:
 - Shortest path finding algorithm :white_check_mark:
-- Fix retraversing graph nodes in TileTraverser
+- Fix retraversing graph nodes in TileTraverser :white_check_mark:
+- Fix interaction between TileTraverser and BoundingBoxCollider
