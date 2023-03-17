@@ -12,7 +12,6 @@ private const val EMPTY_TILE_VALUE = 0
 class TiledCollider(
         private val parameters: SetOf2DParametersWithVelocity,
         private val nonCollisionLayers: List<String>,
-        private val obstacleLayers: List<String> = emptyList(),
         override var collisionContext: CollisionContext
 ) : Collider {
 
@@ -36,13 +35,6 @@ class TiledCollider(
             nonCollisionLayers.forEach { layer ->
                 if (it.getTileValue(centerX, centerY, layer) >= EMPTY_TILE_VALUE) isCenterColliding = false
                 if (it.getTileValue(centerX, bottomY, layer) >= EMPTY_TILE_VALUE) isBottomColliding = false
-            }
-
-            if (obstacleLayers.isNotEmpty()) {
-                obstacleLayers.forEach { layer ->
-                    if (it.getTileValue(centerX, centerY, layer) >= EMPTY_TILE_VALUE) isCenterColliding = true
-                    if (it.getTileValue(centerX, bottomY, layer) >= EMPTY_TILE_VALUE) isBottomColliding = true
-                }
             }
 
             if (isCenterColliding || isBottomColliding) {
