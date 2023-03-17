@@ -26,6 +26,7 @@ interface CollisionContext {
             entities.forEach { entity ->
                 if (collider.isColliding(entity)) {
                     collider.reactToCollision()
+                    (collider.holderEntity as? CollisionReactive)?.reactToCollision()
 
                     if (entity is CollisionReactive) {
                         entity.reactToCollision()
