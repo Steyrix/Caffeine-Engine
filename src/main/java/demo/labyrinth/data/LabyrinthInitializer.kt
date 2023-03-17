@@ -34,7 +34,7 @@ object LabyrinthInitializer {
         initCharacterGraphics(renderProjection, boundingBoxCollisionContext, tiledCollisionContext)
         initCampfireGraphics(renderProjection)
         initTileMapGraphics(renderProjection, screenWidth, screenHeight)
-        initGoblins(renderProjection)
+        initGoblins(renderProjection, boundingBoxCollisionContext)
         initPhysics(boundingBoxCollisionContext, tiledCollisionContext)
     }
 
@@ -46,7 +46,16 @@ object LabyrinthInitializer {
         Character.addComponent(Character.boxCollider, characterParameters)
         Character.addComponent(Character.tiledCollider, characterParameters)
 
-        // bbCollisionContext.addEntity(Crate.boundingBox as Entity)
+        for (i in 0..1) {
+            Goblins.it[i].addComponent(
+                    Goblins.boxColliders[i],
+                    goblinParameters[i]
+            )
+
+            bbCollisionContext.addEntity(Goblins.boundingBoxes[i] as Entity)
+        }
+
+        bbCollisionContext.addEntity(Character.boundingBox as Entity)
         tiledCollisionContext.addEntity(GameMap.graphicalComponent as Entity)
     }
 
@@ -186,7 +195,10 @@ object LabyrinthInitializer {
         Campfire.addComponent(Campfire.graphicalComponent, campfireParameters)
     }
 
-    private fun initGoblins(renderProjection: Matrix4f) {
+    private fun initGoblins(
+            renderProjection: Matrix4f,
+            bbCollisionContext: BoundingBoxCollisionContext
+    ) {
         val frameSizeX = 0.09f
         val frameSizeY = 0.2f
         val texturePath = this.javaClass.getResource("/textures/goblin.png")!!.path
@@ -201,6 +213,12 @@ object LabyrinthInitializer {
             ).apply {
                 shader = ShaderController.createBoundingBoxShader(renderProjection)
             }
+
+            Goblins.boundingBoxes.add(box)
+
+            Goblins.boxColliders.add(
+                    BoundingBoxCollider(box, goblinParameters[i], bbCollisionContext)
+            )
 
             val animatedObject = AnimatedObject2D(
                     frameSizeX = frameSizeX,
