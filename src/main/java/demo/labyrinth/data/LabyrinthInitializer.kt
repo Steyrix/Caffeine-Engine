@@ -107,21 +107,6 @@ object LabyrinthInitializer {
             shader = ShaderController.createBoundingBoxShader(renderProjection)
         }
 
-        Character.boxCollider =
-                BoundingBoxCollider(
-                        Character.it as Entity,
-                        Character.boundingBox!!,
-                        characterParameters,
-                        bbCollisionContext
-                )
-
-        Character.tiledCollider =
-                TiledCollider(
-                        Character.it as Entity,
-                        characterParameters,
-                        listOf("walking_layer", "walkable_objects_layer"),
-                        tiledCollisionContext)
-
         val frameSizeX = 0.111f
         val frameSizeY = 0.25f
         val texturePathFirst = this.javaClass.getResource("/textures/character_front_walk.png")!!.path
@@ -148,6 +133,21 @@ object LabyrinthInitializer {
                 params = characterParameters
         )
         Character.hp = HealthBar(characterParameters, hpBarPatameters1, renderProjection)
+
+        Character.boxCollider =
+                BoundingBoxCollider(
+                        Character.it as Entity,
+                        Character.boundingBox!!,
+                        characterParameters,
+                        bbCollisionContext
+                )
+
+        Character.tiledCollider =
+                TiledCollider(
+                        Character.it as Entity,
+                        characterParameters,
+                        listOf("walking_layer", "walkable_objects_layer"),
+                        tiledCollisionContext)
 
         Character.addComponent(Character.boundingBox, characterParameters)
         Character.addComponent(Character.hp, characterParameters)
@@ -218,14 +218,6 @@ object LabyrinthInitializer {
 
             Goblins.boundingBoxes.add(box)
 
-            Goblins.boxColliders.add(
-                    BoundingBoxCollider(
-                            Goblins.it[i] as Entity,
-                            box,
-                            goblinParameters[i],
-                            bbCollisionContext)
-            )
-
             val animatedObject = AnimatedObject2D(
                     frameSizeX = frameSizeX,
                     frameSizeY = frameSizeY,
@@ -244,6 +236,14 @@ object LabyrinthInitializer {
                     ).also {
                         it.addComponent(box, goblinParameters[i])
                     }
+            )
+
+            Goblins.boxColliders.add(
+                    BoundingBoxCollider(
+                            Goblins.it[i] as Entity,
+                            box,
+                            goblinParameters[i],
+                            bbCollisionContext)
             )
         }
     }
