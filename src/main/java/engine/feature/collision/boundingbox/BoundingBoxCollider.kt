@@ -36,6 +36,8 @@ class BoundingBoxCollider(
     }
 
     override fun isColliding(entity: Entity): Boolean {
+        if (entity as? BoundingBox == box) return false
+
         (entity as? BoundingBox)?.let {
             if (box.isIntersecting(it)) {
                 intersectedBox = it
