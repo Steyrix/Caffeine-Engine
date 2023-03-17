@@ -109,6 +109,7 @@ object LabyrinthInitializer {
 
         Character.boxCollider =
                 BoundingBoxCollider(
+                        Character.it as Entity,
                         Character.boundingBox!!,
                         characterParameters,
                         bbCollisionContext
@@ -116,6 +117,7 @@ object LabyrinthInitializer {
 
         Character.tiledCollider =
                 TiledCollider(
+                        Character.it as Entity,
                         characterParameters,
                         listOf("walking_layer", "walkable_objects_layer"),
                         tiledCollisionContext)
@@ -217,7 +219,11 @@ object LabyrinthInitializer {
             Goblins.boundingBoxes.add(box)
 
             Goblins.boxColliders.add(
-                    BoundingBoxCollider(box, goblinParameters[i], bbCollisionContext)
+                    BoundingBoxCollider(
+                            Goblins.it[i] as Entity,
+                            box,
+                            goblinParameters[i],
+                            bbCollisionContext)
             )
 
             val animatedObject = AnimatedObject2D(
