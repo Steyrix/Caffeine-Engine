@@ -15,7 +15,7 @@ class Goblin(
         private val playerParams: SetOf2DParametersWithVelocity
 ) : CompositeEntity(), CollisionReactive {
 
-    private val startChasing = AccumulatedTimeEvent(timeLimit = 1f) {
+    private val startChasing = AccumulatedTimeEvent(timeLimit = 2f) {
         tileTraverser.moveTo(playerParams.getCenterPoint())
     }
 
@@ -48,6 +48,6 @@ class Goblin(
     }
 
     override fun reactToCollision() {
-        tileTraverser.reactToCollision()
+        // TODO: implement
     }
 }
