@@ -6,19 +6,10 @@ import engine.core.update.SetOfStatic2DParameters
 var hpBarPatameters1 = SetOfStatic2DParameters(
         x = 0f,
         y = 0f,
-        xSize = 75f,
-        ySize = 25f,
+        xSize = 50f,
+        ySize = 12.5f,
         rotationAngle = 0f
 )
-
-var hpBarPatameters2 = SetOfStatic2DParameters(
-        x = 0f,
-        y = 0f,
-        xSize = 75f,
-        ySize = 25f,
-        rotationAngle = 0f
-)
-
 
 var characterParameters = SetOf2DParametersWithVelocity(
         x = 30f,

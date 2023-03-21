@@ -7,7 +7,6 @@ import demo.labyrinth.goblin.Goblin
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
-import engine.core.render.render2D.OpenGlObject2D
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
 import engine.core.texture.Texture2D
@@ -30,11 +29,11 @@ object LabyrinthInitializer {
             boundingBoxCollisionContext: BoundingBoxCollisionContext,
             tiledCollisionContext: TiledCollisionContext
     ) {
-        initCrateGraphics(renderProjection)
+        // initCrateGraphics(renderProjection)
         initCharacterGraphics(renderProjection, boundingBoxCollisionContext, tiledCollisionContext)
         initCampfireGraphics(renderProjection)
         initTileMapGraphics(renderProjection, screenWidth, screenHeight)
-        initGoblins(renderProjection, tiledCollisionContext)
+        initGoblins(renderProjection)
         initPhysics(boundingBoxCollisionContext, tiledCollisionContext)
     }
 
@@ -42,21 +41,10 @@ object LabyrinthInitializer {
             bbCollisionContext: BoundingBoxCollisionContext,
             tiledCollisionContext: TiledCollisionContext
     ) {
-
-        Character.addComponent(Character.boxCollider, characterParameters)
         Character.addComponent(Character.tiledCollider, characterParameters)
         tiledCollisionContext.addEntity(GameMap.graphicalComponent as Entity, GameMap.parameters)
-        tiledCollisionContext.addEntity(Character.it as Entity, characterParameters)
 
-        for (i in 0..1) {
-            Goblins.it[i].addComponent(
-                    Goblins.tiledColliders[i],
-                    goblinParameters[i]
-            )
-
-            tiledCollisionContext.addEntity(Goblins.it[i] as Entity, goblinParameters[i])
-        }
-
+        Character.addComponent(Character.boxCollider, characterParameters)
         bbCollisionContext.addEntity(Character.boundingBox as Entity, characterParameters)
     }
 
@@ -137,6 +125,7 @@ object LabyrinthInitializer {
 
         Character.boxCollider =
                 BoundingBoxCollider(
+                        Character.it as Entity,
                         Character.boundingBox!!,
                         characterParameters,
                         bbCollisionContext
@@ -144,6 +133,7 @@ object LabyrinthInitializer {
 
         Character.tiledCollider =
                 TiledCollider(
+                        Character.it as Entity,
                         characterParameters,
                         listOf("walking_layer", "walkable_objects_layer"),
                         tiledCollisionContext
@@ -153,31 +143,31 @@ object LabyrinthInitializer {
         Character.addComponent(Character.hp, characterParameters)
     }
 
-    private fun initCrateGraphics(renderProjection: Matrix4f) {
-        Crate.boundingBox = BoundingBox(
-                x = 400f,
-                y = 150f,
-                xSize = 70f,
-                ySize = 70f
-        ).apply {
-            shader = ShaderController.createBoundingBoxShader(renderProjection)
-        }
-
-        val texturePath = this.javaClass.getResource("/textures/obj_crate.png")!!.path
-        Crate.graphicalComponent = OpenGlObject2D(
-                texture2D = Texture2D.createInstance(texturePath),
-        ).apply {
-            shader = ShaderController.createTexturedShader(renderProjection)
-        }
-
-        Crate.it = object : CompositeEntity() {}
-
-        Crate.hp = HealthBar(crateParameters, hpBarPatameters2, renderProjection)
-
-        Crate.addComponent(Crate.graphicalComponent, crateParameters)
-        Crate.addComponent(Crate.hp, crateParameters)
-        Crate.addComponent(Crate.boundingBox, crateParameters)
-    }
+//    private fun initCrateGraphics(renderProjection: Matrix4f) {
+//        Crate.boundingBox = BoundingBox(
+//                x = 400f,
+//                y = 150f,
+//                xSize = 70f,
+//                ySize = 70f
+//        ).apply {
+//            shader = ShaderController.createBoundingBoxShader(renderProjection)
+//        }
+//
+//        val texturePath = this.javaClass.getResource("/textures/obj_crate.png")!!.path
+//        Crate.graphicalComponent = OpenGlObject2D(
+//                texture2D = Texture2D.createInstance(texturePath),
+//        ).apply {
+//            shader = ShaderController.createTexturedShader(renderProjection)
+//        }
+//
+//        Crate.it = object : CompositeEntity() {}
+//
+//        Crate.hp = HealthBar(crateParameters, hpBarPatameters2, renderProjection)
+//
+//        Crate.addComponent(Crate.graphicalComponent, crateParameters)
+//        Crate.addComponent(Crate.hp, crateParameters)
+//        Crate.addComponent(Crate.boundingBox, crateParameters)
+//    }
 
     private fun initCampfireGraphics(renderProjection: Matrix4f) {
         val frameSizeX = 0.2f
@@ -197,10 +187,7 @@ object LabyrinthInitializer {
         Campfire.addComponent(Campfire.graphicalComponent, campfireParameters)
     }
 
-    private fun initGoblins(
-            renderProjection: Matrix4f,
-            tiledCollisionContext: TiledCollisionContext
-    ) {
+    private fun initGoblins(renderProjection: Matrix4f) {
         val frameSizeX = 0.09f
         val frameSizeY = 0.2f
         val texturePath = this.javaClass.getResource("/textures/goblin.png")!!.path
@@ -215,8 +202,6 @@ object LabyrinthInitializer {
             ).apply {
                 shader = ShaderController.createBoundingBoxShader(renderProjection)
             }
-
-            Goblins.boundingBoxes.add(box)
 
             val animatedObject = AnimatedObject2D(
                     frameSizeX = frameSizeX,
@@ -238,12 +223,10 @@ object LabyrinthInitializer {
                     }
             )
 
-            Goblins.tiledColliders.add(
-                    TiledCollider(
-                            characterParameters,
-                            listOf("walking_layer", "walkable_objects_layer"),
-                            tiledCollisionContext
-                    )
+            val hp = HealthBar(goblinParameters[i], hpBarPatameters1, renderProjection)
+
+            Goblins.it[i].addComponent(
+                    hp, goblinParameters[i]
             )
         }
     }

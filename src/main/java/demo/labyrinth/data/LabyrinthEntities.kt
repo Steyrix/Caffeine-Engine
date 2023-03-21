@@ -119,8 +119,7 @@ object Crate : GameObject {
 object Goblins {
     val it: MutableList<CompositeEntity> = mutableListOf()
     val parameters: MutableList<SetOf2DParametersWithVelocity> = mutableListOf()
-    val boundingBoxes: MutableList<BoundingBox> = mutableListOf()
-    val tiledColliders: MutableList<TiledCollider> = mutableListOf()
+
     fun update(deltaTime: Float) {
         it.forEach { entity ->
             entity.update(deltaTime)
