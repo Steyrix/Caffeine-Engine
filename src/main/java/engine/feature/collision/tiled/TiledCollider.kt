@@ -10,7 +10,6 @@ import engine.feature.tiled.TileMap
 private const val EMPTY_TILE_VALUE = 0
 
 class TiledCollider(
-        override val holderEntity: Entity,
         private val parameters: SetOf2DParametersWithVelocity,
         private val nonCollisionLayers: List<String>,
         override var collisionContext: CollisionContext

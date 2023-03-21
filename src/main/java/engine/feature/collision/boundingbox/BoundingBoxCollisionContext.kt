@@ -6,9 +6,9 @@ import engine.feature.collision.CollisionContext
 
 class BoundingBoxCollisionContext : CollisionContext {
 
-    override val colliders: MutableList<Collider> = mutableListOf()
+    override val colliders: MutableSet<Collider> = mutableSetOf()
 
-    override val entities: MutableList<Entity> = mutableListOf()
+    override val entities: MutableSet<Entity> = mutableSetOf()
 
     override fun addCollider(collider: Collider) {
         if (collider !is BoundingBoxCollider) return

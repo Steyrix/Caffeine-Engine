@@ -46,14 +46,14 @@ object LabyrinthInitializer {
         Character.addComponent(Character.boxCollider, characterParameters)
         Character.addComponent(Character.tiledCollider, characterParameters)
 
-        for (i in 0..1) {
-            Goblins.it[i].addComponent(
-                    Goblins.boxColliders[i],
-                    goblinParameters[i]
-            )
-
-            bbCollisionContext.addEntity(Goblins.boundingBoxes[i] as Entity)
-        }
+//        for (i in 0..1) {
+//            Goblins.it[i].addComponent(
+//                    Goblins.boxColliders[i],
+//                    goblinParameters[i]
+//            )
+//
+//            bbCollisionContext.addEntity(Goblins.boundingBoxes[i] as Entity)
+//        }
 
         bbCollisionContext.addEntity(Character.boundingBox as Entity)
         tiledCollisionContext.addEntity(GameMap.graphicalComponent as Entity)
@@ -136,7 +136,6 @@ object LabyrinthInitializer {
 
         Character.boxCollider =
                 BoundingBoxCollider(
-                        Character.it as Entity,
                         Character.boundingBox!!,
                         characterParameters,
                         bbCollisionContext
@@ -144,7 +143,6 @@ object LabyrinthInitializer {
 
         Character.tiledCollider =
                 TiledCollider(
-                        Character.it as Entity,
                         characterParameters,
                         listOf("walking_layer", "walkable_objects_layer"),
                         tiledCollisionContext)
@@ -240,7 +238,6 @@ object LabyrinthInitializer {
 
             Goblins.boxColliders.add(
                     BoundingBoxCollider(
-                            Goblins.it[i] as Entity,
                             box,
                             goblinParameters[i],
                             bbCollisionContext)

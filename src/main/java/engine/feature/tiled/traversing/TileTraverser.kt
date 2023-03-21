@@ -31,11 +31,13 @@ class TileTraverser(
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
 
-        cooldownEvent.schedule(deltaTime)
+//        cooldownEvent.schedule(deltaTime)
+//
+//        if (isMovingCooldown) {
+//            avoidCollision()
+//        }
 
-        if (!isMovingCooldown) {
-            traverse()
-        }
+        traverse()
     }
 
     fun moveTo(targetPos: Point2D) {
@@ -144,6 +146,10 @@ class TileTraverser(
     private fun dropVelocity() {
         params.velocityY = 0f
         params.velocityX = 0f
+    }
+
+    private fun avoidCollision() {
+
     }
 
     override fun reactToCollision() {

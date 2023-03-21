@@ -4,9 +4,9 @@ import engine.core.entity.Entity
 
 interface CollisionContext {
 
-    val colliders: MutableList<Collider>
+    val colliders: MutableSet<Collider>
 
-    val entities: MutableList<Entity>
+    val entities: MutableSet<Entity>
 
     fun addCollider(collider: Collider) {
         colliders.add(collider)
@@ -26,7 +26,6 @@ interface CollisionContext {
             entities.forEach { entity ->
                 if (collider.isColliding(entity)) {
                     collider.reactToCollision()
-                    (collider.holderEntity as? CollisionReactive)?.reactToCollision()
 
                     if (entity is CollisionReactive) {
                         entity.reactToCollision()
