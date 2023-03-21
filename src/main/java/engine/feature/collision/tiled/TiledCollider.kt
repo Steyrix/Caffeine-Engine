@@ -24,25 +24,31 @@ class TiledCollider(
     }
 
     override fun isColliding(entity: Entity): Boolean {
-        (entity as? TileMap)?.let {
-            val centerX = parameters.x + parameters.xSize / 2
-            val centerY = parameters.y + parameters.ySize / 2
-            val bottomY = parameters.y + parameters.ySize
+        return if (entity is TileMap) {
+            isCollidingWithMapObjects(entity)
+        } else {
+            return false
+        }
+    }
 
-            var isCenterColliding = true
-            var isBottomColliding = true
+    private fun isCollidingWithMapObjects(map: TileMap): Boolean {
+        val centerX = parameters.x + parameters.xSize / 2
+        val centerY = parameters.y + parameters.ySize / 2
+        val bottomY = parameters.y + parameters.ySize
 
-            nonCollisionLayers.forEach { layer ->
-                if (it.getTileValue(centerX, centerY, layer) >= EMPTY_TILE_VALUE) isCenterColliding = false
-                if (it.getTileValue(centerX, bottomY, layer) >= EMPTY_TILE_VALUE) isBottomColliding = false
-            }
+        var isCenterColliding = true
+        var isBottomColliding = true
 
-            if (isCenterColliding || isBottomColliding) {
-                reactToCollision()
-                return true
-            } else {
-                previousTilePos = Point2D(parameters.x, parameters.y)
-            }
+        nonCollisionLayers.forEach { layer ->
+            if (map.getTileValue(centerX, centerY, layer) >= EMPTY_TILE_VALUE) isCenterColliding = false
+            if (map.getTileValue(centerX, bottomY, layer) >= EMPTY_TILE_VALUE) isBottomColliding = false
+        }
+
+        if (isCenterColliding || isBottomColliding) {
+            reactToCollision()
+            return true
+        } else {
+            previousTilePos = Point2D(parameters.x, parameters.y)
         }
 
         return false
