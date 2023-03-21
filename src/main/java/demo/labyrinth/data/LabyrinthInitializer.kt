@@ -34,7 +34,7 @@ object LabyrinthInitializer {
         initCharacterGraphics(renderProjection, boundingBoxCollisionContext, tiledCollisionContext)
         initCampfireGraphics(renderProjection)
         initTileMapGraphics(renderProjection, screenWidth, screenHeight)
-        initGoblins(renderProjection, boundingBoxCollisionContext)
+        initGoblins(renderProjection, tiledCollisionContext)
         initPhysics(boundingBoxCollisionContext, tiledCollisionContext)
     }
 
@@ -45,18 +45,19 @@ object LabyrinthInitializer {
 
         Character.addComponent(Character.boxCollider, characterParameters)
         Character.addComponent(Character.tiledCollider, characterParameters)
+        tiledCollisionContext.addEntity(GameMap.graphicalComponent as Entity, GameMap.parameters)
+        tiledCollisionContext.addEntity(Character.it as Entity, characterParameters)
 
-//        for (i in 0..1) {
-//            Goblins.it[i].addComponent(
-//                    Goblins.boxColliders[i],
-//                    goblinParameters[i]
-//            )
-//
-//            bbCollisionContext.addEntity(Goblins.boundingBoxes[i] as Entity)
-//        }
+        for (i in 0..1) {
+            Goblins.it[i].addComponent(
+                    Goblins.tiledColliders[i],
+                    goblinParameters[i]
+            )
+
+            tiledCollisionContext.addEntity(Goblins.it[i] as Entity, goblinParameters[i])
+        }
 
         bbCollisionContext.addEntity(Character.boundingBox as Entity, characterParameters)
-        tiledCollisionContext.addEntity(GameMap.graphicalComponent as Entity, GameMap.parameters)
     }
 
     private fun initTileMapGraphics(
@@ -145,7 +146,8 @@ object LabyrinthInitializer {
                 TiledCollider(
                         characterParameters,
                         listOf("walking_layer", "walkable_objects_layer"),
-                        tiledCollisionContext)
+                        tiledCollisionContext
+                )
 
         Character.addComponent(Character.boundingBox, characterParameters)
         Character.addComponent(Character.hp, characterParameters)
@@ -197,7 +199,7 @@ object LabyrinthInitializer {
 
     private fun initGoblins(
             renderProjection: Matrix4f,
-            bbCollisionContext: BoundingBoxCollisionContext
+            tiledCollisionContext: TiledCollisionContext
     ) {
         val frameSizeX = 0.09f
         val frameSizeY = 0.2f
@@ -236,17 +238,13 @@ object LabyrinthInitializer {
                     }
             )
 
-            Goblins.boxColliders.add(
-                    BoundingBoxCollider(
-                            box,
-                            goblinParameters[i],
-                            bbCollisionContext)
+            Goblins.tiledColliders.add(
+                    TiledCollider(
+                            characterParameters,
+                            listOf("walking_layer", "walkable_objects_layer"),
+                            tiledCollisionContext
+                    )
             )
         }
     }
-//    private fun characterOnCollision(box: BoundingBox) {
-//        if (box == Crate.boundingBox) {
-//            val player = Character.it as Player
-//        }
-//    }
 }
