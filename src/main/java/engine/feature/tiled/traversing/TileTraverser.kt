@@ -1,9 +1,7 @@
 package engine.feature.tiled.traversing
 
 import engine.core.entity.CompositeEntity
-import engine.core.loop.AccumulatedTimeEvent
 import engine.core.update.SetOf2DParametersWithVelocity
-import engine.feature.collision.CollisionReactive
 import engine.feature.geometry.Point2D
 import engine.feature.tiled.TileMap
 import kotlin.math.abs
@@ -12,7 +10,7 @@ class TileTraverser(
         private val tileGraph: Map<Int, List<Int>>,
         private val tileMap: TileMap,
         private val params: SetOf2DParametersWithVelocity
-) : CompositeEntity(), CollisionReactive {
+) : CompositeEntity() {
 
     companion object {
         private const val INDEX_NOT_FOUND = -1
@@ -22,21 +20,9 @@ class TileTraverser(
     private var currentDestination: Int = INDEX_NOT_FOUND
     private var velocity = 5f
 
-    private var isMovingCooldown = false
-
-    private val cooldownEvent = AccumulatedTimeEvent(timeLimit = 2f) {
-        isMovingCooldown = false
-    }
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
-
-//        cooldownEvent.schedule(deltaTime)
-//
-//        if (isMovingCooldown) {
-//            avoidCollision()
-//        }
-
         traverse()
     }
 
@@ -146,13 +132,5 @@ class TileTraverser(
     private fun dropVelocity() {
         params.velocityY = 0f
         params.velocityX = 0f
-    }
-
-    private fun avoidCollision() {
-
-    }
-
-    override fun reactToCollision() {
-        isMovingCooldown = true
     }
 }
