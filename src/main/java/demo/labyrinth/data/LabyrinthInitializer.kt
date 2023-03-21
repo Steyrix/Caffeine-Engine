@@ -55,8 +55,8 @@ object LabyrinthInitializer {
 //            bbCollisionContext.addEntity(Goblins.boundingBoxes[i] as Entity)
 //        }
 
-        bbCollisionContext.addEntity(Character.boundingBox as Entity)
-        tiledCollisionContext.addEntity(GameMap.graphicalComponent as Entity)
+        bbCollisionContext.addEntity(Character.boundingBox as Entity, characterParameters)
+        tiledCollisionContext.addEntity(GameMap.graphicalComponent as Entity, GameMap.parameters)
     }
 
     private fun initTileMapGraphics(
