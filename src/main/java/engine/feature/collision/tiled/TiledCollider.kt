@@ -16,6 +16,7 @@ class TiledCollider(
 ) : Collider {
 
     private var previousTilePos: Point2D? = null
+
     override fun reactToCollision() {
         parameters.x = previousTilePos?.x ?: parameters.x
         parameters.y = previousTilePos?.y ?: parameters.y
@@ -27,7 +28,7 @@ class TiledCollider(
         return if (entity is TileMap) {
             isCollidingWithMapObjects(entity)
         } else {
-            return false
+            isCollidingWithEntity(entity)
         }
     }
 
@@ -45,6 +46,29 @@ class TiledCollider(
         }
 
         if (isCenterColliding || isBottomColliding) {
+            reactToCollision()
+            return true
+        } else {
+            previousTilePos = Point2D(parameters.x, parameters.y)
+        }
+
+        return false
+    }
+
+    private fun isCollidingWithEntity(entity: Entity): Boolean {
+        val entityParams = collisionContext.getParams(entity) ?: return false
+        val map = (collisionContext as TiledCollisionContext).getMap() ?: return false
+
+        val centerX = parameters.x + parameters.xSize / 2
+        val centerY = parameters.y + parameters.ySize / 2
+
+        val entityCenterX = entityParams.x + entityParams.xSize / 2
+        val entityCenterY = entityParams.y + entityParams.ySize / 2
+
+        val thisTileIndex = map.getTileIndex(centerX, centerY)
+        val entityTileIdx = map.getTileIndex(entityCenterX, entityCenterY)
+
+        if (thisTileIndex == entityTileIdx) {
             reactToCollision()
             return true
         } else {
