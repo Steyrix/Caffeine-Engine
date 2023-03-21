@@ -10,16 +10,17 @@ import engine.feature.tiled.TileMap
 private const val EMPTY_TILE_VALUE = 0
 
 class TiledCollider(
+        override val holderEntity: Entity,
         private val parameters: SetOf2DParametersWithVelocity,
         private val nonCollisionLayers: List<String>,
         override var collisionContext: CollisionContext
 ) : Collider {
 
-    private var previousTilePos: Point2D? = null
+    private var previousTilePos: Point2D = Point2D(parameters.x, parameters.y)
 
     override fun reactToCollision() {
-        parameters.x = previousTilePos?.x ?: parameters.x
-        parameters.y = previousTilePos?.y ?: parameters.y
+        parameters.x = previousTilePos.x
+        parameters.y = previousTilePos.y
         parameters.velocityX = 0f
         parameters.velocityY = 0f
     }
@@ -28,7 +29,7 @@ class TiledCollider(
         return if (entity is TileMap) {
             isCollidingWithMapObjects(entity)
         } else {
-            isCollidingWithEntity(entity)
+            false
         }
     }
 
@@ -46,30 +47,6 @@ class TiledCollider(
         }
 
         if (isCenterColliding || isBottomColliding) {
-            reactToCollision()
-            return true
-        } else {
-            previousTilePos = Point2D(parameters.x, parameters.y)
-        }
-
-        return false
-    }
-
-    private fun isCollidingWithEntity(entity: Entity): Boolean {
-        val entityParams = collisionContext.getParams(entity) ?: return false
-        val map = (collisionContext as TiledCollisionContext).getMap() ?: return false
-
-        val centerX = parameters.x + parameters.xSize / 2
-        val centerY = parameters.y + parameters.ySize / 2
-
-        val entityCenterX = entityParams.x + entityParams.xSize / 2
-        val entityCenterY = entityParams.y + entityParams.ySize / 2
-
-        val thisTileIndex = map.getTileIndex(centerX, centerY)
-        val entityTileIdx = map.getTileIndex(entityCenterX, entityCenterY)
-
-        if (thisTileIndex == entityTileIdx) {
-            reactToCollision()
             return true
         } else {
             previousTilePos = Point2D(parameters.x, parameters.y)

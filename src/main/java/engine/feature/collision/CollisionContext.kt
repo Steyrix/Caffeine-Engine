@@ -37,12 +37,8 @@ interface CollisionContext {
     fun update() {
         colliders.forEach { collider ->
             entities.forEach { entity ->
-                if (collider.isColliding(entity)) {
+                if (entity != collider.holderEntity && collider.isColliding(entity)) {
                     collider.reactToCollision()
-
-                    if (entity is CollisionReactive) {
-                        entity.reactToCollision()
-                    }
                 }
             }
         }

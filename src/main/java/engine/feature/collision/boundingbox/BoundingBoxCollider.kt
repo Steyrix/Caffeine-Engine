@@ -6,6 +6,7 @@ import engine.feature.collision.Collider
 import engine.feature.collision.CollisionContext
 
 class BoundingBoxCollider(
+        override val holderEntity: Entity,
         private val box: BoundingBox,
         private val parameters: SetOf2DParametersWithVelocity,
         override var collisionContext: CollisionContext,
