@@ -15,10 +15,10 @@ his project, on the other hand, will use LWJGL OpenGL binding, since the latter 
 - Encapsulate initializations of LabyrinthDemo :white_check_mark:
 - Wrap shader uniforms (create some kind of class for it)
 - Think of some kind of collision which interactions will be observed :white_check_mark:
-- Implement speculative collider
 - Think of storing animation frame in a set of parameters :white_check_mark:
 - Preprocess tiled map to implement simple AI :white_check_mark:
 - Improve composite entity pattern :white_check_mark:
+- Implement continuous collision detection for bounding box based collision contexts
 
 ## AI TODO List:
 - Think of how to determine the vector of movement from tile to tile in a given path :white_check_mark:
