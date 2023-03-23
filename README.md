@@ -19,6 +19,7 @@ his project, on the other hand, will use LWJGL OpenGL binding, since the latter 
 - Preprocess tiled map to implement simple AI :white_check_mark:
 - Improve composite entity pattern :white_check_mark:
 - Implement continuous collision detection for bounding box based collision contexts
+- Implement several bounding box collision detection algorithms
 
 ## AI TODO List:
 - Think of how to determine the vector of movement from tile to tile in a given path :white_check_mark:
