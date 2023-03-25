@@ -2,6 +2,7 @@ package engine.feature.collision.tiled
 
 import engine.core.entity.Entity
 import engine.core.update.SetOf2DParametersWithVelocity
+import engine.core.update.SetOfStatic2DParameters
 import engine.feature.collision.Collider
 import engine.feature.collision.CollisionContext
 import engine.feature.geometry.Point2D
@@ -12,6 +13,7 @@ private const val EMPTY_TILE_VALUE = 0
 class TiledCollider(
         override val holderEntity: Entity,
         private val parameters: SetOf2DParametersWithVelocity,
+        private val mapParameters: SetOfStatic2DParameters,
         private val nonCollisionLayers: List<String>,
         override var collisionContext: CollisionContext
 ) : Collider {
@@ -46,7 +48,13 @@ class TiledCollider(
             if (map.getTileValue(centerX, bottomY, layer) >= EMPTY_TILE_VALUE) isBottomColliding = false
         }
 
-        if (isCenterColliding || isBottomColliding) {
+        val isOutOfMap = when {
+//            centerX < 0 || centerX >= mapParameters.xSize -> true
+//            centerY < 0 || centerY >= mapParameters.ySize -> true
+            else -> false
+        }
+
+        if (isCenterColliding || isBottomColliding || isOutOfMap) {
             return true
         } else {
             previousTilePos = Point2D(parameters.x, parameters.y)

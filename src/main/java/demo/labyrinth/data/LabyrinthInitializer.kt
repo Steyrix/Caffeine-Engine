@@ -30,9 +30,9 @@ object LabyrinthInitializer {
             tiledCollisionContext: TiledCollisionContext
     ) {
         // initCrateGraphics(renderProjection)
+        initTileMapGraphics(renderProjection, screenWidth, screenHeight)
         initCharacterGraphics(renderProjection, boundingBoxCollisionContext, tiledCollisionContext)
         initCampfireGraphics(renderProjection)
-        initTileMapGraphics(renderProjection, screenWidth, screenHeight)
         initGoblins(renderProjection)
         initPhysics(boundingBoxCollisionContext, tiledCollisionContext)
     }
@@ -135,6 +135,7 @@ object LabyrinthInitializer {
                 TiledCollider(
                         Character.it as Entity,
                         characterParameters,
+                        GameMap.parameters,
                         listOf("walking_layer", "walkable_objects_layer"),
                         tiledCollisionContext
                 )
