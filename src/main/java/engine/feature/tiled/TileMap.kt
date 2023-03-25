@@ -54,6 +54,9 @@ class TileMap(
     private var widthInTiles: Int = 0
     private var heightInTiles: Int = 0
 
+    val tilesCount: Int
+        get() = widthInTiles * heightInTiles
+
     init {
         if (layers.isEmpty()) throw IllegalStateException("Cannot initialize map with empty list of layers")
 
