@@ -9,7 +9,8 @@ import kotlin.math.abs
 class TileTraverser(
         private val tileGraph: Map<Int, List<Int>>,
         private val tileMap: TileMap,
-        private val params: SetOf2DParametersWithVelocity
+        private val params: SetOf2DParametersWithVelocity,
+        private val flowField: FlowField
 ) : CompositeEntity() {
 
     companion object {
@@ -19,7 +20,6 @@ class TileTraverser(
     private var currentPath: ArrayDeque<Int> = ArrayDeque()
     private var currentDestination: Int = INDEX_NOT_FOUND
     private var velocity = 5f
-
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
@@ -35,7 +35,7 @@ class TileTraverser(
         currentDestination = destination
         dropVelocity()
 
-        val nextPath = ShortestPath.pathTo(
+        val nextPath = PathFinder.pathTo(
                 tileGraph,
                 start,
                 destination

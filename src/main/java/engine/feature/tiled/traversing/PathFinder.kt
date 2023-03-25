@@ -1,6 +1,6 @@
 package engine.feature.tiled.traversing
 
-object ShortestPath {
+object PathFinder {
 
     fun pathTo(
             graph: Map<Int, List<Int>>,
