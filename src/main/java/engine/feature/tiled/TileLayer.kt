@@ -35,7 +35,10 @@ class TileLayer(
     }
 
     fun getTileValueByIndex(index: Int): Int {
-        return if (index <= tileIdsData.size - 1) tileIdsData[index]
-        else -1
+        return when {
+            index < 0 || index >= tileIdsData.size -> -1
+            index <= tileIdsData.size - 1 -> tileIdsData[index]
+            else -> - 1
+        }
     }
 }
