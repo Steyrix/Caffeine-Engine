@@ -12,6 +12,7 @@ class TiledCollisionContext : CollisionContext {
     override val entities: MutableSet<Entity> = mutableSetOf()
 
     override val entitiesParams: MutableMap<Entity, SetOfParameters> = mutableMapOf()
+
     override fun addCollider(collider: Collider) {
         if (collider !is TiledCollider) return
         super.addCollider(collider)
