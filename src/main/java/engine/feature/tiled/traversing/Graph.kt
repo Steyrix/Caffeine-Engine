@@ -1,7 +1,7 @@
 package engine.feature.tiled.traversing
 
 class Node<T>(
-        val adjacencyNodes: MutableSet<Node<T>>,
+        val adjacencyNodes: MutableSet<T>,
         val value: T
 )
 
