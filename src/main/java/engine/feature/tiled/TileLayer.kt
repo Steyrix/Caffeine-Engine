@@ -5,6 +5,7 @@ import engine.core.render.render2D.OpenGlObject2D
 import engine.core.shader.Shader
 import engine.core.update.SetOfParameters
 import engine.feature.tiled.property.Property
+import engine.feature.tiled.traversing.Graph
 
 class TileLayer(
         val name: String,
@@ -25,6 +26,8 @@ class TileLayer(
     private val graphicalComponent: OpenGlObject2D = TileLayerInitializer.genGraphicalComponent(this)
 
     val graph: Map<Int, List<Int>> = TileLayerInitializer.generateTileGraph(this)
+
+    val graphV2: Graph<Int> = TileLayerInitializer.genGraphV2(listOf(this))
 
     override fun updateParameters(parameters: SetOfParameters) {
         graphicalComponent.updateParameters(parameters)
