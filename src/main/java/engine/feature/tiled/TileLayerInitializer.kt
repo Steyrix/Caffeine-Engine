@@ -69,6 +69,7 @@ object TileLayerInitializer {
         return out
     }
 
+    // TODO: graphs merging
     internal fun genGraphV2(layers: List<TileLayer>): Graph<Int> {
         val dataSets = layers.map { it.tileIdsData }
 
