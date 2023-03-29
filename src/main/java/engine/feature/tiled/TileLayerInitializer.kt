@@ -40,27 +40,33 @@ object TileLayerInitializer {
         val data = layer.tileIdsData
 
         for (num in data.indices) {
-            out[num] = mutableListOf()
-            if (data[num] != EMPTY_TILE_ID) {
-                if (num != data.size - 1) {
-                    val target = num + 1
-                    if (data[target] != EMPTY_TILE_ID) out[num]?.add(target)
-                }
+            out[num] = getAdjacentTiles(data, layer.widthInTiles, num)
+        }
 
-                if (num != 0) {
-                    val target = num - 1
-                    if (data[target] != EMPTY_TILE_ID) out[num]?.add(target)
-                }
+        return out
+    }
 
-                if (num + layer.widthInTiles < data.size) {
-                    val target = num + layer.widthInTiles
-                    if (data[target] != EMPTY_TILE_ID) out[num]?.add(target)
-                }
+    private fun getAdjacentTiles(
+            data: List<Int>,
+            widthInTiles: Int,
+            num: Int
+    ): MutableList<Int> {
+        val predicates = listOf(
+                { i: Int -> i < data.size - 1 } to { i: Int -> i + 1 },
+                { i: Int -> i + widthInTiles < data.size } to { i: Int -> i + widthInTiles },
+                { i: Int -> i + widthInTiles + 1 < data.size } to { i: Int -> i + widthInTiles + 1 },
+                { i: Int -> i + widthInTiles - 1 < data.size && widthInTiles > 1 } to { i: Int -> i + widthInTiles - 1 },
+                { i: Int -> i - widthInTiles + 1 >= 0 && widthInTiles > 1 } to { i: Int -> i - widthInTiles + 1 },
+                { i: Int -> i - widthInTiles - 1 >= 0 } to { i: Int -> i - widthInTiles - 1 },
+                { i: Int -> i - widthInTiles >= 0 } to { i: Int -> i - widthInTiles },
+                { i: Int -> i > 0 } to { i: Int -> i - 1 },
+        )
 
-                if (num - layer.widthInTiles >= 0) {
-                    val target = num - layer.widthInTiles
-                    if (data[target] != EMPTY_TILE_ID) out[num]?.add(target)
-                }
+        val out = mutableListOf<Int>()
+
+        predicates.forEach {
+            if (it.first(num) && data[num] != EMPTY_TILE_ID) {
+                out.add(it.second(num))
             }
         }
 
