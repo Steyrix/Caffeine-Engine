@@ -80,7 +80,7 @@ object TileLayerInitializer {
 
         dataSets.forEach { data ->
             for (num in data.indices) {
-                val predicates = generatePredicates(data, widthInTiles)
+                val predicates = getPredicates(data, widthInTiles)
 
                 if (data[num] != EMPTY_TILE_ID) {
                     val node = Node(mutableSetOf(), num)
@@ -99,7 +99,7 @@ object TileLayerInitializer {
         return result
     }
 
-    private fun generatePredicates(
+    private fun getPredicates(
             data: List<Int>,
             widthInTiles: Int
     ): Map<(Int) -> Boolean, (Int) -> Int> {
