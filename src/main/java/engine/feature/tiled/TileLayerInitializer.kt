@@ -2,8 +2,6 @@ package engine.feature.tiled
 
 import engine.core.render.render2D.OpenGlObject2D
 import engine.feature.geometry.Point2D
-import engine.feature.tiled.traversing.Graph
-import engine.feature.tiled.traversing.Node
 
 object TileLayerInitializer {
     private const val EMPTY_TILE_ID = -1
@@ -67,62 +65,6 @@ object TileLayerInitializer {
         }
 
         return out
-    }
-
-    // TODO: graphs merging
-    internal fun genGraphV2(layers: List<TileLayer>): Graph<Int> {
-        val dataSets = layers.map { it.tileIdsData }
-
-        if (layers.isEmpty()) return Graph(mutableSetOf())
-
-        val widthInTiles = layers.first().widthInTiles
-
-        val result = Graph<Int>(mutableSetOf())
-
-        dataSets.forEach { data ->
-            for (num in data.indices) {
-                val predicates = getPredicates(data, widthInTiles)
-
-                if (data[num] != EMPTY_TILE_ID) {
-                    val node = Node(mutableSetOf(), num)
-
-                    predicates.forEach {
-                        if (it.key(num)) {
-                            node.adjacencyNodes.add(it.value(num))
-                        }
-                    }
-
-                    result.nodes.add(node)
-                }
-            }
-        }
-
-        return result
-    }
-
-    private fun getPredicates(
-            data: List<Int>,
-            widthInTiles: Int
-    ): Map<(Int) -> Boolean, (Int) -> Int> {
-        val notEmpty = { i: Int -> data[i] != EMPTY_TILE_ID }
-        return mapOf(
-                { i: Int -> i + 1 < data.size && notEmpty(i + 1) }
-                        to { i: Int -> i + 1 },
-                { i: Int -> i - 1 >= 0 && notEmpty(i - 1) }
-                        to { i: Int -> i - 1 },
-                { i: Int -> i + widthInTiles < data.size && notEmpty(i + widthInTiles) }
-                        to { i: Int -> i + widthInTiles },
-                { i: Int -> i - widthInTiles >= 0 && notEmpty(i - widthInTiles) }
-                        to { i: Int -> i - widthInTiles },
-                { i: Int -> i - widthInTiles - 1 >= 0 && widthInTiles > 2 && notEmpty(i - widthInTiles - 1) }
-                        to { i: Int -> i - widthInTiles - 1 },
-                { i: Int -> i - widthInTiles + 1 >= 0 && widthInTiles > 2 && notEmpty(i - widthInTiles + 1) }
-                        to { i: Int -> i - widthInTiles + 2 },
-                { i: Int -> i + widthInTiles + 1 < data.size && widthInTiles > 2 && notEmpty(i + widthInTiles + 1) }
-                        to { i: Int -> i + widthInTiles + 1 },
-                { i: Int -> i + widthInTiles - 1 < data.size && widthInTiles > 2 && notEmpty(i + widthInTiles - 1) }
-                        to { i: Int -> i + widthInTiles - 2 },
-        )
     }
 
     private fun getPositionByTileIndex(num: Int, widthInTiles: Int): Point2D {

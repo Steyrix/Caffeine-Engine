@@ -6,6 +6,7 @@ import engine.core.shader.Shader
 import engine.core.update.SetOfStatic2DParameters
 import engine.core.update.SetOfParameters
 import engine.feature.geometry.Point2D
+import engine.feature.tiled.traversing.Graph
 import kotlin.math.roundToInt
 
 // TODO: remove doc for properties and rename them for clearance
@@ -75,6 +76,10 @@ class TileMap(
 
     fun getGraphOfLayer(name: String): Map<Int, List<Int>> {
         return layersMap[name]?.graph ?: throw IllegalStateException("Layer with name $name not found")
+    }
+
+    fun getGraphOfLayerV2(name: String): Graph<Int> {
+        return layersMap[name]?.graphV2 ?: throw IllegalStateException("Layer with name $name not found")
     }
 
     fun getLayerByName(name: String): TileLayer = layersMap[name]

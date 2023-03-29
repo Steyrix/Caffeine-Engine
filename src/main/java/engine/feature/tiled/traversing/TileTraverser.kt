@@ -10,7 +10,7 @@ class TileTraverser(
         private val tileGraph: Map<Int, List<Int>>,
         private val tileMap: TileMap,
         private val params: SetOf2DParametersWithVelocity,
-        private val flowField: FlowField
+        private val flowField: FlowField? = null
 ) : CompositeEntity() {
 
     companion object {
