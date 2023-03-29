@@ -8,7 +8,7 @@ import kotlin.math.abs
 
 // todo: use single instance of tileGraph for all entities in a context
 class TileTraverser(
-        tileGraph: Map<Int, List<Int>>,
+        private val graph: TileGraph,
         private val tileMap: TileMap,
         private val params: SetOf2DParametersWithVelocity
 ) : CompositeEntity() {
@@ -20,8 +20,6 @@ class TileTraverser(
     private var currentPath: ArrayDeque<Int> = ArrayDeque()
     private var currentDestination: Int = INDEX_NOT_FOUND
     private var velocity = 5f
-
-    private val graph = TileGraph(tileGraph)
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)

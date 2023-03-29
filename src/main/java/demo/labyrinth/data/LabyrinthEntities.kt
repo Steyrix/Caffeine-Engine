@@ -13,6 +13,7 @@ import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.collision.boundingbox.BoundingBoxCollider
 import engine.feature.collision.tiled.TiledCollider
 import engine.feature.tiled.TileMap
+import engine.feature.tiled.traversing.TileGraph
 import engine.feature.tiled.traversing.TileTraverser
 
 interface GameObject {
@@ -49,14 +50,16 @@ object GameMap : GameObject {
     override var it: CompositeEntity? = null
     var graphicalComponent: TileMap? = null
     set(value) {
-        graph = value?.getGraphOfLayer("walking_layer")
-        field = value
+        value?.let {
+            tileGraph = TileGraph(value.getGraphOfLayer("walking_layer"))
+            field = value
+        }
     }
 
     var parameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
             0f, 0f, 0f, 0f, 0f
     )
-    var graph: Map<Int, List<Int>>? = null
+    var tileGraph: TileGraph? = null
 
     private val lightBlinking = AccumulatedTimeEvent(
             timeLimit = lightBlinkingTimeLimit
@@ -135,7 +138,7 @@ object Goblins {
 
 fun createTileTraverser(params: SetOf2DParametersWithVelocity): TileTraverser {
     return TileTraverser(
-            GameMap.graph!!,
+            GameMap.tileGraph!!,
             GameMap.graphicalComponent!!,
             params
     )
