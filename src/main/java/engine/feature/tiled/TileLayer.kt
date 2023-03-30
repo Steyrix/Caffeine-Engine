@@ -24,7 +24,7 @@ class TileLayer(
 
     private val graphicalComponent: OpenGlObject2D = TileLayerInitializer.genGraphicalComponent(this)
 
-    val graph: Map<Int, List<Int>> = TileLayerInitializer.generateTileGraph(this)
+    val graph: Map<Int, List<Int>> = TileLayerInitializer.generateTileGraph(listOf(this))
 
     override fun updateParameters(parameters: SetOfParameters) {
         graphicalComponent.updateParameters(parameters)
