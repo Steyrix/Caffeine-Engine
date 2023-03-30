@@ -65,8 +65,8 @@ object PathFinder {
     ): ArrayDeque<Int> {
         if (graph.nodes[destination].isNullOrEmpty() || graph.nodes[start].isNullOrEmpty()) return ArrayDeque()
 
-        val finalDestination = if (graph.getDistance(destination) > TileGraph.DEFAULT_DISTANCE) {
-            graph.getClosestAdjacent(destination)
+        val finalDestination = if (graph.getCost(destination) > TileGraph.DEFAULT_COST) {
+            graph.getCheapestAdjacent(destination)
         } else {
             destination
         }
@@ -81,7 +81,7 @@ object PathFinder {
         var previous = finalDestination
         while (pred[previous] != -1) {
             out.addFirst(pred[previous])
-            graph.increaseDistance(pred[previous])
+            graph.increaseCost(pred[previous])
             previous = pred[previous]
         }
 
@@ -104,9 +104,9 @@ object PathFinder {
             queue.remove(node)
 
             graph.nodes[node]!!.forEach {
-                val currDistance = dist[node] + (graph.distances[it] ?: 0)
-                if (currDistance < dist[it]) {
-                    dist[it] = currDistance
+                val currCost = dist[node] + (graph.costs[it] ?: 0)
+                if (currCost < dist[it]) {
+                    dist[it] = currCost
                     pred[it] = node
                 }
             }

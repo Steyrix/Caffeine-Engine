@@ -81,7 +81,7 @@ class TileTraverser(
     private fun getActualNode(it: ArrayDeque<Int>): Int {
         var node = it.first()
         while (it.isNotEmpty() && tileIsReached(node)) {
-            graph.decreaseDistance(node)
+            graph.decreaseCost(node)
             it.removeFirst()
             if (it.isNotEmpty()) {
                 node = it.first()

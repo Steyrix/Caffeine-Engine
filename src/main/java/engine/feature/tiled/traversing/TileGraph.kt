@@ -4,43 +4,43 @@ class TileGraph(
         val nodes: Map<Int, List<Int>>
 ) {
     companion object {
-        const val DEFAULT_DISTANCE = 1
+        const val DEFAULT_COST = 1
     }
 
     val distinct: MutableSet<Int> = mutableSetOf()
 
-    val distances: MutableMap<Int, Int> = mutableMapOf()
+    val costs: MutableMap<Int, Int> = mutableMapOf()
 
     init {
         nodes.forEach {
-            distances[it.key] = DEFAULT_DISTANCE
+            costs[it.key] = DEFAULT_COST
             distinct.add(it.key)
         }
     }
 
-    fun increaseDistance(target: Int) {
-        distances[target] = distances.getOrDefault(target, DEFAULT_DISTANCE) + 1
+    fun increaseCost(target: Int) {
+        costs[target] = costs.getOrDefault(target, DEFAULT_COST) + 1
     }
 
-    fun decreaseDistance(target: Int) {
-        distances[target] = if (distances[target] == 0) {
+    fun decreaseCost(target: Int) {
+        costs[target] = if (costs[target] == 0) {
             0
         } else {
-            distances.getOrDefault(target, 0) - 1
+            costs.getOrDefault(target, 0) - 1
         }
     }
 
-    fun getDistance(target: Int): Int {
-        return distances[target] ?: DEFAULT_DISTANCE
+    fun getCost(target: Int): Int {
+        return costs[target] ?: DEFAULT_COST
     }
 
-    fun getClosestAdjacent(target: Int): Int {
+    fun getCheapestAdjacent(target: Int): Int {
         var min = Int.MAX_VALUE
         var out = target
         nodes[target]?.forEach {
-            if (distances.getOrDefault(it, min) < min) {
+            if (costs.getOrDefault(it, min) < min) {
                 out = it
-                min = distances.getOrDefault(it, min)
+                min = costs.getOrDefault(it, min)
             }
         }
 
