@@ -51,7 +51,12 @@ object GameMap : GameObject {
     var graphicalComponent: TileMap? = null
     set(value) {
         value?.let {
-            tileGraph = TileGraph(value.getGraphOfLayer("walking_layer"))
+            tileGraph = TileGraph(
+                    value.getGraph(
+                            listOf("walking_layer", "walkable_objects_layer")
+                    )
+            )
+
             field = value
         }
     }
