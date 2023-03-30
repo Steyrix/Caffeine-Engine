@@ -23,8 +23,8 @@ his project, on the other hand, will use LWJGL OpenGL binding, since the latter 
 
 ## AI TODO List:
 - Think of how to determine the vector of movement from tile to tile in a given path :white_check_mark:
-- Implement sliding window for representing a path as a graph, each vertex of which can represent multiple tiles
+- Implement sliding window for representing a path as a graph, each vertex of which can represent multiple tiles (not needed)
 - Implement path traversing behavior, which will be responsible for object moving between graph vertices :white_check_mark:
 - Shortest path finding algorithm :white_check_mark:
 - Fix retraversing graph nodes in TileTraverser :white_check_mark:
-- Fix interaction between TileTraverser and BoundingBoxCollider
+- Fix interaction between TileTraverser and BoundingBoxCollider (not needed)
