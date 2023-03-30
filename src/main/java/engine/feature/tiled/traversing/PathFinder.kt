@@ -97,15 +97,15 @@ object PathFinder {
             val node = queue.minByOrNull { dist[it] } ?: 0
             queue.remove(node)
 
-            if (node == destination) return true
-
             graph.nodes[node]!!.forEach {
                 val currDistance = dist[node] + (graph.distances[it] ?: 0)
-                if (currDistance < dist[node]) {
-                    dist[node] = currDistance
-                    pred[node] = it
+                if (currDistance < dist[it]) {
+                    dist[it] = currDistance
+                    pred[it] = node
                 }
             }
+
+            if (node == destination) return true
         }
 
         return false
