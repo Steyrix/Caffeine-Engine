@@ -73,10 +73,6 @@ class TileMap(
         }
     }
 
-    fun getGraphOfLayer(name: String): Map<Int, List<Int>> {
-        return layersMap[name]?.graph ?: throw IllegalStateException("Layer with name $name not found")
-    }
-
     fun getLayerByName(name: String): TileLayer = layersMap[name]
             ?: throw IllegalStateException("Layer with name $name not found")
 
