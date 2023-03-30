@@ -19,7 +19,7 @@ class TileGraph(
     }
 
     fun increaseDistance(target: Int) {
-        distances[target] = distances.getOrDefault(target, 0) + 1
+        distances[target] = distances.getOrDefault(target, DEFAULT_DISTANCE) + 1
     }
 
     fun decreaseDistance(target: Int) {
@@ -28,6 +28,10 @@ class TileGraph(
         } else {
             distances.getOrDefault(target, 0) - 1
         }
+    }
+
+    fun getDistance(target: Int): Int {
+        return distances[target] ?: DEFAULT_DISTANCE
     }
 
     fun getClosestAdjacent(target: Int): Int {
