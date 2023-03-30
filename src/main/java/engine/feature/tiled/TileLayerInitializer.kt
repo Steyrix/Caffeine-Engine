@@ -35,12 +35,21 @@ object TileLayerInitializer {
         )
     }
 
-    internal fun generateTileGraph(layer: TileLayer): HashMap<Int, MutableList<Int>> {
+    internal fun generateTileGraph(layers: List<TileLayer>): HashMap<Int, MutableList<Int>> {
         val out = hashMapOf<Int, MutableList<Int>>()
-        val data = layer.tileIdsData
+        val dataLists = layers.map { it.tileIdsData }
+        val widthInTiles = layers.firstOrNull()?.widthInTiles ?: return hashMapOf()
+        val indices = layers.first().tileIdsData.indices
 
-        for (num in data.indices) {
-            out[num] = getAdjacentTiles(data, layer.widthInTiles, num)
+        for (num in indices) {
+            val adjacentTiles = dataLists
+                    .map { getAdjacentTiles(it, widthInTiles, num) }
+                    .flatten()
+                    .distinct()
+                    .toMutableList()
+
+            out[num] = adjacentTiles
+            println("$num: $adjacentTiles")
         }
 
         return out
