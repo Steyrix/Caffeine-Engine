@@ -1,5 +1,7 @@
 package engine.feature.tiled.traversing
 
+import java.util.PriorityQueue
+
 object PathFinder {
 
     fun pathTo(
@@ -95,19 +97,23 @@ object PathFinder {
             dist: IntArray,
             pred: IntArray
     ): Boolean {
-        val queue = mutableSetOf(*graph.distinct.toTypedArray())
+        val queue = PriorityQueue<Int>(compareBy { dist[it] })
+        val visited = BooleanArray(graph.nodes.size)
 
         dist[start] = 0
+        queue.add(start)
 
         while (queue.isNotEmpty()) {
-            val node = queue.minByOrNull { dist[it] } ?: 0
-            queue.remove(node)
+            val node = queue.poll()
+            if (visited[node]) continue
+            visited[node] = true
 
-            graph.nodes[node]!!.forEach {
+            graph.nodes[node]?.forEach {
                 val currCost = dist[node] + (graph.costs[it] ?: 0)
                 if (currCost < dist[it]) {
                     dist[it] = currCost
                     pred[it] = node
+                    queue.add(it)
                 }
             }
 
