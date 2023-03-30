@@ -19,6 +19,10 @@ class TileGraph(
     }
 
     fun decreaseDistance(target: Int) {
-        distances[target]?.inc()
+        distances[target] = if (distances[target] == 0) {
+            0
+        } else {
+            distances.getOrDefault(target, 0) - 1
+        }
     }
 }
