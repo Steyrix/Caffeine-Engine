@@ -65,14 +65,20 @@ object PathFinder {
     ): ArrayDeque<Int> {
         if (graph.nodes[destination].isNullOrEmpty() || graph.nodes[start].isNullOrEmpty()) return ArrayDeque()
 
+        val finalDestination = if (graph.getDistance(destination) > TileGraph.DEFAULT_DISTANCE) {
+            graph.getClosestAdjacent(destination)
+        } else {
+            destination
+        }
+
         val out = ArrayDeque<Int>()
         val dist = IntArray(graph.nodes.size) { Int.MAX_VALUE }
         val pred = IntArray(graph.nodes.size) { -1 }
 
-        if (!dijkstra(graph, start, destination, dist, pred)) return ArrayDeque()
+        if (!dijkstra(graph, start, finalDestination, dist, pred)) return ArrayDeque()
 
-        out.add(destination)
-        var previous = destination
+        out.add(finalDestination)
+        var previous = finalDestination
         while (pred[previous] != -1) {
             out.addFirst(pred[previous])
             graph.increaseDistance(pred[previous])
