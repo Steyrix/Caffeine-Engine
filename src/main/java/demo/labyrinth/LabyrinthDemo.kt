@@ -1,8 +1,7 @@
 package demo.labyrinth
 
 import demo.labyrinth.data.*
-import demo.labyrinth.data.GameMap
-import demo.labyrinth.data.gameobject.Character
+import demo.labyrinth.data.gameobject.*
 import engine.core.scene.Scene
 import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext

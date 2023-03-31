@@ -3,7 +3,7 @@ package demo.labyrinth.data
 import demo.labyrinth.hp.HealthBar
 import demo.labyrinth.ShaderController
 import demo.labyrinth.goblin.Goblin
-import demo.labyrinth.data.gameobject.Character
+import demo.labyrinth.data.gameobject.*
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
@@ -28,7 +28,7 @@ object LabyrinthInitializer {
             tiledCollisionContext: TiledCollisionContext
     ) {
         // initCrateGraphics(renderProjection)
-        initTileMapGraphics(renderProjection, screenWidth, screenHeight)
+        GameMap.init(renderProjection, screenWidth, screenHeight)
         Character.init(renderProjection, boundingBoxCollisionContext, tiledCollisionContext)
         initCampfireGraphics(renderProjection)
         initGoblins(renderProjection)
@@ -44,39 +44,6 @@ object LabyrinthInitializer {
 
         Character.addComponent(Character.boxCollider, characterParameters)
         bbCollisionContext.addEntity(Character.boundingBox as Entity, characterParameters)
-    }
-
-    private fun initTileMapGraphics(
-            renderProjection: Matrix4f,
-            screenWidth: Float,
-            screenHeight: Float
-    ) {
-        GameMap.parameters = getMapParameters(screenWidth, screenHeight)
-
-        val vertexShaderPath = this.javaClass.getResource("/shaders/lightingShaders/lightingVertexShader.glsl")!!.path
-        val fragmentShaderPath = this.javaClass.getResource("/shaders/lightingShaders/lightingFragmentShader.glsl")!!.path
-
-        GameMap.graphicalComponent = TiledResourceParser.createTileMapFromXml(
-                File(this.javaClass.getResource("/tiled/port_map.xml")!!.path)
-        )
-        GameMap.graphicalComponent?.shader = ShaderLoader.loadFromFile(
-                vertexShaderFilePath = vertexShaderPath,
-                fragmentShaderFilePath = fragmentShaderPath
-        ).also {
-            it.bind()
-            it.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection!!)
-
-            it.setUniform("screenSize", Vector2f(screenWidth, screenHeight))
-            it.setUniform("lightSourceSize", Vector2f(campfireParameters.xSize, campfireParameters.ySize))
-            it.setUniform("lightSourceCoords", Vector2f(campfireParameters.x, campfireParameters.y))
-            it.setUniform("lightIntensityCap", lightIntensityCap)
-        }
-
-        GameMap.parameters.xSize = screenWidth / GameMap.graphicalComponent!!.relativeMapWidth
-        GameMap.parameters.ySize = screenHeight / GameMap.graphicalComponent!!.relativeMapHeight
-
-        GameMap.it = object  : CompositeEntity() {}
-        GameMap.addComponent(GameMap.graphicalComponent, GameMap.parameters)
     }
 
 //    private fun initCrateGraphics(renderProjection: Matrix4f) {
@@ -152,7 +119,7 @@ object LabyrinthInitializer {
                     Goblin(
                             params = goblinParameters[i],
                             drawableComponent = animatedObject,
-                            tileTraverser = createTileTraverser(goblinParameters[i]),
+                            tileTraverser = GameMap.createTileTraverser(goblinParameters[i]),
                             playerParams = characterParameters
                     ).also {
                         it.addComponent(box, goblinParameters[i])

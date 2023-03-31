@@ -18,44 +18,6 @@ object Campfire : GameObject {
     var graphicalComponent: AnimatedObject2D? = null
 }
 
-object GameMap : GameObject {
-    override var it: CompositeEntity? = null
-    var graphicalComponent: TileMap? = null
-    set(value) {
-        value?.let {
-            tileGraph = TileGraph(
-                    value.getGraph(
-                            listOf("walking_layer", "walkable_objects_layer")
-                    )
-            )
-
-            field = value
-        }
-    }
-
-    var parameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
-            0f, 0f, 0f, 0f, 0f
-    )
-    var tileGraph: TileGraph? = null
-
-    private val lightBlinking = AccumulatedTimeEvent(
-            timeLimit = lightBlinkingTimeLimit
-    ) {
-        if (current + 1 >= lightIntensityCaps.size) {
-            current = 0
-        } else current++
-        graphicalComponent?.shader?.let {
-            it.bind()
-            it.setUniform("lightIntensityCap", lightIntensityCaps[current])
-        }
-    }
-
-    override fun update(deltaTime: Float) {
-        super.update(deltaTime)
-        lightBlinking.schedule(deltaTime)
-    }
-}
-
 object Crate : GameObject {
     override var it: CompositeEntity? = null
     var boundingBox: BoundingBox? = null
@@ -111,12 +73,4 @@ object Goblins {
             entity.draw()
         }
     }
-}
-
-fun createTileTraverser(params: SetOf2DParametersWithVelocity): TileTraverser {
-    return TileTraverser(
-            GameMap.tileGraph!!,
-            GameMap.graphicalComponent!!,
-            params
-    )
 }
