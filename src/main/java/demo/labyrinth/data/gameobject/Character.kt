@@ -1,4 +1,4 @@
-package demo.labyrinth.data.entity
+package demo.labyrinth.data.gameobject
 
 import demo.labyrinth.Player
 import demo.labyrinth.ShaderController

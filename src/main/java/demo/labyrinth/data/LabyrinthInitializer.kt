@@ -1,10 +1,9 @@
 package demo.labyrinth.data
 
 import demo.labyrinth.hp.HealthBar
-import demo.labyrinth.Player
 import demo.labyrinth.ShaderController
 import demo.labyrinth.goblin.Goblin
-import demo.labyrinth.data.entity.Character
+import demo.labyrinth.data.gameobject.Character
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
@@ -12,9 +11,7 @@ import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
 import engine.core.texture.Texture2D
 import engine.feature.collision.boundingbox.BoundingBox
-import engine.feature.collision.boundingbox.BoundingBoxCollider
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
-import engine.feature.collision.tiled.TiledCollider
 import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.tiled.parser.TiledResourceParser
 import org.joml.Matrix4f
