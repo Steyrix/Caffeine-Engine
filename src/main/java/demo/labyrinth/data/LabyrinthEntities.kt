@@ -32,15 +32,6 @@ interface GameObject {
     }
 }
 
-object Character : GameObject {
-    override var it: CompositeEntity? = null
-    var graphicalComponent: AnimatedObject2D? = null
-    var boundingBox: BoundingBox? = null
-    var hp: HealthBar? = null
-    var boxCollider: BoundingBoxCollider? = null
-    var tiledCollider: TiledCollider? = null
-}
-
 object Campfire : GameObject {
     override var it: CompositeEntity? = null
     var graphicalComponent: AnimatedObject2D? = null

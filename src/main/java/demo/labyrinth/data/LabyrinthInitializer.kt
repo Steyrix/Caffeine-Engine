@@ -4,6 +4,7 @@ import demo.labyrinth.hp.HealthBar
 import demo.labyrinth.Player
 import demo.labyrinth.ShaderController
 import demo.labyrinth.goblin.Goblin
+import demo.labyrinth.data.entity.Character
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
@@ -31,7 +32,7 @@ object LabyrinthInitializer {
     ) {
         // initCrateGraphics(renderProjection)
         initTileMapGraphics(renderProjection, screenWidth, screenHeight)
-        initCharacterGraphics(renderProjection, boundingBoxCollisionContext, tiledCollisionContext)
+        Character.init(renderProjection, boundingBoxCollisionContext, tiledCollisionContext)
         initCampfireGraphics(renderProjection)
         initGoblins(renderProjection)
         initPhysics(boundingBoxCollisionContext, tiledCollisionContext)
@@ -79,69 +80,6 @@ object LabyrinthInitializer {
 
         GameMap.it = object  : CompositeEntity() {}
         GameMap.addComponent(GameMap.graphicalComponent, GameMap.parameters)
-    }
-
-    private fun initCharacterGraphics(
-            renderProjection: Matrix4f,
-            bbCollisionContext: BoundingBoxCollisionContext,
-            tiledCollisionContext: TiledCollisionContext
-    ) {
-
-        Character.boundingBox = BoundingBox(
-                x = 100f,
-                y = 100f,
-                xSize = 60f,
-                ySize = 60f
-        ).apply {
-            shader = ShaderController.createBoundingBoxShader(renderProjection)
-        }
-
-        val frameSizeX = 0.111f
-        val frameSizeY = 0.25f
-        val texturePathFirst = this.javaClass.getResource("/textures/character_front_walk.png")!!.path
-
-        val textureArray = Texture2D.createInstance(
-                texturePathFirst
-        )
-
-        Character.graphicalComponent = AnimatedObject2D(
-                frameSizeX,
-                frameSizeY,
-                texture = textureArray,
-                animations = characterAnimations
-        ).apply {
-            x = 100f
-            y = 100f
-            xSize = 60f
-            ySize = 60f
-            shader = ShaderController.createAnimationShader(renderProjection!!)
-        }
-
-        Character.it = Player(
-                drawableComponent = Character.graphicalComponent!!,
-                params = characterParameters
-        )
-        Character.hp = HealthBar(characterParameters, hpBarPatameters1, renderProjection)
-
-        Character.boxCollider =
-                BoundingBoxCollider(
-                        Character.it as Entity,
-                        Character.boundingBox!!,
-                        characterParameters,
-                        bbCollisionContext
-                )
-
-        Character.tiledCollider =
-                TiledCollider(
-                        Character.it as Entity,
-                        characterParameters,
-                        GameMap.parameters,
-                        listOf("walking_layer", "walkable_objects_layer"),
-                        tiledCollisionContext
-                )
-
-        Character.addComponent(Character.boundingBox, characterParameters)
-        Character.addComponent(Character.hp, characterParameters)
     }
 
 //    private fun initCrateGraphics(renderProjection: Matrix4f) {
