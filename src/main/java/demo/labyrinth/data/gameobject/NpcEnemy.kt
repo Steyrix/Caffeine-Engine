@@ -42,6 +42,7 @@ class NpcEnemy(
         it?.addComponent(hp, parameters)
     }
 
+    // TODO: move to parameters file
     private fun getBoundingBox(
             renderProjection: Matrix4f
     ): BoundingBox {
