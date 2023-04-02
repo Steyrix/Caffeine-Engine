@@ -31,27 +31,22 @@ fun getMapParameters(screenWidth: Float, screenHeight:Float): SetOfStatic2DParam
     )
 }
 
-val crateParameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
-        x = 400f, y = 430f, xSize = 50f, ySize = 50f, rotationAngle = 0f
+val goblinParams1 = SetOf2DParametersWithVelocity(
+        x = 150f,
+        y = 120f,
+        xSize = 64f,
+        ySize = 64f,
+        rotationAngle = 0f,
+        velocityX = 0f,
+        velocityY = 0f
 )
 
-val goblinParameters: List<SetOf2DParametersWithVelocity> = listOf(
-        SetOf2DParametersWithVelocity(
-                x = 150f,
-                y = 120f,
-                xSize = 64f,
-                ySize = 64f,
-                rotationAngle = 0f,
-                velocityX = 0f,
-                velocityY = 0f
-        ),
-        SetOf2DParametersWithVelocity(
-                x = 250f,
-                y = 120f,
-                xSize = 64f,
-                ySize = 64f,
-                rotationAngle = 0f,
-                velocityX = 0f,
-                velocityY = 0f
-        )
+val goblinParams2 = SetOf2DParametersWithVelocity(
+        x = 250f,
+        y = 120f,
+        xSize = 64f,
+        ySize = 64f,
+        rotationAngle = 0f,
+        velocityX = 0f,
+        velocityY = 0f
 )

@@ -44,8 +44,7 @@ class LabyrinthDemo(
 
     override fun update(deltaTime: Float) {
         Character.update(deltaTime)
-        Goblins.update(deltaTime)
-        // Crate.update(deltaTime)
+        NPCs.update(deltaTime)
         bbCollisionContext.update()
         tiledCollisionContext.update()
 
@@ -58,9 +57,8 @@ class LabyrinthDemo(
         glClearColor(0f, 0.5f, 0f, 0.5f)
 
         GameMap.draw()
-        // Crate.draw()
         Campfire.draw()
         Character.draw()
-        Goblins.draw()
+        NPCs.draw()
     }
 }
