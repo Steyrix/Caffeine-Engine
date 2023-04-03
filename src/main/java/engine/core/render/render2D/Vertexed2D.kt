@@ -63,4 +63,13 @@ open class Vertexed2D(
             initVertexFloatAttribute(attribIndex)
         }
     }
+
+    fun updateBuffer(
+            bufferIndex: Int,
+            offset: Long,
+            data: FloatArray
+    ) {
+        glBindBuffer(GL_ARRAY_BUFFER, bufferHandles[bufferIndex])
+        glBufferSubData(GL_ARRAY_BUFFER, offset, data)
+    }
 }
