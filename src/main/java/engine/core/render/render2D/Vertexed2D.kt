@@ -70,6 +70,11 @@ open class Vertexed2D(
             data: FloatArray
     ) {
         glBindBuffer(GL_ARRAY_BUFFER, bufferHandles[bufferIndex])
-        glBufferSubData(GL_ARRAY_BUFFER, offset, data)
+
+        val floatBuffer = BufferUtils.createFloatBuffer(2 * data.size)
+        floatBuffer.put(data)
+        floatBuffer.flip()
+
+        glBufferSubData(GL_ARRAY_BUFFER, offset, floatBuffer)
     }
 }
