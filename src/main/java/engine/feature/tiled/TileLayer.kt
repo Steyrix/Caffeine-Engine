@@ -10,7 +10,7 @@ class TileLayer(
         val name: String,
         val widthInTiles: Int,
         val heightInTiles: Int,
-        val tileIdsData: List<Int>,
+        val tileIdsData: MutableList<Int>,
         internal val set: TileSet,
         private val properties: ArrayList<Property>
 ): Drawable2D {
@@ -38,5 +38,10 @@ class TileLayer(
             index <= tileIdsData.size - 1 -> tileIdsData[index]
             else -> - 1
         }
+    }
+
+    fun setTileAt(index: Int, tileId: Int) {
+        tileIdsData[index] = tileId
+        //todo: implement buffer update
     }
 }
