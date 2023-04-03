@@ -106,6 +106,11 @@ class TileMap(
         return TileLayerInitializer.generateTileGraph(layers)
     }
 
+    fun setTileAt(layerName: String, posX: Float, posY: Float, tileId: Int) {
+        val layer = getLayerByName(layerName)
+        layer.setTileAt(getTileIndex(posX, posY), tileId)
+    }
+
     private fun getTileAlignmentInMap(tileSize: Float, pos: Float): Int {
         val roundedPos = pos.roundToInt()
         val roundedTileSize = tileSize.roundToInt()
