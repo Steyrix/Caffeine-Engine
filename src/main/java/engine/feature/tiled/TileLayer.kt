@@ -40,8 +40,13 @@ class TileLayer(
         }
     }
 
+    // todo: move magic numbers to constants
     fun setTileAt(index: Int, tileId: Int) {
         tileIdsData[index] = tileId
-        //todo: implement buffer update
+
+        val data = set.getTileByNumber(tileId).tileUV
+        val offset = (data.size * 4 * (index)).toLong()
+
+        graphicalComponent.updateBuffer(1, offset, data)
     }
 }
