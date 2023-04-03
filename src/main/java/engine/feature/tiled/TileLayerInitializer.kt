@@ -24,7 +24,13 @@ object TileLayerInitializer {
                 val uvArray = set.getTileByNumber(tileNumber).tileUV
                 allVertices.addAll(verticesArray.toList())
                 allUV.addAll(uvArray.toList())
+            } else {
+                val uvArray = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
+                val vertices = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
+                allVertices.addAll(vertices.toList())
+                allUV.addAll(uvArray.toList())
             }
+
         }
 
         return OpenGlObject2D(
@@ -49,7 +55,6 @@ object TileLayerInitializer {
                     .toMutableList()
 
             out[num] = adjacentTiles
-            println("$num: $adjacentTiles")
         }
 
         return out
