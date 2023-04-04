@@ -8,7 +8,6 @@ open class Vertexed2D(
         dataArrays: List<FloatArray>,
         protected val verticesCount: Int,
 ) {
-
     private var buffersFilled: Int = 0
     protected val bufferHandles: MutableList<Int> = mutableListOf()
     protected var vertexArrayHandle: Int = 0
