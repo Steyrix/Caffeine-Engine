@@ -76,24 +76,24 @@ val characterAnimations = mutableListOf<Animation>(
                 timeLimit = 0.05f
         ),
         SequenceAtlasAnimation(
-                AnimationKey.STRIKE_R,
+                AnimationKey.STRIKE_U,
                 FrameParametersGenerator.generate(Pair(14,10), Pair(0,0), 0.066f, 0.25f),
-                timeLimit = 0.05f
+                timeLimit = 0.1f
         ),
         SequenceAtlasAnimation(
                 AnimationKey.STRIKE_L,
-                FrameParametersGenerator.generate(Pair(14,10), Pair(1,1), 0.066f, 0.25f),
-                timeLimit = 0.05f
+                FrameParametersGenerator.generate(Pair(10,14), Pair(1,1), 0.066f, 0.25f),
+                timeLimit = 0.1f
         ),
         SequenceAtlasAnimation(
                 AnimationKey.STRIKE_D,
                 FrameParametersGenerator.generate(Pair(14,10), Pair(2,2), 0.066f, 0.25f),
-                timeLimit = 0.05f
+                timeLimit = 0.1f
         ),
         SequenceAtlasAnimation(
-                AnimationKey.STRIKE_U,
-                FrameParametersGenerator.generate(Pair(14,10), Pair(3,3), 0.066f, 0.25f),
-                timeLimit = 0.05f
+                AnimationKey.STRIKE_R,
+                FrameParametersGenerator.generate(Pair(10,14), Pair(3,3), 0.066f, 0.25f),
+                timeLimit = 0.1f
         ),
 )
 
