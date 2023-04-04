@@ -87,7 +87,7 @@ object TextureLoader {
         glBindTexture(GL_TEXTURE_2D_ARRAY, id)
         glTexStorage3D(
                 GL_TEXTURE_2D_ARRAY,
-                1,
+                buffers.size,
                 GL_RGBA8,
                 width,
                 height,
