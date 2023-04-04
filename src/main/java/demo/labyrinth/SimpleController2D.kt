@@ -17,11 +17,19 @@ class SimpleController2D(
         private var isControlledByUser: Boolean = false
 ) : Controllable, Entity, Updatable {
 
+    private var isStriking = false
     private var isWalking = false
     private var direction = Direction.RIGHT
 
     override fun input(window: Window) {
         if (!isControlledByUser) return
+
+        if (window.isKeyPressed(GLFW.GLFW_KEY_SPACE)) {
+            isStriking = true
+            params.velocityX = 0f
+            params.velocityY = 0f
+            return
+        }
 
         params.velocityY = when {
             window.isKeyPressed(GLFW.GLFW_KEY_S) -> {
@@ -55,6 +63,10 @@ class SimpleController2D(
     }
 
     private fun processState() {
+        if (isStriking) {
+            isWalking = false
+        }
+
         if ((params.velocityX != 0f || params.velocityY != 0f) && !isWalking) {
             isWalking = true
         }
@@ -65,14 +77,33 @@ class SimpleController2D(
     }
 
     fun getAnimationKey(): String {
-        return if (isWalking) {
-            when (direction) {
-                Direction.RIGHT -> AnimationKey.WALK_R
-                Direction.LEFT -> AnimationKey.WALK_L
-                Direction.UP -> AnimationKey.WALK_U
-                Direction.DOWN -> AnimationKey.WALK_D
-            }
-        } else when (direction) {
+        return when {
+            isStriking -> getStrikingAnimation()
+            isWalking -> getWalkingAnimation()
+            else -> getIdleAnimation()
+        }
+    }
+
+    private fun getStrikingAnimation(): String {
+        return when (direction) {
+            Direction.RIGHT -> AnimationKey.STRIKE_R
+            Direction.LEFT -> AnimationKey.STRIKE_L
+            Direction.UP -> AnimationKey.STRIKE_U
+            Direction.DOWN -> AnimationKey.STRIKE_D
+        }
+    }
+
+    private fun getWalkingAnimation(): String {
+        return when (direction) {
+            Direction.RIGHT -> AnimationKey.WALK_R
+            Direction.LEFT -> AnimationKey.WALK_L
+            Direction.UP -> AnimationKey.WALK_U
+            Direction.DOWN -> AnimationKey.WALK_D
+        }
+    }
+
+    private fun getIdleAnimation(): String {
+        return when (direction) {
             Direction.RIGHT -> AnimationKey.IDLE_R
             Direction.LEFT -> AnimationKey.IDLE_L
             Direction.UP -> AnimationKey.IDLE_U
