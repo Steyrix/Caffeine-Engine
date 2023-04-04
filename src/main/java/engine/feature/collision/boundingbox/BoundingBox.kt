@@ -18,7 +18,8 @@ open class BoundingBox(
         override var y: Float,
         override var xSize: Float,
         override var ySize: Float,
-        var rotationAngle: Float = 0f
+        var rotationAngle: Float = 0f,
+        val isSizeUpdatable: Boolean = true
 ) : IntersectableBox, Entity,
         Vertexed2D(
                 bufferParamsCount = 1,
@@ -45,8 +46,10 @@ open class BoundingBox(
             parameters.let {
                 x = it.x
                 y = it.y
-                xSize = it.xSize
-                ySize = it.ySize
+                if (isSizeUpdatable) {
+                    xSize = it.xSize
+                    ySize = it.ySize
+                }
                 rotationAngle = it.rotationAngle
             }
         }
@@ -55,8 +58,10 @@ open class BoundingBox(
             parameters.let {
                 x = it.x
                 y = it.y
-                xSize = it.xSize
-                ySize = it.ySize
+                if (isSizeUpdatable) {
+                    xSize = it.xSize
+                    ySize = it.ySize
+                }
                 rotationAngle = it.rotationAngle
             }
         }
