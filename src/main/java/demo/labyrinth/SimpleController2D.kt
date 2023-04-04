@@ -5,6 +5,7 @@ import engine.core.controllable.Controllable
 import engine.core.controllable.Direction
 import engine.core.entity.Entity
 import engine.core.loop.AccumulatedTimeEvent
+import engine.core.loop.PredicateTimeEvent
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.Updatable
 import engine.core.window.Window
@@ -19,13 +20,11 @@ class SimpleController2D(
 ) : Controllable, Entity, Updatable {
 
     private var isStriking = false
-    private val playStrikingAnimation = AccumulatedTimeEvent(
-            timeLimit = 0.4f
-    ) {
-        if (isStriking) {
-            isStriking = false
-        }
-    }
+    private val playStrikingAnimation = PredicateTimeEvent(
+            timeLimit = 0.5f,
+            predicate = { isStriking },
+            action = { isStriking = false }
+    )
 
     private var isWalking = false
     private var direction = Direction.RIGHT
@@ -79,6 +78,7 @@ class SimpleController2D(
     private fun processState() {
         if (isStriking) {
             isWalking = false
+            return
         }
 
         if ((params.velocityX != 0f || params.velocityY != 0f) && !isWalking) {
