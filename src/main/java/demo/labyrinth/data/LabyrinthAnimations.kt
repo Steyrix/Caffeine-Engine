@@ -15,6 +15,8 @@ object AnimationKey {
     const val IDLE_D = "IDLE_D"
     const val STRIKE_R = "STRIKE_R"
     const val STRIKE_L = "STRIKE_L"
+    const val STRIKE_U = "STRIKE_U"
+    const val STRIKE_D = "STRIKE_D"
 
     const val GOBLIN_WALK_R = "WALK_R_S"
     const val GOBLIN_WALK_L = "WALK_L_S"
@@ -24,6 +26,10 @@ object AnimationKey {
     const val GOBLIN_IDLE_L = "IDLE_L_S"
     const val GOBLIN_IDLE_U = "IDLE_U_S"
     const val GOBLIN_IDLE_D = "IDLE_D_S"
+    const val GOBLIN_STRIKE_R = "STRIKE_R"
+    const val GOBLIN_STRIKE_L = "STRIKE_L"
+    const val GOBLIN_STRIKE_U = "STRIKE_U"
+    const val GOBLIN_STRIKE_D = "STRIKE_D"
 
     const val BURN = "BURN"
 }
