@@ -4,6 +4,7 @@ import demo.labyrinth.data.AnimationKey
 import engine.core.controllable.Controllable
 import engine.core.controllable.Direction
 import engine.core.entity.Entity
+import engine.core.loop.AccumulatedTimeEvent
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.Updatable
 import engine.core.window.Window
@@ -18,17 +19,28 @@ class SimpleController2D(
 ) : Controllable, Entity, Updatable {
 
     private var isStriking = false
+    private val playStrikingAnimation = AccumulatedTimeEvent(
+            timeLimit = 0.4f
+    ) {
+        if (isStriking) {
+            isStriking = false
+        }
+    }
+
     private var isWalking = false
     private var direction = Direction.RIGHT
 
     override fun input(window: Window) {
         if (!isControlledByUser) return
 
-        if (window.isKeyPressed(GLFW.GLFW_KEY_SPACE)) {
-            isStriking = true
+        if (isStriking) {
             params.velocityX = 0f
             params.velocityY = 0f
             return
+        }
+
+        if (window.isKeyPressed(GLFW.GLFW_KEY_SPACE)) {
+            isStriking = true
         }
 
         params.velocityY = when {
@@ -57,6 +69,8 @@ class SimpleController2D(
     }
 
     override fun update(deltaTime: Float) {
+        playStrikingAnimation.schedule(deltaTime)
+
         params.x += params.velocityX * deltaTime * modifier
         params.y += params.velocityY * deltaTime * modifier
         processState()
