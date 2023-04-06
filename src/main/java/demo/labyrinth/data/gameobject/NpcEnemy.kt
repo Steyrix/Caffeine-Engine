@@ -5,6 +5,7 @@ import demo.labyrinth.data.*
 import demo.labyrinth.goblin.Goblin
 import demo.labyrinth.hp.HealthBar
 import engine.core.entity.CompositeEntity
+import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.texture.Texture2D
 import engine.core.update.SetOf2DParametersWithVelocity
@@ -48,6 +49,7 @@ class NpcEnemy(
         it?.addComponent(hp, parameters)
 
         boundingBoxCollisionContext.addEntity(box, box.getParameters())
+        boxInteractionContext.addAgent(it as Entity, box)
     }
 
     // TODO: move to parameters file

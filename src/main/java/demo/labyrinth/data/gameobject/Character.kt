@@ -48,6 +48,8 @@ object Character : GameObject {
         tiledCollisionContext.addEntity(GameMap.graphicalComponent as Entity, GameMap.parameters)
         addComponent(boxCollider, characterParameters)
         bbCollisionContext.addEntity(boundingBox as Entity, characterParameters)
+
+        boxInteractionContext.addAgent(it as Entity, boundingBox as BoundingBox)
     }
 
     private fun getBoundingBox(
