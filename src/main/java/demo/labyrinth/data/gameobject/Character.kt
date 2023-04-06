@@ -51,8 +51,10 @@ object Character : GameObject {
         return BoundingBox(
                 x = 100f,
                 y = 100f,
-                xSize = 60f,
-                ySize = 60f
+                xOffset = 16f,
+                xSize = 32f,
+                ySize = 64f,
+                isSizeUpdatable = false
         ).apply {
             shader = ShaderController.createBoundingBoxShader(renderProjection)
         }
