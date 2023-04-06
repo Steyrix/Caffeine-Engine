@@ -13,10 +13,10 @@ import org.lwjgl.opengl.GL33C.*
 
 // TODO: Implement cloneable interface
 open class BoundingBox(
-        override var x: Float,
-        override var y: Float,
-        override var xSize: Float,
-        override var ySize: Float,
+        override var x: Float = 0f,
+        override var y: Float = 0f,
+        override var xSize: Float = 0f,
+        override var ySize: Float = 0f,
         private var xOffset: Float  = 0f,
         private var yOffset: Float = 0f,
         private var rotationAngle: Float = 0f,
