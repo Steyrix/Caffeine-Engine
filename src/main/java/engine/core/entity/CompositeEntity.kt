@@ -45,6 +45,14 @@ open class CompositeEntity : Entity, Updatable {
         }
     }
 
+    override fun consumeInteraction(interaction: Interaction) {
+        parametersMap.entries.forEach {
+            it.value.forEach {entity ->
+                entity.consumeInteraction(interaction)
+            }
+        }
+    }
+
     fun input(window: Window) {
         parametersMap.entries.forEach {
             it.value.forEach { entity ->
