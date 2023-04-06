@@ -20,6 +20,7 @@ class SimpleController2D(
 ) : Controllable, Entity, Updatable {
 
     private var isStriking = false
+
     private val playStrikingAnimation = PredicateTimeEvent(
             timeLimit = 0.5f,
             predicate = { isStriking },
