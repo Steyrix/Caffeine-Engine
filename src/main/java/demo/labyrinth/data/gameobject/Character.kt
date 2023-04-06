@@ -11,6 +11,7 @@ import engine.core.texture.Texture2D
 import engine.feature.collision.boundingbox.*
 import engine.feature.collision.tiled.TiledCollider
 import engine.feature.collision.tiled.TiledCollisionContext
+import engine.feature.interaction.BoxInteractionContext
 import org.joml.Matrix4f
 
 object Character : GameObject {
@@ -24,7 +25,8 @@ object Character : GameObject {
     fun init(
             renderProjection: Matrix4f,
             bbCollisionContext: BoundingBoxCollisionContext,
-            tiledCollisionContext: TiledCollisionContext
+            tiledCollisionContext: TiledCollisionContext,
+            boxInteractionContext: BoxInteractionContext
     ) {
         boundingBox = getBoundingBox(renderProjection)
         graphicalComponent = getAnimatedObjectComponent(renderProjection)

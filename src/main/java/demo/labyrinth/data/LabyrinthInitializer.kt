@@ -7,6 +7,7 @@ import engine.core.render.render2D.AnimatedObject2D
 import engine.core.texture.Texture2D
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.collision.tiled.TiledCollisionContext
+import engine.feature.interaction.BoxInteractionContext
 import org.joml.Matrix4f
 
 object LabyrinthInitializer {
@@ -16,12 +17,22 @@ object LabyrinthInitializer {
             screenWidth: Float,
             screenHeight: Float,
             boundingBoxCollisionContext: BoundingBoxCollisionContext,
-            tiledCollisionContext: TiledCollisionContext
+            tiledCollisionContext: TiledCollisionContext,
+            boxInteractionContext: BoxInteractionContext
     ) {
         GameMap.init(renderProjection, screenWidth, screenHeight)
-        Character.init(renderProjection, boundingBoxCollisionContext, tiledCollisionContext)
+        Character.init(
+                renderProjection,
+                boundingBoxCollisionContext,
+                tiledCollisionContext,
+                boxInteractionContext
+        )
         initCampfireGraphics(renderProjection)
-        initGoblins(renderProjection, boundingBoxCollisionContext)
+        initGoblins(
+                renderProjection,
+                boundingBoxCollisionContext,
+                boxInteractionContext
+        )
     }
 
     private fun initCampfireGraphics(renderProjection: Matrix4f) {
@@ -42,14 +53,28 @@ object LabyrinthInitializer {
         Campfire.addComponent(Campfire.graphicalComponent, campfireParameters)
     }
 
+    // TODO: reduce
     private fun initGoblins(
             renderProjection: Matrix4f,
-            boundingBoxCollisionContext: BoundingBoxCollisionContext
+            boundingBoxCollisionContext: BoundingBoxCollisionContext,
+            boxInteractionContext: BoxInteractionContext
     ) {
         val enemy1 = NpcEnemy(goblinParams1)
-                .also { npc -> npc.init(renderProjection, boundingBoxCollisionContext) }
+                .also { npc ->
+                    npc.init(
+                            renderProjection,
+                            boundingBoxCollisionContext,
+                            boxInteractionContext
+                    )
+                }
         val enemy2 = NpcEnemy(goblinParams2)
-                .also { npc -> npc.init(renderProjection, boundingBoxCollisionContext) }
+                .also { npc ->
+                    npc.init(
+                            renderProjection,
+                            boundingBoxCollisionContext,
+                            boxInteractionContext
+                    )
+                }
         NPCs.it.addAll(listOf(enemy1, enemy2))
     }
 }

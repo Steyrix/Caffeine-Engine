@@ -17,7 +17,7 @@ class LabyrinthDemo(
 
     private val bbCollisionContext = BoundingBoxCollisionContext()
     private val tiledCollisionContext = TiledCollisionContext()
-    private val interactionContext = BoxInteractionContext()
+    private val boxInteractionContext = BoxInteractionContext()
 
     override var renderProjection: Matrix4f? = null
 
@@ -36,7 +36,8 @@ class LabyrinthDemo(
                 screenWidth,
                 screenHeight,
                 bbCollisionContext,
-                tiledCollisionContext
+                tiledCollisionContext,
+                boxInteractionContext
         )
     }
 
@@ -49,7 +50,7 @@ class LabyrinthDemo(
         NPCs.update(deltaTime)
         bbCollisionContext.update()
         tiledCollisionContext.update()
-        interactionContext.update()
+        boxInteractionContext.update()
 
         Campfire.update(deltaTime)
         GameMap.update(deltaTime)

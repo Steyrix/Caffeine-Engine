@@ -10,6 +10,7 @@ import engine.core.texture.Texture2D
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
+import engine.feature.interaction.BoxInteractionContext
 import org.joml.Matrix4f
 
 class NpcEnemy(
@@ -27,7 +28,8 @@ class NpcEnemy(
 
     fun init(
             renderProjection: Matrix4f,
-            boundingBoxCollisionContext: BoundingBoxCollisionContext
+            boundingBoxCollisionContext: BoundingBoxCollisionContext,
+            boxInteractionContext: BoxInteractionContext
     ) {
         val box = getBoundingBox(renderProjection)
         val animatedObject = getAnimatedObject(renderProjection)
