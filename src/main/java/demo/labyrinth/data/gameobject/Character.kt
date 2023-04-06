@@ -49,10 +49,8 @@ object Character : GameObject {
             renderProjection: Matrix4f
     ): BoundingBox {
         return BoundingBox(
-                x = 100f,
-                y = 100f,
-                xOffset = 16f,
-                xSize = 32f,
+                xOffset = 14.5f,
+                xSize = 35f,
                 ySize = 64f,
                 isSizeUpdatable = false
         ).apply {
