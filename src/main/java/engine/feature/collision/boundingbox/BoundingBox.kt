@@ -12,7 +12,6 @@ import engine.feature.util.Buffer
 import org.lwjgl.opengl.GL33C.*
 
 // TODO: Implement cloneable interface
-// TODO: Implement collider pattern
 open class BoundingBox(
         override var x: Float,
         override var y: Float,
