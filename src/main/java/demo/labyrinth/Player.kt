@@ -1,8 +1,10 @@
 package demo.labyrinth
 
+import demo.labyrinth.interaction.AttackInteraction
 import engine.core.entity.CompositeEntity
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.update.SetOf2DParametersWithVelocity
+import engine.feature.interaction.Interaction
 
 class Player(
         private val drawableComponent: AnimatedObject2D,
@@ -32,5 +34,10 @@ class Player(
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
         drawableComponent.setAnimationByKey(controller.getAnimationKey())
+    }
+
+    override fun getInteraction(): Interaction? {
+        if (controller.isStriking) return AttackInteraction()
+        return null
     }
 }

@@ -4,7 +4,6 @@ import demo.labyrinth.data.AnimationKey
 import engine.core.controllable.Controllable
 import engine.core.controllable.Direction
 import engine.core.entity.Entity
-import engine.core.loop.AccumulatedTimeEvent
 import engine.core.loop.PredicateTimeEvent
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.Updatable
@@ -19,7 +18,7 @@ class SimpleController2D(
         private var isControlledByUser: Boolean = false
 ) : Controllable, Entity, Updatable {
 
-    private var isStriking = false
+    var isStriking = false
 
     private val playStrikingAnimation = PredicateTimeEvent(
             timeLimit = 0.5f,

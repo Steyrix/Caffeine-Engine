@@ -9,6 +9,7 @@ import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.texture.Texture2D
 import engine.core.update.SetOf2DParametersWithVelocity
+import engine.core.update.SetOfStatic2DParameters
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.interaction.BoxInteractionContext
@@ -39,14 +40,11 @@ class NpcEnemy(
                 params = parameters,
                 drawableComponent = animatedObject,
                 tileTraverser = GameMap.createTileTraverser(parameters),
-                playerParams = characterParameters
+                playerParams = characterParameters,
+                hp = getHealthBar(parameters, renderProjection)
         ).also {
             it.addComponent(box, parameters)
         }
-
-        val hp = HealthBar(parameters, hpBarPatameters1, renderProjection)
-
-        it?.addComponent(hp, parameters)
 
         boundingBoxCollisionContext.addEntity(box, box.getParameters())
         boxInteractionContext.addAgent(it as Entity, box)
@@ -79,5 +77,22 @@ class NpcEnemy(
         ).apply {
             shader = ShaderController.createAnimationShader(renderProjection)
         }
+    }
+
+    private fun getHealthBar(
+            parameters: SetOf2DParametersWithVelocity,
+            renderProjection: Matrix4f
+    ): HealthBar {
+        return HealthBar(
+                parameters,
+                SetOfStatic2DParameters(
+                        x = 0f,
+                        y = 0f,
+                        xSize = 50f,
+                        ySize = 12.5f,
+                        rotationAngle = 0f
+                ),
+                renderProjection
+        )
     }
 }
