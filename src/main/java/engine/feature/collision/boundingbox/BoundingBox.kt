@@ -18,10 +18,10 @@ open class BoundingBox(
         override var y: Float,
         override var xSize: Float,
         override var ySize: Float,
-        var xOffset: Float  = 0f,
-        var yOffset: Float = 0f,
-        var rotationAngle: Float = 0f,
-        val isSizeUpdatable: Boolean = true
+        private var xOffset: Float  = 0f,
+        private var yOffset: Float = 0f,
+        private var rotationAngle: Float = 0f,
+        private val isSizeUpdatable: Boolean = true
 ) : IntersectableBox, Entity,
         Vertexed2D(
                 bufferParamsCount = 1,
