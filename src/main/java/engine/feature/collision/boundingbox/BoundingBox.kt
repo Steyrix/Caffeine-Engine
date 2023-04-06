@@ -67,4 +67,10 @@ open class BoundingBox(
             }
         }
     }
+
+    fun getParameters(): SetOfStatic2DParameters {
+        return SetOfStatic2DParameters(
+                x, y, xSize, ySize, rotationAngle
+        )
+    }
 }
