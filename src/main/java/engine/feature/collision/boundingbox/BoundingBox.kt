@@ -17,8 +17,8 @@ open class BoundingBox(
         override var y: Float = 0f,
         override var xSize: Float = 0f,
         override var ySize: Float = 0f,
-        private var xOffset: Float  = 0f,
-        private var yOffset: Float = 0f,
+        override var xOffset: Float  = 0f,
+        override var yOffset: Float = 0f,
         private var rotationAngle: Float = 0f,
         private val isSizeUpdatable: Boolean = true
 ) : IntersectableBox, Entity,

@@ -1,14 +1,16 @@
 package engine.feature.collision.boundingbox
 
 import engine.core.render.render2D.Drawable2D
-import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfParameters
 import engine.feature.geometry.Point2D
 
+// TODO handle offsets
 interface IntersectableBox : Drawable2D {
 
     var x: Float
     var y: Float
+    var xOffset: Float
+    var yOffset: Float
     var xSize: Float
     var ySize: Float
 
@@ -23,11 +25,11 @@ interface IntersectableBox : Drawable2D {
         y = nY
     }
 
-    fun isIntersectingByX(anotherBox: BoundingBox) = x < anotherBox.rightX && rightX > anotherBox.x
-    fun isIntersectingByX(params: SetOfParameters) = x < (params.x + params.xSize) && rightX > params.x
+    fun isIntersectingByX(anotherBox: BoundingBox) = x + xOffset < anotherBox.rightX && rightX > anotherBox.x
+    fun isIntersectingByX(params: SetOfParameters) = x + xOffset < (params.x + params.xSize) && rightX > params.x
 
-    fun isIntersectingByY(anotherBox: BoundingBox) = y < anotherBox.bottomY && bottomY > anotherBox.y
-    fun isIntersectingByY(params: SetOfParameters) = y < (params.y + params.ySize) && bottomY > params.y
+    fun isIntersectingByY(anotherBox: BoundingBox) = y + yOffset < anotherBox.bottomY && bottomY > anotherBox.y
+    fun isIntersectingByY(params: SetOfParameters) = y + yOffset < (params.y + params.ySize) && bottomY > params.y
 
     fun isIntersecting(anotherBox: BoundingBox) = isIntersectingByX(anotherBox) && isIntersectingByY(anotherBox)
 
