@@ -2,6 +2,10 @@ package engine.feature.collision.boundingbox
 
 import engine.core.update.SetOf2DParametersWithVelocity
 
+val emptyBehavior = {
+    _: BoundingBox, _: BoundingBox, _: SetOf2DParametersWithVelocity ->
+}
+
 val defaultBehavior = {
     intersectedBox: BoundingBox,
     box: BoundingBox,
