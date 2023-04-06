@@ -19,7 +19,7 @@ interface InteractionContext<T> {
         paramsMap.remove(entity)
     }
 
-    fun update(deltaTime: Float) {
+    fun update() {
         agents.forEach { current ->
             agents.forEach { agent ->
                 checkForInteraction(current, agent)
