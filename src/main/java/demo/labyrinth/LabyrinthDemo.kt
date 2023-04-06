@@ -6,6 +6,7 @@ import engine.core.scene.Scene
 import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.collision.tiled.TiledCollisionContext
+import engine.feature.interaction.BoxInteractionContext
 import org.joml.Matrix4f
 import org.lwjgl.opengl.GL33C.*
 
@@ -16,6 +17,7 @@ class LabyrinthDemo(
 
     private val bbCollisionContext = BoundingBoxCollisionContext()
     private val tiledCollisionContext = TiledCollisionContext()
+    private val interactionContext = BoxInteractionContext()
 
     override var renderProjection: Matrix4f? = null
 
@@ -47,6 +49,7 @@ class LabyrinthDemo(
         NPCs.update(deltaTime)
         bbCollisionContext.update()
         tiledCollisionContext.update()
+        interactionContext.update()
 
         Campfire.update(deltaTime)
         GameMap.update(deltaTime)
