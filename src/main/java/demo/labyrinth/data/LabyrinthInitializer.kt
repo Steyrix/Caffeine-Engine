@@ -3,7 +3,6 @@ package demo.labyrinth.data
 import demo.labyrinth.ShaderController
 import demo.labyrinth.data.gameobject.*
 import engine.core.entity.CompositeEntity
-import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.texture.Texture2D
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
@@ -19,22 +18,10 @@ object LabyrinthInitializer {
             boundingBoxCollisionContext: BoundingBoxCollisionContext,
             tiledCollisionContext: TiledCollisionContext
     ) {
-        // initCrateGraphics(renderProjection)
         GameMap.init(renderProjection, screenWidth, screenHeight)
         Character.init(renderProjection, boundingBoxCollisionContext, tiledCollisionContext)
         initCampfireGraphics(renderProjection)
         initGoblins(renderProjection, boundingBoxCollisionContext)
-        initPhysics(boundingBoxCollisionContext, tiledCollisionContext)
-    }
-
-    private fun initPhysics(
-            bbCollisionContext: BoundingBoxCollisionContext,
-            tiledCollisionContext: TiledCollisionContext
-    ) {
-        Character.addComponent(Character.tiledCollider, characterParameters)
-        tiledCollisionContext.addEntity(GameMap.graphicalComponent as Entity, GameMap.parameters)
-        Character.addComponent(Character.boxCollider, characterParameters)
-        bbCollisionContext.addEntity(Character.boundingBox as Entity, characterParameters)
     }
 
     private fun initCampfireGraphics(renderProjection: Matrix4f) {

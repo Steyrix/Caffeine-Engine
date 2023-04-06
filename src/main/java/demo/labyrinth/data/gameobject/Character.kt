@@ -20,9 +20,9 @@ object Character : GameObject {
     override var it: CompositeEntity? = null
     private var graphicalComponent: AnimatedObject2D? = null
     private var hp: HealthBar? = null
-    var boundingBox: BoundingBox? = null
-    var boxCollider: BoundingBoxCollider? = null
-    var tiledCollider: TiledCollider? = null
+    private var boundingBox: BoundingBox? = null
+    private var boxCollider: BoundingBoxCollider? = null
+    private var tiledCollider: TiledCollider? = null
 
     fun init(
             renderProjection: Matrix4f,
@@ -44,6 +44,11 @@ object Character : GameObject {
 
         addComponent(boundingBox, characterParameters)
         addComponent(hp, characterParameters)
+
+        addComponent(tiledCollider, characterParameters)
+        tiledCollisionContext.addEntity(GameMap.graphicalComponent as Entity, GameMap.parameters)
+        addComponent(boxCollider, characterParameters)
+        bbCollisionContext.addEntity(boundingBox as Entity, characterParameters)
     }
 
     private fun getBoundingBox(
