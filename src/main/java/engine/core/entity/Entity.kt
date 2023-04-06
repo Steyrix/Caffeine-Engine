@@ -1,5 +1,7 @@
 package engine.core.entity
 
+import engine.feature.interaction.Interaction
+
 interface Entity {
     fun onAdd() {}
 

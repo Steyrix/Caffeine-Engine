@@ -6,6 +6,7 @@ import engine.core.update.SetOfParameters
 import engine.core.update.Updatable
 import engine.core.update.update2D.Parameterized
 import engine.core.window.Window
+import engine.feature.interaction.Interaction
 
 /*
     Each set of parameters which is held by the composite entity can be modified
