@@ -18,6 +18,8 @@ open class BoundingBox(
         override var y: Float,
         override var xSize: Float,
         override var ySize: Float,
+        var xOffset: Float  = 0f,
+        var yOffset: Float = 0f,
         var rotationAngle: Float = 0f,
         val isSizeUpdatable: Boolean = true
 ) : IntersectableBox, Entity,
@@ -44,8 +46,8 @@ open class BoundingBox(
     override fun updateParameters(parameters: SetOfParameters) {
         if (parameters is SetOfStatic2DParameters) {
             parameters.let {
-                x = it.x
-                y = it.y
+                x = it.x + xOffset
+                y = it.y + yOffset
                 if (isSizeUpdatable) {
                     xSize = it.xSize
                     ySize = it.ySize
@@ -56,8 +58,8 @@ open class BoundingBox(
 
         if (parameters is SetOf2DParametersWithVelocity) {
             parameters.let {
-                x = it.x
-                y = it.y
+                x = it.x + xOffset
+                y = it.y + yOffset
                 if (isSizeUpdatable) {
                     xSize = it.xSize
                     ySize = it.ySize
