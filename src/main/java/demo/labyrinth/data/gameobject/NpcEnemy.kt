@@ -47,11 +47,11 @@ class NpcEnemy(
             renderProjection: Matrix4f
     ): BoundingBox {
         return BoundingBox(
-                x = 150f + (100),
-                y = 120f,
-                xSize = 50f,
-                ySize = 50f,
-                rotationAngle = 0f
+                xOffset = 14.5f,
+                xSize = 35f,
+                ySize = 64f,
+                rotationAngle = 0f,
+                isSizeUpdatable = false
         ).apply {
             shader = ShaderController.createBoundingBoxShader(renderProjection)
         }
