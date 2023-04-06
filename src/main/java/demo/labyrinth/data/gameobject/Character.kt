@@ -11,6 +11,7 @@ import engine.core.texture.Texture2D
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.collision.boundingbox.BoundingBoxCollider
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
+import engine.feature.collision.boundingbox.defaultBehavior
 import engine.feature.collision.tiled.TiledCollider
 import engine.feature.collision.tiled.TiledCollisionContext
 import org.joml.Matrix4f
@@ -90,7 +91,8 @@ object Character : GameObject {
                 it as Entity,
                 boundingBox!!,
                 characterParameters,
-                bbCollisionContext
+                bbCollisionContext,
+                defaultBehavior
         )
     }
 
