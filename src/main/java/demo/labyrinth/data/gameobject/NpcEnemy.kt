@@ -9,6 +9,7 @@ import engine.core.render.render2D.AnimatedObject2D
 import engine.core.texture.Texture2D
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.collision.boundingbox.BoundingBox
+import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import org.joml.Matrix4f
 
 class NpcEnemy(
@@ -24,7 +25,10 @@ class NpcEnemy(
         it?.draw()
     }
 
-    fun init(renderProjection: Matrix4f) {
+    fun init(
+            renderProjection: Matrix4f,
+            boundingBoxCollisionContext: BoundingBoxCollisionContext
+    ) {
         val box = getBoundingBox(renderProjection)
         val animatedObject = getAnimatedObject(renderProjection)
 
@@ -40,6 +44,8 @@ class NpcEnemy(
         val hp = HealthBar(parameters, hpBarPatameters1, renderProjection)
 
         it?.addComponent(hp, parameters)
+
+        boundingBoxCollisionContext.addEntity(box, box.getParameters())
     }
 
     // TODO: move to parameters file

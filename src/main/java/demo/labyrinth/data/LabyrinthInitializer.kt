@@ -23,7 +23,7 @@ object LabyrinthInitializer {
         GameMap.init(renderProjection, screenWidth, screenHeight)
         Character.init(renderProjection, boundingBoxCollisionContext, tiledCollisionContext)
         initCampfireGraphics(renderProjection)
-        initGoblins(renderProjection)
+        initGoblins(renderProjection, boundingBoxCollisionContext)
         initPhysics(boundingBoxCollisionContext, tiledCollisionContext)
     }
 
@@ -55,9 +55,14 @@ object LabyrinthInitializer {
         Campfire.addComponent(Campfire.graphicalComponent, campfireParameters)
     }
 
-    private fun initGoblins(renderProjection: Matrix4f) {
-        val enemy1 = NpcEnemy(goblinParams1).also { npc -> npc.init(renderProjection) }
-        val enemy2 = NpcEnemy(goblinParams2).also { npc -> npc.init(renderProjection) }
+    private fun initGoblins(
+            renderProjection: Matrix4f,
+            boundingBoxCollisionContext: BoundingBoxCollisionContext
+    ) {
+        val enemy1 = NpcEnemy(goblinParams1)
+                .also { npc -> npc.init(renderProjection, boundingBoxCollisionContext) }
+        val enemy2 = NpcEnemy(goblinParams2)
+                .also { npc -> npc.init(renderProjection, boundingBoxCollisionContext) }
         NPCs.it.addAll(listOf(enemy1, enemy2))
     }
 }
