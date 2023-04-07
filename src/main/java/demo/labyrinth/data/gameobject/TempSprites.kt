@@ -54,7 +54,7 @@ object TempSprites : GameObject {
         it?.addComponent(graphicalComponent, params)
         actions.add(
                 AccumulatedTimeEvent(
-                        timeLimit = 1.2f,
+                        timeLimit = 0.5f,
                         action = { _ ->
                             it?.removeComponent(params)
                         },
