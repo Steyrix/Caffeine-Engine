@@ -2,6 +2,7 @@ package demo.labyrinth
 
 import demo.labyrinth.interaction.AttackInteraction
 import engine.core.entity.CompositeEntity
+import engine.core.loop.PredicateTimeEvent
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.interaction.Interaction
@@ -10,6 +11,16 @@ class Player(
         private val drawableComponent: AnimatedObject2D,
         params: SetOf2DParametersWithVelocity
 ) : CompositeEntity() {
+
+    private var isAttack = false
+
+    private val attackCooldown = PredicateTimeEvent(
+            timeLimit = 0.5f,
+            predicate = { isAttack },
+            action = {
+                isAttack = false
+            }
+    )
 
     private val controller = SimpleController2D(
             params,
@@ -34,10 +45,14 @@ class Player(
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
         drawableComponent.setAnimationByKey(controller.getAnimationKey())
+        attackCooldown.schedule(deltaTime)
     }
 
     override fun getInteraction(): Interaction? {
-        if (controller.isStriking) return AttackInteraction()
+        if (controller.isStriking && !isAttack) {
+            isAttack = true
+            return AttackInteraction()
+        }
         return null
     }
 }
