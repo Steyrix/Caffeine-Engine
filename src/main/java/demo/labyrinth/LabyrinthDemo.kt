@@ -51,6 +51,7 @@ class LabyrinthDemo(
         bbCollisionContext.update()
         tiledCollisionContext.update()
         boxInteractionContext.update()
+        TempSprites.update(deltaTime)
 
         Campfire.update(deltaTime)
         GameMap.update(deltaTime)
@@ -64,5 +65,6 @@ class LabyrinthDemo(
         Campfire.draw()
         Character.draw()
         NPCs.draw()
+        TempSprites.draw()
     }
 }
