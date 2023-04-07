@@ -100,7 +100,7 @@ class SimpleController2D(
     }
 
     fun getStrikePos(): Point2D {
-        return Point2D(params.x + params.xSize, params.y + params.ySize / 2)
+        return Point2D(params.x + params.xSize / 2, params.y + params.ySize / 2)
     }
 
     private fun getStrikingAnimation(): String {
