@@ -28,6 +28,12 @@ open class CompositeEntity : Entity, Updatable {
         component.onAdd()
     }
 
+    fun removeComponent(
+            parameters: SetOfParameters
+    ) {
+        parametersMap.remove(parameters)
+    }
+
     fun draw() {
         parametersMap.entries.forEach {
             it.value.forEach { entity ->
