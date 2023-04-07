@@ -52,8 +52,6 @@ class Player(
     override fun getInteraction(): Interaction? {
         if (controller.isStriking && !isAttack) {
             isAttack = true
-            val currPos = controller.getStrikePos()
-            TempSprites.generateHit(currPos.x, currPos.y)
             return AttackInteraction()
         }
         return null
