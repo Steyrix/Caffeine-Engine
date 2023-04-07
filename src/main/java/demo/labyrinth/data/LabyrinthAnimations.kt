@@ -153,6 +153,6 @@ val hitAnimation = mutableListOf<Animation>(
         SequenceAtlasAnimation(
             AnimationKey.HIT,
             FrameParametersGenerator.generate(Pair(0,3), Pair(0,3),0.25f, 0.25f),
-            timeLimit = 0.1f
+            timeLimit = 0.03f
         )
 )
