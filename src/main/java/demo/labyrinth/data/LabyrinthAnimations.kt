@@ -32,6 +32,7 @@ object AnimationKey {
     const val GOBLIN_STRIKE_D = "STRIKE_D"
 
     const val BURN = "BURN"
+    const val HIT = "HIT"
 }
 
 val characterAnimations = mutableListOf<Animation>(
@@ -145,5 +146,13 @@ val campfireAnimations = mutableListOf<Animation>(
                 AnimationKey.BURN,
                 FrameParametersGenerator.generate(Pair(0,3), Pair(0,0), 0.2f, 1.0f),
                 timeLimit = 0.1f
+        )
+)
+
+val hitAnimation = mutableListOf<Animation>(
+        SequenceAtlasAnimation(
+            AnimationKey.HIT,
+            FrameParametersGenerator.generate(Pair(0,3), Pair(0,3),0.25f, 0.25f),
+            timeLimit = 0.1f
         )
 )
