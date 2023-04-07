@@ -33,6 +33,7 @@ object LabyrinthInitializer {
                 boundingBoxCollisionContext,
                 boxInteractionContext
         )
+        TempSprites.init(renderProjection)
     }
 
     private fun initCampfireGraphics(renderProjection: Matrix4f) {
