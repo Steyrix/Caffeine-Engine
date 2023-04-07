@@ -46,8 +46,8 @@ object TempSprites : GameObject {
         val params = SetOfStatic2DParameters(
                 x = posX,
                 y = posY,
-                xSize = 10f,
-                ySize = 10f,
+                xSize = 64f,
+                ySize = 64f,
                 rotationAngle = 0f
         )
 
@@ -57,12 +57,14 @@ object TempSprites : GameObject {
                         timeLimit = 1.2f,
                         action = { _ ->
                             it?.removeComponent(params)
-                        }
+                        },
+                        initialTime = 0f
                 )
         )
     }
 
     override fun update(deltaTime: Float) {
+        super.update(deltaTime)
         actions.forEach {
             it.schedule(deltaTime)
         }
