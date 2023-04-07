@@ -53,4 +53,8 @@ class SequenceAtlasAnimation(
             shader.setUniform(Shader.VAR_KEY_FRAME_Y, it.frameNumberY)
         }
     }
+
+    override fun toString(): String {
+        return "Animation $name: currentFrame is ${currentFrame.toString()}"
+    }
 }
