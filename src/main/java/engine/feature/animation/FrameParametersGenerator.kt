@@ -11,6 +11,7 @@ object FrameParametersGenerator {
 
         val out = mutableListOf<FrameParameters>()
         var xFirst = xRange.first
+        val initialX = xFirst
         val xLast = xRange.second
         var yFirst = yRange.first
         val yLast = yRange.second
@@ -30,11 +31,13 @@ object FrameParametersGenerator {
             { xFirst >= xLast }
         }
 
+
         while (yConditionFunc.invoke()) {
 
             val frameY = yFirst + 1
             val yOffset = yFirst * frameSizeY
 
+            xFirst = initialX
             while (xConditionFunc.invoke()) {
                 val frameX = xFirst + 1
                 val xOffset = xFirst * frameSizeX
