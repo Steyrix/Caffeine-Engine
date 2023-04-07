@@ -24,10 +24,6 @@ class NpcEnemy(
         it?.update(deltaTime)
     }
 
-    override fun draw() {
-        it?.draw()
-    }
-
     fun init(
             renderProjection: Matrix4f,
             boundingBoxCollisionContext: BoundingBoxCollisionContext,
