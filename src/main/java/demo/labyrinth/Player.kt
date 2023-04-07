@@ -1,5 +1,6 @@
 package demo.labyrinth
 
+import demo.labyrinth.data.gameobject.TempSprites
 import demo.labyrinth.interaction.AttackInteraction
 import engine.core.entity.CompositeEntity
 import engine.core.loop.PredicateTimeEvent
@@ -51,6 +52,8 @@ class Player(
     override fun getInteraction(): Interaction? {
         if (controller.isStriking && !isAttack) {
             isAttack = true
+            val currPos = controller.getStrikePos()
+            TempSprites.generateHit(currPos.x, currPos.y)
             return AttackInteraction()
         }
         return null
