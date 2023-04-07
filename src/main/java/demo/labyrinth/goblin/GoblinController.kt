@@ -7,6 +7,7 @@ import engine.core.entity.Entity
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.Updatable
 import engine.core.window.Window
+import engine.feature.geometry.Point2D
 
 class GoblinController(
         private val params: SetOf2DParametersWithVelocity,
@@ -57,4 +58,6 @@ class GoblinController(
             Direction.DOWN -> AnimationKey.GOBLIN_IDLE_D
         }
     }
+
+    fun getCurrentCenterPos() = Point2D(params.x, params.y)
 }

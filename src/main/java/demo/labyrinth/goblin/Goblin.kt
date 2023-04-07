@@ -1,5 +1,6 @@
 package demo.labyrinth.goblin
 
+import demo.labyrinth.data.gameobject.TempSprites
 import demo.labyrinth.hp.HealthBar
 import demo.labyrinth.interaction.AttackInteraction
 import engine.core.entity.CompositeEntity
@@ -65,7 +66,11 @@ class Goblin(
 
     override fun consumeInteraction(interaction: Interaction) {
         when(interaction) {
-            is AttackInteraction -> hp.filled -= interaction.damage
+            is AttackInteraction -> {
+                val currPos = controller.getCurrentCenterPos()
+                TempSprites.generateHit(currPos.x, currPos.y)
+                hp.filled -= interaction.damage
+            }
         }
     }
 }
