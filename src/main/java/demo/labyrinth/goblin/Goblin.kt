@@ -19,9 +19,12 @@ class Goblin(
         private val hp: HealthBar
 ) : CompositeEntity(), CollisionReactive {
 
-    private val startChasing = AccumulatedTimeEvent(timeLimit = 2f) {
-        tileTraverser.moveTo(playerParams.getCenterPoint())
-    }
+    private val startChasing = AccumulatedTimeEvent(
+            timeLimit = 2f,
+            action = {
+                tileTraverser.moveTo(playerParams.getCenterPoint())
+            }
+    )
 
     private val controller = GoblinController(
             params,

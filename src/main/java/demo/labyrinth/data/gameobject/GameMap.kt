@@ -36,16 +36,17 @@ object GameMap : GameObject {
     var tileGraph: TileGraph? = null
 
     private val lightBlinking = AccumulatedTimeEvent(
-            timeLimit = lightBlinkingTimeLimit
-    ) {
-        if (current + 1 >= lightIntensityCaps.size) {
-            current = 0
-        } else current++
-        graphicalComponent?.shader?.let {
-            it.bind()
-            it.setUniform("lightIntensityCap", lightIntensityCaps[current])
-        }
-    }
+            timeLimit = lightBlinkingTimeLimit,
+            action = {
+                if (current + 1 >= lightIntensityCaps.size) {
+                    current = 0
+                } else current++
+                graphicalComponent?.shader?.let {
+                    it.bind()
+                    it.setUniform("lightIntensityCap", lightIntensityCaps[current])
+                }
+            }
+    )
 
     fun init(
             renderProjection: Matrix4f,
