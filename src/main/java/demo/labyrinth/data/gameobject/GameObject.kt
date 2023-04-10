@@ -18,4 +18,6 @@ interface GameObject {
         if (entity == null) return
         it?.addComponent(entity, params)
     }
+
+    fun isDisposed() = it?.isDisposed ?: false
 }
