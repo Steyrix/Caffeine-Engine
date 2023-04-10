@@ -1,10 +1,11 @@
 package demo.labyrinth.goblin
 
+import demo.labyrinth.data.AnimationKey
 import demo.labyrinth.data.gameobject.TempSprites
 import demo.labyrinth.hp.HealthBar
 import demo.labyrinth.interaction.AttackInteraction
 import engine.core.entity.CompositeEntity
-import engine.core.loop.AccumulatedTimeEvent
+import engine.core.loop.PredicateTimeEvent
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.getCenterPoint
@@ -20,8 +21,9 @@ class Goblin(
         private val hp: HealthBar
 ) : CompositeEntity(), CollisionReactive {
 
-    private val startChasing = AccumulatedTimeEvent(
+    private val startChasing = PredicateTimeEvent(
             timeLimit = 2f,
+            predicate = { parametersMap.containsKey(tileTraverser) },
             action = {
                 tileTraverser.moveTo(playerParams.getCenterPoint())
             }
@@ -57,10 +59,15 @@ class Goblin(
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
         startChasing.schedule(deltaTime)
-        drawableComponent.setAnimationByKey(controller.getAnimationKey())
+
+        if (parametersMap.containsKey(controller)) {
+            drawableComponent.setAnimationByKey(controller.getAnimationKey())
+        }
 
         if (hp.filled <= 0) {
-
+            parametersMap.remove(tileTraverser)
+            parametersMap.remove(controller)
+            drawableComponent.setAnimationByKey(AnimationKey.GOBLIN_DEFEAT)
         }
     }
 
