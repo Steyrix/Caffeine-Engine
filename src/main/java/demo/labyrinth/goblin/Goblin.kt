@@ -58,6 +58,10 @@ class Goblin(
         super.update(deltaTime)
         startChasing.schedule(deltaTime)
         drawableComponent.setAnimationByKey(controller.getAnimationKey())
+
+        if (hp.filled <= 0) {
+
+        }
     }
 
     override fun reactToCollision() {
