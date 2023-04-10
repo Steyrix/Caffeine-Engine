@@ -68,6 +68,7 @@ class Goblin(
             parametersMap.remove(tileTraverser)
             parametersMap.remove(controller)
             drawableComponent.setAnimationByKey(AnimationKey.GOBLIN_DEFEAT)
+            isDisposed = true
         }
     }
 
