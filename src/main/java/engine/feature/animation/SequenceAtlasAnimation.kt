@@ -4,6 +4,7 @@ import engine.core.shader.Shader
 
 class SequenceAtlasAnimation(
         override val name: String,
+        override val isReplayable: Boolean = true,
         private val frames: List<FrameParameters>,
         initialIndex: Int = 0,
         private val timeLimit: Float

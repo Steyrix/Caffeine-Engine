@@ -27,7 +27,6 @@ class BasicAtlasAnimation(
     }
 
     override fun play(deltaTime: Float) {
-
         playFunction?.let {
             it.invoke(deltaTime, currentFrameX, currentFrameY, firstPosX, firstPosY)
             return
