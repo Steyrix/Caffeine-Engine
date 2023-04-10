@@ -31,9 +31,7 @@ object FrameParametersGenerator {
             { xFirst >= xLast }
         }
 
-
         while (yConditionFunc.invoke()) {
-
             val frameY = yFirst + 1
             val yOffset = yFirst * frameSizeY
 
