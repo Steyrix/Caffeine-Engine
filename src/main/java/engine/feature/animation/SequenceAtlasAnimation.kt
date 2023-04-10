@@ -38,9 +38,8 @@ class SequenceAtlasAnimation(
             if (currIndex + 1 < frames.size) {
                 currIndex++
             } else {
-                currIndex = 0
+                if (isReplayable) currIndex = 0
             }
-
 
             currentFrame = frames[currIndex]
         }
