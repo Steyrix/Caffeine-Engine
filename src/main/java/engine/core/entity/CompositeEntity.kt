@@ -15,56 +15,45 @@ import engine.feature.interaction.Interaction
  */
 open class CompositeEntity : Entity, Updatable {
 
-    protected val parametersMap: HashMap<SetOfParameters, MutableList<Entity>> = hashMapOf()
+    protected val parametersMap: HashMap<Entity, SetOfParameters> = hashMapOf()
 
     fun addComponent(
             component: Entity,
             parameters: SetOfParameters
     ) {
-        parametersMap
-                .getOrPut(parameters) { mutableListOf() }
-                .add(component)
-
+        parametersMap[component] = parameters
         component.onAdd()
     }
 
     fun removeComponent(
-            parameters: SetOfParameters
+            entity: Entity
     ) {
-        parametersMap.remove(parameters)
+        parametersMap.remove(entity)
     }
 
     fun draw() {
-        parametersMap.entries.forEach {
-            it.value.forEach { entity ->
-                (entity as? Drawable)?.draw()
-                (entity as? CompositeEntity)?.draw()
-            }
+        parametersMap.keys.forEach { entity ->
+            (entity as? Drawable)?.draw()
+            (entity as? CompositeEntity)?.draw()
         }
     }
 
     override fun update(deltaTime: Float) {
         parametersMap.entries.forEach {
-            it.value.forEach { entity ->
-                (entity as? Updatable)?.update(deltaTime)
-                (entity as? Parameterized)?.updateParameters(it.key)
-            }
+            (it.key as? Updatable)?.update(deltaTime)
+            (it.key as? Parameterized)?.updateParameters(it.value)
         }
     }
 
     override fun consumeInteraction(interaction: Interaction) {
-        parametersMap.entries.forEach {
-            it.value.forEach {entity ->
-                entity.consumeInteraction(interaction)
-            }
+        parametersMap.keys.forEach { entity ->
+            entity.consumeInteraction(interaction)
         }
     }
 
     fun input(window: Window) {
-        parametersMap.entries.forEach {
-            it.value.forEach { entity ->
-                (entity as? Controllable)?.input(window)
-            }
+        parametersMap.keys.forEach { entity ->
+            (entity as? Controllable)?.input(window)
         }
     }
 }
