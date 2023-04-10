@@ -57,4 +57,14 @@ class SequenceAtlasAnimation(
     override fun toString(): String {
         return "Animation $name: currentFrame is ${currentFrame.toString()}"
     }
+
+    override fun copy(): SequenceAtlasAnimation {
+        return SequenceAtlasAnimation(
+                name,
+                isReplayable,
+                frames = frames.map { it.copy() },
+                initialIndex = 0,
+                timeLimit = timeLimit
+        )
+    }
 }

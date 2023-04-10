@@ -11,4 +11,6 @@ interface Animation {
     fun play(deltaTime: Float)
 
     fun setUniforms(shader: Shader)
+
+    fun copy(): Animation
 }

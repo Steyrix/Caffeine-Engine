@@ -69,7 +69,7 @@ class NpcEnemy(
                 frameSizeX = 0.09f,
                 frameSizeY = 0.2f,
                 texture = Texture2D.createInstance(texturePath),
-                animations = goblinsAnimations
+                animations = goblinsAnimations.map { it.copy() }
         ).apply {
             shader = ShaderController.createAnimationShader(renderProjection)
         }

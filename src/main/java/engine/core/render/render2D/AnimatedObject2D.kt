@@ -23,7 +23,7 @@ class AnimatedObject2D(
             frameSizeX: Float,
             frameSizeY: Float,
             texture: Texture2D?,
-            animations: MutableList<Animation>
+            animations: List<Animation>
     ) : this(
             bufferParamsCount = 2,
             dataArrays = listOf(Buffer.RECTANGLE_INDICES, Buffer.getRectangleSectorVertices(frameSizeX, frameSizeY)),

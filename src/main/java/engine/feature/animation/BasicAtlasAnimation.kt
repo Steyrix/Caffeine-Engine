@@ -63,6 +63,19 @@ class BasicAtlasAnimation(
         shader.setUniform(Shader.VAR_KEY_FRAME_Y, currentFrameY)
     }
 
+    override fun copy(): BasicAtlasAnimation {
+        return BasicAtlasAnimation(
+                name,
+                animationId,
+                usedLayerId,
+                framesCountX,
+                framesCountY,
+                currentFrameX,
+                currentFrameY,
+                timeLimit
+        )
+    }
+
     private fun isLastFrameX() = if (shouldInc()) {
         currentFrameX + 1 > lastPosX
     } else {
