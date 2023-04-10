@@ -17,6 +17,8 @@ open class CompositeEntity : Entity, Updatable {
 
     protected val parametersMap: HashMap<Entity, SetOfParameters> = hashMapOf()
 
+    var isDisposed = false
+
     fun addComponent(
             component: Entity,
             parameters: SetOfParameters
