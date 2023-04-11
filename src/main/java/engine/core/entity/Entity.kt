@@ -7,5 +7,5 @@ interface Entity {
 
     fun consumeInteraction(interaction: Interaction) {}
 
-    fun getInteraction(): Interaction? = null
+    fun getInteractions(): List<Interaction> = emptyList()
 }

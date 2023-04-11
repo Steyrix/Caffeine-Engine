@@ -30,8 +30,10 @@ interface InteractionContext<T> {
     private fun checkForInteraction(target: Entity, agent: Entity) {
         if (agent != target) {
             if (isInteracting(target, agent)) {
-                val interaction = target.getInteraction()
-                interaction?.let { agent.consumeInteraction(it) }
+                val interactions = target.getInteractions()
+                interactions.forEach {
+                    agent.consumeInteraction(it)
+                }
             }
         }
     }
