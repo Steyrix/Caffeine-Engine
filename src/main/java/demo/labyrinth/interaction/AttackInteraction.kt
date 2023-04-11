@@ -2,6 +2,6 @@ package demo.labyrinth.interaction
 
 import engine.feature.interaction.Interaction
 
-class AttackInteraction(
+data class AttackInteraction(
         val damage: Float = 0.25f
 ) : Interaction
