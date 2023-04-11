@@ -146,7 +146,31 @@ val goblinsAnimations = mutableListOf<Animation>(
                 isReplayable = false,
                 frames = FrameParametersGenerator.generate(Pair(0, 4), Pair(4, 4), 0.09f, 0.2f),
                 timeLimit = 0.25f
-        )
+        ),
+        SequenceAtlasAnimation(
+                name = AnimationKey.GOBLIN_STRIKE_D,
+                isReplayable = false,
+                frames = FrameParametersGenerator.generate(Pair(7, 10), Pair(0, 0), 0.09f, 0.2f),
+                timeLimit = 0.25f
+        ),
+        SequenceAtlasAnimation(
+                name = AnimationKey.GOBLIN_STRIKE_R,
+                isReplayable = false,
+                frames = FrameParametersGenerator.generate(Pair(7, 10), Pair(1, 1), 0.09f, 0.2f),
+                timeLimit = 0.25f
+        ),
+        SequenceAtlasAnimation(
+                name = AnimationKey.GOBLIN_STRIKE_U,
+                isReplayable = false,
+                frames = FrameParametersGenerator.generate(Pair(7, 10), Pair(2, 2), 0.09f, 0.2f),
+                timeLimit = 0.25f
+        ),
+        SequenceAtlasAnimation(
+                name = AnimationKey.GOBLIN_STRIKE_L,
+                isReplayable = false,
+                frames = FrameParametersGenerator.generate(Pair(7, 10), Pair(3, 3), 0.09f, 0.2f),
+                timeLimit = 0.25f
+        ),
 )
 
 val campfireAnimations = mutableListOf<Animation>(
