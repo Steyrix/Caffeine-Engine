@@ -2,6 +2,7 @@ package demo.labyrinth
 
 import demo.labyrinth.data.gameobject.TempSprites
 import demo.labyrinth.interaction.AttackInteraction
+import demo.labyrinth.interaction.IsAttackableInteraction
 import engine.core.entity.CompositeEntity
 import engine.core.loop.PredicateTimeEvent
 import engine.core.render.render2D.AnimatedObject2D
@@ -49,11 +50,14 @@ class Player(
         attackCooldown.schedule(deltaTime)
     }
 
-    override fun getInteraction(): Interaction? {
+    override fun getInteractions(): List<Interaction> {
+        val out = mutableListOf<Interaction>()
         if (controller.isStriking && !isAttack) {
             isAttack = true
-            return AttackInteraction()
+            out.add(AttackInteraction())
         }
-        return null
+
+        out.add(IsAttackableInteraction)
+        return out.toList()
     }
 }
