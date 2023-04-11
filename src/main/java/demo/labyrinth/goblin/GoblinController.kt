@@ -28,12 +28,20 @@ class GoblinController(
     override fun input(window: Window) {}
 
     override fun update(deltaTime: Float) {
+        playStrikingAnimation.schedule(deltaTime)
+        if (isStriking) return
+
         params.x += params.velocityX * deltaTime * modifier
         params.y += params.velocityY * deltaTime * modifier
         processState()
     }
 
     private fun processState() {
+        if (isStriking) {
+            isWalking = false
+            return
+        }
+
         if ((params.velocityX != 0f || params.velocityY != 0f) && !isWalking) {
             isWalking = true
         }
@@ -51,25 +59,44 @@ class GoblinController(
         }
     }
 
+    fun strike() {
+        isStriking = true
+    }
+
+    fun getCurrentCenterPos() = Point2D(params.x, params.y)
+
     fun getAnimationKey(): String {
-        return if (isWalking) {
-            when (direction) {
-                Direction.RIGHT -> AnimationKey.GOBLIN_WALK_R
-                Direction.LEFT -> AnimationKey.GOBLIN_WALK_L
-                Direction.UP -> AnimationKey.GOBLIN_WALK_U
-                Direction.DOWN -> AnimationKey.GOBLIN_WALK_D
-            }
-        } else when (direction) {
+        return when {
+            isStriking -> getStrikingAnimation()
+            isWalking -> getWalkingAnimation()
+            else -> getIdleAnimation()
+        }
+    }
+
+    private fun getStrikingAnimation(): String {
+        return when (direction) {
+            Direction.RIGHT -> AnimationKey.GOBLIN_STRIKE_R
+            Direction.LEFT -> AnimationKey.GOBLIN_STRIKE_L
+            Direction.UP -> AnimationKey.GOBLIN_STRIKE_U
+            Direction.DOWN -> AnimationKey.GOBLIN_STRIKE_D
+        }
+    }
+
+    private fun getWalkingAnimation(): String {
+        return when (direction) {
+            Direction.RIGHT -> AnimationKey.GOBLIN_WALK_R
+            Direction.LEFT -> AnimationKey.GOBLIN_WALK_L
+            Direction.UP -> AnimationKey.GOBLIN_WALK_U
+            Direction.DOWN -> AnimationKey.GOBLIN_WALK_D
+        }
+    }
+
+    private fun getIdleAnimation(): String {
+        return when (direction) {
             Direction.RIGHT -> AnimationKey.GOBLIN_IDLE_R
             Direction.LEFT -> AnimationKey.GOBLIN_IDLE_L
             Direction.UP -> AnimationKey.GOBLIN_IDLE_U
             Direction.DOWN -> AnimationKey.GOBLIN_IDLE_D
         }
     }
-
-    fun strike() {
-        isStriking = true
-    }
-
-    fun getCurrentCenterPos() = Point2D(params.x, params.y)
 }
