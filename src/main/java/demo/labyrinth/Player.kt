@@ -60,4 +60,14 @@ class Player(
         out.add(IsAttackableInteraction)
         return out.toList()
     }
+
+    override fun consumeInteraction(interaction: Interaction) {
+//        when(interaction) {
+//            is AttackInteraction -> {
+//                val currPos = controller.getCurrentCenterPos()
+//                TempSprites.generateHit(currPos.x, currPos.y)
+//                // hp.filled -= interaction.damage
+//            }
+//        }
+    }
 }

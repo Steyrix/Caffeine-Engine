@@ -93,13 +93,13 @@ class Goblin(
         }
     }
 
-    override fun getInteractions(): List<Interaction> {
-        val out = mutableListOf<Interaction>()
-
-        if (controller.isStriking) {
-            out.add(AttackInteraction(damage = 0.05f))
-        }
-
-        return out
-    }
+//    override fun getInteractions(): List<Interaction> {
+//        val out = mutableListOf<Interaction>()
+//
+//        if (controller.isStriking) {
+//            out.add(AttackInteraction(damage = 0.05f))
+//        }
+//
+//        return out
+//    }
 }
