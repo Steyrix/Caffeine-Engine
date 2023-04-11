@@ -17,4 +17,8 @@ class PredicateTimeEvent (
             action.invoke(deltaTime)
         }
     }
+
+    fun reset() {
+        accumulatedTime = 0f
+    }
 }
