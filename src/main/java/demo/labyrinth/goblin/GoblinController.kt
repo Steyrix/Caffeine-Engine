@@ -4,6 +4,7 @@ import demo.labyrinth.data.AnimationKey
 import engine.core.controllable.Controllable
 import engine.core.controllable.Direction
 import engine.core.entity.Entity
+import engine.core.loop.PredicateTimeEvent
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.Updatable
 import engine.core.window.Window
@@ -14,8 +15,15 @@ class GoblinController(
         private var modifier: Float = 20f,
 ) : Controllable, Entity, Updatable {
 
+    var isStriking = false
     private var isWalking = false
     private var direction = Direction.RIGHT
+
+    private val playStrikingAnimation = PredicateTimeEvent(
+            timeLimit = 0.5f,
+            predicate = { isStriking },
+            action = { isStriking = false }
+    )
 
     override fun input(window: Window) {}
 
@@ -57,6 +65,10 @@ class GoblinController(
             Direction.UP -> AnimationKey.GOBLIN_IDLE_U
             Direction.DOWN -> AnimationKey.GOBLIN_IDLE_D
         }
+    }
+
+    fun strike() {
+        isStriking = true
     }
 
     fun getCurrentCenterPos() = Point2D(params.x, params.y)
