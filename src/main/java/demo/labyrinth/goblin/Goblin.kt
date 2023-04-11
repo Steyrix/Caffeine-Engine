@@ -4,6 +4,7 @@ import demo.labyrinth.data.AnimationKey
 import demo.labyrinth.data.gameobject.TempSprites
 import demo.labyrinth.hp.HealthBar
 import demo.labyrinth.interaction.AttackInteraction
+import demo.labyrinth.interaction.IsAttackableInteraction
 import engine.core.entity.CompositeEntity
 import engine.core.loop.PredicateTimeEvent
 import engine.core.render.render2D.AnimatedObject2D
@@ -12,18 +13,14 @@ import engine.core.update.getCenterPoint
 import engine.feature.collision.CollisionReactive
 import engine.feature.interaction.Interaction
 import engine.feature.tiled.traversing.TileTraverser
-import kotlin.math.pow
-import kotlin.math.sqrt
 
 class Goblin(
         private val drawableComponent: AnimatedObject2D,
-        private val params: SetOf2DParametersWithVelocity,
+        params: SetOf2DParametersWithVelocity,
         private val tileTraverser: TileTraverser,
         private val playerParams: SetOf2DParametersWithVelocity,
         private val hp: HealthBar
 ) : CompositeEntity(), CollisionReactive {
-
-    private val distanceToStrike = 15f
 
     private val startChasing = PredicateTimeEvent(
             timeLimit = 2f,
@@ -75,10 +72,6 @@ class Goblin(
             isDisposed = true
             return
         }
-
-        if (getDistanceToPlayer() <= distanceToStrike) {
-            controller.strike()
-        }
     }
 
     override fun reactToCollision() {
@@ -92,12 +85,11 @@ class Goblin(
                 TempSprites.generateHit(currPos.x, currPos.y)
                 hp.filled -= interaction.damage
             }
+            is IsAttackableInteraction -> {
+                if (!controller.isStriking) {
+                    controller.strike()
+                }
+            }
         }
-    }
-
-    private fun getDistanceToPlayer(): Float {
-        val x = (playerParams.x - params.x).toDouble().pow(2.0)
-        val y = (playerParams.y - params.y).toDouble().pow(2.0)
-        return sqrt(x.toFloat() + y.toFloat())
     }
 }
