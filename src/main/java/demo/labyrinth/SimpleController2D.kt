@@ -8,6 +8,7 @@ import engine.core.loop.PredicateTimeEvent
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.Updatable
 import engine.core.window.Window
+import engine.feature.geometry.Point2D
 import org.lwjgl.glfw.GLFW
 
 class SimpleController2D(
@@ -89,6 +90,8 @@ class SimpleController2D(
             isWalking = false
         }
     }
+
+    fun getCurrentCenterPos() = Point2D(params.x, params.y)
 
     fun getAnimationKey(): String {
         return when {
