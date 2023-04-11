@@ -61,6 +61,7 @@ class GoblinController(
 
     fun strike() {
         isStriking = true
+        isWalking = false
     }
 
     fun getCurrentCenterPos() = Point2D(params.x, params.y)
