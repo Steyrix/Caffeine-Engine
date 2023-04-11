@@ -12,14 +12,18 @@ import engine.core.update.getCenterPoint
 import engine.feature.collision.CollisionReactive
 import engine.feature.interaction.Interaction
 import engine.feature.tiled.traversing.TileTraverser
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 class Goblin(
         private val drawableComponent: AnimatedObject2D,
-        params: SetOf2DParametersWithVelocity,
+        private val params: SetOf2DParametersWithVelocity,
         private val tileTraverser: TileTraverser,
         private val playerParams: SetOf2DParametersWithVelocity,
         private val hp: HealthBar
 ) : CompositeEntity(), CollisionReactive {
+
+    private val distanceToStrike = 15f
 
     private val startChasing = PredicateTimeEvent(
             timeLimit = 2f,
@@ -69,6 +73,11 @@ class Goblin(
             parametersMap.remove(controller)
             drawableComponent.setAnimationByKey(AnimationKey.GOBLIN_DEFEAT)
             isDisposed = true
+            return
+        }
+
+        if (getDistanceToPlayer() <= distanceToStrike) {
+            controller.strike()
         }
     }
 
@@ -84,5 +93,11 @@ class Goblin(
                 hp.filled -= interaction.damage
             }
         }
+    }
+
+    private fun getDistanceToPlayer(): Float {
+        val x = (playerParams.x - params.x).toDouble().pow(2.0)
+        val y = (playerParams.y - params.y).toDouble().pow(2.0)
+        return sqrt(x.toFloat() + y.toFloat())
     }
 }
