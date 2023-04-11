@@ -99,7 +99,6 @@ val characterAnimations = mutableListOf<Animation>(
         ),
 )
 
-// TODO: two goblins depend on each other fix
 val goblinsAnimations = mutableListOf<Animation>(
         SequenceAtlasAnimation(
                 name = AnimationKey.GOBLIN_IDLE_R,
