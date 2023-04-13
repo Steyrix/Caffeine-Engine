@@ -7,7 +7,6 @@ import engine.feature.geometry.Point2D
 import engine.feature.tiled.TileMap
 import kotlin.math.abs
 
-// todo: use single instance of tileGraph for all entities in a context
 class TileTraverser(
         private val graph: TileGraph,
         private val tileMap: TileMap,
