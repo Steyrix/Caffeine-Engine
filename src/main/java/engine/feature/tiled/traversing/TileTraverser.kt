@@ -27,11 +27,11 @@ class TileTraverser(
     private var isPaused = false
 
     fun resume() {
-        isPaused = true
+        isPaused = false
     }
 
     fun pause() {
-        isPaused = false
+        isPaused = true
     }
 
     override fun update(deltaTime: Float) {
