@@ -20,12 +20,23 @@ class TileTraverser(
     private var currentPath: ArrayDeque<Int> = ArrayDeque()
     private var currentDestination: Int = INDEX_NOT_FOUND
     private var velocity = 5f
+
     private var currentTile = -1
     private var previousTile = -1
 
+    private var isPaused = false
+
+    fun resume() {
+        isPaused = true
+    }
+
+    fun pause() {
+        isPaused = false
+    }
+
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
-        traverse()
+        if (!isPaused) traverse()
     }
 
     fun moveTo(targetPos: Point2D) {
