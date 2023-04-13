@@ -2,6 +2,7 @@ package engine.feature.tiled.traversing
 
 import engine.core.entity.CompositeEntity
 import engine.core.update.SetOf2DParametersWithVelocity
+import engine.core.update.getCenterPoint
 import engine.feature.geometry.Point2D
 import engine.feature.tiled.TileMap
 import kotlin.math.abs
@@ -20,6 +21,8 @@ class TileTraverser(
     private var currentPath: ArrayDeque<Int> = ArrayDeque()
     private var currentDestination: Int = INDEX_NOT_FOUND
     private var velocity = 5f
+    private var currentTile = -1
+    private var previousTile = -1
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
@@ -31,7 +34,10 @@ class TileTraverser(
 
         if (currentDestination == destination) return
 
-        val start = tileMap.getTileIndex(params.x, params.y)
+        val entityCenter = params.getCenterPoint()
+        val start = tileMap.getTileIndex(entityCenter.x, entityCenter.y)
+        currentTile = start
+
         currentDestination = destination
         dropVelocity()
 
@@ -81,7 +87,10 @@ class TileTraverser(
     private fun getActualNode(it: ArrayDeque<Int>): Int {
         var node = it.first()
         while (it.isNotEmpty() && tileIsReached(node)) {
-            graph.decreaseCost(node)
+            previousTile = currentTile
+            currentTile = node
+            graph.decreaseCost(previousTile)
+
             it.removeFirst()
             if (it.isNotEmpty()) {
                 node = it.first()
@@ -111,14 +120,17 @@ class TileTraverser(
 
     private fun tileIsReached(tileIndex: Int): Boolean {
         val pos = tileMap.getTilePosition(tileIndex)
+        val tilePosX = pos.x
+        val tilePosY = pos.y
 
-        val x = pos.x
-        val isHorizontalIntersection = x in params.x..(params.x + params.xSize)
+        val entityCenter = params.getCenterPoint()
+        val x = entityCenter.x
+        val y = entityCenter.y
 
-        val y = pos.y
-        val isVerticalIntersection = y in params.y..(params.y + params.ySize)
+        val isHorizontalIntersection = x in tilePosX..(tilePosX + tileMap.getTileWidth())
+        val isVerticalIntersection = y in tilePosY..(tilePosY + tileMap.getTileHeight())
 
-        val isInsignificantDiff = isHorizontalDiffInsignificant(x) && isVerticalDiffInsignificant(y)
+        val isInsignificantDiff = isHorizontalDiffInsignificant(tilePosX) && isVerticalDiffInsignificant(tilePosY)
         return isHorizontalIntersection && isVerticalIntersection || isInsignificantDiff
     }
 
