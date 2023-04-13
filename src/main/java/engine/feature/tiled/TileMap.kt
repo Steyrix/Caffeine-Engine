@@ -73,6 +73,10 @@ class TileMap(
         }
     }
 
+    fun getTileHeight() = absoluteTileHeight
+
+    fun getTileWidth() = absoluteTileWidth
+
     fun getLayerByName(name: String): TileLayer = layersMap[name]
             ?: throw IllegalStateException("Layer with name $name not found")
 
