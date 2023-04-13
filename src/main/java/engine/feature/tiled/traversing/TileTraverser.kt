@@ -32,6 +32,7 @@ class TileTraverser(
 
     fun pause() {
         isPaused = true
+        dropVelocity()
     }
 
     override fun update(deltaTime: Float) {
