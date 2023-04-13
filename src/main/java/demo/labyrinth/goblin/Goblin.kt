@@ -5,6 +5,7 @@ import demo.labyrinth.data.gameobject.TempSprites
 import demo.labyrinth.hp.HealthBar
 import demo.labyrinth.interaction.AttackInteraction
 import demo.labyrinth.interaction.IsAttackableInteraction
+import engine.core.controllable.Direction
 import engine.core.entity.CompositeEntity
 import engine.core.loop.PredicateTimeEvent
 import engine.core.render.render2D.AnimatedObject2D
@@ -13,10 +14,11 @@ import engine.core.update.getCenterPoint
 import engine.feature.collision.CollisionReactive
 import engine.feature.interaction.Interaction
 import engine.feature.tiled.traversing.TileTraverser
+import kotlin.math.abs
 
 class Goblin(
         private val drawableComponent: AnimatedObject2D,
-        params: SetOf2DParametersWithVelocity,
+        private val params: SetOf2DParametersWithVelocity,
         private val tileTraverser: TileTraverser,
         private val playerParams: SetOf2DParametersWithVelocity,
         private val hp: HealthBar
@@ -104,6 +106,18 @@ class Goblin(
                 }
             }
         }
+    }
+
+    // todo finish
+    private fun getTargetDirection(): Direction {
+        val isToRight = playerParams.x >= params.x
+        val isToLeft = playerParams.x < params.x
+        val isToTop = playerParams.y <= params.y
+        val isToBotton = playerParams.y > params.y
+
+        val isHorizontalDiff = abs(playerParams.x - params.x) >= abs(playerParams.y - params.y)
+
+        return Direction.RIGHT
     }
 
 //    override fun getInteractions(): List<Interaction> {
