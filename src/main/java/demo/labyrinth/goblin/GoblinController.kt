@@ -87,6 +87,10 @@ class GoblinController(
         }
     }
 
+    fun setDirection(value: Direction) {
+        direction = value
+    }
+
     private fun getStrikingAnimation(): String {
         return when (direction) {
             Direction.RIGHT -> AnimationKey.GOBLIN_STRIKE_R
