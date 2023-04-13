@@ -25,10 +25,20 @@ class GoblinController(
             action = { isStriking = false }
     )
 
+    private var isStrikeCooldown = false
+
+    private val strikeCooldown = PredicateTimeEvent(
+            timeLimit = 1f,
+            predicate = { isStrikeCooldown },
+            action = { isStrikeCooldown = false }
+    )
+
     override fun input(window: Window) {}
 
     override fun update(deltaTime: Float) {
         playStrikingAnimation.schedule(deltaTime)
+        strikeCooldown.schedule(deltaTime)
+
         if (isStriking) return
 
         params.x += params.velocityX * deltaTime * modifier
@@ -60,8 +70,11 @@ class GoblinController(
     }
 
     fun strike() {
-        isStriking = true
-        isWalking = false
+        if (!isStrikeCooldown) {
+            isStriking = true
+            isStrikeCooldown = true
+            isWalking = false
+        }
     }
 
     fun getCurrentCenterPos() = Point2D(params.x, params.y)
