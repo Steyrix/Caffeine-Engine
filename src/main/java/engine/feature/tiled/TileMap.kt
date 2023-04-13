@@ -6,6 +6,7 @@ import engine.core.shader.Shader
 import engine.core.update.SetOfStatic2DParameters
 import engine.core.update.SetOfParameters
 import engine.feature.geometry.Point2D
+import engine.feature.tiled.traversing.TileGraph
 import kotlin.math.roundToInt
 
 // TODO: remove doc for properties and rename them for clearance
@@ -105,9 +106,13 @@ class TileMap(
         return yTileNumber * widthInTiles + xTileNumber
     }
 
-    fun getGraph(layerNames: List<String>): HashMap<Int, MutableList<Int>> {
-        val layers = layerNames.map { getLayerByName(it) }
-        return TileLayerInitializer.generateTileGraph(layers)
+    fun getGraph(
+            walkableLayers: List<String>,
+            obstacleLayers: List<String>
+    ): TileGraph? {
+        val walkable = walkableLayers.map { getLayerByName(it) }
+        val obstacle = obstacleLayers.map { getLayerByName(it) }
+        return TileLayerInitializer.generateTileGraph(walkable, obstacle)
     }
 
     fun setTileAt(layerName: String, posX: Float, posY: Float, tileId: Int) {

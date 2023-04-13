@@ -2,6 +2,7 @@ package engine.feature.tiled
 
 import engine.core.render.render2D.OpenGlObject2D
 import engine.feature.geometry.Point2D
+import engine.feature.tiled.traversing.TileGraph
 
 object TileLayerInitializer {
     private const val EMPTY_TILE_ID = -1
@@ -41,11 +42,14 @@ object TileLayerInitializer {
         )
     }
 
-    internal fun generateTileGraph(layers: List<TileLayer>): HashMap<Int, MutableList<Int>> {
+    internal fun generateTileGraph(
+            walkableLayers: List<TileLayer>,
+            obstacleLayers: List<TileLayer> = emptyList()
+    ): TileGraph? {
         val out = hashMapOf<Int, MutableList<Int>>()
-        val dataLists = layers.map { it.tileIdsData }
-        val widthInTiles = layers.firstOrNull()?.widthInTiles ?: return hashMapOf()
-        val indices = layers.first().tileIdsData.indices
+        val dataLists = walkableLayers.map { it.tileIdsData }
+        val widthInTiles = walkableLayers.firstOrNull()?.widthInTiles ?: return null
+        val indices = walkableLayers.first().tileIdsData.indices
 
         for (num in indices) {
             val adjacentTiles = dataLists
@@ -57,7 +61,17 @@ object TileLayerInitializer {
             out[num] = adjacentTiles
         }
 
-        return out
+        val result = TileGraph(out)
+
+        obstacleLayers.forEach {
+            it.tileIdsData.forEachIndexed { index, it ->
+                if (it != EMPTY_TILE_ID) {
+                    result.increaseCost(index)
+                }
+            }
+        }
+
+        return result
     }
 
     private fun getAdjacentTiles(

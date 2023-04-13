@@ -20,10 +20,9 @@ object GameMap : GameObject {
     var graphicalComponent: TileMap? = null
         set(value) {
             value?.let {
-                tileGraph = TileGraph(
-                        value.getGraph(
-                                listOf("walking_layer", "walkable_objects_layer")
-                        )
+                tileGraph = value.getGraph(
+                        listOf("walking_layer", "walkable_objects_layer"),
+                        listOf("obstacles_layer", "obstacles_bg_layer", "unwalking_layer")
                 )
 
                 field = value
