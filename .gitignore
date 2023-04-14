@@ -44,3 +44,7 @@ cmake-build-*/
 # IntelliJ
 out/
 target/
+
+# Text descriptions
+
+GoblinRoadmap.txt
