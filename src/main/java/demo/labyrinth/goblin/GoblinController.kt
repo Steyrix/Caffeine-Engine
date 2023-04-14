@@ -72,11 +72,12 @@ class GoblinController(
         }
     }
 
-    fun strike() {
+    fun strike(targetParams: SetOfParameters) {
         if (!isStrikeCooldown) {
             isStriking = true
             isStrikeCooldown = true
             isWalking = false
+            directToTarget(targetParams)
         }
     }
 
@@ -90,7 +91,7 @@ class GoblinController(
         }
     }
 
-    fun directToTarget(targetParams: SetOfParameters) {
+    private fun directToTarget(targetParams: SetOfParameters) {
         val targetCenter = targetParams.getCenterPoint()
         val thisCenter = params.getCenterPoint()
 

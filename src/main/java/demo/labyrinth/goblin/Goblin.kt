@@ -100,7 +100,7 @@ class Goblin(
             }
             is IsAttackableInteraction -> {
                 if (!controller.isStriking) {
-                    controller.strike()
+                    controller.strike(playerParams)
                     tileTraverser.pause()
                     isMovingStopped = true
                 }
