@@ -1,3 +1,0 @@
-1. Goblin should move between centers of the tiles
-2. Goblin has reached the tile when its center is equal to the tile's center. OR if difference is insignificant
-3. Goblin can attack the character if it is directed towards the character
