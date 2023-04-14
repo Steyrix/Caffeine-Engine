@@ -6,9 +6,12 @@ import engine.core.controllable.Direction
 import engine.core.entity.Entity
 import engine.core.loop.PredicateTimeEvent
 import engine.core.update.SetOf2DParametersWithVelocity
+import engine.core.update.SetOfParameters
 import engine.core.update.Updatable
+import engine.core.update.getCenterPoint
 import engine.core.window.Window
 import engine.feature.geometry.Point2D
+import kotlin.math.abs
 
 class GoblinController(
         private val params: SetOf2DParametersWithVelocity,
@@ -87,8 +90,27 @@ class GoblinController(
         }
     }
 
-    fun setDirection(value: Direction) {
-        direction = value
+    fun directToTarget(targetParams: SetOfParameters) {
+        val targetCenter = targetParams.getCenterPoint()
+        val thisCenter = params.getCenterPoint()
+
+        val horizontalDirection = if (targetCenter.x <= thisCenter.x) {
+            Direction.LEFT
+        } else {
+            Direction.RIGHT
+        }
+
+        val verticalDirection = if (targetCenter.y <= thisCenter.y) {
+            Direction.UP
+        } else {
+            Direction.DOWN
+        }
+
+        direction = if (abs(targetCenter.x - thisCenter.x) >= abs(targetCenter.y - thisCenter.y)) {
+            horizontalDirection
+        } else {
+            verticalDirection
+        }
     }
 
     private fun getStrikingAnimation(): String {
