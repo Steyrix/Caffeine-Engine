@@ -108,18 +108,6 @@ class Goblin(
         }
     }
 
-    // todo finish
-    private fun getTargetDirection(): Direction {
-        val isToRight = playerParams.x >= params.x
-        val isToLeft = playerParams.x < params.x
-        val isToTop = playerParams.y <= params.y
-        val isToBotton = playerParams.y > params.y
-
-        val isHorizontalDiff = abs(playerParams.x - params.x) >= abs(playerParams.y - params.y)
-
-        return Direction.RIGHT
-    }
-
 //    override fun getInteractions(): List<Interaction> {
 //        val out = mutableListOf<Interaction>()
 //
