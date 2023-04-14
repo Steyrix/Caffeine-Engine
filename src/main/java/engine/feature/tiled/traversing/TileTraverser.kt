@@ -97,7 +97,7 @@ class TileTraverser(
 
     private fun getActualNode(it: ArrayDeque<Int>): Int {
         var node = it.first()
-        while (it.isNotEmpty() && tileIsReached(node)) {
+        while (it.isNotEmpty() && tileIsReachedV2(node)) {
             previousTile = currentTile
             currentTile = node
             graph.decreaseCost(previousTile)
@@ -113,18 +113,20 @@ class TileTraverser(
 
     private fun modifyVelocity(tileIndex: Int) {
         val nextPos = tileMap.getTilePosition(tileIndex)
+        val x = nextPos.x + tileMap.getTileWidth() / 2
+        val y = nextPos.y + tileMap.getTileHeight() / 2
 
         params.velocityX = when {
-            isHorizontalDiffInsignificant(nextPos.x) -> 0f
-            nextPos.x > params.x -> velocity
-            nextPos.x < params.x -> -velocity
+            isHorizontalDiffInsignificant(x) -> 0f
+            x > params.x -> velocity
+            x < params.x -> -velocity
             else -> 0f
         }
 
         params.velocityY = when {
-            isVerticalDiffInsignificant(nextPos.y) -> 0f
-            nextPos.y > params.y -> velocity
-            nextPos.y < params.y -> -velocity
+            isVerticalDiffInsignificant(y) -> 0f
+            y > params.y -> velocity
+            y < params.y -> -velocity
             else -> 0f
         }
     }
@@ -140,6 +142,22 @@ class TileTraverser(
 
         val isHorizontalIntersection = x in tilePosX..(tilePosX + tileMap.getTileWidth())
         val isVerticalIntersection = y in tilePosY..(tilePosY + tileMap.getTileHeight())
+
+        val isInsignificantDiff = isHorizontalDiffInsignificant(tilePosX) && isVerticalDiffInsignificant(tilePosY)
+        return isHorizontalIntersection && isVerticalIntersection || isInsignificantDiff
+    }
+
+    private fun tileIsReachedV2(tileIndex: Int): Boolean {
+        val pos = tileMap.getTilePosition(tileIndex)
+        val tilePosX = pos.x + tileMap.getTileWidth() /2
+        val tilePosY = pos.y + tileMap.getTileHeight() / 2
+
+        val entityCenter = params.getCenterPoint()
+        val x = entityCenter.x
+        val y = entityCenter.y
+
+        val isHorizontalIntersection = x in (tilePosX - 1f)..(tilePosX + 1f)
+        val isVerticalIntersection = y in (tilePosY - 1f)..(tilePosX + 1f)
 
         val isInsignificantDiff = isHorizontalDiffInsignificant(tilePosX) && isVerticalDiffInsignificant(tilePosY)
         return isHorizontalIntersection && isVerticalIntersection || isInsignificantDiff
