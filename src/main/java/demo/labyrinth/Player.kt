@@ -65,7 +65,7 @@ class Player(
         val out = mutableListOf<Interaction>()
         if (controller.isStriking && !isAttack) {
             isAttack = true
-            out.add(AttackInteraction())
+            out.add(AttackInteraction(this))
         }
 
         out.add(IsAttackableInteraction)

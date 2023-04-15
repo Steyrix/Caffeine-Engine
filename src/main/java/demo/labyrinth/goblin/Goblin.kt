@@ -1,11 +1,11 @@
 package demo.labyrinth.goblin
 
+import demo.labyrinth.Player
 import demo.labyrinth.data.AnimationKey
 import demo.labyrinth.data.gameobject.TempSprites
 import demo.labyrinth.hp.HealthBar
 import demo.labyrinth.interaction.AttackInteraction
 import demo.labyrinth.interaction.IsAttackableInteraction
-import engine.core.controllable.Direction
 import engine.core.entity.CompositeEntity
 import engine.core.loop.PredicateTimeEvent
 import engine.core.render.render2D.AnimatedObject2D
@@ -14,11 +14,10 @@ import engine.core.update.getCenterPoint
 import engine.feature.collision.CollisionReactive
 import engine.feature.interaction.Interaction
 import engine.feature.tiled.traversing.TileTraverser
-import kotlin.math.abs
 
 class Goblin(
         private val drawableComponent: AnimatedObject2D,
-        private val params: SetOf2DParametersWithVelocity,
+        params: SetOf2DParametersWithVelocity,
         private val tileTraverser: TileTraverser,
         private val playerParams: SetOf2DParametersWithVelocity,
         private val hp: HealthBar
@@ -94,6 +93,7 @@ class Goblin(
     override fun consumeInteraction(interaction: Interaction) {
         when(interaction) {
             is AttackInteraction -> {
+                if (interaction.producer !is Player) return
                 val currPos = controller.getCurrentCenterPos()
                 TempSprites.generateHit(currPos.x, currPos.y)
                 hp.filled -= interaction.damage
@@ -112,7 +112,10 @@ class Goblin(
         val out = mutableListOf<Interaction>()
 
         if (controller.isStriking) {
-            out.add(AttackInteraction(damage = 0.05f))
+            out.add(AttackInteraction(
+                    producer = this,
+                    damage = 0.05f
+            ))
         }
 
         return out
