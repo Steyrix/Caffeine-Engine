@@ -24,6 +24,16 @@ class Player(
             }
     )
 
+    private var isHit = false
+
+    private val takeHitCooldown = PredicateTimeEvent(
+        timeLimit = 0.5f,
+        predicate = { isHit },
+        action = {
+            isHit = false
+        }
+    )
+
     private val controller = SimpleController2D(
             params,
             absVelocityY = 10f,
@@ -48,6 +58,7 @@ class Player(
         super.update(deltaTime)
         drawableComponent.setAnimationByKey(controller.getAnimationKey())
         attackCooldown.schedule(deltaTime)
+        takeHitCooldown.schedule(deltaTime)
     }
 
     override fun getInteractions(): List<Interaction> {
@@ -62,12 +73,15 @@ class Player(
     }
 
     override fun consumeInteraction(interaction: Interaction) {
-//        when(interaction) {
-//            is AttackInteraction -> {
-//                val currPos = controller.getCurrentCenterPos()
-//                TempSprites.generateHit(currPos.x, currPos.y)
-//                // hp.filled -= interaction.damage
-//            }
-//        }
+        when(interaction) {
+            is AttackInteraction -> {
+                if (!isHit) {
+                    isHit = true
+                    val currPos = controller.getCurrentCenterPos()
+                    TempSprites.generateHit(currPos.x, currPos.y)
+                    // hp.filled -= interaction.damage
+                }
+            }
+        }
     }
 }
