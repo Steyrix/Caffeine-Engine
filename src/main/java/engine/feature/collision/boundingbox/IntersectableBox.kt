@@ -83,6 +83,10 @@ interface IntersectableBox : Drawable2D {
         }
     }
 
+    fun getCenterPoint(): Point2D {
+        return Point2D(x + xSize / 2, y + ySize / 2)
+    }
+
     private fun isPointInBox(point: Point2D, isStrict: Boolean): Boolean {
         return if (isStrict) {
             point.x < rightX
