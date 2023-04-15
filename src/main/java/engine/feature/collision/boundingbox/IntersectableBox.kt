@@ -33,6 +33,11 @@ interface IntersectableBox : Drawable2D {
 
     fun isIntersecting(anotherBox: BoundingBox) = isIntersectingByX(anotherBox) && isIntersectingByY(anotherBox)
 
+    fun isReachingCenterOf(anotherBox: BoundingBox): Boolean {
+        val center = anotherBox.getCenterPoint()
+        return center.x in x..(x + xSize) && center.y in y..(y + ySize)
+    }
+
     fun isIntersecting(params: SetOfParameters) = isIntersectingByX(params) && isIntersectingByY(params)
 
     fun isContainingEveryOf(points: List<Point2D>): Boolean {
