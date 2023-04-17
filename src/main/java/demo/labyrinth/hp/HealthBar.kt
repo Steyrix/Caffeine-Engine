@@ -1,11 +1,13 @@
 package demo.labyrinth.hp
 
 import demo.labyrinth.ShaderController
+import demo.labyrinth.interaction.AttackInteraction
 import engine.core.entity.CompositeEntity
 import engine.core.render.render2D.OpenGlObject2D
 import engine.core.texture.Texture2D
 import engine.core.update.SetOfParameters
 import engine.core.update.SetOfStatic2DParameters
+import engine.feature.interaction.Interaction
 import org.joml.Matrix4f
 
 class HealthBar(
@@ -45,6 +47,12 @@ class HealthBar(
         graphicalComponent.shader?.let {
             it.bind()
             it.setUniform(SHADER_UNIFORM_NAME, filled)
+        }
+    }
+
+    override fun consumeInteraction(interaction: Interaction) {
+        when(interaction) {
+            is AttackInteraction -> filled -= interaction.damage
         }
     }
 }
