@@ -25,7 +25,7 @@ class Goblin(
 
     private val startChasing = PredicateTimeEvent(
             timeLimit = 2f,
-            predicate = { parametersMap.containsKey(tileTraverser) },
+            predicate = { entitiesMap.containsKey(tileTraverser) },
             action = {
                 tileTraverser.moveTo(playerParams.getCenterPoint())
             }
@@ -73,13 +73,13 @@ class Goblin(
         startChasing.schedule(deltaTime)
         moveCooldown.schedule(deltaTime)
 
-        if (parametersMap.containsKey(controller)) {
+        if (entitiesMap.containsKey(controller)) {
             drawableComponent.setAnimationByKey(controller.getAnimationKey())
         }
 
         if (hp.filled <= 0) {
-            parametersMap.remove(tileTraverser)
-            parametersMap.remove(controller)
+            entitiesMap.remove(tileTraverser)
+            entitiesMap.remove(controller)
             drawableComponent.setAnimationByKey(AnimationKey.GOBLIN_DEFEAT)
             isDisposed = true
             return
