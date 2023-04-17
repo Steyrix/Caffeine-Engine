@@ -39,8 +39,8 @@ class HealthBar(
         super.update(deltaTime)
 
         with(objParams) {
-            barParams.x = this.x - ((barParams.xSize - this.xSize) / 2)
-            barParams.y = this.y - 2 - barParams.ySize
+            barParams.x = x - ((barParams.xSize - xSize) / 2)
+            barParams.y = y - 2 - barParams.ySize
         }
 
         graphicalComponent.shader?.let {
