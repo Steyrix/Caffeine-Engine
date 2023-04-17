@@ -11,7 +11,7 @@ import engine.feature.interaction.Interaction
 
 class Player(
         private val drawableComponent: AnimatedObject2D,
-        params: SetOf2DParametersWithVelocity
+        private val params: SetOf2DParametersWithVelocity
 ) : CompositeEntity() {
 
     private var isAttack = false
@@ -68,7 +68,7 @@ class Player(
             out.add(AttackInteraction(this))
         }
 
-        out.add(IsAttackableInteraction)
+        out.add(IsAttackableInteraction(params))
         return out.toList()
     }
 

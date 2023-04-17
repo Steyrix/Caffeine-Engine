@@ -1,5 +1,8 @@
 package demo.labyrinth.interaction
 
+import engine.core.update.SetOfParameters
 import engine.feature.interaction.Interaction
 
-object IsAttackableInteraction : Interaction
+data class IsAttackableInteraction(
+        val targetParams: SetOfParameters
+) : Interaction
