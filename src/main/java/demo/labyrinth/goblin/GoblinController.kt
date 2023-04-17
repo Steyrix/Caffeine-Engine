@@ -76,7 +76,7 @@ class GoblinController(
 
     override fun consumeInteraction(interaction: Interaction) {
         when(interaction) {
-            is IsAttackableInteraction -> Unit
+            is IsAttackableInteraction -> strike(interaction.targetParams)
         }
     }
 
