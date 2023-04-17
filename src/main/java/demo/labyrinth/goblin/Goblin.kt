@@ -96,7 +96,6 @@ class Goblin(
                 if (interaction.producer !is Player) return
                 val currPos = controller.getCurrentCenterPos()
                 TempSprites.generateHit(currPos.x, currPos.y)
-                hp.filled -= interaction.damage
             }
             is IsAttackableInteraction -> {
                 if (!controller.isStriking) {
@@ -105,6 +104,10 @@ class Goblin(
                     isMovingStopped = true
                 }
             }
+        }
+
+        entitiesMap.keys.forEach {
+            it.consumeInteraction(interaction)
         }
     }
 
