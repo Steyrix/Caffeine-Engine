@@ -21,7 +21,7 @@ class HealthBar(
     }
 
     private val graphicalComponent: OpenGlObject2D
-    private var filled: Float = 1.0f
+    var filled: Float = 1.0f
 
     init {
         val textureFilePath = this.javaClass.getResource("/textures/healthbar_atlas.png")!!.path
