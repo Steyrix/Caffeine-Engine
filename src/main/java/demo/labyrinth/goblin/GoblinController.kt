@@ -1,6 +1,7 @@
 package demo.labyrinth.goblin
 
 import demo.labyrinth.data.AnimationKey
+import demo.labyrinth.interaction.IsAttackableInteraction
 import engine.core.controllable.Controllable
 import engine.core.controllable.Direction
 import engine.core.entity.Entity
@@ -11,6 +12,7 @@ import engine.core.update.Updatable
 import engine.core.update.getCenterPoint
 import engine.core.window.Window
 import engine.feature.geometry.Point2D
+import engine.feature.interaction.Interaction
 import kotlin.math.abs
 
 class GoblinController(
@@ -72,8 +74,14 @@ class GoblinController(
         }
     }
 
+    override fun consumeInteraction(interaction: Interaction) {
+        when(interaction) {
+            is IsAttackableInteraction -> Unit
+        }
+    }
+
     fun strike(targetParams: SetOfParameters) {
-        if (!isStrikeCooldown) {
+        if (!isStrikeCooldown && !isStriking) {
             isStriking = true
             isStrikeCooldown = true
             isWalking = false
