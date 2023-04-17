@@ -98,8 +98,7 @@ class Goblin(
                 TempSprites.generateHit(currPos.x, currPos.y)
             }
             is IsAttackableInteraction -> {
-                if (!controller.isStriking) {
-                    controller.strike(playerParams)
+                if (!isMovingStopped) {
                     tileTraverser.pause()
                     isMovingStopped = true
                 }
