@@ -8,6 +8,7 @@ import engine.core.texture.Texture2D
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.interaction.BoxInteractionContext
+import engine.feature.matrix.MatrixComputer
 import org.joml.Matrix4f
 
 object LabyrinthInitializer {
@@ -34,6 +35,9 @@ object LabyrinthInitializer {
                 boxInteractionContext
         )
         TempSprites.init(renderProjection)
+
+        MatrixComputer.worldTranslation.x += screenWidth / 2 - characterParameters.x - characterParameters.xSize / 2
+        MatrixComputer.worldTranslation.y += screenHeight / 2 - characterParameters.y - characterParameters.ySize / 2
     }
 
     private fun initCampfireGraphics(renderProjection: Matrix4f) {
