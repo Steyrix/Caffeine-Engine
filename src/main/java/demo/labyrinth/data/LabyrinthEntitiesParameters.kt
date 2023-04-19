@@ -21,9 +21,9 @@ var characterParameters = SetOf2DParametersWithVelocity(
         velocityY = 0f
 )
 
-const val CHARACTER_BOX_OFFSET_MODIFIER = 0.2265f
+const val HUMANIOD_BOX_OFFSET_MODIFIER = 0.2265f
 
-fun getCharacterBoxOffset() = characterParameters.xSize * CHARACTER_BOX_OFFSET_MODIFIER / 2
+fun getCharacterBoxOffset() = characterParameters.xSize * HUMANIOD_BOX_OFFSET_MODIFIER / 2
 
 fun getCharacterBoxSize() = characterParameters.xSize - getCharacterBoxOffset() * 2
 
