@@ -14,12 +14,18 @@ var hpBarPatameters1 = SetOfStatic2DParameters(
 var characterParameters = SetOf2DParametersWithVelocity(
         x = 30f,
         y = 30f,
-        xSize = 64f,
-        ySize = 64f,
+        xSize = 128f,
+        ySize = 128f,
         rotationAngle = 0f,
         velocityX = 0f,
         velocityY = 0f
 )
+
+const val CHARACTER_BOX_OFFSET_MODIFIER = 0.2265f
+
+fun getBoxOffset() = characterParameters.xSize * CHARACTER_BOX_OFFSET_MODIFIER / 2
+
+fun getBoxSize() = characterParameters.xSize - getBoxOffset() * 2
 
 val campfireParameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
         900f, 750f, 50f, 50f, 0f
@@ -34,8 +40,8 @@ fun getMapParameters(screenWidth: Float, screenHeight:Float): SetOfStatic2DParam
 val goblinParams1 = SetOf2DParametersWithVelocity(
         x = 150f,
         y = 120f,
-        xSize = 64f,
-        ySize = 64f,
+        xSize = 128f,
+        ySize = 128f,
         rotationAngle = 0f,
         velocityX = 0f,
         velocityY = 0f
@@ -44,8 +50,8 @@ val goblinParams1 = SetOf2DParametersWithVelocity(
 val goblinParams2 = SetOf2DParametersWithVelocity(
         x = 250f,
         y = 120f,
-        xSize = 64f,
-        ySize = 64f,
+        xSize = 128f,
+        ySize = 128f,
         rotationAngle = 0f,
         velocityX = 0f,
         velocityY = 0f

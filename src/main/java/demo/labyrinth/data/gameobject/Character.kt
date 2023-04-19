@@ -56,9 +56,9 @@ object Character : GameObject {
             renderProjection: Matrix4f
     ): BoundingBox {
         return BoundingBox(
-                xOffset = 14.5f,
-                xSize = 35f,
-                ySize = 64f,
+                xOffset = getBoxOffset(),
+                xSize = getBoxSize(),
+                ySize = characterParameters.ySize,
                 isSizeUpdatable = false
         ).apply {
             shader = ShaderController.createBoundingBoxShader(renderProjection)
