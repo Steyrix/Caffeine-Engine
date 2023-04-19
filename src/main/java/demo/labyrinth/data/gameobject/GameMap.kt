@@ -7,6 +7,7 @@ import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfStatic2DParameters
+import engine.feature.matrix.MatrixState
 import engine.feature.tiled.TileMap
 import engine.feature.tiled.parser.TiledResourceParser
 import engine.feature.tiled.traversing.TileGraph
@@ -42,8 +43,17 @@ object GameMap : GameObject {
                 } else current++
                 graphicalComponent?.shader?.let {
                     it.bind()
-                    it.setUniform("lightIntensityCap", lightIntensityCaps[current])
-                    it.setUniform("lightSourceCoords", Vector2f(campfireParameters.x, campfireParameters.y))
+                    it.setUniform(
+                            "lightIntensityCap",
+                            lightIntensityCaps[current]
+                    )
+                    it.setUniform(
+                            "lightSourceCoords",
+                            Vector2f(
+                                    campfireParameters.x + MatrixState.worldTranslation.x,
+                                    campfireParameters.y + MatrixState.worldTranslation.y
+                            )
+                    )
                 }
             }
     )

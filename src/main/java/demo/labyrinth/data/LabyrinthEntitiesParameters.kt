@@ -16,8 +16,8 @@ var hpBarPatameters1 = SetOfStatic2DParameters(
 )
 
 var characterParameters = SetOf2DParametersWithVelocity(
-        x = 300f,
-        y = 300f,
+        x = 500f,
+        y = 500f,
         xSize = HUMANOID_SIZE,
         ySize = HUMANOID_SIZE,
         rotationAngle = 0f,
@@ -49,9 +49,8 @@ fun getHumanoidBoxOffset() = HUMANOID_SIZE * HUMANIOD_BOX_OFFSET_MODIFIER / 2
 
 fun getHumanoidBoxSize() = HUMANOID_SIZE - getHumanoidBoxOffset() * 2
 
-// TODO change location of light source on movement
 val campfireParameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
-        400f, 400f, 100f, 100f, 0f
+        800f, 800f, 100f, 100f, 0f
 )
 
 fun getMapParameters(screenWidth: Float, screenHeight:Float): SetOfStatic2DParameters {

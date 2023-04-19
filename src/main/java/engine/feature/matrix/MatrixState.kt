@@ -6,7 +6,7 @@ import org.joml.Vector3f
 
 object MatrixState {
 
-    private val worldTranslation = Vector2f(0f, 0f)
+    val worldTranslation = Vector2f(0f, 0f)
 
     fun getResultMatrix(
             posX: Float,
