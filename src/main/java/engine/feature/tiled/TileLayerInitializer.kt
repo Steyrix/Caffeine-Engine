@@ -64,8 +64,8 @@ object TileLayerInitializer {
         val result = TileGraph(out)
 
         obstacleLayers.forEach {
-            it.tileIdsData.forEachIndexed { index, it ->
-                if (it != EMPTY_TILE_ID) {
+            it.tileIdsData.forEachIndexed { index, tileValue ->
+                if (tileValue != EMPTY_TILE_ID) {
                     result.increaseCost(index)
                 }
             }
