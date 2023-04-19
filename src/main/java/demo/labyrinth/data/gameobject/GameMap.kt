@@ -43,6 +43,7 @@ object GameMap : GameObject {
                 graphicalComponent?.shader?.let {
                     it.bind()
                     it.setUniform("lightIntensityCap", lightIntensityCaps[current])
+                    it.setUniform("lightSourceCoords", Vector2f(campfireParameters.x, campfireParameters.y))
                 }
             }
     )

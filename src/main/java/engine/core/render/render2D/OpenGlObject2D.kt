@@ -7,7 +7,7 @@ import engine.core.texture.Texture2D
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfStatic2DParameters
 import engine.core.update.SetOfParameters
-import engine.feature.matrix.MatrixComputer
+import engine.feature.matrix.MatrixState
 import engine.feature.util.Buffer
 import org.lwjgl.opengl.GL33C.*
 
@@ -54,7 +54,7 @@ open class OpenGlObject2D(
         shader?.let {
             it.bind()
 
-            val model = MatrixComputer.getResultMatrix(x, y, xSize, ySize, rotationAngle)
+            val model = MatrixState.getResultMatrix(x, y, xSize, ySize, rotationAngle)
 
             defineTextureState()
             it.setUniform(Shader.VAR_KEY_MODEL, model)

@@ -51,7 +51,7 @@ fun getHumanoidBoxSize() = HUMANOID_SIZE - getHumanoidBoxOffset() * 2
 
 // TODO change location of light source on movement
 val campfireParameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
-        900f, 750f, 100f, 100f, 0f
+        400f, 400f, 100f, 100f, 0f
 )
 
 fun getMapParameters(screenWidth: Float, screenHeight:Float): SetOfStatic2DParameters {

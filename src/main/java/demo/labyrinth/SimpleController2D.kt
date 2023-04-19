@@ -9,7 +9,7 @@ import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.Updatable
 import engine.core.window.Window
 import engine.feature.geometry.Point2D
-import engine.feature.matrix.MatrixComputer
+import engine.feature.matrix.MatrixState
 import org.lwjgl.glfw.GLFW
 
 class SimpleController2D(
@@ -78,8 +78,7 @@ class SimpleController2D(
         params.x += horizontalMovement
         params.y += verticalMovement
 
-        MatrixComputer.worldTranslation.x -= horizontalMovement
-        MatrixComputer.worldTranslation.y -= verticalMovement
+        MatrixState.translate(-horizontalMovement, -verticalMovement)
         processState()
     }
 

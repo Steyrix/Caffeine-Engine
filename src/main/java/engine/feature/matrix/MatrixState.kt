@@ -4,9 +4,9 @@ import org.joml.Matrix4f
 import org.joml.Vector2f
 import org.joml.Vector3f
 
-object MatrixComputer {
+object MatrixState {
 
-    var worldTranslation = Vector2f(0f, 0f)
+    private val worldTranslation = Vector2f(0f, 0f)
 
     fun getResultMatrix(
             posX: Float,
@@ -25,5 +25,10 @@ object MatrixComputer {
             rotateZ(rotationAngle)
             scaleXY(xSize, ySize)
         }
+    }
+
+    fun translate(x: Float, y: Float) {
+        worldTranslation.x += x
+        worldTranslation.y += y
     }
 }
