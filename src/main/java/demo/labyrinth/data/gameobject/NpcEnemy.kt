@@ -53,7 +53,7 @@ class NpcEnemy(
         return BoundingBox(
                 xOffset = getHumanoidBoxOffset(),
                 xSize = getHumanoidBoxSize(),
-                ySize = HUMANOID_SIZE,
+                ySize = HUMANOID_SIZE_X,
                 rotationAngle = 0f,
                 isSizeUpdatable = false
         ).apply {
