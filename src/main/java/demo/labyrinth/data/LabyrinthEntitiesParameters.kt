@@ -50,7 +50,7 @@ fun getHumanoidBoxOffset() = HUMANOID_SIZE * HUMANIOD_BOX_OFFSET_MODIFIER / 2
 fun getHumanoidBoxSize() = HUMANOID_SIZE - getHumanoidBoxOffset() * 2
 
 val campfireParameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
-        900f, 750f, 50f, 50f, 0f
+        900f, 750f, 100f, 100f, 0f
 )
 
 fun getMapParameters(screenWidth: Float, screenHeight:Float): SetOfStatic2DParameters {
