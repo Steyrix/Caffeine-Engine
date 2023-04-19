@@ -7,6 +7,7 @@ import engine.core.entity.Entity
 import engine.core.loop.PredicateTimeEvent
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.Updatable
+import engine.core.update.getCenterPoint
 import engine.core.window.Window
 import engine.feature.geometry.Point2D
 import engine.feature.matrix.MatrixState
@@ -30,6 +31,13 @@ class SimpleController2D(
 
     private var isWalking = false
     private var direction = Direction.RIGHT
+    private val previousPosition = Point2D(0f,0f)
+
+    init {
+        val center = params.getCenterPoint()
+        previousPosition.x = center.x
+        previousPosition.y = center.y
+    }
 
     override fun input(window: Window) {
         if (!isControlledByUser) return
@@ -72,13 +80,19 @@ class SimpleController2D(
     override fun update(deltaTime: Float) {
         playStrikingAnimation.schedule(deltaTime)
 
+        val center = params.getCenterPoint()
+        val horizontalDiff = previousPosition.x - center.x
+        val verticalDiff = previousPosition.y - center.y
+        previousPosition.x = center.x
+        previousPosition.y = center.y
+
         val horizontalMovement = params.velocityX * deltaTime * modifier
         val verticalMovement = params.velocityY * deltaTime * modifier
 
         params.x += horizontalMovement
         params.y += verticalMovement
 
-        MatrixState.translate(-horizontalMovement, -verticalMovement)
+        MatrixState.translate(horizontalDiff, verticalDiff)
         processState()
     }
 

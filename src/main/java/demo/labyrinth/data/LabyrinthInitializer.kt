@@ -5,6 +5,7 @@ import demo.labyrinth.data.gameobject.*
 import engine.core.entity.CompositeEntity
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.texture.Texture2D
+import engine.core.update.getCenterPoint
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.interaction.BoxInteractionContext
@@ -36,9 +37,10 @@ object LabyrinthInitializer {
         )
         TempSprites.init(renderProjection)
 
+        val centerPoint = characterParameters.getCenterPoint()
         MatrixState.translate(
-                screenWidth / 2 - characterParameters.x - characterParameters.xSize / 2,
-                screenHeight / 2 - characterParameters.y - characterParameters.ySize / 2
+                screenWidth / 2 - centerPoint.x,
+                screenHeight / 2 - centerPoint.y
         )
     }
 
