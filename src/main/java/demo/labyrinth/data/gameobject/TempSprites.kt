@@ -38,16 +38,16 @@ object TempSprites : GameObject {
         ).apply {
             x = posX
             y = posY
-            xSize = 10f
-            ySize = 10f
+            xSize = 20f
+            ySize = 20f
             shader = ShaderController.createAnimationShader(renderProjection!!)
         }
 
         val params = SetOfStatic2DParameters(
                 x = posX,
                 y = posY,
-                xSize = 64f,
-                ySize = 64f,
+                xSize = 128f,
+                ySize = 128f,
                 rotationAngle = 0f
         )
 
