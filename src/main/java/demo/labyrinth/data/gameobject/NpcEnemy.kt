@@ -51,9 +51,9 @@ class NpcEnemy(
             renderProjection: Matrix4f
     ): BoundingBox {
         return BoundingBox(
-                xOffset = 14.5f,
-                xSize = 35f,
-                ySize = 64f,
+                xOffset = getHumanoidBoxOffset(),
+                xSize = getHumanoidBoxSize(),
+                ySize = HUMANOID_SIZE,
                 rotationAngle = 0f,
                 isSizeUpdatable = false
         ).apply {

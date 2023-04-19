@@ -56,8 +56,8 @@ object Character : GameObject {
             renderProjection: Matrix4f
     ): BoundingBox {
         return BoundingBox(
-                xOffset = getCharacterBoxOffset(),
-                xSize = getCharacterBoxSize(),
+                xOffset = getHumanoidBoxOffset(),
+                xSize = getHumanoidBoxSize(),
                 ySize = characterParameters.ySize,
                 isSizeUpdatable = false
         ).apply {
