@@ -15,11 +15,12 @@ class TileTraverser(
 
     companion object {
         private const val INDEX_NOT_FOUND = -1
+        private const val VELOCITY = 10f
+        private const val INSIGNIFICANT_DIFFERENCE = 4f
     }
 
     private var currentPath: ArrayDeque<Int> = ArrayDeque()
     private var currentDestination: Int = INDEX_NOT_FOUND
-    private var velocity = 5f
 
     private var currentTile = -1
     private var previousTile = -1
@@ -118,15 +119,15 @@ class TileTraverser(
 
         params.velocityX = when {
             isHorizontalDiffInsignificant(x) -> 0f
-            x > params.x -> velocity
-            x < params.x -> -velocity
+            x > params.x -> VELOCITY
+            x < params.x -> -VELOCITY
             else -> 0f
         }
 
         params.velocityY = when {
             isVerticalDiffInsignificant(y) -> 0f
-            y > params.y -> velocity
-            y < params.y -> -velocity
+            y > params.y -> VELOCITY
+            y < params.y -> -VELOCITY
             else -> 0f
         }
     }
@@ -164,11 +165,11 @@ class TileTraverser(
     }
 
     private fun isHorizontalDiffInsignificant(x: Float): Boolean {
-        return abs(x - params.x) < 1f
+        return abs(x - params.x) < INSIGNIFICANT_DIFFERENCE
     }
 
     private fun isVerticalDiffInsignificant(y: Float): Boolean {
-        return abs(y - params.y) < 1f
+        return abs(y - params.y) < INSIGNIFICANT_DIFFERENCE
     }
 
     private fun dropVelocity() {
