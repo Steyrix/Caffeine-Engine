@@ -55,8 +55,8 @@ object GameMap : GameObject {
         parameters = getMapParameters(screenWidth, screenHeight)
         graphicalComponent = getGraphicalComponent(renderProjection, screenWidth, screenHeight)
 
-        parameters.xSize = screenWidth / graphicalComponent!!.relativeMapWidth
-        parameters.ySize = screenHeight / graphicalComponent!!.relativeMapHeight
+        parameters.xSize = screenWidth
+        parameters.ySize = screenHeight
 
         it = object  : CompositeEntity() {}
         GameMap.addComponent(graphicalComponent, parameters)
