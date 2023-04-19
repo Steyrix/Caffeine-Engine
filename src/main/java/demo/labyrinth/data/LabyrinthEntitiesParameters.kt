@@ -23,9 +23,9 @@ var characterParameters = SetOf2DParametersWithVelocity(
 
 const val CHARACTER_BOX_OFFSET_MODIFIER = 0.2265f
 
-fun getBoxOffset() = characterParameters.xSize * CHARACTER_BOX_OFFSET_MODIFIER / 2
+fun getCharacterBoxOffset() = characterParameters.xSize * CHARACTER_BOX_OFFSET_MODIFIER / 2
 
-fun getBoxSize() = characterParameters.xSize - getBoxOffset() * 2
+fun getCharacterBoxSize() = characterParameters.xSize - getCharacterBoxOffset() * 2
 
 val campfireParameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
         900f, 750f, 50f, 50f, 0f
