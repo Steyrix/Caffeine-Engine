@@ -80,6 +80,7 @@ object PathFinder {
         if (!dijkstra(graph, start, finalDestination, dist, pred)) return ArrayDeque()
 
         out.add(finalDestination)
+        graph.increaseCost(finalDestination)
         var previous = finalDestination
         while (pred[previous] != -1) {
             out.addFirst(pred[previous])

@@ -36,7 +36,7 @@ class TileGraph(
 
     fun getCheapestAdjacent(target: Int): Int {
         var min = Int.MAX_VALUE
-        var out = target
+        var out = nodes[target]?.first() ?: target
         nodes[target]?.forEach {
             if (costs.getOrDefault(it, min) < min) {
                 out = it
