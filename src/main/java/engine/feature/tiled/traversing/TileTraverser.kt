@@ -7,6 +7,7 @@ import engine.feature.geometry.Point2D
 import engine.feature.tiled.TileMap
 import kotlin.math.abs
 
+// TODO: avoid obstacles
 class TileTraverser(
         private val graph: TileGraph,
         private val tileMap: TileMap,
@@ -15,7 +16,7 @@ class TileTraverser(
 
     companion object {
         private const val INDEX_NOT_FOUND = -1
-        private const val VELOCITY = 10f
+        private const val VELOCITY = 5f
         private const val INSIGNIFICANT_DIFFERENCE = 4f
     }
 
@@ -60,6 +61,7 @@ class TileTraverser(
         )
 
         extendCurrentPath(nextPath)
+        println(currentPath)
     }
 
     private fun extendCurrentPath(nextPath: ArrayDeque<Int>) {
