@@ -120,6 +120,7 @@ class TileTraverser(
         val y = nextPos.y + tileMap.getTileHeight() / 2
 
         val centerPoint = params.getCenterPoint()
+        val bottomPoint = params.y + params.ySize
 
         params.velocityX = when {
             isHorizontalDiffInsignificant(x) -> 0f
@@ -173,11 +174,11 @@ class TileTraverser(
     }
 
     private fun isHorizontalDiffInsignificant(x: Float): Boolean {
-        return abs(x - params.x - params.xSize / 2) < INSIGNIFICANT_DIFFERENCE
+        return abs(x - params.x - params.xSize / 2) <= INSIGNIFICANT_DIFFERENCE
     }
 
     private fun isVerticalDiffInsignificant(y: Float): Boolean {
-        return abs(y - params.y - params.ySize / 2) < INSIGNIFICANT_DIFFERENCE
+        return abs(y - params.y - params.ySize / 2) <= INSIGNIFICANT_DIFFERENCE
     }
 
     private fun dropVelocity() {
