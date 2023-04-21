@@ -83,10 +83,6 @@ object TileLayerInitializer {
         val predicates = listOf(
                 { i: Int -> i < data.size - 1 } to { i: Int -> i + 1 },
                 { i: Int -> i + widthInTiles < data.size } to { i: Int -> i + widthInTiles },
-                { i: Int -> i + widthInTiles + 1 < data.size } to { i: Int -> i + widthInTiles + 1 },
-                { i: Int -> i + widthInTiles - 1 < data.size && widthInTiles > 1 } to { i: Int -> i + widthInTiles - 1 },
-                { i: Int -> i - widthInTiles + 1 >= 0 && widthInTiles > 1 } to { i: Int -> i - widthInTiles + 1 },
-                { i: Int -> i - widthInTiles - 1 >= 0 } to { i: Int -> i - widthInTiles - 1 },
                 { i: Int -> i - widthInTiles >= 0 } to { i: Int -> i - widthInTiles },
                 { i: Int -> i > 0 } to { i: Int -> i - 1 },
         )
