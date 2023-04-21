@@ -51,7 +51,6 @@ object TileLayerInitializer {
         val widthInTiles = walkableLayers.firstOrNull()?.widthInTiles ?: return null
         val indices = walkableLayers.first().tileIdsData.indices
 
-        // TODO find possible bug when obstacle tile is not added to the graph
         for (num in indices) {
             val adjacentTiles = dataLists
                     .map { getAdjacentTiles(it, widthInTiles, num) }
