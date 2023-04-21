@@ -90,7 +90,10 @@ object TileLayerInitializer {
 
         predicates.forEach {
             if (it.first(num) && data[num] != EMPTY_TILE_ID) {
-                out.add(it.second(num))
+                val toAdd = it.second(num)
+                if (data[toAdd] != EMPTY_TILE_ID) {
+                    out.add(toAdd)
+                }
             }
         }
 
