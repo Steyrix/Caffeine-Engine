@@ -100,7 +100,7 @@ class TileTraverser(
 
     private fun getActualNode(it: ArrayDeque<Int>): Int {
         var node = it.first()
-        while (it.isNotEmpty() && tileIsReachedV2(node)) {
+        while (it.isNotEmpty() && tileIsReached(node)) {
             previousTile = currentTile
             currentTile = node
             graph.decreaseCost(previousTile)
@@ -138,22 +138,6 @@ class TileTraverser(
     }
 
     private fun tileIsReached(tileIndex: Int): Boolean {
-        val pos = tileMap.getTilePosition(tileIndex)
-        val tilePosX = pos.x
-        val tilePosY = pos.y
-
-        val entityCenter = params.getCenterPoint()
-        val x = entityCenter.x
-        val y = entityCenter.y
-
-        val isHorizontalIntersection = x in tilePosX..(tilePosX + tileMap.getTileWidth())
-        val isVerticalIntersection = y in tilePosY..(tilePosY + tileMap.getTileHeight())
-
-        val isInsignificantDiff = isHorizontalDiffInsignificant(tilePosX) && isVerticalDiffInsignificant(tilePosY)
-        return isHorizontalIntersection && isVerticalIntersection || isInsignificantDiff
-    }
-
-    private fun tileIsReachedV2(tileIndex: Int): Boolean {
         val pos = tileMap.getTilePosition(tileIndex)
         val tilePosX = pos.x + tileMap.getTileWidth() /2
         val tilePosY = pos.y + tileMap.getTileHeight() / 2
