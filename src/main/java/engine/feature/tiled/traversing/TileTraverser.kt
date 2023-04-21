@@ -118,6 +118,7 @@ class TileTraverser(
         val nextPos = tileMap.getTilePosition(tileIndex)
         val x = nextPos.x + tileMap.getTileWidth() / 2
         val y = nextPos.y + tileMap.getTileHeight() / 2
+        val bottomY = nextPos.y + tileMap.getTileHeight()
 
         val centerPoint = params.getCenterPoint()
         val bottomPoint = params.y + params.ySize
@@ -130,9 +131,9 @@ class TileTraverser(
         }
 
         params.velocityY = when {
-            isVerticalDiffInsignificant(y) -> 0f
-            y > centerPoint.y -> VELOCITY
-            y < centerPoint.y -> -VELOCITY
+            isVerticalDiffInsignificant(bottomY) -> 0f
+            bottomY > bottomPoint -> VELOCITY
+            bottomY < bottomPoint -> -VELOCITY
             else -> 0f
         }
     }
@@ -140,21 +141,16 @@ class TileTraverser(
     private fun tileIsReached(tileIndex: Int): Boolean {
         val pos = tileMap.getTilePosition(tileIndex)
         val tilePosX = pos.x + tileMap.getTileWidth() /2
-        val tilePosY = pos.y + tileMap.getTileHeight() / 2
+        val tilePosBottomY = pos.y + tileMap.getTileHeight()
 
-        val entityCenter = params.getCenterPoint()
-        val x = entityCenter.x
-        val y = entityCenter.y
+        val x = params.getCenterPoint().x
         val bottomY = params.y + params.ySize
 
         val isHorizontalIntersection = x in (tilePosX - 1f)..(tilePosX + 1f)
-        val isVerticalIntersection = y in (tilePosY - 1f)..(tilePosX + 1f)
-        val isBottomVerticalInterscetion = bottomY in (tilePosY - 1f)..(tilePosY + 1f)
-        val isCenterIntersection = isHorizontalIntersection && isVerticalIntersection
-        val isBottomInterscetion = isBottomVerticalInterscetion && isHorizontalIntersection
+        val isBottomIntersection = bottomY in (tilePosBottomY - 1f)..(tilePosBottomY + 1f)
 
-        val isInsignificantDiff = isHorizontalDiffInsignificant(tilePosX) && isVerticalDiffInsignificant(tilePosY)
-        return isCenterIntersection || isBottomInterscetion || isInsignificantDiff
+        val isInsignificantDiff = isHorizontalDiffInsignificant(tilePosX) && isVerticalDiffInsignificant(tilePosBottomY)
+        return isHorizontalIntersection || isBottomIntersection || isInsignificantDiff
     }
 
     private fun isHorizontalDiffInsignificant(x: Float): Boolean {
@@ -162,7 +158,7 @@ class TileTraverser(
     }
 
     private fun isVerticalDiffInsignificant(y: Float): Boolean {
-        return abs(y - params.y - params.ySize / 2) <= INSIGNIFICANT_DIFFERENCE
+        return abs(y - params.y - params.ySize) <= INSIGNIFICANT_DIFFERENCE
     }
 
     private fun dropVelocity() {
