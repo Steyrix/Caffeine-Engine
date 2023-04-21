@@ -91,6 +91,8 @@ class Goblin(
     }
 
     override fun consumeInteraction(interaction: Interaction) {
+        if (isDisposed) return
+
         when(interaction) {
             is AttackInteraction -> {
                 if (interaction.producer !is Player) return
