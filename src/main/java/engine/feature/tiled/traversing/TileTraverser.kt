@@ -160,12 +160,16 @@ class TileTraverser(
         val entityCenter = params.getCenterPoint()
         val x = entityCenter.x
         val y = entityCenter.y
+        val bottomY = params.y + params.ySize
 
         val isHorizontalIntersection = x in (tilePosX - 1f)..(tilePosX + 1f)
         val isVerticalIntersection = y in (tilePosY - 1f)..(tilePosX + 1f)
+        val isBottomVerticalInterscetion = bottomY in (tilePosY - 1f)..(tilePosY + 1f)
+        val isCenterIntersection = isHorizontalIntersection && isVerticalIntersection
+        val isBottomInterscetion = isBottomVerticalInterscetion && isHorizontalIntersection
 
         val isInsignificantDiff = isHorizontalDiffInsignificant(tilePosX) && isVerticalDiffInsignificant(tilePosY)
-        return isHorizontalIntersection && isVerticalIntersection || isInsignificantDiff
+        return isCenterIntersection || isBottomInterscetion || isInsignificantDiff
     }
 
     private fun isHorizontalDiffInsignificant(x: Float): Boolean {
