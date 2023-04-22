@@ -1,4 +1,4 @@
-package demo.labyrinth.data.gameobject
+package engine.core.scene
 
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity

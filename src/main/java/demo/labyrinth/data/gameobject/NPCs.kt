@@ -1,6 +1,7 @@
 package demo.labyrinth.data.gameobject
 
 import engine.core.loop.AccumulatedTimeEvent
+import engine.core.scene.GameObject
 import engine.core.update.SetOf2DParametersWithVelocity
 
 object NPCs {

@@ -3,6 +3,7 @@ package demo.labyrinth.data.gameobject
 import demo.labyrinth.data.*
 import engine.core.entity.CompositeEntity
 import engine.core.loop.AccumulatedTimeEvent
+import engine.core.scene.GameObject
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
 import engine.core.update.SetOf2DParametersWithVelocity

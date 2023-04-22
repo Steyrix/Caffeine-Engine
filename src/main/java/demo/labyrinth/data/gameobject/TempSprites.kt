@@ -5,6 +5,7 @@ import demo.labyrinth.data.hitAnimation
 import engine.core.entity.CompositeEntity
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.render.render2D.AnimatedObject2D
+import engine.core.scene.GameObject
 import engine.core.texture.Texture2D
 import engine.core.update.SetOfStatic2DParameters
 import org.joml.Matrix4f

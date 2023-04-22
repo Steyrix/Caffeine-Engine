@@ -7,6 +7,7 @@ import demo.labyrinth.hp.HealthBar
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
+import engine.core.scene.GameObject
 import engine.core.texture.Texture2D
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfStatic2DParameters
