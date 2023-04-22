@@ -19,6 +19,8 @@ class LabyrinthDemo(
     private val tiledCollisionContext = TiledCollisionContext()
     private val boxInteractionContext = BoxInteractionContext()
 
+    private var orderedDrawableObjects = mutableListOf<GameObject>()
+
     override var renderProjection: Matrix4f? = null
 
     override fun init() {
@@ -39,6 +41,9 @@ class LabyrinthDemo(
                 tiledCollisionContext,
                 boxInteractionContext
         )
+
+        orderedDrawableObjects.add(Character)
+        orderedDrawableObjects.addAll(NPCs.it)
     }
 
     override fun input(window: Window) {
@@ -48,6 +53,8 @@ class LabyrinthDemo(
     override fun update(deltaTime: Float) {
         Character.update(deltaTime)
         NPCs.update(deltaTime)
+        setupDrawOrder()
+
         bbCollisionContext.update()
         tiledCollisionContext.update()
         boxInteractionContext.update()
@@ -65,8 +72,17 @@ class LabyrinthDemo(
 
         GameMap.draw()
         Campfire.draw()
-        Character.draw()
-        NPCs.draw()
+
+        orderedDrawableObjects.forEach {
+            it.draw()
+        }
+
         TempSprites.draw()
+    }
+
+    private fun setupDrawOrder() {
+        orderedDrawableObjects.sortBy {
+            it.getZLevel()
+        }
     }
 }

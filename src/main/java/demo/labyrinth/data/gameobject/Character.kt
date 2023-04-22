@@ -113,4 +113,8 @@ object Character : GameObject {
                 tiledCollisionContext
         )
     }
+
+    override fun getZLevel(): Float {
+        return characterParameters.y
+    }
 }

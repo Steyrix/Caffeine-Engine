@@ -20,4 +20,6 @@ interface GameObject {
     }
 
     fun isDisposed() = it?.isDisposed ?: false
+
+    fun getZLevel(): Float = 0f
 }

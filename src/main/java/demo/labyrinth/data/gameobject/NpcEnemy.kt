@@ -91,4 +91,8 @@ class NpcEnemy(
                 renderProjection
         )
     }
+
+    override fun getZLevel(): Float {
+        return parameters.y
+    }
 }
