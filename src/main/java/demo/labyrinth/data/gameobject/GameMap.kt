@@ -23,7 +23,7 @@ object GameMap : GameObject {
             value?.let {
                 tileGraph = value.getGraph(
                         listOf("walking_layer", "walkable_objects_layer"),
-                        listOf("obstacles_layer", "obstacles_bg_layer", "unwalking_layer")
+                        listOf("obstacles_layer")
                 )
 
                 field = value
