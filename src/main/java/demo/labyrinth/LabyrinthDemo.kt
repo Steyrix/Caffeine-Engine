@@ -44,6 +44,7 @@ class LabyrinthDemo(
         )
 
         orderedDrawableObjects.add(Character)
+        orderedDrawableObjects.add(Campfire)
         orderedDrawableObjects.addAll(NPCs.it)
     }
 
@@ -54,6 +55,7 @@ class LabyrinthDemo(
     override fun update(deltaTime: Float) {
         Character.update(deltaTime)
         NPCs.update(deltaTime)
+        Campfire.update(deltaTime)
         setupDrawOrder()
 
         bbCollisionContext.update()
@@ -61,7 +63,6 @@ class LabyrinthDemo(
         boxInteractionContext.update()
         TempSprites.update(deltaTime)
 
-        Campfire.update(deltaTime)
         GameMap.update(deltaTime)
     }
 
@@ -72,7 +73,6 @@ class LabyrinthDemo(
         glClearColor(0f, 0.5f, 0f, 0.5f)
 
         GameMap.draw()
-        Campfire.draw()
 
         orderedDrawableObjects.forEach {
             it.draw()
