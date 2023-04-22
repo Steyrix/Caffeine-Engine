@@ -7,7 +7,6 @@ import engine.feature.geometry.Point2D
 import engine.feature.tiled.TileMap
 import kotlin.math.abs
 
-// TODO: avoid obstacles
 class TileTraverser(
         private val graph: TileGraph,
         private val tileMap: TileMap,
@@ -117,7 +116,6 @@ class TileTraverser(
     private fun modifyVelocity(tileIndex: Int) {
         val nextPos = tileMap.getTilePosition(tileIndex)
         val x = nextPos.x + tileMap.getTileWidth() / 2
-        val y = nextPos.y + tileMap.getTileHeight() / 2
         val bottomY = nextPos.y + tileMap.getTileHeight()
 
         val centerPoint = params.getCenterPoint()
@@ -150,7 +148,7 @@ class TileTraverser(
         val isBottomIntersection = bottomY in (tilePosBottomY - 1f)..(tilePosBottomY + 1f)
 
         val isInsignificantDiff = isHorizontalDiffInsignificant(tilePosX) && isVerticalDiffInsignificant(tilePosBottomY)
-        return isHorizontalIntersection || isBottomIntersection || isInsignificantDiff
+        return (isHorizontalIntersection && isBottomIntersection) || isInsignificantDiff
     }
 
     private fun isHorizontalDiffInsignificant(x: Float): Boolean {
