@@ -1,6 +1,5 @@
-package demo.labyrinth.data
+package demo.labyrinth.data.gameobject
 
-import demo.labyrinth.data.gameobject.GameObject
 import engine.core.entity.CompositeEntity
 import engine.core.render.render2D.AnimatedObject2D
 
