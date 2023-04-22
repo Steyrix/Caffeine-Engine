@@ -118,13 +118,13 @@ class TileTraverser(
         val x = nextPos.x + tileMap.getTileWidth() / 2
         val bottomY = nextPos.y + tileMap.getTileHeight()
 
-        val centerPoint = params.getCenterPoint()
+        val centerPoint = params.getCenterPoint().x
         val bottomPoint = params.y + params.ySize
 
         params.velocityX = when {
             isHorizontalDiffInsignificant(x) -> 0f
-            x > centerPoint.x -> VELOCITY
-            x < centerPoint.x -> -VELOCITY
+            x > centerPoint -> VELOCITY
+            x < centerPoint -> -VELOCITY
             else -> 0f
         }
 
