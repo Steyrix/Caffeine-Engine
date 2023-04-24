@@ -94,6 +94,10 @@ class NpcEnemy(
     }
 
     override fun getZLevel(): Float {
+        if (it?.isDisposed == true) {
+            return -1f
+        }
+
         return parameters.y
     }
 }
