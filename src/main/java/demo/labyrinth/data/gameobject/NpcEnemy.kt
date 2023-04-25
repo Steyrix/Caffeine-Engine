@@ -18,7 +18,7 @@ import engine.feature.tiled.traversing.TileTraverser
 import org.joml.Matrix4f
 
 class NpcEnemy(
-        private var parameters: SetOf2DParametersWithVelocity
+        private val parameters: SetOf2DParametersWithVelocity
 ) : GameObject {
 
     override var it: CompositeEntity? = null
