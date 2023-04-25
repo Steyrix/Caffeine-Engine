@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="1">
- <tileset firstgid="1" source="../IdeaProjects/Caffeine-Engine/src/main/resources/tiled/path_and_objects_tileset.xml"/>
+ <tileset firstgid="1" source="/tiled/path_and_objects_tileset.xml"/>
  <layer id="1" name="walking_layer" width="30" height="30">
   <data encoding="csv">
 178,178,178,178,178,178,178,178,87,88,89,178,178,178,178,178,178,178,178,1,66,18,19,178,178,178,178,178,178,178,
