@@ -2,7 +2,7 @@ package engine.core.scene.context
 
 import java.awt.Window
 
-interface GameContext {
+interface Context {
 
     fun init(bundle: Bundle?)
 
