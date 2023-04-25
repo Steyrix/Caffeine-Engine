@@ -53,6 +53,8 @@ class LabyrinthDemo(
         objects.forEach { it.input(window) }
     }
 
+
+    // todo fix delta time boost
     override fun update(deltaTime: Float) {
         // todo encapsulate
         objects.forEach { entity ->
