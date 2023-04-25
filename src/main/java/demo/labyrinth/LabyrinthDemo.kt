@@ -81,6 +81,10 @@ class LabyrinthDemo(
         TempSprites.draw()
     }
 
+    override fun onSwitch() {
+
+    }
+
     private fun setupDrawOrder() {
         orderedDrawableObjects.sortBy {
             it.getZLevel()

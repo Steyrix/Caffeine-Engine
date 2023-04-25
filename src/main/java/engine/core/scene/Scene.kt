@@ -15,5 +15,7 @@ interface Scene {
 
     fun render(window: Window)
 
+    fun onSwitch()
+
     var renderProjection: Matrix4f?
 }
