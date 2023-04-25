@@ -3,6 +3,7 @@ package engine.core.scene
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.update.SetOfParameters
+import engine.core.window.Window
 
 interface GameObject {
     var it: CompositeEntity?
@@ -12,6 +13,10 @@ interface GameObject {
 
     fun draw() {
         it?.draw()
+    }
+
+    fun input(window: Window) {
+        it?.input(window)
     }
 
     fun addComponent(entity: Entity?, params: SetOfParameters) {
