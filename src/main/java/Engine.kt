@@ -13,7 +13,6 @@ class Engine(
     private val timer = Timer()
     private var gameLoop: GameLoop = FixedStepGameLoop(window, timer)
 
-
     private fun init() {
         scene.init()
     }
