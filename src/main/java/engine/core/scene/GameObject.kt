@@ -6,6 +6,7 @@ import engine.core.update.SetOfParameters
 import engine.core.window.Window
 
 interface GameObject {
+
     var it: CompositeEntity?
     fun update(deltaTime: Float) {
         it?.update(deltaTime)
