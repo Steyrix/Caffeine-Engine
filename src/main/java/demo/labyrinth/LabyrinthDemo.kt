@@ -53,8 +53,6 @@ class LabyrinthDemo(
         objects.forEach { it.input(window) }
     }
 
-
-    // todo fix delta time boost
     override fun update(deltaTime: Float) {
         // todo encapsulate
         objects.forEach { entity ->
@@ -72,7 +70,6 @@ class LabyrinthDemo(
 
         actions.forEach { it.schedule(deltaTime) }
 
-        objects.forEach { it.update(deltaTime) }
         setupDrawOrder()
         bbCollisionContext.update()
         tiledCollisionContext.update()
