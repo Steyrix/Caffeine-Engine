@@ -1,31 +1,30 @@
 package engine.core.scene
 
+import engine.core.scene.context.Bundle
 import engine.core.window.Window
 
-interface CompositeScene : Scene {
+interface SceneHolder {
 
     val sceneMap: MutableMap<String, Scene>
 
     var currentScene: Scene?
 
-    override fun init() {
-        currentScene?.init()
-    }
-
-    override fun render(window: Window) {
+    fun render(window: Window) {
         currentScene?.render(window)
     }
 
-    override fun update(deltaTime: Float) {
+    fun update(deltaTime: Float) {
         currentScene?.update(deltaTime)
     }
 
     fun switchScene(nextSceneName: String) {
+        currentScene?.onSwitch()
+        val bundle = currentScene?.getBundle()
         currentScene = sceneMap[nextSceneName]
-        onSceneChanged()
+        onSceneChanged(bundle)
     }
 
-    fun onSceneChanged() {
-        currentScene?.init()
+    fun onSceneChanged(bundle: Bundle?) {
+        currentScene?.init(bundle)
     }
 }
