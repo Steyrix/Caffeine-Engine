@@ -23,6 +23,8 @@ class LabyrinthDemo(
 
     private var orderedDrawableObjects = mutableListOf<GameObject>()
 
+    private var objects = mutableListOf<GameObject>()
+
     override var renderProjection: Matrix4f? = null
 
     override fun init(bundle: Bundle?) {
@@ -35,7 +37,7 @@ class LabyrinthDemo(
                 1f
         )
 
-        LabyrinthInitializer.initAll(
+        objects = LabyrinthInitializer.initAll(
                 renderProjection!!,
                 screenWidth,
                 screenHeight,
@@ -43,28 +45,20 @@ class LabyrinthDemo(
                 tiledCollisionContext,
                 boxInteractionContext
         )
-
-        orderedDrawableObjects.add(Character)
-        orderedDrawableObjects.add(Campfire)
-        orderedDrawableObjects.addAll(NPCs.it)
     }
 
     override fun input(window: Window) {
-        Character.it?.input(window)
+        objects.forEach { it.input(window) }
     }
 
     override fun update(deltaTime: Float) {
-        Character.update(deltaTime)
-        NPCs.update(deltaTime)
-        Campfire.update(deltaTime)
+        objects.forEach { it.update(deltaTime) }
         setupDrawOrder()
 
         bbCollisionContext.update()
         tiledCollisionContext.update()
         boxInteractionContext.update()
         TempSprites.update(deltaTime)
-
-        GameMap.update(deltaTime)
     }
 
     override fun render(window: Window) {
@@ -73,9 +67,7 @@ class LabyrinthDemo(
         glClear(GL_COLOR_BUFFER_BIT)
         glClearColor(0f, 0.5f, 0f, 0.5f)
 
-        GameMap.draw()
-
-        orderedDrawableObjects.forEach {
+        objects.forEach {
             it.draw()
         }
 
@@ -91,7 +83,7 @@ class LabyrinthDemo(
     }
 
     private fun setupDrawOrder() {
-        orderedDrawableObjects.sortBy {
+        objects.sortBy {
             it.getZLevel()
         }
     }

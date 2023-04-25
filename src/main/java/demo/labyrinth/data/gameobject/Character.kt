@@ -15,7 +15,7 @@ import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.interaction.BoxInteractionContext
 import org.joml.Matrix4f
 
-object Character : GameObject {
+class Character : GameObject {
     override var it: CompositeEntity? = null
     private var graphicalComponent: AnimatedObject2D? = null
     private var hp: HealthBar? = null
@@ -46,7 +46,6 @@ object Character : GameObject {
         addComponent(hp, characterParameters)
 
         addComponent(tiledCollider, characterParameters)
-        tiledCollisionContext.addEntity(GameMap.graphicalComponent as Entity, GameMap.parameters)
         addComponent(boxCollider, characterParameters)
         bbCollisionContext.addEntity(boundingBox as Entity, characterParameters)
 
@@ -109,7 +108,6 @@ object Character : GameObject {
         return TiledCollider(
                 it as Entity,
                 characterParameters,
-                GameMap.parameters,
                 listOf("walking_layer", "walkable_objects_layer"),
                 tiledCollisionContext
         )

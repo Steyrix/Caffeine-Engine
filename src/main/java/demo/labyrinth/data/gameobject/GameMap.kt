@@ -2,12 +2,14 @@ package demo.labyrinth.data.gameobject
 
 import demo.labyrinth.data.*
 import engine.core.entity.CompositeEntity
+import engine.core.entity.Entity
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.scene.GameObject
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfStatic2DParameters
+import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.matrix.MatrixState
 import engine.feature.tiled.TileMap
 import engine.feature.tiled.parser.TiledResourceParser
@@ -17,7 +19,8 @@ import org.joml.Matrix4f
 import org.joml.Vector2f
 import java.io.File
 
-object GameMap : GameObject {
+class GameMap : GameObject {
+
     override var it: CompositeEntity? = null
     var graphicalComponent: TileMap? = null
         set(value) {
@@ -62,7 +65,8 @@ object GameMap : GameObject {
     fun init(
             renderProjection: Matrix4f,
             screenWidth: Float,
-            screenHeight: Float
+            screenHeight: Float,
+            tiledCollisionContext: TiledCollisionContext,
     ) {
         parameters = getMapParameters(screenWidth, screenHeight)
         graphicalComponent = getGraphicalComponent(renderProjection, screenWidth, screenHeight)
@@ -72,7 +76,9 @@ object GameMap : GameObject {
         recalculateParameters(parameters.xSize, parameters.ySize)
 
         it = object  : CompositeEntity() {}
-        GameMap.addComponent(graphicalComponent, parameters)
+        addComponent(graphicalComponent, parameters)
+
+        tiledCollisionContext.addEntity(graphicalComponent as Entity, parameters)
     }
 
     private fun getGraphicalComponent(
@@ -113,5 +119,9 @@ object GameMap : GameObject {
                 graphicalComponent!!,
                 params
         )
+    }
+
+    override fun getZLevel(): Float {
+        return Float.MIN_VALUE
     }
 }

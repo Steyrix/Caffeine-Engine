@@ -1,15 +1,14 @@
 package demo.labyrinth.data
 
-import demo.labyrinth.ShaderController
 import demo.labyrinth.data.gameobject.*
-import engine.core.entity.CompositeEntity
-import engine.core.render.render2D.AnimatedObject2D
-import engine.core.texture.Texture2D
+import engine.core.scene.GameObject
+import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.getCenterPoint
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.interaction.BoxInteractionContext
 import engine.feature.matrix.MatrixState
+import engine.feature.tiled.traversing.TileTraverser
 import org.joml.Matrix4f
 
 object LabyrinthInitializer {
@@ -21,20 +20,35 @@ object LabyrinthInitializer {
             boundingBoxCollisionContext: BoundingBoxCollisionContext,
             tiledCollisionContext: TiledCollisionContext,
             boxInteractionContext: BoxInteractionContext
-    ) {
-        GameMap.init(renderProjection, screenWidth, screenHeight)
-        Character.init(
+    ): MutableList<GameObject> {
+        val gameMap = GameMap().apply {
+            init(
+                    renderProjection,
+                    screenWidth,
+                    screenHeight,
+                    tiledCollisionContext
+            )
+        }
+
+        val character = Character().apply {
+            init(
+                    renderProjection,
+                    boundingBoxCollisionContext,
+                    tiledCollisionContext,
+                    boxInteractionContext
+            )
+        }
+
+        val campfire = Campfire().apply {
+            init(renderProjection)
+        }
+
+        val listOfNpc = initGoblins(
                 renderProjection,
                 boundingBoxCollisionContext,
-                tiledCollisionContext,
                 boxInteractionContext
-        )
-        initCampfireGraphics(renderProjection)
-        initGoblins(
-                renderProjection,
-                boundingBoxCollisionContext,
-                boxInteractionContext
-        )
+        ) { params: SetOf2DParametersWithVelocity -> gameMap.createTileTraverser(params) }
+
         TempSprites.init(renderProjection)
 
         val centerPoint = characterParameters.getCenterPoint()
@@ -42,38 +56,26 @@ object LabyrinthInitializer {
                 screenWidth / 2 - centerPoint.x,
                 screenHeight / 2 - centerPoint.y
         )
-    }
 
-    private fun initCampfireGraphics(renderProjection: Matrix4f) {
-        val frameSizeX = 0.2f
-        val frameSizeY = 1.0f
-
-        val texturePath = this.javaClass.getResource("/textures/camp_fire_texture.png")!!.path
-        Campfire.graphicalComponent = AnimatedObject2D(
-                frameSizeX = frameSizeX,
-                frameSizeY = frameSizeY,
-                texture = Texture2D.createInstance(texturePath),
-                animations = campfireAnimations
-        ).apply {
-            shader = ShaderController.createAnimationShader(renderProjection)
-        }
-
-        Campfire.it = object : CompositeEntity() {}
-        Campfire.addComponent(Campfire.graphicalComponent, campfireParameters)
+        return mutableListOf(gameMap, campfire, character, listOfNpc)
     }
 
     // TODO: reduce
     private fun initGoblins(
             renderProjection: Matrix4f,
             boundingBoxCollisionContext: BoundingBoxCollisionContext,
-            boxInteractionContext: BoxInteractionContext
-    ) {
+            boxInteractionContext: BoxInteractionContext,
+            creator: (SetOf2DParametersWithVelocity) -> TileTraverser
+    ): NPCs {
+        val out = NPCs()
+
         val enemy1 = NpcEnemy(goblinParams1)
                 .also { npc ->
                     npc.init(
                             renderProjection,
                             boundingBoxCollisionContext,
-                            boxInteractionContext
+                            boxInteractionContext,
+                            creator(goblinParams1)
                     )
                 }
         val enemy2 = NpcEnemy(goblinParams2)
@@ -81,9 +83,13 @@ object LabyrinthInitializer {
                     npc.init(
                             renderProjection,
                             boundingBoxCollisionContext,
-                            boxInteractionContext
+                            boxInteractionContext,
+                            creator(goblinParams2)
                     )
                 }
-        NPCs.it.addAll(listOf(enemy1, enemy2))
+
+        out.objects.addAll(listOf(enemy1, enemy2))
+
+        return out
     }
 }

@@ -14,6 +14,7 @@ import engine.core.update.SetOfStatic2DParameters
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.interaction.BoxInteractionContext
+import engine.feature.tiled.traversing.TileTraverser
 import org.joml.Matrix4f
 
 class NpcEnemy(
@@ -28,7 +29,8 @@ class NpcEnemy(
     fun init(
             renderProjection: Matrix4f,
             boundingBoxCollisionContext: BoundingBoxCollisionContext,
-            boxInteractionContext: BoxInteractionContext
+            boxInteractionContext: BoxInteractionContext,
+            tileTraverser: TileTraverser
     ) {
         val box = getBoundingBox(renderProjection)
         val animatedObject = getAnimatedObject(renderProjection)
@@ -36,7 +38,7 @@ class NpcEnemy(
         it = Goblin(
                 params = parameters,
                 drawableComponent = animatedObject,
-                tileTraverser = GameMap.createTileTraverser(parameters),
+                tileTraverser = tileTraverser,
                 playerParams = characterParameters,
                 hp = getHealthBar(parameters, renderProjection)
         ).also {
