@@ -22,5 +22,10 @@ interface CompositeScene : Scene {
 
     fun switchScene(nextSceneName: String) {
         currentScene = sceneMap[nextSceneName]
+        onSceneChanged()
+    }
+
+    fun onSceneChanged() {
+        currentScene?.init()
     }
 }
