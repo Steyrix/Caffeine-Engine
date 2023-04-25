@@ -22,7 +22,8 @@ import java.io.File
 class GameMap : GameObject {
 
     override var it: CompositeEntity? = null
-    var graphicalComponent: TileMap? = null
+
+    private var graphicalComponent: TileMap? = null
         set(value) {
             value?.let {
                 tileGraph = value.getGraph(
@@ -34,10 +35,11 @@ class GameMap : GameObject {
             }
         }
 
-    var parameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
+    private var parameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
             0f, 0f, 0f, 0f, 0f
     )
-    var tileGraph: TileGraph? = null
+
+    private var tileGraph: TileGraph? = null
 
     private val lightBlinking = AccumulatedTimeEvent(
             timeLimit = lightBlinkingTimeLimit,
@@ -75,7 +77,7 @@ class GameMap : GameObject {
         parameters.ySize = 800f
         recalculateParameters(parameters.xSize, parameters.ySize)
 
-        it = object  : CompositeEntity() {}
+        it = object : CompositeEntity() {}
         addComponent(graphicalComponent, parameters)
 
         tiledCollisionContext.addEntity(graphicalComponent as Entity, parameters)
