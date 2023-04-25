@@ -16,7 +16,9 @@ import engine.feature.interaction.BoxInteractionContext
 import org.joml.Matrix4f
 
 class Character : GameObject {
+
     override var it: CompositeEntity? = null
+
     private var graphicalComponent: AnimatedObject2D? = null
     private var hp: HealthBar? = null
     private var boundingBox: BoundingBox? = null
