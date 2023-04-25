@@ -57,17 +57,16 @@ object LabyrinthInitializer {
                 screenHeight / 2 - centerPoint.y
         )
 
-        return mutableListOf(gameMap, campfire, character, listOfNpc)
+        return mutableListOf(gameMap, campfire, character).also { it.addAll(listOfNpc) }
     }
 
-    // TODO: reduce
     private fun initGoblins(
             renderProjection: Matrix4f,
             boundingBoxCollisionContext: BoundingBoxCollisionContext,
             boxInteractionContext: BoxInteractionContext,
             creator: (SetOf2DParametersWithVelocity) -> TileTraverser
-    ): NPCs {
-        val out = NPCs()
+    ): List<NpcEnemy> {
+        val out = mutableListOf<NpcEnemy>()
 
         val enemy1 = NpcEnemy(goblinParams1)
                 .also { npc ->
@@ -88,7 +87,8 @@ object LabyrinthInitializer {
                     )
                 }
 
-        out.objects.addAll(listOf(enemy1, enemy2))
+        out.add(enemy1)
+        out.add(enemy2)
 
         return out
     }

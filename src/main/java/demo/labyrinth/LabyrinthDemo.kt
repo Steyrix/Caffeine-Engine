@@ -2,6 +2,7 @@ package demo.labyrinth
 
 import demo.labyrinth.data.*
 import demo.labyrinth.data.gameobject.*
+import engine.core.loop.AccumulatedTimeEvent
 import engine.core.scene.GameObject
 import engine.core.scene.Scene
 import engine.core.scene.context.Bundle
@@ -21,9 +22,10 @@ class LabyrinthDemo(
     private val tiledCollisionContext = TiledCollisionContext()
     private val boxInteractionContext = BoxInteractionContext()
 
-    private var orderedDrawableObjects = mutableListOf<GameObject>()
-
+    // todo: use game context, adapt to bundle
     private var objects = mutableListOf<GameObject>()
+
+    private val actions: MutableList<AccumulatedTimeEvent> = mutableListOf()
 
     override var renderProjection: Matrix4f? = null
 
@@ -52,9 +54,24 @@ class LabyrinthDemo(
     }
 
     override fun update(deltaTime: Float) {
+        // todo encapsulate
+        objects.forEach { entity ->
+            entity.update(deltaTime)
+            if (entity.isDisposed()) {
+                actions.add(
+                        AccumulatedTimeEvent(
+                                timeLimit = 10f,
+                                action = { this.objects.remove(entity) },
+                                initialTime = 0f
+                        )
+                )
+            }
+        }
+
+        actions.forEach { it.schedule(deltaTime) }
+
         objects.forEach { it.update(deltaTime) }
         setupDrawOrder()
-
         bbCollisionContext.update()
         tiledCollisionContext.update()
         boxInteractionContext.update()
