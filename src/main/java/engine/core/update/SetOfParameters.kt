@@ -2,7 +2,7 @@ package engine.core.update
 
 import engine.feature.geometry.Point2D
 
-interface SetOfParameters {
+sealed interface SetOfParameters {
     var x: Float
     var y: Float
     var xSize: Float
@@ -10,7 +10,7 @@ interface SetOfParameters {
     var rotationAngle: Float
 }
 
-class SetOfStatic2DParameters(
+data class SetOfStatic2DParameters(
         override var x: Float,
         override var y: Float,
         override var xSize: Float,
@@ -18,7 +18,7 @@ class SetOfStatic2DParameters(
         override var rotationAngle: Float,
 ) : SetOfParameters
 
-class SetOf2DParametersWithVelocity(
+data class SetOf2DParametersWithVelocity(
         override var x: Float,
         override var y: Float,
         override var xSize: Float,
@@ -28,14 +28,9 @@ class SetOf2DParametersWithVelocity(
         var velocityY: Float
 ) : SetOfParameters
 
-class Behavior2DParameters(
-        var movementX: Float,
-        var movementY: Float
-)
-
 fun SetOfParameters.getCenterPoint(): Point2D {
     return Point2D(
-         x + xSize / 2,
+            x + xSize / 2,
             y + ySize / 2
     )
 }
