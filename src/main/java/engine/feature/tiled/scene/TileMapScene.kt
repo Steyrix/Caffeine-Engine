@@ -3,6 +3,7 @@ package engine.feature.tiled.scene
 import engine.core.scene.Scene
 import org.joml.Matrix4f
 
+// TODO: finish, test
 abstract class TileMapScene : Scene {
 
     private var tiledMap: TileMapObject? = null
