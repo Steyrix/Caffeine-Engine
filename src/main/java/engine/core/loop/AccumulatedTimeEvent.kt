@@ -1,6 +1,6 @@
 package engine.core.loop
 
-class AccumulatedTimeEvent(
+open class AccumulatedTimeEvent(
         private val timeLimit: Float,
         private val action: (Float) -> Unit,
         initialTime: Float = timeLimit
