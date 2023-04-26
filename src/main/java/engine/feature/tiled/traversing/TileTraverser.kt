@@ -4,7 +4,7 @@ import engine.core.entity.CompositeEntity
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.getCenterPoint
 import engine.feature.geometry.Point2D
-import engine.feature.tiled.TileMap
+import engine.feature.tiled.data.TileMap
 import kotlin.math.abs
 
 class TileTraverser(

@@ -11,7 +11,7 @@ import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.matrix.MatrixState
-import engine.feature.tiled.TileMap
+import engine.feature.tiled.data.TileMap
 import engine.feature.tiled.parser.TiledResourceParser
 import engine.feature.tiled.traversing.TileGraph
 import engine.feature.tiled.traversing.TileTraverser

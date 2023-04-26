@@ -2,11 +2,10 @@ package engine.feature.collision.tiled
 
 import engine.core.entity.Entity
 import engine.core.update.SetOf2DParametersWithVelocity
-import engine.core.update.SetOfStatic2DParameters
 import engine.feature.collision.Collider
 import engine.feature.collision.CollisionContext
 import engine.feature.geometry.Point2D
-import engine.feature.tiled.TileMap
+import engine.feature.tiled.data.TileMap
 
 private const val EMPTY_TILE_VALUE = 0
 

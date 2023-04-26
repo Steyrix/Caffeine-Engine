@@ -1,4 +1,4 @@
-package engine.feature.tiled
+package engine.feature.tiled.data
 
 data class Tile(
         val tileUV: FloatArray

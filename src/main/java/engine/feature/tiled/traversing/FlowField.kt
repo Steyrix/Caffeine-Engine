@@ -1,6 +1,6 @@
 package engine.feature.tiled.traversing
 
-import engine.feature.tiled.TileMap
+import engine.feature.tiled.data.TileMap
 
 class FlowField(
         map: TileMap

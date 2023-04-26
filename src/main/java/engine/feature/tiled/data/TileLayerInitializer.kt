@@ -1,4 +1,4 @@
-package engine.feature.tiled
+package engine.feature.tiled.data
 
 import engine.core.render.render2D.OpenGlObject2D
 import engine.feature.geometry.Point2D

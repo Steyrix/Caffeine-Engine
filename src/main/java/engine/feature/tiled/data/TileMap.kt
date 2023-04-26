@@ -1,4 +1,4 @@
-package engine.feature.tiled
+package engine.feature.tiled.data
 
 import engine.core.entity.Entity
 import engine.core.render.render2D.Drawable2D

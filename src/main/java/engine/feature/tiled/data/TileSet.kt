@@ -1,4 +1,4 @@
-package engine.feature.tiled
+package engine.feature.tiled.data
 
 import engine.core.texture.Texture2D
 
