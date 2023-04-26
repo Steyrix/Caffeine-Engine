@@ -1,11 +1,9 @@
 package demo.labyrinth
 
 import demo.labyrinth.data.*
-import demo.labyrinth.data.gameobject.*
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.scene.GameObject
 import engine.core.scene.Scene
-import engine.core.scene.context.Bundle
 import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.collision.tiled.TiledCollisionContext
@@ -29,7 +27,7 @@ class LabyrinthDemo(
 
     override var renderProjection: Matrix4f? = null
 
-    override fun init(bundle: Bundle?) {
+    override fun init() {
         renderProjection = Matrix4f().ortho(
                 0f,
                 screenWidth,
@@ -89,10 +87,6 @@ class LabyrinthDemo(
 
     override fun onSwitch() {
 
-    }
-
-    override fun getBundle(): Bundle? {
-        return null
     }
 
     private fun setupDrawOrder() {
