@@ -82,6 +82,27 @@ class Shader {
         }
     }
 
+    fun setUniform(uniformName: String, value: Any) {
+        MemoryStack.stackPush().use {
+            checkForUniformNameExists(uniformName)
+
+            when (value) {
+                is Float -> glUniform1f(uniforms[uniformName]!!, value)
+                is Vector2f -> glUniform2f(
+                        uniforms[uniformName]!!,
+                        value.x,
+                        value.y
+                )
+                is Int -> glUniform1i(uniforms[uniformName]!!, value)
+                is Matrix4f -> glUniformMatrix4fv(
+                        uniforms[uniformName]!!,
+                        false,
+                        value.get(it.mallocFloat(MATRIX4F_VALUE_SIZE))
+                )
+            }
+        }
+    }
+
     fun createVertexShader(shaderCode: String) {
         vertexShaderId = createShader(shaderCode, GL_VERTEX_SHADER)
     }
