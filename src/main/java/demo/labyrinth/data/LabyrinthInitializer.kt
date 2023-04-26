@@ -8,6 +8,7 @@ import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.interaction.BoxInteractionContext
 import engine.feature.matrix.MatrixState
+import engine.feature.tiled.scene.TileMapObject
 import engine.feature.tiled.traversing.TileTraverser
 import org.joml.Matrix4f
 
@@ -25,12 +26,20 @@ object LabyrinthInitializer {
             init(renderProjection)
         }
 
-        val gameMap = GameMap().apply {
+        val newMap = TileMapObject(
+                getStartingMapPreset(screenWidth, screenHeight)
+        ).apply {
             init(
                     renderProjection,
-                    screenWidth,
-                    screenHeight,
-                    tiledCollisionContext
+                    listOf(tiledCollisionContext)
+            )
+            adjustParameters(
+                    HUMANOID_SIZE_TO_MAP_RELATION,
+                    listOf(
+                            characterParameters,
+                            goblinParams1,
+                            goblinParams2
+                    )
             )
         }
 
@@ -53,7 +62,7 @@ object LabyrinthInitializer {
                 boundingBoxCollisionContext,
                 boxInteractionContext,
                 tempSpritesHolder
-        ) { params: SetOf2DParametersWithVelocity -> gameMap.createTileTraverser(params) }
+        ) { params: SetOf2DParametersWithVelocity -> newMap.createTraverser(params) }
 
         val centerPoint = characterParameters.getCenterPoint()
         MatrixState.translate(
@@ -61,7 +70,7 @@ object LabyrinthInitializer {
                 screenHeight / 2 - centerPoint.y
         )
 
-        return mutableListOf(gameMap, campfire, character, tempSpritesHolder).also { it.addAll(listOfNpc) }
+        return mutableListOf(newMap, campfire, character, tempSpritesHolder).also { it.addAll(listOfNpc) }
     }
 
     private fun initGoblins(
