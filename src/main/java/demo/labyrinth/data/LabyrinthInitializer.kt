@@ -21,6 +21,10 @@ object LabyrinthInitializer {
             tiledCollisionContext: TiledCollisionContext,
             boxInteractionContext: BoxInteractionContext
     ): MutableList<GameObject> {
+        val tempSpritesHolder = TempSpritesHolder().apply {
+            init(renderProjection)
+        }
+
         val gameMap = GameMap().apply {
             init(
                     renderProjection,
@@ -35,7 +39,8 @@ object LabyrinthInitializer {
                     renderProjection,
                     boundingBoxCollisionContext,
                     tiledCollisionContext,
-                    boxInteractionContext
+                    boxInteractionContext,
+                    tempSpritesHolder
             )
         }
 
@@ -46,10 +51,9 @@ object LabyrinthInitializer {
         val listOfNpc = initGoblins(
                 renderProjection,
                 boundingBoxCollisionContext,
-                boxInteractionContext
+                boxInteractionContext,
+                tempSpritesHolder
         ) { params: SetOf2DParametersWithVelocity -> gameMap.createTileTraverser(params) }
-
-        TempSprites.init(renderProjection)
 
         val centerPoint = characterParameters.getCenterPoint()
         MatrixState.translate(
@@ -57,13 +61,14 @@ object LabyrinthInitializer {
                 screenHeight / 2 - centerPoint.y
         )
 
-        return mutableListOf(gameMap, campfire, character).also { it.addAll(listOfNpc) }
+        return mutableListOf(gameMap, campfire, character, tempSpritesHolder).also { it.addAll(listOfNpc) }
     }
 
     private fun initGoblins(
             renderProjection: Matrix4f,
             boundingBoxCollisionContext: BoundingBoxCollisionContext,
             boxInteractionContext: BoxInteractionContext,
+            tempSpritesHolder: TempSpritesHolder,
             creator: (SetOf2DParametersWithVelocity) -> TileTraverser
     ): List<NpcEnemy> {
         val out = mutableListOf<NpcEnemy>()
@@ -74,7 +79,8 @@ object LabyrinthInitializer {
                             renderProjection,
                             boundingBoxCollisionContext,
                             boxInteractionContext,
-                            creator(goblinParams1)
+                            creator(goblinParams1),
+                            tempSpritesHolder
                     )
                 }
         val enemy2 = NpcEnemy(goblinParams2)
@@ -83,7 +89,8 @@ object LabyrinthInitializer {
                             renderProjection,
                             boundingBoxCollisionContext,
                             boxInteractionContext,
-                            creator(goblinParams2)
+                            creator(goblinParams2),
+                            tempSpritesHolder
                     )
                 }
 

@@ -2,7 +2,7 @@ package demo.labyrinth.goblin
 
 import demo.labyrinth.Player
 import demo.labyrinth.data.AnimationKey
-import demo.labyrinth.data.gameobject.TempSprites
+import demo.labyrinth.data.gameobject.TempSpritesHolder
 import demo.labyrinth.hp.HealthBar
 import demo.labyrinth.interaction.AttackInteraction
 import demo.labyrinth.interaction.IsAttackableInteraction
@@ -11,7 +11,6 @@ import engine.core.loop.PredicateTimeEvent
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.getCenterPoint
-import engine.feature.collision.CollisionReactive
 import engine.feature.interaction.Interaction
 import engine.feature.tiled.traversing.TileTraverser
 
@@ -20,8 +19,9 @@ class Goblin(
         params: SetOf2DParametersWithVelocity,
         private val tileTraverser: TileTraverser,
         private val playerParams: SetOf2DParametersWithVelocity,
-        private val hp: HealthBar
-) : CompositeEntity(), CollisionReactive {
+        private val hp: HealthBar,
+        private val tempSpritesHolder: TempSpritesHolder
+) : CompositeEntity() {
 
     private val startChasing = PredicateTimeEvent(
             timeLimit = 2f,
@@ -86,10 +86,6 @@ class Goblin(
         }
     }
 
-    override fun reactToCollision() {
-        // TODO: implement
-    }
-
     override fun consumeInteraction(interaction: Interaction) {
         if (isDisposed) return
 
@@ -97,7 +93,7 @@ class Goblin(
             is AttackInteraction -> {
                 if (interaction.producer !is Player) return
                 val currPos = controller.getCurrentCenterPos()
-                TempSprites.generateHit(currPos.x, currPos.y)
+                tempSpritesHolder.generateHit(currPos.x, currPos.y)
             }
             is IsAttackableInteraction -> {
                 if (!isMovingStopped) {

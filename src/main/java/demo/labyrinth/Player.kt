@@ -1,6 +1,6 @@
 package demo.labyrinth
 
-import demo.labyrinth.data.gameobject.TempSprites
+import demo.labyrinth.data.gameobject.TempSpritesHolder
 import demo.labyrinth.interaction.AttackInteraction
 import demo.labyrinth.interaction.IsAttackableInteraction
 import engine.core.entity.CompositeEntity
@@ -11,7 +11,8 @@ import engine.feature.interaction.Interaction
 
 class Player(
         private val drawableComponent: AnimatedObject2D,
-        private val params: SetOf2DParametersWithVelocity
+        private val params: SetOf2DParametersWithVelocity,
+        private val tempSpritesHolder: TempSpritesHolder
 ) : CompositeEntity() {
 
     private var isAttack = false
@@ -78,7 +79,7 @@ class Player(
                 if (!isHit) {
                     isHit = true
                     val currPos = controller.getCurrentCenterPos()
-                    TempSprites.generateHit(currPos.x, currPos.y)
+                    tempSpritesHolder.generateHit(currPos.x, currPos.y)
                     // hp.filled -= interaction.damage
                 }
             }

@@ -61,7 +61,7 @@ class LabyrinthDemo(
                 actions.add(
                         AccumulatedTimeEvent(
                                 timeLimit = 10f,
-                                action = { this.objects.remove(entity) },
+                                action = { objects.remove(entity) },
                                 initialTime = 0f
                         )
                 )
@@ -74,7 +74,6 @@ class LabyrinthDemo(
         bbCollisionContext.update()
         tiledCollisionContext.update()
         boxInteractionContext.update()
-        TempSprites.update(deltaTime)
     }
 
     override fun render(window: Window) {
@@ -86,8 +85,6 @@ class LabyrinthDemo(
         objects.forEach {
             it.draw()
         }
-
-        TempSprites.draw()
     }
 
     override fun onSwitch() {

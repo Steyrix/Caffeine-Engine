@@ -31,7 +31,8 @@ class NpcEnemy(
             renderProjection: Matrix4f,
             boundingBoxCollisionContext: BoundingBoxCollisionContext,
             boxInteractionContext: BoxInteractionContext,
-            tileTraverser: TileTraverser
+            tileTraverser: TileTraverser,
+            tempSpritesHolder: TempSpritesHolder
     ) {
         val box = getBoundingBox(renderProjection)
         val animatedObject = getAnimatedObject(renderProjection)
@@ -41,7 +42,8 @@ class NpcEnemy(
                 drawableComponent = animatedObject,
                 tileTraverser = tileTraverser,
                 playerParams = characterParameters,
-                hp = getHealthBar(parameters, renderProjection)
+                hp = getHealthBar(parameters, renderProjection),
+                tempSpritesHolder = tempSpritesHolder
         ).also {
             it.addComponent(box, parameters)
         }

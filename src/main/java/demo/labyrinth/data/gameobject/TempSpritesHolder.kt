@@ -10,7 +10,7 @@ import engine.core.texture.Texture2D
 import engine.core.update.SetOfStatic2DParameters
 import org.joml.Matrix4f
 
-object TempSprites : GameObject {
+class TempSpritesHolder : GameObject {
 
     override var it: CompositeEntity? = CompositeEntity()
 
@@ -18,12 +18,16 @@ object TempSprites : GameObject {
 
     private var renderProjection: Matrix4f? = null
 
+    private var z: Float = -1f
+
     fun init(projection: Matrix4f) {
         renderProjection = projection
     }
 
     fun generateHit(posX: Float, posY: Float) {
         if (renderProjection == null) return
+
+        z = posY + 0.1f
 
         val frameSizeX = 0.25f
         val frameSizeY = 0.25f
@@ -71,5 +75,7 @@ object TempSprites : GameObject {
         }
     }
 
-
+    override fun getZLevel(): Float {
+        return z
+    }
 }

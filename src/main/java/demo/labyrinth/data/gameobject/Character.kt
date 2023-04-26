@@ -29,14 +29,16 @@ class Character : GameObject {
             renderProjection: Matrix4f,
             bbCollisionContext: BoundingBoxCollisionContext,
             tiledCollisionContext: TiledCollisionContext,
-            boxInteractionContext: BoxInteractionContext
+            boxInteractionContext: BoxInteractionContext,
+            tempSpritesHolder: TempSpritesHolder
     ) {
         boundingBox = getBoundingBox(renderProjection)
         graphicalComponent = getAnimatedObjectComponent(renderProjection)
 
         it = Player(
                 drawableComponent = graphicalComponent!!,
-                params = characterParameters
+                params = characterParameters,
+                tempSpritesHolder = tempSpritesHolder
         )
 
         hp = HealthBar(characterParameters, hpBarPatameters1, renderProjection)
