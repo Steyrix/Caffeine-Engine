@@ -7,6 +7,7 @@ import engine.core.scene.GameObject
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
 import engine.core.update.SetOf2DParametersWithVelocity
+import engine.core.update.SetOfParameters
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.collision.CollisionContext
 import engine.feature.tiled.data.TileMap
@@ -43,15 +44,13 @@ class TileMapObject(
 
     fun init(
             renderProjection: Matrix4f,
-            screenWidth: Float,
-            screenHeight: Float,
             collisionContexts: List<CollisionContext>
     ) {
         parameters = SetOfStatic2DParameters(
-                x = mapPresets.width,
-                y = mapPresets.height,
-                xSize = screenWidth,
-                ySize = screenHeight,
+                x = 0f,
+                y = 0f,
+                xSize = mapPresets.width,
+                ySize = mapPresets.height,
                 rotationAngle = 0f
         )
 
@@ -111,6 +110,16 @@ class TileMapObject(
                 graphicalComponent!!,
                 targetParams
         )
+    }
+
+    fun adjustParameters(
+            sizeToMapRelation: Float,
+            params: List<SetOfParameters>
+    ) {
+        params.forEach {
+            it.xSize = sizeToMapRelation * parameters.xSize
+            it.ySize = sizeToMapRelation * parameters.ySize
+        }
     }
 
     override fun getZLevel(): Float {
