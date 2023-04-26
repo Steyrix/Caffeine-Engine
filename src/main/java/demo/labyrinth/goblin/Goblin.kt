@@ -89,7 +89,7 @@ class Goblin(
     override fun consumeInteraction(interaction: Interaction) {
         if (isDisposed) return
 
-        when(interaction) {
+        when (interaction) {
             is AttackInteraction -> {
                 if (interaction.producer !is Player) return
                 val currPos = controller.getCurrentCenterPos()
@@ -111,11 +111,13 @@ class Goblin(
     override fun getInteractions(): List<Interaction> {
         val out = mutableListOf<Interaction>()
 
-        if (controller.isStriking) {
-            out.add(AttackInteraction(
-                    producer = this,
-                    damage = 0.05f
-            ))
+        if (controller.isStriking && !isDisposed) {
+            out.add(
+                    AttackInteraction(
+                            producer = this,
+                            damage = 0.05f
+                    )
+            )
         }
 
         return out
