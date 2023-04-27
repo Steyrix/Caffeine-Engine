@@ -30,7 +30,9 @@ open class CompositeEntity : Entity, Updatable {
     fun removeComponent(
             entity: Entity
     ) {
-        entitiesMap.remove(entity)
+        if (entitiesMap.contains(entity)) {
+            entitiesMap.remove(entity)
+        }
     }
 
     fun draw() {
