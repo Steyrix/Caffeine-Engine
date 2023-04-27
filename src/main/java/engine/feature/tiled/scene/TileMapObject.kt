@@ -23,7 +23,7 @@ class TileMapObject(
 
     override var it: CompositeEntity? = CompositeEntity()
 
-    private var parameters: SetOfStatic2DParameters =
+    var parameters: SetOfStatic2DParameters =
             SetOfStatic2DParameters(
                     0f, 0f, 0f, 0f, 0f
             )

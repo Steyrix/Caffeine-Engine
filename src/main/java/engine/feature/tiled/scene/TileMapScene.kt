@@ -23,6 +23,10 @@ abstract class TileMapScene : Scene {
                 screenWidth,
                 screenHeight
         )
+
+        tiledMap?.let {
+            gameContext[it] = it.parameters
+        }
     }
 
     abstract fun initTileMap(
