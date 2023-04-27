@@ -4,12 +4,9 @@ import demo.medieval_game.data.gameobject.*
 import engine.core.scene.GameObject
 import engine.core.scene.SceneInitializer
 import engine.core.update.SetOf2DParametersWithVelocity
-import engine.core.update.getCenterPoint
 import engine.feature.collision.CollisionContext
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
-import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.interaction.BoxInteractionContext
-import engine.feature.matrix.MatrixState
 import engine.feature.tiled.scene.TileMapObject
 import engine.feature.tiled.traversing.TileTraverser
 import org.joml.Matrix4f
@@ -42,27 +39,11 @@ object LabyrinthInitializer : SceneInitializer {
 
     fun initAll(
             renderProjection: Matrix4f,
-            screenWidth: Float,
-            screenHeight: Float,
             boundingBoxCollisionContext: BoundingBoxCollisionContext,
-            tiledCollisionContext: TiledCollisionContext,
             boxInteractionContext: BoxInteractionContext,
+            tempSpritesHolder: TempSpritesHolder,
             tileTraverserCreator: (SetOf2DParametersWithVelocity) -> TileTraverser
     ): MutableList<GameObject> {
-        val tempSpritesHolder = TempSpritesHolder().apply {
-            init(renderProjection)
-        }
-
-        val character = Character().apply {
-            init(
-                    renderProjection,
-                    boundingBoxCollisionContext,
-                    tiledCollisionContext,
-                    boxInteractionContext,
-                    tempSpritesHolder
-            )
-        }
-
         val campfire = Campfire().apply {
             init(renderProjection)
         }
@@ -74,13 +55,7 @@ object LabyrinthInitializer : SceneInitializer {
                 tempSpritesHolder
         ) { params: SetOf2DParametersWithVelocity -> tileTraverserCreator.invoke(params) }
 
-        val centerPoint = characterParameters.getCenterPoint()
-        MatrixState.translate(
-                screenWidth / 2 - centerPoint.x,
-                screenHeight / 2 - centerPoint.y
-        )
-
-        return mutableListOf(campfire, character, tempSpritesHolder).also { it.addAll(listOfNpc) }
+        return mutableListOf(campfire, tempSpritesHolder).also { it.addAll(listOfNpc) }
     }
 
     private fun initGoblins(

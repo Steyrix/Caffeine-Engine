@@ -9,9 +9,11 @@ interface Scene {
     val screenWidth: Float
     val screenHeight: Float
 
-    val gameContext: MutableMap<GameObject, SetOfParameters>
+    val gameContext: MutableList<GameObject>
 
-    fun init()
+    fun init(persistentObject: List<GameObject>) {
+        gameContext.addAll(persistentObject)
+    }
 
     fun input(window: Window)
 

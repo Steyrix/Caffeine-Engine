@@ -13,12 +13,18 @@ interface SceneHolder {
 
     val persistentGameObjects: MutableList<GameObject>
 
+    fun init()
+
     fun render(window: Window) {
         currentScene?.render(window)
     }
 
     fun update(deltaTime: Float) {
         currentScene?.update(deltaTime)
+    }
+
+    fun input(window: Window) {
+        currentScene?.input(window)
     }
 
     fun switchScene(nextSceneName: String) {

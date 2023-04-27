@@ -1,9 +1,9 @@
 package demo.medieval_game.scene
 
+import demo.medieval_game.data.gameobject.*
 import demo.medieval_game.data.starting_level.LabyrinthInitializer
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.scene.GameObject
-import engine.core.update.SetOfParameters
 import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.collision.tiled.TiledCollisionContext
@@ -15,42 +15,38 @@ import org.lwjgl.opengl.GL33C.*
 
 class StartingMapDemo(
         override val screenWidth: Float,
-        override val screenHeight: Float
-) : TileMapScene() {
+        override val screenHeight: Float,
+        projection: Matrix4f? = null,
+        private val boxInteractionContext: BoxInteractionContext,
+        private val bbCollisionContext: BoundingBoxCollisionContext
+) : TileMapScene(projection) {
 
     override var renderProjection: Matrix4f? = null
 
-    override val gameContext: MutableMap<GameObject, SetOfParameters> = mutableMapOf()
+    override val gameContext: MutableList<GameObject> = mutableListOf()
 
-    private val bbCollisionContext = BoundingBoxCollisionContext()
     private val tiledCollisionContext = TiledCollisionContext()
-    private val boxInteractionContext = BoxInteractionContext()
 
     private var objects = mutableListOf<GameObject>()
 
     private val actions: MutableList<AccumulatedTimeEvent> = mutableListOf()
 
-    override fun init() {
-        super.init()
+    override fun init(persistentObject: List<GameObject>) {
+        super.init(persistentObject)
 
-        renderProjection = Matrix4f().ortho(
-                0f,
-                screenWidth,
-                screenHeight,
-                0f,
-                0f,
-                1f
-        )
+        val tempSpritesHolder = gameContext.find { it is TempSpritesHolder } as? TempSpritesHolder
+        val character = gameContext.find { it is Character } as Character
 
         tiledMap?.let {
-            objects = LabyrinthInitializer.initAll(
+            val objects = LabyrinthInitializer.initAll(
                     renderProjection!!,
-                    screenWidth,
-                    screenHeight,
                     bbCollisionContext,
-                    tiledCollisionContext,
-                    boxInteractionContext
+                    boxInteractionContext,
+                    tempSpritesHolder!!
             ) { params -> it.createTraverser(params) }
+
+            gameContext.addAll(objects)
+            character.updateCollisionContext(tiledCollisionContext)
         }
     }
 
@@ -64,14 +60,11 @@ class StartingMapDemo(
     }
 
     override fun input(window: Window) {
-        objects.forEach { it.input(window) }
+        gameContext.forEach { it.input(window) }
     }
 
     override fun update(deltaTime: Float) {
-        gameContext.forEach { it.key.update(deltaTime) }
-
-        // todo encapsulate
-        objects.forEach { entity ->
+        gameContext.forEach { entity ->
             entity.update(deltaTime)
             if (entity.isDisposed()) {
                 actions.add(
@@ -87,8 +80,8 @@ class StartingMapDemo(
         actions.forEach { it.schedule(deltaTime) }
 
         setupDrawOrder()
-        bbCollisionContext.update()
         tiledCollisionContext.update()
+        bbCollisionContext.update()
         boxInteractionContext.update()
     }
 
@@ -98,11 +91,7 @@ class StartingMapDemo(
         glClear(GL_COLOR_BUFFER_BIT)
         glClearColor(0f, 0.5f, 0f, 0.5f)
 
-        gameContext.forEach { it.key.draw() }
-
-        objects.forEach {
-            it.draw()
-        }
+        gameContext.forEach { it.draw() }
     }
 
     override fun onSwitch() {
@@ -110,7 +99,7 @@ class StartingMapDemo(
     }
 
     private fun setupDrawOrder() {
-        objects.sortBy {
+        gameContext.sortBy {
             it.getZLevel()
         }
     }

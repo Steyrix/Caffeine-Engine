@@ -28,7 +28,7 @@ class Character : GameObject {
     fun init(
             renderProjection: Matrix4f,
             bbCollisionContext: BoundingBoxCollisionContext,
-            tiledCollisionContext: TiledCollisionContext,
+            tiledCollisionContext: TiledCollisionContext?,
             boxInteractionContext: BoxInteractionContext,
             tempSpritesHolder: TempSpritesHolder
     ) {
@@ -44,13 +44,17 @@ class Character : GameObject {
         hp = HealthBar(characterParameters, hpBarPatameters1, renderProjection)
 
         boxCollider = getBoundingBoxCollider(bbCollisionContext)
-        tiledCollider = getTiledCollider(tiledCollisionContext)
+
+        tiledCollisionContext?.let {
+            tiledCollider = getTiledCollider(tiledCollisionContext)
+            addComponent(tiledCollider, characterParameters)
+        }
+
 
         addComponent(boundingBox, characterParameters)
         addComponent(hp, characterParameters)
-
-        addComponent(tiledCollider, characterParameters)
         addComponent(boxCollider, characterParameters)
+
         bbCollisionContext.addEntity(boundingBox as Entity, characterParameters)
 
         boxInteractionContext.addAgent(it as Entity, boundingBox as BoundingBox)
@@ -115,6 +119,18 @@ class Character : GameObject {
                 listOf("walking_layer", "walkable_objects_layer"),
                 tiledCollisionContext
         )
+    }
+
+    fun updateCollisionContext(
+            collisionContext: TiledCollisionContext
+    ) {
+        if (tiledCollider != null) {
+            it?.removeComponent(tiledCollider as Entity)
+        }
+
+        tiledCollider = getTiledCollider(collisionContext)
+
+        addComponent(tiledCollider, characterParameters)
     }
 
     override fun getZLevel(): Float {
