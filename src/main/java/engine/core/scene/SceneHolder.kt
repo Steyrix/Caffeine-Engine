@@ -8,6 +8,8 @@ interface SceneHolder {
 
     var currentScene: Scene?
 
+    val persistentGameObjects: MutableList<GameObject>
+
     fun render(window: Window) {
         currentScene?.render(window)
     }
