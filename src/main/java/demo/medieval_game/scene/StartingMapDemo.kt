@@ -27,8 +27,6 @@ class StartingMapDemo(
 
     private val tiledCollisionContext = TiledCollisionContext()
 
-    private var objects = mutableListOf<GameObject>()
-
     private val actions: MutableList<AccumulatedTimeEvent> = mutableListOf()
 
     override fun init(persistentObject: List<GameObject>) {
@@ -70,7 +68,7 @@ class StartingMapDemo(
                 actions.add(
                         AccumulatedTimeEvent(
                                 timeLimit = 10f,
-                                action = { objects.remove(entity) },
+                                action = { gameContext.remove(entity) },
                                 initialTime = 0f
                         )
                 )
