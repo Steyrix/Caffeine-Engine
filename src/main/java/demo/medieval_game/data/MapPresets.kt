@@ -1,4 +1,4 @@
-package demo.labyrinth.data
+package demo.medieval_game.data
 
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.render.render2D.Drawable2D

@@ -1,4 +1,4 @@
-package demo.labyrinth.data
+package demo.medieval_game.data
 
 /* Lighting shaders variables */
 var lightBlinkingTimeLimit = 0.1f

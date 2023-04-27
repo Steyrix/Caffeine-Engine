@@ -1,9 +1,9 @@
-package demo.labyrinth.data.gameobject
+package demo.medieval_game.data.gameobject
 
-import demo.labyrinth.ShaderController
-import demo.labyrinth.data.*
-import demo.labyrinth.goblin.Goblin
-import demo.labyrinth.hp.HealthBar
+import demo.medieval_game.ShaderController
+import demo.medieval_game.data.*
+import demo.medieval_game.goblin.Goblin
+import demo.medieval_game.hp.HealthBar
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D

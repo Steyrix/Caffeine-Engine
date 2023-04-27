@@ -1,6 +1,6 @@
-package demo.labyrinth.data
+package demo.medieval_game.data
 
-import demo.labyrinth.data.gameobject.*
+import demo.medieval_game.data.gameobject.*
 import engine.core.scene.GameObject
 import engine.core.scene.SceneInitializer
 import engine.core.update.SetOf2DParametersWithVelocity

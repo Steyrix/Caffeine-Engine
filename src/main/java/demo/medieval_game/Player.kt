@@ -1,8 +1,8 @@
-package demo.labyrinth
+package demo.medieval_game
 
-import demo.labyrinth.data.gameobject.TempSpritesHolder
-import demo.labyrinth.interaction.AttackInteraction
-import demo.labyrinth.interaction.IsAttackableInteraction
+import demo.medieval_game.data.gameobject.TempSpritesHolder
+import demo.medieval_game.interaction.AttackInteraction
+import demo.medieval_game.interaction.IsAttackableInteraction
 import engine.core.entity.CompositeEntity
 import engine.core.loop.PredicateTimeEvent
 import engine.core.render.render2D.AnimatedObject2D

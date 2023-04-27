@@ -1,4 +1,4 @@
-package demo.labyrinth.interaction
+package demo.medieval_game.interaction
 
 import engine.core.entity.CompositeEntity
 import engine.feature.interaction.Interaction

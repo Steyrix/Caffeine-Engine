@@ -1,8 +1,8 @@
-package demo.labyrinth.data.gameobject
+package demo.medieval_game.data.gameobject
 
-import demo.labyrinth.ShaderController
-import demo.labyrinth.data.campfireAnimations
-import demo.labyrinth.data.campfireParameters
+import demo.medieval_game.ShaderController
+import demo.medieval_game.data.campfireAnimations
+import demo.medieval_game.data.campfireParameters
 import engine.core.entity.CompositeEntity
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.scene.GameObject

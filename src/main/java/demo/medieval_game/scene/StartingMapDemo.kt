@@ -1,6 +1,6 @@
-package demo.labyrinth
+package demo.medieval_game.scene
 
-import demo.labyrinth.data.*
+import demo.medieval_game.data.*
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.scene.GameObject
 import engine.core.update.SetOfParameters
@@ -13,7 +13,7 @@ import engine.feature.tiled.scene.TileMapScene
 import org.joml.Matrix4f
 import org.lwjgl.opengl.GL33C.*
 
-class LabyrinthDemo(
+class StartingMapDemo(
         override val screenWidth: Float,
         override val screenHeight: Float
 ) : TileMapScene() {

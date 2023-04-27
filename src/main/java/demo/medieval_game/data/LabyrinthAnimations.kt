@@ -1,4 +1,4 @@
-package demo.labyrinth.data
+package demo.medieval_game.data
 
 import engine.feature.animation.Animation
 import engine.feature.animation.FrameParametersGenerator

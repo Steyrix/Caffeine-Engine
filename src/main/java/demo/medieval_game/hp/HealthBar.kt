@@ -1,7 +1,7 @@
-package demo.labyrinth.hp
+package demo.medieval_game.hp
 
-import demo.labyrinth.ShaderController
-import demo.labyrinth.interaction.AttackInteraction
+import demo.medieval_game.ShaderController
+import demo.medieval_game.interaction.AttackInteraction
 import engine.core.entity.CompositeEntity
 import engine.core.render.render2D.OpenGlObject2D
 import engine.core.texture.Texture2D

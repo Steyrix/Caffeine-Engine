@@ -1,7 +1,7 @@
-package demo.labyrinth.goblin
+package demo.medieval_game.goblin
 
-import demo.labyrinth.data.AnimationKey
-import demo.labyrinth.interaction.IsAttackableInteraction
+import demo.medieval_game.data.AnimationKey
+import demo.medieval_game.interaction.IsAttackableInteraction
 import engine.core.controllable.Controllable
 import engine.core.controllable.Direction
 import engine.core.entity.Entity

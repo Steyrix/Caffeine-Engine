@@ -1,6 +1,6 @@
-package demo.labyrinth
+package demo.medieval_game
 
-import demo.labyrinth.data.AnimationKey
+import demo.medieval_game.data.AnimationKey
 import engine.core.controllable.Controllable
 import engine.core.controllable.Direction
 import engine.core.entity.Entity

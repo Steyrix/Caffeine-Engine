@@ -1,4 +1,4 @@
-package demo.labyrinth.data
+package demo.medieval_game.data
 
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfStatic2DParameters

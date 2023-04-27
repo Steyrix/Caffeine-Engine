@@ -1,4 +1,4 @@
-package demo.labyrinth
+package demo.medieval_game
 
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader

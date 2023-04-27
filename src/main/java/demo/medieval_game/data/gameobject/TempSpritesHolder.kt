@@ -1,7 +1,7 @@
-package demo.labyrinth.data.gameobject
+package demo.medieval_game.data.gameobject
 
-import demo.labyrinth.ShaderController
-import demo.labyrinth.data.hitAnimation
+import demo.medieval_game.ShaderController
+import demo.medieval_game.data.hitAnimation
 import engine.core.entity.CompositeEntity
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.render.render2D.AnimatedObject2D
