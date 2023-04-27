@@ -10,6 +10,7 @@ interface Scene {
     val screenHeight: Float
 
     val gameContext: MutableMap<GameObject, SetOfParameters>
+
     fun init()
 
     fun input(window: Window)
