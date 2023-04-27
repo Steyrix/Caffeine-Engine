@@ -4,19 +4,29 @@ import engine.core.scene.Scene
 import org.joml.Matrix4f
 
 // TODO: finish
-abstract class TileMapScene : Scene {
+abstract class TileMapScene(
+        projection: Matrix4f? = null
+) : Scene {
+
+    init {
+        projection?.let {
+            renderProjection = it
+        }
+    }
 
     protected var tiledMap: TileMapObject? = null
 
     override fun init() {
-        renderProjection = Matrix4f().ortho(
-                0f,
-                screenWidth,
-                screenHeight,
-                0f,
-                0f,
-                1f
-        )
+        if (renderProjection == null) {
+            renderProjection = Matrix4f().ortho(
+                    0f,
+                    screenWidth,
+                    screenHeight,
+                    0f,
+                    0f,
+                    1f
+            )
+        }
 
         tiledMap = initTileMap(
                 renderProjection!!,
