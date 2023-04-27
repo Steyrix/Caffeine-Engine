@@ -4,6 +4,9 @@ import engine.core.window.Window
 
 interface SceneHolder {
 
+    val screenWidth: Float
+    val screenHeight: Float
+
     val sceneMap: MutableMap<String, Scene>
 
     var currentScene: Scene?
