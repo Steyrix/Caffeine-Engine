@@ -3,31 +3,36 @@ package demo.labyrinth
 import demo.labyrinth.data.*
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.scene.GameObject
-import engine.core.scene.Scene
+import engine.core.update.SetOfParameters
 import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.interaction.BoxInteractionContext
+import engine.feature.tiled.scene.TileMapObject
+import engine.feature.tiled.scene.TileMapScene
 import org.joml.Matrix4f
 import org.lwjgl.opengl.GL33C.*
 
 class LabyrinthDemo(
         override val screenWidth: Float,
         override val screenHeight: Float
-) : Scene {
+) : TileMapScene() {
+
+    override var renderProjection: Matrix4f? = null
+
+    override val gameContext: MutableMap<GameObject, SetOfParameters> = mutableMapOf()
 
     private val bbCollisionContext = BoundingBoxCollisionContext()
     private val tiledCollisionContext = TiledCollisionContext()
     private val boxInteractionContext = BoxInteractionContext()
 
-    // todo: use game context, adapt to bundle
     private var objects = mutableListOf<GameObject>()
 
     private val actions: MutableList<AccumulatedTimeEvent> = mutableListOf()
 
-    override var renderProjection: Matrix4f? = null
-
     override fun init() {
+        super.init()
+
         renderProjection = Matrix4f().ortho(
                 0f,
                 screenWidth,
@@ -37,13 +42,24 @@ class LabyrinthDemo(
                 1f
         )
 
-        objects = LabyrinthInitializer.initAll(
-                renderProjection!!,
+        tiledMap?.let {
+            objects = LabyrinthInitializer.initAll(
+                    renderProjection!!,
+                    screenWidth,
+                    screenHeight,
+                    bbCollisionContext,
+                    tiledCollisionContext,
+                    boxInteractionContext
+            ) { params -> it.createTraverser(params) }
+        }
+    }
+
+    override fun initTileMap(projection: Matrix4f, screenWidth: Float, screenHeight: Float): TileMapObject {
+        return LabyrinthInitializer.initTileMapObject(
+                projection,
                 screenWidth,
                 screenHeight,
-                bbCollisionContext,
-                tiledCollisionContext,
-                boxInteractionContext
+                listOf(tiledCollisionContext)
         )
     }
 
@@ -52,6 +68,8 @@ class LabyrinthDemo(
     }
 
     override fun update(deltaTime: Float) {
+        gameContext.forEach { it.key.update(deltaTime) }
+
         // todo encapsulate
         objects.forEach { entity ->
             entity.update(deltaTime)
@@ -79,6 +97,8 @@ class LabyrinthDemo(
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
         glClear(GL_COLOR_BUFFER_BIT)
         glClearColor(0f, 0.5f, 0f, 0.5f)
+
+        gameContext.forEach { it.key.draw() }
 
         objects.forEach {
             it.draw()
