@@ -1,6 +1,6 @@
 package demo.medieval_game.scene
 
-import demo.medieval_game.data.*
+import demo.medieval_game.data.starting_level.LabyrinthInitializer
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.scene.GameObject
 import engine.core.update.SetOfParameters

@@ -1,6 +1,6 @@
 package demo.medieval_game
 
-import demo.medieval_game.data.AnimationKey
+import demo.medieval_game.data.starting_level.AnimationKey
 import engine.core.controllable.Controllable
 import engine.core.controllable.Direction
 import engine.core.entity.Entity

@@ -1,4 +1,4 @@
-package demo.medieval_game.data
+package demo.medieval_game.data.starting_level
 
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.render.render2D.Drawable2D

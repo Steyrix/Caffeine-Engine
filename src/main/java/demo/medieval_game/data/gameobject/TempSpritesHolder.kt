@@ -1,7 +1,7 @@
 package demo.medieval_game.data.gameobject
 
 import demo.medieval_game.ShaderController
-import demo.medieval_game.data.hitAnimation
+import demo.medieval_game.data.starting_level.hitAnimation
 import engine.core.entity.CompositeEntity
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.render.render2D.AnimatedObject2D

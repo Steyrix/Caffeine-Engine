@@ -1,4 +1,4 @@
-package demo.medieval_game.data
+package demo.medieval_game.data.starting_level
 
 import demo.medieval_game.data.gameobject.*
 import engine.core.scene.GameObject

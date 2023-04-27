@@ -1,4 +1,4 @@
-package demo.medieval_game.data
+package demo.medieval_game.data.starting_level
 
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfStatic2DParameters

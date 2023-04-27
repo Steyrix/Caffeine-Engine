@@ -1,4 +1,4 @@
-package demo.medieval_game.data
+package demo.medieval_game.data.starting_level
 
 /* Lighting shaders variables */
 var lightBlinkingTimeLimit = 0.1f

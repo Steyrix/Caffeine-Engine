@@ -1,4 +1,4 @@
-package demo.medieval_game.data
+package demo.medieval_game.data.starting_level
 
 import engine.feature.animation.Animation
 import engine.feature.animation.FrameParametersGenerator
