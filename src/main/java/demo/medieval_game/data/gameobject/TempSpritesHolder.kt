@@ -27,7 +27,7 @@ class TempSpritesHolder : GameObject {
     fun generateHit(posX: Float, posY: Float) {
         if (renderProjection == null) return
 
-        z = posY + 0.1f
+        z = posY + 0.5f
 
         val frameSizeX = 0.25f
         val frameSizeY = 0.25f
@@ -59,7 +59,7 @@ class TempSpritesHolder : GameObject {
         it?.addComponent(graphicalComponent, params)
         actions.add(
                 AccumulatedTimeEvent(
-                        timeLimit = 0.5f,
+                        timeLimit = 0.8f,
                         action = { _ ->
                             it?.removeComponent(graphicalComponent)
                         },
