@@ -3,10 +3,10 @@ package engine.feature.tiled.scene
 import engine.core.scene.Scene
 import org.joml.Matrix4f
 
-// TODO: finish, test
+// TODO: finish
 abstract class TileMapScene : Scene {
 
-    private var tiledMap: TileMapObject? = null
+    protected var tiledMap: TileMapObject? = null
 
     override fun init() {
         renderProjection = Matrix4f().ortho(
