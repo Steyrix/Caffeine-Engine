@@ -2,6 +2,7 @@ package demo.labyrinth.data
 
 import demo.labyrinth.data.gameobject.*
 import engine.core.scene.GameObject
+import engine.core.scene.SceneInitializer
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.getCenterPoint
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
@@ -12,7 +13,7 @@ import engine.feature.tiled.scene.TileMapObject
 import engine.feature.tiled.traversing.TileTraverser
 import org.joml.Matrix4f
 
-object LabyrinthInitializer {
+object LabyrinthInitializer : SceneInitializer {
 
     fun initAll(
             renderProjection: Matrix4f,
