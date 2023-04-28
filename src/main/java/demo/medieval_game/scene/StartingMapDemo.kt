@@ -1,7 +1,7 @@
 package demo.medieval_game.scene
 
 import demo.medieval_game.data.gameobject.*
-import demo.medieval_game.data.starting_level.LabyrinthInitializer
+import demo.medieval_game.data.starting_level.StartingMapInitializer
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.scene.GameObject
 import engine.core.session.Session
@@ -44,7 +44,7 @@ class StartingMapDemo(
         val character = gameContext.find { it is Character } as Character
 
         tiledMap?.let {
-            val objects = LabyrinthInitializer.initAll(
+            val objects = StartingMapInitializer.initAll(
                     renderProjection!!,
                     bbCollisionContext!!,
                     boxInteractionContext!!,
@@ -57,7 +57,7 @@ class StartingMapDemo(
     }
 
     override fun initTileMap(projection: Matrix4f, screenWidth: Float, screenHeight: Float): TileMapObject {
-        return LabyrinthInitializer.initTileMapObject(
+        return StartingMapInitializer.initTileMapObject(
                 projection,
                 screenWidth,
                 screenHeight,

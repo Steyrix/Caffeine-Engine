@@ -11,7 +11,7 @@ import engine.feature.tiled.scene.TileMapObject
 import engine.feature.tiled.traversing.TileTraverser
 import org.joml.Matrix4f
 
-object LabyrinthInitializer : SceneInitializer {
+object StartingMapInitializer : SceneInitializer {
 
     fun initTileMapObject(
             renderProjection: Matrix4f,
