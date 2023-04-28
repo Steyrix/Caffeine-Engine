@@ -20,7 +20,7 @@ open class BoundingBox(
         override var xOffset: Float  = 0f,
         override var yOffset: Float = 0f,
         private var rotationAngle: Float = 0f,
-        private val isSizeUpdatable: Boolean = true
+        private val isSizeBoundToHolder: Boolean = true
 ) : IntersectableBox, Entity,
         Vertexed2D(
                 bufferParamsCount = 1,
@@ -47,7 +47,7 @@ open class BoundingBox(
             parameters.let {
                 x = it.x + xOffset
                 y = it.y + yOffset
-                if (isSizeUpdatable) {
+                if (isSizeBoundToHolder) {
                     xSize = it.xSize
                     ySize = it.ySize
                 }
@@ -59,7 +59,7 @@ open class BoundingBox(
             parameters.let {
                 x = it.x + xOffset
                 y = it.y + yOffset
-                if (isSizeUpdatable) {
+                if (isSizeBoundToHolder) {
                     xSize = it.xSize
                     ySize = it.ySize
                 }
@@ -72,5 +72,10 @@ open class BoundingBox(
         return SetOfStatic2DParameters(
                 x, y, xSize, ySize, rotationAngle
         )
+    }
+
+    fun forceUpdateSize(width: Float, height: Float) {
+        xSize = width
+        ySize = height
     }
 }

@@ -61,7 +61,7 @@ class NpcEnemy(
                 xSize = getHumanoidBoxSize(),
                 ySize = HUMANOID_SIZE_X,
                 rotationAngle = 0f,
-                isSizeUpdatable = false
+                isSizeBoundToHolder = false
         ).apply {
             shader = ShaderController.createBoundingBoxShader(renderProjection)
         }
