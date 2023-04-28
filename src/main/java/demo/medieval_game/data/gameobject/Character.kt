@@ -50,7 +50,6 @@ class Character : GameObject {
             addComponent(tiledCollider, characterParameters)
         }
 
-
         addComponent(boundingBox, characterParameters)
         addComponent(hp, characterParameters)
         addComponent(boxCollider, characterParameters)
