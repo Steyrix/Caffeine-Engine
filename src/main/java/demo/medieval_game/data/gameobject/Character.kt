@@ -67,7 +67,7 @@ class Character : GameObject {
                 xOffset = getHumanoidBoxOffset(),
                 xSize = getHumanoidBoxSize(),
                 ySize = characterParameters.ySize,
-                isSizeUpdatable = false
+                isSizeBoundToHolder = false
         ).apply {
             shader = ShaderController.createBoundingBoxShader(renderProjection)
         }
@@ -131,6 +131,10 @@ class Character : GameObject {
         tiledCollider = getTiledCollider(collisionContext)
 
         addComponent(tiledCollider, characterParameters)
+    }
+
+    fun updateBoundingBox(width: Float, height: Float) {
+        boundingBox?.forceUpdateSize(width, height)
     }
 
     override fun getZLevel(): Float {
