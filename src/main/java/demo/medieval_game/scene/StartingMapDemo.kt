@@ -4,6 +4,7 @@ import demo.medieval_game.data.gameobject.*
 import demo.medieval_game.data.starting_level.LabyrinthInitializer
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.scene.GameObject
+import engine.core.session.Session
 import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.collision.tiled.TiledCollisionContext
@@ -16,9 +17,7 @@ import org.lwjgl.opengl.GL33C.*
 class StartingMapDemo(
         override val screenWidth: Float,
         override val screenHeight: Float,
-        projection: Matrix4f? = null,
-        private val boxInteractionContext: BoxInteractionContext,
-        private val bbCollisionContext: BoundingBoxCollisionContext
+        projection: Matrix4f? = null
 ) : TileMapScene(projection) {
 
     override var renderProjection: Matrix4f? = null
@@ -29,8 +28,16 @@ class StartingMapDemo(
 
     private val actions: MutableList<AccumulatedTimeEvent> = mutableListOf()
 
-    override fun init(persistentObject: List<GameObject>) {
-        super.init(persistentObject)
+    private var bbCollisionContext: BoundingBoxCollisionContext? = null
+    private var boxInteractionContext: BoxInteractionContext? = null
+
+    override fun init(session: Session) {
+        if (session !is MedievalGameSession) return
+
+        bbCollisionContext = session.bbCollisionContext
+        boxInteractionContext = session.boxInteractionContext
+
+        super.init(session)
 
         val tempSpritesHolder = gameContext.find { it is TempSpritesHolder } as? TempSpritesHolder
         val character = gameContext.find { it is Character } as Character
@@ -38,8 +45,8 @@ class StartingMapDemo(
         tiledMap?.let {
             val objects = LabyrinthInitializer.initAll(
                     renderProjection!!,
-                    bbCollisionContext,
-                    boxInteractionContext,
+                    bbCollisionContext!!,
+                    boxInteractionContext!!,
                     tempSpritesHolder!!
             ) { params -> it.createTraverser(params) }
 
@@ -79,8 +86,8 @@ class StartingMapDemo(
 
         setupDrawOrder()
         tiledCollisionContext.update()
-        bbCollisionContext.update()
-        boxInteractionContext.update()
+        bbCollisionContext?.update()
+        boxInteractionContext?.update()
     }
 
     override fun render(window: Window) {
