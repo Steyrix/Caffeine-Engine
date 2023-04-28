@@ -1,6 +1,6 @@
 package demo.medieval_game.goblin
 
-import demo.medieval_game.data.starting_level.AnimationKey
+import demo.medieval_game.data.AnimationKey
 import demo.medieval_game.interaction.IsAttackableInteraction
 import engine.core.controllable.Controllable
 import engine.core.controllable.Direction

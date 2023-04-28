@@ -2,6 +2,7 @@ package demo.medieval_game.data.gameobject
 
 import demo.medieval_game.Player
 import demo.medieval_game.ShaderController
+import demo.medieval_game.data.characterAnimations
 import demo.medieval_game.data.starting_level.*
 import demo.medieval_game.hp.HealthBar
 import engine.core.entity.CompositeEntity

@@ -1,7 +1,7 @@
 package demo.medieval_game.goblin
 
 import demo.medieval_game.Player
-import demo.medieval_game.data.starting_level.AnimationKey
+import demo.medieval_game.data.AnimationKey
 import demo.medieval_game.data.gameobject.TempSpritesHolder
 import demo.medieval_game.hp.HealthBar
 import demo.medieval_game.interaction.AttackInteraction
