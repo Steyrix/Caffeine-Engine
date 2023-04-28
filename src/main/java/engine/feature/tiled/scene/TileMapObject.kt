@@ -1,5 +1,6 @@
 package engine.feature.tiled.scene
 
+import demo.medieval_game.data.starting_level.recalculateParameters
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.render.render2D.Drawable2D
@@ -60,6 +61,8 @@ class TileMapObject(
         collisionContexts.forEach {
             it.addEntity(graphicalComponent as Entity, parameters)
         }
+
+        recalculateParameters(parameters.xSize, parameters.ySize)
     }
 
     private fun getGraphicalComponent(
