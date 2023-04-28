@@ -35,7 +35,7 @@ class MedievalGame(
                 screenWidth,
                 screenHeight,
                 renderProjection
-        )
+        ) { switchScene("nexus") }
 
         currentScene?.init(MedievalGameSession)
     }

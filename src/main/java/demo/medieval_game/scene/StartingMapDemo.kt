@@ -17,7 +17,8 @@ import org.lwjgl.opengl.GL33C.*
 class StartingMapDemo(
         override val screenWidth: Float,
         override val screenHeight: Float,
-        projection: Matrix4f? = null
+        projection: Matrix4f? = null,
+        switchTrigger: () -> Unit = {}
 ) : TileMapScene(projection) {
 
     override var renderProjection: Matrix4f? = null
