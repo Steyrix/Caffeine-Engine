@@ -1,5 +1,6 @@
 package engine.core.scene
 
+import engine.core.session.Session
 import engine.core.update.SetOfParameters
 import engine.core.window.Window
 import org.joml.Matrix4f
@@ -11,8 +12,8 @@ interface Scene {
 
     val gameContext: MutableList<GameObject>
 
-    fun init(persistentObject: List<GameObject>) {
-        gameContext.addAll(persistentObject)
+    fun init(session: Session) {
+        gameContext.addAll(session.getPersistentObjects())
     }
 
     fun input(window: Window)

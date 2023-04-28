@@ -11,8 +11,6 @@ interface SceneHolder {
 
     var currentScene: Scene?
 
-    val persistentGameObjects: MutableList<GameObject>
-
     fun init()
 
     fun render(window: Window) {
