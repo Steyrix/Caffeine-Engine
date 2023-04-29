@@ -30,13 +30,22 @@ object MedievalGameMatrixState : MatrixState {
     }
 
     fun translateWorld(x: Float, y: Float) {
-        if (isTranslationPossible(x)) {
+        if (isHorizontalTranslationPossible(x)) {
             worldTranslation.x += x
         }
-        worldTranslation.y += y
+
+        if (isVerticalTranslationPossible(y)) {
+            worldTranslation.y += y
+        }
     }
 
-    fun isTranslationPossible(x: Float, worldWidth: Float = 1500f, screenWidth: Float = 999.375f): Boolean {
+    fun isHorizontalTranslationPossible(x: Float, worldWidth: Float = 1500f, screenWidth: Float = 999.375f): Boolean {
         return (screenWidth + abs(worldTranslation.x + x) < worldWidth)
+                && (worldTranslation.x + x) < 0
+    }
+
+    fun isVerticalTranslationPossible(y: Float, worldHeight: Float = 1500f, screenHeight: Float = 999.375f): Boolean {
+        return (screenHeight + abs(worldTranslation.y + y) < worldHeight)
+                && (worldTranslation.y + y) < 0
     }
 }
