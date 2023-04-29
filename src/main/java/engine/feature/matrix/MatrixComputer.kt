@@ -3,6 +3,7 @@ package engine.feature.matrix
 import org.joml.Matrix4f
 
 object MatrixComputer {
+
     var matrixState: MatrixState = DefaultMatrixState
 
     fun getResultMatrix(
