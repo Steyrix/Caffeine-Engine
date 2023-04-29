@@ -3,7 +3,7 @@ package engine.feature.matrix
 import org.joml.Matrix4f
 
 object MatrixComputer {
-    var matrixState : MatrixState? = null
+    var matrixState: MatrixState = DefaultMatrixState
 
     fun getResultMatrix(
             posX: Float,
@@ -11,5 +11,5 @@ object MatrixComputer {
             xSize: Float,
             ySize: Float,
             rotationAngle: Float
-    ): Matrix4f = matrixState!!.getResultMatrix(posX, posY, xSize, ySize, rotationAngle)
+    ): Matrix4f = matrixState.getResultMatrix(posX, posY, xSize, ySize, rotationAngle)
 }
