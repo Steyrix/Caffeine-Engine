@@ -1,8 +1,8 @@
 package demo.medieval_game.data.starting_level
 
+import demo.medieval_game.MedievalGameMatrixState
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.render.render2D.Drawable2D
-import engine.feature.matrix.MatrixState
 import engine.feature.tiled.scene.TileMapPreset
 import org.joml.Vector2f
 
@@ -21,8 +21,8 @@ fun getLightBlinkingEvent(graphicalComponent: Drawable2D) = AccumulatedTimeEvent
                 it.setUniform(
                         "lightSourceCoords",
                         Vector2f(
-                                campfireParameters.x + MatrixState.worldTranslation.x,
-                                campfireParameters.y + MatrixState.worldTranslation.y
+                                campfireParameters.x + MedievalGameMatrixState.worldTranslation.x,
+                                campfireParameters.y + MedievalGameMatrixState.worldTranslation.y
                         )
                 )
             }

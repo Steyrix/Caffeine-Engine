@@ -7,7 +7,7 @@ import engine.core.shader.Shader
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfStatic2DParameters
 import engine.core.update.SetOfParameters
-import engine.feature.matrix.MatrixState
+import engine.feature.matrix.MatrixComputer
 import engine.feature.util.Buffer
 import org.lwjgl.opengl.GL33C.*
 
@@ -34,7 +34,7 @@ open class BoundingBox(
         shader?.let {
             it.bind()
 
-            val model = MatrixState.getResultMatrix(x, y, xSize, ySize, rotationAngle)
+            val model = MatrixComputer.getResultMatrix(x, y, xSize, ySize, rotationAngle)
             it.setUniform(Shader.VAR_KEY_MODEL, model)
 
             glBindVertexArray(vertexArrayHandle)

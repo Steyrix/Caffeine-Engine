@@ -1,5 +1,6 @@
 package demo.medieval_game.data
 
+import demo.medieval_game.MedievalGameMatrixState
 import demo.medieval_game.data.gameobject.Character
 import demo.medieval_game.data.gameobject.TempSpritesHolder
 import demo.medieval_game.data.starting_level.characterParameters
@@ -8,7 +9,6 @@ import engine.core.update.getCenterPoint
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.interaction.BoxInteractionContext
-import engine.feature.matrix.MatrixState
 import org.joml.Matrix4f
 
 object Initializer {
@@ -40,7 +40,7 @@ object Initializer {
 
         val centerPoint = characterParameters.getCenterPoint()
 
-        MatrixState.translate(
+        MedievalGameMatrixState.translateWorld(
                 screenWidth / 2 - centerPoint.x,
                 screenHeight / 2 - centerPoint.y
         )

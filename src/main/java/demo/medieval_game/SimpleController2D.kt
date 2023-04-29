@@ -10,7 +10,6 @@ import engine.core.update.Updatable
 import engine.core.update.getCenterPoint
 import engine.core.window.Window
 import engine.feature.geometry.Point2D
-import engine.feature.matrix.MatrixState
 import org.lwjgl.glfw.GLFW
 
 class SimpleController2D(
@@ -92,7 +91,7 @@ class SimpleController2D(
         params.x += horizontalMovement
         params.y += verticalMovement
 
-        MatrixState.translate(horizontalDiff, verticalDiff)
+        MedievalGameMatrixState.translateWorld(horizontalDiff, verticalDiff)
         processState()
     }
 

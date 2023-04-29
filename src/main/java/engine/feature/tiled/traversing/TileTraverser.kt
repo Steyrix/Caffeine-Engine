@@ -60,7 +60,6 @@ class TileTraverser(
         )
 
         extendCurrentPath(nextPath)
-        println(currentPath)
     }
 
     private fun extendCurrentPath(nextPath: ArrayDeque<Int>) {
