@@ -9,6 +9,7 @@ import kotlin.math.abs
 object MedievalGameMatrixState : MatrixState {
 
     val worldTranslation = Vector2f(0f, 0f)
+    val tempTranslation = Vector2f(0f, 0f)
 
     override fun getResultMatrix(
             posX: Float,
@@ -31,11 +32,25 @@ object MedievalGameMatrixState : MatrixState {
 
     fun translateWorld(x: Float, y: Float) {
         if (isHorizontalTranslationPossible(x)) {
-            worldTranslation.x += x
+            if (tempTranslation.x > 0f) {
+                tempTranslation.x -= abs(x)
+            } else {
+                tempTranslation.x = 0f
+                worldTranslation.x += x
+            }
+        } else {
+            tempTranslation.x += abs(x)
         }
 
         if (isVerticalTranslationPossible(y)) {
-            worldTranslation.y += y
+            if (tempTranslation.y > 0f) {
+                tempTranslation.y -= abs(y)
+            } else {
+                tempTranslation.y = 0f
+                worldTranslation.y += y
+            }
+        } else {
+            tempTranslation.y += abs(y)
         }
     }
 
