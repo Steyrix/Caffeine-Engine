@@ -53,6 +53,7 @@ class StartingMapDemo(
 
             gameContext.addAll(objects)
             character.updateCollisionContext(tiledCollisionContext)
+            character.updateBoundingBox()
         }
     }
 

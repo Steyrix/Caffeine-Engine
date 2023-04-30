@@ -26,6 +26,9 @@ class Character : GameObject {
     private var boxCollider: BoundingBoxCollider? = null
     private var tiledCollider: TiledCollider? = null
 
+    private var projection = Matrix4f()
+    private var currentInteractionContext: BoxInteractionContext? = null
+
     fun init(
             renderProjection: Matrix4f,
             bbCollisionContext: BoundingBoxCollisionContext,
@@ -33,6 +36,7 @@ class Character : GameObject {
             boxInteractionContext: BoxInteractionContext,
             tempSpritesHolder: TempSpritesHolder
     ) {
+        projection = renderProjection
         boundingBox = getBoundingBox(renderProjection)
         graphicalComponent = getAnimatedObjectComponent(renderProjection)
 
@@ -57,6 +61,7 @@ class Character : GameObject {
 
         bbCollisionContext.addEntity(boundingBox as Entity, characterParameters)
 
+        currentInteractionContext = boxInteractionContext
         boxInteractionContext.addAgent(it as Entity, boundingBox as BoundingBox)
     }
 
@@ -133,8 +138,13 @@ class Character : GameObject {
         addComponent(tiledCollider, characterParameters)
     }
 
-    fun updateBoundingBox(width: Float, height: Float) {
-        boundingBox?.forceUpdateSize(width, height)
+    fun updateBoundingBox() {
+        it?.removeComponent(boundingBox!!)
+        currentInteractionContext?.removeAgent(boundingBox!!)
+
+        boundingBox = getBoundingBox(projection)
+        it?.addComponent(boundingBox as Entity, characterParameters)
+        currentInteractionContext?.addAgent(it as Entity, boundingBox as BoundingBox)
     }
 
     override fun getZLevel(): Float {
