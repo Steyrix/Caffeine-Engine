@@ -28,6 +28,16 @@ data class SetOf2DParametersWithVelocity(
         var velocityY: Float
 ) : SetOfParameters
 
+data class SetOfStatic2DParametersWithOffset(
+        override var x: Float,
+        override var y: Float,
+        override var xSize: Float,
+        override var ySize: Float,
+        override var rotationAngle: Float,
+        var xOffset: Float,
+        var yOffset: Float
+) : SetOfParameters
+
 fun SetOfParameters.getCenterPoint(): Point2D {
     return Point2D(
             x + xSize / 2,
