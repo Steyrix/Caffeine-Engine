@@ -7,6 +7,7 @@ import engine.core.shader.Shader
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfStatic2DParameters
 import engine.core.update.SetOfParameters
+import engine.core.update.SetOfStatic2DParametersWithOffset
 import engine.feature.matrix.MatrixComputer
 import engine.feature.util.Buffer
 import org.lwjgl.opengl.GL33C.*
@@ -26,6 +27,18 @@ open class BoundingBox(
                 bufferParamsCount = 1,
                 dataArrays = listOf(Buffer.RECTANGLE_VERTICES),
                 verticesCount = 8) {
+
+    constructor(initialParams: SetOfStatic2DParametersWithOffset, isSizeBoundToHolder: Boolean) :
+            this(
+                    initialParams.x,
+                    initialParams.y,
+                    initialParams.xSize,
+                    initialParams.ySize,
+                    initialParams.xOffset,
+                    initialParams.yOffset,
+                    initialParams.rotationAngle,
+                    isSizeBoundToHolder
+            )
 
     override var shader: Shader? = null
     override val innerDrawableComponents: MutableList<Drawable2D> = mutableListOf()
