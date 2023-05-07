@@ -15,6 +15,8 @@ class MedievalGame(
     override val sceneMap: MutableMap<String, Scene> = mutableMapOf()
     override var currentScene: Scene? = null
 
+    private val session = MedievalGameSession
+
     private val renderProjection: Matrix4f =
             Matrix4f()
                     .ortho(
@@ -25,6 +27,10 @@ class MedievalGame(
                             0f,
                             1f
                     )
+
+    init {
+        sceneMap["nexus"] = NexusMap(screenWidth, screenHeight, renderProjection)
+    }
 
     override fun init() {
         MatrixComputer.matrixState = MedievalGameMatrixState
@@ -42,5 +48,10 @@ class MedievalGame(
         ) { switchScene("nexus") }
 
         currentScene?.init(MedievalGameSession)
+    }
+
+    override fun switchScene(nextSceneName: String) {
+        super.switchScene(nextSceneName)
+        currentScene?.init(session)
     }
 }
