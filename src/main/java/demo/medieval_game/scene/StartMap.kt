@@ -23,8 +23,6 @@ class StartMap(
         switchTrigger: () -> Unit = {}
 ) : TileMapScene(projection) {
 
-    override var renderProjection: Matrix4f? = null
-
     override val gameContext: MutableList<GameObject> = mutableListOf()
 
     private val tiledCollisionContext = TiledCollisionContext()

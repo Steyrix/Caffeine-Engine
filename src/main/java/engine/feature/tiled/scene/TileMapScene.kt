@@ -8,13 +8,15 @@ abstract class TileMapScene(
         projection: Matrix4f? = null
 ) : Scene {
 
+    override var renderProjection: Matrix4f? = null
+
+    protected var tiledMap: TileMapObject? = null
+
     init {
         projection?.let {
             renderProjection = it
         }
     }
-
-    protected var tiledMap: TileMapObject? = null
 
     override fun init(session: Session) {
         super.init(session)
