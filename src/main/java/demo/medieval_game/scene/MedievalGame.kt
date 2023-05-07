@@ -35,7 +35,7 @@ class MedievalGame(
                 )
         )
 
-        currentScene = StartingMapDemo(
+        currentScene = StartMap(
                 screenWidth,
                 screenHeight,
                 renderProjection

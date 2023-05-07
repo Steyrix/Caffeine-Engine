@@ -2,7 +2,7 @@ package demo.medieval_game.scene
 
 import demo.medieval_game.data.MapSceneInitializer
 import demo.medieval_game.data.gameobject.*
-import demo.medieval_game.data.starting_level.StartingMapInitializer
+import demo.medieval_game.data.starting_level.StartMapInitializer
 import demo.medieval_game.data.starting_level.getStartingMapPreset
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.scene.GameObject
@@ -16,7 +16,7 @@ import engine.feature.tiled.scene.TileMapScene
 import org.joml.Matrix4f
 import org.lwjgl.opengl.GL33C.*
 
-class StartingMapDemo(
+class StartMap(
         override val screenWidth: Float,
         override val screenHeight: Float,
         projection: Matrix4f? = null,
@@ -46,7 +46,7 @@ class StartingMapDemo(
         val character = gameContext.find { it is Character } as Character
 
         tiledMap?.let {
-            val objects = StartingMapInitializer.initAll(
+            val objects = StartMapInitializer.initAll(
                     renderProjection!!,
                     bbCollisionContext!!,
                     boxInteractionContext!!,
