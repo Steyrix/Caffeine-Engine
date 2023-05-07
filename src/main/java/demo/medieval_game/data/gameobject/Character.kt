@@ -146,6 +146,10 @@ class Character : GameObject {
         currentInteractionContext?.addAgent(it as Entity, boundingBox as BoundingBox)
     }
 
+    fun isOutOfMap(): Boolean {
+        return tiledCollider?.isOutOfMap ?: false
+    }
+
     override fun getZLevel(): Float {
         return characterParameters.y
     }
