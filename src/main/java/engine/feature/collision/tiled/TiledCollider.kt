@@ -56,10 +56,6 @@ class TiledCollider(
             else -> false
         }
 
-        if (isOutOfMap) {
-            println("OUT")
-        }
-
         if (isCenterColliding || isBottomColliding) {
             return true
         } else {
