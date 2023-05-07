@@ -34,17 +34,14 @@ class TileMap(
     /*
         Represents the size of map relative to the screen size
      */
-    val relativeMapHeight: Float
-    val relativeMapWidth: Float
+    val relativeHeight: Float
+    val relativeWidth: Float
 
     /*
         Represents the absolute size of map in pixels
      */
-    var absoluteMapHeight: Float = 0f
-    private set
-
-    var absoluteMapWidth: Float = 0f
-    private set
+    private var absoluteHeight: Float = 0f
+    private var absoluteWidth: Float = 0f
 
     /*
         Represents the absolute size of tile in pixels
@@ -69,8 +66,8 @@ class TileMap(
         widthInTiles = layers.first().widthInTiles
         heightInTiles = layers.first().heightInTiles
 
-        relativeMapHeight = heightInTiles * set.relativeTileHeight
-        relativeMapWidth = widthInTiles * set.relativeTileWidth
+        relativeHeight = heightInTiles * set.relativeTileHeight
+        relativeWidth = widthInTiles * set.relativeTileWidth
 
         layers.forEach {
             innerDrawableComponents.add(it)
@@ -94,8 +91,8 @@ class TileMap(
         val rowIndex = index / widthInTiles
         val columnIndex = index - rowIndex * widthInTiles
 
-        val x = columnIndex * absoluteMapWidth * set.relativeTileWidth
-        val y = rowIndex * absoluteMapHeight * set.relativeTileHeight
+        val x = columnIndex * absoluteWidth * set.relativeTileWidth
+        val y = rowIndex * absoluteHeight * set.relativeTileHeight
 
         return Point2D(x, y)
     }
@@ -135,14 +132,22 @@ class TileMap(
 
     override fun updateParameters(parameters: SetOfParameters) {
         if (parameters is SetOfStatic2DParameters) {
-            absoluteMapWidth = parameters.xSize
-            absoluteMapHeight = parameters.ySize
-            absoluteTileWidth = relativeMapWidth / widthInTiles * absoluteMapWidth
-            absoluteTileHeight = relativeMapHeight / heightInTiles * absoluteMapHeight
+            absoluteWidth = parameters.xSize
+            absoluteHeight = parameters.ySize
+            absoluteTileWidth = relativeWidth / widthInTiles * absoluteWidth
+            absoluteTileHeight = relativeHeight / heightInTiles * absoluteHeight
         }
 
         innerDrawableComponents.forEach {
             it.updateParameters(parameters)
         }
+    }
+
+    fun getWorldWidth(): Float {
+        return relativeWidth * absoluteWidth
+    }
+
+    fun getWorldHeight(): Float {
+        return relativeHeight * absoluteHeight
     }
 }
