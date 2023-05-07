@@ -12,20 +12,18 @@ import engine.feature.collision.CollisionContext
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.interaction.BoxInteractionContext
 import engine.feature.tiled.scene.TileMapObject
+import engine.feature.tiled.scene.TileMapPreset
 import engine.feature.tiled.traversing.TileTraverser
 import org.joml.Matrix4f
 
 object StartingMapInitializer : SceneInitializer {
 
     fun initTileMapObject(
+            preset: TileMapPreset,
             renderProjection: Matrix4f,
-            screenWidth: Float,
-            screenHeight: Float,
             collisionContexts: List<CollisionContext>
     ): TileMapObject {
-        return TileMapObject(
-                getStartingMapPreset(screenWidth, screenHeight)
-        ).apply {
+        return TileMapObject(preset).apply {
             init(
                     renderProjection,
                     collisionContexts
