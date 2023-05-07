@@ -17,8 +17,6 @@ class NexusMap(
         switchTrigger: () -> Unit = {}
 ) : TileMapScene(projection) {
 
-    override val gameContext: MutableList<GameObject> = mutableListOf()
-
     private val tiledCollisionContext = TiledCollisionContext()
 
     override fun init(session: Session) {

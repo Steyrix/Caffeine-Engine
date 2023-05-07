@@ -1,5 +1,6 @@
 package engine.feature.tiled.scene
 
+import engine.core.scene.GameObject
 import engine.core.scene.Scene
 import engine.core.session.Session
 import org.joml.Matrix4f
@@ -9,6 +10,8 @@ abstract class TileMapScene(
 ) : Scene {
 
     override var renderProjection: Matrix4f? = null
+
+    override val gameContext: MutableList<GameObject> = mutableListOf()
 
     protected var tiledMap: TileMapObject? = null
 

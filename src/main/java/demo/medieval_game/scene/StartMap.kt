@@ -23,8 +23,6 @@ class StartMap(
         switchTrigger: () -> Unit = {}
 ) : TileMapScene(projection) {
 
-    override val gameContext: MutableList<GameObject> = mutableListOf()
-
     private val tiledCollisionContext = TiledCollisionContext()
 
     private val actions: MutableList<AccumulatedTimeEvent> = mutableListOf()
