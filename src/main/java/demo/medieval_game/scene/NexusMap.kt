@@ -58,7 +58,7 @@ class NexusMap(
 
     override fun initTileMap(projection: Matrix4f, screenWidth: Float, screenHeight: Float): TileMapObject {
         return MapSceneInitializer.initTileMapObject(
-                getNexusMapPreset(screenWidth, screenHeight),
+                getNexusMapPreset(),
                 projection,
                 listOf(tiledCollisionContext)
         )
