@@ -30,6 +30,7 @@ fun getLightBlinkingEvent(graphicalComponent: Drawable2D) = AccumulatedTimeEvent
         }
 )
 
+// TODO: store in map
 fun getStartingMapPreset(screenWidth: Float, screenHeight: Float): TileMapPreset =
         TileMapPreset(
                 width = 800f,
