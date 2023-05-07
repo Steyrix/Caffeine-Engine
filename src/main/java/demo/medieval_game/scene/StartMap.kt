@@ -5,7 +5,6 @@ import demo.medieval_game.data.gameobject.*
 import demo.medieval_game.data.starting_level.StartMapInitializer
 import demo.medieval_game.data.starting_level.getStartingMapPreset
 import engine.core.loop.AccumulatedTimeEvent
-import engine.core.scene.GameObject
 import engine.core.session.Session
 import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
@@ -84,7 +83,7 @@ class StartMap(
 
         actions.forEach { it.schedule(deltaTime) }
 
-        setupDrawOrder()
+        super.update(deltaTime)
         tiledCollisionContext.update()
         bbCollisionContext?.update()
         boxInteractionContext?.update()
@@ -101,11 +100,5 @@ class StartMap(
 
     override fun onSwitch() {
 
-    }
-
-    private fun setupDrawOrder() {
-        gameContext.sortBy {
-            it.getZLevel()
-        }
     }
 }
