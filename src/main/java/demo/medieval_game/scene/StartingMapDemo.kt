@@ -70,6 +70,7 @@ class StartingMapDemo(
         gameContext.forEach { it.input(window) }
     }
 
+    // TODO: refactor
     override fun update(deltaTime: Float) {
         gameContext.forEach { entity ->
             entity.update(deltaTime)
