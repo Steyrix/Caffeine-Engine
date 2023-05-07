@@ -8,37 +8,12 @@ import demo.medieval_game.data.goblinParams2
 import engine.core.scene.GameObject
 import engine.core.scene.SceneInitializer
 import engine.core.update.SetOf2DParametersWithVelocity
-import engine.feature.collision.CollisionContext
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.interaction.BoxInteractionContext
-import engine.feature.tiled.scene.TileMapObject
-import engine.feature.tiled.scene.TileMapPreset
 import engine.feature.tiled.traversing.TileTraverser
 import org.joml.Matrix4f
 
 object StartingMapInitializer : SceneInitializer {
-
-    fun initTileMapObject(
-            preset: TileMapPreset,
-            renderProjection: Matrix4f,
-            collisionContexts: List<CollisionContext>
-    ): TileMapObject {
-        return TileMapObject(preset).apply {
-            init(
-                    renderProjection,
-                    collisionContexts
-            )
-            adjustParameters(
-                    HUMANOID_SIZE_TO_MAP_RELATION,
-                    listOf(
-                            characterParameters,
-                            goblinParams1,
-                            goblinParams2
-                    )
-            )
-        }
-    }
-
     fun initAll(
             renderProjection: Matrix4f,
             boundingBoxCollisionContext: BoundingBoxCollisionContext,

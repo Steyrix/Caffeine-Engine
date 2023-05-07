@@ -1,5 +1,6 @@
 package demo.medieval_game.scene
 
+import demo.medieval_game.data.MapSceneInitializer
 import demo.medieval_game.data.gameobject.*
 import demo.medieval_game.data.starting_level.StartingMapInitializer
 import demo.medieval_game.data.starting_level.getStartingMapPreset
@@ -59,7 +60,7 @@ class StartingMapDemo(
     }
 
     override fun initTileMap(projection: Matrix4f, screenWidth: Float, screenHeight: Float): TileMapObject {
-        return StartingMapInitializer.initTileMapObject(
+        return MapSceneInitializer.initTileMapObject(
                 getStartingMapPreset(screenWidth, screenHeight),
                 projection,
                 listOf(tiledCollisionContext)
