@@ -50,6 +50,7 @@ class MedievalGame(
         currentScene?.init(MedievalGameSession)
     }
 
+    // TODO: this init should probably be in super interface as well as session property
     override fun switchScene(nextSceneName: String) {
         super.switchScene(nextSceneName)
         currentScene?.init(session)
