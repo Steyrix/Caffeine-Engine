@@ -19,7 +19,7 @@ class StartMap(
         override val screenWidth: Float,
         override val screenHeight: Float,
         projection: Matrix4f? = null,
-        switchTrigger: () -> Unit = {}
+        private val switchTrigger: () -> Unit = {}
 ) : TileMapScene(projection) {
 
     private val tiledCollisionContext = TiledCollisionContext()
@@ -28,6 +28,8 @@ class StartMap(
 
     private var bbCollisionContext: BoundingBoxCollisionContext? = null
     private var boxInteractionContext: BoxInteractionContext? = null
+
+    private var character: Character? = null
 
     override fun init(session: Session) {
         if (session !is MedievalGameSession) return
@@ -38,7 +40,7 @@ class StartMap(
         super.init(session)
 
         val tempSpritesHolder = gameContext.find { it is TempSpritesHolder } as? TempSpritesHolder
-        val character = gameContext.find { it is Character } as Character
+        character = gameContext.find { it is Character } as Character
 
         tiledMap?.let {
             val objects = StartMapInitializer.initAll(
@@ -49,8 +51,8 @@ class StartMap(
             ) { params -> it.createTraverser(params) }
 
             gameContext.addAll(objects)
-            character.updateCollisionContext(tiledCollisionContext)
-            character.updateBoundingBox()
+            character?.updateCollisionContext(tiledCollisionContext)
+            character?.updateBoundingBox()
         }
     }
 
@@ -87,6 +89,10 @@ class StartMap(
         tiledCollisionContext.update()
         bbCollisionContext?.update()
         boxInteractionContext?.update()
+
+        if (character?.isOutOfMap() == true) {
+            switchTrigger.invoke()
+        }
     }
 
     override fun render(window: Window) {
