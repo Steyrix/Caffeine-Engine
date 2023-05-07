@@ -1,6 +1,10 @@
 package demo.medieval_game.data.starting_level
 
+import demo.medieval_game.data.HUMANOID_SIZE_TO_MAP_RELATION
+import demo.medieval_game.data.characterParameters
 import demo.medieval_game.data.gameobject.*
+import demo.medieval_game.data.goblinParams1
+import demo.medieval_game.data.goblinParams2
 import engine.core.scene.GameObject
 import engine.core.scene.SceneInitializer
 import engine.core.update.SetOf2DParametersWithVelocity

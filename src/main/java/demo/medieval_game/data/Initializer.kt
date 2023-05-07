@@ -3,7 +3,6 @@ package demo.medieval_game.data
 import demo.medieval_game.MedievalGameMatrixState
 import demo.medieval_game.data.gameobject.Character
 import demo.medieval_game.data.gameobject.TempSpritesHolder
-import demo.medieval_game.data.starting_level.characterParameters
 import engine.core.scene.GameObject
 import engine.core.update.getCenterPoint
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext

@@ -1,4 +1,4 @@
-package demo.medieval_game.data.starting_level
+package demo.medieval_game.data
 
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfStatic2DParameters
@@ -72,5 +72,4 @@ fun recalculateParameters(xSize: Float, ySize: Float) {
     goblinParams1.ySize = HUMANOID_SIZE_Y
     goblinParams2.xSize = HUMANOID_SIZE_X
     goblinParams2.ySize = HUMANOID_SIZE_Y
-
 }
