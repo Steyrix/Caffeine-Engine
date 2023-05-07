@@ -18,6 +18,9 @@ class TiledCollider(
 
     private var previousTilePos: Point2D = Point2D(parameters.x, parameters.y)
 
+    var isOutOfMap = false
+        private set
+
     override fun reactToCollision() {
         parameters.x = previousTilePos.x
         parameters.y = previousTilePos.y
@@ -46,13 +49,18 @@ class TiledCollider(
             if (map.getTileValue(centerX, bottomY, layer) >= EMPTY_TILE_VALUE) isBottomColliding = false
         }
 
-        val isOutOfMap = when {
-//            centerX < 0 || centerX >= mapParameters.xSize -> true
-//            centerY < 0 || centerY >= mapParameters.ySize -> true
+        // TODO top collision handle
+        isOutOfMap = when {
+            centerX < 0 || centerX >= map.getWorldWidth() -> true
+            centerY < 0 || centerY >= map.getWorldHeight() -> true
             else -> false
         }
 
-        if (isCenterColliding || isBottomColliding || isOutOfMap) {
+        if (isOutOfMap) {
+            println("OUT")
+        }
+
+        if (isCenterColliding || isBottomColliding) {
             return true
         } else {
             previousTilePos = Point2D(parameters.x, parameters.y)
