@@ -40,8 +40,11 @@ class TileMap(
     /*
         Represents the absolute size of map in pixels
      */
-    private var absoluteMapHeight: Float = 0f
-    private var absoluteMapWidth: Float = 0f
+    var absoluteMapHeight: Float = 0f
+    private set
+
+    var absoluteMapWidth: Float = 0f
+    private set
 
     /*
         Represents the absolute size of tile in pixels
