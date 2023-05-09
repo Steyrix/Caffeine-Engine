@@ -35,7 +35,7 @@ class TileMapObject(
     val worldSize: Point2D
         get() {
             val w = graphicalComponent?.getWorldWidth() ?: 0f
-            val h = graphicalComponent?.getTileHeight() ?: 0f
+            val h = graphicalComponent?.getWorldHeight() ?: 0f
             return Point2D(w, h)
         }
 
