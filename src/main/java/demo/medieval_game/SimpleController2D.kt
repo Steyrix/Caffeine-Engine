@@ -29,7 +29,10 @@ class SimpleController2D(
     )
 
     private var isWalking = false
-    private var direction = Direction.RIGHT
+
+    var direction = Direction.RIGHT
+    private set
+
     private val previousPosition = Point2D(0f,0f)
 
     init {

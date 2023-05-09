@@ -4,6 +4,7 @@ import demo.medieval_game.Player
 import demo.medieval_game.ShaderController
 import demo.medieval_game.data.*
 import demo.medieval_game.hp.HealthBar
+import engine.core.controllable.Direction
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
@@ -149,6 +150,8 @@ class Character : GameObject {
     fun isOutOfMap(): Boolean {
         return tiledCollider?.isOutOfMap ?: false
     }
+
+    fun getDirection() = (it as Player).getDirection()
 
     override fun getZLevel(): Float {
         return characterParameters.y
