@@ -70,6 +70,7 @@ class TileMapObject(
             it.addEntity(graphicalComponent as Entity, parameters)
         }
 
+        graphicalComponent?.updateParameters(parameters)
         recalculateParameters(parameters.xSize, parameters.ySize)
     }
 
