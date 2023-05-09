@@ -26,7 +26,7 @@ interface SceneHolder {
     }
 
     fun switchScene(nextSceneName: String) {
-        currentScene?.onSwitch()
+        val intent = currentScene?.onSwitch()
         currentScene = sceneMap[nextSceneName]
     }
 }

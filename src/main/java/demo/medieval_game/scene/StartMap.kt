@@ -6,11 +6,13 @@ import demo.medieval_game.data.characterParameters
 import demo.medieval_game.data.gameobject.*
 import demo.medieval_game.data.starting_level.StartMapInitializer
 import demo.medieval_game.data.starting_level.getStartingMapPreset
+import engine.core.controllable.Direction
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.session.Session
 import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.collision.tiled.TiledCollisionContext
+import engine.feature.geometry.Point2D
 import engine.feature.interaction.BoxInteractionContext
 import engine.feature.tiled.scene.TileMapObject
 import engine.feature.tiled.scene.TileMapScene
@@ -106,8 +108,15 @@ class StartMap(
         gameContext.forEach { it.draw() }
     }
 
-    override fun onSwitch() {
+    override fun onSwitch(): MedievalGameSceneIntent {
+        val intent = MedievalGameSceneIntent(
+                direction = Direction.RIGHT,
+                previousScenePos = Point2D(characterParameters.x, characterParameters.y)
+        )
         characterParameters.x = 0f
+        println("charParameters: ${characterParameters.x}")
+        println("point x: ${intent.previousScenePos.x}")
         MedievalGameMatrixState.worldTranslation.x = 0f
+        return intent
     }
 }

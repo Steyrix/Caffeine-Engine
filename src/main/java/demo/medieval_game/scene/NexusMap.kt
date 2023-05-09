@@ -110,7 +110,7 @@ class NexusMap(
         gameContext.forEach { it.draw() }
     }
 
-    override fun onSwitch() {
+    override fun onSwitch(): MedievalGameSceneIntent {
         TODO("Not yet implemented")
     }
 }

@@ -13,7 +13,10 @@ interface Scene {
 
     val gameContext: MutableList<GameObject>
 
-    fun init(session: Session) {
+    fun init(
+            session: Session,
+            intent: SceneIntent? = null
+    ) {
         gameContext.addAll(session.getPersistentObjects())
     }
 
@@ -23,5 +26,5 @@ interface Scene {
 
     fun render(window: Window)
 
-    fun onSwitch()
+    fun onSwitch(): SceneIntent
 }
