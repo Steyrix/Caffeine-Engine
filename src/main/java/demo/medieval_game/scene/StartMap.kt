@@ -111,12 +111,10 @@ class StartMap(
 
     override fun onSwitch(): MedievalGameSceneIntent {
         val intent = MedievalGameSceneIntent(
-                direction = Direction.RIGHT,
+                direction = character!!.getDirection(),
                 previousScenePos = Point2D(characterParameters.x, characterParameters.y)
         )
         characterParameters.x = 0f
-        println("charParameters: ${characterParameters.x}")
-        println("point x: ${intent.previousScenePos.x}")
         MedievalGameMatrixState.worldTranslation.x = 0f
         return intent
     }
