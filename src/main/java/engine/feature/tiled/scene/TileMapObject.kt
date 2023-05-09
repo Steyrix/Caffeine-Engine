@@ -11,6 +11,7 @@ import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfParameters
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.collision.CollisionContext
+import engine.feature.geometry.Point2D
 import engine.feature.tiled.data.TileMap
 import engine.feature.tiled.parser.TiledResourceParser
 import engine.feature.tiled.traversing.TileGraph
@@ -30,6 +31,13 @@ class TileMapObject(
             )
 
     private var graph: TileGraph? = null
+
+    val worldSize: Point2D
+        get() {
+            val w = graphicalComponent?.getWorldWidth() ?: 0f
+            val h = graphicalComponent?.getTileHeight() ?: 0f
+            return Point2D(w, h)
+        }
 
     private var graphicalComponent: TileMap? = null
         set(value) {
