@@ -1,6 +1,8 @@
 package demo.medieval_game.scene
 
+import demo.medieval_game.MedievalGameMatrixState
 import demo.medieval_game.data.MapSceneInitializer
+import demo.medieval_game.data.characterParameters
 import demo.medieval_game.data.gameobject.Character
 import demo.medieval_game.data.gameobject.TempSpritesHolder
 import demo.medieval_game.data.starting_level.StartMapInitializer
@@ -29,6 +31,8 @@ class NexusMap(
 
     private var bbCollisionContext: BoundingBoxCollisionContext? = null
     private var boxInteractionContext: BoxInteractionContext? = null
+
+    private var rounds = 0
 
     override fun init(session: Session) {
         if (session !is MedievalGameSession) return
@@ -69,6 +73,13 @@ class NexusMap(
     }
 
     override fun update(deltaTime: Float) {
+        if (rounds < 2) {
+            rounds++
+            if (rounds == 2) {
+                MedievalGameMatrixState.tempTranslation.x = screenWidth / 2 - characterParameters.xSize / 2
+            }
+        }
+
         gameContext.forEach { entity ->
             entity.update(deltaTime)
             if (entity.isDisposed()) {
