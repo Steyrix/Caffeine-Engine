@@ -2,6 +2,7 @@ package engine.feature.tiled.scene
 
 import engine.core.scene.GameObject
 import engine.core.scene.Scene
+import engine.core.scene.SceneIntent
 import engine.core.session.Session
 import org.joml.Matrix4f
 
@@ -21,8 +22,8 @@ abstract class TileMapScene(
         }
     }
 
-    override fun init(session: Session) {
-        super.init(session)
+    override fun init(session: Session, intent: SceneIntent?) {
+        super.init(session, intent)
 
         if (renderProjection == null) {
             renderProjection = Matrix4f().ortho(

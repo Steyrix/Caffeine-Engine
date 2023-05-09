@@ -8,6 +8,7 @@ import demo.medieval_game.data.starting_level.StartMapInitializer
 import demo.medieval_game.data.starting_level.getStartingMapPreset
 import engine.core.controllable.Direction
 import engine.core.loop.AccumulatedTimeEvent
+import engine.core.scene.SceneIntent
 import engine.core.session.Session
 import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
@@ -35,13 +36,13 @@ class StartMap(
 
     private var character: Character? = null
 
-    override fun init(session: Session) {
+    override fun init(session: Session, intent: SceneIntent?) {
         if (session !is MedievalGameSession) return
 
         bbCollisionContext = session.bbCollisionContext
         boxInteractionContext = session.boxInteractionContext
 
-        super.init(session)
+        super.init(session, intent)
 
         val tempSpritesHolder = gameContext.find { it is TempSpritesHolder } as? TempSpritesHolder
         character = gameContext.find { it is Character } as Character

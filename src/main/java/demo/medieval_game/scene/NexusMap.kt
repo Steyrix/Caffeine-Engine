@@ -8,6 +8,7 @@ import demo.medieval_game.data.gameobject.TempSpritesHolder
 import demo.medieval_game.data.starting_level.StartMapInitializer
 import demo.medieval_game.data.starting_level.getNexusMapPreset
 import engine.core.loop.AccumulatedTimeEvent
+import engine.core.scene.SceneIntent
 import engine.core.session.Session
 import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
@@ -34,10 +35,10 @@ class NexusMap(
 
     private var rounds = 0
 
-    override fun init(session: Session) {
+    override fun init(session: Session, intent: SceneIntent?) {
         if (session !is MedievalGameSession) return
 
-        super.init(session)
+        super.init(session, intent)
 
         bbCollisionContext = session.bbCollisionContext
         boxInteractionContext = session.boxInteractionContext
