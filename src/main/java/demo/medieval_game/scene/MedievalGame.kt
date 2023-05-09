@@ -15,7 +15,7 @@ class MedievalGame(
     override val sceneMap: MutableMap<String, Scene> = mutableMapOf()
     override var currentScene: Scene? = null
 
-    private val session = MedievalGameSession
+    override val session = MedievalGameSession
 
     private val renderProjection: Matrix4f =
             Matrix4f()
@@ -48,11 +48,5 @@ class MedievalGame(
         ) { switchScene("nexus") }
 
         currentScene?.init(MedievalGameSession)
-    }
-
-    // TODO: this init should probably be in super interface as well as session property
-    override fun switchScene(nextSceneName: String) {
-        super.switchScene(nextSceneName)
-        currentScene?.init(session)
     }
 }

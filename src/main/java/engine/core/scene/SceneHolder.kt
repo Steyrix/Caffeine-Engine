@@ -1,8 +1,11 @@
 package engine.core.scene
 
+import engine.core.session.Session
 import engine.core.window.Window
 
 interface SceneHolder {
+
+    val session: Session
 
     val screenWidth: Float
     val screenHeight: Float
@@ -28,5 +31,6 @@ interface SceneHolder {
     fun switchScene(nextSceneName: String) {
         val intent = currentScene?.onSwitch()
         currentScene = sceneMap[nextSceneName]
+        currentScene?.init(session, intent)
     }
 }
