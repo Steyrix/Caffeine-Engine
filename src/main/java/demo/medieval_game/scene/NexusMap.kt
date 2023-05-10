@@ -83,6 +83,7 @@ class NexusMap(
         if (rounds < 2) {
             rounds++
             if (rounds == 2) {
+                // because of simple controller
                 MedievalGameMatrixState.tempTranslation.x = screenWidth / 2 - characterParameters.xSize / 2
                 MedievalGameMatrixState.tempTranslation.y = screenHeight / 2 - characterParameters.ySize / 2
             }
