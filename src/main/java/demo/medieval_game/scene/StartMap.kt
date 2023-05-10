@@ -1,12 +1,10 @@
 package demo.medieval_game.scene
 
-import demo.medieval_game.MedievalGameMatrixState
 import demo.medieval_game.data.MapSceneInitializer
 import demo.medieval_game.data.characterParameters
 import demo.medieval_game.data.gameobject.*
 import demo.medieval_game.data.starting_level.StartMapInitializer
 import demo.medieval_game.data.starting_level.getStartingMapPreset
-import engine.core.controllable.Direction
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.scene.SceneIntent
 import engine.core.session.Session
@@ -110,12 +108,9 @@ class StartMap(
     }
 
     override fun onSwitch(): MedievalGameSceneIntent {
-        val intent = MedievalGameSceneIntent(
+        return MedievalGameSceneIntent(
                 direction = character!!.getDirection(),
                 previousScenePos = Point2D(characterParameters.x, characterParameters.y)
         )
-        characterParameters.x = 0f
-        MedievalGameMatrixState.worldTranslation.x = 0f
-        return intent
     }
 }
