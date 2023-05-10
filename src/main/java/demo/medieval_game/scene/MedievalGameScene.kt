@@ -91,7 +91,7 @@ abstract class MedievalGameScene(
         gameContext.forEach { it.draw() }
     }
 
-    protected fun handleMapTransaction(intent: MedievalGameSceneIntent) {
+    protected open fun handleMapTransaction(intent: MedievalGameSceneIntent) {
         isHorizontalMapTransaction =
                 intent.direction == Direction.RIGHT
                         || intent.direction == Direction.LEFT
@@ -105,7 +105,7 @@ abstract class MedievalGameScene(
         )
     }
 
-    protected fun postMapTransactionAction() {
+    protected open fun postMapTransactionAction() {
         if (rounds < 2) {
             rounds++
             if (rounds == 2) {
