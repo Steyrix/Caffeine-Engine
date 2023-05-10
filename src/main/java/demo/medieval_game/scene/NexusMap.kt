@@ -63,7 +63,7 @@ class NexusMap(
         }
 
         intent?.let {
-            determineDirection(it as MedievalGameSceneIntent)
+            handleMapTransaction(it as MedievalGameSceneIntent)
         }
     }
 
@@ -123,50 +123,13 @@ class NexusMap(
         TODO("Not yet implemented")
     }
 
-    private fun determineDirection(intent: MedievalGameSceneIntent) {
-        val worldWidth = tiledMap?.worldSize?.x ?: 0f
-        val worldHeight = tiledMap?.worldSize?.y ?: 0f
-        var xMod = 0f
-        var yMod = 0f
-
-        when(intent.direction) {
-            Direction.RIGHT -> {
-                characterParameters.x = 0f
-                xMod = 1f
-            }
-            Direction.LEFT -> {
-                characterParameters.x = worldWidth - characterParameters.xSize
-                xMod = 1f
-            }
-            Direction.UP -> {
-                characterParameters.y = worldHeight - characterParameters.ySize
-                yMod = 1f
-            }
-            Direction.DOWN -> {
-                characterParameters.y = 0f
-                yMod = 1f
-            }
-        }
-
-        // TODO move out and fix
-        MedievalGameMatrixState.worldTranslation.x *= yMod
-        MedievalGameMatrixState.worldTranslation.y *= xMod
-        MedievalGameMatrixState.tempTranslation.x *= yMod
-        MedievalGameMatrixState.tempTranslation.y *= xMod
-
-        val centerPoint = characterParameters.getCenterPoint()
-        val horizontalTranslation = screenWidth - centerPoint.x
-        val verticalTranslation = screenHeight - centerPoint.y
-
-        MedievalGameMatrixState.translateWorld(
-                horizontalTranslation * xMod,
-                verticalTranslation * yMod
+    private fun handleMapTransaction(intent: MedievalGameSceneIntent) {
+        MedievalGameMatrixState.handleMapTransaction(
+                intent.direction,
+                screenWidth,
+                screenHeight,
+                worldWidth = tiledMap?.worldSize?.x ?: 0f,
+                worldHeight = tiledMap?.worldSize?.y ?: 0f
         )
-
-        MedievalGameMatrixState.tempTranslation.x = screenWidth / 2 - characterParameters.xSize / 2
-        MedievalGameMatrixState.tempTranslation.y = screenHeight / 2 - characterParameters.ySize / 2
-
-        println(MedievalGameMatrixState.tempTranslation.x)
-        println(MedievalGameMatrixState.tempTranslation.y)
     }
 }

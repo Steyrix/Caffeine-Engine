@@ -1,5 +1,8 @@
 package demo.medieval_game.matrix
 
+import demo.medieval_game.data.characterParameters
+import engine.core.controllable.Direction
+import engine.core.update.getCenterPoint
 import engine.feature.matrix.MatrixState
 import org.joml.Matrix4f
 import org.joml.Vector2f
@@ -62,5 +65,52 @@ object MedievalGameMatrixState : MatrixState {
     private fun isVerticalTranslationPossible(y: Float, worldHeight: Float = 1500f, screenHeight: Float = 999.375f): Boolean {
         return (screenHeight + abs(worldTranslation.y + y) < worldHeight)
                 && (worldTranslation.y + y) < 0
+    }
+
+    fun handleMapTransaction(
+            direction: Direction,
+            screenWidth: Float,
+            screenHeight: Float,
+            worldWidth: Float,
+            worldHeight: Float
+    ) {
+        var xMod = 0f
+        var yMod = 0f
+
+        when(direction) {
+            Direction.RIGHT -> {
+                characterParameters.x = 0f
+                xMod = 1f
+            }
+            Direction.LEFT -> {
+                characterParameters.x = worldWidth - characterParameters.xSize
+                xMod = 1f
+            }
+            Direction.UP -> {
+                characterParameters.y = worldHeight - characterParameters.ySize
+                yMod = 1f
+            }
+            Direction.DOWN -> {
+                characterParameters.y = 0f
+                yMod = 1f
+            }
+        }
+
+        worldTranslation.x *= yMod
+        worldTranslation.y *= xMod
+        tempTranslation.x *= yMod
+        tempTranslation.y *= xMod
+
+        val centerPoint = characterParameters.getCenterPoint()
+        val horizontalTranslation = screenWidth - centerPoint.x
+        val verticalTranslation = screenHeight - centerPoint.y
+
+        translateWorld(
+                horizontalTranslation * xMod,
+                verticalTranslation * yMod
+        )
+
+        tempTranslation.x = screenWidth / 2 - characterParameters.xSize / 2
+        tempTranslation.y = screenHeight / 2 - characterParameters.ySize / 2
     }
 }
