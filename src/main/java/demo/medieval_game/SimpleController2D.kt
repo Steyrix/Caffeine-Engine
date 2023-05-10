@@ -1,6 +1,7 @@
 package demo.medieval_game
 
 import demo.medieval_game.data.AnimationKey
+import demo.medieval_game.matrix.MedievalGameMatrixState
 import engine.core.controllable.Controllable
 import engine.core.controllable.Direction
 import engine.core.entity.Entity

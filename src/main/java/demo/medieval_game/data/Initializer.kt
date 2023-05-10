@@ -1,6 +1,6 @@
 package demo.medieval_game.data
 
-import demo.medieval_game.MedievalGameMatrixState
+import demo.medieval_game.matrix.MedievalGameMatrixState
 import demo.medieval_game.data.gameobject.Character
 import demo.medieval_game.data.gameobject.TempSpritesHolder
 import engine.core.scene.GameObject

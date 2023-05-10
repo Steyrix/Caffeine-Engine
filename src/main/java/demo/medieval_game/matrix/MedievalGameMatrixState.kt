@@ -1,4 +1,4 @@
-package demo.medieval_game
+package demo.medieval_game.matrix
 
 import engine.feature.matrix.MatrixState
 import org.joml.Matrix4f

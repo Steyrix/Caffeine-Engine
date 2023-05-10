@@ -1,6 +1,6 @@
 package demo.medieval_game.scene
 
-import demo.medieval_game.MedievalGameMatrixState
+import demo.medieval_game.matrix.MedievalGameMatrixState
 import engine.core.scene.Scene
 import engine.core.scene.SceneHolder
 import engine.core.session.SimpleGamePresets

@@ -1,6 +1,6 @@
 package demo.medieval_game.scene
 
-import demo.medieval_game.MedievalGameMatrixState
+import demo.medieval_game.matrix.MedievalGameMatrixState
 import demo.medieval_game.data.MapSceneInitializer
 import demo.medieval_game.data.characterParameters
 import demo.medieval_game.data.gameobject.Character
