@@ -1,6 +1,7 @@
 package demo.medieval_game.scene
 
 import demo.medieval_game.data.starting_level.getNexusMapPreset
+import demo.medieval_game.data.starting_level.getStartingMapPreset
 import demo.medieval_game.matrix.MedievalGameMatrixState
 import engine.core.scene.Scene
 import engine.core.scene.SceneHolder
@@ -43,6 +44,7 @@ class MedievalGame(
         )
 
         currentScene = StartMap(
+                getStartingMapPreset(screenWidth, screenHeight),
                 screenWidth,
                 screenHeight,
                 renderProjection
