@@ -109,8 +109,17 @@ object MedievalGameMatrixState : MatrixState {
                 horizontalTranslation * xMod,
                 verticalTranslation * yMod
         )
+    }
 
-        tempTranslation.x = screenWidth / 2 - characterParameters.xSize / 2
-        tempTranslation.y = screenHeight / 2 - characterParameters.ySize / 2
+    fun postMapTransactionAction(
+            isHorizontalTransaction: Boolean,
+            screenWidth: Float,
+            screenHeight: Float
+    ) {
+        if (isHorizontalTransaction) {
+            tempTranslation.x = screenWidth / 2 - characterParameters.xSize / 2
+        } else {
+            tempTranslation.y = screenHeight / 2 - characterParameters.ySize / 2
+        }
     }
 }

@@ -36,6 +36,7 @@ class NexusMap(
     private var boxInteractionContext: BoxInteractionContext? = null
 
     private var rounds = 0
+    private var isHorizontalMapTransaction = false
 
     override fun init(session: Session, intent: SceneIntent?) {
         if (session !is MedievalGameSession) return
@@ -80,14 +81,7 @@ class NexusMap(
     }
 
     override fun update(deltaTime: Float) {
-        if (rounds < 2) {
-            rounds++
-            if (rounds == 2) {
-                // because of simple controller
-                MedievalGameMatrixState.tempTranslation.x = screenWidth / 2 - characterParameters.xSize / 2
-                MedievalGameMatrixState.tempTranslation.y = screenHeight / 2 - characterParameters.ySize / 2
-            }
-        }
+        postMapTransactionAction()
 
         gameContext.forEach { entity ->
             entity.update(deltaTime)
@@ -124,6 +118,10 @@ class NexusMap(
     }
 
     private fun handleMapTransaction(intent: MedievalGameSceneIntent) {
+        isHorizontalMapTransaction =
+                intent.direction == Direction.RIGHT
+                        || intent.direction == Direction.LEFT
+
         MedievalGameMatrixState.handleMapTransaction(
                 intent.direction,
                 screenWidth,
@@ -131,5 +129,18 @@ class NexusMap(
                 worldWidth = tiledMap?.worldSize?.x ?: 0f,
                 worldHeight = tiledMap?.worldSize?.y ?: 0f
         )
+    }
+
+    private fun postMapTransactionAction() {
+        if (rounds < 2) {
+            rounds++
+            if (rounds == 2) {
+                MedievalGameMatrixState.postMapTransactionAction(
+                        isHorizontalMapTransaction,
+                        screenWidth,
+                        screenHeight
+                )
+            }
+        }
     }
 }
