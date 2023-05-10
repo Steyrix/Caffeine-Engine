@@ -1,5 +1,6 @@
 package demo.medieval_game.scene
 
+import demo.medieval_game.data.starting_level.getNexusMapPreset
 import demo.medieval_game.matrix.MedievalGameMatrixState
 import engine.core.scene.Scene
 import engine.core.scene.SceneHolder
@@ -29,7 +30,7 @@ class MedievalGame(
                     )
 
     init {
-        sceneMap["nexus"] = NexusMap(screenWidth, screenHeight, renderProjection)
+        sceneMap["nexus"] = NexusMap(getNexusMapPreset(),  screenWidth, screenHeight, renderProjection)
     }
 
     override fun init() {
