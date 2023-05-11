@@ -14,7 +14,7 @@ import engine.feature.tiled.scene.TileMapObject
 import engine.feature.tiled.scene.TileMapPreset
 import engine.feature.tiled.scene.TileMapScene
 import org.joml.Matrix4f
-import org.lwjgl.opengl.GL33C
+import org.lwjgl.opengl.GL33C.*
 
 abstract class MedievalGameScene(
         private val preset: TileMapPreset,
@@ -83,10 +83,10 @@ abstract class MedievalGameScene(
     }
 
     override fun render(window: Window) {
-        GL33C.glEnable(GL33C.GL_BLEND)
-        GL33C.glBlendFunc(GL33C.GL_SRC_ALPHA, GL33C.GL_ONE_MINUS_SRC_ALPHA)
-        GL33C.glClear(GL33C.GL_COLOR_BUFFER_BIT)
-        GL33C.glClearColor(0f, 0.5f, 0f, 0.5f)
+        glEnable(GL_BLEND)
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+        glClear(GL_COLOR_BUFFER_BIT)
+        glClearColor(0f, 0.5f, 0f, 0.5f)
 
         gameContext.forEach { it.draw() }
     }
