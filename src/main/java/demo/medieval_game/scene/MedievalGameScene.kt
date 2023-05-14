@@ -59,6 +59,7 @@ abstract class MedievalGameScene(
     }
 
     override fun update(deltaTime: Float) {
+        super.update(deltaTime)
         postMapTransactionAction()
 
         gameContext.forEach { entity ->
@@ -76,7 +77,6 @@ abstract class MedievalGameScene(
 
         actions.forEach { it.schedule(deltaTime) }
 
-        super.update(deltaTime)
         tiledCollisionContext.update()
         bbCollisionContext?.update()
         boxInteractionContext?.update()
