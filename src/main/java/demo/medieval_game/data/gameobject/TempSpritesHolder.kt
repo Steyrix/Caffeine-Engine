@@ -4,6 +4,7 @@ import demo.medieval_game.ShaderController
 import demo.medieval_game.data.hitAnimation
 import engine.core.entity.CompositeEntity
 import engine.core.loop.AccumulatedTimeEvent
+import engine.core.render.primitive.Rectangle
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.scene.GameObject
 import engine.core.texture.Texture2D
@@ -62,6 +63,23 @@ class TempSpritesHolder : GameObject {
                         initialTime = 0f
                 )
         )
+    }
+
+    // TODO: set up screen coords
+    fun generateBlackScreen() {
+        val params = SetOfStatic2DParameters(
+                x = 0f,
+                y = 0f,
+                xSize = 300f,
+                ySize = 300f,
+                rotationAngle = 0f
+        )
+
+        val graphicalComponent = Rectangle(0f, 0f, 0f).apply {
+            // todo add primitive shader
+        }
+
+        it?.addComponent(graphicalComponent, params)
     }
 
     override fun update(deltaTime: Float) {
