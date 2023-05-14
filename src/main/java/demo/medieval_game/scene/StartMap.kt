@@ -47,7 +47,7 @@ class StartMap(
         }
     }
 
-    override fun onSwitch(): MedievalGameSceneIntent {
+    override fun getNextSceneIntent(): MedievalGameSceneIntent {
         return MedievalGameSceneIntent(
                 direction = character!!.getDirection(),
                 previousScenePos = Point2D(characterParameters.x, characterParameters.y)

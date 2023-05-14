@@ -39,7 +39,7 @@ class NexusMap(
         }
     }
 
-    override fun onSwitch(): MedievalGameSceneIntent {
+    override fun getNextSceneIntent(): MedievalGameSceneIntent {
         TODO("Not yet implemented")
     }
 }

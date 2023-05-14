@@ -26,5 +26,7 @@ interface Scene {
 
     fun render(window: Window)
 
-    fun onSwitch(): SceneIntent
+    fun onSwitch() = Unit
+
+    fun getNextSceneIntent(): SceneIntent
 }
