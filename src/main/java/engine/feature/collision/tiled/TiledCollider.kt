@@ -40,6 +40,7 @@ class TiledCollider(
         val centerX = parameters.x + parameters.xSize / 2
         val centerY = parameters.y + parameters.ySize / 2
         val bottomY = parameters.y + parameters.ySize
+        val topY = parameters.y
 
         var isCenterColliding = true
         var isBottomColliding = true
@@ -49,10 +50,9 @@ class TiledCollider(
             if (map.getTileValue(centerX, bottomY, layer) >= EMPTY_TILE_VALUE) isBottomColliding = false
         }
 
-        // TODO top collision handle
         isOutOfMap = when {
             centerX < 0 || centerX >= map.getWorldWidth() -> true
-            centerY < 0 || centerY >= map.getWorldHeight() -> true
+            bottomY < 0 || topY >= map.getWorldHeight() -> true
             else -> false
         }
 
