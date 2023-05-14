@@ -20,6 +20,7 @@ class Shader {
         const val VAR_KEY_Y_OFFSET = "yOffset"
         const val VAR_KEY_FRAME_X = "frameNumberX"
         const val VAR_KEY_FRAME_Y = "frameNumberY"
+        const val ALPHA = "alpha"
     }
 
     private val programId = glCreateProgram()
