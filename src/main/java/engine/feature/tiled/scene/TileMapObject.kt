@@ -135,6 +135,6 @@ class TileMapObject(
     }
 
     override fun getZLevel(): Float {
-        return Float.MIN_VALUE
+        return Float.NEGATIVE_INFINITY
     }
 }
