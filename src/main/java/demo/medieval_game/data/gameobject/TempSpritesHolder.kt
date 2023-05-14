@@ -41,10 +41,6 @@ class TempSpritesHolder : GameObject {
             texture = texture,
             animations = hitAnimation
         ).apply {
-            x = posX
-            y = posY
-            xSize = 20f
-            ySize = 20f
             shader = ShaderController.createAnimationShader(renderProjection!!)
         }
 
