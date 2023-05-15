@@ -24,7 +24,8 @@ class TempSpritesHolder : GameObject {
 
     private var z: Float = -1f
 
-    private var alpha = 0f
+    private var fadingAlpha = 0f
+    private var defadingAlpha = 1f
 
     fun init(projection: Matrix4f) {
         renderProjection = projection
@@ -76,6 +77,7 @@ class TempSpritesHolder : GameObject {
             onFinish: () -> Unit
     ) {
         if (renderProjection == null) return
+        println("fading $fadingAlpha")
 
         val params = SetOfStatic2DParameters(
                 x = 0f,
@@ -93,9 +95,10 @@ class TempSpritesHolder : GameObject {
 
         actions.add(
                 SingleTimeEvent(
-                        timeLimit = 1.5f,
+                        timeLimit = 2f,
                         action = { _ ->
                             it?.removeComponent(graphicalComponent)
+                            fadingAlpha = 0f
                             onFinish.invoke()
                         },
                         initialTime = 0f
@@ -103,10 +106,54 @@ class TempSpritesHolder : GameObject {
         )
 
         updateActions.add { deltaTime ->
-            alpha += deltaTime * 0.5f
+            fadingAlpha += deltaTime * 0.5f
             graphicalComponent.shader?.let {
                 it.bind()
-                it.setUniform(Shader.ALPHA, alpha)
+                it.setUniform(Shader.ALPHA, fadingAlpha)
+            }
+        }
+
+        z = Float.MAX_VALUE
+    }
+
+    fun startScreenDefading(
+            worldWidth: Float,
+            worldHeight: Float,
+    ) {
+        if (renderProjection == null) return
+        println("defading $defadingAlpha")
+
+        val params = SetOfStatic2DParameters(
+                x = 0f,
+                y = 0f,
+                xSize = worldWidth,
+                ySize = worldHeight,
+                rotationAngle = 0f
+        )
+
+        val graphicalComponent = Rectangle(0f, 0f, 0f).apply {
+            shader = ShaderController.createPrimitiveShader(renderProjection!!)
+        }
+
+        it?.addComponent(graphicalComponent, params)
+
+        actions.add(
+                SingleTimeEvent(
+                        timeLimit = 2f,
+                        action = { _ ->
+                            it?.removeComponent(graphicalComponent)
+                            defadingAlpha = 1f
+                        },
+                        initialTime = 0f
+                )
+        )
+
+        // should delete update Action
+        updateActions.add { deltaTime ->
+            defadingAlpha -= deltaTime * 0.5f
+            graphicalComponent.shader?.let {
+                it.bind()
+                it.setUniform(Shader.ALPHA, defadingAlpha)
             }
         }
 

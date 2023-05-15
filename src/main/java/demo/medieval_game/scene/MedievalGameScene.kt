@@ -68,6 +68,8 @@ abstract class MedievalGameScene(
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
+
+        defadeScreen()
         postMapTransactionAction()
 
         gameContext.forEach { entity ->
@@ -128,6 +130,18 @@ abstract class MedievalGameScene(
                         isHorizontalMapTransaction,
                         screenWidth,
                         screenHeight
+                )
+            }
+        }
+    }
+
+    private fun defadeScreen() {
+        if (rounds < 1) {
+            rounds++
+            if (rounds == 1) {
+                tempSpritesHolder?.startScreenDefading(
+                        tiledMap?.worldSize?.x ?: 0f,
+                        tiledMap?.worldSize?.y ?: 0f,
                 )
             }
         }
