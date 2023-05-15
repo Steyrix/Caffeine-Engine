@@ -1,11 +1,11 @@
 package engine.core.loop
 
 open class AccumulatedTimeEvent(
-        private val timeLimit: Float,
-        private val action: (Float) -> Unit,
+        protected val timeLimit: Float,
+        protected val action: (Float) -> Unit,
         initialTime: Float = timeLimit
 ) {
-    private var accumulatedTime = initialTime
+    protected var accumulatedTime = initialTime
 
     open fun schedule(deltaTime: Float) {
         accumulatedTime += deltaTime
