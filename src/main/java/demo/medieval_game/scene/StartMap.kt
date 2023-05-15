@@ -17,10 +17,6 @@ class StartMap(
         private val switchTrigger: () -> Unit = {}
 ) : MedievalGameScene(preset, screenWidth, screenHeight, projection) {
 
-    private var character: Character? = null
-
-    private var tempSpritesHolder: TempSpritesHolder? = null
-
     private var isFading = false
 
     override fun init(session: Session, intent: SceneIntent?) {
@@ -49,8 +45,8 @@ class StartMap(
         if (character?.isOutOfMap() == true && !isFading) {
             isFading = true
             tempSpritesHolder?.startScreenFading(
-                    screenWidth,
-                    screenHeight,
+                    tiledMap?.worldSize?.x ?: 0f,
+                    tiledMap?.worldSize?.y ?: 0f,
             ) {
                 switchTrigger.invoke()
             }

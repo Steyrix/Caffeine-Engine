@@ -1,6 +1,8 @@
 package demo.medieval_game.scene
 
 import demo.medieval_game.data.MapSceneInitializer
+import demo.medieval_game.data.gameobject.Character
+import demo.medieval_game.data.gameobject.TempSpritesHolder
 import demo.medieval_game.matrix.MedievalGameMatrixState
 import engine.core.controllable.Direction
 import engine.core.loop.AccumulatedTimeEvent
@@ -22,6 +24,9 @@ abstract class MedievalGameScene(
         override val screenHeight: Float,
         projection: Matrix4f? = null,
 ) : TileMapScene(projection) {
+
+    protected var character: Character? = null
+    protected var tempSpritesHolder: TempSpritesHolder? = null
 
     protected val tiledCollisionContext = TiledCollisionContext()
 
