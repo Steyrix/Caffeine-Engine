@@ -2,6 +2,8 @@ package engine.core.scene.game_object
 
 import engine.core.window.Window
 
+// TODO different z-level for different elements, among other components in game context
+// TODO disposing
 open class CompositeGameObject : GameObject {
 
     private val objectList = mutableListOf<GameObject>()
