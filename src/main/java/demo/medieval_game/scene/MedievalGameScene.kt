@@ -94,6 +94,10 @@ abstract class MedievalGameScene(
         gameContext.forEach { it.draw() }
     }
 
+    override fun onSwitch() {
+        tiledCollisionContext.dispose()
+    }
+
     protected open fun handleMapTransaction(intent: MedievalGameSceneIntent) {
         isHorizontalMapTransaction =
                 intent.direction == Direction.RIGHT
