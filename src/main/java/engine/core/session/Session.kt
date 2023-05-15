@@ -1,6 +1,6 @@
 package engine.core.session
 
-import engine.core.scene.GameObject
+import engine.core.scene.game_object.GameObject
 
 abstract class Session {
 

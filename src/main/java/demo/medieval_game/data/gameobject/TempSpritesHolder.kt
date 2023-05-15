@@ -7,15 +7,14 @@ import engine.core.loop.AccumulatedTimeEvent
 import engine.core.loop.SingleTimeEvent
 import engine.core.render.primitive.Rectangle
 import engine.core.render.render2D.AnimatedObject2D
-import engine.core.scene.GameObject
+import engine.core.scene.game_object.GameObject
+import engine.core.scene.game_object.SingleGameObject
 import engine.core.shader.Shader
 import engine.core.texture.Texture2D
 import engine.core.update.SetOfStatic2DParameters
 import org.joml.Matrix4f
 
-class TempSpritesHolder : GameObject {
-
-    override var it: CompositeEntity? = CompositeEntity()
+class TempSpritesHolder : SingleGameObject() {
 
     private val actions: MutableList<AccumulatedTimeEvent> = mutableListOf()
     private val updateActions: MutableList<(Float) -> Unit> = mutableListOf()
@@ -26,6 +25,10 @@ class TempSpritesHolder : GameObject {
 
     private var fadingAlpha = 0f
     private var defadingAlpha = 1f
+
+    init {
+        it = CompositeEntity()
+    }
 
     fun init(projection: Matrix4f) {
         renderProjection = projection

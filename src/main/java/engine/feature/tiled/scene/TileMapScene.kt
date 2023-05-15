@@ -1,6 +1,6 @@
 package engine.feature.tiled.scene
 
-import engine.core.scene.GameObject
+import engine.core.scene.game_object.GameObject
 import engine.core.scene.Scene
 import engine.core.scene.SceneIntent
 import engine.core.session.Session

@@ -3,7 +3,7 @@ package demo.medieval_game.scene
 import demo.medieval_game.data.Initializer
 import demo.medieval_game.data.gameobject.PlayableCharacter
 import demo.medieval_game.data.gameobject.TempSpritesHolder
-import engine.core.scene.GameObject
+import engine.core.scene.game_object.GameObject
 import engine.core.session.Session
 import engine.core.session.SessionPresets
 import engine.core.session.SimpleGamePresets

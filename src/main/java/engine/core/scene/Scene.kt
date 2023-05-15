@@ -1,5 +1,6 @@
 package engine.core.scene
 
+import engine.core.scene.game_object.GameObject
 import engine.core.session.Session
 import engine.core.window.Window
 import org.joml.Matrix4f
