@@ -46,4 +46,10 @@ interface CollisionContext {
             }
         }
     }
+
+    fun dispose() {
+        colliders.clear()
+        entities.clear()
+        entitiesParams.clear()
+    }
 }
