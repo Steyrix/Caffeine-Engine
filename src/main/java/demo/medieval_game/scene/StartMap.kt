@@ -19,10 +19,14 @@ class StartMap(
 
     private var character: Character? = null
 
+    private var tempSpritesHolder: TempSpritesHolder? = null
+
+    private var isFading = false
+
     override fun init(session: Session, intent: SceneIntent?) {
         super.init(session, intent)
 
-        val tempSpritesHolder = gameContext.find { it is TempSpritesHolder } as? TempSpritesHolder
+        tempSpritesHolder = gameContext.find { it is TempSpritesHolder } as? TempSpritesHolder
         character = gameContext.find { it is Character } as Character
 
         tiledMap?.let {
@@ -42,8 +46,14 @@ class StartMap(
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
 
-        if (character?.isOutOfMap() == true) {
-            switchTrigger.invoke()
+        if (character?.isOutOfMap() == true && !isFading) {
+            isFading = true
+            tempSpritesHolder?.startScreenFading(
+                    screenWidth,
+                    screenHeight,
+            ) {
+                switchTrigger.invoke()
+            }
         }
     }
 
