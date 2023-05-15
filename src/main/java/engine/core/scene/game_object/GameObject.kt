@@ -12,8 +12,6 @@ interface GameObject {
 
     fun input(window: Window)
 
-    fun addComponent(entity: Entity?, params: SetOfParameters)
-
     fun isDisposed(): Boolean
 
     fun getZLevel(): Float

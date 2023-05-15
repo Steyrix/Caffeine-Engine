@@ -21,7 +21,7 @@ open class SingleGameObject : GameObject {
         it?.input(window)
     }
 
-    override fun addComponent(entity: Entity?, params: SetOfParameters) {
+    fun addComponent(entity: Entity?, params: SetOfParameters) {
         if (entity == null) return
         it?.addComponent(entity, params)
     }
