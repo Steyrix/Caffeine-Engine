@@ -6,6 +6,8 @@ class CompositeGameObject : GameObject {
 
     private val it = mutableListOf<GameObject>()
 
+    var descendingZ = false
+
     override fun update(deltaTime: Float) {
         it.forEach {
             it.update(deltaTime)
@@ -38,7 +40,19 @@ class CompositeGameObject : GameObject {
         it.add(gameObject)
     }
 
-    override fun getZLevel(): Float = it.maxOf { it.getZLevel() }
+    override fun getZLevel(): Float {
+        val out = if (descendingZ) {
+            it.maxOf { it.getZLevel() }
+        } else {
+            it.minOf { it.getZLevel() }
+        }
+
+        return if (out.isNaN()) {
+            Float.NEGATIVE_INFINITY
+        } else {
+            out
+        }
+    }
 
     fun getInnerObjects() = it.toList()
 }
