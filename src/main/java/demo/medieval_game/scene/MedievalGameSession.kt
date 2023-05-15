@@ -2,6 +2,7 @@ package demo.medieval_game.scene
 
 import demo.medieval_game.data.Initializer
 import demo.medieval_game.data.gameobject.Character
+import demo.medieval_game.data.gameobject.TempSpritesHolder
 import engine.core.scene.GameObject
 import engine.core.session.Session
 import engine.core.session.SessionPresets
@@ -13,7 +14,11 @@ object MedievalGameSession : Session() {
 
     override val persistentGameObjects: MutableList<GameObject> = mutableListOf()
 
-    private var character: Character? = null
+    var playableCharacter: Character? = null
+        private set
+
+    var tempSpritesHolder: TempSpritesHolder? = null
+        private set
 
     val bbCollisionContext = BoundingBoxCollisionContext()
     val boxInteractionContext = BoxInteractionContext()
@@ -31,7 +36,8 @@ object MedievalGameSession : Session() {
                 )
         )
 
-        character = persistentGameObjects.find { it is Character } as? Character
+        playableCharacter = persistentGameObjects.find { it is Character } as? Character
+        tempSpritesHolder = persistentGameObjects.find { it is TempSpritesHolder } as? TempSpritesHolder
     }
 
     override fun getPersistentObjects(): List<GameObject> {
@@ -39,6 +45,6 @@ object MedievalGameSession : Session() {
     }
 
     fun getCharacter(): Character? {
-        return character
+        return playableCharacter
     }
 }
