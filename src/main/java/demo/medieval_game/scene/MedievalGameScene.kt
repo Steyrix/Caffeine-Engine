@@ -37,7 +37,8 @@ abstract class MedievalGameScene(
     protected var bbCollisionContext: BoundingBoxCollisionContext? = null
     protected var boxInteractionContext: BoxInteractionContext? = null
 
-    private var rounds = 0
+    private var updateRounds = 0
+    private var renderRounds = 0
     private var isHorizontalMapTransaction = false
 
     override fun init(session: Session, intent: SceneIntent?) {
@@ -69,7 +70,6 @@ abstract class MedievalGameScene(
     }
 
     override fun update(deltaTime: Float) {
-        defadeScreen()
         postMapTransactionAction()
 
         gameContext.forEach { entity ->
@@ -100,6 +100,10 @@ abstract class MedievalGameScene(
     }
 
     override fun render(window: Window) {
+        renderRounds = renderRounds.inc()
+        if (renderRounds == 1) {
+            defadeScreen()
+        }
         renderSetup()
         gameContext.convertToFlatList().forEach { it.draw() }
     }
@@ -123,9 +127,9 @@ abstract class MedievalGameScene(
     }
 
     protected open fun postMapTransactionAction() {
-        if (rounds < 2) {
-            rounds++
-            if (rounds == 2) {
+        if (updateRounds < 2) {
+            updateRounds++
+            if (updateRounds == 2) {
                 MedievalGameMatrixState.postMapTransactionAction(
                         isHorizontalMapTransaction,
                         screenWidth,
@@ -136,9 +140,9 @@ abstract class MedievalGameScene(
     }
 
     private fun defadeScreen() {
-        if (rounds < 1) {
-            rounds++
-            if (rounds == 1) {
+        if (updateRounds < 1) {
+            updateRounds++
+            if (updateRounds == 1) {
                 tempSpritesHolder?.startScreenDefading(
                         tiledMap?.worldSize?.x ?: 0f,
                         tiledMap?.worldSize?.y ?: 0f,
