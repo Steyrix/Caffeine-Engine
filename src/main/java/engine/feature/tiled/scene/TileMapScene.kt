@@ -47,19 +47,9 @@ abstract class TileMapScene(
         }
     }
 
-    override fun update(deltaTime: Float) {
-        setupDrawOrder()
-    }
-
     abstract fun initTileMap(
             projection: Matrix4f,
             screenWidth: Float,
             screenHeight: Float
     ): TileMapObject
-
-    private fun setupDrawOrder() {
-        gameContext.sortBy {
-            it.getZLevel()
-        }
-    }
 }

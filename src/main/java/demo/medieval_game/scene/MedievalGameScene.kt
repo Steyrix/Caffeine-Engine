@@ -7,6 +7,8 @@ import demo.medieval_game.matrix.MedievalGameMatrixState
 import engine.core.controllable.Direction
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.scene.SceneIntent
+import engine.core.scene.game_object.CompositeGameObject
+import engine.core.scene.game_object.GameObject
 import engine.core.session.Session
 import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
@@ -67,8 +69,6 @@ abstract class MedievalGameScene(
     }
 
     override fun update(deltaTime: Float) {
-        super.update(deltaTime)
-
         defadeScreen()
         postMapTransactionAction()
 
@@ -101,7 +101,7 @@ abstract class MedievalGameScene(
 
     override fun render(window: Window) {
         renderSetup()
-        gameContext.forEach { it.draw() }
+        gameContext.convertToFlatList().forEach { it.draw() }
     }
 
     override fun onSwitch() {
@@ -145,5 +145,21 @@ abstract class MedievalGameScene(
                 )
             }
         }
+    }
+
+    private fun MutableList<GameObject>.convertToFlatList(): MutableList<GameObject> {
+        val out = mutableListOf<GameObject>()
+        this.forEach {
+            if (it is CompositeGameObject) {
+                it.getInnerObjects().forEach { innerObject ->
+                    out.add(innerObject)
+                }
+            } else {
+                out.add(it)
+            }
+        }
+
+        out.sortBy { it.getZLevel() }
+        return out
     }
 }

@@ -42,7 +42,7 @@ class TempSpritesHolder : CompositeGameObject() {
         if (renderProjection == null) return
 
         val obj = object : SingleGameObject() {
-            override fun getZLevel() = Float.MAX_VALUE
+            override fun getZLevel() = posY + 0.5f
         }.apply {
             it = CompositeEntity()
         }
