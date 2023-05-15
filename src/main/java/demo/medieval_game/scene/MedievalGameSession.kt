@@ -1,7 +1,7 @@
 package demo.medieval_game.scene
 
 import demo.medieval_game.data.Initializer
-import demo.medieval_game.data.gameobject.Character
+import demo.medieval_game.data.gameobject.PlayableCharacter
 import demo.medieval_game.data.gameobject.TempSpritesHolder
 import engine.core.scene.GameObject
 import engine.core.session.Session
@@ -14,7 +14,7 @@ object MedievalGameSession : Session() {
 
     override val persistentGameObjects: MutableList<GameObject> = mutableListOf()
 
-    var playableCharacter: Character? = null
+    var playableCharacter: PlayableCharacter? = null
         private set
 
     var tempSpritesHolder: TempSpritesHolder? = null
@@ -36,7 +36,7 @@ object MedievalGameSession : Session() {
                 )
         )
 
-        playableCharacter = persistentGameObjects.find { it is Character } as? Character
+        playableCharacter = persistentGameObjects.find { it is PlayableCharacter } as? PlayableCharacter
         tempSpritesHolder = persistentGameObjects.find { it is TempSpritesHolder } as? TempSpritesHolder
     }
 

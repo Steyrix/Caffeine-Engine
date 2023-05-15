@@ -1,7 +1,7 @@
 package demo.medieval_game.scene
 
 import demo.medieval_game.data.MapSceneInitializer
-import demo.medieval_game.data.gameobject.Character
+import demo.medieval_game.data.gameobject.PlayableCharacter
 import demo.medieval_game.data.gameobject.TempSpritesHolder
 import demo.medieval_game.matrix.MedievalGameMatrixState
 import engine.core.controllable.Direction
@@ -25,7 +25,7 @@ abstract class MedievalGameScene(
         projection: Matrix4f? = null,
 ) : TileMapScene(projection) {
 
-    protected var character: Character? = null
+    protected var character: PlayableCharacter? = null
     protected var tempSpritesHolder: TempSpritesHolder? = null
 
     protected val tiledCollisionContext = TiledCollisionContext()

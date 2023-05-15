@@ -1,7 +1,7 @@
 package demo.medieval_game.data
 
 import demo.medieval_game.matrix.MedievalGameMatrixState
-import demo.medieval_game.data.gameobject.Character
+import demo.medieval_game.data.gameobject.PlayableCharacter
 import demo.medieval_game.data.gameobject.TempSpritesHolder
 import engine.core.scene.GameObject
 import engine.core.update.getCenterPoint
@@ -54,7 +54,7 @@ object Initializer {
             boxInteractionContext: BoxInteractionContext,
             tempSpritesHolder: TempSpritesHolder
     ): GameObject {
-        return Character().apply {
+        return PlayableCharacter().apply {
             init(
                     renderProjection,
                     boundingBoxCollisionContext,

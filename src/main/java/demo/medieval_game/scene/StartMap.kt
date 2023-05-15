@@ -23,7 +23,7 @@ class StartMap(
         super.init(session, intent)
 
         tempSpritesHolder = gameContext.find { it is TempSpritesHolder } as? TempSpritesHolder
-        character = gameContext.find { it is Character } as Character
+        character = gameContext.find { it is PlayableCharacter } as PlayableCharacter
 
         tiledMap?.let {
             val objects = StartMapInitializer.initAll(
