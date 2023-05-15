@@ -43,8 +43,4 @@ object MedievalGameSession : Session() {
     override fun getPersistentObjects(): List<GameObject> {
         return persistentGameObjects.toList()
     }
-
-    fun getCharacter(): Character? {
-        return playableCharacter
-    }
 }
