@@ -4,59 +4,43 @@ import engine.core.window.Window
 
 open class CompositeGameObject : GameObject {
 
-    private val it = mutableListOf<GameObject>()
-
-    var descendingZ = false
+    private val objectList = mutableListOf<GameObject>()
 
     override fun update(deltaTime: Float) {
-        it.forEach {
+        objectList.forEach {
             it.update(deltaTime)
         }
     }
 
     override fun draw() {
-        it.sortBy { it.getZLevel() }
-        it.forEach {
+        objectList.sortBy { it.getZLevel() }
+        objectList.forEach {
             it.draw()
         }
     }
 
     override fun input(window: Window) {
-        it.forEach {
+        objectList.forEach {
             it.input(window)
         }
     }
 
     override fun isDisposed(): Boolean {
-        var isDisposed = true
-        it.forEach {
-            if (!it.isDisposed()) isDisposed = false
-        }
-
-        return it.isEmpty() && isDisposed
+        return false
     }
 
     fun addComponent(gameObject: GameObject) {
-        it.add(gameObject)
+        objectList.add(gameObject)
     }
 
     fun removeComponent(gameObject: GameObject) {
-        it.remove(gameObject)
+        objectList.remove(gameObject)
     }
 
     override fun getZLevel(): Float {
-        val out = if (descendingZ) {
-            it.maxOf { it.getZLevel() }
-        } else {
-            it.minOf { it.getZLevel() }
-        }
-
-        return if (out.isNaN()) {
-            Float.NEGATIVE_INFINITY
-        } else {
-            out
-        }
+        if (objectList.isEmpty()) return Float.NEGATIVE_INFINITY
+        return objectList.maxOf { it.getZLevel() }
     }
 
-    fun getInnerObjects() = it.toList()
+    fun getInnerObjects() = objectList.toList()
 }
