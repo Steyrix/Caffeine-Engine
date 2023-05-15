@@ -7,16 +7,12 @@ open class AccumulatedTimeEvent(
 ) {
     private var accumulatedTime = initialTime
 
-    var isFinished = false
-        private set
-
-    fun schedule(deltaTime: Float) {
+    open fun schedule(deltaTime: Float) {
         accumulatedTime += deltaTime
 
         if (accumulatedTime >= timeLimit) {
             accumulatedTime = 0f
             action.invoke(deltaTime)
-            isFinished = true
         }
     }
 }
