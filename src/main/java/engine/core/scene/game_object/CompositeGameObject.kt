@@ -40,6 +40,10 @@ open class CompositeGameObject : GameObject {
         it.add(gameObject)
     }
 
+    fun removeComponent(gameObject: GameObject) {
+        it.remove(gameObject)
+    }
+
     override fun getZLevel(): Float {
         val out = if (descendingZ) {
             it.maxOf { it.getZLevel() }
