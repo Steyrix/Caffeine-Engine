@@ -2,7 +2,7 @@ package engine.core.scene.game_object
 
 import engine.core.window.Window
 
-class CompositeGameObject : GameObject {
+open class CompositeGameObject : GameObject {
 
     private val it = mutableListOf<GameObject>()
 
