@@ -11,8 +11,13 @@ class SingleTimeEvent(
 
     override fun schedule(deltaTime: Float) {
         if (!isFinished) {
-            super.schedule(deltaTime)
-            isFinished = true
+            accumulatedTime += deltaTime
+
+            if (accumulatedTime >= timeLimit) {
+                accumulatedTime = 0f
+                action.invoke(deltaTime)
+                isFinished = true
+            }
         }
     }
 }
