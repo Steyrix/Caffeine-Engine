@@ -71,8 +71,8 @@ class TempSpritesHolder : GameObject {
     }
 
     fun startScreenFading(
-            screenWidth: Float,
-            screenHeight: Float,
+            worldWidth: Float,
+            worldHeight: Float,
             onFinish: () -> Unit
     ) {
         if (renderProjection == null) return
@@ -80,8 +80,8 @@ class TempSpritesHolder : GameObject {
         val params = SetOfStatic2DParameters(
                 x = 0f,
                 y = 0f,
-                xSize = screenWidth,
-                ySize = screenHeight,
+                xSize = worldWidth,
+                ySize = worldHeight,
                 rotationAngle = 0f
         )
 
