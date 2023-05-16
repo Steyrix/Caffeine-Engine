@@ -127,7 +127,7 @@ abstract class MedievalGameScene(
     }
 
     protected open fun postMapTransactionAction() {
-        if (updateRounds < 2) return
+        if (updateRounds >= 2) return
         updateRounds++
         if (updateRounds == 2) {
             MedievalGameMatrixState.postMapTransactionAction(
