@@ -127,19 +127,20 @@ abstract class MedievalGameScene(
     }
 
     protected open fun postMapTransactionAction() {
-        if (updateRounds < 2) {
-            updateRounds++
-            if (updateRounds == 2) {
-                MedievalGameMatrixState.postMapTransactionAction(
-                        isHorizontalMapTransaction,
-                        screenWidth,
-                        screenHeight
-                )
-            }
+        if (updateRounds < 2) return
+        updateRounds++
+        if (updateRounds == 2) {
+            MedievalGameMatrixState.postMapTransactionAction(
+                    isHorizontalMapTransaction,
+                    screenWidth,
+                    screenHeight
+            )
         }
     }
 
     private fun defadeScreen() {
+        if (renderRounds > 0) return
+        renderRounds++
         tempSpritesHolder?.startScreenDefading(
                 tiledMap?.worldSize?.x ?: 0f,
                 tiledMap?.worldSize?.y ?: 0f,
