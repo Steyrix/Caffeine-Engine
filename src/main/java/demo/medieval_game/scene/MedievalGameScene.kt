@@ -140,15 +140,10 @@ abstract class MedievalGameScene(
     }
 
     private fun defadeScreen() {
-        if (updateRounds < 1) {
-            updateRounds++
-            if (updateRounds == 1) {
-                tempSpritesHolder?.startScreenDefading(
-                        tiledMap?.worldSize?.x ?: 0f,
-                        tiledMap?.worldSize?.y ?: 0f,
-                )
-            }
-        }
+        tempSpritesHolder?.startScreenDefading(
+                tiledMap?.worldSize?.x ?: 0f,
+                tiledMap?.worldSize?.y ?: 0f,
+        )
     }
 
     private fun MutableList<GameObject>.convertToFlatList(): MutableList<GameObject> {
