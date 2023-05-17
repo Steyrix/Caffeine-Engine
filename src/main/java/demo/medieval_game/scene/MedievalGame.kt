@@ -1,11 +1,13 @@
 package demo.medieval_game.scene
 
+import demo.medieval_game.data.gameobject.SharedSpritesHolder
 import demo.medieval_game.data.starting_level.getNexusMapPreset
 import demo.medieval_game.data.starting_level.getStartingMapPreset
 import demo.medieval_game.matrix.MedievalGameMatrixState
 import engine.core.scene.Scene
 import engine.core.scene.SceneHolder
 import engine.core.session.SimpleGamePresets
+import engine.core.window.Window
 import engine.feature.matrix.MatrixComputer
 import org.joml.Matrix4f
 
@@ -19,6 +21,8 @@ class MedievalGame(
 
     override val session = MedievalGameSession
 
+    private var sharedSprites: SharedSpritesHolder? = null
+
     private val renderProjection: Matrix4f =
             Matrix4f()
                     .ortho(
@@ -31,7 +35,7 @@ class MedievalGame(
                     )
 
     init {
-        sceneMap["nexus"] = NexusMap(getNexusMapPreset(),  screenWidth, screenHeight, renderProjection)
+        sceneMap["nexus"] = NexusMap(getNexusMapPreset(), screenWidth, screenHeight, renderProjection)
     }
 
     override fun init() {
@@ -43,13 +47,43 @@ class MedievalGame(
                 )
         )
 
+        sharedSprites = MedievalGameSession.sharedSpritesHolder
+
         currentScene = StartMap(
                 getStartingMapPreset(screenWidth, screenHeight),
                 screenWidth,
                 screenHeight,
                 renderProjection
-        ) { switchScene("nexus") }
+        ) {
+            switchScene("nexus")
+        }
 
         currentScene?.init(MedievalGameSession)
+    }
+
+    override fun switchScene(nextSceneName: String) {
+        renderTransition {
+            super.switchScene(nextSceneName)
+        }
+    }
+
+    private fun renderTransition(
+            onFinish: () -> Unit
+    ) {
+        sharedSprites?.startScreenFading(
+                screenWidth * 2,
+                screenHeight * 2,
+                onFinish
+        )
+    }
+
+    override fun render(window: Window) {
+        super.render(window)
+        sharedSprites?.draw()
+    }
+
+    override fun update(deltaTime: Float) {
+        super.update(deltaTime)
+        sharedSprites?.update(deltaTime)
     }
 }

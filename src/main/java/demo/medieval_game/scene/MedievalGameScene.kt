@@ -38,7 +38,7 @@ abstract class MedievalGameScene(
     protected var boxInteractionContext: BoxInteractionContext? = null
 
     private var updateRounds = 0
-    private var renderRounds = 0
+
     private var isHorizontalMapTransaction = false
 
     override fun init(session: Session, intent: SceneIntent?) {
@@ -100,10 +100,6 @@ abstract class MedievalGameScene(
     }
 
     override fun render(window: Window) {
-        renderRounds = renderRounds.inc()
-        if (renderRounds == 1) {
-            defadeScreen()
-        }
         renderSetup()
         gameContext.convertToFlatList().forEach { it.draw() }
     }
@@ -136,15 +132,6 @@ abstract class MedievalGameScene(
                     screenHeight
             )
         }
-    }
-
-    private fun defadeScreen() {
-        if (renderRounds > 0) return
-        renderRounds++
-        tempSpritesHolder?.startScreenDefading(
-                tiledMap?.worldSize?.x ?: 0f,
-                tiledMap?.worldSize?.y ?: 0f,
-        )
     }
 
     private fun MutableList<GameObject>.convertToFlatList(): MutableList<GameObject> {

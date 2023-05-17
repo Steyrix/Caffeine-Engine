@@ -2,6 +2,7 @@ package demo.medieval_game.scene
 
 import demo.medieval_game.data.Initializer
 import demo.medieval_game.data.gameobject.PlayableCharacter
+import demo.medieval_game.data.gameobject.SharedSpritesHolder
 import demo.medieval_game.data.gameobject.TempSpritesHolder
 import engine.core.scene.game_object.GameObject
 import engine.core.session.Session
@@ -18,6 +19,9 @@ object MedievalGameSession : Session() {
         private set
 
     var tempSpritesHolder: TempSpritesHolder? = null
+        private set
+
+    var sharedSpritesHolder: SharedSpritesHolder? = null
         private set
 
     val bbCollisionContext = BoundingBoxCollisionContext()
@@ -38,6 +42,7 @@ object MedievalGameSession : Session() {
 
         playableCharacter = persistentGameObjects.find { it is PlayableCharacter } as? PlayableCharacter
         tempSpritesHolder = persistentGameObjects.find { it is TempSpritesHolder } as? TempSpritesHolder
+        sharedSpritesHolder = SharedSpritesHolder().apply { init(presets.renderProjection) }
     }
 
     override fun getPersistentObjects(): List<GameObject> {
