@@ -5,6 +5,7 @@ import demo.medieval_game.data.gameobject.*
 import demo.medieval_game.data.starting_level.StartMapInitializer
 import engine.core.scene.SceneIntent
 import engine.core.session.Session
+import engine.core.window.Window
 import engine.feature.geometry.Point2D
 import engine.feature.tiled.scene.TileMapPreset
 import org.joml.Matrix4f
@@ -44,13 +45,13 @@ class StartMap(
 
         if (character?.isOutOfMap() == true && !isFading) {
             isFading = true
-            tempSpritesHolder?.startScreenFading(
-                    tiledMap?.worldSize?.x ?: 0f,
-                    tiledMap?.worldSize?.y ?: 0f,
-            ) {
-                switchTrigger.invoke()
-            }
+            switchTrigger.invoke()
         }
+    }
+
+    override fun input(window: Window) {
+        if (isFading) return
+        super.input(window)
     }
 
     override fun getNextSceneIntent(): MedievalGameSceneIntent {
