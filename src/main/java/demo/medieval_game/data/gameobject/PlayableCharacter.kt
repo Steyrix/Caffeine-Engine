@@ -134,6 +134,10 @@ class PlayableCharacter : SingleGameObject() {
         tiledCollider = getTiledCollider(collisionContext)
 
         addComponent(tiledCollider, characterParameters)
+
+        tiledCollider?.let {
+            collisionContext.addCollider(it)
+        }
     }
 
     fun updateBoundingBox() {
