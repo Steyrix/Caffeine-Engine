@@ -113,7 +113,6 @@ class PlayableCharacter : SingleGameObject() {
         )
     }
 
-    // TODO update obstacles bg
     private fun getTiledCollider(
             tiledCollisionContext: TiledCollisionContext
     ): TiledCollider {
