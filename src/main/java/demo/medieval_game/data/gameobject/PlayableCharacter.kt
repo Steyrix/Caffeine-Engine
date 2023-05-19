@@ -113,6 +113,7 @@ class PlayableCharacter : SingleGameObject() {
         )
     }
 
+    // TODO: configure layers via getTiledCollider method's parameters
     private fun getTiledCollider(
             tiledCollisionContext: TiledCollisionContext
     ): TiledCollider {
