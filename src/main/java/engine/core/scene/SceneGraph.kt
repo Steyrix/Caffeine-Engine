@@ -1,12 +1,12 @@
 package engine.core.scene
 
-typealias AdjacentScenes<S> = MutableMap<Node<S>, MutableList<Node<S>>>
+typealias AdjacentScenes<N> = MutableMap<N, MutableList<N>>
 
 abstract class Node<S : Scene> {
     protected abstract val value: S
 }
 
-abstract class SceneGraph<S : Scene> {
+abstract class SceneGraph<S : Scene, N : Node<S>> {
 
-    protected abstract val nodes: AdjacentScenes<S>
+    protected abstract val nodes: AdjacentScenes<N>
 }
