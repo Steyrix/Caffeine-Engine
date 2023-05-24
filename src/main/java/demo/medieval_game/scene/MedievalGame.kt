@@ -6,6 +6,7 @@ import demo.medieval_game.data.starting_level.getStartingMapPreset
 import demo.medieval_game.matrix.MedievalGameMatrixState
 import engine.core.scene.Scene
 import engine.core.scene.SceneHolder
+import engine.core.scene.SceneIntent
 import engine.core.session.SimpleGamePresets
 import engine.core.window.Window
 import engine.feature.matrix.MatrixComputer
@@ -67,6 +68,10 @@ class MedievalGame(
         }
     }
 
+    override fun getNextSceneName(intent: SceneIntent): String {
+        TODO("Not yet implemented")
+    }
+
     private fun renderTransition(
             onFinish: () -> Unit
     ) {
@@ -85,9 +90,5 @@ class MedievalGame(
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
         sharedSprites?.update(deltaTime)
-    }
-
-    private fun getNextScene() {
-
     }
 }

@@ -34,4 +34,6 @@ interface SceneHolder {
         currentScene = sceneMap[nextSceneName]
         currentScene?.init(session, intent)
     }
+
+    fun getNextSceneName(intent: SceneIntent): String
 }
