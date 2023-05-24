@@ -69,7 +69,9 @@ class MedievalGame(
     }
 
     override fun getNextSceneName(intent: SceneIntent): String {
-        TODO("Not yet implemented")
+        (intent as? MedievalGameSceneIntent)?.let {
+            return ""
+        } ?: throw IllegalStateException()
     }
 
     private fun renderTransition(
