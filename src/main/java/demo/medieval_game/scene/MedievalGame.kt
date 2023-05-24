@@ -86,4 +86,8 @@ class MedievalGame(
         super.update(deltaTime)
         sharedSprites?.update(deltaTime)
     }
+
+    private fun getNextScene() {
+
+    }
 }
