@@ -3,3 +3,4 @@
 - Save direction of a map leaving / proper matrix translations [DONE]
 - Different initializers for scenes
 - Universal scene initializer using serialized data
+- Serialized maps
