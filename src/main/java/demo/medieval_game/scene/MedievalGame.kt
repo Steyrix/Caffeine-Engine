@@ -17,6 +17,8 @@ class MedievalGame(
         override val screenHeight: Float
 ) : SceneHolder {
 
+    // TODO: 2d array for maps
+
     override val sceneMap: MutableMap<String, Scene> = mutableMapOf()
     override var currentScene: Scene? = null
 
@@ -35,6 +37,7 @@ class MedievalGame(
                             1f
                     )
 
+    // TODO: deserialize maps from presets
     init {
         sceneMap["nexus"] = NexusMap(getNexusMapPreset(), screenWidth, screenHeight, renderProjection)
     }
