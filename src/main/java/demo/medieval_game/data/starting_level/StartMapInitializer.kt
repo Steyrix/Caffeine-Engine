@@ -3,7 +3,6 @@ package demo.medieval_game.data.starting_level
 import demo.medieval_game.data.gameobject.*
 import demo.medieval_game.data.goblinParams1
 import demo.medieval_game.data.goblinParams2
-import engine.core.parameters.toStatic
 import engine.core.scene.game_object.GameObject
 import engine.core.scene.SceneInitializer
 import engine.core.update.SetOf2DParametersWithVelocity
@@ -66,8 +65,8 @@ object StartMapInitializer : SceneInitializer {
 
         out.add(enemy1)
         out.add(enemy2)
-        enemy1.spawn(goblinParams1.toStatic())
-        enemy2.spawn(goblinParams1.toStatic())
+        enemy1.spawn(goblinParams1)
+        enemy2.spawn(goblinParams1)
 
         return out
     }
