@@ -32,9 +32,8 @@ class SharedSpritesHolder : SingleGameObject() {
             worldHeight: Float,
             onFinish: () -> Unit
     ) {
-        println("fade")
         if (renderProjection == null) return
-        println("start fading $alpha")
+
         val params = SetOfStatic2DParameters(
                 x = 0f,
                 y = 0f,
@@ -53,7 +52,6 @@ class SharedSpritesHolder : SingleGameObject() {
                 SingleTimeEvent(
                         timeLimit = 4f,
                         action = { _ ->
-                            println("invoke")
                             it?.removeComponent(graphicalComponent)
                             componentToAction.remove(graphicalComponent)
                             alpha = 0f
