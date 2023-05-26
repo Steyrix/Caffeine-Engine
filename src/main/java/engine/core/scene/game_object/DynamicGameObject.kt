@@ -1,6 +1,7 @@
 package engine.core.scene.game_object
 
 import engine.core.update.SetOfParameters
+import engine.core.window.Window
 
 abstract class DynamicGameObject<P : SetOfParameters> : SingleGameObject() {
 
@@ -17,9 +18,15 @@ abstract class DynamicGameObject<P : SetOfParameters> : SingleGameObject() {
         isSpawned = false
     }
 
-    override fun draw() {
-        if (isSpawned) {
-            super.draw()
-        }
+    final override fun draw() {
+        if (!isSpawned) return
+    }
+
+    final override fun update(deltaTime: Float) {
+        if (!isSpawned) return
+    }
+
+    final override fun input(window: Window) {
+        if (!isSpawned) return
     }
 }
