@@ -20,7 +20,8 @@ his project, on the other hand, will use LWJGL OpenGL binding, since the latter 
 - Improve composite entity pattern :white_check_mark:
 - Implement continuous collision detection for bounding box based collision contexts
 - Implement several bounding box collision detection algorithms
-- Refactor Tiled Map, provide the ability to change, replace specific tiles for future rerendering
+- Refactor Tiled Map, provide the ability to change, replace specific tiles for future rerendering :white_check_mark:
+- Use parameters data classes instances only in the scope of game object, since it can be hard and messy to perform operation on static entities
 
 ## AI TODO List:
 - Think of how to determine the vector of movement from tile to tile in a given path :white_check_mark:
