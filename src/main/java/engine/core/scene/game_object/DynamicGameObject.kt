@@ -20,13 +20,19 @@ abstract class DynamicGameObject<P : SetOfParameters> : SingleGameObject() {
 
     final override fun draw() {
         if (!isSpawned) return
+
+        super.draw()
     }
 
     final override fun update(deltaTime: Float) {
         if (!isSpawned) return
+
+        super.update(deltaTime)
     }
 
     final override fun input(window: Window) {
         if (!isSpawned) return
+
+        super.input(window)
     }
 }
