@@ -21,7 +21,6 @@ class NpcEnemy(
 ) : DynamicGameObject<SetOfStatic2DParameters>() {
 
     override fun preSpawn(setOfParameters: SetOfStatic2DParameters) {
-        TODO("Not yet implemented")
     }
 
     fun init(
