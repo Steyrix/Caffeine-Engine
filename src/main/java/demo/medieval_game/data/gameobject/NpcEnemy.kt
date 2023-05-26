@@ -17,7 +17,7 @@ import engine.feature.tiled.traversing.TileTraverser
 import org.joml.Matrix4f
 
 class NpcEnemy(
-        private val parameters: SetOf2DParametersWithVelocity
+        private val params: SetOf2DParametersWithVelocity
 ) : DynamicGameObject<SetOfStatic2DParameters>() {
 
     override fun preSpawn(setOfParameters: SetOfStatic2DParameters) {
@@ -34,14 +34,14 @@ class NpcEnemy(
         val animatedObject = getAnimatedObject(renderProjection)
 
         it = Goblin(
-                params = parameters,
+                params = params,
                 drawableComponent = animatedObject,
                 tileTraverser = tileTraverser,
                 playerParams = characterParameters,
-                hp = getHealthBar(parameters, renderProjection),
+                hp = getHealthBar(params, renderProjection),
                 tempSpritesHolder = tempSpritesHolder
         ).also {
-            it.addComponent(box, parameters)
+            it.addComponent(box, params)
         }
 
         boundingBoxCollisionContext.addEntity(box, box.getParameters())
@@ -99,6 +99,6 @@ class NpcEnemy(
             return 0.1f
         }
 
-        return parameters.y
+        return params.y
     }
 }
