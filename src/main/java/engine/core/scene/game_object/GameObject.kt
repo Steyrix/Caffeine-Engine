@@ -1,7 +1,5 @@
 package engine.core.scene.game_object
 
-import engine.core.entity.Entity
-import engine.core.update.SetOfParameters
 import engine.core.window.Window
 
 interface GameObject {
