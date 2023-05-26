@@ -17,7 +17,8 @@ class MedievalGame(
         override val screenHeight: Float
 ) : SceneHolder {
 
-    // TODO: 2d array for maps
+    // TODO: initialize
+    private val maps: MutableMap<Int, MutableList<Scene>> = mutableMapOf()
 
     override val sceneMap: MutableMap<String, Scene> = mutableMapOf()
     override var currentScene: Scene? = null
