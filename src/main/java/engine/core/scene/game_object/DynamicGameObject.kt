@@ -6,7 +6,10 @@ abstract class DynamicGameObject<P : SetOfParameters> : SingleGameObject() {
 
     private var isSpawned = false
 
-    open fun spawn(setOfParameters: P) {
+    abstract fun preSpawn(setOfParameters: P)
+
+    fun spawn(setOfParameters: P) {
+        preSpawn(setOfParameters)
         isSpawned = true
     }
 
