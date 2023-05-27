@@ -1,4 +1,4 @@
-package engine.core.scene.game_object
+package engine.core.game_object
 
 import engine.core.window.Window
 

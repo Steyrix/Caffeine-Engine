@@ -4,11 +4,9 @@ import demo.medieval_game.Player
 import demo.medieval_game.ShaderController
 import demo.medieval_game.data.*
 import demo.medieval_game.hp.HealthBar
-import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D
-import engine.core.scene.game_object.GameObject
-import engine.core.scene.game_object.SingleGameObject
+import engine.core.game_object.SingleGameObject
 import engine.core.texture.Texture2D
 import engine.feature.collision.boundingbox.*
 import engine.feature.collision.tiled.TiledCollider

@@ -4,7 +4,7 @@ import demo.medieval_game.data.Initializer
 import demo.medieval_game.data.gameobject.PlayableCharacter
 import demo.medieval_game.data.gameobject.SharedSpritesHolder
 import demo.medieval_game.data.gameobject.TempSpritesHolder
-import engine.core.scene.game_object.GameObject
+import engine.core.game_object.GameObject
 import engine.core.session.Session
 import engine.core.session.SessionPresets
 import engine.core.session.SimpleGamePresets

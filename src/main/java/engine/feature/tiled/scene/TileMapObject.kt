@@ -4,8 +4,7 @@ import demo.medieval_game.data.recalculateParameters
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.render.render2D.Drawable2D
-import engine.core.scene.game_object.GameObject
-import engine.core.scene.game_object.SingleGameObject
+import engine.core.game_object.SingleGameObject
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
 import engine.core.update.SetOf2DParametersWithVelocity

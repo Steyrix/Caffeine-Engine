@@ -5,7 +5,7 @@ import demo.medieval_game.data.campfireAnimations
 import demo.medieval_game.data.campfireParameters
 import engine.core.entity.CompositeEntity
 import engine.core.render.render2D.AnimatedObject2D
-import engine.core.scene.game_object.SingleGameObject
+import engine.core.game_object.SingleGameObject
 import engine.core.texture.Texture2D
 import org.joml.Matrix4f
 

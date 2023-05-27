@@ -7,8 +7,8 @@ import demo.medieval_game.matrix.MedievalGameMatrixState
 import engine.core.controllable.Direction
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.scene.SceneIntent
-import engine.core.scene.game_object.CompositeGameObject
-import engine.core.scene.game_object.GameObject
+import engine.core.game_object.CompositeGameObject
+import engine.core.game_object.GameObject
 import engine.core.session.Session
 import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext

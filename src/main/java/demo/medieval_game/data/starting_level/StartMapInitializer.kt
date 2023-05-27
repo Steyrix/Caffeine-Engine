@@ -3,7 +3,7 @@ package demo.medieval_game.data.starting_level
 import demo.medieval_game.data.gameobject.*
 import demo.medieval_game.data.goblinParams1
 import demo.medieval_game.data.goblinParams2
-import engine.core.scene.game_object.GameObject
+import engine.core.game_object.GameObject
 import engine.core.scene.SceneInitializer
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
