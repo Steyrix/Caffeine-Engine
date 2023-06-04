@@ -7,9 +7,12 @@ import engine.core.entity.CompositeEntity
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.game_object.SingleGameObject
 import engine.core.texture.Texture2D
+import engine.core.update.SetOfStatic2DParameters
 import org.joml.Matrix4f
 
-class Campfire : SingleGameObject() {
+class Campfire(
+        private val parameters: SetOfStatic2DParameters
+) : SingleGameObject() {
 
     private var graphicalComponent: AnimatedObject2D? = null
 
@@ -30,10 +33,10 @@ class Campfire : SingleGameObject() {
         }
 
         it = object : CompositeEntity() {}
-        addComponent(graphicalComponent, campfireParameters)
+        addComponent(graphicalComponent, parameters)
     }
 
     override fun getZLevel(): Float {
-        return campfireParameters.y
+        return parameters.y
     }
 }

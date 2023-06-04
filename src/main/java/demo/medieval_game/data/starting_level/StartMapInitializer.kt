@@ -1,5 +1,6 @@
 package demo.medieval_game.data.starting_level
 
+import demo.medieval_game.data.campfireParameters
 import demo.medieval_game.data.gameobject.*
 import demo.medieval_game.data.goblinParams1
 import demo.medieval_game.data.goblinParams2
@@ -19,7 +20,9 @@ object StartMapInitializer : SceneInitializer {
             tempSpritesHolder: TempSpritesHolder,
             tileTraverserCreator: (SetOf2DParametersWithVelocity) -> TileTraverser
     ): MutableList<out GameObject> {
-        val campfire = Campfire().apply {
+        val campfire = Campfire(
+                parameters = campfireParameters
+        ).apply {
             init(renderProjection)
         }
 
