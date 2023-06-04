@@ -37,7 +37,7 @@ object Initializer {
 
         out.add(character)
 
-        val centerPoint = characterParameters.getCenterPoint()
+        val centerPoint = character.getParams().getCenterPoint()
 
         MedievalGameMatrixState.translateWorld(
                 screenWidth / 2 - centerPoint.x,
@@ -53,7 +53,7 @@ object Initializer {
             tiledCollisionContext: TiledCollisionContext?,
             boxInteractionContext: BoxInteractionContext,
             tempSpritesHolder: TempSpritesHolder
-    ): GameObject {
+    ): PlayableCharacter {
         return PlayableCharacter(
                 characterParameters
         ).apply {
