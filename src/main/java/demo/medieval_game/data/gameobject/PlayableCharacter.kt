@@ -74,7 +74,7 @@ class PlayableCharacter(
         return BoundingBox(
                 xOffset = getHumanoidBoxOffset(),
                 xSize = getHumanoidBoxSize(),
-                ySize = characterParameters.ySize,
+                ySize = parameters.ySize,
                 isSizeBoundToHolder = false
         ).apply {
             shader = ShaderController.createBoundingBoxShader(renderProjection)
@@ -162,7 +162,7 @@ class PlayableCharacter(
     fun getDirection() = (it as Player).getDirection()
 
     override fun getZLevel(): Float {
-        return characterParameters.y
+        return parameters.y
     }
 
     override fun getParams(): SetOf2DParametersWithVelocity {
