@@ -164,4 +164,8 @@ class PlayableCharacter(
     override fun getZLevel(): Float {
         return characterParameters.y
     }
+
+    override fun getParams(): SetOf2DParametersWithVelocity {
+        return parameters.copy()
+    }
 }

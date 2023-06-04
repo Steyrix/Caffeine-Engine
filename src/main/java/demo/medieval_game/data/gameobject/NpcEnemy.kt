@@ -101,4 +101,8 @@ class NpcEnemy(
 
         return parameters.y
     }
+
+    override fun getParams(): SetOf2DParametersWithVelocity {
+        return parameters.copy()
+    }
 }

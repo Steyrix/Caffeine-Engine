@@ -37,4 +37,6 @@ abstract class DynamicGameObject<P : SetOfParameters>(
 
         super.input(window)
     }
+
+    abstract fun getParams(): P
 }
