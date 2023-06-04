@@ -33,6 +33,8 @@ class NpcEnemy(
         val box = getBoundingBox(renderProjection)
         val animatedObject = getAnimatedObject(renderProjection)
 
+        // TODO here I am passing static character parameters because goblin needs to chase character.
+        // I can get rid of this using lambda passing to this class, however it will expose Goblin inner methods
         it = Goblin(
                 params = parameters,
                 drawableComponent = animatedObject,
