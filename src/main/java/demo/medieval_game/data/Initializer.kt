@@ -54,7 +54,9 @@ object Initializer {
             boxInteractionContext: BoxInteractionContext,
             tempSpritesHolder: TempSpritesHolder
     ): GameObject {
-        return PlayableCharacter().apply {
+        return PlayableCharacter(
+                characterParameters
+        ).apply {
             init(
                     renderProjection,
                     boundingBoxCollisionContext,
@@ -62,6 +64,7 @@ object Initializer {
                     boxInteractionContext,
                     tempSpritesHolder
             )
+            spawn(characterParameters)
         }
     }
 }

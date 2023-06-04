@@ -5,16 +5,19 @@ import demo.medieval_game.ShaderController
 import demo.medieval_game.data.*
 import demo.medieval_game.hp.HealthBar
 import engine.core.entity.Entity
+import engine.core.game_object.DynamicGameObject
 import engine.core.render.render2D.AnimatedObject2D
-import engine.core.game_object.SingleGameObject
 import engine.core.texture.Texture2D
+import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.collision.boundingbox.*
 import engine.feature.collision.tiled.TiledCollider
 import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.interaction.BoxInteractionContext
 import org.joml.Matrix4f
 
-class PlayableCharacter : SingleGameObject() {
+class PlayableCharacter(
+        params: SetOf2DParametersWithVelocity
+) : DynamicGameObject<SetOf2DParametersWithVelocity>(params) {
 
     private var graphicalComponent: AnimatedObject2D? = null
     private var hp: HealthBar? = null
@@ -24,6 +27,10 @@ class PlayableCharacter : SingleGameObject() {
 
     private var projection = Matrix4f()
     private var currentInteractionContext: BoxInteractionContext? = null
+
+    override fun preSpawn(setOfParameters: SetOf2DParametersWithVelocity) {
+
+    }
 
     fun init(
             renderProjection: Matrix4f,
