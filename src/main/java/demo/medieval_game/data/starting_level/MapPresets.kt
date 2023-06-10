@@ -1,7 +1,7 @@
 package demo.medieval_game.data.starting_level
 
+import demo.medieval_game.data.*
 import demo.medieval_game.matrix.MedievalGameMatrixState
-import demo.medieval_game.data.campfireParameters
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.render.render2D.Drawable2D
 import engine.feature.tiled.scene.TileMapPreset
