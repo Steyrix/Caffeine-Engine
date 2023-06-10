@@ -5,8 +5,6 @@ import engine.core.update.SetOfStatic2DParameters
 
 const val HUMANOID_SIZE_TO_MAP_RELATION = 0.128f
 
-const val HUMANOID_BOX_OFFSET_MODIFIER = 0.2265f
-
 var HUMANOID_SIZE_X = 102.4f
 var HUMANOID_SIZE_Y = 102.4f
 
@@ -48,9 +46,9 @@ val goblinParams2 = SetOf2DParametersWithVelocity(
         velocityY = 0f
 )
 
-fun getHumanoidBoxOffset() = HUMANOID_SIZE_X * HUMANOID_BOX_OFFSET_MODIFIER / 2
+val humanoidBoxOffset = 11.596801f
 
-fun getHumanoidBoxSize() = HUMANOID_SIZE_X - getHumanoidBoxOffset() * 2
+val humanoidBoxSize = 79.2064f
 
 val campfireParameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
         800f, 800f, 100f, 100f, 0f

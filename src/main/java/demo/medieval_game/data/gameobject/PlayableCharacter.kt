@@ -72,8 +72,8 @@ class PlayableCharacter(
             renderProjection: Matrix4f
     ): BoundingBox {
         return BoundingBox(
-                xOffset = getHumanoidBoxOffset(),
-                xSize = getHumanoidBoxSize(),
+                xOffset = humanoidBoxOffset,
+                xSize = humanoidBoxSize,
                 ySize = parameters.ySize,
                 isSizeBoundToHolder = false
         ).apply {
