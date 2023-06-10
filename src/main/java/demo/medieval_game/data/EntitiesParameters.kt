@@ -7,8 +7,8 @@ const val HUMANOID_SIZE_TO_MAP_RELATION = 0.128f
 
 const val HUMANOID_BOX_OFFSET_MODIFIER = 0.2265f
 
-var HUMANOID_SIZE_X = 128f
-var HUMANOID_SIZE_Y = 128f
+var HUMANOID_SIZE_X = 102.4f
+var HUMANOID_SIZE_Y = 102.4f
 
 var hpBarParameters1 = SetOfStatic2DParameters(
         x = 0f,
@@ -60,16 +60,4 @@ fun getMapParameters(screenWidth: Float, screenHeight:Float): SetOfStatic2DParam
     return SetOfStatic2DParameters(
             x = 0f, y = 0f, xSize = screenWidth, ySize = screenHeight, rotationAngle = 0f
     )
-}
-
-fun recalculateParameters(xSize: Float, ySize: Float) {
-    HUMANOID_SIZE_X = HUMANOID_SIZE_TO_MAP_RELATION * xSize
-    HUMANOID_SIZE_Y = HUMANOID_SIZE_TO_MAP_RELATION * ySize
-
-    characterParameters.xSize = HUMANOID_SIZE_X
-    characterParameters.ySize = HUMANOID_SIZE_Y
-    goblinParams1.xSize = HUMANOID_SIZE_X
-    goblinParams1.ySize = HUMANOID_SIZE_Y
-    goblinParams2.xSize = HUMANOID_SIZE_X
-    goblinParams2.ySize = HUMANOID_SIZE_Y
 }
