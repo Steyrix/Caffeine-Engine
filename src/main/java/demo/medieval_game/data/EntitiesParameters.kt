@@ -10,7 +10,7 @@ const val HUMANOID_BOX_OFFSET_MODIFIER = 0.2265f
 var HUMANOID_SIZE_X = 128f
 var HUMANOID_SIZE_Y = 128f
 
-var hpBarPatameters1 = SetOfStatic2DParameters(
+var hpBarParameters1 = SetOfStatic2DParameters(
         x = 0f,
         y = 0f,
         xSize = 50f,

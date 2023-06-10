@@ -49,7 +49,7 @@ class PlayableCharacter(
                 tempSpritesHolder = tempSpritesHolder
         )
 
-        hp = HealthBar(characterParameters, hpBarPatameters1, renderProjection)
+        hp = HealthBar(characterParameters, hpBarParameters1, renderProjection)
 
         boxCollider = getBoundingBoxCollider(bbCollisionContext)
 
