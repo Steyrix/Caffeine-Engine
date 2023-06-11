@@ -12,7 +12,7 @@ data class AnimationPreset(
         val atlasTexturePath: String,
         val frameSizeX: Float,
         val frameSizeY: Float,
-        val animations: MutableList<Animation>
+        val animations: List<Animation>
 )
 
 data class NpcPreset(
