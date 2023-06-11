@@ -47,29 +47,21 @@ object StartMapInitializer : SceneInitializer {
             creator: (SetOf2DParametersWithVelocity) -> TileTraverser
     ): List<GameObject> {
         val out = mutableListOf<GameObject>()
+        val paramsList = listOf(goblinParams1, goblinParams2)
 
-        val enemy1 = createGoblinNPC(
-                renderProjection,
-                boundingBoxCollisionContext,
-                boxInteractionContext,
-                goblinParams1,
-                creator,
-                tempSpritesHolder
-        )
+        paramsList.forEach {
+            val goblin = createGoblinNPC(
+                    renderProjection,
+                    boundingBoxCollisionContext,
+                    boxInteractionContext,
+                    it,
+                    creator,
+                    tempSpritesHolder
+            )
 
-        val enemy2 = createGoblinNPC(
-                renderProjection,
-                boundingBoxCollisionContext,
-                boxInteractionContext,
-                goblinParams2,
-                creator,
-                tempSpritesHolder
-        )
-
-        out.add(enemy1)
-        out.add(enemy2)
-        enemy1.spawn(goblinParams1)
-        enemy2.spawn(goblinParams1)
+            out.add(goblin)
+            goblin.spawn(it)
+        }
 
         return out
     }
