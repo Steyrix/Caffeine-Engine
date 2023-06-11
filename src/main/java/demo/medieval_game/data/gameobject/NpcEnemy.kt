@@ -2,7 +2,7 @@ package demo.medieval_game.data.gameobject
 
 import demo.medieval_game.ShaderController
 import demo.medieval_game.data.*
-import demo.medieval_game.goblin.Goblin
+import demo.medieval_game.data.gameobject.npc.goblin.Goblin
 import demo.medieval_game.hp.HealthBar
 import engine.core.entity.Entity
 import engine.core.render.render2D.AnimatedObject2D

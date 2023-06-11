@@ -1,4 +1,4 @@
-package demo.medieval_game.goblin
+package demo.medieval_game.data.gameobject.npc.goblin
 
 import demo.medieval_game.Player
 import demo.medieval_game.data.AnimationKey
