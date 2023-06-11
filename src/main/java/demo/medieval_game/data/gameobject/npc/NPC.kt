@@ -36,7 +36,7 @@ abstract class NPC<E : CompositeEntity>(
         )
 
         it = initEntity(
-                box,
+                renderProjection,
                 animatedObject
         )
 
@@ -83,7 +83,7 @@ abstract class NPC<E : CompositeEntity>(
     }
 
     abstract fun initEntity(
-            boundingBox: BoundingBox,
+            renderProjection: Matrix4f,
             animatedObject2D: AnimatedObject2D
     ): E
 }
