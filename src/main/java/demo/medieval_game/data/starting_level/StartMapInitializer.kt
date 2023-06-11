@@ -1,7 +1,10 @@
 package demo.medieval_game.data.starting_level
 
 import demo.medieval_game.data.campfireParameters
+import demo.medieval_game.data.characterParameters
 import demo.medieval_game.data.gameobject.*
+import demo.medieval_game.data.gameobject.npc.goblin.GoblinNPC
+import demo.medieval_game.data.gameobject.npc.goblin.GoblinPreset
 import demo.medieval_game.data.goblinParams1
 import demo.medieval_game.data.goblinParams2
 import engine.core.game_object.GameObject
@@ -42,29 +45,26 @@ object StartMapInitializer : SceneInitializer {
             boxInteractionContext: BoxInteractionContext,
             tempSpritesHolder: TempSpritesHolder,
             creator: (SetOf2DParametersWithVelocity) -> TileTraverser
-    ): List<NpcEnemy> {
-        val out = mutableListOf<NpcEnemy>()
+    ): List<GameObject> {
+        val out = mutableListOf<GameObject>()
 
-        val enemy1 = NpcEnemy(goblinParams1)
-                .also { npc ->
-                    npc.init(
-                            renderProjection,
-                            boundingBoxCollisionContext,
-                            boxInteractionContext,
-                            creator(goblinParams1),
-                            tempSpritesHolder
-                    )
-                }
-        val enemy2 = NpcEnemy(goblinParams2)
-                .also { npc ->
-                    npc.init(
-                            renderProjection,
-                            boundingBoxCollisionContext,
-                            boxInteractionContext,
-                            creator(goblinParams2),
-                            tempSpritesHolder
-                    )
-                }
+        val enemy1 = createGoblinNPC(
+                renderProjection,
+                boundingBoxCollisionContext,
+                boxInteractionContext,
+                goblinParams1,
+                creator,
+                tempSpritesHolder
+        )
+
+        val enemy2 = createGoblinNPC(
+                renderProjection,
+                boundingBoxCollisionContext,
+                boxInteractionContext,
+                goblinParams2,
+                creator,
+                tempSpritesHolder
+        )
 
         out.add(enemy1)
         out.add(enemy2)
@@ -72,5 +72,28 @@ object StartMapInitializer : SceneInitializer {
         enemy2.spawn(goblinParams1)
 
         return out
+    }
+
+    private fun createGoblinNPC(
+            renderProjection: Matrix4f,
+            boundingBoxCollisionContext: BoundingBoxCollisionContext,
+            boxInteractionContext: BoxInteractionContext,
+            params: SetOf2DParametersWithVelocity,
+            creator: (SetOf2DParametersWithVelocity) -> TileTraverser,
+            tempSpritesHolder: TempSpritesHolder
+    ): GoblinNPC {
+        return GoblinNPC(
+                params,
+                creator.invoke(params),
+                characterParameters,
+                tempSpritesHolder
+        ).also {
+            it.init(
+                    renderProjection,
+                    boundingBoxCollisionContext,
+                    boxInteractionContext,
+                    GoblinPreset.value
+            )
+        }
     }
 }
