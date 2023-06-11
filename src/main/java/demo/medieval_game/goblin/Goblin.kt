@@ -77,7 +77,6 @@ class Goblin(
             drawableComponent.setAnimationByKey(controller.getAnimationKey())
         }
 
-        // todo Encapsulate
         if (hp.filled <= 0) {
             entitiesMap.remove(tileTraverser)
             entitiesMap.remove(controller)

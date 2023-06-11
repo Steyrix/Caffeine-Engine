@@ -37,8 +37,7 @@ abstract class NPC<E : CompositeEntity>(
 
         it = initEntity(
                 box,
-                animatedObject,
-                getComponents()
+                animatedObject
         )
 
         boundingBoxCollisionContext.addEntity(box, box.getParameters())
@@ -85,9 +84,6 @@ abstract class NPC<E : CompositeEntity>(
 
     abstract fun initEntity(
             boundingBox: BoundingBox,
-            animatedObject2D: AnimatedObject2D,
-            components: List<CompositeEntity>
+            animatedObject2D: AnimatedObject2D
     ): E
-
-    abstract fun getComponents(): List<CompositeEntity>
 }
