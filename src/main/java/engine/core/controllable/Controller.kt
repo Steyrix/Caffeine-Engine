@@ -1,4 +1,6 @@
 package engine.core.controllable
 
-interface Controller {
-}
+import engine.core.entity.Entity
+import engine.core.update.Updatable
+
+interface Controller : Entity, Updatable
