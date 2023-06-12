@@ -17,6 +17,7 @@ abstract class HumanoidController : AnimationController {
         }
     }
 
+    // TODO: default impl of these methods
     protected abstract fun getStrikingAnimation(): String
 
     protected abstract fun getWalkingAnimation(): String
