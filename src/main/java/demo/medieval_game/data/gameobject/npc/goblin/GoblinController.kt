@@ -18,7 +18,7 @@ import kotlin.math.abs
 class GoblinController(
         private val params: SetOf2DParametersWithVelocity,
         private var modifier: Float = 20f,
-) : Controllable, Entity, Updatable {
+) : Entity, Updatable {
 
     var isStriking = false
     private var isWalking = false
@@ -37,8 +37,6 @@ class GoblinController(
             predicate = { isStrikeCooldown },
             action = { isStrikeCooldown = false }
     )
-
-    override fun input(window: Window) {}
 
     override fun update(deltaTime: Float) {
         playStrikingAnimation.schedule(deltaTime)
