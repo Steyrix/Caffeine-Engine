@@ -1,6 +1,7 @@
 package demo.medieval_game.data.gameobject.npc.goblin
 
 import demo.medieval_game.data.AnimationKey
+import demo.medieval_game.data.gameobject.npc.HumanoidController
 import demo.medieval_game.interaction.IsAttackableInteraction
 import engine.core.controllable.Controllable
 import engine.core.controllable.Direction
@@ -18,11 +19,7 @@ import kotlin.math.abs
 class GoblinController(
         private val params: SetOf2DParametersWithVelocity,
         private var modifier: Float = 20f,
-) : Entity, Updatable {
-
-    var isStriking = false
-    private var isWalking = false
-    private var direction = Direction.RIGHT
+) : HumanoidController(), Entity, Updatable {
 
     private val playStrikingAnimation = PredicateTimeEvent(
             timeLimit = 0.5f,
@@ -89,14 +86,6 @@ class GoblinController(
 
     fun getCurrentCenterPos() = Point2D(params.x, params.y)
 
-    fun getAnimationKey(): String {
-        return when {
-            isStriking -> getStrikingAnimation()
-            isWalking -> getWalkingAnimation()
-            else -> getIdleAnimation()
-        }
-    }
-
     private fun directToTarget(targetParams: SetOfParameters) {
         val targetCenter = targetParams.getCenterPoint()
         val thisCenter = params.getCenterPoint()
@@ -120,7 +109,7 @@ class GoblinController(
         }
     }
 
-    private fun getStrikingAnimation(): String {
+    override fun getStrikingAnimation(): String {
         return when (direction) {
             Direction.RIGHT -> AnimationKey.GOBLIN_STRIKE_R
             Direction.LEFT -> AnimationKey.GOBLIN_STRIKE_L
@@ -129,7 +118,7 @@ class GoblinController(
         }
     }
 
-    private fun getWalkingAnimation(): String {
+    override fun getWalkingAnimation(): String {
         return when (direction) {
             Direction.RIGHT -> AnimationKey.GOBLIN_WALK_R
             Direction.LEFT -> AnimationKey.GOBLIN_WALK_L
@@ -138,7 +127,7 @@ class GoblinController(
         }
     }
 
-    private fun getIdleAnimation(): String {
+    override fun getIdleAnimation(): String {
         return when (direction) {
             Direction.RIGHT -> AnimationKey.GOBLIN_IDLE_R
             Direction.LEFT -> AnimationKey.GOBLIN_IDLE_L
