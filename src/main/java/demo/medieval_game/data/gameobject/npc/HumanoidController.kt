@@ -1,6 +1,6 @@
 package demo.medieval_game.data.gameobject.npc
 
-import engine.core.controllable.AnimationController
+import engine.core.controllable.animation.AnimationController
 import engine.core.controllable.Direction
 import java.util.EnumMap
 
