@@ -1,4 +1,4 @@
-package engine.core.controllable.animation
+package engine.core.controllable
 
 import engine.core.controllable.Controller
 
