@@ -1,25 +1,31 @@
 package demo.medieval_game.data.gameobject.npc
 
-import engine.core.controllable.animation.AnimationController
+import engine.core.controllable.AnimationController
 import engine.core.controllable.Direction
 import java.util.EnumMap
 
-private const val IDLE = "IDLE"
-private const val STRIKE = "STRIKE"
-private const val WALK = "WALK"
-
 typealias MultiMap = HashMap<String, MutableMap<Direction, String>>
 
-abstract class HumanoidController : AnimationController {
+abstract class HumanoidController(
+        idleMap: EnumMap<Direction, String>,
+        strikeMap: EnumMap<Direction, String>,
+        walkMap: EnumMap<Direction, String>,
+) : AnimationController {
+
+    companion object {
+        const val IDLE = "IDLE"
+        const val STRIKE = "STRIKE"
+        const val WALK = "WALK"
+    }
 
     protected var direction: Direction = Direction.LEFT
-    protected var isStriking = false
-    protected var isWalking = false
+    var isStriking = false
+    var isWalking = false
 
-    protected val animationMultiMap: MultiMap = hashMapOf(
-            IDLE to EnumMap(Direction::class.java),
-            STRIKE to EnumMap(Direction::class.java),
-            WALK to EnumMap(Direction::class.java)
+    private val animationMultiMap: MultiMap = hashMapOf(
+            IDLE to idleMap,
+            STRIKE to strikeMap,
+            WALK to walkMap
     )
 
     override fun getAnimationKey(): String {
@@ -30,10 +36,15 @@ abstract class HumanoidController : AnimationController {
         }
     }
 
-    // TODO: default impl of these methods
-    protected abstract fun getStrikingAnimation(): String
+    private fun getStrikingAnimation(): String {
+        return animationMultiMap[STRIKE]?.get(direction) ?: ""
+    }
 
-    protected abstract fun getWalkingAnimation(): String
+    private fun getWalkingAnimation(): String {
+        return animationMultiMap[WALK]?.get(direction) ?: ""
+    }
 
-    protected abstract fun getIdleAnimation(): String
+    private fun getIdleAnimation(): String {
+        return animationMultiMap[IDLE]?.get(direction) ?: ""
+    }
 }

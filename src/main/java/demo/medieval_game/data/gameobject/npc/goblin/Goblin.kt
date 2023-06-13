@@ -44,6 +44,9 @@ class Goblin(
     private val controller = GoblinController(
             params,
             modifier = 20f,
+            GoblinAnimationMaps.idleMap,
+            GoblinAnimationMaps.strikeMap,
+            GoblinAnimationMaps.walkMap
     )
 
     init {
