@@ -50,42 +50,24 @@ object StartMapInitializer : SceneInitializer {
         val paramsList = listOf(goblinParams1, goblinParams2)
 
         paramsList.forEach {
-            val goblin = createGoblinNPC(
-                    renderProjection,
-                    boundingBoxCollisionContext,
-                    boxInteractionContext,
+            val goblin = GoblinNPC(
                     it,
-                    creator,
+                    creator.invoke(it),
+                    characterParameters,
                     tempSpritesHolder
-            )
+            ).also { npc ->
+                npc.init(
+                        renderProjection,
+                        boundingBoxCollisionContext,
+                        boxInteractionContext,
+                        GoblinPreset.get()
+                )
+            }
 
             out.add(goblin)
             goblin.spawn(it)
         }
 
         return out
-    }
-
-    private fun createGoblinNPC(
-            renderProjection: Matrix4f,
-            boundingBoxCollisionContext: BoundingBoxCollisionContext,
-            boxInteractionContext: BoxInteractionContext,
-            params: SetOf2DParametersWithVelocity,
-            creator: (SetOf2DParametersWithVelocity) -> TileTraverser,
-            tempSpritesHolder: TempSpritesHolder
-    ): GoblinNPC {
-        return GoblinNPC(
-                params,
-                creator.invoke(params),
-                characterParameters,
-                tempSpritesHolder
-        ).also {
-            it.init(
-                    renderProjection,
-                    boundingBoxCollisionContext,
-                    boxInteractionContext,
-                    GoblinPreset.get()
-            )
-        }
     }
 }
