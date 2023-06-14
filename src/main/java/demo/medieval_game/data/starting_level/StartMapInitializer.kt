@@ -84,7 +84,7 @@ object StartMapInitializer : SceneInitializer {
                     renderProjection,
                     boundingBoxCollisionContext,
                     boxInteractionContext,
-                    GoblinPreset.value
+                    GoblinPreset.get()
             )
         }
     }
