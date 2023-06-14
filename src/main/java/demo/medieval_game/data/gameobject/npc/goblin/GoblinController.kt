@@ -11,16 +11,16 @@ import engine.core.update.Updatable
 import engine.core.update.getCenterPoint
 import engine.feature.geometry.Point2D
 import engine.feature.interaction.Interaction
-import java.util.*
 import kotlin.math.abs
 
 class GoblinController(
         private val params: SetOf2DParametersWithVelocity,
-        private var modifier: Float = 20f,
-        idleMap: EnumMap<Direction, String>,
-        strikeMap: EnumMap<Direction, String>,
-        walkMap: EnumMap<Direction, String>
-) : HumanoidController(idleMap, strikeMap, walkMap), Entity, Updatable {
+        private var modifier: Float = 20f
+) : HumanoidController(
+        GoblinAnimationMaps.idleMap,
+        GoblinAnimationMaps.strikeMap,
+        GoblinAnimationMaps.walkMap
+), Entity, Updatable {
 
     private val playStrikingAnimation = PredicateTimeEvent(
             timeLimit = 0.5f,
