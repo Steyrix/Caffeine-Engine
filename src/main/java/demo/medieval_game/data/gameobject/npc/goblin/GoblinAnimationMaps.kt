@@ -5,7 +5,7 @@ import engine.core.controllable.Direction
 import java.util.*
 
 object GoblinAnimationMaps {
-    val idleMap =
+    fun getIdleMap() =
             EnumMap<Direction, String>(Direction::class.java).apply {
                 put(Direction.RIGHT, AnimationKey.GOBLIN_IDLE_R)
                 put(Direction.LEFT, AnimationKey.GOBLIN_IDLE_L)
@@ -13,7 +13,7 @@ object GoblinAnimationMaps {
                 put(Direction.DOWN, AnimationKey.GOBLIN_IDLE_D)
             }
 
-    val strikeMap =
+    fun getStrikeMap() =
             EnumMap<Direction, String>(Direction::class.java).apply {
                 put(Direction.RIGHT, AnimationKey.GOBLIN_STRIKE_R)
                 put(Direction.LEFT, AnimationKey.GOBLIN_STRIKE_L)
@@ -21,7 +21,7 @@ object GoblinAnimationMaps {
                 put(Direction.DOWN, AnimationKey.GOBLIN_STRIKE_D)
             }
 
-    val walkMap =
+    fun getWalkMap() =
             EnumMap<Direction, String>(Direction::class.java).apply {
                 put(Direction.RIGHT, AnimationKey.GOBLIN_WALK_R)
                 put(Direction.LEFT, AnimationKey.GOBLIN_WALK_L)
