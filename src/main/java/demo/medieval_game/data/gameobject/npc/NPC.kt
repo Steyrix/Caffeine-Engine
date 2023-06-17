@@ -38,9 +38,7 @@ abstract class NPC<E : CompositeEntity>(
         it = initEntity(
                 renderProjection,
                 animatedObject
-        ).also { e ->
-            e.addComponent(box, parameters)
-        }
+        ).addComponent(box, parameters)
 
         boundingBoxCollisionContext.addEntity(box, box.getParameters())
         boxInteractionContext.addAgent(it as Entity, box)

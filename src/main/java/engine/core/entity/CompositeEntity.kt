@@ -22,9 +22,11 @@ open class CompositeEntity : Entity, Updatable {
     fun addComponent(
             component: Entity,
             parameters: SetOfParameters
-    ) {
+    ) : CompositeEntity {
         entitiesMap[component] = parameters
         component.onAdd()
+
+        return this
     }
 
     fun removeComponent(

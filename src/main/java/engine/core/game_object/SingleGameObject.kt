@@ -21,9 +21,12 @@ open class SingleGameObject : GameObject {
         it?.input(window)
     }
 
-    fun addComponent(entity: Entity?, params: SetOfParameters) {
-        if (entity == null) return
-        it?.addComponent(entity, params)
+    fun addComponent(entity: Entity?, params: SetOfParameters): SingleGameObject {
+        if (entity != null) {
+            it?.addComponent(entity, params)
+        }
+
+        return this
     }
 
     override fun isDisposed() = it?.isDisposed ?: false

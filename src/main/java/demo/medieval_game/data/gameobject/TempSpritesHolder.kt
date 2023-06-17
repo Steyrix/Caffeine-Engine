@@ -32,13 +32,6 @@ class TempSpritesHolder : CompositeGameObject() {
     fun generateHit(posX: Float, posY: Float) {
         if (renderProjection == null) return
 
-        val obj = object : SingleGameObject() {
-            override fun getZLevel() = posY + 0.5f
-        }.apply {
-            it = CompositeEntity()
-        }
-        addComponent(obj)
-
         val frameSizeX = 0.25f
         val frameSizeY = 0.25f
 
@@ -59,7 +52,12 @@ class TempSpritesHolder : CompositeGameObject() {
                 rotationAngle = 0f
         )
 
-        obj.it?.addComponent(graphicalComponent, params)
+        val obj = object : SingleGameObject() {
+            override fun getZLevel() = posY + 0.5f
+        }.apply {
+            it = CompositeEntity().addComponent(graphicalComponent, params)
+        }
+        addComponent(obj)
 
         actions.add(
                 SingleTimeEvent(

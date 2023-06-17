@@ -65,7 +65,7 @@ class TileMapObject(
         )
 
         graphicalComponent = getGraphicalComponent(renderProjection)
-        addComponent(graphicalComponent, parameters!!)
+        addComponent(graphicalComponent, parameters)
 
         collisionContexts.forEach {
             it.addEntity(graphicalComponent as Entity, parameters)
