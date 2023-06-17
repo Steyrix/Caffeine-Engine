@@ -84,7 +84,7 @@ abstract class NPC<E : CompositeEntity>(
         return parameters.copy()
     }
 
-    abstract fun initEntity(
+    protected abstract fun initEntity(
             renderProjection: Matrix4f,
             animatedObject2D: AnimatedObject2D
     ): E
