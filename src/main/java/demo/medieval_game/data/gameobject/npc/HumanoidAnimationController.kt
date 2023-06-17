@@ -6,7 +6,7 @@ import java.util.EnumMap
 
 typealias MultiMap = HashMap<String, MutableMap<Direction, String>>
 
-abstract class HumanoidController(
+abstract class HumanoidAnimationController(
         idleMap: EnumMap<Direction, String>,
         strikeMap: EnumMap<Direction, String>,
         walkMap: EnumMap<Direction, String>,

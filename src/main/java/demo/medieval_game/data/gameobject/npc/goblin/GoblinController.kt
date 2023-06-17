@@ -1,6 +1,6 @@
 package demo.medieval_game.data.gameobject.npc.goblin
 
-import demo.medieval_game.data.gameobject.npc.HumanoidController
+import demo.medieval_game.data.gameobject.npc.HumanoidAnimationController
 import demo.medieval_game.interaction.IsAttackableInteraction
 import engine.core.controllable.Direction
 import engine.core.entity.Entity
@@ -16,7 +16,7 @@ import kotlin.math.abs
 class GoblinController(
         private val params: SetOf2DParametersWithVelocity,
         private var modifier: Float = 20f
-) : HumanoidController(
+) : HumanoidAnimationController(
         GoblinAnimationMaps.getIdleMap(),
         GoblinAnimationMaps.getStrikeMap(),
         GoblinAnimationMaps.getWalkMap()
