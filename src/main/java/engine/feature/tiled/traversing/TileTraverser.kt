@@ -10,7 +10,7 @@ import kotlin.math.abs
 class TileTraverser(
         private val graph: TileGraph,
         private val tileMap: TileMap,
-        private val params: SetOf2DParametersWithVelocity
+        private val holderParams: SetOf2DParametersWithVelocity
 ) : CompositeEntity() {
 
     companion object {
@@ -46,7 +46,7 @@ class TileTraverser(
 
         if (currentDestination == destination) return
 
-        val entityCenter = params.getCenterPoint()
+        val entityCenter = holderParams.getCenterPoint()
         val start = tileMap.getTileIndex(entityCenter.x, entityCenter.y)
         currentTile = start
 
@@ -117,17 +117,17 @@ class TileTraverser(
         val x = nextPos.x + tileMap.getTileWidth() / 2
         val bottomY = nextPos.y + tileMap.getTileHeight()
 
-        val centerPoint = params.getCenterPoint().x
-        val bottomPoint = params.y + params.ySize
+        val centerPoint = holderParams.getCenterPoint().x
+        val bottomPoint = holderParams.y + holderParams.ySize
 
-        params.velocityX = when {
+        holderParams.velocityX = when {
             isHorizontalDiffInsignificant(x) -> 0f
             x > centerPoint -> VELOCITY
             x < centerPoint -> -VELOCITY
             else -> 0f
         }
 
-        params.velocityY = when {
+        holderParams.velocityY = when {
             isVerticalDiffInsignificant(bottomY) -> 0f
             bottomY > bottomPoint -> VELOCITY
             bottomY < bottomPoint -> -VELOCITY
@@ -140,8 +140,8 @@ class TileTraverser(
         val tilePosX = pos.x + tileMap.getTileWidth() /2
         val tilePosBottomY = pos.y + tileMap.getTileHeight()
 
-        val x = params.getCenterPoint().x
-        val bottomY = params.y + params.ySize
+        val x = holderParams.getCenterPoint().x
+        val bottomY = holderParams.y + holderParams.ySize
 
         val isHorizontalIntersection = x in (tilePosX - 1f)..(tilePosX + 1f)
         val isBottomIntersection = bottomY in (tilePosBottomY - 1f)..(tilePosBottomY + 1f)
@@ -151,15 +151,15 @@ class TileTraverser(
     }
 
     private fun isHorizontalDiffInsignificant(x: Float): Boolean {
-        return abs(x - params.x - params.xSize / 2) <= INSIGNIFICANT_DIFFERENCE
+        return abs(x - holderParams.x - holderParams.xSize / 2) <= INSIGNIFICANT_DIFFERENCE
     }
 
     private fun isVerticalDiffInsignificant(y: Float): Boolean {
-        return abs(y - params.y - params.ySize) <= INSIGNIFICANT_DIFFERENCE
+        return abs(y - holderParams.y - holderParams.ySize) <= INSIGNIFICANT_DIFFERENCE
     }
 
     private fun dropVelocity() {
-        params.velocityY = 0f
-        params.velocityX = 0f
+        holderParams.velocityY = 0f
+        holderParams.velocityX = 0f
     }
 }
