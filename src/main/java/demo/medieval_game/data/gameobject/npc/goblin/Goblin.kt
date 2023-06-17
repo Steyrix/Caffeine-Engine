@@ -10,7 +10,6 @@ import engine.core.entity.CompositeEntity
 import engine.core.loop.PredicateTimeEvent
 import engine.core.render.render2D.AnimatedObject2D
 import engine.core.update.SetOf2DParametersWithVelocity
-import engine.core.update.getCenterPoint
 import engine.feature.interaction.Interaction
 import engine.feature.tiled.traversing.TileTraverser
 
@@ -18,7 +17,6 @@ class Goblin(
         private val drawableComponent: AnimatedObject2D,
         params: SetOf2DParametersWithVelocity,
         private val tileTraverser: TileTraverser,
-        private val playerParams: SetOf2DParametersWithVelocity,
         private val hp: HealthBar,
         private val tempSpritesHolder: TempSpritesHolder
 ) : CompositeEntity() {
@@ -27,7 +25,7 @@ class Goblin(
             timeLimit = 2f,
             predicate = { entitiesMap.containsKey(tileTraverser) },
             action = {
-                tileTraverser.moveTo(playerParams.getCenterPoint())
+                tileTraverser.moveToTarget()
             }
     )
 

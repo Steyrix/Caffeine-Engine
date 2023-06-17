@@ -3,14 +3,14 @@ package engine.feature.tiled.traversing
 import engine.core.entity.CompositeEntity
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.getCenterPoint
-import engine.feature.geometry.Point2D
 import engine.feature.tiled.data.TileMap
 import kotlin.math.abs
 
 class TileTraverser(
         private val graph: TileGraph,
         private val tileMap: TileMap,
-        private val holderParams: SetOf2DParametersWithVelocity
+        private val holderParams: SetOf2DParametersWithVelocity,
+        private val targetParams: SetOf2DParametersWithVelocity
 ) : CompositeEntity() {
 
     companion object {
@@ -41,8 +41,8 @@ class TileTraverser(
         if (!isPaused) traverse()
     }
 
-    fun moveTo(targetPos: Point2D) {
-        val destination = tileMap.getTileIndex(targetPos.x, targetPos.y)
+    fun moveToTarget() {
+        val destination = tileMap.getTileIndex(targetParams.x, targetParams.y)
 
         if (currentDestination == destination) return
 

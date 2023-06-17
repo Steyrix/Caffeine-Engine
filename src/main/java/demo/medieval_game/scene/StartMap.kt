@@ -32,7 +32,7 @@ class StartMap(
                     bbCollisionContext!!,
                     boxInteractionContext!!,
                     tempSpritesHolder!!
-            ) { params -> it.createTraverser(params) }
+            ) { params -> it.createTraverser(params, characterParameters) }
 
             gameContext.addAll(objects)
             character?.updateCollisionContext(tiledCollisionContext)

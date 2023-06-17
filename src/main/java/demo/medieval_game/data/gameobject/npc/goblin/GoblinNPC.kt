@@ -12,7 +12,6 @@ import org.joml.Matrix4f
 class GoblinNPC(
         params: SetOf2DParametersWithVelocity,
         private val tileTraverser: TileTraverser,
-        private val playerParams: SetOf2DParametersWithVelocity,
         private val tempSpritesHolder: TempSpritesHolder
 ) : NPC<Goblin>(params) {
 
@@ -24,7 +23,6 @@ class GoblinNPC(
                 animatedObject2D,
                 parameters,
                 tileTraverser,
-                playerParams,
                 getGoblinHealthBar(renderProjection),
                 tempSpritesHolder
         )

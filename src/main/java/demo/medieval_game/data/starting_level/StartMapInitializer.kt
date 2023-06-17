@@ -53,7 +53,6 @@ object StartMapInitializer : SceneInitializer {
             val goblin = GoblinNPC(
                     it,
                     creator.invoke(it),
-                    characterParameters,
                     tempSpritesHolder
             ).also { npc ->
                 npc.init(

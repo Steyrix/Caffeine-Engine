@@ -1,5 +1,6 @@
 package demo.medieval_game.scene
 
+import demo.medieval_game.data.characterParameters
 import demo.medieval_game.data.starting_level.StartMapInitializer
 import engine.core.scene.SceneIntent
 import engine.core.session.Session
@@ -24,7 +25,7 @@ class NexusMap(
                     bbCollisionContext!!,
                     boxInteractionContext!!,
                     tempSpritesHolder!!
-            ) { params -> it.createTraverser(params) }
+            ) { params -> it.createTraverser(params, characterParameters) }
 
             gameContext.addAll(objects)
             character?.updateCollisionContext(tiledCollisionContext)

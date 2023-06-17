@@ -115,11 +115,13 @@ class TileMapObject(
     }
 
     fun createTraverser(
+            holderParams: SetOf2DParametersWithVelocity,
             targetParams: SetOf2DParametersWithVelocity
     ): TileTraverser {
         return TileTraverser(
                 graph!!,
                 graphicalComponent!!,
+                holderParams,
                 targetParams
         )
     }
