@@ -11,7 +11,7 @@ class Buffer(
         val vertexCount: Int
 ) {
 
-    val handle: Int = glGenBuffers()
+    private val handle: Int = glGenBuffers()
 
     init {
         val floatBuffer = prepareData(data)
