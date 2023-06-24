@@ -16,7 +16,7 @@ class VertexArray {
         glEnableVertexAttribArray(index)
 
         buffer.bind()
-        glVertexAttribPointer(index, buffer.vertexCount, GL_FLOAT, false, 0, 0)
+        glVertexAttribPointer(index, buffer.componentCount, GL_FLOAT, false, 0, 0)
         buffer.unbind()
 
         unbind()
@@ -28,5 +28,9 @@ class VertexArray {
 
     fun unbind() {
         glBindVertexArray(0)
+    }
+
+    fun dispose() {
+        glDeleteVertexArrays(handle)
     }
 }

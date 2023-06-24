@@ -8,10 +8,12 @@ private const val FLOAT_BYTE_SIZE = 2
 
 class Buffer(
         data: FloatArray,
-        val vertexCount: Int
+        vertexCount: Int
 ) {
 
     private val handle: Int = glGenBuffers()
+
+    val componentCount: Int = data.size / vertexCount
 
     init {
         val floatBuffer = prepareData(data)
@@ -33,6 +35,10 @@ class Buffer(
 
     fun unbind() {
         glBindBuffer(GL_ARRAY_BUFFER, 0)
+    }
+
+    fun dispose() {
+        glDeleteBuffers(handle)
     }
 
     private fun prepareData(data: FloatArray): FloatBuffer {
