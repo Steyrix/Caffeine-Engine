@@ -52,6 +52,7 @@ open class OpenGlObject2D(
 
     override fun draw() {
         shader?.let {
+            vertexArray.bind()
             it.bind()
 
             val model = MatrixComputer.getResultMatrix(x, y, xSize, ySize, rotationAngle)
@@ -60,7 +61,6 @@ open class OpenGlObject2D(
             it.setUniform(Shader.VAR_KEY_MODEL, model)
             it.validate()
 
-            vertexArray.bind()
             glDrawArrays(GL_TRIANGLES, 0, verticesCount)
         }
         super.draw()
