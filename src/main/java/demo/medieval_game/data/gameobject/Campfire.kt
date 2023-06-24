@@ -3,7 +3,7 @@ package demo.medieval_game.data.gameobject
 import demo.medieval_game.ShaderController
 import demo.medieval_game.data.campfireAnimations
 import engine.core.entity.CompositeEntity
-import engine.core.render.render2D.AnimatedObject2D
+import engine.core.render.AnimatedObject2D
 import engine.core.game_object.SingleGameObject
 import engine.core.texture.Texture2D
 import engine.core.update.SetOfStatic2DParameters

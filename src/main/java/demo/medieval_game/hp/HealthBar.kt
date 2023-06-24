@@ -3,7 +3,7 @@ package demo.medieval_game.hp
 import demo.medieval_game.ShaderController
 import demo.medieval_game.interaction.AttackInteraction
 import engine.core.entity.CompositeEntity
-import engine.core.render.render2D.OpenGlObject2D
+import engine.core.render.OpenGlObject2D
 import engine.core.texture.Texture2D
 import engine.core.update.SetOfParameters
 import engine.core.update.SetOfStatic2DParameters

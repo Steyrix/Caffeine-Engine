@@ -1,4 +1,4 @@
-package engine.core.render.render2D
+package engine.core.render
 
 import engine.core.entity.Entity
 import engine.core.shader.Shader

@@ -1,7 +1,7 @@
 package engine.feature.tiled.data
 
 import engine.core.entity.Entity
-import engine.core.render.render2D.Drawable2D
+import engine.core.render.Drawable2D
 import engine.core.shader.Shader
 import engine.core.update.SetOfStatic2DParameters
 import engine.core.update.SetOfParameters

@@ -1,6 +1,5 @@
-package engine.core.render.render2D
+package engine.core.render
 
-import engine.core.render.Drawable
 import engine.core.shader.Shader
 import engine.core.update.update2D.Parameterized
 

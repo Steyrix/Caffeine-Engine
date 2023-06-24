@@ -5,7 +5,7 @@ import demo.medieval_game.data.hitAnimation
 import engine.core.entity.CompositeEntity
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.loop.SingleTimeEvent
-import engine.core.render.render2D.AnimatedObject2D
+import engine.core.render.AnimatedObject2D
 import engine.core.game_object.CompositeGameObject
 import engine.core.game_object.SingleGameObject
 import engine.core.texture.Texture2D

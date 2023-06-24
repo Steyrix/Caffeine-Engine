@@ -1,4 +1,4 @@
-package engine.core.render.render2D
+package engine.core.render
 
 import engine.core.shader.Shader
 import engine.core.texture.ArrayTexture2D
@@ -6,8 +6,6 @@ import engine.core.texture.Texture2D
 import engine.core.update.Updatable
 import engine.feature.animation.Animation
 import engine.feature.animation.AnimationHolder2D
-import engine.feature.animation.BasicAtlasAnimation
-import engine.feature.animation.SequenceAtlasAnimation
 import engine.feature.util.Buffer
 
 class AnimatedObject2D(

@@ -1,7 +1,7 @@
 package engine.feature.tiled.scene
 
 import engine.core.loop.AccumulatedTimeEvent
-import engine.core.render.render2D.Drawable2D
+import engine.core.render.Drawable2D
 
 data class TileMapPreset(
         val width: Float,

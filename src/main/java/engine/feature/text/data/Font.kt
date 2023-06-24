@@ -1,6 +1,6 @@
 package engine.feature.text.data
 
-import engine.core.render.render2D.OpenGlObject2D
+import engine.core.render.OpenGlObject2D
 
 data class Font(
         val name: String,

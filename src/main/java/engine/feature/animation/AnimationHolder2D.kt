@@ -1,7 +1,7 @@
 package engine.feature.animation
 
 import engine.core.entity.Entity
-import engine.core.render.render2D.OpenGlObject2D
+import engine.core.render.OpenGlObject2D
 import engine.core.shader.Shader
 
 class AnimationHolder2D(

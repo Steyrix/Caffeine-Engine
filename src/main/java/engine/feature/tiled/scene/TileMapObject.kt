@@ -2,7 +2,7 @@ package engine.feature.tiled.scene
 
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
-import engine.core.render.render2D.Drawable2D
+import engine.core.render.Drawable2D
 import engine.core.game_object.SingleGameObject
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader

@@ -1,6 +1,6 @@
-package engine.core.render.render2D
+package engine.core.render
 
-import engine.core.render.render2D.buffer.Buffer
+import engine.core.render.buffer.Buffer
 
 open class Vertexed2D(
         bufferParamsCount: Int,

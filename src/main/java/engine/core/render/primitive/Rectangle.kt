@@ -1,6 +1,6 @@
 package engine.core.render.primitive
 
-import engine.core.render.render2D.OpenGlObject2D
+import engine.core.render.OpenGlObject2D
 import engine.feature.util.Buffer
 
 class Rectangle(r: Float, g: Float, b: Float) : OpenGlObject2D(

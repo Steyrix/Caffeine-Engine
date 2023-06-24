@@ -4,7 +4,7 @@ import demo.medieval_game.ShaderController
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.game_object.DynamicGameObject
-import engine.core.render.render2D.AnimatedObject2D
+import engine.core.render.AnimatedObject2D
 import engine.core.texture.Texture2D
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.collision.boundingbox.BoundingBox

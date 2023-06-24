@@ -1,6 +1,6 @@
 package engine.feature.tiled.data
 
-import engine.core.render.render2D.OpenGlObject2D
+import engine.core.render.OpenGlObject2D
 import engine.feature.geometry.Point2D
 import engine.feature.tiled.traversing.TileGraph
 

@@ -1,4 +1,4 @@
-package engine.core.render.render2D.buffer
+package engine.core.render.buffer
 
 import org.lwjgl.BufferUtils
 import org.lwjgl.opengl.GL15.*
