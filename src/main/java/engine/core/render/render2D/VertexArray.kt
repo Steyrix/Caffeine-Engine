@@ -1,10 +1,9 @@
 package engine.core.render.render2D
 
+import engine.core.render.render2D.buffer.Buffer
 import org.lwjgl.opengl.GL30.*
 
-class VertexArray(
-
-) {
+class VertexArray {
 
     private var handle: Int = 0
 
@@ -12,10 +11,15 @@ class VertexArray(
         handle = glGenVertexArrays()
     }
 
-    fun addBuffer(bufferId: Int, index: Int) {
+    fun addBuffer(buffer: Buffer, index: Int) {
         bind()
+        glEnableVertexAttribArray(index)
 
-        glBindBuffer(GL_ARRAY_BUFFER, bufferId)
+        buffer.bind()
+        glVertexAttribPointer(index, buffer.vertexCount, GL_FLOAT, false, 0, 0)
+        buffer.unbind()
+
+        unbind()
     }
 
     fun bind() {
