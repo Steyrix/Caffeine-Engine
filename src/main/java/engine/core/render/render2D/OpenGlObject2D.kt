@@ -58,10 +58,9 @@ open class OpenGlObject2D(
 
             defineTextureState()
             it.setUniform(Shader.VAR_KEY_MODEL, model)
-
             it.validate()
 
-            glBindVertexArray(vertexArrayHandle)
+            vertexArray.bind()
             glDrawArrays(GL_TRIANGLES, 0, verticesCount)
         }
         super.draw()
@@ -96,10 +95,10 @@ open class OpenGlObject2D(
     }
 
     fun dispose() {
-        bufferHandles.forEach {
-            glDeleteBuffers(it)
+        buffers.forEach {
+            it.dispose()
         }
-        glDeleteVertexArrays(vertexArrayHandle)
+        vertexArray.dispose()
     }
 
     private fun defineTextureState() {

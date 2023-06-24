@@ -50,7 +50,7 @@ open class BoundingBox(
             val model = MatrixComputer.getResultMatrix(x, y, xSize, ySize, rotationAngle)
             it.setUniform(Shader.VAR_KEY_MODEL, model)
 
-            glBindVertexArray(vertexArrayHandle)
+            vertexArray.bind()
             glDrawArrays(GL_LINES, 0, verticesCount)
         }
     }
