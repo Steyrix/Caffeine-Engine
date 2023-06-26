@@ -16,7 +16,7 @@ open class Model(
 ) : Drawable<SetOfParameters>, Entity {
 
     constructor(
-            texture2D: Texture2D,
+            texture: Texture2D,
             uv: FloatArray = DefaultBufferData.getRectangleSectorVertices(1.0f, 1.0f)
     ) : this(
             mesh = Mesh(
@@ -26,11 +26,11 @@ open class Model(
                     ),
                     verticesCount = 6
             ),
-            texture = texture2D,
+            texture = texture,
             arrayTexture = null
     )
 
-    constructor(arrayTexture2D: ArrayTexture2D) : this(
+    constructor(arrayTexture: ArrayTexture2D) : this(
             mesh = Mesh(
                     dataArrays = listOf(
                             DefaultBufferData.RECTANGLE_INDICES,
@@ -39,18 +39,18 @@ open class Model(
                     verticesCount = 6
             ),
             texture = null,
-            arrayTexture = arrayTexture2D
+            arrayTexture = arrayTexture
     )
 
     constructor(
             dataArrays: List<FloatArray>,
             verticesCount: Int,
-            texture2D: Texture2D? = null,
-            arrayTexture2D: ArrayTexture2D? = null
+            texture: Texture2D? = null,
+            arrayTexture: ArrayTexture2D? = null
     ) : this(
             mesh = Mesh(dataArrays, verticesCount),
-            texture = texture2D,
-            arrayTexture = arrayTexture2D
+            texture = texture,
+            arrayTexture = arrayTexture
     )
 
     private var textureUniformName: String = ""

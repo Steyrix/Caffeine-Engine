@@ -27,7 +27,7 @@ class HealthBar(
         val textureFilePath = this.javaClass.getResource("/textures/healthbar_atlas.png")!!.path
 
         graphicalComponent = Model(
-                texture2D = Texture2D.createInstance(textureFilePath),
+                texture = Texture2D.createInstance(textureFilePath),
         ).apply {
             shader = ShaderController.createHpBarShader(projection)
         }
