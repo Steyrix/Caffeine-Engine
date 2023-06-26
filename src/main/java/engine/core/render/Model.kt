@@ -42,6 +42,17 @@ open class Model(
             arrayTexture = arrayTexture2D
     )
 
+    constructor(
+            dataArrays: List<FloatArray>,
+            verticesCount: Int,
+            texture2D: Texture2D? = null,
+            arrayTexture2D: ArrayTexture2D? = null
+    ) : this(
+            mesh = Mesh(dataArrays, verticesCount),
+            texture = texture2D,
+            arrayTexture = arrayTexture2D
+    )
+
     private var textureUniformName: String = ""
 
     override var shader: Shader? = null
