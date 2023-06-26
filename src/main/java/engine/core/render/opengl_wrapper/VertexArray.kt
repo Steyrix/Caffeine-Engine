@@ -1,6 +1,6 @@
-package engine.core.render
+package engine.core.render.opengl_wrapper
 
-import engine.core.render.buffer.Buffer
+import engine.core.render.opengl_wrapper.buffer.Buffer
 import org.lwjgl.opengl.GL30.*
 
 class VertexArray {

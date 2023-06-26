@@ -1,6 +1,7 @@
 package engine.core.render
 
-import engine.core.render.buffer.Buffer
+import engine.core.render.opengl_wrapper.buffer.Buffer
+import engine.core.render.opengl_wrapper.VertexArray
 
 open class Vertexed2D(
         bufferParamsCount: Int,

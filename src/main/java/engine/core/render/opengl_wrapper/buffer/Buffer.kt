@@ -1,4 +1,4 @@
-package engine.core.render.buffer
+package engine.core.render.opengl_wrapper.buffer
 
 import org.lwjgl.BufferUtils
 import org.lwjgl.opengl.GL15.*
