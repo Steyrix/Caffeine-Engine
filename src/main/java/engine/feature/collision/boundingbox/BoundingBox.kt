@@ -2,7 +2,6 @@ package engine.feature.collision.boundingbox
 
 import engine.core.entity.CompositeEntity
 import engine.core.render.Drawable
-import engine.core.render.Mesh
 import engine.core.render.Model
 import engine.core.shader.Shader
 import engine.core.update.SetOfStatic2DParameters
@@ -36,10 +35,8 @@ class BoundingBox(
             )
 
     private val model = Model(
-            mesh = Mesh(
-                    dataArrays = listOf(DefaultBufferData.RECTANGLE_VERTICES),
-                    verticesCount = 8
-            )
+            dataArrays = listOf(DefaultBufferData.RECTANGLE_VERTICES),
+            verticesCount = 8
     ).apply {
         drawMode = GL_LINES
     }
