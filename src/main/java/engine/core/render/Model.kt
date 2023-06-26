@@ -10,9 +10,9 @@ import engine.core.update.SetOfParameters
 import org.lwjgl.opengl.GL33C.*
 
 open class Model(
-        protected val mesh: Mesh,
-        var texture: Texture2D? = null,
-        var arrayTexture: ArrayTexture2D? = null
+        private val mesh: Mesh,
+        private var texture: Texture2D? = null,
+        private var arrayTexture: ArrayTexture2D? = null
 ) : Drawable<SetOfParameters>, Entity {
 
     constructor(
