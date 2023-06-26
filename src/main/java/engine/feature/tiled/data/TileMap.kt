@@ -9,6 +9,7 @@ import engine.feature.tiled.traversing.TileGraph
 import kotlin.math.roundToInt
 
 // TODO: remove doc for properties and rename them for clearance
+// TODO: make composite entity
 class TileMap(
         private val layers: MutableList<TileLayer>,
 ) : Drawable<SetOfStatic2DParameters>, Entity {
