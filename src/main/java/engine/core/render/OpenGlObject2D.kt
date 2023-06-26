@@ -16,7 +16,7 @@ open class OpenGlObject2D(
         verticesCount: Int,
         var texture: Texture2D? = null,
         var arrayTexture: ArrayTexture2D? = null
-): Vertexed2D(dataArrays, verticesCount), Drawable2D, Entity {
+): Mesh(dataArrays, verticesCount), Drawable2D, Entity {
 
     constructor(
             texture2D: Texture2D,

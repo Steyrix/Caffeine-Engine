@@ -2,7 +2,7 @@ package engine.feature.collision.boundingbox
 
 import engine.core.entity.Entity
 import engine.core.render.Drawable2D
-import engine.core.render.Vertexed2D
+import engine.core.render.Mesh
 import engine.core.shader.Shader
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfStatic2DParameters
@@ -23,7 +23,7 @@ open class BoundingBox(
         private var rotationAngle: Float = 0f,
         private val isSizeBoundToHolder: Boolean = true
 ) : IntersectableBox, Entity,
-        Vertexed2D(
+        Mesh(
                 dataArrays = listOf(DefaultBufferData.RECTANGLE_VERTICES),
                 verticesCount = 8) {
 

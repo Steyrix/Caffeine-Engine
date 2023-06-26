@@ -3,7 +3,7 @@ package engine.core.render
 import engine.core.render.opengl_wrapper.buffer.Buffer
 import engine.core.render.opengl_wrapper.VertexArray
 
-open class Vertexed2D(
+open class Mesh(
         dataArrays: List<FloatArray>,
         protected val verticesCount: Int,
 ) {
