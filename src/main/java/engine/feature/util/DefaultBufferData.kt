@@ -1,6 +1,6 @@
 package engine.feature.util
 
-object Buffer {
+object DefaultBufferData {
     val RECTANGLE_INDICES = floatArrayOf(
             0f, 0f,
             1f, 1f,

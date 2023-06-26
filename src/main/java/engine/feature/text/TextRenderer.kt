@@ -5,7 +5,7 @@ import engine.core.shader.Shader
 import engine.core.texture.Texture2D
 import engine.feature.geometry.Point2D
 import engine.feature.text.TextRendererUtil.generateMap
-import engine.feature.util.Buffer
+import engine.feature.util.DefaultBufferData
 import java.awt.Dimension
 
 // TODO: ability to reduce gaps between letters and make it look natural
@@ -106,7 +106,7 @@ class TextRenderer(
 
         if (!cache.containsKey(char)) {
             val uvCoordinates = getCharUV(char)
-            val bufferData = Buffer.RECTANGLE_INDICES
+            val bufferData = DefaultBufferData.RECTANGLE_INDICES
             glObject = OpenGlObject2D(
                     bufferParamsCount = 2,
                     dataArrays = listOf(bufferData, uvCoordinates),

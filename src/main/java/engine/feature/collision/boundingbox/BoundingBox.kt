@@ -9,7 +9,7 @@ import engine.core.update.SetOfStatic2DParameters
 import engine.core.update.SetOfParameters
 import engine.core.update.SetOfStatic2DParametersWithOffset
 import engine.feature.matrix.MatrixComputer
-import engine.feature.util.Buffer
+import engine.feature.util.DefaultBufferData
 import org.lwjgl.opengl.GL33C.*
 
 // TODO: Implement cloneable interface
@@ -25,7 +25,7 @@ open class BoundingBox(
 ) : IntersectableBox, Entity,
         Vertexed2D(
                 bufferParamsCount = 1,
-                dataArrays = listOf(Buffer.RECTANGLE_VERTICES),
+                dataArrays = listOf(DefaultBufferData.RECTANGLE_VERTICES),
                 verticesCount = 8) {
 
     constructor(initialParams: SetOfStatic2DParametersWithOffset, isSizeBoundToHolder: Boolean) :

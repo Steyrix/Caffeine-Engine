@@ -6,7 +6,7 @@ import engine.core.texture.Texture2D
 import engine.core.update.Updatable
 import engine.feature.animation.Animation
 import engine.feature.animation.AnimationHolder2D
-import engine.feature.util.Buffer
+import engine.feature.util.DefaultBufferData
 
 class AnimatedObject2D(
         bufferParamsCount: Int = 2,
@@ -24,7 +24,7 @@ class AnimatedObject2D(
             animations: List<Animation>
     ) : this(
             bufferParamsCount = 2,
-            dataArrays = listOf(Buffer.RECTANGLE_INDICES, Buffer.getRectangleSectorVertices(frameSizeX, frameSizeY)),
+            dataArrays = listOf(DefaultBufferData.RECTANGLE_INDICES, DefaultBufferData.getRectangleSectorVertices(frameSizeX, frameSizeY)),
             verticesCount = 6,
             texture,
             arrayTexture = null,
@@ -38,7 +38,7 @@ class AnimatedObject2D(
             animations: MutableList<Animation>
     ) : this(
             bufferParamsCount = 2,
-            dataArrays = listOf(Buffer.RECTANGLE_INDICES, Buffer.getRectangleSectorVertices(frameSizeX, frameSizeY)),
+            dataArrays = listOf(DefaultBufferData.RECTANGLE_INDICES, DefaultBufferData.getRectangleSectorVertices(frameSizeX, frameSizeY)),
             verticesCount = 6,
             texture = null,
             arrayTexture,
