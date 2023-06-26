@@ -31,7 +31,7 @@ class Goblin(
 
     private var isMovingStopped = false
 
-    private val moveCooldown = PredicateTimeEvent(
+    private val suspendMove = PredicateTimeEvent(
             timeLimit = 1.5f,
             predicate = { isMovingStopped },
             action = {
@@ -69,7 +69,7 @@ class Goblin(
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
         startChasing.schedule(deltaTime)
-        moveCooldown.schedule(deltaTime)
+        suspendMove.schedule(deltaTime)
 
         if (entitiesMap.containsKey(controller)) {
             drawableComponent.setAnimationByKey(controller.getAnimationKey())
