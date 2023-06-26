@@ -7,25 +7,25 @@ import java.util.*
 object GoblinAnimationMaps {
     fun getIdleMap() =
             EnumMap<Direction, String>(Direction::class.java).apply {
-                put(Direction.RIGHT, AnimationKey.GOBLIN_IDLE_R)
-                put(Direction.LEFT, AnimationKey.GOBLIN_IDLE_L)
-                put(Direction.UP, AnimationKey.GOBLIN_IDLE_U)
-                put(Direction.DOWN, AnimationKey.GOBLIN_IDLE_D)
+                put(Direction.RIGHT, AnimationKey.IDLE_R)
+                put(Direction.LEFT, AnimationKey.IDLE_L)
+                put(Direction.UP, AnimationKey.IDLE_U)
+                put(Direction.DOWN, AnimationKey.IDLE_D)
             }
 
     fun getStrikeMap() =
             EnumMap<Direction, String>(Direction::class.java).apply {
-                put(Direction.RIGHT, AnimationKey.GOBLIN_STRIKE_R)
-                put(Direction.LEFT, AnimationKey.GOBLIN_STRIKE_L)
-                put(Direction.UP, AnimationKey.GOBLIN_STRIKE_U)
-                put(Direction.DOWN, AnimationKey.GOBLIN_STRIKE_D)
+                put(Direction.RIGHT, AnimationKey.STRIKE_R)
+                put(Direction.LEFT, AnimationKey.STRIKE_L)
+                put(Direction.UP, AnimationKey.STRIKE_U)
+                put(Direction.DOWN, AnimationKey.STRIKE_D)
             }
 
     fun getWalkMap() =
             EnumMap<Direction, String>(Direction::class.java).apply {
-                put(Direction.RIGHT, AnimationKey.GOBLIN_WALK_R)
-                put(Direction.LEFT, AnimationKey.GOBLIN_WALK_L)
-                put(Direction.UP, AnimationKey.GOBLIN_WALK_U)
-                put(Direction.DOWN, AnimationKey.GOBLIN_WALK_D)
+                put(Direction.RIGHT, AnimationKey.WALK_R)
+                put(Direction.LEFT, AnimationKey.WALK_L)
+                put(Direction.UP, AnimationKey.WALK_U)
+                put(Direction.DOWN, AnimationKey.WALK_D)
             }
 }

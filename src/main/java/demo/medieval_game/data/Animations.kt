@@ -18,18 +18,6 @@ object AnimationKey {
     const val STRIKE_U = "STRIKE_U"
     const val STRIKE_D = "STRIKE_D"
 
-    const val GOBLIN_WALK_R = "GOB_WALK_R"
-    const val GOBLIN_WALK_L = "GOB_WALK_L"
-    const val GOBLIN_WALK_U = "GOB_WALK_U"
-    const val GOBLIN_WALK_D = "GOB_WALK_D"
-    const val GOBLIN_IDLE_R = "GOB_IDLE_R"
-    const val GOBLIN_IDLE_L = "GOB_IDLE_L"
-    const val GOBLIN_IDLE_U = "GOB_IDLE_U"
-    const val GOBLIN_IDLE_D = "GOB_IDLE_D"
-    const val GOBLIN_STRIKE_R = "GOB_STRIKE_R"
-    const val GOBLIN_STRIKE_L = "GOB_STRIKE_L"
-    const val GOBLIN_STRIKE_U = "GOB_STRIKE_U"
-    const val GOBLIN_STRIKE_D = "GOB_STRIKE_D"
     const val GOBLIN_DEFEAT = "GOB_DEFEAT"
 
     const val BURN = "BURN"
@@ -101,42 +89,42 @@ val characterAnimations = mutableListOf<Animation>(
 
 val goblinsAnimations = mutableListOf<Animation>(
         SequenceAtlasAnimation(
-                name = AnimationKey.GOBLIN_IDLE_R,
+                name = AnimationKey.IDLE_R,
                 frames = FrameParametersGenerator.generate(Pair(6, 6), Pair(1, 1), 0.09f, 0.2f),
                 timeLimit = 1f
         ),
         SequenceAtlasAnimation(
-                name = AnimationKey.GOBLIN_IDLE_L,
+                name = AnimationKey.IDLE_L,
                 frames = FrameParametersGenerator.generate(Pair(6, 6), Pair(3, 3), 0.09f, 0.2f),
                 timeLimit = 1f
         ),
         SequenceAtlasAnimation(
-                name = AnimationKey.GOBLIN_IDLE_U,
+                name = AnimationKey.IDLE_U,
                 frames = FrameParametersGenerator.generate(Pair(6, 6), Pair(2, 2), 0.09f, 0.2f),
                 timeLimit = 1f
         ),
         SequenceAtlasAnimation(
-                name = AnimationKey.GOBLIN_IDLE_D,
+                name = AnimationKey.IDLE_D,
                 frames = FrameParametersGenerator.generate(Pair(6, 6), Pair(0, 0), 0.09f, 0.2f),
                 timeLimit = 1f
         ),
         SequenceAtlasAnimation(
-                name = AnimationKey.GOBLIN_WALK_R,
+                name = AnimationKey.WALK_R,
                 frames = FrameParametersGenerator.generate(Pair(0, 5), Pair(1, 1), 0.09f, 0.2f),
                 timeLimit = 0.25f
         ),
         SequenceAtlasAnimation(
-                name = AnimationKey.GOBLIN_WALK_L,
+                name = AnimationKey.WALK_L,
                 frames = FrameParametersGenerator.generate(Pair(0, 5), Pair(3, 3), 0.09f, 0.2f),
                 timeLimit = 0.25f
         ),
         SequenceAtlasAnimation(
-                name = AnimationKey.GOBLIN_WALK_U,
+                name = AnimationKey.WALK_U,
                 frames = FrameParametersGenerator.generate(Pair(0, 5), Pair(2, 2), 0.09f, 0.2f),
                 timeLimit = 0.25f
         ),
         SequenceAtlasAnimation(
-                name = AnimationKey.GOBLIN_WALK_D,
+                name = AnimationKey.WALK_D,
                 frames = FrameParametersGenerator.generate(Pair(0, 5), Pair(0, 0), 0.09f, 0.2f),
                 timeLimit = 0.25f
         ),
@@ -147,22 +135,22 @@ val goblinsAnimations = mutableListOf<Animation>(
                 timeLimit = 0.25f
         ),
         SequenceAtlasAnimation(
-                name = AnimationKey.GOBLIN_STRIKE_D,
+                name = AnimationKey.STRIKE_D,
                 frames = FrameParametersGenerator.generate(Pair(7, 10), Pair(0, 0), 0.09f, 0.2f),
                 timeLimit = 0.1f
         ),
         SequenceAtlasAnimation(
-                name = AnimationKey.GOBLIN_STRIKE_R,
+                name = AnimationKey.STRIKE_R,
                 frames = FrameParametersGenerator.generate(Pair(7, 10), Pair(1, 1), 0.09f, 0.2f),
                 timeLimit = 0.1f
         ),
         SequenceAtlasAnimation(
-                name = AnimationKey.GOBLIN_STRIKE_U,
+                name = AnimationKey.STRIKE_U,
                 frames = FrameParametersGenerator.generate(Pair(7, 10), Pair(2, 2), 0.09f, 0.2f),
                 timeLimit = 0.1f
         ),
         SequenceAtlasAnimation(
-                name = AnimationKey.GOBLIN_STRIKE_L,
+                name = AnimationKey.STRIKE_L,
                 frames = FrameParametersGenerator.generate(Pair(7, 10), Pair(3, 3), 0.09f, 0.2f),
                 timeLimit = 0.1f
         ),
