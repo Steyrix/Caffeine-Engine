@@ -36,10 +36,8 @@ object TileLayerInitializer {
         }
 
         return Model(
-                mesh = Mesh(
-                        dataArrays = listOf(allVertices.toFloatArray(), allUV.toFloatArray()),
-                        verticesCount = allVertices.size / 2
-                ),
+                dataArrays = listOf(allVertices.toFloatArray(), allUV.toFloatArray()),
+                verticesCount = allVertices.size / 2,
                 texture = set.texture2D
         )
     }
