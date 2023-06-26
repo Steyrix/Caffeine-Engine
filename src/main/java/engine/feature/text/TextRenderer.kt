@@ -109,10 +109,8 @@ class TextRenderer(
             val uvCoordinates = getCharUV(char)
             val bufferData = DefaultBufferData.RECTANGLE_INDICES
             glObject = Model(
-                    mesh = Mesh(
-                            dataArrays = listOf(bufferData, uvCoordinates),
-                            verticesCount = 6
-                    ),
+                    dataArrays = listOf(bufferData, uvCoordinates),
+                    verticesCount = 6,
                     texture = textureAtlas
             ).apply {
                 x = pos.x
