@@ -8,13 +8,13 @@ import demo.medieval_game.interaction.AttackInteraction
 import demo.medieval_game.interaction.IsAttackableInteraction
 import engine.core.entity.CompositeEntity
 import engine.core.loop.PredicateTimeEvent
-import engine.core.render.AnimatedObject2D
+import engine.core.render.AnimatedModel2D
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.interaction.Interaction
 import engine.feature.tiled.traversing.TileTraverser
 
 class Goblin(
-        private val drawableComponent: AnimatedObject2D,
+        private val drawableComponent: AnimatedModel2D,
         params: SetOf2DParametersWithVelocity,
         private val tileTraverser: TileTraverser,
         private val hp: HealthBar,

@@ -5,12 +5,12 @@ import demo.medieval_game.interaction.AttackInteraction
 import demo.medieval_game.interaction.IsAttackableInteraction
 import engine.core.entity.CompositeEntity
 import engine.core.loop.PredicateTimeEvent
-import engine.core.render.AnimatedObject2D
+import engine.core.render.AnimatedModel2D
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.interaction.Interaction
 
 class Player(
-        private val drawableComponent: AnimatedObject2D,
+        private val drawableComponent: AnimatedModel2D,
         private val params: SetOf2DParametersWithVelocity,
         private val tempSpritesHolder: TempSpritesHolder
 ) : CompositeEntity() {

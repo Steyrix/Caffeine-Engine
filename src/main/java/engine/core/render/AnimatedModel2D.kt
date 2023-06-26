@@ -8,7 +8,7 @@ import engine.feature.animation.Animation
 import engine.feature.animation.AnimationHolder2D
 import engine.core.render.util.DefaultBufferData
 
-class AnimatedObject2D(
+class AnimatedModel2D(
         mesh: Mesh,
         texture: Texture2D? = null,
         arrayTexture: ArrayTexture2D? = null,

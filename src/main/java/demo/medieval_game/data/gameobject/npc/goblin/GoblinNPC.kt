@@ -3,7 +3,7 @@ package demo.medieval_game.data.gameobject.npc.goblin
 import demo.medieval_game.data.gameobject.TempSpritesHolder
 import demo.medieval_game.data.gameobject.npc.NPC
 import demo.medieval_game.hp.HealthBar
-import engine.core.render.AnimatedObject2D
+import engine.core.render.AnimatedModel2D
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.tiled.traversing.TileTraverser
@@ -17,10 +17,10 @@ class GoblinNPC(
 
     override fun initEntity(
             renderProjection: Matrix4f,
-            animatedObject2D: AnimatedObject2D
+            animatedModel2D: AnimatedModel2D
     ): Goblin {
         return Goblin(
-                animatedObject2D,
+                animatedModel2D,
                 parameters,
                 tileTraverser,
                 getGoblinHealthBar(renderProjection),

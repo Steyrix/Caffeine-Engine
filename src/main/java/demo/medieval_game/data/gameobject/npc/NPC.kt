@@ -4,7 +4,7 @@ import demo.medieval_game.ShaderController
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.game_object.DynamicGameObject
-import engine.core.render.AnimatedObject2D
+import engine.core.render.AnimatedModel2D
 import engine.core.texture.Texture2D
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.collision.boundingbox.BoundingBox
@@ -59,8 +59,8 @@ abstract class NPC<E : CompositeEntity>(
     private fun getAnimatedObject(
             renderProjection: Matrix4f,
             preset: AnimationPreset
-    ): AnimatedObject2D {
-        return AnimatedObject2D(
+    ): AnimatedModel2D {
+        return AnimatedModel2D(
                 frameSizeX = preset.frameSizeX,
                 frameSizeY = preset.frameSizeY,
                 texture = Texture2D.createInstance(preset.atlasTexturePath),
@@ -84,6 +84,6 @@ abstract class NPC<E : CompositeEntity>(
 
     protected abstract fun initEntity(
             renderProjection: Matrix4f,
-            animatedObject2D: AnimatedObject2D
+            animatedModel2D: AnimatedModel2D
     ): E
 }

@@ -6,7 +6,7 @@ import demo.medieval_game.data.*
 import demo.medieval_game.hp.HealthBar
 import engine.core.entity.Entity
 import engine.core.game_object.DynamicGameObject
-import engine.core.render.AnimatedObject2D
+import engine.core.render.AnimatedModel2D
 import engine.core.texture.Texture2D
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.collision.boundingbox.*
@@ -19,7 +19,7 @@ class PlayableCharacter(
         params: SetOf2DParametersWithVelocity
 ) : DynamicGameObject<SetOf2DParametersWithVelocity>(params) {
 
-    private var graphicalComponent: AnimatedObject2D? = null
+    private var graphicalComponent: AnimatedModel2D? = null
     private var hp: HealthBar? = null
     private var boundingBox: BoundingBox? = null
     private var boxCollider: BoundingBoxCollider? = null
@@ -83,7 +83,7 @@ class PlayableCharacter(
 
     private fun getAnimatedObjectComponent(
             renderProjection: Matrix4f
-    ): AnimatedObject2D {
+    ): AnimatedModel2D {
         val frameSizeX = 0.066f
         val frameSizeY = 0.25f
         val texturePathFirst = this.javaClass.getResource("/textures/character_atlas.png")!!.path
@@ -92,7 +92,7 @@ class PlayableCharacter(
                 texturePathFirst
         )
 
-        return AnimatedObject2D(
+        return AnimatedModel2D(
                 frameSizeX,
                 frameSizeY,
                 texture = textureArray,
