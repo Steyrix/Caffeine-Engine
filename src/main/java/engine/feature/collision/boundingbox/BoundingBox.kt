@@ -24,7 +24,6 @@ open class BoundingBox(
         private val isSizeBoundToHolder: Boolean = true
 ) : IntersectableBox, Entity,
         Vertexed2D(
-                bufferParamsCount = 1,
                 dataArrays = listOf(DefaultBufferData.RECTANGLE_VERTICES),
                 verticesCount = 8) {
 

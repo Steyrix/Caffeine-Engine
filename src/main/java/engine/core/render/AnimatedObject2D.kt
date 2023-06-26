@@ -9,13 +9,12 @@ import engine.feature.animation.AnimationHolder2D
 import engine.feature.util.DefaultBufferData
 
 class AnimatedObject2D(
-        bufferParamsCount: Int = 2,
         dataArrays: List<FloatArray>,
         verticesCount: Int = 6,
         texture: Texture2D? = null,
         arrayTexture: ArrayTexture2D? = null,
         private val animationHolder: AnimationHolder2D
-) : OpenGlObject2D(bufferParamsCount, dataArrays, verticesCount, texture, arrayTexture), Updatable {
+) : OpenGlObject2D(dataArrays, verticesCount, texture, arrayTexture), Updatable {
 
     constructor(
             frameSizeX: Float,
@@ -23,7 +22,6 @@ class AnimatedObject2D(
             texture: Texture2D?,
             animations: List<Animation>
     ) : this(
-            bufferParamsCount = 2,
             dataArrays = listOf(DefaultBufferData.RECTANGLE_INDICES, DefaultBufferData.getRectangleSectorVertices(frameSizeX, frameSizeY)),
             verticesCount = 6,
             texture,
@@ -37,7 +35,6 @@ class AnimatedObject2D(
             arrayTexture: ArrayTexture2D?,
             animations: MutableList<Animation>
     ) : this(
-            bufferParamsCount = 2,
             dataArrays = listOf(DefaultBufferData.RECTANGLE_INDICES, DefaultBufferData.getRectangleSectorVertices(frameSizeX, frameSizeY)),
             verticesCount = 6,
             texture = null,

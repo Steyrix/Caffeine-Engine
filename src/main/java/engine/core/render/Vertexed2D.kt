@@ -4,7 +4,6 @@ import engine.core.render.opengl_wrapper.buffer.Buffer
 import engine.core.render.opengl_wrapper.VertexArray
 
 open class Vertexed2D(
-        bufferParamsCount: Int,
         dataArrays: List<FloatArray>,
         protected val verticesCount: Int,
 ) {
@@ -13,16 +12,13 @@ open class Vertexed2D(
     protected val vertexArray = VertexArray()
 
     init {
-        initBuffers(dataArrays, bufferParamsCount)
+        initBuffers(dataArrays)
         initVertexArray()
     }
 
     private fun initBuffers(
-            dataArrays: List<FloatArray>,
-            bufferParamsCount: Int
+            dataArrays: List<FloatArray>
     ) {
-        require(dataArrays.size == bufferParamsCount)
-
         dataArrays.forEach {
             buffers.add(
                     Buffer(it, verticesCount)

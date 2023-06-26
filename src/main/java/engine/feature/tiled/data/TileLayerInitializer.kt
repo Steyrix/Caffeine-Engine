@@ -35,7 +35,6 @@ object TileLayerInitializer {
         }
 
         return OpenGlObject2D(
-                bufferParamsCount = 2,
                 dataArrays = listOf(allVertices.toFloatArray(), allUV.toFloatArray()),
                 verticesCount = allVertices.size / 2,
                 texture = set.texture2D

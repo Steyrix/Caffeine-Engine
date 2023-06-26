@@ -108,7 +108,6 @@ class TextRenderer(
             val uvCoordinates = getCharUV(char)
             val bufferData = DefaultBufferData.RECTANGLE_INDICES
             glObject = OpenGlObject2D(
-                    bufferParamsCount = 2,
                     dataArrays = listOf(bufferData, uvCoordinates),
                     verticesCount = 6,
                     texture = textureAtlas

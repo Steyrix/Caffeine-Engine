@@ -12,18 +12,16 @@ import engine.feature.util.DefaultBufferData
 import org.lwjgl.opengl.GL33C.*
 
 open class OpenGlObject2D(
-        bufferParamsCount: Int,
         dataArrays: List<FloatArray>,
         verticesCount: Int,
         var texture: Texture2D? = null,
         var arrayTexture: ArrayTexture2D? = null
-): Vertexed2D(bufferParamsCount, dataArrays, verticesCount), Drawable2D, Entity {
+): Vertexed2D(dataArrays, verticesCount), Drawable2D, Entity {
 
     constructor(
             texture2D: Texture2D,
             uv: FloatArray = DefaultBufferData.getRectangleSectorVertices(1.0f, 1.0f)
     ) : this(
-            bufferParamsCount = 2,
             dataArrays = listOf(DefaultBufferData.RECTANGLE_INDICES, uv),
             verticesCount = 6,
             texture = texture2D,
@@ -31,7 +29,6 @@ open class OpenGlObject2D(
     )
 
     constructor(arrayTexture2D: ArrayTexture2D) : this(
-            bufferParamsCount = 2,
             dataArrays = listOf(DefaultBufferData.RECTANGLE_INDICES, DefaultBufferData.getRectangleSectorVertices(1.0f, 1.0f)),
             verticesCount = 6,
             texture = null,
