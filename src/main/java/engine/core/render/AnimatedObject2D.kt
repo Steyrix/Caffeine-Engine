@@ -45,6 +45,19 @@ class AnimatedObject2D(
             animationHolder = AnimationHolder2D(animations)
     )
 
+    constructor(
+            dataArrays: List<FloatArray>,
+            verticesCount: Int,
+            texture: Texture2D? = null,
+            arrayTexture: ArrayTexture2D? = null,
+            animationHolder: AnimationHolder2D
+    ) : this(
+            mesh = Mesh(dataArrays, verticesCount),
+            texture = texture,
+            arrayTexture = arrayTexture,
+            animationHolder = animationHolder
+    )
+
     override var shader: Shader? = null
 
     override fun update(deltaTime: Float) {
