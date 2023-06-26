@@ -1,6 +1,6 @@
 package engine.feature.collision.boundingbox
 
-import engine.core.entity.Entity
+import engine.core.entity.CompositeEntity
 import engine.core.render.Drawable
 import engine.core.render.Mesh
 import engine.core.render.Model
@@ -8,12 +8,11 @@ import engine.core.shader.Shader
 import engine.core.update.SetOfStatic2DParameters
 import engine.core.update.SetOfStatic2DParametersWithOffset
 import engine.core.render.util.DefaultBufferData
-import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfParameters
 import org.lwjgl.opengl.GL33C.*
 
 // TODO: Implement cloneable interface
-open class BoundingBox(
+class BoundingBox(
         override var x: Float = 0f,
         override var y: Float = 0f,
         override var xSize: Float = 0f,
@@ -22,7 +21,7 @@ open class BoundingBox(
         override var yOffset: Float = 0f,
         private var rotationAngle: Float = 0f,
         private val isSizeBoundToHolder: Boolean = true
-) : IntersectableBox, Entity, Drawable<SetOfParameters> {
+) : CompositeEntity(), IntersectableBox, Drawable<SetOfParameters> {
 
     constructor(initialParams: SetOfStatic2DParametersWithOffset, isSizeBoundToHolder: Boolean) :
             this(
@@ -51,8 +50,16 @@ open class BoundingBox(
             field = value
         }
 
-    override fun draw() {
-        model.draw()
+    private var params = SetOfStatic2DParameters(
+            x,
+            y,
+            xSize,
+            ySize,
+            rotationAngle
+    )
+
+    init {
+        addComponent(model, params)
     }
 
     override fun updateParameters(parameters: SetOfParameters) {
@@ -66,17 +73,15 @@ open class BoundingBox(
             rotationAngle = it.rotationAngle
         }
 
-        model.updateParameters(
-                SetOfStatic2DParameters(
-                        x, y, xSize, ySize, rotationAngle
-                )
-        )
+        params.x = x
+        params.y = y
+        params.xSize = xSize
+        params.ySize = ySize
+        params.rotationAngle = rotationAngle
     }
 
     fun getParameters(): SetOfStatic2DParameters {
-        return SetOfStatic2DParameters(
-                x, y, xSize, ySize, rotationAngle
-        )
+        return params
     }
 
     fun forceUpdateSize(width: Float, height: Float) {
