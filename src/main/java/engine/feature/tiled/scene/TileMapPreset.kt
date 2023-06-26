@@ -1,7 +1,7 @@
 package engine.feature.tiled.scene
 
 import engine.core.loop.AccumulatedTimeEvent
-import engine.core.render.Drawable2D
+import engine.core.render.Drawable
 
 data class TileMapPreset(
         val width: Float,
@@ -10,7 +10,7 @@ data class TileMapPreset(
         val vertexShaderPath: String,
         val fragmentShaderPath: String,
         val shaderUniforms: Map<String, Any>,
-        val updateEvents: List<(Drawable2D) -> AccumulatedTimeEvent>,
+        val updateEvents: List<(Drawable<*>) -> AccumulatedTimeEvent>,
         val walkingLayers: List<String>,
         val obstacleLayers: List<String>
 )

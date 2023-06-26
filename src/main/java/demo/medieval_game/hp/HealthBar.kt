@@ -3,7 +3,7 @@ package demo.medieval_game.hp
 import demo.medieval_game.ShaderController
 import demo.medieval_game.interaction.AttackInteraction
 import engine.core.entity.CompositeEntity
-import engine.core.render.OpenGlObject2D
+import engine.core.render.Model
 import engine.core.texture.Texture2D
 import engine.core.update.SetOfParameters
 import engine.core.update.SetOfStatic2DParameters
@@ -20,13 +20,13 @@ class HealthBar(
         private const val SHADER_UNIFORM_NAME = "filled"
     }
 
-    private val graphicalComponent: OpenGlObject2D
+    private val graphicalComponent: Model
     var filled: Float = 1.0f
 
     init {
         val textureFilePath = this.javaClass.getResource("/textures/healthbar_atlas.png")!!.path
 
-        graphicalComponent = OpenGlObject2D(
+        graphicalComponent = Model(
                 texture2D = Texture2D.createInstance(textureFilePath),
         ).apply {
             shader = ShaderController.createHpBarShader(projection)

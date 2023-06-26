@@ -1,11 +1,12 @@
 package engine.feature.text
 
-import engine.core.render.OpenGlObject2D
+import engine.core.render.Mesh
+import engine.core.render.Model
 import engine.core.shader.Shader
 import engine.core.texture.Texture2D
 import engine.feature.geometry.Point2D
 import engine.feature.text.TextRendererUtil.generateMap
-import engine.feature.util.DefaultBufferData
+import engine.core.render.util.DefaultBufferData
 import java.awt.Dimension
 
 // TODO: ability to reduce gaps between letters and make it look natural
@@ -32,7 +33,7 @@ class TextRenderer(
         }
     }
 
-    private val cache: HashMap<Char, OpenGlObject2D> = HashMap()
+    private val cache: HashMap<Char, Model> = HashMap()
 
     val isValid: Boolean
         get() = this.textureAtlas != null && this.characterCoordinates != null
@@ -102,14 +103,16 @@ class TextRenderer(
             fontSize: Dimension,
             pos: Point2D
     ) {
-        val glObject: OpenGlObject2D
+        val glObject: Model
 
         if (!cache.containsKey(char)) {
             val uvCoordinates = getCharUV(char)
             val bufferData = DefaultBufferData.RECTANGLE_INDICES
-            glObject = OpenGlObject2D(
-                    dataArrays = listOf(bufferData, uvCoordinates),
-                    verticesCount = 6,
+            glObject = Model(
+                    mesh = Mesh(
+                            dataArrays = listOf(bufferData, uvCoordinates),
+                            verticesCount = 6
+                    ),
                     texture = textureAtlas
             ).apply {
                 x = pos.x

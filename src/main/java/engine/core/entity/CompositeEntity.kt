@@ -39,7 +39,7 @@ open class CompositeEntity : Entity, Updatable {
 
     fun draw() {
         entitiesMap.keys.forEach { entity ->
-            (entity as? Drawable)?.draw()
+            (entity as? Drawable<SetOfParameters>)?.draw()
             (entity as? CompositeEntity)?.draw()
         }
     }
@@ -47,7 +47,7 @@ open class CompositeEntity : Entity, Updatable {
     override fun update(deltaTime: Float) {
         entitiesMap.entries.forEach {
             (it.key as? Updatable)?.update(deltaTime)
-            (it.key as? Parameterized)?.updateParameters(it.value)
+            (it.key as? Parameterized<SetOfParameters>)?.updateParameters(it.value)
         }
     }
 

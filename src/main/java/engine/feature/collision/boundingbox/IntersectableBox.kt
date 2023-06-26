@@ -1,11 +1,10 @@
 package engine.feature.collision.boundingbox
 
-import engine.core.render.Drawable2D
 import engine.core.update.SetOfParameters
 import engine.feature.geometry.Point2D
 
 // TODO handle offsets
-interface IntersectableBox : Drawable2D {
+interface IntersectableBox {
 
     var x: Float
     var y: Float
@@ -95,13 +94,13 @@ interface IntersectableBox : Drawable2D {
     private fun isPointInBox(point: Point2D, isStrict: Boolean): Boolean {
         return if (isStrict) {
             point.x < rightX
-            && point.x > x
-            && point.y < bottomY
-            && point.y > y
+                    && point.x > x
+                    && point.y < bottomY
+                    && point.y > y
         } else {
             point.x in x..rightX
-            && point.y <= bottomY
-            && point.y >= y
+                    && point.y <= bottomY
+                    && point.y >= y
         }
     }
 }

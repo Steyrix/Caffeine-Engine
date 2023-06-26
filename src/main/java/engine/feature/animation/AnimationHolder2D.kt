@@ -1,7 +1,7 @@
 package engine.feature.animation
 
 import engine.core.entity.Entity
-import engine.core.render.OpenGlObject2D
+import engine.core.render.Model
 import engine.core.shader.Shader
 
 class AnimationHolder2D(
@@ -9,7 +9,7 @@ class AnimationHolder2D(
 ) : Entity {
     private var currentAnimation: Animation = animations.first()
 
-    fun updateAnimationUniforms(target: OpenGlObject2D, shader: Shader) {
+    fun updateAnimationUniforms(target: Model, shader: Shader) {
         if (target.isTextured()) {
             currentAnimation.setUniforms(shader)
         }

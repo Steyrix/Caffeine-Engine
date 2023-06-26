@@ -2,8 +2,8 @@ package engine.feature.tiled.scene
 
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
-import engine.core.render.Drawable2D
 import engine.core.game_object.SingleGameObject
+import engine.core.render.Drawable
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
 import engine.core.update.SetOf2DParametersWithVelocity
@@ -110,7 +110,7 @@ class TileMapObject(
     ) {
         super.update(deltaTime)
         mapPresets.updateEvents.forEach {
-            it.invoke(graphicalComponent as Drawable2D).schedule(deltaTime)
+            it.invoke(graphicalComponent as Drawable<*>).schedule(deltaTime)
         }
     }
 

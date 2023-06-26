@@ -1,9 +1,9 @@
 package engine.feature.tiled.data
 
-import engine.core.render.Drawable2D
-import engine.core.render.OpenGlObject2D
+import engine.core.render.Drawable
+import engine.core.render.Model
 import engine.core.shader.Shader
-import engine.core.update.SetOfParameters
+import engine.core.update.SetOfStatic2DParameters
 import engine.feature.tiled.property.Property
 
 class TileLayer(
@@ -13,18 +13,17 @@ class TileLayer(
         val tileIdsData: MutableList<Int>,
         internal val set: TileSet,
         private val properties: ArrayList<Property>
-): Drawable2D {
+): Drawable<SetOfStatic2DParameters> {
 
     override var shader: Shader? = null
         set(value) {
             field = value
             graphicalComponent.shader = value
         }
-    override val innerDrawableComponents: MutableList<Drawable2D> = mutableListOf()
 
-    private val graphicalComponent: OpenGlObject2D = TileLayerInitializer.genGraphicalComponent(this)
+    private val graphicalComponent: Model = TileLayerInitializer.genGraphicalComponent(this)
 
-    override fun updateParameters(parameters: SetOfParameters) {
+    override fun updateParameters(parameters: SetOfStatic2DParameters) {
         graphicalComponent.updateParameters(parameters)
     }
 
@@ -47,6 +46,10 @@ class TileLayer(
         val data = set.getTileByNumber(tileId).tileUV
         val offset = (data.size * 4 * (index)).toLong()
 
-        graphicalComponent.updateBuffer(1, offset, data)
+        graphicalComponent.updateMesh(
+                1,
+                offset,
+                data
+        )
     }
 }

@@ -4,36 +4,45 @@ import engine.core.entity.Entity
 import engine.core.shader.Shader
 import engine.core.texture.ArrayTexture2D
 import engine.core.texture.Texture2D
-import engine.core.update.SetOf2DParametersWithVelocity
-import engine.core.update.SetOfStatic2DParameters
-import engine.core.update.SetOfParameters
 import engine.feature.matrix.MatrixComputer
-import engine.feature.util.DefaultBufferData
+import engine.core.render.util.DefaultBufferData
+import engine.core.update.SetOfParameters
 import org.lwjgl.opengl.GL33C.*
 
-open class OpenGlObject2D(
-        dataArrays: List<FloatArray>,
-        verticesCount: Int,
+open class Model(
+        protected val mesh: Mesh,
         var texture: Texture2D? = null,
         var arrayTexture: ArrayTexture2D? = null
-): Mesh(dataArrays, verticesCount), Drawable2D, Entity {
+) : Drawable<SetOfParameters>, Entity {
 
     constructor(
             texture2D: Texture2D,
             uv: FloatArray = DefaultBufferData.getRectangleSectorVertices(1.0f, 1.0f)
     ) : this(
-            dataArrays = listOf(DefaultBufferData.RECTANGLE_INDICES, uv),
-            verticesCount = 6,
+            mesh = Mesh(
+                    dataArrays = listOf(
+                            DefaultBufferData.RECTANGLE_INDICES,
+                            uv
+                    ),
+                    verticesCount = 6
+            ),
             texture = texture2D,
             arrayTexture = null
     )
 
     constructor(arrayTexture2D: ArrayTexture2D) : this(
-            dataArrays = listOf(DefaultBufferData.RECTANGLE_INDICES, DefaultBufferData.getRectangleSectorVertices(1.0f, 1.0f)),
-            verticesCount = 6,
+            mesh = Mesh(
+                    dataArrays = listOf(
+                            DefaultBufferData.RECTANGLE_INDICES,
+                            DefaultBufferData.getRectangleSectorVertices(1.0f, 1.0f)
+                    ),
+                    verticesCount = 6
+            ),
             texture = null,
             arrayTexture = arrayTexture2D
     )
+
+    private var textureUniformName: String = ""
 
     override var shader: Shader? = null
 
@@ -43,13 +52,11 @@ open class OpenGlObject2D(
     var ySize: Float = 0f
     var rotationAngle: Float = 0f
 
-    override val innerDrawableComponents: MutableList<Drawable2D> = mutableListOf()
-
-    private var textureUniformName: String = ""
+    var drawMode = GL_TRIANGLES
 
     override fun draw() {
         shader?.let {
-            vertexArray.bind()
+            mesh.prepare()
             it.bind()
 
             val model = MatrixComputer.getResultMatrix(x, y, xSize, ySize, rotationAngle)
@@ -58,44 +65,12 @@ open class OpenGlObject2D(
             it.setUniform(Shader.VAR_KEY_MODEL, model)
             it.validate()
 
-            glDrawArrays(GL_TRIANGLES, 0, verticesCount)
-        }
-        super.draw()
-    }
-
-    override fun updateParameters(parameters: SetOfParameters) {
-        var mutableParams = parameters
-
-        if (parameters is SetOf2DParametersWithVelocity) {
-            mutableParams = SetOfStatic2DParameters(
-                    parameters.x,
-                    parameters.y,
-                    parameters.xSize,
-                    parameters.ySize,
-                    parameters.rotationAngle
-            )
-        }
-
-        innerDrawableComponents.forEach {
-            it.updateParameters(mutableParams)
-        }
-
-        if (mutableParams is SetOfStatic2DParameters) {
-            mutableParams.let {
-                x = it.x
-                y = it.y
-                xSize = it.xSize
-                ySize = it.ySize
-                rotationAngle = it.rotationAngle
-            }
+            glDrawArrays(drawMode, 0, mesh.verticesCount)
         }
     }
 
     fun dispose() {
-        buffers.forEach {
-            it.dispose()
-        }
-        vertexArray.dispose()
+        mesh.dispose()
     }
 
     private fun defineTextureState() {
@@ -124,5 +99,22 @@ open class OpenGlObject2D(
 
     fun isTextured(): Boolean {
         return texture != null || arrayTexture != null
+    }
+
+    override fun updateParameters(parameters: SetOfParameters) {
+        x = parameters.x
+        y = parameters.y
+        xSize = parameters.xSize
+        ySize = parameters.ySize
+        rotationAngle = parameters.rotationAngle
+    }
+
+    // todo: get rid of proxying
+    fun updateMesh(
+            bufferIndex: Int,
+            offset: Long,
+            data: FloatArray
+    ) {
+        mesh.updateBuffer(bufferIndex, offset, data)
     }
 }

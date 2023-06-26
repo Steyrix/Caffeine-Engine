@@ -1,6 +1,7 @@
 package engine.feature.tiled.data
 
-import engine.core.render.OpenGlObject2D
+import engine.core.render.Mesh
+import engine.core.render.Model
 import engine.feature.geometry.Point2D
 import engine.feature.tiled.traversing.TileGraph
 
@@ -9,7 +10,7 @@ object TileLayerInitializer {
 
     internal fun genGraphicalComponent(
             layer: TileLayer
-    ): OpenGlObject2D {
+    ): Model {
         val allVertices: ArrayList<Float> = ArrayList()
         val allUV: ArrayList<Float> = ArrayList()
         val data = layer.tileIdsData
@@ -34,9 +35,11 @@ object TileLayerInitializer {
 
         }
 
-        return OpenGlObject2D(
-                dataArrays = listOf(allVertices.toFloatArray(), allUV.toFloatArray()),
-                verticesCount = allVertices.size / 2,
+        return Model(
+                mesh = Mesh(
+                        dataArrays = listOf(allVertices.toFloatArray(), allUV.toFloatArray()),
+                        verticesCount = allVertices.size / 2
+                ),
                 texture = set.texture2D
         )
     }

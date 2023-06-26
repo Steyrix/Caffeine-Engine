@@ -1,18 +1,17 @@
 package engine.feature.tiled.data
 
 import engine.core.entity.Entity
-import engine.core.render.Drawable2D
+import engine.core.render.Drawable
 import engine.core.shader.Shader
 import engine.core.update.SetOfStatic2DParameters
-import engine.core.update.SetOfParameters
 import engine.feature.geometry.Point2D
 import engine.feature.tiled.traversing.TileGraph
 import kotlin.math.roundToInt
 
 // TODO: remove doc for properties and rename them for clearance
 class TileMap(
-        layers: MutableList<TileLayer>,
-) : Drawable2D, Entity {
+        private val layers: MutableList<TileLayer>,
+) : Drawable<SetOfStatic2DParameters>, Entity {
 
     companion object {
         private const val NOT_FOUND = -1
@@ -21,12 +20,10 @@ class TileMap(
     override var shader: Shader? = null
         set(value) {
             field = value
-            innerDrawableComponents.forEach {
+            layers.forEach {
                 it.shader = value
             }
         }
-
-    override val innerDrawableComponents: MutableList<Drawable2D> = mutableListOf()
 
     private val set: TileSet
     private val layersMap = layers.associateBy { it.name }
@@ -68,10 +65,6 @@ class TileMap(
 
         relativeHeight = heightInTiles * set.relativeTileHeight
         relativeWidth = widthInTiles * set.relativeTileWidth
-
-        layers.forEach {
-            innerDrawableComponents.add(it)
-        }
     }
 
     fun getTileHeight() = absoluteTileHeight
@@ -130,17 +123,19 @@ class TileMap(
         return roundedPos / roundedTileSize
     }
 
-    override fun updateParameters(parameters: SetOfParameters) {
-        if (parameters is SetOfStatic2DParameters) {
-            absoluteWidth = parameters.xSize
-            absoluteHeight = parameters.ySize
-            absoluteTileWidth = relativeWidth / widthInTiles * absoluteWidth
-            absoluteTileHeight = relativeHeight / heightInTiles * absoluteHeight
-        }
+    override fun updateParameters(parameters: SetOfStatic2DParameters) {
+        absoluteWidth = parameters.xSize
+        absoluteHeight = parameters.ySize
+        absoluteTileWidth = relativeWidth / widthInTiles * absoluteWidth
+        absoluteTileHeight = relativeHeight / heightInTiles * absoluteHeight
 
-        innerDrawableComponents.forEach {
+        layers.forEach {
             it.updateParameters(parameters)
         }
+    }
+
+    override fun draw() {
+        layers.forEach { it.draw() }
     }
 
     fun getWorldWidth(): Float {

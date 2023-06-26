@@ -1,9 +1,9 @@
 package engine.feature.text.data
 
-import engine.core.render.OpenGlObject2D
+import engine.core.render.Model
 
 data class Font(
         val name: String,
         val symbolAtlasPath: String,
-        val atlasGraphicObject: OpenGlObject2D
+        val atlasGraphicObject: Model
 )

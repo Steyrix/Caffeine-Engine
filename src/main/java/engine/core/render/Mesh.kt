@@ -6,11 +6,11 @@ import engine.core.render.opengl_wrapper.VertexArray
 
 open class Mesh(
         dataArrays: List<FloatArray>,
-        protected val verticesCount: Int,
+        val verticesCount: Int,
 ) : Entity {
 
-    protected val buffers: MutableList<Buffer> = mutableListOf()
-    protected val vertexArray = VertexArray()
+    private val buffers: MutableList<Buffer> = mutableListOf()
+    private val vertexArray = VertexArray()
 
     init {
         initBuffers(dataArrays)
@@ -39,5 +39,14 @@ open class Mesh(
             data: FloatArray
     ) {
         buffers[bufferIndex].update(data, offset)
+    }
+
+    fun prepare() {
+        vertexArray.bind()
+    }
+
+    fun dispose() {
+        vertexArray.dispose()
+        buffers.forEach { it.dispose() }
     }
 }

@@ -6,15 +6,14 @@ import engine.core.texture.Texture2D
 import engine.core.update.Updatable
 import engine.feature.animation.Animation
 import engine.feature.animation.AnimationHolder2D
-import engine.feature.util.DefaultBufferData
+import engine.core.render.util.DefaultBufferData
 
 class AnimatedObject2D(
-        dataArrays: List<FloatArray>,
-        verticesCount: Int = 6,
+        mesh: Mesh,
         texture: Texture2D? = null,
         arrayTexture: ArrayTexture2D? = null,
         private val animationHolder: AnimationHolder2D
-) : OpenGlObject2D(dataArrays, verticesCount, texture, arrayTexture), Updatable {
+) : Model(mesh, texture, arrayTexture), Updatable {
 
     constructor(
             frameSizeX: Float,
@@ -22,8 +21,10 @@ class AnimatedObject2D(
             texture: Texture2D?,
             animations: List<Animation>
     ) : this(
-            dataArrays = listOf(DefaultBufferData.RECTANGLE_INDICES, DefaultBufferData.getRectangleSectorVertices(frameSizeX, frameSizeY)),
-            verticesCount = 6,
+            mesh = Mesh(
+                    dataArrays = listOf(DefaultBufferData.RECTANGLE_INDICES, DefaultBufferData.getRectangleSectorVertices(frameSizeX, frameSizeY)),
+                    verticesCount = 6
+            ),
             texture,
             arrayTexture = null,
             animationHolder = AnimationHolder2D(animations)
@@ -35,8 +36,10 @@ class AnimatedObject2D(
             arrayTexture: ArrayTexture2D?,
             animations: MutableList<Animation>
     ) : this(
-            dataArrays = listOf(DefaultBufferData.RECTANGLE_INDICES, DefaultBufferData.getRectangleSectorVertices(frameSizeX, frameSizeY)),
-            verticesCount = 6,
+            mesh = Mesh(
+                    dataArrays = listOf(DefaultBufferData.RECTANGLE_INDICES, DefaultBufferData.getRectangleSectorVertices(frameSizeX, frameSizeY)),
+                    verticesCount = 6
+            ),
             texture = null,
             arrayTexture,
             animationHolder = AnimationHolder2D(animations)
