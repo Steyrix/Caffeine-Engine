@@ -1,13 +1,12 @@
 package engine.core.render
 
-import engine.core.entity.Entity
 import engine.core.render.opengl_wrapper.buffer.Buffer
 import engine.core.render.opengl_wrapper.VertexArray
 
 open class Mesh(
         dataArrays: List<FloatArray>,
         val verticesCount: Int,
-) : Entity {
+) {
 
     private val buffers: MutableList<Buffer> = mutableListOf()
     private val vertexArray = VertexArray()
