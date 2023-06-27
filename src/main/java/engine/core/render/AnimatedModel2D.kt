@@ -1,6 +1,5 @@
 package engine.core.render
 
-import engine.core.shader.Shader
 import engine.core.texture.ArrayTexture2D
 import engine.core.texture.Texture2D
 import engine.core.update.Updatable
@@ -57,8 +56,6 @@ class AnimatedModel2D(
             arrayTexture = arrayTexture,
             animationHolder = animationHolder
     )
-
-    override var shader: Shader? = null
 
     override fun update(deltaTime: Float) {
         shader?.let {
