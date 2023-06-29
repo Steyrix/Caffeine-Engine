@@ -7,6 +7,7 @@ import demo.medieval_game.data.gameobject.npc.goblin.GoblinNPC
 import demo.medieval_game.data.gameobject.npc.goblin.GoblinPreset
 import demo.medieval_game.data.goblinParams1
 import demo.medieval_game.data.goblinParams2
+import demo.medieval_game.scene.MedievalGame
 import engine.core.game_object.GameObject
 import engine.core.scene.SceneInitializer
 import engine.core.update.SetOf2DParametersWithVelocity
@@ -17,7 +18,6 @@ import org.joml.Matrix4f
 
 object StartMapInitializer : SceneInitializer {
     fun initAll(
-            renderProjection: Matrix4f,
             boundingBoxCollisionContext: BoundingBoxCollisionContext,
             boxInteractionContext: BoxInteractionContext,
             tempSpritesHolder: TempSpritesHolder,
@@ -26,11 +26,10 @@ object StartMapInitializer : SceneInitializer {
         val campfire = Campfire(
                 parameters = campfireParameters
         ).apply {
-            init(renderProjection)
+            init(MedievalGame.renderProjection)
         }
 
         val listOfNpc = initGoblins(
-                renderProjection,
                 boundingBoxCollisionContext,
                 boxInteractionContext,
                 tempSpritesHolder
@@ -40,7 +39,6 @@ object StartMapInitializer : SceneInitializer {
     }
 
     private fun initGoblins(
-            renderProjection: Matrix4f,
             boundingBoxCollisionContext: BoundingBoxCollisionContext,
             boxInteractionContext: BoxInteractionContext,
             tempSpritesHolder: TempSpritesHolder,
@@ -56,7 +54,7 @@ object StartMapInitializer : SceneInitializer {
                     tempSpritesHolder
             ).also { npc ->
                 npc.init(
-                        renderProjection,
+                        MedievalGame.renderProjection,
                         boundingBoxCollisionContext,
                         boxInteractionContext,
                         GoblinPreset.get()

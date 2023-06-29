@@ -21,7 +21,6 @@ class NexusMap(
         // TODO: temp
         tiledMap?.let {
             val objects = StartMapInitializer.initAll(
-                    renderProjection!!,
                     bbCollisionContext!!,
                     boxInteractionContext!!,
                     tempSpritesHolder!!

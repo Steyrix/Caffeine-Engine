@@ -28,7 +28,6 @@ class StartMap(
 
         tiledMap?.let {
             val objects = StartMapInitializer.initAll(
-                    renderProjection!!,
                     bbCollisionContext!!,
                     boxInteractionContext!!,
                     tempSpritesHolder!!
