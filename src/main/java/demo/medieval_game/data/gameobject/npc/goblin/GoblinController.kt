@@ -1,6 +1,7 @@
 package demo.medieval_game.data.gameobject.npc.goblin
 
 import demo.medieval_game.data.gameobject.npc.HumanoidAnimationController
+import demo.medieval_game.data.gameobject.npc.HumanoidAnimationMaps
 import demo.medieval_game.interaction.IsAttackableInteraction
 import engine.core.controllable.Direction
 import engine.core.entity.Entity
