@@ -17,9 +17,9 @@ class GoblinController(
         private val params: SetOf2DParametersWithVelocity,
         private var modifier: Float = 20f
 ) : HumanoidAnimationController(
-        GoblinAnimationMaps.getIdleMap(),
-        GoblinAnimationMaps.getStrikeMap(),
-        GoblinAnimationMaps.getWalkMap()
+        HumanoidAnimationMaps.getIdleMap(),
+        HumanoidAnimationMaps.getStrikeMap(),
+        HumanoidAnimationMaps.getWalkMap()
 ), Entity, Updatable {
 
     private val playStrikingAnimation = PredicateTimeEvent(
