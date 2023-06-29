@@ -1,12 +1,14 @@
 package demo.medieval_game.data.gameobject.npc
 
 import demo.medieval_game.ShaderController
+import demo.medieval_game.hp.HealthBar
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.game_object.DynamicGameObject
 import engine.core.render.AnimatedModel2D
 import engine.core.texture.Texture2D
 import engine.core.update.SetOf2DParametersWithVelocity
+import engine.core.update.SetOfStatic2DParameters
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.interaction.BoxInteractionContext
@@ -86,4 +88,18 @@ abstract class NPC<E : CompositeEntity>(
             renderProjection: Matrix4f,
             animatedModel2D: AnimatedModel2D
     ): E
+
+    protected fun getHpBar(renderProjection: Matrix4f): HealthBar {
+        return HealthBar(
+                parameters,
+                SetOfStatic2DParameters(
+                        x = 0f,
+                        y = 0f,
+                        xSize = 50f,
+                        ySize = 12.5f,
+                        rotationAngle = 0f
+                ),
+                renderProjection
+        )
+    }
 }
