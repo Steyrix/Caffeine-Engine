@@ -29,6 +29,11 @@ object DefaultBufferData {
             sectorWidth, sectorHeight
     )
 
+    fun getRectangleSectorBuffers(sectorWidth: Float = 1f, sectorHeight: Float = 1f) = listOf(
+            RECTANGLE_INDICES,
+            getRectangleSectorVertices(sectorWidth, sectorHeight)
+    )
+
     fun getVerticesScaled(horizontalScale: Float = 1f, verticalScale: Float = 1f) = floatArrayOf(
             0f, 0f,
             horizontalScale, 0f,
