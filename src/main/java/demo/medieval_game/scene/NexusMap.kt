@@ -11,7 +11,7 @@ class NexusMap(
         preset: TileMapPreset,
         screenWidth: Float,
         screenHeight: Float,
-        projection: Matrix4f? = null,
+        projection: Matrix4f,
         switchTrigger: () -> Unit = {}
 ) : MedievalGameScene(preset, screenWidth, screenHeight, projection) {
 

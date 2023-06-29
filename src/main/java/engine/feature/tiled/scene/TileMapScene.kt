@@ -7,34 +7,17 @@ import engine.core.session.Session
 import org.joml.Matrix4f
 
 abstract class TileMapScene(
-        projection: Matrix4f? = null
+        projection: Matrix4f
 ) : Scene {
 
-    override var renderProjection: Matrix4f? = null
+    override val renderProjection = projection
 
     override val gameContext: MutableList<GameObject> = mutableListOf()
 
     protected var tiledMap: TileMapObject? = null
 
-    init {
-        projection?.let {
-            renderProjection = it
-        }
-    }
-
     override fun init(session: Session, intent: SceneIntent?) {
         super.init(session, intent)
-
-        if (renderProjection == null) {
-            renderProjection = Matrix4f().ortho(
-                    0f,
-                    screenWidth,
-                    screenHeight,
-                    0f,
-                    0f,
-                    1f
-            )
-        }
 
         tiledMap = initTileMap(
                 renderProjection!!,

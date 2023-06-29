@@ -14,7 +14,7 @@ class StartMap(
         preset: TileMapPreset,
         screenWidth: Float,
         screenHeight: Float,
-        projection: Matrix4f? = null,
+        projection: Matrix4f,
         private val switchTrigger: () -> Unit = {}
 ) : MedievalGameScene(preset, screenWidth, screenHeight, projection) {
 
