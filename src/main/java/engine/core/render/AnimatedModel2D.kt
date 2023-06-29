@@ -21,7 +21,7 @@ class AnimatedModel2D(
             animations: List<Animation>
     ) : this(
             mesh = Mesh(
-                    dataArrays = listOf(DefaultBufferData.RECTANGLE_INDICES, DefaultBufferData.getRectangleSectorVertices(frameSizeX, frameSizeY)),
+                    dataArrays = DefaultBufferData.getRectangleSectorBuffers(frameSizeX, frameSizeY),
                     verticesCount = 6
             ),
             texture,
@@ -36,7 +36,7 @@ class AnimatedModel2D(
             animations: MutableList<Animation>
     ) : this(
             mesh = Mesh(
-                    dataArrays = listOf(DefaultBufferData.RECTANGLE_INDICES, DefaultBufferData.getRectangleSectorVertices(frameSizeX, frameSizeY)),
+                    dataArrays = DefaultBufferData.getRectangleSectorBuffers(frameSizeX, frameSizeY),
                     verticesCount = 6
             ),
             texture = null,
