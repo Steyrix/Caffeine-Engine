@@ -1,4 +1,4 @@
-package engine.feature.geometry
+package engine.core.geometry
 
 class Point2D(
         var x: Float,

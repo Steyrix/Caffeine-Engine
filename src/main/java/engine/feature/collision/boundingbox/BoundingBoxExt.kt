@@ -1,6 +1,6 @@
 package engine.feature.collision.boundingbox
 
-import engine.feature.geometry.Point2D
+import engine.core.geometry.Point2D
 
 fun BoundingBox.getLeftCollisionPoints() = listOf(
         Point2D(x, y),

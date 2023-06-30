@@ -10,7 +10,7 @@ import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfParameters
 import engine.core.update.Updatable
 import engine.core.update.getCenterPoint
-import engine.feature.geometry.Point2D
+import engine.core.geometry.Point2D
 import engine.feature.interaction.Interaction
 import kotlin.math.abs
 

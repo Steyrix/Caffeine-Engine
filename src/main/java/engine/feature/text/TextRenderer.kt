@@ -1,10 +1,9 @@
 package engine.feature.text
 
-import engine.core.render.Mesh
 import engine.core.render.Model
 import engine.core.shader.Shader
 import engine.core.texture.Texture2D
-import engine.feature.geometry.Point2D
+import engine.core.geometry.Point2D
 import engine.feature.text.TextRendererUtil.generateMap
 import engine.core.render.util.DefaultBufferData
 import java.awt.Dimension

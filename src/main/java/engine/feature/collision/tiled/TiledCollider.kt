@@ -4,7 +4,7 @@ import engine.core.entity.Entity
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.collision.Collider
 import engine.feature.collision.CollisionContext
-import engine.feature.geometry.Point2D
+import engine.core.geometry.Point2D
 import engine.feature.tiled.data.TileMap
 
 private const val EMPTY_TILE_VALUE = 0

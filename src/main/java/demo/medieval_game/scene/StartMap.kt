@@ -6,7 +6,7 @@ import demo.medieval_game.data.starting_level.StartMapInitializer
 import engine.core.scene.SceneIntent
 import engine.core.session.Session
 import engine.core.window.Window
-import engine.feature.geometry.Point2D
+import engine.core.geometry.Point2D
 import engine.feature.tiled.scene.TileMapPreset
 import org.joml.Matrix4f
 
