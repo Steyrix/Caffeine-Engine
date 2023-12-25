@@ -29,7 +29,7 @@ class PlayableCharacter(
     private var currentInteractionContext: BoxInteractionContext? = null
 
     override fun preSpawn(setOfParameters: SetOf2DParametersWithVelocity) {
-
+        // TODO: implement
     }
 
     fun init(
