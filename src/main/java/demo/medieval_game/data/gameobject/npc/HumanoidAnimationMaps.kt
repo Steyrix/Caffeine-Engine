@@ -1,10 +1,10 @@
-package demo.medieval_game.data.gameobject.npc.goblin
+package demo.medieval_game.data.gameobject.npc
 
 import demo.medieval_game.data.AnimationKey
 import engine.core.controllable.Direction
 import java.util.*
 
-object GoblinAnimationMaps {
+object HumanoidAnimationMaps {
     fun getIdleMap() =
             EnumMap<Direction, String>(Direction::class.java).apply {
                 put(Direction.RIGHT, AnimationKey.IDLE_R)

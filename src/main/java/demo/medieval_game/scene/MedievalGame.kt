@@ -17,6 +17,10 @@ class MedievalGame(
         override val screenHeight: Float
 ) : SceneHolder {
 
+    companion object {
+        var renderProjection: Matrix4f = Matrix4f().ortho(0f, 0f, 0f, 0f, 0f, 0f)
+    }
+
     // TODO: initialize
     private val maps: MutableMap<Int, MutableList<Scene>> = mutableMapOf()
 
@@ -27,16 +31,17 @@ class MedievalGame(
 
     private var sharedSprites: SharedSpritesHolder? = null
 
-    private val renderProjection: Matrix4f =
-            Matrix4f()
-                    .ortho(
-                            0f,
-                            screenWidth,
-                            screenHeight,
-                            0f,
-                            0f,
-                            1f
-                    )
+    init {
+        renderProjection = Matrix4f()
+                .ortho(
+                        0f,
+                        screenWidth,
+                        screenHeight,
+                        0f,
+                        0f,
+                        1f
+                )
+    }
 
     // TODO: deserialize maps from presets
     init {

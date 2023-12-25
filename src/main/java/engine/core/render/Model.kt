@@ -32,10 +32,7 @@ open class Model(
 
     constructor(arrayTexture: ArrayTexture2D) : this(
             mesh = Mesh(
-                    dataArrays = listOf(
-                            DefaultBufferData.RECTANGLE_INDICES,
-                            DefaultBufferData.getRectangleSectorVertices(1.0f, 1.0f)
-                    ),
+                    dataArrays = DefaultBufferData.getRectangleSectorBuffers(),
                     verticesCount = 6
             ),
             texture = null,

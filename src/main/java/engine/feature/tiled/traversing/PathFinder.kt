@@ -2,7 +2,7 @@ package engine.feature.tiled.traversing
 
 import java.util.PriorityQueue
 
-object PathFinder {
+internal object PathFinder {
 
     fun pathTo(
             graph: Map<Int, List<Int>>,

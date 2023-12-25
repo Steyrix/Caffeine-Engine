@@ -1,8 +1,7 @@
 package engine.feature.tiled.data
 
-import engine.core.render.Mesh
 import engine.core.render.Model
-import engine.feature.geometry.Point2D
+import engine.core.geometry.Point2D
 import engine.feature.tiled.traversing.TileGraph
 
 object TileLayerInitializer {

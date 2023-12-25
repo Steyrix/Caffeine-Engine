@@ -1,6 +1,7 @@
 package demo.medieval_game.data.gameobject.npc.goblin
 
 import demo.medieval_game.data.gameobject.npc.HumanoidAnimationController
+import demo.medieval_game.data.gameobject.npc.HumanoidAnimationMaps
 import demo.medieval_game.interaction.IsAttackableInteraction
 import engine.core.controllable.Direction
 import engine.core.entity.Entity
@@ -9,7 +10,7 @@ import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfParameters
 import engine.core.update.Updatable
 import engine.core.update.getCenterPoint
-import engine.feature.geometry.Point2D
+import engine.core.geometry.Point2D
 import engine.feature.interaction.Interaction
 import kotlin.math.abs
 
@@ -17,9 +18,9 @@ class GoblinController(
         private val params: SetOf2DParametersWithVelocity,
         private var modifier: Float = 20f
 ) : HumanoidAnimationController(
-        GoblinAnimationMaps.getIdleMap(),
-        GoblinAnimationMaps.getStrikeMap(),
-        GoblinAnimationMaps.getWalkMap()
+        HumanoidAnimationMaps.getIdleMap(),
+        HumanoidAnimationMaps.getStrikeMap(),
+        HumanoidAnimationMaps.getWalkMap()
 ), Entity, Updatable {
 
     private val playStrikingAnimation = PredicateTimeEvent(

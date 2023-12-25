@@ -1,7 +1,7 @@
 package engine.feature.collision.boundingbox
 
 import engine.core.update.SetOfParameters
-import engine.feature.geometry.Point2D
+import engine.core.geometry.Point2D
 
 // TODO handle offsets
 interface IntersectableBox {

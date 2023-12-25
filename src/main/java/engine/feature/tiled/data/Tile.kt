@@ -9,9 +9,7 @@ data class Tile(
 
         other as Tile
 
-        if (!tileUV.contentEquals(other.tileUV)) return false
-
-        return true
+        return tileUV.contentEquals(other.tileUV)
     }
 
     override fun hashCode(): Int {

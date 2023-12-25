@@ -1,6 +1,6 @@
 package engine.core.update
 
-import engine.feature.geometry.Point2D
+import engine.core.geometry.Point2D
 
 sealed interface SetOfParameters {
     var x: Float

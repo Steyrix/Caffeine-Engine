@@ -1,7 +1,7 @@
 package engine.feature.text
 
 import engine.core.texture.Texture2D
-import engine.feature.geometry.Point2D
+import engine.core.geometry.Point2D
 import java.awt.Dimension
 import java.util.InvalidPropertiesFormatException
 

@@ -10,7 +10,7 @@ import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfParameters
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.collision.CollisionContext
-import engine.feature.geometry.Point2D
+import engine.core.geometry.Point2D
 import engine.feature.tiled.data.TileMap
 import engine.feature.tiled.parser.TiledResourceParser
 import engine.feature.tiled.traversing.TileGraph

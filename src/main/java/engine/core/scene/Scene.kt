@@ -10,7 +10,7 @@ interface Scene {
     val screenWidth: Float
     val screenHeight: Float
 
-    var renderProjection: Matrix4f?
+    val renderProjection: Matrix4f
 
     val gameContext: MutableList<GameObject>
 

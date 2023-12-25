@@ -4,7 +4,7 @@ import engine.core.entity.Entity
 import engine.core.render.Drawable
 import engine.core.shader.Shader
 import engine.core.update.SetOfStatic2DParameters
-import engine.feature.geometry.Point2D
+import engine.core.geometry.Point2D
 import engine.feature.tiled.traversing.TileGraph
 import kotlin.math.roundToInt
 

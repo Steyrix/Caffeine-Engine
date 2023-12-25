@@ -24,7 +24,7 @@ abstract class MedievalGameScene(
         private val preset: TileMapPreset,
         override val screenWidth: Float,
         override val screenHeight: Float,
-        projection: Matrix4f? = null,
+        projection: Matrix4f
 ) : TileMapScene(projection) {
 
     protected var character: PlayableCharacter? = null
