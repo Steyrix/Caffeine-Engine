@@ -76,7 +76,7 @@ class GoblinController(
         }
     }
 
-    fun strike(targetParams: SetOfParameters) {
+    private fun strike(targetParams: SetOfParameters) {
         if (!isStrikeCooldown && !isStriking) {
             isStriking = true
             isStrikeCooldown = true
