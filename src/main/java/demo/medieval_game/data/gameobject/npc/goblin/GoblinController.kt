@@ -28,17 +28,17 @@ class GoblinController(
             action = { isStriking = false }
     )
 
-    private var isStrikeCooldown = false
+    private var isStrikeCoolDown = false
 
-    private val strikeCooldown = PredicateTimeEvent(
+    private val strikeCoolDown = PredicateTimeEvent(
             timeLimit = 1f,
-            predicate = { isStrikeCooldown },
-            action = { isStrikeCooldown = false }
+            predicate = { isStrikeCoolDown },
+            action = { isStrikeCoolDown = false }
     )
 
     override fun update(deltaTime: Float) {
         playStrikingAnimation.schedule(deltaTime)
-        strikeCooldown.schedule(deltaTime)
+        strikeCoolDown.schedule(deltaTime)
 
         if (isStriking) return
 
@@ -77,9 +77,9 @@ class GoblinController(
     }
 
     private fun strike(targetParams: SetOfParameters) {
-        if (!isStrikeCooldown && !isStriking) {
+        if (!isStrikeCoolDown && !isStriking) {
             isStriking = true
-            isStrikeCooldown = true
+            isStrikeCoolDown = true
             isWalking = false
             directToTarget(targetParams)
         }
