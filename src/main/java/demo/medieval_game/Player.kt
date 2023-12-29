@@ -17,7 +17,7 @@ class Player(
 
     private var isAttack = false
 
-    private val attackCooldown = PredicateTimeEvent(
+    private val attackCoolDown = PredicateTimeEvent(
             timeLimit = 0.5f,
             predicate = { isAttack },
             action = {
@@ -27,7 +27,7 @@ class Player(
 
     private var isHit = false
 
-    private val takeHitCooldown = PredicateTimeEvent(
+    private val takeHitCoolDown = PredicateTimeEvent(
         timeLimit = 0.5f,
         predicate = { isHit },
         action = {
@@ -58,8 +58,8 @@ class Player(
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
         drawableComponent.setAnimationByKey(controller.getAnimationKey())
-        attackCooldown.schedule(deltaTime)
-        takeHitCooldown.schedule(deltaTime)
+        attackCoolDown.schedule(deltaTime)
+        takeHitCoolDown.schedule(deltaTime)
     }
 
     override fun getInteractions(): List<Interaction> {
