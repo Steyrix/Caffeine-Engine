@@ -3,9 +3,9 @@ package engine.core.game_object
 import engine.core.update.SetOfParameters
 import engine.core.window.Window
 
-abstract class DynamicGameObject<P : SetOfParameters>(
+abstract class DynamicGameEntity<P : SetOfParameters>(
         protected val parameters: P
-) : SingleGameObject() {
+) : SingleGameEntity() {
 
     private var isSpawned = false
 

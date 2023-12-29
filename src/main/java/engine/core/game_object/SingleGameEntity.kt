@@ -5,7 +5,7 @@ import engine.core.entity.Entity
 import engine.core.update.SetOfParameters
 import engine.core.window.Window
 
-open class SingleGameObject : GameObject {
+open class SingleGameEntity : GameEntity {
 
     var it: CompositeEntity? = null
 
@@ -21,7 +21,7 @@ open class SingleGameObject : GameObject {
         it?.input(window)
     }
 
-    fun addComponent(entity: Entity?, params: SetOfParameters): SingleGameObject {
+    fun addComponent(entity: Entity?, params: SetOfParameters): SingleGameEntity {
         if (entity != null) {
             it?.addComponent(entity, params)
         }

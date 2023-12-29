@@ -5,7 +5,7 @@ import demo.medieval_game.ShaderController
 import demo.medieval_game.data.*
 import demo.medieval_game.hp.HealthBar
 import engine.core.entity.Entity
-import engine.core.game_object.DynamicGameObject
+import engine.core.game_object.DynamicGameEntity
 import engine.core.render.AnimatedModel2D
 import engine.core.texture.Texture2D
 import engine.core.update.SetOf2DParametersWithVelocity
@@ -17,7 +17,7 @@ import org.joml.Matrix4f
 
 class PlayableCharacter(
         params: SetOf2DParametersWithVelocity
-) : DynamicGameObject<SetOf2DParametersWithVelocity>(params) {
+) : DynamicGameEntity<SetOf2DParametersWithVelocity>(params) {
 
     private var graphicalComponent: AnimatedModel2D? = null
     private var hp: HealthBar? = null

@@ -4,7 +4,7 @@ import demo.medieval_game.data.Initializer
 import demo.medieval_game.data.gameobject.PlayableCharacter
 import demo.medieval_game.data.gameobject.SharedSpritesHolder
 import demo.medieval_game.data.gameobject.TempSpritesHolder
-import engine.core.game_object.GameObject
+import engine.core.game_object.GameEntity
 import engine.core.session.Session
 import engine.core.session.SessionPresets
 import engine.core.session.SimpleGamePresets
@@ -13,7 +13,7 @@ import engine.feature.interaction.BoxInteractionContext
 
 object MedievalGameSession : Session() {
 
-    override val persistentGameObjects: MutableList<GameObject> = mutableListOf()
+    override val persistentGameEntities: MutableList<GameEntity> = mutableListOf()
 
     var playableCharacter: PlayableCharacter? = null
         private set
@@ -30,7 +30,7 @@ object MedievalGameSession : Session() {
     override fun init(presets: SessionPresets) {
         if (presets !is SimpleGamePresets) return
 
-        persistentGameObjects.addAll(
+        persistentGameEntities.addAll(
                 Initializer.initPersistentObjects(
                         presets.screenWidth,
                         presets.screenHeight,
@@ -40,12 +40,12 @@ object MedievalGameSession : Session() {
                 )
         )
 
-        playableCharacter = persistentGameObjects.find { it is PlayableCharacter } as? PlayableCharacter
-        tempSpritesHolder = persistentGameObjects.find { it is TempSpritesHolder } as? TempSpritesHolder
+        playableCharacter = persistentGameEntities.find { it is PlayableCharacter } as? PlayableCharacter
+        tempSpritesHolder = persistentGameEntities.find { it is TempSpritesHolder } as? TempSpritesHolder
         sharedSpritesHolder = SharedSpritesHolder().apply { init(presets.renderProjection) }
     }
 
-    override fun getPersistentObjects(): List<GameObject> {
-        return persistentGameObjects.toList()
+    override fun getPersistentObjects(): List<GameEntity> {
+        return persistentGameEntities.toList()
     }
 }

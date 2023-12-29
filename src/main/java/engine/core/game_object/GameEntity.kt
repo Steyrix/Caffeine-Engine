@@ -2,7 +2,7 @@ package engine.core.game_object
 
 import engine.core.window.Window
 
-interface GameObject {
+interface GameEntity {
 
     fun update(deltaTime: Float)
 

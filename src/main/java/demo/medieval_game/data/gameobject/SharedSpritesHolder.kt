@@ -6,12 +6,12 @@ import engine.core.entity.Entity
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.loop.SingleTimeEvent
 import engine.core.render.primitive.Rectangle
-import engine.core.game_object.SingleGameObject
+import engine.core.game_object.SingleGameEntity
 import engine.core.shader.Shader
 import engine.core.update.SetOfStatic2DParameters
 import org.joml.Matrix4f
 
-class SharedSpritesHolder : SingleGameObject() {
+class SharedSpritesHolder : SingleGameEntity() {
 
     private var alpha = 0f
     private var isFadeIn = true

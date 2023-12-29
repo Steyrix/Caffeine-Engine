@@ -7,14 +7,14 @@ import demo.medieval_game.matrix.MedievalGameMatrixState
 import engine.core.controllable.Direction
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.scene.SceneIntent
-import engine.core.game_object.CompositeGameObject
-import engine.core.game_object.GameObject
+import engine.core.game_object.CompositeGameEntity
+import engine.core.game_object.GameEntity
 import engine.core.session.Session
 import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.interaction.BoxInteractionContext
-import engine.feature.tiled.scene.TileMapObject
+import engine.feature.tiled.scene.TileMapEntity
 import engine.feature.tiled.scene.TileMapPreset
 import engine.feature.tiled.scene.TileMapScene
 import org.joml.Matrix4f
@@ -57,7 +57,7 @@ abstract class MedievalGameScene(
         }
     }
 
-    override fun initTileMap(projection: Matrix4f, screenWidth: Float, screenHeight: Float): TileMapObject {
+    override fun initTileMap(projection: Matrix4f, screenWidth: Float, screenHeight: Float): TileMapEntity {
         return MapSceneInitializer.initTileMapObject(
                 preset,
                 projection,
@@ -134,10 +134,10 @@ abstract class MedievalGameScene(
         }
     }
 
-    private fun MutableList<GameObject>.convertToFlatList(): MutableList<GameObject> {
-        val out = mutableListOf<GameObject>()
+    private fun MutableList<GameEntity>.convertToFlatList(): MutableList<GameEntity> {
+        val out = mutableListOf<GameEntity>()
         this.forEach {
-            if (it is CompositeGameObject) {
+            if (it is CompositeGameEntity) {
                 it.getInnerObjects().forEach { innerObject ->
                     out.add(innerObject)
                 }

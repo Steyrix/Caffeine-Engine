@@ -1,6 +1,6 @@
 package engine.core.scene
 
-import engine.core.game_object.GameObject
+import engine.core.game_object.GameEntity
 import engine.core.session.Session
 import engine.core.window.Window
 import org.joml.Matrix4f
@@ -12,7 +12,7 @@ interface Scene {
 
     val renderProjection: Matrix4f
 
-    val gameContext: MutableList<GameObject>
+    val gameContext: MutableList<GameEntity>
 
     fun init(
             session: Session,

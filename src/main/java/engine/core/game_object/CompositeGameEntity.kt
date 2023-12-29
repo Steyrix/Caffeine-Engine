@@ -3,9 +3,9 @@ package engine.core.game_object
 import engine.core.window.Window
 
 // TODO disposing
-open class CompositeGameObject : GameObject {
+open class CompositeGameEntity : GameEntity {
 
-    private val objectList = mutableListOf<GameObject>()
+    private val objectList = mutableListOf<GameEntity>()
 
     override fun update(deltaTime: Float) {
         objectList.forEach {
@@ -30,12 +30,12 @@ open class CompositeGameObject : GameObject {
         return false
     }
 
-    fun addComponent(gameObject: GameObject) {
-        objectList.add(gameObject)
+    fun addComponent(gameEntity: GameEntity) {
+        objectList.add(gameEntity)
     }
 
-    fun removeComponent(gameObject: GameObject) {
-        objectList.remove(gameObject)
+    fun removeComponent(gameEntity: GameEntity) {
+        objectList.remove(gameEntity)
     }
 
     override fun getZLevel(): Float {

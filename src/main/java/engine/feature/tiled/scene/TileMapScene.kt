@@ -1,6 +1,6 @@
 package engine.feature.tiled.scene
 
-import engine.core.game_object.GameObject
+import engine.core.game_object.GameEntity
 import engine.core.scene.Scene
 import engine.core.scene.SceneIntent
 import engine.core.session.Session
@@ -12,9 +12,9 @@ abstract class TileMapScene(
 
     override val renderProjection = projection
 
-    override val gameContext: MutableList<GameObject> = mutableListOf()
+    override val gameContext: MutableList<GameEntity> = mutableListOf()
 
-    protected var tiledMap: TileMapObject? = null
+    protected var tiledMap: TileMapEntity? = null
 
     override fun init(session: Session, intent: SceneIntent?) {
         super.init(session, intent)
@@ -34,5 +34,5 @@ abstract class TileMapScene(
             projection: Matrix4f,
             screenWidth: Float,
             screenHeight: Float
-    ): TileMapObject
+    ): TileMapEntity
 }

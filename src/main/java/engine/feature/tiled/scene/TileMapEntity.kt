@@ -2,7 +2,7 @@ package engine.feature.tiled.scene
 
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
-import engine.core.game_object.SingleGameObject
+import engine.core.game_object.SingleGameEntity
 import engine.core.render.Drawable
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
@@ -18,9 +18,9 @@ import engine.feature.tiled.traversing.TileTraverser
 import org.joml.Matrix4f
 import java.io.File
 
-class TileMapObject(
+class TileMapEntity(
         private val mapPresets: TileMapPreset
-) : SingleGameObject() {
+) : SingleGameEntity() {
 
     var parameters: SetOfStatic2DParameters =
             SetOfStatic2DParameters(

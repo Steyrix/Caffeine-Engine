@@ -3,7 +3,7 @@ package demo.medieval_game.data
 import demo.medieval_game.matrix.MedievalGameMatrixState
 import demo.medieval_game.data.gameobject.PlayableCharacter
 import demo.medieval_game.data.gameobject.TempSpritesHolder
-import engine.core.game_object.GameObject
+import engine.core.game_object.GameEntity
 import engine.core.update.getCenterPoint
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.collision.tiled.TiledCollisionContext
@@ -18,8 +18,8 @@ object Initializer {
             renderProjection: Matrix4f,
             bbCollisionContext: BoundingBoxCollisionContext,
             boxInteractionContext: BoxInteractionContext
-    ): List<GameObject> {
-        val out = mutableListOf<GameObject>()
+    ): List<GameEntity> {
+        val out = mutableListOf<GameEntity>()
 
         val tempSpritesHolder = TempSpritesHolder().apply {
             init(renderProjection)
