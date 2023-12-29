@@ -4,6 +4,7 @@ import demo.medieval_game.data.gameobject.SharedSpritesHolder
 import demo.medieval_game.data.starting_level.getNexusMapPreset
 import demo.medieval_game.data.starting_level.getStartingMapPreset
 import demo.medieval_game.matrix.MedievalGameMatrixState
+import engine.core.scene.GameContext
 import engine.core.scene.Scene
 import engine.core.scene.SceneHolder
 import engine.core.scene.SceneIntent
@@ -12,6 +13,8 @@ import engine.core.window.Window
 import engine.feature.matrix.MatrixComputer
 import org.joml.Matrix4f
 
+
+// TODO: 29.12.2023 move shared entities to shared context
 class MedievalGame(
         override val screenWidth: Float,
         override val screenHeight: Float
@@ -26,6 +29,8 @@ class MedievalGame(
 
     override val sceneMap: MutableMap<String, Scene> = mutableMapOf()
     override var currentScene: Scene? = null
+
+    override val sharedContext: GameContext = GameContext.getInstance()
 
     override val session = MedievalGameSession
 

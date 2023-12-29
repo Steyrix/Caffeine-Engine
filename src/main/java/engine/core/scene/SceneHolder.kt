@@ -11,6 +11,7 @@ interface SceneHolder {
     val screenHeight: Float
 
     val sceneMap: MutableMap<String, Scene>
+    val sharedContext: GameContext
 
     var currentScene: Scene?
 
