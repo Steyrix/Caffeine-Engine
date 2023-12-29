@@ -3,6 +3,8 @@ package engine.core.scene
 import engine.core.game_object.CompositeGameEntity
 import engine.core.game_object.GameEntity
 
+
+// TODO: 29.12.23 replace every scene's context with this
 interface GameContext {
 
     companion object {
