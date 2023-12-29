@@ -5,6 +5,14 @@ import engine.core.game_object.GameEntity
 
 interface GameContext {
 
+    companion object {
+        fun getInstance(): GameContext {
+            return object : GameContext {
+                override val entities: MutableList<GameEntity> = mutableListOf()
+            }
+        }
+    }
+
     val entities: MutableList<GameEntity>
 
     fun add(entity: GameEntity) {
