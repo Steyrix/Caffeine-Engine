@@ -15,7 +15,7 @@ object MedievalGameSession : Session() {
 
     override val persistentGameEntities: MutableList<GameEntity> = mutableListOf()
 
-    var playableCharacter: PlayableCharacter? = null
+    var sessionCharacter: PlayableCharacter? = null
         private set
 
     var tempSpritesHolder: TempSpritesHolder? = null
@@ -40,7 +40,7 @@ object MedievalGameSession : Session() {
                 )
         )
 
-        playableCharacter = persistentGameEntities.find { it is PlayableCharacter } as? PlayableCharacter
+        sessionCharacter = persistentGameEntities.find { it is PlayableCharacter } as? PlayableCharacter
         tempSpritesHolder = persistentGameEntities.find { it is TempSpritesHolder } as? TempSpritesHolder
         sharedSpritesHolder = SharedSpritesHolder().apply { init(presets.renderProjection) }
     }
