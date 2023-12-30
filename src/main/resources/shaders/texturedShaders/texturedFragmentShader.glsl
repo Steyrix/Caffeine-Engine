@@ -10,7 +10,7 @@ void main(void)
 {
     fColor = texture(textureSample, fragmentUV).rgba;
 
-    if(fColor.a <= 0){
+    if (fColor.a <= 0){
         discard;
     }
 }

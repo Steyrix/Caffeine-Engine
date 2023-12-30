@@ -7,10 +7,10 @@ import engine.feature.tiled.data.TileMap
 import kotlin.math.abs
 
 class TileTraverser(
-        private val graph: TileGraph,
-        private val tileMap: TileMap,
-        private val holderParams: SetOf2DParametersWithVelocity,
-        private val targetParams: SetOf2DParametersWithVelocity
+    private val graph: TileGraph,
+    private val tileMap: TileMap,
+    private val holderParams: SetOf2DParametersWithVelocity,
+    private val targetParams: SetOf2DParametersWithVelocity
 ) : CompositeEntity() {
 
     companion object {
@@ -54,9 +54,9 @@ class TileTraverser(
         dropVelocity()
 
         val nextPath = PathFinder.pathToByDijkstra(
-                graph,
-                start,
-                destination
+            graph,
+            start,
+            destination
         )
 
         extendCurrentPath(nextPath)
@@ -137,7 +137,7 @@ class TileTraverser(
 
     private fun tileIsReached(tileIndex: Int): Boolean {
         val pos = tileMap.getTilePosition(tileIndex)
-        val tilePosX = pos.x + tileMap.getTileWidth() /2
+        val tilePosX = pos.x + tileMap.getTileWidth() / 2
         val tilePosBottomY = pos.y + tileMap.getTileHeight()
 
         val x = holderParams.getCenterPoint().x

@@ -1,9 +1,9 @@
 package engine.core.loop
 
 class SingleTimeEvent(
-        timeLimit: Float,
-        action: (Float) -> Unit,
-        initialTime: Float = timeLimit
+    timeLimit: Float,
+    action: (Float) -> Unit,
+    initialTime: Float = timeLimit
 ) : AccumulatedTimeEvent(timeLimit, action, initialTime) {
 
     var isFinished = false

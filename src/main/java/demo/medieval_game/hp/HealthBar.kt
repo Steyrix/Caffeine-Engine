@@ -11,9 +11,9 @@ import engine.feature.interaction.Interaction
 import org.joml.Matrix4f
 
 class HealthBar(
-        private val objParams: SetOfParameters,
-        private val barParams: SetOfStatic2DParameters,
-        private val projection: Matrix4f
+    private val objParams: SetOfParameters,
+    private val barParams: SetOfStatic2DParameters,
+    private val projection: Matrix4f
 ) : CompositeEntity() {
 
     companion object {
@@ -27,7 +27,7 @@ class HealthBar(
         val textureFilePath = this.javaClass.getResource("/textures/healthbar_atlas.png")!!.path
 
         graphicalComponent = Model(
-                texture = Texture2D.createInstance(textureFilePath),
+            texture = Texture2D.createInstance(textureFilePath),
         ).apply {
             shader = ShaderController.createHpBarShader(projection)
         }
@@ -50,7 +50,7 @@ class HealthBar(
     }
 
     override fun consumeInteraction(interaction: Interaction) {
-        when(interaction) {
+        when (interaction) {
             is AttackInteraction -> filled -= interaction.damage
         }
     }

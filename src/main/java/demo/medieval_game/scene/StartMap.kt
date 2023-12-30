@@ -11,11 +11,11 @@ import engine.feature.tiled.scene.TileMapPreset
 import org.joml.Matrix4f
 
 class StartMap(
-        preset: TileMapPreset,
-        screenWidth: Float,
-        screenHeight: Float,
-        projection: Matrix4f,
-        private val switchTrigger: () -> Unit = {}
+    preset: TileMapPreset,
+    screenWidth: Float,
+    screenHeight: Float,
+    projection: Matrix4f,
+    private val switchTrigger: () -> Unit = {}
 ) : MedievalGameScene(preset, screenWidth, screenHeight, projection) {
 
     private var isFading = false
@@ -27,8 +27,8 @@ class StartMap(
 
         tiledMap?.let {
             val objects = StartMapInitializer.initAll(
-                    bbCollisionContext!!,
-                    boxInteractionContext!!,
+                bbCollisionContext!!,
+                boxInteractionContext!!,
             ) { params -> it.createTraverser(params, characterParameters) }
 
             context.addAll(objects)
@@ -53,8 +53,8 @@ class StartMap(
 
     override fun getNextSceneIntent(): MedievalGameSceneIntent {
         return MedievalGameSceneIntent(
-                direction = character!!.getDirection(),
-                previousScenePos = Point2D(characterParameters.x, characterParameters.y)
+            direction = character!!.getDirection(),
+            previousScenePos = Point2D(characterParameters.x, characterParameters.y)
         )
     }
 

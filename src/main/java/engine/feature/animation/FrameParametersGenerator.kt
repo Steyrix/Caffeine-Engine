@@ -3,10 +3,10 @@ package engine.feature.animation
 object FrameParametersGenerator {
 
     fun generate(
-            xRange: Pair<Int, Int>,
-            yRange: Pair<Int, Int>,
-            frameSizeX: Float,
-            frameSizeY: Float
+        xRange: Pair<Int, Int>,
+        yRange: Pair<Int, Int>,
+        frameSizeX: Float,
+        frameSizeY: Float
     ): List<FrameParameters> {
 
         val out = mutableListOf<FrameParameters>()
@@ -41,12 +41,12 @@ object FrameParametersGenerator {
                 val xOffset = xFirst * frameSizeX
 
                 out.add(
-                        FrameParameters(
-                                xOffset,
-                                yOffset,
-                                frameX,
-                                frameY
-                        )
+                    FrameParameters(
+                        xOffset,
+                        yOffset,
+                        frameX,
+                        frameY
+                    )
                 )
 
                 if (xAscending) xFirst++ else xFirst--

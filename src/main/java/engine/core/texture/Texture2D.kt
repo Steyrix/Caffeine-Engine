@@ -4,12 +4,13 @@ import org.lwjgl.opengl.GL33C.*
 import java.awt.Dimension
 
 class Texture2D(
-        override val id: Int
+    override val id: Int
 ) : Texture {
 
     override val bindTarget = GL_TEXTURE_2D
 
     private val dimension: Dimension
+
     companion object {
         fun createInstance(src: String): Texture2D {
             return Texture2D(TextureLoader.loadTexture2D(src))

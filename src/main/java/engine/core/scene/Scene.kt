@@ -14,8 +14,8 @@ interface Scene {
     val context: GameContext
 
     fun init(
-            session: Session,
-            intent: SceneIntent? = null
+        session: Session,
+        intent: SceneIntent? = null
     ) {
         context.addAll(session.getPersistentObjects())
     }

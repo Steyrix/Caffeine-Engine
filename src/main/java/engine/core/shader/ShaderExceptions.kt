@@ -5,21 +5,21 @@ import java.lang.IllegalArgumentException
 class ShaderNotCreatedException : IllegalStateException("Could not create shader program")
 
 class UniformNotFoundException(
-        uniformName: String
+    uniformName: String
 ) : IllegalArgumentException("Could not find uniform with name $uniformName")
 
 class IllegalShaderTypeException(
-        shaderType: Int
+    shaderType: Int
 ) : IllegalStateException("Could not create shader with type $shaderType")
 
 class ShaderCompilationFailedException(
-        log: String
+    log: String
 ) : IllegalStateException("Could not compile shader: $log")
 
 class ShaderLinkFailedException(
-        log: String
+    log: String
 ) : IllegalStateException("Could not link shader: $log")
 
 class ShaderValidationFailedException(
-        log: String
+    log: String
 ) : IllegalStateException("Could not validate shader: $log")

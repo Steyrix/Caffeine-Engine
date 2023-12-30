@@ -3,7 +3,7 @@ package engine.feature.tiled.traversing
 import engine.feature.tiled.data.TileMap
 
 class FlowField(
-        map: TileMap
+    map: TileMap
 ) {
     private val occupationMap: MutableMap<Int, Int>
 

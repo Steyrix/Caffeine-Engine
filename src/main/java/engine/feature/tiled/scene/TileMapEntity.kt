@@ -19,13 +19,13 @@ import org.joml.Matrix4f
 import java.io.File
 
 class TileMapEntity(
-        private val mapPresets: TileMapPreset
+    private val mapPresets: TileMapPreset
 ) : SingleGameEntity() {
 
     var parameters: SetOfStatic2DParameters =
-            SetOfStatic2DParameters(
-                    0f, 0f, 0f, 0f, 0f
-            )
+        SetOfStatic2DParameters(
+            0f, 0f, 0f, 0f, 0f
+        )
 
     private var graph: TileGraph? = null
 
@@ -40,8 +40,8 @@ class TileMapEntity(
         set(value) {
             value?.let {
                 graph = value.getGraph(
-                        mapPresets.walkingLayers,
-                        mapPresets.obstacleLayers
+                    mapPresets.walkingLayers,
+                    mapPresets.obstacleLayers
                 )
 
                 field = value
@@ -53,15 +53,15 @@ class TileMapEntity(
     }
 
     fun init(
-            renderProjection: Matrix4f,
-            collisionContexts: List<CollisionContext>
+        renderProjection: Matrix4f,
+        collisionContexts: List<CollisionContext>
     ) {
         parameters = SetOfStatic2DParameters(
-                x = 0f,
-                y = 0f,
-                xSize = mapPresets.width,
-                ySize = mapPresets.height,
-                rotationAngle = 0f
+            x = 0f,
+            y = 0f,
+            xSize = mapPresets.width,
+            ySize = mapPresets.height,
+            rotationAngle = 0f
         )
 
         graphicalComponent = getGraphicalComponent(renderProjection)
@@ -75,24 +75,24 @@ class TileMapEntity(
     }
 
     private fun getGraphicalComponent(
-            renderProjection: Matrix4f
+        renderProjection: Matrix4f
     ): TileMap {
         val vertexShaderPath = this.javaClass.getResource(mapPresets.vertexShaderPath)?.path
-                ?: throw IllegalStateException()
+            ?: throw IllegalStateException()
 
         val fragmentShaderPath = this.javaClass.getResource(mapPresets.fragmentShaderPath)?.path
-                ?: throw IllegalStateException()
+            ?: throw IllegalStateException()
 
         val sourcePath = this.javaClass.getResource(mapPresets.mapSourcePath)?.path
-                ?: throw IllegalStateException()
+            ?: throw IllegalStateException()
 
         val graphicalComponent = TiledResourceParser.createTileMapFromXml(
-                File(sourcePath)
+            File(sourcePath)
         )
 
         graphicalComponent.shader = ShaderLoader.loadFromFile(
-                vertexShaderFilePath = vertexShaderPath,
-                fragmentShaderFilePath = fragmentShaderPath
+            vertexShaderFilePath = vertexShaderPath,
+            fragmentShaderFilePath = fragmentShaderPath
         ).also { shader ->
             shader.bind()
             shader.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection)
@@ -106,7 +106,7 @@ class TileMapEntity(
     }
 
     override fun update(
-            deltaTime: Float
+        deltaTime: Float
     ) {
         super.update(deltaTime)
         mapPresets.updateEvents.forEach {
@@ -115,20 +115,20 @@ class TileMapEntity(
     }
 
     fun createTraverser(
-            holderParams: SetOf2DParametersWithVelocity,
-            targetParams: SetOf2DParametersWithVelocity
+        holderParams: SetOf2DParametersWithVelocity,
+        targetParams: SetOf2DParametersWithVelocity
     ): TileTraverser {
         return TileTraverser(
-                graph!!,
-                graphicalComponent!!,
-                holderParams,
-                targetParams
+            graph!!,
+            graphicalComponent!!,
+            holderParams,
+            targetParams
         )
     }
 
     fun adjustParameters(
-            sizeToMapRelation: Float,
-            params: List<SetOfParameters>
+        sizeToMapRelation: Float,
+        params: List<SetOfParameters>
     ) {
         params.forEach {
             it.xSize = sizeToMapRelation * parameters.xSize

@@ -6,11 +6,11 @@ import org.joml.Vector3f
 object DefaultMatrixState : MatrixState {
 
     override fun getResultMatrix(
-            posX: Float,
-            posY: Float,
-            xSize: Float,
-            ySize: Float,
-            rotationAngle: Float
+        posX: Float,
+        posY: Float,
+        xSize: Float,
+        ySize: Float,
+        rotationAngle: Float
     ): Matrix4f {
         val model = Matrix4f().identity()
 

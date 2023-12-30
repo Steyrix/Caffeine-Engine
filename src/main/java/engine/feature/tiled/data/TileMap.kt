@@ -11,7 +11,7 @@ import kotlin.math.roundToInt
 // TODO: remove doc for properties and rename them for clearance
 // TODO: make composite entity
 class TileMap(
-        private val layers: MutableList<TileLayer>,
+    private val layers: MutableList<TileLayer>,
 ) : Drawable<SetOfStatic2DParameters>, Entity {
 
     companion object {
@@ -73,7 +73,7 @@ class TileMap(
     fun getTileWidth() = absoluteTileWidth
 
     fun getLayerByName(name: String): TileLayer = layersMap[name]
-            ?: throw IllegalStateException("Layer with name $name not found")
+        ?: throw IllegalStateException("Layer with name $name not found")
 
     fun getTileValue(posX: Float, posY: Float, layerName: String): Int {
         val layer = layersMap[layerName] ?: return NOT_FOUND
@@ -101,8 +101,8 @@ class TileMap(
     }
 
     fun getGraph(
-            walkableLayers: List<String>,
-            obstacleLayers: List<String>
+        walkableLayers: List<String>,
+        obstacleLayers: List<String>
     ): TileGraph? {
         val walkable = walkableLayers.map { getLayerByName(it) }
         val obstacle = obstacleLayers.map { getLayerByName(it) }

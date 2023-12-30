@@ -4,7 +4,7 @@ import engine.core.update.SetOfParameters
 import engine.core.window.Window
 
 abstract class DynamicGameEntity<P : SetOfParameters>(
-        protected val parameters: P
+    protected val parameters: P
 ) : SingleGameEntity() {
 
     private var isSpawned = false

@@ -1,9 +1,9 @@
 package engine.core.loop
 
 open class AccumulatedTimeEvent(
-        protected val timeLimit: Float,
-        protected val action: (Float) -> Unit,
-        initialTime: Float = timeLimit
+    protected val timeLimit: Float,
+    protected val action: (Float) -> Unit,
+    initialTime: Float = timeLimit
 ) {
     protected var accumulatedTime = initialTime
 

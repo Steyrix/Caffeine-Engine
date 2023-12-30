@@ -4,8 +4,8 @@ import engine.core.render.opengl_wrapper.buffer.Buffer
 import engine.core.render.opengl_wrapper.VertexArray
 
 open class Mesh(
-        dataArrays: List<FloatArray>,
-        val verticesCount: Int,
+    dataArrays: List<FloatArray>,
+    val verticesCount: Int,
 ) {
 
     private val buffers: MutableList<Buffer> = mutableListOf()
@@ -17,11 +17,11 @@ open class Mesh(
     }
 
     private fun initBuffers(
-            dataArrays: List<FloatArray>
+        dataArrays: List<FloatArray>
     ) {
         dataArrays.forEach {
             buffers.add(
-                    Buffer(it, verticesCount)
+                Buffer(it, verticesCount)
             )
         }
     }
@@ -33,9 +33,9 @@ open class Mesh(
     }
 
     fun updateBuffer(
-            bufferIndex: Int,
-            offset: Long,
-            data: FloatArray
+        bufferIndex: Int,
+        offset: Long,
+        data: FloatArray
     ) {
         buffers[bufferIndex].update(data, offset)
     }

@@ -10,44 +10,44 @@ import engine.core.update.SetOfParameters
 import org.lwjgl.opengl.GL33C.*
 
 open class Model(
-        private val mesh: Mesh,
-        private var texture: Texture2D? = null,
-        private var arrayTexture: ArrayTexture2D? = null
+    private val mesh: Mesh,
+    private var texture: Texture2D? = null,
+    private var arrayTexture: ArrayTexture2D? = null
 ) : Drawable<SetOfParameters>, Entity {
 
     constructor(
-            texture: Texture2D,
-            uv: FloatArray = DefaultBufferData.getRectangleSectorVertices(1.0f, 1.0f)
+        texture: Texture2D,
+        uv: FloatArray = DefaultBufferData.getRectangleSectorVertices(1.0f, 1.0f)
     ) : this(
-            mesh = Mesh(
-                    dataArrays = listOf(
-                            DefaultBufferData.RECTANGLE_INDICES,
-                            uv
-                    ),
-                    verticesCount = 6
+        mesh = Mesh(
+            dataArrays = listOf(
+                DefaultBufferData.RECTANGLE_INDICES,
+                uv
             ),
-            texture = texture,
-            arrayTexture = null
+            verticesCount = 6
+        ),
+        texture = texture,
+        arrayTexture = null
     )
 
     constructor(arrayTexture: ArrayTexture2D) : this(
-            mesh = Mesh(
-                    dataArrays = DefaultBufferData.getRectangleSectorBuffers(),
-                    verticesCount = 6
-            ),
-            texture = null,
-            arrayTexture = arrayTexture
+        mesh = Mesh(
+            dataArrays = DefaultBufferData.getRectangleSectorBuffers(),
+            verticesCount = 6
+        ),
+        texture = null,
+        arrayTexture = arrayTexture
     )
 
     constructor(
-            dataArrays: List<FloatArray>,
-            verticesCount: Int,
-            texture: Texture2D? = null,
-            arrayTexture: ArrayTexture2D? = null
+        dataArrays: List<FloatArray>,
+        verticesCount: Int,
+        texture: Texture2D? = null,
+        arrayTexture: ArrayTexture2D? = null
     ) : this(
-            mesh = Mesh(dataArrays, verticesCount),
-            texture = texture,
-            arrayTexture = arrayTexture
+        mesh = Mesh(dataArrays, verticesCount),
+        texture = texture,
+        arrayTexture = arrayTexture
     )
 
     private var textureUniformName: String = ""
@@ -119,9 +119,9 @@ open class Model(
 
     // todo: get rid of proxying
     fun updateMesh(
-            bufferIndex: Int,
-            offset: Long,
-            data: FloatArray
+        bufferIndex: Int,
+        offset: Long,
+        data: FloatArray
     ) {
         mesh.updateBuffer(bufferIndex, offset, data)
     }

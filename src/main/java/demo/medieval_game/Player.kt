@@ -10,19 +10,19 @@ import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.interaction.Interaction
 
 class Player(
-        private val drawableComponent: AnimatedModel2D,
-        private val params: SetOf2DParametersWithVelocity,
-        private val tempSpritesHolder: TempSpritesHolder
+    private val drawableComponent: AnimatedModel2D,
+    private val params: SetOf2DParametersWithVelocity,
+    private val tempSpritesHolder: TempSpritesHolder
 ) : CompositeEntity() {
 
     private var isAttack = false
 
     private val attackCoolDown = PredicateTimeEvent(
-            timeLimit = 0.5f,
-            predicate = { isAttack },
-            action = {
-                isAttack = false
-            }
+        timeLimit = 0.5f,
+        predicate = { isAttack },
+        action = {
+            isAttack = false
+        }
     )
 
     private var isHit = false
@@ -36,22 +36,22 @@ class Player(
     )
 
     private val controller = SimpleController2D(
-            params,
-            absVelocityY = 10f,
-            absVelocityX = 10f,
-            modifier = 20f,
-            isControlledByUser = true
+        params,
+        absVelocityY = 10f,
+        absVelocityX = 10f,
+        modifier = 20f,
+        isControlledByUser = true
     )
 
     init {
         addComponent(
-                component = drawableComponent,
-                parameters = params
+            component = drawableComponent,
+            parameters = params
         )
 
         addComponent(
-                component = controller,
-                parameters = params
+            component = controller,
+            parameters = params
         )
     }
 
@@ -76,7 +76,7 @@ class Player(
     fun getDirection() = controller.direction
 
     override fun consumeInteraction(interaction: Interaction) {
-        when(interaction) {
+        when (interaction) {
             is AttackInteraction -> {
                 if (!isHit) {
                     isHit = true

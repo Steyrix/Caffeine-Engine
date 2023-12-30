@@ -4,5 +4,5 @@ import engine.core.update.SetOfParameters
 import engine.feature.interaction.Interaction
 
 data class IsAttackableInteraction(
-        val targetParams: SetOfParameters
+    val targetParams: SetOfParameters
 ) : Interaction

@@ -3,11 +3,11 @@ package engine.feature.animation
 import engine.core.shader.Shader
 
 class SequenceAtlasAnimation(
-        override val name: String,
-        override val isReplayable: Boolean = true,
-        private val frames: List<FrameParameters>,
-        initialIndex: Int = 0,
-        private val timeLimit: Float
+    override val name: String,
+    override val isReplayable: Boolean = true,
+    private val frames: List<FrameParameters>,
+    initialIndex: Int = 0,
+    private val timeLimit: Float
 ) : Animation {
 
     private var accumulatedTime: Float = 0f
@@ -60,11 +60,11 @@ class SequenceAtlasAnimation(
 
     override fun copy(): SequenceAtlasAnimation {
         return SequenceAtlasAnimation(
-                name,
-                isReplayable,
-                frames = frames.map { it.copy() },
-                initialIndex = 0,
-                timeLimit = timeLimit
+            name,
+            isReplayable,
+            frames = frames.map { it.copy() },
+            initialIndex = 0,
+            timeLimit = timeLimit
         )
     }
 }

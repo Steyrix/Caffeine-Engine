@@ -5,6 +5,6 @@ import engine.core.scene.SceneIntent
 import engine.core.geometry.Point2D
 
 data class MedievalGameSceneIntent(
-        val direction: Direction,
-        val previousScenePos: Point2D
-): SceneIntent
+    val direction: Direction,
+    val previousScenePos: Point2D
+) : SceneIntent

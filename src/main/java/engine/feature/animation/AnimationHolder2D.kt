@@ -4,7 +4,7 @@ import engine.core.render.Model
 import engine.core.shader.Shader
 
 class AnimationHolder2D(
-        private val animations: List<Animation>
+    private val animations: List<Animation>
 ) {
     private var currentAnimation: Animation = animations.first()
 

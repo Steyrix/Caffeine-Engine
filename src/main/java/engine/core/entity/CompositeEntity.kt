@@ -20,9 +20,9 @@ open class CompositeEntity : Entity, Updatable {
     var isDisposed = false
 
     fun addComponent(
-            component: Entity,
-            parameters: SetOfParameters
-    ) : CompositeEntity {
+        component: Entity,
+        parameters: SetOfParameters
+    ): CompositeEntity {
         entitiesMap[component] = parameters
         component.onAdd()
 
@@ -30,7 +30,7 @@ open class CompositeEntity : Entity, Updatable {
     }
 
     fun removeComponent(
-            entity: Entity
+        entity: Entity
     ) {
         if (entitiesMap.contains(entity)) {
             entitiesMap.remove(entity)

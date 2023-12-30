@@ -16,19 +16,19 @@ import engine.feature.tiled.traversing.TileTraverser
 
 object StartMapInitializer : SceneInitializer {
     fun initAll(
-            boundingBoxCollisionContext: BoundingBoxCollisionContext,
-            boxInteractionContext: BoxInteractionContext,
-            tileTraverserCreator: (SetOf2DParametersWithVelocity) -> TileTraverser
+        boundingBoxCollisionContext: BoundingBoxCollisionContext,
+        boxInteractionContext: BoxInteractionContext,
+        tileTraverserCreator: (SetOf2DParametersWithVelocity) -> TileTraverser
     ): MutableList<out GameEntity> {
         val campfire = Campfire(
-                parameters = campfireParameters
+            parameters = campfireParameters
         ).apply {
             init(MedievalGame.renderProjection)
         }
 
         val listOfNpc = initGoblins(
-                boundingBoxCollisionContext,
-                boxInteractionContext,
+            boundingBoxCollisionContext,
+            boxInteractionContext,
         ) { params: SetOf2DParametersWithVelocity -> tileTraverserCreator.invoke(params) }
 
         val out = mutableListOf<GameEntity>().apply {
@@ -40,24 +40,24 @@ object StartMapInitializer : SceneInitializer {
     }
 
     private fun initGoblins(
-            boundingBoxCollisionContext: BoundingBoxCollisionContext,
-            boxInteractionContext: BoxInteractionContext,
-            creator: (SetOf2DParametersWithVelocity) -> TileTraverser
+        boundingBoxCollisionContext: BoundingBoxCollisionContext,
+        boxInteractionContext: BoxInteractionContext,
+        creator: (SetOf2DParametersWithVelocity) -> TileTraverser
     ): List<GameEntity> {
         val out = mutableListOf<GameEntity>()
         val paramsList = listOf(goblinParams1, goblinParams2)
 
         paramsList.forEach {
             val goblin = GoblinNPC(
-                    it,
-                    creator.invoke(it),
-                    TempSpritesHolder().apply { init(MedievalGame.renderProjection) }
+                it,
+                creator.invoke(it),
+                TempSpritesHolder().apply { init(MedievalGame.renderProjection) }
             ).also { npc ->
                 npc.init(
-                        MedievalGame.renderProjection,
-                        boundingBoxCollisionContext,
-                        boxInteractionContext,
-                        GoblinPreset.get()
+                    MedievalGame.renderProjection,
+                    boundingBoxCollisionContext,
+                    boxInteractionContext,
+                    GoblinPreset.get()
                 )
             }
 

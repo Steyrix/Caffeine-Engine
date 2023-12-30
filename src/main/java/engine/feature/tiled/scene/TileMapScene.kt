@@ -7,7 +7,7 @@ import engine.core.session.Session
 import org.joml.Matrix4f
 
 abstract class TileMapScene(
-        projection: Matrix4f
+    projection: Matrix4f
 ) : Scene {
 
     override val renderProjection = projection
@@ -20,9 +20,9 @@ abstract class TileMapScene(
         super.init(session, intent)
 
         tiledMap = initTileMap(
-                renderProjection!!,
-                screenWidth,
-                screenHeight
+            renderProjection!!,
+            screenWidth,
+            screenHeight
         )
 
         tiledMap?.let {
@@ -31,8 +31,8 @@ abstract class TileMapScene(
     }
 
     abstract fun initTileMap(
-            projection: Matrix4f,
-            screenWidth: Float,
-            screenHeight: Float
+        projection: Matrix4f,
+        screenWidth: Float,
+        screenHeight: Float
     ): TileMapEntity
 }

@@ -3,16 +3,16 @@ package engine.core.texture
 import org.lwjgl.opengl.GL42C.*
 
 class ArrayTexture2D(
-        override val id: Int
+    override val id: Int
 ) : Texture {
 
     companion object {
         fun createInstance(
-                sources: List<String>,
-                layersCount: Int
+            sources: List<String>,
+            layersCount: Int
         ): ArrayTexture2D {
             return ArrayTexture2D(
-                    TextureLoader.loadArrayTexture2D(sources, layersCount)
+                TextureLoader.loadArrayTexture2D(sources, layersCount)
             )
         }
     }

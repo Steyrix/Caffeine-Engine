@@ -3,11 +3,11 @@ package engine.feature.tiled.data
 import engine.core.texture.Texture2D
 
 class TileSet(
-        internal val tileWidthPx: Float,
-        internal val tileHeightPx: Float,
-        internal val texture2D: Texture2D,
-        private val textureTileCount: Int,
-        private val textureColumnCount: Int
+    internal val tileWidthPx: Float,
+    internal val tileHeightPx: Float,
+    internal val texture2D: Texture2D,
+    private val textureTileCount: Int,
+    private val textureColumnCount: Int
 ) {
 
     companion object {
@@ -37,12 +37,12 @@ class TileSet(
         val currentColumn = (numberInSet % textureColumnCount).toFloat()
 
         return floatArrayOf(
-                currentColumn * x, (currentRow + 1) * y,
-                (currentColumn + 1) * x, currentRow * y,
-                currentColumn * x, currentRow * y,
-                currentColumn * x, (currentRow + 1) * y,
-                (currentColumn + 1) * x, (currentRow + 1) * y,
-                (currentColumn + 1) * x, currentRow * y
+            currentColumn * x, (currentRow + 1) * y,
+            (currentColumn + 1) * x, currentRow * y,
+            currentColumn * x, currentRow * y,
+            currentColumn * x, (currentRow + 1) * y,
+            (currentColumn + 1) * x, (currentRow + 1) * y,
+            (currentColumn + 1) * x, currentRow * y
         )
     }
 }

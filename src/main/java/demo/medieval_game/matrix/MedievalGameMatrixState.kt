@@ -15,11 +15,11 @@ object MedievalGameMatrixState : MatrixState {
     val tempTranslation = Vector2f(0f, 0f)
 
     override fun getResultMatrix(
-            posX: Float,
-            posY: Float,
-            xSize: Float,
-            ySize: Float,
-            rotationAngle: Float
+        posX: Float,
+        posY: Float,
+        xSize: Float,
+        ySize: Float,
+        rotationAngle: Float
     ): Matrix4f {
         val model = Matrix4f().identity()
 
@@ -57,27 +57,35 @@ object MedievalGameMatrixState : MatrixState {
         }
     }
 
-    private fun isHorizontalTranslationPossible(x: Float, worldWidth: Float = 1500f, screenWidth: Float = 999.375f): Boolean {
+    private fun isHorizontalTranslationPossible(
+        x: Float,
+        worldWidth: Float = 1500f,
+        screenWidth: Float = 999.375f
+    ): Boolean {
         return (screenWidth + abs(worldTranslation.x + x) < worldWidth)
                 && (worldTranslation.x + x) < 0
     }
 
-    private fun isVerticalTranslationPossible(y: Float, worldHeight: Float = 1500f, screenHeight: Float = 999.375f): Boolean {
+    private fun isVerticalTranslationPossible(
+        y: Float,
+        worldHeight: Float = 1500f,
+        screenHeight: Float = 999.375f
+    ): Boolean {
         return (screenHeight + abs(worldTranslation.y + y) < worldHeight)
                 && (worldTranslation.y + y) < 0
     }
 
     fun handleMapTransaction(
-            direction: Direction,
-            screenWidth: Float,
-            screenHeight: Float,
-            worldWidth: Float,
-            worldHeight: Float
+        direction: Direction,
+        screenWidth: Float,
+        screenHeight: Float,
+        worldWidth: Float,
+        worldHeight: Float
     ) {
         var xMod = 0f
         var yMod = 0f
 
-        when(direction) {
+        when (direction) {
             Direction.RIGHT -> {
                 characterParameters.x = 0f
                 xMod = 1f
@@ -106,15 +114,15 @@ object MedievalGameMatrixState : MatrixState {
         val verticalTranslation = screenHeight - centerPoint.y
 
         translateWorld(
-                horizontalTranslation * xMod,
-                verticalTranslation * yMod
+            horizontalTranslation * xMod,
+            verticalTranslation * yMod
         )
     }
 
     fun postMapTransactionAction(
-            isHorizontalTransaction: Boolean,
-            screenWidth: Float,
-            screenHeight: Float
+        isHorizontalTransaction: Boolean,
+        screenWidth: Float,
+        screenHeight: Float
     ) {
         if (isHorizontalTransaction) {
             tempTranslation.x = screenWidth / 2 - characterParameters.xSize / 2

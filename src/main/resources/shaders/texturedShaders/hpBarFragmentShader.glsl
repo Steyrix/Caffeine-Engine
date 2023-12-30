@@ -12,7 +12,7 @@ void main(void) {
     vec2 texCoord = vec2(fragmentUV.x, fragmentUV.y / 2 + offset);
     fColor = texture(textureSample, texCoord);
 
-    if(fColor.a <= 0) {
+    if (fColor.a <= 0) {
         discard;
     }
 }

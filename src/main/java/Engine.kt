@@ -21,16 +21,16 @@ class Engine(
         try {
             init()
             gameLoop.loop(
-                    inputFunc = {
-                        sceneHolder.input(window)
-                    },
-                    renderFunc = {
-                        sceneHolder.render(window)
-                        window.update()
-                    },
-                    updateFunc = { deltaTime ->
-                        sceneHolder.update(deltaTime)
-                    }
+                inputFunc = {
+                    sceneHolder.input(window)
+                },
+                renderFunc = {
+                    sceneHolder.render(window)
+                    window.update()
+                },
+                updateFunc = { deltaTime ->
+                    sceneHolder.update(deltaTime)
+                }
             )
         } catch (e: Exception) {
             e.printStackTrace()

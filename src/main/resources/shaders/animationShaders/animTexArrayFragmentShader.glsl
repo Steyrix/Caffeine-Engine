@@ -10,7 +10,7 @@ uniform int textureArrayLayer;
 void main(void)
 {
     fColor = texture(textureArray, vec3(fragmentUV, textureArrayLayer)).rgba;
-    if(fColor.a <= 0){
+    if (fColor.a <= 0){
         discard;
     }
 }

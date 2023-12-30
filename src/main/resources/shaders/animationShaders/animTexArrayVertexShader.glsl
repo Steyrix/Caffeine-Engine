@@ -18,12 +18,12 @@ void main(void)
 
     fragmentUV = vec2(vertexUV.x * frameNumberX, vertexUV.y * frameNumberY);
 
-    if(fragmentUV.x <= 0)
+    if (fragmentUV.x <= 0)
     {
         fragmentUV.x = vertexUV.x + xOffset;
     }
 
-    if(fragmentUV.y <= 0)
+    if (fragmentUV.y <= 0)
     {
         fragmentUV.y = vertexUV.y + yOffset;
     }

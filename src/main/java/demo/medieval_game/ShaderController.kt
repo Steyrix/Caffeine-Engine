@@ -7,11 +7,12 @@ import org.joml.Matrix4f
 object ShaderController {
     fun createBoundingBoxShader(projection: Matrix4f): Shader {
         val vertexPath = this.javaClass.getResource("/shaders/boundingBoxShaders/boundingBoxVertexShader.glsl")!!.path
-        val fragmentPath = this.javaClass.getResource("/shaders/boundingBoxShaders/boundingBoxFragmentShader.glsl")!!.path
+        val fragmentPath =
+            this.javaClass.getResource("/shaders/boundingBoxShaders/boundingBoxFragmentShader.glsl")!!.path
 
         return ShaderLoader.loadFromFile(
-                vertexShaderFilePath = vertexPath,
-                fragmentShaderFilePath = fragmentPath
+            vertexShaderFilePath = vertexPath,
+            fragmentShaderFilePath = fragmentPath
         ).also {
             it.bind()
             it.setUniform(Shader.VAR_KEY_PROJECTION, projection)
@@ -23,8 +24,8 @@ object ShaderController {
         val fragmentPath = this.javaClass.getResource("/shaders/animationShaders/animFragmentShader.glsl")!!.path
 
         return ShaderLoader.loadFromFile(
-                vertexShaderFilePath = vertexPath,
-                fragmentShaderFilePath = fragmentPath
+            vertexShaderFilePath = vertexPath,
+            fragmentShaderFilePath = fragmentPath
         ).also {
             it.bind()
             it.setUniform(Shader.VAR_KEY_PROJECTION, projection)
@@ -33,11 +34,12 @@ object ShaderController {
 
     fun createAnimationShaderWithTexArray(projection: Matrix4f): Shader {
         val vertexPath = this.javaClass.getResource("/shaders/animationShaders/animTexArrayVertexShader.glsl")!!.path
-        val fragmentPath = this.javaClass.getResource("/shaders/animationShaders/animTexArrayFragmentShader.glsl")!!.path
+        val fragmentPath =
+            this.javaClass.getResource("/shaders/animationShaders/animTexArrayFragmentShader.glsl")!!.path
 
         return ShaderLoader.loadFromFile(
-                vertexShaderFilePath = vertexPath,
-                fragmentShaderFilePath = fragmentPath
+            vertexShaderFilePath = vertexPath,
+            fragmentShaderFilePath = fragmentPath
         ).also {
             it.bind()
             it.setUniform(Shader.VAR_KEY_PROJECTION, projection)
@@ -49,8 +51,8 @@ object ShaderController {
         val fragmentPath = this.javaClass.getResource("/shaders/texturedShaders/texturedFragmentShader.glsl")!!.path
 
         return ShaderLoader.loadFromFile(
-                vertexShaderFilePath = vertexPath,
-                fragmentShaderFilePath = fragmentPath
+            vertexShaderFilePath = vertexPath,
+            fragmentShaderFilePath = fragmentPath
         ).also {
             it.bind()
             it.setUniform(Shader.VAR_KEY_PROJECTION, projection)
@@ -62,8 +64,8 @@ object ShaderController {
         val fragmentPath = this.javaClass.getResource("/shaders/texturedShaders/hpBarFragmentShader.glsl")!!.path
 
         return ShaderLoader.loadFromFile(
-                vertexShaderFilePath = vertexPath,
-                fragmentShaderFilePath = fragmentPath
+            vertexShaderFilePath = vertexPath,
+            fragmentShaderFilePath = fragmentPath
         ).also {
             it.bind()
             it.setUniform(Shader.VAR_KEY_PROJECTION, projection)
@@ -75,8 +77,8 @@ object ShaderController {
         val fragmentPath = this.javaClass.getResource("/shaders/primitiveShaders/primitiveFragmentShader.glsl")!!.path
 
         return ShaderLoader.loadFromFile(
-                vertexShaderFilePath = vertexPath,
-                fragmentShaderFilePath = fragmentPath
+            vertexShaderFilePath = vertexPath,
+            fragmentShaderFilePath = fragmentPath
         ).also {
             it.bind()
             it.setUniform(Shader.VAR_KEY_PROJECTION, projection)

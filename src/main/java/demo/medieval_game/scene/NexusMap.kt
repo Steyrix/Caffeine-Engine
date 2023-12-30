@@ -8,11 +8,11 @@ import engine.feature.tiled.scene.TileMapPreset
 import org.joml.Matrix4f
 
 class NexusMap(
-        preset: TileMapPreset,
-        screenWidth: Float,
-        screenHeight: Float,
-        projection: Matrix4f,
-        switchTrigger: () -> Unit = {}
+    preset: TileMapPreset,
+    screenWidth: Float,
+    screenHeight: Float,
+    projection: Matrix4f,
+    switchTrigger: () -> Unit = {}
 ) : MedievalGameScene(preset, screenWidth, screenHeight, projection) {
 
     override fun init(session: Session, intent: SceneIntent?) {
@@ -21,8 +21,8 @@ class NexusMap(
         // TODO: temp
         tiledMap?.let {
             val objects = StartMapInitializer.initAll(
-                    bbCollisionContext!!,
-                    boxInteractionContext!!,
+                bbCollisionContext!!,
+                boxInteractionContext!!,
             ) { params -> it.createTraverser(params, characterParameters) }
             context.addAll(objects)
             character?.updateCollisionContext(tiledCollisionContext)

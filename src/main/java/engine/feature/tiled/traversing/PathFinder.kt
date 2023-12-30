@@ -5,9 +5,9 @@ import java.util.PriorityQueue
 internal object PathFinder {
 
     fun pathTo(
-            graph: Map<Int, List<Int>>,
-            start: Int,
-            destination: Int
+        graph: Map<Int, List<Int>>,
+        start: Int,
+        destination: Int
     ): ArrayDeque<Int> {
         if (graph[destination].isNullOrEmpty() || graph[start].isNullOrEmpty()) return ArrayDeque()
 
@@ -28,11 +28,11 @@ internal object PathFinder {
     }
 
     private fun bfs(
-            graph: Map<Int, List<Int>>,
-            start: Int,
-            destination: Int,
-            dist: IntArray,
-            pred: IntArray
+        graph: Map<Int, List<Int>>,
+        start: Int,
+        destination: Int,
+        dist: IntArray,
+        pred: IntArray
     ): Boolean {
         val queue = ArrayDeque<Int>()
 
@@ -61,9 +61,9 @@ internal object PathFinder {
     }
 
     fun pathToByDijkstra(
-            graph: TileGraph,
-            start: Int,
-            destination: Int
+        graph: TileGraph,
+        start: Int,
+        destination: Int
     ): ArrayDeque<Int> {
         if (graph.nodes[destination].isNullOrEmpty() || graph.nodes[start].isNullOrEmpty()) return ArrayDeque()
 
@@ -92,11 +92,11 @@ internal object PathFinder {
     }
 
     private fun dijkstra(
-            graph: TileGraph,
-            start: Int,
-            destination: Int,
-            dist: IntArray,
-            pred: IntArray
+        graph: TileGraph,
+        start: Int,
+        destination: Int,
+        dist: IntArray,
+        pred: IntArray
     ): Boolean {
         val queue = PriorityQueue<Int>(compareBy { dist[it] })
         val visited = BooleanArray(graph.nodes.size)

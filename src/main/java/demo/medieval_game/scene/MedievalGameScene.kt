@@ -18,10 +18,10 @@ import org.joml.Matrix4f
 import org.lwjgl.opengl.GL33C.*
 
 abstract class MedievalGameScene(
-        private val preset: TileMapPreset,
-        override val screenWidth: Float,
-        override val screenHeight: Float,
-        projection: Matrix4f
+    private val preset: TileMapPreset,
+    override val screenWidth: Float,
+    override val screenHeight: Float,
+    projection: Matrix4f
 ) : TileMapScene(projection) {
 
     protected var character: PlayableCharacter? = null
@@ -54,9 +54,9 @@ abstract class MedievalGameScene(
 
     override fun initTileMap(projection: Matrix4f, screenWidth: Float, screenHeight: Float): TileMapEntity {
         return MapSceneInitializer.initTileMapObject(
-                preset,
-                projection,
-                listOf(tiledCollisionContext)
+            preset,
+            projection,
+            listOf(tiledCollisionContext)
         )
     }
 
@@ -108,15 +108,15 @@ abstract class MedievalGameScene(
 
     protected open fun handleMapTransaction(intent: MedievalGameSceneIntent) {
         isHorizontalMapTransaction =
-                intent.direction == Direction.RIGHT
-                        || intent.direction == Direction.LEFT
+            intent.direction == Direction.RIGHT
+                    || intent.direction == Direction.LEFT
 
         MedievalGameMatrixState.handleMapTransaction(
-                intent.direction,
-                screenWidth,
-                screenHeight,
-                worldWidth = tiledMap?.worldSize?.x ?: 0f,
-                worldHeight = tiledMap?.worldSize?.y ?: 0f
+            intent.direction,
+            screenWidth,
+            screenHeight,
+            worldWidth = tiledMap?.worldSize?.x ?: 0f,
+            worldHeight = tiledMap?.worldSize?.y ?: 0f
         )
     }
 
@@ -125,9 +125,9 @@ abstract class MedievalGameScene(
         updateRounds++
         if (updateRounds == 2) {
             MedievalGameMatrixState.postMapTransactionAction(
-                    isHorizontalMapTransaction,
-                    screenWidth,
-                    screenHeight
+                isHorizontalMapTransaction,
+                screenWidth,
+                screenHeight
             )
         }
     }

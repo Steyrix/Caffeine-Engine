@@ -3,14 +3,14 @@ package engine.feature.animation
 import engine.core.shader.Shader
 
 class BasicAtlasAnimation(
-        override val name: String,
-        private val animationId: Int,
-        val usedLayerId: Int,
-        private val framesCountX: Int,
-        private val framesCountY: Int,
-        internal var currentFrameX: Int,
-        internal var currentFrameY: Int,
-        private val timeLimit: Float
+    override val name: String,
+    private val animationId: Int,
+    val usedLayerId: Int,
+    private val framesCountX: Int,
+    private val framesCountY: Int,
+    internal var currentFrameX: Int,
+    internal var currentFrameY: Int,
+    private val timeLimit: Float
 ) : Animation {
     private var playFunction: ((Float, Int, Int, Int, Int) -> Unit)? = null
 
@@ -46,7 +46,7 @@ class BasicAtlasAnimation(
                         else if (shouldInc())
                             currentFrameY++
                         else
-                            currentFrameY --
+                            currentFrameY--
                     }
                 } else if (shouldInc())
                     currentFrameX++
@@ -65,14 +65,14 @@ class BasicAtlasAnimation(
 
     override fun copy(): BasicAtlasAnimation {
         return BasicAtlasAnimation(
-                name,
-                animationId,
-                usedLayerId,
-                framesCountX,
-                framesCountY,
-                currentFrameX,
-                currentFrameY,
-                timeLimit
+            name,
+            animationId,
+            usedLayerId,
+            framesCountX,
+            framesCountY,
+            currentFrameX,
+            currentFrameY,
+            timeLimit
         )
     }
 

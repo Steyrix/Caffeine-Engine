@@ -19,27 +19,27 @@ void main(void)
     float verticalDiff = lightSourceSize.y;
 
     float lightSourceX =
-        (lightSourceCoords.x - horizontalDiff) / screenSize.x * 2 - 1;
+    (lightSourceCoords.x - horizontalDiff) / screenSize.x * 2 - 1;
 
     float lightSourceY =
-        (-lightSourceCoords.y - verticalDiff) / screenSize.y * 2 + 1;
+    (-lightSourceCoords.y - verticalDiff) / screenSize.y * 2 + 1;
 
     vec2 lightSourcePos = vec2(lightSourceX, lightSourceY);
 
     float lightIntensity = 1.0/distance(lightSourcePos, pos.xy);
 
-    if(lightIntensity >= lightIntensityCap) {
+    if (lightIntensity >= lightIntensityCap) {
         lightIntensity = lightIntensityCap;
     }
 
-    if(lightIntensity <= 1) {
+    if (lightIntensity <= 1) {
         lightIntensity = 1;
     }
 
     vec4 lightCol = vec4(lightIntensity, lightIntensity, lightIntensity, 1.0);
     fColor = texture(textureSample, fragmentUV).rgba * lightCol;
 
-    if(fColor.a <= 0){
+    if (fColor.a <= 0){
         discard;
     }
 }

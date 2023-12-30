@@ -12,31 +12,31 @@ import org.lwjgl.opengl.GL33C.*
 
 // TODO: Implement cloneable interface
 class BoundingBox(
-        override var x: Float = 0f,
-        override var y: Float = 0f,
-        override var xSize: Float = 0f,
-        override var ySize: Float = 0f,
-        override var xOffset: Float  = 0f,
-        override var yOffset: Float = 0f,
-        private var rotationAngle: Float = 0f,
-        private val isSizeBoundToHolder: Boolean = true
+    override var x: Float = 0f,
+    override var y: Float = 0f,
+    override var xSize: Float = 0f,
+    override var ySize: Float = 0f,
+    override var xOffset: Float = 0f,
+    override var yOffset: Float = 0f,
+    private var rotationAngle: Float = 0f,
+    private val isSizeBoundToHolder: Boolean = true
 ) : CompositeEntity(), IntersectableBox, Drawable<SetOfParameters> {
 
     constructor(initialParams: SetOfStatic2DParametersWithOffset, isSizeBoundToHolder: Boolean) :
             this(
-                    initialParams.x,
-                    initialParams.y,
-                    initialParams.xSize,
-                    initialParams.ySize,
-                    initialParams.xOffset,
-                    initialParams.yOffset,
-                    initialParams.rotationAngle,
-                    isSizeBoundToHolder
+                initialParams.x,
+                initialParams.y,
+                initialParams.xSize,
+                initialParams.ySize,
+                initialParams.xOffset,
+                initialParams.yOffset,
+                initialParams.rotationAngle,
+                isSizeBoundToHolder
             )
 
     private val model = Model(
-            dataArrays = listOf(DefaultBufferData.RECTANGLE_VERTICES),
-            verticesCount = 8
+        dataArrays = listOf(DefaultBufferData.RECTANGLE_VERTICES),
+        verticesCount = 8
     ).apply {
         drawMode = GL_LINES
     }
@@ -48,11 +48,11 @@ class BoundingBox(
         }
 
     private var params = SetOfStatic2DParameters(
-            x,
-            y,
-            xSize,
-            ySize,
-            rotationAngle
+        x,
+        y,
+        xSize,
+        ySize,
+        rotationAngle
     )
 
     init {

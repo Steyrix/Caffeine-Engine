@@ -8,22 +8,22 @@ import org.joml.Matrix4f
 object MapSceneInitializer {
 
     fun initTileMapObject(
-            preset: TileMapPreset,
-            renderProjection: Matrix4f,
-            collisionContexts: List<CollisionContext>
+        preset: TileMapPreset,
+        renderProjection: Matrix4f,
+        collisionContexts: List<CollisionContext>
     ): TileMapEntity {
         return TileMapEntity(preset).apply {
             init(
-                    renderProjection,
-                    collisionContexts
+                renderProjection,
+                collisionContexts
             )
             adjustParameters(
-                    HUMANOID_SIZE_TO_MAP_RELATION,
-                    listOf(
-                            characterParameters,
-                            goblinParams1,
-                            goblinParams2
-                    )
+                HUMANOID_SIZE_TO_MAP_RELATION,
+                listOf(
+                    characterParameters,
+                    goblinParams1,
+                    goblinParams2
+                )
             )
         }
     }

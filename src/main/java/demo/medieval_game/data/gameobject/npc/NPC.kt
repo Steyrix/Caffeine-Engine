@@ -15,31 +15,31 @@ import engine.feature.interaction.BoxInteractionContext
 import org.joml.Matrix4f
 
 abstract class NPC<E : CompositeEntity>(
-        params: SetOf2DParametersWithVelocity
+    params: SetOf2DParametersWithVelocity
 ) : DynamicGameEntity<SetOf2DParametersWithVelocity>(params) {
 
     override fun preSpawn(setOfParameters: SetOf2DParametersWithVelocity) {
     }
 
     fun init(
-            renderProjection: Matrix4f,
-            boundingBoxCollisionContext: BoundingBoxCollisionContext,
-            boxInteractionContext: BoxInteractionContext,
-            preset: NpcPreset
+        renderProjection: Matrix4f,
+        boundingBoxCollisionContext: BoundingBoxCollisionContext,
+        boxInteractionContext: BoxInteractionContext,
+        preset: NpcPreset
     ) {
         val box = getBoundingBox(
-                renderProjection,
-                preset.box
+            renderProjection,
+            preset.box
         )
 
         val animatedObject = getAnimatedObject(
-                renderProjection,
-                preset.animation
+            renderProjection,
+            preset.animation
         )
 
         it = initEntity(
-                renderProjection,
-                animatedObject
+            renderProjection,
+            animatedObject
         ).addComponent(box, parameters)
 
         boundingBoxCollisionContext.addEntity(box, box.getParameters())
@@ -47,26 +47,26 @@ abstract class NPC<E : CompositeEntity>(
     }
 
     private fun getBoundingBox(
-            renderProjection: Matrix4f,
-            preset: NpcBoxPreset
+        renderProjection: Matrix4f,
+        preset: NpcBoxPreset
     ): BoundingBox {
         return BoundingBox(
-                preset.initialParams,
-                preset.isSizeBoundToHolder
+            preset.initialParams,
+            preset.isSizeBoundToHolder
         ).apply {
             shader = ShaderController.createBoundingBoxShader(renderProjection)
         }
     }
 
     private fun getAnimatedObject(
-            renderProjection: Matrix4f,
-            preset: AnimationPreset
+        renderProjection: Matrix4f,
+        preset: AnimationPreset
     ): AnimatedModel2D {
         return AnimatedModel2D(
-                frameSizeX = preset.frameSizeX,
-                frameSizeY = preset.frameSizeY,
-                texture = Texture2D.createInstance(preset.atlasTexturePath),
-                animations = preset.animations
+            frameSizeX = preset.frameSizeX,
+            frameSizeY = preset.frameSizeY,
+            texture = Texture2D.createInstance(preset.atlasTexturePath),
+            animations = preset.animations
         ).apply {
             shader = ShaderController.createAnimationShader(renderProjection)
         }
@@ -85,21 +85,21 @@ abstract class NPC<E : CompositeEntity>(
     }
 
     protected abstract fun initEntity(
-            renderProjection: Matrix4f,
-            animatedModel2D: AnimatedModel2D
+        renderProjection: Matrix4f,
+        animatedModel2D: AnimatedModel2D
     ): E
 
     protected fun getHpBar(renderProjection: Matrix4f): HealthBar {
         return HealthBar(
-                parameters,
-                SetOfStatic2DParameters(
-                        x = 0f,
-                        y = 0f,
-                        xSize = 50f,
-                        ySize = 12.5f,
-                        rotationAngle = 0f
-                ),
-                renderProjection
+            parameters,
+            SetOfStatic2DParameters(
+                x = 0f,
+                y = 0f,
+                xSize = 50f,
+                ySize = 12.5f,
+                rotationAngle = 0f
+            ),
+            renderProjection
         )
     }
 }

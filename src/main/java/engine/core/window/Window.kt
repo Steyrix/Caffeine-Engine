@@ -16,10 +16,10 @@ private const val INIT_ERR_MSG = "Unable to initialize GLFW"
 private const val WINDOW_CREATE_ERR_MSG = "Failed to create the GLFW window"
 
 class Window(
-        var width: Int = DEFAULT_WIDTH,
-        var height: Int = DEFAULT_HEIGHT,
-        var isVsyncEnabled: Boolean = false,
-        title: String = DEFAULT_TITLE
+    var width: Int = DEFAULT_WIDTH,
+    var height: Int = DEFAULT_HEIGHT,
+    var isVsyncEnabled: Boolean = false,
+    title: String = DEFAULT_TITLE
 ) {
 
     private val window: Long
@@ -71,9 +71,9 @@ class Window(
 
             // Center the window
             glfwSetWindowPos(
-                    window,
-                    (vidmode!!.width() - pWidth[0]) / 2,
-                    (vidmode!!.height() - pHeight[0]) / 2
+                window,
+                (vidmode!!.width() - pWidth[0]) / 2,
+                (vidmode!!.height() - pHeight[0]) / 2
             )
         }
 
@@ -95,7 +95,7 @@ class Window(
         glfwDestroyWindow(window)
     }
 
-    fun isKeyPressed(keyCode: Int): Boolean  {
+    fun isKeyPressed(keyCode: Int): Boolean {
         return glfwGetKey(window, keyCode) == GLFW_PRESS
     }
 

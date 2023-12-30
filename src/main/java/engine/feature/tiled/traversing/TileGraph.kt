@@ -1,7 +1,7 @@
 package engine.feature.tiled.traversing
 
 class TileGraph(
-        val nodes: Map<Int, List<Int>>
+    val nodes: Map<Int, List<Int>>
 ) {
     companion object {
         const val DEFAULT_COST = 1

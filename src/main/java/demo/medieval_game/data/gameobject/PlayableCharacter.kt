@@ -17,7 +17,7 @@ import engine.feature.interaction.BoxInteractionContext
 import org.joml.Matrix4f
 
 class PlayableCharacter(
-        params: SetOf2DParametersWithVelocity
+    params: SetOf2DParametersWithVelocity
 ) : DynamicGameEntity<SetOf2DParametersWithVelocity>(params) {
 
     private var graphicalComponent: AnimatedModel2D? = null
@@ -34,9 +34,9 @@ class PlayableCharacter(
     }
 
     fun init(
-            bbCollisionContext: BoundingBoxCollisionContext,
-            tiledCollisionContext: TiledCollisionContext?,
-            boxInteractionContext: BoxInteractionContext
+        bbCollisionContext: BoundingBoxCollisionContext,
+        tiledCollisionContext: TiledCollisionContext?,
+        boxInteractionContext: BoxInteractionContext
     ) {
         projection = MedievalGame.renderProjection
         boundingBox = getBoundingBox(projection)
@@ -44,9 +44,9 @@ class PlayableCharacter(
         val tempSprites = TempSpritesHolder().apply { init(projection) }
 
         it = Player(
-                drawableComponent = graphicalComponent!!,
-                params = characterParameters,
-                tempSpritesHolder = tempSprites
+            drawableComponent = graphicalComponent!!,
+            params = characterParameters,
+            tempSpritesHolder = tempSprites
         )
 
         hp = HealthBar(characterParameters, hpBarParameters1, projection)
@@ -70,34 +70,34 @@ class PlayableCharacter(
     }
 
     private fun getBoundingBox(
-            renderProjection: Matrix4f
+        renderProjection: Matrix4f
     ): BoundingBox {
         return BoundingBox(
-                xOffset = HUMANOID_BOX_OFFSET,
-                xSize = HUMAMOID_BOX_SIZE,
-                ySize = parameters.ySize,
-                isSizeBoundToHolder = false
+            xOffset = HUMANOID_BOX_OFFSET,
+            xSize = HUMAMOID_BOX_SIZE,
+            ySize = parameters.ySize,
+            isSizeBoundToHolder = false
         ).apply {
             shader = ShaderController.createBoundingBoxShader(renderProjection)
         }
     }
 
     private fun getAnimatedObjectComponent(
-            renderProjection: Matrix4f
+        renderProjection: Matrix4f
     ): AnimatedModel2D {
         val frameSizeX = 0.066f
         val frameSizeY = 0.25f
         val texturePathFirst = this.javaClass.getResource("/textures/character_atlas.png")!!.path
 
         val textureArray = Texture2D.createInstance(
-                texturePathFirst
+            texturePathFirst
         )
 
         return AnimatedModel2D(
-                frameSizeX,
-                frameSizeY,
-                texture = textureArray,
-                animations = characterAnimations
+            frameSizeX,
+            frameSizeY,
+            texture = textureArray,
+            animations = characterAnimations
         ).apply {
             x = 100f
             y = 100f
@@ -108,31 +108,31 @@ class PlayableCharacter(
     }
 
     private fun getBoundingBoxCollider(
-            bbCollisionContext: BoundingBoxCollisionContext
+        bbCollisionContext: BoundingBoxCollisionContext
     ): BoundingBoxCollider {
         return BoundingBoxCollider(
-                it as Entity,
-                boundingBox!!,
-                characterParameters,
-                bbCollisionContext,
-                emptyBehavior
+            it as Entity,
+            boundingBox!!,
+            characterParameters,
+            bbCollisionContext,
+            emptyBehavior
         )
     }
 
     // TODO: configure layers via getTiledCollider method's parameters
     private fun getTiledCollider(
-            tiledCollisionContext: TiledCollisionContext
+        tiledCollisionContext: TiledCollisionContext
     ): TiledCollider {
         return TiledCollider(
-                it as Entity,
-                characterParameters,
-                listOf("walking_layer", "walkable_objects_layer"),
-                tiledCollisionContext
+            it as Entity,
+            characterParameters,
+            listOf("walking_layer", "walkable_objects_layer"),
+            tiledCollisionContext
         )
     }
 
     fun updateCollisionContext(
-            collisionContext: TiledCollisionContext
+        collisionContext: TiledCollisionContext
     ) {
         if (tiledCollider != null) {
             it?.removeComponent(tiledCollider as Entity)

@@ -7,8 +7,8 @@ import java.nio.FloatBuffer
 private const val FLOAT_BYTE_SIZE = 2
 
 class Buffer(
-        data: FloatArray,
-        vertexCount: Int
+    data: FloatArray,
+    vertexCount: Int
 ) {
 
     private val handle: Int = glGenBuffers()
@@ -43,9 +43,9 @@ class Buffer(
 
     private fun prepareData(data: FloatArray): FloatBuffer {
         return BufferUtils.createFloatBuffer(FLOAT_BYTE_SIZE * data.size)
-                .apply {
-                    put(data)
-                    flip()
-                }
+            .apply {
+                put(data)
+                flip()
+            }
     }
 }

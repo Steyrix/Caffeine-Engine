@@ -4,16 +4,16 @@ import engine.core.loop.timer.Timer
 import engine.core.window.Window
 
 class FixedStepGameLoop(
-        private val targetWindow: Window,
-        private val timer: Timer,
-        val targetFps: Int = 60,
-        val targetUpdateSecs: Int = 30
+    private val targetWindow: Window,
+    private val timer: Timer,
+    val targetFps: Int = 60,
+    val targetUpdateSecs: Int = 30
 ) : GameLoop {
 
     override fun loop(
-            inputFunc: () -> Unit,
-            renderFunc: () -> Unit,
-            updateFunc: (Float) -> Unit
+        inputFunc: () -> Unit,
+        renderFunc: () -> Unit,
+        updateFunc: (Float) -> Unit
     ) {
         var elapsedTime: Float
         var accumulator = 0f

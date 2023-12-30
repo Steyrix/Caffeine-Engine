@@ -7,13 +7,13 @@ import engine.core.update.SetOfStatic2DParameters
 import engine.feature.tiled.property.Property
 
 class TileLayer(
-        val name: String,
-        val widthInTiles: Int,
-        val heightInTiles: Int,
-        val tileIdsData: MutableList<Int>,
-        internal val set: TileSet,
-        private val properties: ArrayList<Property>
-): Drawable<SetOfStatic2DParameters> {
+    val name: String,
+    val widthInTiles: Int,
+    val heightInTiles: Int,
+    val tileIdsData: MutableList<Int>,
+    internal val set: TileSet,
+    private val properties: ArrayList<Property>
+) : Drawable<SetOfStatic2DParameters> {
 
     override var shader: Shader? = null
         set(value) {
@@ -35,7 +35,7 @@ class TileLayer(
         return when {
             index < 0 || index >= tileIdsData.size -> -1
             index <= tileIdsData.size - 1 -> tileIdsData[index]
-            else -> - 1
+            else -> -1
         }
     }
 
@@ -47,9 +47,9 @@ class TileLayer(
         val offset = (data.size * 4 * (index)).toLong()
 
         graphicalComponent.updateMesh(
-                1,
-                offset,
-                data
+            1,
+            offset,
+            data
         )
     }
 }

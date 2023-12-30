@@ -14,15 +14,15 @@ uniform float yOffset;
 
 void main(void)
 {
-   gl_Position = projection * model * vec4(position, 0.0, 1.0);
+    gl_Position = projection * model * vec4(position, 0.0, 1.0);
 
-   fragmentUV = vec2(vertexUV.x * frameNumberX, vertexUV.y * frameNumberY);
+    fragmentUV = vec2(vertexUV.x * frameNumberX, vertexUV.y * frameNumberY);
 
-   if(fragmentUV.x <= 0) {
-      fragmentUV.x = vertexUV.x + xOffset;
-   }
+    if (fragmentUV.x <= 0) {
+        fragmentUV.x = vertexUV.x + xOffset;
+    }
 
-   if(fragmentUV.y <= 0) {
-      fragmentUV.y = vertexUV.y + yOffset;
-   }
+    if (fragmentUV.y <= 0) {
+        fragmentUV.y = vertexUV.y + yOffset;
+    }
 }

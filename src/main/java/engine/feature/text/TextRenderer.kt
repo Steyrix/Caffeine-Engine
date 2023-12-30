@@ -10,20 +10,20 @@ import java.awt.Dimension
 
 // TODO: ability to reduce gaps between letters and make it look natural
 class TextRenderer(
-        private val textureAtlas: Texture2D?,
-        private val characterCoordinates: HashMap<Char, Point2D>?,
-        private val charSize: Dimension,
-        private var textShader: Shader
+    private val textureAtlas: Texture2D?,
+    private val characterCoordinates: HashMap<Char, Point2D>?,
+    private val charSize: Dimension,
+    private var textShader: Shader
 ) {
     companion object {
         private const val NULL_COORDINATES_MAP_ERROR_TEXT = "Character coordinates map is null"
         private const val NULL_ATLAS_ERROR_TEXT = "Texture atlas is null"
 
         fun getInstance(
-                charSize: Dimension,
-                textureFilePath: String,
-                characters: MutableList<Char>,
-                initialShader: Shader
+            charSize: Dimension,
+            textureFilePath: String,
+            characters: MutableList<Char>,
+            initialShader: Shader
         ): TextRenderer {
             val textureAtlas: Texture2D = Texture2D.createInstance(textureFilePath)
             val characterCoordinates = generateMap(charSize, textureAtlas, characters)
@@ -38,7 +38,7 @@ class TextRenderer(
         get() = this.textureAtlas != null && this.characterCoordinates != null
 
     override fun toString(): String =
-            "Text renderer with " + characterCoordinates!!.size + " characters. \n" + characterCoordinates.toString()
+        "Text renderer with " + characterCoordinates!!.size + " characters. \n" + characterCoordinates.toString()
 
     fun setShader(shader: Shader) {
         textShader = shader
@@ -46,9 +46,9 @@ class TextRenderer(
 
     // TODO: implement modifiable horizontal and vertical gaps
     fun drawText(
-            text: String,
-            fontSize: Dimension,
-            pos: Point2D
+        text: String,
+        fontSize: Dimension,
+        pos: Point2D
     ) {
         var x = 0
         var y = 0
@@ -66,9 +66,9 @@ class TextRenderer(
             val verticalPos = pos.y + verticalShift
 
             drawCharacter(
-                    char = c,
-                    fontSize = fontSize,
-                    pos = Point2D(horizontalPos, verticalPos)
+                char = c,
+                fontSize = fontSize,
+                pos = Point2D(horizontalPos, verticalPos)
             )
         }
     }
@@ -88,19 +88,19 @@ class TextRenderer(
         val height = (charSize.getHeight() / textureAtlas.getHeightF()).toFloat()
 
         return floatArrayOf(
-                width * curr.x,       height * curr.y,
-                width * (curr.x + 1), height * (curr.y + 1),
-                width * curr.x,       height * (curr.y + 1),
-                width * curr.x,       height * curr.y,
-                width * (curr.x + 1), height * curr.y,
-                width * (curr.x + 1), height * (curr.y + 1)
+            width * curr.x, height * curr.y,
+            width * (curr.x + 1), height * (curr.y + 1),
+            width * curr.x, height * (curr.y + 1),
+            width * curr.x, height * curr.y,
+            width * (curr.x + 1), height * curr.y,
+            width * (curr.x + 1), height * (curr.y + 1)
         )
     }
 
     private fun drawCharacter(
-            char: Char,
-            fontSize: Dimension,
-            pos: Point2D
+        char: Char,
+        fontSize: Dimension,
+        pos: Point2D
     ) {
         val glObject: Model
 
@@ -108,9 +108,9 @@ class TextRenderer(
             val uvCoordinates = getCharUV(char)
             val bufferData = DefaultBufferData.RECTANGLE_INDICES
             glObject = Model(
-                    dataArrays = listOf(bufferData, uvCoordinates),
-                    verticesCount = 6,
-                    texture = textureAtlas
+                dataArrays = listOf(bufferData, uvCoordinates),
+                verticesCount = 6,
+                texture = textureAtlas
             ).apply {
                 x = pos.x
                 y = pos.y

@@ -22,7 +22,7 @@ internal object TiledResourceParser {
         val tileSet = retrieveTileSet(document)
 
         return TileMap(
-                layers = retrieveLayers(mapWidth, mapHeight, document, tileSet)
+            layers = retrieveLayers(mapWidth, mapHeight, document, tileSet)
         )
     }
 
@@ -54,10 +54,10 @@ internal object TiledResourceParser {
     }
 
     private fun retrieveLayers(
-            widthInTiles: Int,
-            heightInTiles: Int,
-            doc: Document,
-            tileSet: TileSet
+        widthInTiles: Int,
+        heightInTiles: Int,
+        doc: Document,
+        tileSet: TileSet
     ): ArrayList<TileLayer> {
         val out = ArrayList<TileLayer>()
         val layers = doc.getElementsByTagName(LAYER)
@@ -70,14 +70,14 @@ internal object TiledResourceParser {
             val name = currentLayer.attributes.getNamedItem(PROPERTY_NAME).nodeValue
 
             out.add(
-                    TileLayer(
-                            name = name,
-                            widthInTiles = widthInTiles,
-                            heightInTiles = heightInTiles,
-                            tileIdsData = data,
-                            set = tileSet,
-                            properties = primitiveProperties
-                    )
+                TileLayer(
+                    name = name,
+                    widthInTiles = widthInTiles,
+                    heightInTiles = heightInTiles,
+                    tileIdsData = data,
+                    set = tileSet,
+                    properties = primitiveProperties
+                )
             )
         }
 
@@ -91,12 +91,12 @@ internal object TiledResourceParser {
         for (i in 0 until nodes.length) {
             if (nodes.item(i).nodeName == DATA) {
                 out.addAll(nodes
-                        .item(i)
-                        .textContent
-                        .replace("\n", "")
-                        .replace(" ", "")
-                        .split(",")
-                        .map { it.toInt() - 1 })
+                    .item(i)
+                    .textContent
+                    .replace("\n", "")
+                    .replace(" ", "")
+                    .split(",")
+                    .map { it.toInt() - 1 })
             }
         }
 

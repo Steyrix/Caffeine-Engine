@@ -1,7 +1,7 @@
 package engine.feature.tiled.data
 
 data class Tile(
-        val tileUV: FloatArray
+    val tileUV: FloatArray
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

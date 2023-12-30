@@ -9,9 +9,9 @@ internal object TextRendererUtil {
     private const val ATLAS_WRONG_FORMAT_ERROR_TEXT = "Invalid texture atlas format"
 
     fun generateMap(
-            charSize: Dimension,
-            textureAtlas: Texture2D,
-            characters: MutableList<Char>
+        charSize: Dimension,
+        textureAtlas: Texture2D,
+        characters: MutableList<Char>
     ): HashMap<Char, Point2D> {
         val out = HashMap<Char, Point2D>()
         val xStep: Int
@@ -27,9 +27,9 @@ internal object TextRendererUtil {
             charsCount = xStep * yStep
             if (charsCount != characters.size)
                 throw InvalidPropertiesFormatException(
-                        "$ATLAS_WRONG_FORMAT_ERROR_TEXT: " +
-                                "\n Calculated number of characters = $charsCount" +
-                                "\n Actual number of characters = ${characters.size}"
+                    "$ATLAS_WRONG_FORMAT_ERROR_TEXT: " +
+                            "\n Calculated number of characters = $charsCount" +
+                            "\n Actual number of characters = ${characters.size}"
                 )
         } else
             throw InvalidPropertiesFormatException(ATLAS_WRONG_FORMAT_ERROR_TEXT)

@@ -60,9 +60,9 @@ class Shader {
             checkForUniformNameExists(uniformName)
 
             glUniform2f(
-                    uniforms[uniformName]!!,
-                    value.x,
-                    value.y
+                uniforms[uniformName]!!,
+                value.x,
+                value.y
             )
         }
     }
@@ -90,15 +90,15 @@ class Shader {
             when (value) {
                 is Float -> glUniform1f(uniforms[uniformName]!!, value)
                 is Vector2f -> glUniform2f(
-                        uniforms[uniformName]!!,
-                        value.x,
-                        value.y
+                    uniforms[uniformName]!!,
+                    value.x,
+                    value.y
                 )
                 is Int -> glUniform1i(uniforms[uniformName]!!, value)
                 is Matrix4f -> glUniformMatrix4fv(
-                        uniforms[uniformName]!!,
-                        false,
-                        value.get(it.mallocFloat(MATRIX4F_VALUE_SIZE))
+                    uniforms[uniformName]!!,
+                    false,
+                    value.get(it.mallocFloat(MATRIX4F_VALUE_SIZE))
                 )
             }
         }

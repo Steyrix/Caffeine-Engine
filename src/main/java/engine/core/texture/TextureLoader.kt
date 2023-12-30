@@ -6,9 +6,9 @@ import java.nio.ByteBuffer
 import org.lwjgl.opengl.GL42C.*
 
 data class LoadingResult(
-        val width: Int,
-        val height: Int,
-        val buffer: ByteBuffer
+    val width: Int,
+    val height: Int,
+    val buffer: ByteBuffer
 )
 
 object TextureLoader {
@@ -25,18 +25,19 @@ object TextureLoader {
             val channels = it.mallocInt(1)
 
             buff = STBImage.stbi_load(src, tWidth, tHeight, channels, 4)
-                    ?: throw Exception("Image file [" + src + "] not loaded: " + STBImage.stbi_failure_reason())
+                ?: throw Exception("Image file [" + src + "] not loaded: " + STBImage.stbi_failure_reason())
 
             width = tWidth.get()
             height = tHeight.get()
         }
 
         return LoadingResult(
-                width,
-                height,
-                buff
+            width,
+            height,
+            buff
         )
     }
+
     fun loadTexture2D(src: String): Int {
         val loadingResult = loadViaStbi(src)
 
@@ -50,15 +51,15 @@ object TextureLoader {
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1)
 
         glTexImage2D(
-                GL_TEXTURE_2D,
-                0,
-                GL_RGBA,
-                width,
-                height,
-                0,
-                GL_RGBA,
-                GL_UNSIGNED_BYTE,
-                buff
+            GL_TEXTURE_2D,
+            0,
+            GL_RGBA,
+            width,
+            height,
+            0,
+            GL_RGBA,
+            GL_UNSIGNED_BYTE,
+            buff
         )
         glGenerateMipmap(GL_TEXTURE_2D)
         glBindTexture(GL_TEXTURE_2D, 0)
@@ -69,8 +70,8 @@ object TextureLoader {
     }
 
     fun loadArrayTexture2D(
-            sources: List<String>,
-            layersCount: Int
+        sources: List<String>,
+        layersCount: Int
     ): Int {
         var width = 0
         var height = 0
@@ -86,27 +87,27 @@ object TextureLoader {
         val id: Int = glGenTextures()
         glBindTexture(GL_TEXTURE_2D_ARRAY, id)
         glTexStorage3D(
-                GL_TEXTURE_2D_ARRAY,
-                buffers.size,
-                GL_RGBA8,
-                width,
-                height,
-                layersCount
+            GL_TEXTURE_2D_ARRAY,
+            buffers.size,
+            GL_RGBA8,
+            width,
+            height,
+            layersCount
         )
 
         buffers.forEachIndexed { index, byteBuffer ->
             glTexSubImage3D(
-                    GL_TEXTURE_2D_ARRAY,
-                    0,
-                    0,
-                    0,
-                    index,
-                    width,
-                    height,
-                    layersCount,
-                    GL_RGBA,
-                    GL_UNSIGNED_BYTE,
-                    byteBuffer
+                GL_TEXTURE_2D_ARRAY,
+                0,
+                0,
+                0,
+                index,
+                width,
+                height,
+                layersCount,
+                GL_RGBA,
+                GL_UNSIGNED_BYTE,
+                byteBuffer
             )
         }
 

@@ -8,7 +8,7 @@ object TileLayerInitializer {
     private const val EMPTY_TILE_ID = -1
 
     internal fun genGraphicalComponent(
-            layer: TileLayer
+        layer: TileLayer
     ): Model {
         val allVertices: ArrayList<Float> = ArrayList()
         val allUV: ArrayList<Float> = ArrayList()
@@ -35,15 +35,15 @@ object TileLayerInitializer {
         }
 
         return Model(
-                dataArrays = listOf(allVertices.toFloatArray(), allUV.toFloatArray()),
-                verticesCount = allVertices.size / 2,
-                texture = set.texture2D
+            dataArrays = listOf(allVertices.toFloatArray(), allUV.toFloatArray()),
+            verticesCount = allVertices.size / 2,
+            texture = set.texture2D
         )
     }
 
     internal fun generateTileGraph(
-            walkableLayers: List<TileLayer>,
-            obstacleLayers: List<TileLayer> = emptyList()
+        walkableLayers: List<TileLayer>,
+        obstacleLayers: List<TileLayer> = emptyList()
     ): TileGraph? {
         val out = hashMapOf<Int, MutableList<Int>>()
         val dataLists = walkableLayers.map { it.tileIdsData }
@@ -52,10 +52,10 @@ object TileLayerInitializer {
 
         for (num in indices) {
             val adjacentTiles = dataLists
-                    .map { getAdjacentTiles(it, widthInTiles, num) }
-                    .flatten()
-                    .distinct()
-                    .toMutableList()
+                .map { getAdjacentTiles(it, widthInTiles, num) }
+                .flatten()
+                .distinct()
+                .toMutableList()
 
             out[num] = adjacentTiles
         }
@@ -74,15 +74,15 @@ object TileLayerInitializer {
     }
 
     private fun getAdjacentTiles(
-            data: List<Int>,
-            widthInTiles: Int,
-            num: Int
+        data: List<Int>,
+        widthInTiles: Int,
+        num: Int
     ): MutableList<Int> {
         val predicates = listOf(
-                { i: Int -> i < data.size - 1 } to { i: Int -> i + 1 },
-                { i: Int -> i + widthInTiles < data.size } to { i: Int -> i + widthInTiles },
-                { i: Int -> i - widthInTiles >= 0 } to { i: Int -> i - widthInTiles },
-                { i: Int -> i > 0 } to { i: Int -> i - 1 },
+            { i: Int -> i < data.size - 1 } to { i: Int -> i + 1 },
+            { i: Int -> i + widthInTiles < data.size } to { i: Int -> i + widthInTiles },
+            { i: Int -> i - widthInTiles >= 0 } to { i: Int -> i - widthInTiles },
+            { i: Int -> i > 0 } to { i: Int -> i - 1 },
         )
 
         val out = mutableListOf<Int>()
@@ -108,11 +108,12 @@ object TileLayerInitializer {
 
     private fun genVertices(pos: Point2D, set: TileSet): FloatArray {
         return floatArrayOf(
-                set.relativeTileWidth * pos.x, set.relativeTileHeight * (pos.y + 1),
-                set.relativeTileWidth * (pos.x + 1), set.relativeTileHeight * pos.y,
-                set.relativeTileWidth * pos.x, set.relativeTileHeight * pos.y,
-                set.relativeTileWidth * pos.x, set.relativeTileHeight * (pos.y + 1),
-                set.relativeTileWidth * (pos.x + 1), set.relativeTileHeight * (pos.y + 1),
-                set.relativeTileWidth * (pos.x + 1), set.relativeTileHeight * pos.y)
+            set.relativeTileWidth * pos.x, set.relativeTileHeight * (pos.y + 1),
+            set.relativeTileWidth * (pos.x + 1), set.relativeTileHeight * pos.y,
+            set.relativeTileWidth * pos.x, set.relativeTileHeight * pos.y,
+            set.relativeTileWidth * pos.x, set.relativeTileHeight * (pos.y + 1),
+            set.relativeTileWidth * (pos.x + 1), set.relativeTileHeight * (pos.y + 1),
+            set.relativeTileWidth * (pos.x + 1), set.relativeTileHeight * pos.y
+        )
     }
 }

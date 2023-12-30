@@ -28,18 +28,18 @@ class SharedSpritesHolder : SingleGameEntity() {
     }
 
     fun startScreenFading(
-            worldWidth: Float,
-            worldHeight: Float,
-            onFinish: () -> Unit
+        worldWidth: Float,
+        worldHeight: Float,
+        onFinish: () -> Unit
     ) {
         if (renderProjection == null) return
 
         val params = SetOfStatic2DParameters(
-                x = 0f,
-                y = 0f,
-                xSize = worldWidth,
-                ySize = worldHeight,
-                rotationAngle = 0f
+            x = 0f,
+            y = 0f,
+            xSize = worldWidth,
+            ySize = worldHeight,
+            rotationAngle = 0f
         )
 
         val graphicalComponent = Rectangle(0f, 0f, 0f).apply {
@@ -49,16 +49,16 @@ class SharedSpritesHolder : SingleGameEntity() {
         it?.addComponent(graphicalComponent, params)
 
         actions.add(
-                SingleTimeEvent(
-                        timeLimit = 4f,
-                        action = { _ ->
-                            it?.removeComponent(graphicalComponent)
-                            componentToAction.remove(graphicalComponent)
-                            alpha = 0f
-                            isFadeIn = true
-                        },
-                        initialTime = 0f
-                )
+            SingleTimeEvent(
+                timeLimit = 4f,
+                action = { _ ->
+                    it?.removeComponent(graphicalComponent)
+                    componentToAction.remove(graphicalComponent)
+                    alpha = 0f
+                    isFadeIn = true
+                },
+                initialTime = 0f
+            )
         )
 
 

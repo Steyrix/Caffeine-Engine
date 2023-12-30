@@ -15,26 +15,26 @@ import engine.feature.interaction.Interaction
 import kotlin.math.abs
 
 class GoblinController(
-        private val params: SetOf2DParametersWithVelocity,
-        private var modifier: Float = 20f
+    private val params: SetOf2DParametersWithVelocity,
+    private var modifier: Float = 20f
 ) : HumanoidAnimationController(
-        HumanoidAnimationMaps.getIdleMap(),
-        HumanoidAnimationMaps.getStrikeMap(),
-        HumanoidAnimationMaps.getWalkMap()
+    HumanoidAnimationMaps.getIdleMap(),
+    HumanoidAnimationMaps.getStrikeMap(),
+    HumanoidAnimationMaps.getWalkMap()
 ), Entity, Updatable {
 
     private val playStrikingAnimation = PredicateTimeEvent(
-            timeLimit = 0.5f,
-            predicate = { isStriking },
-            action = { isStriking = false }
+        timeLimit = 0.5f,
+        predicate = { isStriking },
+        action = { isStriking = false }
     )
 
     private var isStrikeCoolDown = false
 
     private val strikeCoolDown = PredicateTimeEvent(
-            timeLimit = 1f,
-            predicate = { isStrikeCoolDown },
-            action = { isStrikeCoolDown = false }
+        timeLimit = 1f,
+        predicate = { isStrikeCoolDown },
+        action = { isStrikeCoolDown = false }
     )
 
     override fun update(deltaTime: Float) {
@@ -72,7 +72,7 @@ class GoblinController(
     }
 
     override fun consumeInteraction(interaction: Interaction) {
-        when(interaction) {
+        when (interaction) {
             is IsAttackableInteraction -> strike(interaction.targetParams)
         }
     }

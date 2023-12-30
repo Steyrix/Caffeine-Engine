@@ -7,9 +7,9 @@ import java.util.EnumMap
 typealias MultiMap = HashMap<String, MutableMap<Direction, String>>
 
 abstract class HumanoidAnimationController(
-        idleMap: EnumMap<Direction, String>,
-        strikeMap: EnumMap<Direction, String>,
-        walkMap: EnumMap<Direction, String>,
+    idleMap: EnumMap<Direction, String>,
+    strikeMap: EnumMap<Direction, String>,
+    walkMap: EnumMap<Direction, String>,
 ) : AnimationController {
 
     companion object {
@@ -23,9 +23,9 @@ abstract class HumanoidAnimationController(
     var isWalking = false
 
     private val animationMultiMap: MultiMap = hashMapOf(
-            IDLE to idleMap,
-            STRIKE to strikeMap,
-            WALK to walkMap
+        IDLE to idleMap,
+        STRIKE to strikeMap,
+        WALK to walkMap
     )
 
     override fun getAnimationKey(): String {

@@ -14,55 +14,55 @@ import engine.feature.interaction.Interaction
 import engine.feature.tiled.traversing.TileTraverser
 
 class Goblin(
-        private val drawableComponent: AnimatedModel2D,
-        params: SetOf2DParametersWithVelocity,
-        private val tileTraverser: TileTraverser,
-        private val hp: HealthBar,
-        private val tempSpritesHolder: TempSpritesHolder
+    private val drawableComponent: AnimatedModel2D,
+    params: SetOf2DParametersWithVelocity,
+    private val tileTraverser: TileTraverser,
+    private val hp: HealthBar,
+    private val tempSpritesHolder: TempSpritesHolder
 ) : CompositeEntity() {
 
     private val startChasing = PredicateTimeEvent(
-            timeLimit = 2f,
-            predicate = { entitiesMap.containsKey(tileTraverser) },
-            action = {
-                tileTraverser.moveToTarget()
-            }
+        timeLimit = 2f,
+        predicate = { entitiesMap.containsKey(tileTraverser) },
+        action = {
+            tileTraverser.moveToTarget()
+        }
     )
 
     private var isMovingStopped = false
 
     private val suspendMove = PredicateTimeEvent(
-            timeLimit = 1.5f,
-            predicate = { isMovingStopped },
-            action = {
-                tileTraverser.resume()
-            }
+        timeLimit = 1.5f,
+        predicate = { isMovingStopped },
+        action = {
+            tileTraverser.resume()
+        }
     )
 
     private val controller = GoblinController(
-            params,
-            modifier = 20f
+        params,
+        modifier = 20f
     )
 
     init {
         addComponent(
-                component = drawableComponent,
-                parameters = params
+            component = drawableComponent,
+            parameters = params
         )
 
         addComponent(
-                component = controller,
-                parameters = params
+            component = controller,
+            parameters = params
         )
 
         addComponent(
-                component = tileTraverser,
-                parameters = params
+            component = tileTraverser,
+            parameters = params
         )
 
         addComponent(
-                component = hp,
-                parameters = params
+            component = hp,
+            parameters = params
         )
         addComponent(
             component = tempSpritesHolder,
@@ -115,10 +115,10 @@ class Goblin(
 
         if (controller.isStriking && !isDisposed) {
             out.add(
-                    AttackInteraction(
-                            producer = this,
-                            damage = 0.05f
-                    )
+                AttackInteraction(
+                    producer = this,
+                    damage = 0.05f
+                )
             )
         }
 
