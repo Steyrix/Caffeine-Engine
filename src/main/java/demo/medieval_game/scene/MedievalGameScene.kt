@@ -44,7 +44,7 @@ abstract class MedievalGameScene(
 
         super.init(session, intent)
 
-        character = session.playableCharacter
+        character = session.sessionCharacter
         tempSpritesHolder = session.tempSpritesHolder
 
         bbCollisionContext = session.bbCollisionContext
