@@ -4,6 +4,7 @@ import demo.medieval_game.Player
 import demo.medieval_game.ShaderController
 import demo.medieval_game.data.*
 import demo.medieval_game.hp.HealthBar
+import demo.medieval_game.scene.MedievalGame
 import engine.core.entity.Entity
 import engine.core.game_object.DynamicGameEntity
 import engine.core.render.AnimatedModel2D
@@ -33,15 +34,14 @@ class PlayableCharacter(
     }
 
     fun init(
-            renderProjection: Matrix4f,
             bbCollisionContext: BoundingBoxCollisionContext,
             tiledCollisionContext: TiledCollisionContext?,
             boxInteractionContext: BoxInteractionContext,
             tempSpritesHolder: TempSpritesHolder
     ) {
-        projection = renderProjection
-        boundingBox = getBoundingBox(renderProjection)
-        graphicalComponent = getAnimatedObjectComponent(renderProjection)
+        projection = MedievalGame.renderProjection
+        boundingBox = getBoundingBox(projection)
+        graphicalComponent = getAnimatedObjectComponent(projection)
 
         it = Player(
                 drawableComponent = graphicalComponent!!,
@@ -49,7 +49,7 @@ class PlayableCharacter(
                 tempSpritesHolder = tempSpritesHolder
         )
 
-        hp = HealthBar(characterParameters, hpBarParameters1, renderProjection)
+        hp = HealthBar(characterParameters, hpBarParameters1, projection)
 
         boxCollider = getBoundingBoxCollider(bbCollisionContext)
 
