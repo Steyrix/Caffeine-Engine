@@ -2,7 +2,6 @@ package demo.medieval_game.scene
 
 import demo.medieval_game.data.MapSceneInitializer
 import demo.medieval_game.data.gameobject.PlayableCharacter
-import demo.medieval_game.data.gameobject.TempSpritesHolder
 import demo.medieval_game.matrix.MedievalGameMatrixState
 import engine.core.controllable.Direction
 import engine.core.loop.AccumulatedTimeEvent
@@ -26,7 +25,6 @@ abstract class MedievalGameScene(
 ) : TileMapScene(projection) {
 
     protected var character: PlayableCharacter? = null
-    protected var tempSpritesHolder: TempSpritesHolder? = null
 
     protected val tiledCollisionContext = TiledCollisionContext()
 
@@ -45,7 +43,6 @@ abstract class MedievalGameScene(
         super.init(session, intent)
 
         character = session.sessionCharacter
-        tempSpritesHolder = session.tempSpritesHolder
 
         bbCollisionContext = session.bbCollisionContext
         boxInteractionContext = session.boxInteractionContext

@@ -23,7 +23,6 @@ class NexusMap(
             val objects = StartMapInitializer.initAll(
                     bbCollisionContext!!,
                     boxInteractionContext!!,
-                    tempSpritesHolder!!
             ) { params -> it.createTraverser(params, characterParameters) }
             context.addAll(objects)
             character?.updateCollisionContext(tiledCollisionContext)

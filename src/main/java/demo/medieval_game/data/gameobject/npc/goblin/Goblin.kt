@@ -64,6 +64,10 @@ class Goblin(
                 component = hp,
                 parameters = params
         )
+        addComponent(
+            component = tempSpritesHolder,
+            parameters = params
+        )
     }
 
     override fun update(deltaTime: Float) {

@@ -36,17 +36,17 @@ class PlayableCharacter(
     fun init(
             bbCollisionContext: BoundingBoxCollisionContext,
             tiledCollisionContext: TiledCollisionContext?,
-            boxInteractionContext: BoxInteractionContext,
-            tempSpritesHolder: TempSpritesHolder
+            boxInteractionContext: BoxInteractionContext
     ) {
         projection = MedievalGame.renderProjection
         boundingBox = getBoundingBox(projection)
         graphicalComponent = getAnimatedObjectComponent(projection)
+        val tempSprites = TempSpritesHolder().apply { init(projection) }
 
         it = Player(
                 drawableComponent = graphicalComponent!!,
                 params = characterParameters,
-                tempSpritesHolder = tempSpritesHolder
+                tempSpritesHolder = tempSprites
         )
 
         hp = HealthBar(characterParameters, hpBarParameters1, projection)
@@ -61,6 +61,7 @@ class PlayableCharacter(
         addComponent(boundingBox, characterParameters)
         addComponent(hp, characterParameters)
         addComponent(boxCollider, characterParameters)
+        addComponent(tempSprites, characterParameters)
 
         bbCollisionContext.addEntity(boundingBox as Entity, characterParameters)
 

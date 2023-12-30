@@ -2,8 +2,6 @@ package demo.medieval_game.scene
 
 import demo.medieval_game.data.Initializer
 import demo.medieval_game.data.gameobject.PlayableCharacter
-import demo.medieval_game.data.gameobject.SharedSpritesHolder
-import demo.medieval_game.data.gameobject.TempSpritesHolder
 import engine.core.game_object.GameEntity
 import engine.core.session.Session
 import engine.core.session.SessionPresets
@@ -18,12 +16,7 @@ object MedievalGameSession : Session() {
     var sessionCharacter: PlayableCharacter? = null
         private set
 
-    var tempSpritesHolder: TempSpritesHolder? = null
-        private set
-
-    var sharedSpritesHolder: SharedSpritesHolder? = null
-        private set
-
+    // TODO: scene holder should probably be responsible of this
     val bbCollisionContext = BoundingBoxCollisionContext()
     val boxInteractionContext = BoxInteractionContext()
 
@@ -31,18 +24,15 @@ object MedievalGameSession : Session() {
         if (presets !is SimpleGamePresets) return
 
         persistentGameEntities.addAll(
-                Initializer.initPersistentObjects(
-                        presets.screenWidth,
-                        presets.screenHeight,
-                        presets.renderProjection,
-                        bbCollisionContext,
-                        boxInteractionContext
-                )
+            Initializer.initPersistentObjects(
+                presets.screenWidth,
+                presets.screenHeight,
+                bbCollisionContext,
+                boxInteractionContext
+            )
         )
 
         sessionCharacter = persistentGameEntities.find { it is PlayableCharacter } as? PlayableCharacter
-        tempSpritesHolder = persistentGameEntities.find { it is TempSpritesHolder } as? TempSpritesHolder
-        sharedSpritesHolder = SharedSpritesHolder().apply { init(presets.renderProjection) }
     }
 
     override fun getPersistentObjects(): List<GameEntity> {

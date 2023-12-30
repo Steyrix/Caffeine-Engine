@@ -18,7 +18,6 @@ object StartMapInitializer : SceneInitializer {
     fun initAll(
             boundingBoxCollisionContext: BoundingBoxCollisionContext,
             boxInteractionContext: BoxInteractionContext,
-            tempSpritesHolder: TempSpritesHolder,
             tileTraverserCreator: (SetOf2DParametersWithVelocity) -> TileTraverser
     ): MutableList<out GameEntity> {
         val campfire = Campfire(
@@ -30,16 +29,19 @@ object StartMapInitializer : SceneInitializer {
         val listOfNpc = initGoblins(
                 boundingBoxCollisionContext,
                 boxInteractionContext,
-                tempSpritesHolder
         ) { params: SetOf2DParametersWithVelocity -> tileTraverserCreator.invoke(params) }
 
-        return mutableListOf(campfire, tempSpritesHolder).also { it.addAll(listOfNpc) }
+        val out = mutableListOf<GameEntity>().apply {
+            add(campfire)
+            addAll(listOfNpc)
+        }
+
+        return out
     }
 
     private fun initGoblins(
             boundingBoxCollisionContext: BoundingBoxCollisionContext,
             boxInteractionContext: BoxInteractionContext,
-            tempSpritesHolder: TempSpritesHolder,
             creator: (SetOf2DParametersWithVelocity) -> TileTraverser
     ): List<GameEntity> {
         val out = mutableListOf<GameEntity>()
@@ -49,7 +51,7 @@ object StartMapInitializer : SceneInitializer {
             val goblin = GoblinNPC(
                     it,
                     creator.invoke(it),
-                    tempSpritesHolder
+                    TempSpritesHolder().apply { init(MedievalGame.renderProjection) }
             ).also { npc ->
                 npc.init(
                         MedievalGame.renderProjection,

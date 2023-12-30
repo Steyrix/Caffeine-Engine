@@ -16,8 +16,8 @@ import org.joml.Matrix4f
 
 // TODO: 29.12.2023 move shared entities to shared context
 class MedievalGame(
-        override val screenWidth: Float,
-        override val screenHeight: Float
+    override val screenWidth: Float,
+    override val screenHeight: Float
 ) : SceneHolder {
 
     companion object {
@@ -34,41 +34,38 @@ class MedievalGame(
 
     override val session = MedievalGameSession
 
-    private var sharedSprites: SharedSpritesHolder? = null
+    private var sharedSpritesHolder: SharedSpritesHolder? = null
 
     init {
         renderProjection = Matrix4f()
-                .ortho(
-                        0f,
-                        screenWidth,
-                        screenHeight,
-                        0f,
-                        0f,
-                        1f
-                )
-    }
+            .ortho(
+                0f,
+                screenWidth,
+                screenHeight,
+                0f,
+                0f,
+                1f
+            )
 
-    // TODO: deserialize maps from presets
-    init {
+        // TODO: deserialize maps from presets
         sceneMap["nexus"] = NexusMap(getNexusMapPreset(), screenWidth, screenHeight, renderProjection)
+        sharedSpritesHolder = SharedSpritesHolder().apply { init(renderProjection) }
     }
 
     override fun init() {
         MatrixComputer.matrixState = MedievalGameMatrixState
 
         MedievalGameSession.init(
-                SimpleGamePresets(
-                        screenWidth, screenHeight, renderProjection
-                )
+            SimpleGamePresets(
+                screenWidth, screenHeight, renderProjection
+            )
         )
 
-        sharedSprites = MedievalGameSession.sharedSpritesHolder
-
         currentScene = StartMap(
-                getStartingMapPreset(screenWidth, screenHeight),
-                screenWidth,
-                screenHeight,
-                renderProjection
+            getStartingMapPreset(screenWidth, screenHeight),
+            screenWidth,
+            screenHeight,
+            renderProjection
         ) {
             switchScene("nexus")
         }
@@ -89,22 +86,22 @@ class MedievalGame(
     }
 
     private fun renderTransition(
-            onFinish: () -> Unit
+        onFinish: () -> Unit
     ) {
-        sharedSprites?.startScreenFading(
-                screenWidth * 2,
-                screenHeight * 2,
-                onFinish
+        sharedSpritesHolder?.startScreenFading(
+            screenWidth * 2,
+            screenHeight * 2,
+            onFinish
         )
     }
 
     override fun render(window: Window) {
         super.render(window)
-        sharedSprites?.draw()
+        sharedSpritesHolder?.draw()
     }
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
-        sharedSprites?.update(deltaTime)
+        sharedSpritesHolder?.update(deltaTime)
     }
 }
