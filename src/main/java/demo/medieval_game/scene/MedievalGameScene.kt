@@ -7,8 +7,6 @@ import demo.medieval_game.matrix.MedievalGameMatrixState
 import engine.core.controllable.Direction
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.scene.SceneIntent
-import engine.core.game_object.CompositeGameEntity
-import engine.core.game_object.GameEntity
 import engine.core.session.Session
 import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
@@ -66,21 +64,22 @@ abstract class MedievalGameScene(
     }
 
     override fun input(window: Window) {
-        gameContext.forEach { it.input(window) }
+        context.forEach { it.input(window) }
     }
 
     override fun update(deltaTime: Float) {
         postMapTransactionAction()
 
-        gameContext.forEach { entity ->
+        // TODO: move out
+        context.forEach { entity ->
             entity.update(deltaTime)
             if (entity.isDisposed()) {
                 actions.add(
-                        AccumulatedTimeEvent(
-                                timeLimit = 10f,
-                                action = { gameContext.remove(entity) },
-                                initialTime = 0f
-                        )
+                    AccumulatedTimeEvent(
+                        timeLimit = 10f,
+                        action = { context.remove(entity) },
+                        initialTime = 0f
+                    )
                 )
             }
         }
@@ -101,7 +100,9 @@ abstract class MedievalGameScene(
 
     override fun render(window: Window) {
         renderSetup()
-        gameContext.convertToFlatList().forEach { it.draw() }
+        context.entitiesSortedByLevelZ().forEach {
+            it.draw()
+        }
     }
 
     override fun onSwitch() {
@@ -132,21 +133,5 @@ abstract class MedievalGameScene(
                     screenHeight
             )
         }
-    }
-
-    private fun MutableList<GameEntity>.convertToFlatList(): MutableList<GameEntity> {
-        val out = mutableListOf<GameEntity>()
-        this.forEach {
-            if (it is CompositeGameEntity) {
-                it.getInnerObjects().forEach { innerObject ->
-                    out.add(innerObject)
-                }
-            } else {
-                out.add(it)
-            }
-        }
-
-        out.sortBy { it.getZLevel() }
-        return out
     }
 }

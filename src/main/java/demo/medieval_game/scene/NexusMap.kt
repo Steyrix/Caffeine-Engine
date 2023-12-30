@@ -25,8 +25,7 @@ class NexusMap(
                     boxInteractionContext!!,
                     tempSpritesHolder!!
             ) { params -> it.createTraverser(params, characterParameters) }
-
-            gameContext.addAll(objects)
+            context.addAll(objects)
             character?.updateCollisionContext(tiledCollisionContext)
             character?.updateBoundingBox()
         }

@@ -3,27 +3,24 @@ package engine.core.scene
 import engine.core.game_object.CompositeGameEntity
 import engine.core.game_object.GameEntity
 
-
-// TODO: 29.12.23 replace every scene's context with this
-interface GameContext {
+open class GameContext {
 
     companion object {
         fun getInstance(): GameContext {
-            return object : GameContext {
-                override val entities: MutableList<GameEntity> = mutableListOf()
-            }
+            return GameContext()
         }
     }
 
-    val entities: MutableList<GameEntity>
+    private val entities: MutableList<GameEntity> = mutableListOf()
 
-    fun add(entity: GameEntity) {
-        entities.add(entity)
-    }
+    fun add(entity: GameEntity) = entities.add(entity)
+    fun addAll(list: List<GameEntity>) = entities.addAll(list)
 
-    fun remove(entity: GameEntity) {
-        entities.remove(entity)
-    }
+    fun remove(entity: GameEntity) = entities.remove(entity)
+
+    fun forEach(block: (GameEntity) -> Unit) = entities.forEach(block)
+
+    fun find(predicate: (GameEntity) -> Boolean) = entities.find { predicate(it) }
 
     fun entitiesSortedByLevelZ(): List<GameEntity> {
         val out = mutableListOf<GameEntity>()

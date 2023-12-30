@@ -23,8 +23,8 @@ class StartMap(
     override fun init(session: Session, intent: SceneIntent?) {
         super.init(session, intent)
 
-        tempSpritesHolder = gameContext.find { it is TempSpritesHolder } as? TempSpritesHolder
-        character = gameContext.find { it is PlayableCharacter } as PlayableCharacter
+        tempSpritesHolder = context.find { it is TempSpritesHolder } as? TempSpritesHolder
+        character = context.find { it is PlayableCharacter } as PlayableCharacter
 
         tiledMap?.let {
             val objects = StartMapInitializer.initAll(
@@ -33,7 +33,7 @@ class StartMap(
                     tempSpritesHolder!!
             ) { params -> it.createTraverser(params, characterParameters) }
 
-            gameContext.addAll(objects)
+            context.addAll(objects)
             character?.updateCollisionContext(tiledCollisionContext)
             character?.updateBoundingBox()
         }
