@@ -3,6 +3,7 @@ package engine.core.scene
 import engine.core.session.Session
 import engine.core.window.Window
 
+// TODO: fix relation between scene holder and session
 interface SceneHolder {
 
     val session: Session
