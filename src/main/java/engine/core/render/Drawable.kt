@@ -9,4 +9,6 @@ interface Drawable<P : SetOfParameters> : Parameterized<P> {
     var shader: Shader?
 
     fun draw()
+
+    fun getZlevel(): Float = 1f
 }
