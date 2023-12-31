@@ -26,6 +26,8 @@ class TileMap(
             }
         }
 
+    override var zLevel: Float = 0f
+    
     private val set: TileSet
     private val layersMap = layers.associateBy { it.name }
 

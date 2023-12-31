@@ -59,6 +59,7 @@ open class Model(
     var xSize: Float = 0f
     var ySize: Float = 0f
     var rotationAngle: Float = 0f
+    override var zLevel: Float = 0f
 
     var drawMode = GL_TRIANGLES
 

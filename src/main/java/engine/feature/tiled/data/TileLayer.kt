@@ -21,6 +21,8 @@ class TileLayer(
             graphicalComponent.shader = value
         }
 
+    override var zLevel: Float = 0f
+
     private val graphicalComponent: Model = TileLayerInitializer.genGraphicalComponent(this)
 
     override fun updateParameters(parameters: SetOfStatic2DParameters) {

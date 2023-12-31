@@ -47,6 +47,8 @@ class BoundingBox(
             field = value
         }
 
+    override var zLevel: Float = 1f
+
     private var params = SetOfStatic2DParameters(
         x,
         y,
