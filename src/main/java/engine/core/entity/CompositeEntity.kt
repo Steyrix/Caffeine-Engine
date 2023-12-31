@@ -37,6 +37,7 @@ open class CompositeEntity : Entity, Updatable {
         }
     }
 
+    // TODO: sort by z level
     fun draw() {
         entitiesMap.keys.forEach { entity ->
             (entity as? Drawable<SetOfParameters>)?.draw()
