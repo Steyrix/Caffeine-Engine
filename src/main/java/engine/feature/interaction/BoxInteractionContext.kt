@@ -12,6 +12,8 @@ class BoxInteractionContext : InteractionContext<BoundingBox> {
     override val isInteracting = { target: Entity, agent: Entity -> isIntersecting(target, agent) }
 
     private fun isIntersecting(target: Entity, agent: Entity): Boolean {
+        if (target == agent) return false
+
         paramsMap[target]?.let { current ->
             paramsMap[agent]?.let {
                 return current.isIntersecting(it)

@@ -3,6 +3,7 @@ package engine.feature.interaction
 import engine.core.entity.Entity
 
 interface InteractionContext<T> {
+
     val isInteracting: (target: Entity, agent: Entity) -> Boolean
 
     val agents: MutableList<Entity>
@@ -20,22 +21,21 @@ interface InteractionContext<T> {
     }
 
     fun update() {
+        val consumersList = mutableListOf<Entity>()
+
         agents.forEach { current ->
             agents.forEach { agent ->
-                checkForInteraction(current, agent)
-            }
-        }
-    }
-
-    // TODO: add consumers to list, each should consume interaction, then list should be cleared
-    private fun checkForInteraction(target: Entity, agent: Entity) {
-        if (agent != target) {
-            if (isInteracting(target, agent)) {
-                val interactions = target.getInteractions()
-                interactions.forEach {
-                    agent.consumeInteraction(it)
+                if (isInteracting(current, agent)) {
+                    consumersList.add(agent)
                 }
             }
+
+            current.getInteractions().forEach { interaction ->
+                consumersList.forEach {
+                    it.consumeInteraction(interaction)
+                }
+            }
+            consumersList.clear()
         }
     }
 }
