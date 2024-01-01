@@ -37,12 +37,24 @@ open class CompositeEntity : Entity, Updatable {
         }
     }
 
-    // TODO: sort by z level
     fun draw() {
-        entitiesMap.keys.forEach { entity ->
-            (entity as? Drawable<SetOfParameters>)?.draw()
-            (entity as? CompositeEntity)?.draw()
+        this.getDrawablesFlatList().forEach {
+            (it as? Drawable<*>)?.draw()
         }
+    }
+
+    private fun getDrawablesFlatList(): List<Entity> {
+        val preSortedList = mutableListOf<Entity>()
+
+        entitiesMap.keys.forEach {
+            if (it is CompositeEntity) {
+                preSortedList.addAll(it.getDrawablesFlatList())
+            } else if (it is Drawable<*>) {
+                preSortedList.add(it)
+            }
+        }
+
+        return preSortedList.sortedBy { (it as? Drawable<*>)?.zLevel }
     }
 
     override fun update(deltaTime: Float) {
