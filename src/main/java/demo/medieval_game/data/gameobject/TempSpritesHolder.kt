@@ -27,7 +27,7 @@ class TempSpritesHolder : CompositeEntity() {
         renderProjection = projection
     }
 
-    fun generateHit(posX: Float, posY: Float) {
+    fun generateHit(posX: Float, posY: Float, posZ: Float) {
         if (renderProjection == null) return
 
         val frameSizeX = 0.25f
@@ -40,6 +40,7 @@ class TempSpritesHolder : CompositeEntity() {
             animations = hitAnimation
         ).apply {
             shader = ShaderController.createAnimationShader(renderProjection!!)
+            zLevel = posZ
         }
 
         val params = SetOfStatic2DParameters(

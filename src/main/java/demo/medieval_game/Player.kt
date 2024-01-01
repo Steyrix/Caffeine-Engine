@@ -81,7 +81,11 @@ class Player(
                 if (!isHit) {
                     isHit = true
                     val currPos = controller.getCurrentCenterPos()
-                    tempSpritesHolder.generateHit(currPos.x, currPos.y)
+                    tempSpritesHolder.generateHit(
+                        currPos.x,
+                        currPos.y,
+                        posZ = drawableComponent.zLevel + 0.5f
+                    )
                     // hp.filled -= interaction.damage
                 }
             }

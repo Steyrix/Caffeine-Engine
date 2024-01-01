@@ -95,7 +95,11 @@ class Goblin(
             is AttackInteraction -> {
                 if (interaction.producer !is Player) return
                 val currPos = controller.getCurrentCenterPos()
-                tempSpritesHolder.generateHit(currPos.x, currPos.y)
+                tempSpritesHolder.generateHit(
+                    currPos.x,
+                    currPos.y,
+                    posZ = drawableComponent.zLevel + 0.5f
+                )
             }
             is IsAttackableInteraction -> {
                 if (!isMovingStopped) {
