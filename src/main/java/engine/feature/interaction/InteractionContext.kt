@@ -1,5 +1,6 @@
 package engine.feature.interaction
 
+import demo.medieval_game.data.gameobject.npc.goblin.Goblin
 import engine.core.entity.Entity
 
 interface InteractionContext<T> {
@@ -27,6 +28,7 @@ interface InteractionContext<T> {
         }
     }
 
+    // TODO: add consumers to list, each should consume interaction, then list should be cleared
     private fun checkForInteraction(target: Entity, agent: Entity) {
         if (agent != target) {
             if (isInteracting(target, agent)) {
