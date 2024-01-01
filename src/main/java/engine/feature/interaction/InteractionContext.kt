@@ -1,6 +1,5 @@
 package engine.feature.interaction
 
-import demo.medieval_game.data.gameobject.npc.goblin.Goblin
 import engine.core.entity.Entity
 
 interface InteractionContext<T> {
