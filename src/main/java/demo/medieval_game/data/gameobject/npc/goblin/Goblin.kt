@@ -109,9 +109,7 @@ class Goblin(
             }
         }
 
-        entitiesMap.keys.forEach {
-            it.consumeInteraction(interaction)
-        }
+        super.consumeInteraction(interaction)
     }
 
     override fun getInteractions(): List<Interaction> {
