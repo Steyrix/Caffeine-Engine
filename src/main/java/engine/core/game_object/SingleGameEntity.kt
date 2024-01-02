@@ -30,4 +30,6 @@ open class SingleGameEntity : GameEntity {
     }
 
     override fun isDisposed() = it?.isDisposed ?: false
+
+    override fun getZLevel(): Float = 0f
 }

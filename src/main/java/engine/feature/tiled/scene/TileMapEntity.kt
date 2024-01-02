@@ -102,8 +102,6 @@ class TileMapEntity(
             }
         }
 
-        graphicalComponent.zLevel = Float.NEGATIVE_INFINITY
-
         return graphicalComponent
     }
 
@@ -136,5 +134,9 @@ class TileMapEntity(
             it.xSize = sizeToMapRelation * parameters.xSize
             it.ySize = sizeToMapRelation * parameters.ySize
         }
+    }
+
+    override fun getZLevel(): Float {
+        return Float.NEGATIVE_INFINITY
     }
 }
