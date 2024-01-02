@@ -2,6 +2,10 @@ package engine.core.game_object
 
 import engine.core.window.Window
 
+/*
+    GameEntity interface is responsible for sorting rendering according
+    to global z-axis value.
+ */
 interface GameEntity {
 
     fun update(deltaTime: Float)
