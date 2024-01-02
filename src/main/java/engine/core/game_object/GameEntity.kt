@@ -3,7 +3,7 @@ package engine.core.game_object
 import engine.core.window.Window
 
 /*
-    GameEntity interface is responsible for sorting rendering according
+    GameEntity interface is responsible for placing an entity in rendering queue according
     to global z-axis value.
  */
 interface GameEntity {
