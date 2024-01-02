@@ -2,6 +2,7 @@ package engine.core.scene
 
 import engine.core.game_object.CompositeGameEntity
 import engine.core.game_object.GameEntity
+import engine.core.render.Drawable
 
 open class GameContext {
 
@@ -32,6 +33,6 @@ open class GameContext {
             }
         }
 
-        return out.sortedBy { it.getZLevel() }
+        return out.sortedBy { (it as? Drawable<*>)?.zLevel }
     }
 }

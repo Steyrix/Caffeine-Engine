@@ -11,6 +11,4 @@ interface GameEntity {
     fun input(window: Window)
 
     fun isDisposed(): Boolean
-
-    fun getZLevel(): Float
 }

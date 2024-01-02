@@ -69,10 +69,11 @@ abstract class NPC<E : CompositeEntity>(
             animations = preset.animations
         ).apply {
             shader = ShaderController.createAnimationShader(renderProjection)
+            zLevel = getZLevel()
         }
     }
 
-    override fun getZLevel(): Float {
+    private fun getZLevel(): Float {
         if (it?.isDisposed == true) {
             return 0.1f
         }

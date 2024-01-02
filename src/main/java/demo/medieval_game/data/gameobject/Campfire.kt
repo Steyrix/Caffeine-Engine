@@ -29,13 +29,10 @@ class Campfire(
             animations = campfireAnimations
         ).apply {
             shader = ShaderController.createAnimationShader(renderProjection)
+            zLevel = parameters.y
         }
 
         it = object : CompositeEntity() {}
         addComponent(graphicalComponent, parameters)
-    }
-
-    override fun getZLevel(): Float {
-        return parameters.y
     }
 }

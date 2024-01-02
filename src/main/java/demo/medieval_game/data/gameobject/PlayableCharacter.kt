@@ -104,6 +104,7 @@ class PlayableCharacter(
             xSize = 60f
             ySize = 60f
             shader = ShaderController.createAnimationShader(renderProjection)
+            zLevel = getZLevel()
         }
     }
 
@@ -162,7 +163,7 @@ class PlayableCharacter(
 
     fun getDirection() = (it as Player).getDirection()
 
-    override fun getZLevel(): Float {
+    private fun getZLevel(): Float {
         return parameters.y
     }
 

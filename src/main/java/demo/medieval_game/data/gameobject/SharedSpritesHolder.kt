@@ -44,6 +44,7 @@ class SharedSpritesHolder : SingleGameEntity() {
 
         val graphicalComponent = Rectangle(0f, 0f, 0f).apply {
             shader = ShaderController.createPrimitiveShader(renderProjection!!)
+            zLevel = Float.POSITIVE_INFINITY
         }
 
         it?.addComponent(graphicalComponent, params)
@@ -92,9 +93,5 @@ class SharedSpritesHolder : SingleGameEntity() {
         componentToAction.values.forEach {
             it.invoke(deltaTime)
         }
-    }
-
-    override fun getZLevel(): Float {
-        return Float.POSITIVE_INFINITY
     }
 }

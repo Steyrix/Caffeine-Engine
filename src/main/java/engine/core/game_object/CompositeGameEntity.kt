@@ -14,7 +14,6 @@ open class CompositeGameEntity : GameEntity {
     }
 
     override fun draw() {
-        objectList.sortBy { it.getZLevel() }
         objectList.forEach {
             it.draw()
         }
@@ -36,11 +35,6 @@ open class CompositeGameEntity : GameEntity {
 
     fun removeComponent(gameEntity: GameEntity) {
         objectList.remove(gameEntity)
-    }
-
-    override fun getZLevel(): Float {
-        if (objectList.isEmpty()) return Float.NEGATIVE_INFINITY
-        return objectList.maxOf { it.getZLevel() }
     }
 
     fun getInnerObjects() = objectList.toList()
