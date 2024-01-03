@@ -3,6 +3,10 @@ package engine.core.game_object
 import engine.core.update.SetOfParameters
 import engine.core.window.Window
 
+/*
+    DynamicGameEntity is designed to offer the ability to override spawning logic.
+    Dynamic entities are entities that can leave the game context.
+ */
 abstract class DynamicGameEntity<P : SetOfParameters>(
     protected val parameters: P
 ) : SingleGameEntity() {
