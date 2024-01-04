@@ -21,7 +21,9 @@ class HealthBar(
     }
 
     private val graphicalComponent: Model
+
     var filled: Float = 1.0f
+        private set
 
     init {
         val textureFilePath = this.javaClass.getResource("/textures/healthbar_atlas.png")!!.path
