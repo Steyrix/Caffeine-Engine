@@ -6,8 +6,8 @@ import engine.core.window.Window
 class FixedStepGameLoop(
     private val targetWindow: Window,
     private val timer: Timer,
-    val targetFps: Int = 60,
-    val targetUpdateSecs: Int = 30
+    private val targetFps: Int = 60,
+    private val targetUpdateSecs: Int = 30
 ) : GameLoop {
 
     override fun loop(
