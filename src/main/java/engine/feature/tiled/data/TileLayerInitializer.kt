@@ -79,10 +79,14 @@ object TileLayerInitializer {
         num: Int
     ): MutableList<Int> {
         val predicates = listOf(
-            { i: Int -> i < data.size - 1 } to { i: Int -> i + 1 },
-            { i: Int -> i + widthInTiles < data.size } to { i: Int -> i + widthInTiles },
-            { i: Int -> i - widthInTiles >= 0 } to { i: Int -> i - widthInTiles },
-            { i: Int -> i > 0 } to { i: Int -> i - 1 },
+            { i: Int -> i < data.size - 1 } to { i: Int -> i + 1 }, // right tile
+            { i: Int -> i + widthInTiles < data.size } to { i: Int -> i + widthInTiles }, // bottom tile
+            { i: Int -> i - widthInTiles >= 0 } to { i: Int -> i - widthInTiles }, // upper tile
+            { i: Int -> i > 0 } to { i: Int -> i - 1 }, // left tile
+            { i: Int -> i - widthInTiles - 1 >= 0 } to { i: Int -> i - widthInTiles - 1 }, // left upper tile
+            { i: Int -> i - widthInTiles + 1 >= 0 } to { i: Int -> i - widthInTiles + 1 }, // right upper tile
+            { i: Int -> i + widthInTiles + 1 < data.size } to { i: Int -> i + widthInTiles + 1 }, // right bottom tile
+            { i: Int -> i + widthInTiles - 1 < data.size } to { i: Int -> i + widthInTiles - 1 }, // left bottom tile
         )
 
         val out = mutableListOf<Int>()
