@@ -6,6 +6,7 @@ import engine.core.update.getCenterPoint
 import engine.feature.tiled.data.TileMap
 import kotlin.math.abs
 
+// TODO: 05.01.24 - known bug - traversing entity stops traversing at some point (when it has no way to go)
 class TileTraverser(
     private val graph: TileGraph,
     private val tileMap: TileMap,
