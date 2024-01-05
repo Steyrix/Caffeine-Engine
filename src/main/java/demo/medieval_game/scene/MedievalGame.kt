@@ -13,7 +13,6 @@ import engine.core.window.Window
 import engine.feature.matrix.MatrixComputer
 import org.joml.Matrix4f
 
-
 // TODO: 29.12.2023 move shared entities to shared context
 class MedievalGame(
     override val screenWidth: Float,
