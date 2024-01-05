@@ -45,6 +45,9 @@ class TileTraverser(
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
         if (!isPaused) traverse()
+        if (isStumble) {
+            println("Stumble detected!")
+        }
     }
 
     fun moveToTarget() {
@@ -97,7 +100,16 @@ class TileTraverser(
 
         if (currentPath.isNotEmpty()) {
             modifyVelocity(node)
+            isStumble = false
+            stumbleCount = 0
         } else {
+
+            if (stumbleCount < stumbleLimit) {
+                stumbleCount++
+            } else {
+                isStumble = true
+            }
+
             dropVelocity()
         }
     }
