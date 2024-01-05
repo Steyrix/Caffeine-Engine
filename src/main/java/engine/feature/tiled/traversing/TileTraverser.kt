@@ -28,6 +28,11 @@ class TileTraverser(
 
     private var isPaused = false
 
+    // TODO: detect stumble
+    private val stumbleLimit = 10
+    private var stumbleCount = 0
+    private var isStumble = false
+
     fun resume() {
         isPaused = false
     }
