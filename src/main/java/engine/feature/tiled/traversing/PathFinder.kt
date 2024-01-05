@@ -2,6 +2,7 @@ package engine.feature.tiled.traversing
 
 import java.util.PriorityQueue
 
+// TODO: diagonal adjacent tiles can be surrounded by unwalkable tiles. Thus they need to be deleted from path
 internal object PathFinder {
 
     fun pathTo(
