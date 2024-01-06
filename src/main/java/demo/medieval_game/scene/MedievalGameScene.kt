@@ -11,6 +11,7 @@ import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.interaction.BoxInteractionContext
+import engine.feature.text.TextRenderer
 import engine.feature.tiled.scene.TileMapEntity
 import engine.feature.tiled.scene.TileMapPreset
 import engine.feature.tiled.scene.TileMapScene
@@ -36,6 +37,8 @@ abstract class MedievalGameScene(
     private var updateRounds = 0
 
     private var isHorizontalMapTransaction = false
+
+    protected var textRenderer: TextRenderer? = null
 
     override fun init(session: Session, intent: SceneIntent?) {
         if (session !is MedievalGameSession) return

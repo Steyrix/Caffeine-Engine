@@ -9,6 +9,7 @@ import engine.core.window.Window
 import engine.core.geometry.Point2D
 import engine.feature.tiled.scene.TileMapPreset
 import org.joml.Matrix4f
+import java.awt.Dimension
 
 class StartMap(
     preset: TileMapPreset,
@@ -22,6 +23,8 @@ class StartMap(
 
     override fun init(session: Session, intent: SceneIntent?) {
         super.init(session, intent)
+
+        textRenderer = (session as MedievalGameSession).textRenderer
 
         character = context.find { it is PlayableCharacter } as PlayableCharacter
 
@@ -44,6 +47,15 @@ class StartMap(
             isFading = true
             switchTrigger.invoke()
         }
+    }
+
+    override fun render(window: Window) {
+        super.render(window)
+        textRenderer?.drawText(
+            "HELLO WORLD",
+            Dimension(32, 64),
+            pos = Point2D(0f, 100f)
+        )
     }
 
     override fun input(window: Window) {
