@@ -73,6 +73,7 @@ object TileLayerInitializer {
         return result
     }
 
+    // TODO: optimize
     private fun getAdjacentTiles(
         data: List<Int>,
         widthInTiles: Int,
@@ -83,6 +84,9 @@ object TileLayerInitializer {
             { i: Int -> i + widthInTiles < data.size } to { i: Int -> i + widthInTiles }, // bottom tile
             { i: Int -> i - widthInTiles >= 0 } to { i: Int -> i - widthInTiles }, // upper tile
             { i: Int -> i > 0 } to { i: Int -> i - 1 }, // left tile
+        )
+
+        val diagonalPredicates = listOf(
             { i: Int -> i - widthInTiles - 1 >= 0 } to { i: Int -> i - widthInTiles - 1 }, // left upper tile
             { i: Int -> i - widthInTiles + 1 >= 0 } to { i: Int -> i - widthInTiles + 1 }, // right upper tile
             { i: Int -> i + widthInTiles + 1 < data.size } to { i: Int -> i + widthInTiles + 1 }, // right bottom tile
@@ -93,6 +97,22 @@ object TileLayerInitializer {
 
         predicates.forEach {
             if (it.first(num) && data[num] != EMPTY_TILE_ID) {
+                val toAdd = it.second(num)
+                if (data[toAdd] != EMPTY_TILE_ID) {
+                    out.add(toAdd)
+                }
+            }
+        }
+
+        diagonalPredicates.forEachIndexed { i, it ->
+            val condition = when(i) {
+                0 -> { x: Int -> predicates[3].first(x) && predicates[2].first(x) }
+                1 -> { x: Int -> predicates[0].first(x) && predicates[2].first(x) }
+                2 -> { x: Int -> predicates[0].first(x) && predicates[1].first(x) }
+                else -> { x: Int -> predicates[3].first(x) && predicates[1].first(x) }
+            }
+
+            if (it.first(num) && condition(num) && data[num] != EMPTY_TILE_ID) {
                 val toAdd = it.second(num)
                 if (data[toAdd] != EMPTY_TILE_ID) {
                     out.add(toAdd)
