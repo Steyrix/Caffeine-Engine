@@ -12,7 +12,7 @@ import java.awt.Dimension
 class TextRenderer(
     private val textureAtlas: Texture2D?,
     private val characterCoordinates: HashMap<Char, Point2D>?,
-    private val charSize: Dimension,
+    private val charSizeInAtlas: Dimension,
     private var textShader: Shader
 ) {
     companion object {
@@ -20,15 +20,15 @@ class TextRenderer(
         private const val NULL_ATLAS_ERROR_TEXT = "Texture atlas is null"
 
         fun getInstance(
-            charSize: Dimension,
+            charSizeInAtlas: Dimension,
             textureFilePath: String,
-            characters: MutableList<Char>,
+            characters: List<Char>,
             initialShader: Shader
         ): TextRenderer {
             val textureAtlas: Texture2D = Texture2D.createInstance(textureFilePath)
-            val characterCoordinates = generateMap(charSize, textureAtlas, characters)
+            val characterCoordinates = generateMap(charSizeInAtlas, textureAtlas, characters)
 
-            return TextRenderer(textureAtlas!!, characterCoordinates!!, charSize, initialShader)
+            return TextRenderer(textureAtlas!!, characterCoordinates!!, charSizeInAtlas, initialShader)
         }
     }
 
@@ -84,8 +84,8 @@ class TextRenderer(
             throw NullPointerException(NULL_ATLAS_ERROR_TEXT)
         }
 
-        val width = (charSize.getWidth() / textureAtlas.getWidthF()).toFloat()
-        val height = (charSize.getHeight() / textureAtlas.getHeightF()).toFloat()
+        val width = (charSizeInAtlas.getWidth() / textureAtlas.getWidthF()).toFloat()
+        val height = (charSizeInAtlas.getHeight() / textureAtlas.getHeightF()).toFloat()
 
         return floatArrayOf(
             width * curr.x, height * curr.y,

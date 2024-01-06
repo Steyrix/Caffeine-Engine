@@ -11,7 +11,7 @@ internal object TextRendererUtil {
     fun generateMap(
         charSize: Dimension,
         textureAtlas: Texture2D,
-        characters: MutableList<Char>
+        characters: List<Char>
     ): HashMap<Char, Point2D> {
         val out = HashMap<Char, Point2D>()
         val xStep: Int
