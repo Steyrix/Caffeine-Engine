@@ -1,12 +1,14 @@
 package engine.feature.tiled.traversing
 
 import engine.core.entity.CompositeEntity
+import engine.core.geometry.Point2D
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.getCenterPoint
 import engine.feature.tiled.data.TileMap
 import kotlin.math.abs
 
-// TODO: 05.01.24 - known bug - traversing entity stops traversing at some point (when it has no way to go)
+// TODO: 06.01.24 - known bug - traversing entity stops traversing at some point (when it has no way to go)
+// TODO: is solved by hacky solution
 class TileTraverser(
     private val graph: TileGraph,
     private val tileMap: TileMap,
@@ -17,7 +19,7 @@ class TileTraverser(
     companion object {
         private const val INDEX_NOT_FOUND = -1
         private const val VELOCITY = 5f
-        private const val INSIGNIFICANT_DIFFERENCE = 4f
+        private const val INSIGNIFICANT_DIFFERENCE = 2f
     }
 
     private var currentPath: ArrayDeque<Int> = ArrayDeque()
@@ -28,7 +30,6 @@ class TileTraverser(
 
     private var isPaused = false
 
-    // TODO: detect stumble
     private val stumbleLimit = 10
     private var stumbleCount = 0
     private var isStumble = false
@@ -45,26 +46,29 @@ class TileTraverser(
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
         if (!isPaused) traverse()
-        if (isStumble) {
-            println("Stumble detected!")
-        }
     }
 
     fun moveToTarget() {
-        val destination = tileMap.getTileIndex(targetParams.x, targetParams.y)
+        val destCenter = targetParams.getCenterPoint()
+        val destination = tileMap.getTileIndex(
+            destCenter.x,
+            destCenter.y
+        )
 
         if (currentDestination == destination) return
 
-        val entityCenter = holderParams.getCenterPoint()
-        val start = tileMap.getTileIndex(entityCenter.x, entityCenter.y)
-        currentTile = start
+        if (!isStumble) {
+            val entityCenter = holderParams.getCenterPoint()
+            val start = tileMap.getTileIndex(entityCenter.x, entityCenter.y)
+            currentTile = start
+        }
 
         currentDestination = destination
         dropVelocity()
 
         val nextPath = PathFinder.pathToByDijkstra(
             graph,
-            start,
+            currentTile,
             destination
         )
 
@@ -73,7 +77,7 @@ class TileTraverser(
 
     private fun extendCurrentPath(nextPath: ArrayDeque<Int>) {
         if (nextPath.isNotEmpty()) {
-
+            isStumble = false
             val indexOfJoin = if (currentPath.isEmpty()) {
                 INDEX_NOT_FOUND
             } else {
@@ -87,11 +91,30 @@ class TileTraverser(
                 currentPath.clear()
                 currentPath.addAll(nextPath)
             }
+        } else if (isStumble) {
+            solveStumbling()
+        }
+    }
+
+    private fun solveStumbling() {
+        var i = 0
+
+        val positionsList = listOf(
+            Point2D(holderParams.x, holderParams.y),
+            Point2D(holderParams.x, holderParams.y + holderParams.ySize),
+            Point2D(holderParams.x + holderParams.xSize, holderParams.y),
+            Point2D(holderParams.x + holderParams.xSize, holderParams.y + holderParams.ySize)
+        )
+
+        while (graph.nodes[currentTile].isNullOrEmpty() && i < 4) {
+            currentTile = tileMap.getTileIndex(positionsList[i].x, positionsList[i].y)
+            i++
         }
     }
 
     private fun traverse() {
         if (currentPath.isEmpty()) {
+            detectIfStumble()
             dropVelocity()
             return
         }
@@ -103,14 +126,16 @@ class TileTraverser(
             isStumble = false
             stumbleCount = 0
         } else {
-
-            if (stumbleCount < stumbleLimit) {
-                stumbleCount++
-            } else {
-                isStumble = true
-            }
-
+            detectIfStumble()
             dropVelocity()
+        }
+    }
+
+    private fun detectIfStumble() {
+        if (stumbleCount < stumbleLimit) {
+            stumbleCount++
+        } else {
+            isStumble = true
         }
     }
 
