@@ -31,7 +31,6 @@ object TileLayerInitializer {
                 allVertices.addAll(vertices.toList())
                 allUV.addAll(uvArray.toList())
             }
-
         }
 
         return Model(
