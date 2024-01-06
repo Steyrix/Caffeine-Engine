@@ -84,4 +84,17 @@ object ShaderController {
             it.setUniform(Shader.VAR_KEY_PROJECTION, projection)
         }
     }
+
+    fun createTextShader(projection: Matrix4f): Shader {
+        val vertexPath = this.javaClass.getResource("/shaders/textShaders/textRenderVertexShader.glsl")!!.path
+        val fragmentPath = this.javaClass.getResource("/shaders/textShaders/textRenderFragmentShader.glsl")!!.path
+
+        return ShaderLoader.loadFromFile(
+            vertexShaderFilePath = vertexPath,
+            fragmentShaderFilePath = fragmentPath
+        ).also {
+            it.bind()
+            it.setUniform(Shader.VAR_KEY_PROJECTION, projection)
+        }
+    }
 }
