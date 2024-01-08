@@ -27,62 +27,62 @@ object AnimationKey {
 val characterAnimations = mutableListOf<Animation>(
     SequenceAtlasAnimation(
         name = AnimationKey.IDLE_R,
-        frames = FrameParametersGenerator.generate(Pair(0, 0), Pair(3, 3), 0.066f, 0.25f),
+        frames = FrameParametersGenerator.generate(Pair(0, 0), Pair(3, 3), 0.111f, 0.25f),
         timeLimit = 1f
     ),
     SequenceAtlasAnimation(
         name = AnimationKey.IDLE_L,
-        frames = FrameParametersGenerator.generate(Pair(0, 0), Pair(1, 1), 0.066f, 0.25f),
+        frames = FrameParametersGenerator.generate(Pair(0, 0), Pair(1, 1), 0.111f, 0.25f),
         timeLimit = 1f
     ),
     SequenceAtlasAnimation(
         name = AnimationKey.IDLE_U,
-        frames = FrameParametersGenerator.generate(Pair(0, 0), Pair(0, 0), 0.066f, 0.25f),
+        frames = FrameParametersGenerator.generate(Pair(0, 0), Pair(0, 0), 0.111f, 0.25f),
         timeLimit = 1f
     ),
     SequenceAtlasAnimation(
         name = AnimationKey.IDLE_D,
-        frames = FrameParametersGenerator.generate(Pair(0, 0), Pair(2, 2), 0.066f, 0.25f),
+        frames = FrameParametersGenerator.generate(Pair(0, 0), Pair(2, 2), 0.111f, 0.25f),
         timeLimit = 1f
     ),
     SequenceAtlasAnimation(
         name = AnimationKey.WALK_R,
-        frames = FrameParametersGenerator.generate(Pair(1, 8), Pair(3, 3), 0.066f, 0.25f),
+        frames = FrameParametersGenerator.generate(Pair(1, 8), Pair(3, 3), 0.111f, 0.25f),
         timeLimit = 0.05f
     ),
     SequenceAtlasAnimation(
         name = AnimationKey.WALK_L,
-        frames = FrameParametersGenerator.generate(Pair(8, 1), Pair(1, 1), 0.066f, 0.25f),
+        frames = FrameParametersGenerator.generate(Pair(8, 1), Pair(1, 1), 0.111f, 0.25f),
         timeLimit = 0.05f
     ),
     SequenceAtlasAnimation(
         name = AnimationKey.WALK_U,
-        frames = FrameParametersGenerator.generate(Pair(1, 8), Pair(0, 0), 0.066f, 0.25f),
+        frames = FrameParametersGenerator.generate(Pair(1, 8), Pair(0, 0), 0.111f, 0.25f),
         timeLimit = 0.05f
     ),
     SequenceAtlasAnimation(
         name = AnimationKey.WALK_D,
-        frames = FrameParametersGenerator.generate(Pair(1, 8), Pair(2, 2), 0.066f, 0.25f),
+        frames = FrameParametersGenerator.generate(Pair(1, 8), Pair(2, 2), 0.111f, 0.25f),
         timeLimit = 0.05f
     ),
     SequenceAtlasAnimation(
         name = AnimationKey.STRIKE_U,
-        frames = FrameParametersGenerator.generate(Pair(14, 10), Pair(0, 0), 0.066f, 0.25f),
+        frames = FrameParametersGenerator.generate(Pair(14, 10), Pair(0, 0), 0.111f, 0.25f),
         timeLimit = 0.1f
     ),
     SequenceAtlasAnimation(
         name = AnimationKey.STRIKE_L,
-        frames = FrameParametersGenerator.generate(Pair(10, 14), Pair(1, 1), 0.066f, 0.25f),
+        frames = FrameParametersGenerator.generate(Pair(10, 14), Pair(1, 1), 0.111f, 0.25f),
         timeLimit = 0.1f
     ),
     SequenceAtlasAnimation(
         name = AnimationKey.STRIKE_D,
-        frames = FrameParametersGenerator.generate(Pair(14, 10), Pair(2, 2), 0.066f, 0.25f),
+        frames = FrameParametersGenerator.generate(Pair(14, 10), Pair(2, 2), 0.111f, 0.25f),
         timeLimit = 0.1f
     ),
     SequenceAtlasAnimation(
         name = AnimationKey.STRIKE_R,
-        frames = FrameParametersGenerator.generate(Pair(10, 14), Pair(3, 3), 0.066f, 0.25f),
+        frames = FrameParametersGenerator.generate(Pair(10, 14), Pair(3, 3), 0.111f, 0.25f),
         timeLimit = 0.1f
     ),
 )
