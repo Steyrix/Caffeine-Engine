@@ -52,8 +52,6 @@ open class Model(
 
     private var textureUniformName: String = ""
 
-    private val textureMap = hashMapOf<Int, Texture2D>()
-
     override var shader: Shader? = null
 
     var x: Float = 0f
@@ -127,9 +125,5 @@ open class Model(
         data: FloatArray
     ) {
         mesh.updateBuffer(bufferIndex, offset, data)
-    }
-
-    private fun switchTexture(id: Int) {
-        // TODO: implement
     }
 }
