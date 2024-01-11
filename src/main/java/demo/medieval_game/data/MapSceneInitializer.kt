@@ -10,21 +10,25 @@ object MapSceneInitializer {
     fun initTileMapObject(
         preset: TileMapPreset,
         renderProjection: Matrix4f,
-        collisionContexts: List<CollisionContext>
+        collisionContexts: List<CollisionContext>,
+        isAutoAdjustEnabled: Boolean = false
     ): TileMapEntity {
         return TileMapEntity(preset).apply {
             init(
                 renderProjection,
                 collisionContexts
             )
-            adjustParameters(
-                HUMANOID_SIZE_TO_MAP_RELATION,
-                listOf(
-                    characterParameters,
-                    goblinParams1,
-                    goblinParams2
+
+            if (isAutoAdjustEnabled) {
+                adjustParameters(
+                    HUMANOID_SIZE_TO_MAP_RELATION,
+                    listOf(
+                        characterParameters,
+                        goblinParams1,
+                        goblinParams2
+                    )
                 )
-            )
+            }
         }
     }
 }
