@@ -48,7 +48,7 @@ val goblinParams2 = SetOf2DParametersWithVelocity(
 
 const val HUMANOID_BOX_OFFSET = 11.596801f
 
-const val HUMAMOID_BOX_SIZE = 79.2064f
+const val HUMANOID_BOX_SIZE = 79.2064f
 
 val campfireParameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
     800f, 800f, 100f, 100f, 0f

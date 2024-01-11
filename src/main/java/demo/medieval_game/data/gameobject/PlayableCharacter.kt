@@ -74,7 +74,7 @@ class PlayableCharacter(
     ): BoundingBox {
         return BoundingBox(
             xOffset = HUMANOID_BOX_OFFSET,
-            xSize = HUMAMOID_BOX_SIZE,
+            xSize = HUMANOID_BOX_SIZE,
             ySize = parameters.ySize,
             isSizeBoundToHolder = false
         ).apply {
