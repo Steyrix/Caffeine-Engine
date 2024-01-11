@@ -4,7 +4,7 @@ import engine.core.render.Drawable
 import engine.core.shader.Shader
 import engine.core.update.SetOfStatic2DParameters
 
-class DebugMesh : Drawable<SetOfStatic2DParameters> {
+class TileDebugMesh : Drawable<SetOfStatic2DParameters> {
 
     override var shader: Shader?
         get() = TODO("Not yet implemented")
