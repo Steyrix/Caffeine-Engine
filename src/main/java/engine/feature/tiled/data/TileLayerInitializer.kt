@@ -72,7 +72,6 @@ object TileLayerInitializer {
         return result
     }
 
-    // TODO: optimize
     private fun getAdjacentTiles(
         data: List<Int>,
         widthInTiles: Int,
