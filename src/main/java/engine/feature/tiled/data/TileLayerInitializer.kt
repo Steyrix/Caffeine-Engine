@@ -3,6 +3,7 @@ package engine.feature.tiled.data
 import engine.core.render.Model
 import engine.core.geometry.Point2D
 import engine.feature.tiled.traversing.TileGraph
+import org.lwjgl.opengl.GL33C
 
 object TileLayerInitializer {
     private const val EMPTY_TILE_ID = -1
@@ -38,6 +39,24 @@ object TileLayerInitializer {
             verticesCount = allVertices.size / 2,
             texture = set.texture2D
         )
+    }
+
+    internal fun genDebugGraphicalComponent(layer: TileLayer): Model {
+        val allVertices: ArrayList<Float> = ArrayList()
+        val data = layer.tileIdsData
+        val set = layer.set
+        for (num in data.indices) {
+            val pos = getPositionByTileIndex(num, layer.widthInTiles)
+            val verticesArray = genVertices(pos, set)
+            allVertices.addAll(verticesArray.toList())
+        }
+
+        return Model(
+            dataArrays = listOf(allVertices.toFloatArray()),
+            verticesCount = allVertices.size
+        ).apply {
+            drawMode = GL33C.GL_LINES
+        }
     }
 
     internal fun generateTileGraph(
