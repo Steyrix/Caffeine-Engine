@@ -4,15 +4,11 @@ import engine.core.render.Drawable
 import engine.core.shader.Shader
 import engine.core.update.SetOfStatic2DParameters
 
-class TileDebugMesh : Drawable<SetOfStatic2DParameters> {
+class TileDebugModel : Drawable<SetOfStatic2DParameters> {
 
-    override var shader: Shader?
-        get() = TODO("Not yet implemented")
-        set(value) {}
-    override var zLevel: Float
-        get() = TODO("Not yet implemented")
-        set(value) {}
+    override var shader: Shader? = null
 
+    override var zLevel: Float = 0f
     override fun draw() {
         TODO("Not yet implemented")
     }
