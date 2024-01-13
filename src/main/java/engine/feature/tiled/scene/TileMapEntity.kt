@@ -102,6 +102,23 @@ class TileMapEntity(
             }
         }
 
+        // TODO: cover with debug flag
+        val debugVertexShaderPath =
+            this.javaClass.getResource("/shaders/boundingBoxShaders/boundingBoxVertexShader.glsl")?.path
+                ?: throw IllegalStateException()
+
+        val debugFragmentShaderPath =
+            this.javaClass.getResource("/shaders/boundingBoxShaders/boundingBoxFragmentShader.glsl")?.path
+                ?: throw IllegalStateException()
+
+        graphicalComponent.debugShader = ShaderLoader.loadFromFile(
+            vertexShaderFilePath = debugVertexShaderPath,
+            fragmentShaderFilePath = debugFragmentShaderPath
+        ).also { shader ->
+            shader.bind()
+            shader.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection)
+        }
+
         return graphicalComponent
     }
 
