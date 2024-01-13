@@ -47,13 +47,21 @@ object TileLayerInitializer {
         val set = layer.set
         for (num in data.indices) {
             val pos = getPositionByTileIndex(num, layer.widthInTiles)
+            val tileNumber = data[num]
+
             val verticesArray = genDebugVertices(pos, set)
-            allVertices.addAll(verticesArray.toList())
+
+            if (tileNumber != EMPTY_TILE_ID) {
+                allVertices.addAll(verticesArray.toList())
+            } else {
+                val vertices = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
+                allVertices.addAll(vertices.toList())
+            }
         }
 
         return Model(
             dataArrays = listOf(allVertices.toFloatArray()),
-            verticesCount = allVertices.size
+            verticesCount = allVertices.size / 2
         ).apply {
             drawMode = GL33C.GL_LINES
             zLevel = 2f
