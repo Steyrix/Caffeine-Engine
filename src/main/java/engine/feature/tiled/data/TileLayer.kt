@@ -14,9 +14,9 @@ class TileLayer(
     val tileIdsData: MutableList<Int>,
     internal val set: TileSet,
     private val properties: ArrayList<Property>
-) : Drawable<SetOfStatic2DParameters>, CompositeEntity() {
+) : CompositeEntity() {
 
-    override var shader: Shader? = null
+    var shader: Shader? = null
         set(value) {
             field = value
             graphicalComponent.shader = value
@@ -27,8 +27,6 @@ class TileLayer(
             field = value
             debugGraphicalComponent.shader = value
         }
-
-    override var zLevel: Float = 0f
 
     private val graphicalComponent: Model = TileLayerInitializer.genGraphicalComponent(this)
 
@@ -43,7 +41,7 @@ class TileLayer(
         addComponent(debugGraphicalComponent, paramsKey)
     }
 
-    override fun updateParameters(parameters: SetOfStatic2DParameters) {
+    fun updateParameters(parameters: SetOfStatic2DParameters) {
         graphicalComponent.updateParameters(parameters)
         debugGraphicalComponent.updateParameters(parameters)
     }
