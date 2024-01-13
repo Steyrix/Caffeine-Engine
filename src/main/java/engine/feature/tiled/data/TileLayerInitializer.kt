@@ -157,4 +157,17 @@ object TileLayerInitializer {
             set.relativeTileWidth * (pos.x + 1), set.relativeTileHeight * pos.y
         )
     }
+
+    private fun genDebugVertices(pos: Point2D, set: TileSet): FloatArray {
+        return floatArrayOf(
+            set.relativeTileWidth * pos.x, set.relativeTileHeight * pos.y,
+            set.relativeTileWidth * (pos.x + 1), set.relativeTileHeight * pos.y,
+            set.relativeTileWidth * (pos.x + 1), set.relativeTileHeight * pos.y,
+            set.relativeTileWidth * (pos.x + 1), set.relativeTileHeight * (pos.y + 1),
+            set.relativeTileWidth * (pos.x + 1), set.relativeTileHeight * (pos.y + 1),
+            set.relativeTileWidth * pos.x, set.relativeTileHeight * (pos.y + 1),
+            set.relativeTileWidth * pos.x, set.relativeTileHeight * (pos.y + 1),
+            set.relativeTileWidth * pos.x, set.relativeTileHeight * pos.y
+        )
+    }
 }
