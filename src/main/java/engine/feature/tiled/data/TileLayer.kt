@@ -22,6 +22,12 @@ class TileLayer(
             graphicalComponent.shader = value
         }
 
+    var debugShader: Shader? = null
+        set(value) {
+            field = value
+            debugGraphicalComponent.shader = value
+        }
+
     override var zLevel: Float = 0f
 
     private val graphicalComponent: Model = TileLayerInitializer.genGraphicalComponent(this)
