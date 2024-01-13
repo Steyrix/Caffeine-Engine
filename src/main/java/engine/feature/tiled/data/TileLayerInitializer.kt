@@ -47,7 +47,7 @@ object TileLayerInitializer {
         val set = layer.set
         for (num in data.indices) {
             val pos = getPositionByTileIndex(num, layer.widthInTiles)
-            val verticesArray = genVertices(pos, set)
+            val verticesArray = genDebugVertices(pos, set)
             allVertices.addAll(verticesArray.toList())
         }
 
