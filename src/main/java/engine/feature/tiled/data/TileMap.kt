@@ -26,6 +26,14 @@ class TileMap(
             }
         }
 
+    var debugShader: Shader? = null
+        set(value) {
+            field = value
+            layers.forEach {
+                it.debugShader = value
+            }
+        }
+
     override var zLevel: Float = 0f
     
     private val set: TileSet
