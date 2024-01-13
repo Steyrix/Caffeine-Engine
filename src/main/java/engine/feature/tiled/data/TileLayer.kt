@@ -25,6 +25,8 @@ class TileLayer(
 
     private val graphicalComponent: Model = TileLayerInitializer.genGraphicalComponent(this)
 
+    private val debugGraphicalComponent: Model = TileLayerInitializer.genDebugGraphicalComponent(this)
+
     override fun updateParameters(parameters: SetOfStatic2DParameters) {
         graphicalComponent.updateParameters(parameters)
     }
