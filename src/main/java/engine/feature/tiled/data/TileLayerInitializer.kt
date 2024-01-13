@@ -38,7 +38,7 @@ object TileLayerInitializer {
             dataArrays = listOf(allVertices.toFloatArray(), allUV.toFloatArray()),
             verticesCount = allVertices.size / 2,
             texture = set.texture2D
-        )
+        ).apply { zLevel = 1f }
     }
 
     internal fun genDebugGraphicalComponent(layer: TileLayer): Model {
@@ -56,6 +56,7 @@ object TileLayerInitializer {
             verticesCount = allVertices.size
         ).apply {
             drawMode = GL33C.GL_LINES
+            zLevel = 2f
         }
     }
 
