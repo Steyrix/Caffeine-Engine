@@ -1,5 +1,6 @@
 package engine.feature.tiled.data
 
+import engine.core.entity.CompositeEntity
 import engine.core.render.Drawable
 import engine.core.render.Model
 import engine.core.shader.Shader
@@ -13,7 +14,7 @@ class TileLayer(
     val tileIdsData: MutableList<Int>,
     internal val set: TileSet,
     private val properties: ArrayList<Property>
-) : Drawable<SetOfStatic2DParameters> {
+) : Drawable<SetOfStatic2DParameters>, CompositeEntity() {
 
     override var shader: Shader? = null
         set(value) {
@@ -25,14 +26,20 @@ class TileLayer(
 
     private val graphicalComponent: Model = TileLayerInitializer.genGraphicalComponent(this)
 
+    // TODO: cover by debug flag
     private val debugGraphicalComponent: Model = TileLayerInitializer.genDebugGraphicalComponent(this)
+
+    // TODO: hack, remove it
+    private val paramsKey = SetOfStatic2DParameters(0f, 0f, 0f, 0f, 0f)
+
+    init {
+        addComponent(graphicalComponent, paramsKey)
+        addComponent(debugGraphicalComponent, paramsKey)
+    }
 
     override fun updateParameters(parameters: SetOfStatic2DParameters) {
         graphicalComponent.updateParameters(parameters)
-    }
-
-    override fun draw() {
-        graphicalComponent.draw()
+        debugGraphicalComponent.updateParameters(parameters)
     }
 
     fun getTileValueByIndex(index: Int): Int {
