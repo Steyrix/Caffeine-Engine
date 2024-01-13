@@ -94,12 +94,12 @@ val goblinsAnimations = mutableListOf<Animation>(
         timeLimit = 1f
     ),
     SequenceAtlasAnimation(
-        name = AnimationKey.IDLE_L,
+        name = AnimationKey.IDLE_U,
         frames = FrameParametersGenerator.generate(Pair(6, 6), Pair(3, 3), 0.09f, 0.2f),
         timeLimit = 1f
     ),
     SequenceAtlasAnimation(
-        name = AnimationKey.IDLE_U,
+        name = AnimationKey.IDLE_L,
         frames = FrameParametersGenerator.generate(Pair(6, 6), Pair(2, 2), 0.09f, 0.2f),
         timeLimit = 1f
     ),
@@ -114,12 +114,12 @@ val goblinsAnimations = mutableListOf<Animation>(
         timeLimit = 0.25f
     ),
     SequenceAtlasAnimation(
-        name = AnimationKey.WALK_L,
+        name = AnimationKey.WALK_U,
         frames = FrameParametersGenerator.generate(Pair(0, 5), Pair(3, 3), 0.09f, 0.2f),
         timeLimit = 0.25f
     ),
     SequenceAtlasAnimation(
-        name = AnimationKey.WALK_U,
+        name = AnimationKey.WALK_L,
         frames = FrameParametersGenerator.generate(Pair(0, 5), Pair(2, 2), 0.09f, 0.2f),
         timeLimit = 0.25f
     ),
