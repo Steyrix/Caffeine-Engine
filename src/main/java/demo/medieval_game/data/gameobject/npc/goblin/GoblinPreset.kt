@@ -26,7 +26,7 @@ object GoblinPreset {
                 isSizeBoundToHolder = false
             ),
             AnimationPreset(
-                this.javaClass.getResource("/textures/GoblinAtlas_ver1.png")!!.path,
+                this.javaClass.getResource("/textures/GoblinAtlas_ver2.png")!!.path,
                 animations = goblinsAnimations.map { it.copy() },
                 frameSizeX = 0.09f,
                 frameSizeY = 0.2f

@@ -111,22 +111,22 @@ val goblinsAnimations = mutableListOf<Animation>(
     SequenceAtlasAnimation(
         name = AnimationKey.WALK_R,
         frames = FrameParametersGenerator.generate(Pair(0, 5), Pair(1, 1), 0.09f, 0.2f),
-        timeLimit = 0.25f
+        timeLimit = 0.15f
     ),
     SequenceAtlasAnimation(
         name = AnimationKey.WALK_U,
         frames = FrameParametersGenerator.generate(Pair(0, 5), Pair(3, 3), 0.09f, 0.2f),
-        timeLimit = 0.25f
+        timeLimit = 0.15f
     ),
     SequenceAtlasAnimation(
         name = AnimationKey.WALK_L,
         frames = FrameParametersGenerator.generate(Pair(0, 5), Pair(2, 2), 0.09f, 0.2f),
-        timeLimit = 0.25f
+        timeLimit = 0.15f
     ),
     SequenceAtlasAnimation(
         name = AnimationKey.WALK_D,
         frames = FrameParametersGenerator.generate(Pair(0, 5), Pair(0, 0), 0.09f, 0.2f),
-        timeLimit = 0.25f
+        timeLimit = 0.15f
     ),
     SequenceAtlasAnimation(
         name = AnimationKey.GOBLIN_DEFEAT,
