@@ -15,7 +15,7 @@ data class AnimationPreset(
     val animations: List<Animation>
 )
 
-data class NpcPreset(
+data class Preset(
     val box: BoundingBoxPreset,
     val animation: AnimationPreset
 )

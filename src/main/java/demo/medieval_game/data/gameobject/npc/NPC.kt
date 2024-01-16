@@ -25,7 +25,7 @@ abstract class NPC<E : CompositeEntity>(
         renderProjection: Matrix4f,
         boundingBoxCollisionContext: BoundingBoxCollisionContext,
         boxInteractionContext: BoxInteractionContext,
-        preset: NpcPreset
+        preset: Preset
     ) {
         val box = getBoundingBox(
             renderProjection,
