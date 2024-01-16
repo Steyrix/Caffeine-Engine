@@ -87,7 +87,7 @@ class PlayableCharacter(
     ): AnimatedModel2D {
         val frameWidth = 0.066f
         val frameHeight = 0.25f
-        val path = this.javaClass.getResource("/textures/KnightAtlas_ver9.png")!!.path
+        val path = this.javaClass.getResource("/textures/KnightAtlas.png")!!.path
 
         val textureArray = Texture2D.createInstance(
             path
