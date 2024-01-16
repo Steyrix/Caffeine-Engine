@@ -23,8 +23,8 @@ class Campfire(
 
         val texturePath = this.javaClass.getResource("/textures/camp_fire_texture.png")!!.path
         graphicalComponent = AnimatedModel2D(
-            frameSizeX = frameSizeX,
-            frameSizeY = frameSizeY,
+            frameWidth = frameSizeX,
+            frameHeight = frameSizeY,
             texture = Texture2D.createInstance(texturePath),
             animations = campfireAnimations
         ).apply {

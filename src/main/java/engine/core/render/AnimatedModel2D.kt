@@ -15,13 +15,13 @@ class AnimatedModel2D(
 ) : Model(mesh, texture, arrayTexture), Updatable {
 
     constructor(
-        frameSizeX: Float,
-        frameSizeY: Float,
+        frameWidth: Float,
+        frameHeight: Float,
         texture: Texture2D?,
         animations: List<Animation>
     ) : this(
         mesh = Mesh(
-            dataArrays = DefaultBufferData.getRectangleSectorBuffers(frameSizeX, frameSizeY),
+            dataArrays = DefaultBufferData.getRectangleSectorBuffers(frameWidth, frameHeight),
             verticesCount = 6
         ),
         texture,
@@ -30,13 +30,13 @@ class AnimatedModel2D(
     )
 
     constructor(
-        frameSizeX: Float,
-        frameSizeY: Float,
+        frameWidth: Float,
+        frameHeight: Float,
         arrayTexture: ArrayTexture2D?,
         animations: MutableList<Animation>
     ) : this(
         mesh = Mesh(
-            dataArrays = DefaultBufferData.getRectangleSectorBuffers(frameSizeX, frameSizeY),
+            dataArrays = DefaultBufferData.getRectangleSectorBuffers(frameWidth, frameHeight),
             verticesCount = 6
         ),
         texture = null,
