@@ -3,7 +3,7 @@ package demo.medieval_game.data.gameobject.npc
 import engine.core.update.SetOfStatic2DParametersWithOffset
 import engine.feature.animation.Animation
 
-data class NpcBoxPreset(
+data class BoundingBoxPreset(
     val initialParams: SetOfStatic2DParametersWithOffset,
     val isSizeBoundToHolder: Boolean
 )
@@ -16,6 +16,6 @@ data class AnimationPreset(
 )
 
 data class NpcPreset(
-    val box: NpcBoxPreset,
+    val box: BoundingBoxPreset,
     val animation: AnimationPreset
 )

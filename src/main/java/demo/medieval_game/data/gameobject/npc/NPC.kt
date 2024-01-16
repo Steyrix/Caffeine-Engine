@@ -48,7 +48,7 @@ abstract class NPC<E : CompositeEntity>(
 
     private fun getBoundingBox(
         renderProjection: Matrix4f,
-        preset: NpcBoxPreset
+        preset: BoundingBoxPreset
     ): BoundingBox {
         return BoundingBox(
             preset.initialParams,

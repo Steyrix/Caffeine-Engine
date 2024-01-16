@@ -1,7 +1,7 @@
 package demo.medieval_game.data.gameobject.npc.goblin
 
 import demo.medieval_game.data.HUMANOID_SIZE_Y
-import demo.medieval_game.data.gameobject.npc.NpcBoxPreset
+import demo.medieval_game.data.gameobject.npc.BoundingBoxPreset
 import demo.medieval_game.data.gameobject.npc.NpcPreset
 import demo.medieval_game.data.HUMANOID_BOX_OFFSET
 import demo.medieval_game.data.HUMANOID_BOX_SIZE
@@ -13,7 +13,7 @@ object GoblinPreset {
 
     fun get(): NpcPreset {
         return NpcPreset(
-            NpcBoxPreset(
+            BoundingBoxPreset(
                 SetOfStatic2DParametersWithOffset(
                     x = 0f,
                     y = 0f,
