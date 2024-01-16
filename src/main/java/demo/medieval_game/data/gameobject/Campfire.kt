@@ -21,7 +21,7 @@ class Campfire(
         val frameWidth = 0.2f
         val frameHeight = 1.0f
 
-        val texturePath = this.javaClass.getResource("/textures/camp_fire_texture.png")!!.path
+        val texturePath = this.javaClass.getResource("/textures/CampFireAtlas.png")!!.path
         graphicalComponent = AnimatedModel2D(
             frameWidth = frameWidth,
             frameHeight = frameHeight,

@@ -19,7 +19,7 @@ class TempSpritesHolder : CompositeEntity() {
     private val texture: Texture2D
 
     init {
-        val texturePath = this.javaClass.getResource("/textures/blood_hit.png")!!.path
+        val texturePath = this.javaClass.getResource("/textures/BloodHitAtlas.png")!!.path
         texture = Texture2D.createInstance(texturePath)
     }
 

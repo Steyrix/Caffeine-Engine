@@ -48,7 +48,7 @@ object MedievalGameSession : Session() {
     }
 
     private fun initTextRenderer() {
-        val fontAtlasPath = this.javaClass.getResource("/textures/simpleFontAtlas.png")?.path ?: ""
+        val fontAtlasPath = this.javaClass.getResource("/textures/SimpleFontAtlas.png")?.path ?: ""
 
         textRenderer = TextRenderer.getInstance(
             charSizeInAtlas = Dimension(64, 64),
