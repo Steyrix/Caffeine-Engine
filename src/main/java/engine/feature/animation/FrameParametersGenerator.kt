@@ -5,8 +5,8 @@ object FrameParametersGenerator {
     fun generate(
         xRange: Pair<Int, Int>,
         yRange: Pair<Int, Int>,
-        frameSizeX: Float,
-        frameSizeY: Float
+        frameWidth: Float,
+        frameHeight: Float
     ): List<FrameParameters> {
 
         val out = mutableListOf<FrameParameters>()
@@ -33,12 +33,12 @@ object FrameParametersGenerator {
 
         while (yConditionFunc.invoke()) {
             val frameY = yFirst + 1
-            val yOffset = yFirst * frameSizeY
+            val yOffset = yFirst * frameHeight
 
             xFirst = initialX
             while (xConditionFunc.invoke()) {
                 val frameX = xFirst + 1
-                val xOffset = xFirst * frameSizeX
+                val xOffset = xFirst * frameWidth
 
                 out.add(
                     FrameParameters(
