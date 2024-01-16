@@ -5,11 +5,11 @@ import engine.core.shader.Shader
 class BasicAtlasAnimation(
     override val name: String,
     private val animationId: Int,
-    val usedLayerId: Int,
+    private val usedLayerId: Int,
     private val framesCountX: Int,
     private val framesCountY: Int,
-    internal var currentFrameX: Int,
-    internal var currentFrameY: Int,
+    private var currentFrameX: Int,
+    private var currentFrameY: Int,
     private val timeLimit: Float
 ) : Animation {
     private var playFunction: ((Float, Int, Int, Int, Int) -> Unit)? = null
