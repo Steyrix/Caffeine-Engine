@@ -30,12 +30,12 @@ class TempSpritesHolder : CompositeEntity() {
     fun generateHit(posX: Float, posY: Float, posZ: Float) {
         if (renderProjection == null) return
 
-        val frameSizeX = 0.25f
-        val frameSizeY = 0.25f
+        val frameWidth = 0.25f
+        val frameHeight = 0.25f
 
         val graphicalComponent = AnimatedModel2D(
-            frameSizeX,
-            frameSizeY,
+            frameWidth,
+            frameHeight,
             texture = texture,
             animations = hitAnimation
         ).apply {

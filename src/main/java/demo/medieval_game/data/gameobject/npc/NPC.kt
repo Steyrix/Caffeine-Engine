@@ -63,8 +63,8 @@ abstract class NPC<E : CompositeEntity>(
         preset: AnimationPreset
     ): AnimatedModel2D {
         return AnimatedModel2D(
-            frameWidth = preset.frameSizeX,
-            frameHeight = preset.frameSizeY,
+            frameWidth = preset.frameWidth,
+            frameHeight = preset.frameHeight,
             texture = Texture2D.createInstance(preset.atlasTexturePath),
             animations = preset.animations
         ).apply {

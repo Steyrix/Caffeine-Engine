@@ -10,8 +10,8 @@ data class BoundingBoxPreset(
 
 data class AnimationPreset(
     val atlasTexturePath: String,
-    val frameSizeX: Float,
-    val frameSizeY: Float,
+    val frameWidth: Float,
+    val frameHeight: Float,
     val animations: List<Animation>
 )
 
