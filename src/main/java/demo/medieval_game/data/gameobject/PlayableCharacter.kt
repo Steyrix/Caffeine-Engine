@@ -99,10 +99,6 @@ class PlayableCharacter(
             texture = textureArray,
             animations = characterAnimations
         ).apply {
-            x = 100f
-            y = 100f
-            xSize = 60f
-            ySize = 60f
             shader = ShaderController.createAnimationShader(renderProjection)
         }
     }
