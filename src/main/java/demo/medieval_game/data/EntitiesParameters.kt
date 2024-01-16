@@ -3,6 +3,7 @@ package demo.medieval_game.data
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfStatic2DParameters
 
+// TODO: use resource file
 const val HUMANOID_SIZE_TO_MAP_RELATION = 0.128f
 
 var HUMANOID_SIZE_X = 102.4f
