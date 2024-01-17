@@ -83,4 +83,8 @@ open class CompositeEntity : Entity, Updatable {
             (entity as? Controllable)?.input(window)
         }
     }
+
+    fun contains(entity: Entity): Boolean {
+        return entitiesMap.containsKey(entity)
+    }
 }
