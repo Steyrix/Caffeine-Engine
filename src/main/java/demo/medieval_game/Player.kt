@@ -17,6 +17,7 @@ class Player(
 ) : CompositeEntity() {
 
     private var isAttack = false
+    private var isStriking = false
 
     private val attackCoolDown = PredicateTimeEvent(
         timeLimit = 0.5f,
@@ -42,7 +43,10 @@ class Player(
         absVelocityY = 10f,
         absVelocityX = 10f,
         modifier = 20f,
-        isControlledByUser = true
+        isControlledByUser = true,
+        onStrikingChange = {
+            isStriking = !isStriking
+        }
     )
 
     init {
@@ -81,10 +85,9 @@ class Player(
             is AttackInteraction -> {
                 if (!isHit) {
                     isHit = true
-                    val currPos = parameters.getCenterPoint()
                     tempSpritesHolder.generateHit(
-                        currPos.x,
-                        currPos.y,
+                        parameters.x,
+                        parameters.y,
                         posZ = drawableComponent.zLevel + 0.5f
                     )
                 }

@@ -19,7 +19,8 @@ class SimpleController2D(
     private var absVelocityY: Float = 0f,
     private var absVelocityX: Float = 0f,
     private var modifier: Float = 20f,
-    private var isControlledByUser: Boolean = false
+    private var isControlledByUser: Boolean = false,
+    private val onStrikingChange: () -> Unit = {}
 ) : HumanoidAnimationController(
     drawableComponent,
     HumanoidAnimationMaps.getIdleMap(),
@@ -30,7 +31,10 @@ class SimpleController2D(
     private val playStrikingAnimation = PredicateTimeEvent(
         timeLimit = 0.5f,
         predicate = { isStriking },
-        action = { isStriking = false }
+        action = {
+            isStriking = false
+            onStrikingChange.invoke()
+        }
     )
 
     private val previousPosition = Point2D(0f, 0f)
@@ -52,6 +56,7 @@ class SimpleController2D(
 
         if (window.isKeyPressed(GLFW.GLFW_KEY_SPACE)) {
             isStriking = true
+            onStrikingChange.invoke()
         }
 
         params.velocityY = when {
