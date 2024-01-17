@@ -14,13 +14,11 @@ class Goblin(
     private val drawableComponent: AnimatedModel2D,
     params: SetOf2DParametersWithVelocity,
     private val hp: HealthBar,
-    private val tempSpritesHolder: TempSpritesHolder
+    private val tempSpritesHolder: TempSpritesHolder,
+    private val controller: GoblinController
 ) : CompositeEntity() {
 
-    private val controller = GoblinController(
-        params,
-        modifier = 20f
-    )
+    var onDispose: () -> Unit = {}
 
     init {
         addComponent(
@@ -52,7 +50,7 @@ class Goblin(
         }
 
         if (hp.filled <= 0) {
-            entitiesMap.remove(controller)
+            onDispose.invoke()
             drawableComponent.setAnimationByKey(AnimationKey.GOBLIN_DEFEAT)
             isDisposed = true
             return

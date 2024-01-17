@@ -18,13 +18,26 @@ class GoblinNPC(
         animatedModel2D: AnimatedModel2D
     ): Goblin {
 
-        return Goblin(
+        val controller = GoblinController(
+            parameters,
+            modifier = 20f
+        )
+
+        val entity = Goblin(
             animatedModel2D,
             parameters,
             getHpBar(renderProjection),
             tempSpritesHolder,
+            controller
         ).apply {
             addComponent(tileTraverser, parameters)
         }
+
+        entity.onDispose = {
+            entity.removeComponent(tileTraverser)
+            entity.removeComponent(controller)
+        }
+
+        return entity
     }
 }
