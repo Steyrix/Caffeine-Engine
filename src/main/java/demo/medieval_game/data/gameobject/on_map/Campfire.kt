@@ -1,4 +1,4 @@
-package demo.medieval_game.data.gameobject
+package demo.medieval_game.data.gameobject.on_map
 
 import demo.medieval_game.ShaderController
 import demo.medieval_game.data.campfireAnimations

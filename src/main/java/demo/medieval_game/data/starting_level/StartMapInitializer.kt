@@ -4,6 +4,7 @@ import demo.medieval_game.data.campfireParameters
 import demo.medieval_game.data.gameobject.*
 import demo.medieval_game.data.gameobject.npc.goblin.GoblinNPC
 import demo.medieval_game.data.gameobject.npc.goblin.GoblinPreset
+import demo.medieval_game.data.gameobject.on_map.Campfire
 import demo.medieval_game.data.goblinParams1
 import demo.medieval_game.data.goblinParams2
 import demo.medieval_game.scene.MedievalGame
