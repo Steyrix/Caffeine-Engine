@@ -16,6 +16,7 @@ import engine.feature.interaction.Interaction
 open class CompositeEntity : Entity, Updatable {
 
     protected val entitiesMap: HashMap<Entity, SetOfParameters> = hashMapOf()
+    private val toRemove = mutableListOf<Entity>()
 
     var isDisposed = false
 
@@ -33,7 +34,7 @@ open class CompositeEntity : Entity, Updatable {
         entity: Entity
     ) {
         if (entitiesMap.contains(entity)) {
-            entitiesMap.remove(entity)
+            toRemove.add(entity)
         }
     }
 
@@ -58,9 +59,16 @@ open class CompositeEntity : Entity, Updatable {
     }
 
     override fun update(deltaTime: Float) {
-        entitiesMap.entries.forEach {
-            (it.key as? Updatable)?.update(deltaTime)
-            (it.key as? Parameterized<SetOfParameters>)?.updateParameters(it.value)
+        val iterator = entitiesMap.entries.iterator()
+        while (iterator.hasNext()) {
+            val item = iterator.next()
+            if (toRemove.contains(item.key)) {
+                iterator.remove()
+                toRemove.remove(item.key)
+            } else {
+                (item.key as? Updatable)?.update(deltaTime)
+                (item.key as? Parameterized<SetOfParameters>)?.updateParameters(item.value)
+            }
         }
     }
 
