@@ -10,6 +10,8 @@ import engine.core.render.AnimatedModel2D
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.interaction.Interaction
 
+// TODO: remove coupling with hb bar
+// TODO: remove coupling with controller
 class Goblin(
     private val drawableComponent: AnimatedModel2D,
     params: SetOf2DParametersWithVelocity,
