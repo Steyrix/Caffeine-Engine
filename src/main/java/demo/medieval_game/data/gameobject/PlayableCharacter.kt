@@ -2,9 +2,11 @@ package demo.medieval_game.data.gameobject
 
 import demo.medieval_game.Player
 import demo.medieval_game.ShaderController
+import demo.medieval_game.SimpleController2D
 import demo.medieval_game.data.*
 import demo.medieval_game.hp.HealthBar
 import demo.medieval_game.scene.MedievalGame
+import engine.core.controllable.Direction
 import engine.core.entity.Entity
 import engine.core.game_object.DynamicGameEntity
 import engine.core.render.AnimatedModel2D
@@ -29,6 +31,8 @@ class PlayableCharacter(
     private var projection = Matrix4f()
     private var currentInteractionContext: BoxInteractionContext? = null
 
+    private var controller: SimpleController2D? = null
+
     override fun preSpawn(setOfParameters: SetOf2DParametersWithVelocity) {
         // TODO: implement
     }
@@ -49,6 +53,18 @@ class PlayableCharacter(
             tempSpritesHolder = tempSprites
         )
 
+        controller = SimpleController2D(
+            graphicalComponent!!,
+            parameters,
+            absVelocityY = 10f,
+            absVelocityX = 10f,
+            modifier = 20f,
+            isControlledByUser = true,
+            onStrikingChange = { value ->
+                (it as Player).isStriking = value
+            }
+        )
+
         hp = HealthBar(characterParameters, hpBarParameters1, projection)
 
         boxCollider = getBoundingBoxCollider(bbCollisionContext)
@@ -62,6 +78,7 @@ class PlayableCharacter(
         addComponent(hp, characterParameters)
         addComponent(boxCollider, characterParameters)
         addComponent(tempSprites, characterParameters)
+        addComponent(controller, characterParameters)
 
         bbCollisionContext.addEntity(boundingBox as Entity, characterParameters)
 
@@ -156,7 +173,7 @@ class PlayableCharacter(
         return tiledCollider?.isOutOfMap ?: false
     }
 
-    fun getDirection() = (it as Player).getDirection()
+    fun getDirection() = controller?.direction ?: Direction.RIGHT
 
     override fun getZLevel(): Float {
         return parameters.y

@@ -16,7 +16,7 @@ class Player(
 ) : CompositeEntity() {
 
     private var isAttack = false
-    private var isStriking = false
+    var isStriking = false
 
     private val attackCoolDown = PredicateTimeEvent(
         timeLimit = 0.5f,
@@ -36,35 +36,15 @@ class Player(
         }
     )
 
-    private val controller = SimpleController2D(
-        drawableComponent,
-        parameters,
-        absVelocityY = 10f,
-        absVelocityX = 10f,
-        modifier = 20f,
-        isControlledByUser = true,
-        onStrikingChange = {
-            this.isStriking = it
-        }
-    )
-
     init {
         addComponent(
             component = drawableComponent,
-            parameters = parameters
-        )
-
-        addComponent(
-            component = controller,
             parameters = parameters
         )
     }
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
-
-        println("isStriking: $isStriking")
-        println("isAttack: $isAttack")
         attackCoolDown.schedule(deltaTime)
         takeHitCoolDown.schedule(deltaTime)
     }
@@ -79,8 +59,6 @@ class Player(
         out.add(IsAttackableInteraction(parameters))
         return out.toList()
     }
-
-    fun getDirection() = controller.direction
 
     override fun consumeInteraction(interaction: Interaction) {
         when (interaction) {
