@@ -1,39 +1,37 @@
 package demo.medieval_game
 
-import demo.medieval_game.data.AnimationKey
+import demo.medieval_game.data.gameobject.npc.HumanoidAnimationController
+import demo.medieval_game.data.gameobject.npc.HumanoidAnimationMaps
 import demo.medieval_game.matrix.MedievalGameMatrixState
 import engine.core.controllable.Controllable
 import engine.core.controllable.Direction
-import engine.core.entity.Entity
 import engine.core.loop.PredicateTimeEvent
 import engine.core.update.SetOf2DParametersWithVelocity
-import engine.core.update.Updatable
 import engine.core.update.getCenterPoint
 import engine.core.window.Window
 import engine.core.geometry.Point2D
+import engine.core.render.AnimatedModel2D
 import org.lwjgl.glfw.GLFW
 
-// TODO: reuse human animation controller
 class SimpleController2D(
+    drawableComponent: AnimatedModel2D,
     private val params: SetOf2DParametersWithVelocity,
     private var absVelocityY: Float = 0f,
     private var absVelocityX: Float = 0f,
     private var modifier: Float = 20f,
     private var isControlledByUser: Boolean = false
-) : Controllable, Entity, Updatable {
-
-    var isStriking = false
+) : HumanoidAnimationController(
+    drawableComponent,
+    HumanoidAnimationMaps.getIdleMap(),
+    HumanoidAnimationMaps.getStrikeMap(),
+    HumanoidAnimationMaps.getWalkMap()
+), Controllable {
 
     private val playStrikingAnimation = PredicateTimeEvent(
         timeLimit = 0.5f,
         predicate = { isStriking },
         action = { isStriking = false }
     )
-
-    private var isWalking = false
-
-    var direction = Direction.RIGHT
-        private set
 
     private val previousPosition = Point2D(0f, 0f)
 
@@ -116,39 +114,4 @@ class SimpleController2D(
     }
 
     fun getCurrentCenterPos() = Point2D(params.x, params.y)
-
-    fun getAnimationKey(): String {
-        return when {
-            isStriking -> getStrikingAnimation()
-            isWalking -> getWalkingAnimation()
-            else -> getIdleAnimation()
-        }
-    }
-
-    private fun getStrikingAnimation(): String {
-        return when (direction) {
-            Direction.RIGHT -> AnimationKey.STRIKE_R
-            Direction.LEFT -> AnimationKey.STRIKE_L
-            Direction.UP -> AnimationKey.STRIKE_U
-            Direction.DOWN -> AnimationKey.STRIKE_D
-        }
-    }
-
-    private fun getWalkingAnimation(): String {
-        return when (direction) {
-            Direction.RIGHT -> AnimationKey.WALK_R
-            Direction.LEFT -> AnimationKey.WALK_L
-            Direction.UP -> AnimationKey.WALK_U
-            Direction.DOWN -> AnimationKey.WALK_D
-        }
-    }
-
-    private fun getIdleAnimation(): String {
-        return when (direction) {
-            Direction.RIGHT -> AnimationKey.IDLE_R
-            Direction.LEFT -> AnimationKey.IDLE_L
-            Direction.UP -> AnimationKey.IDLE_U
-            Direction.DOWN -> AnimationKey.IDLE_D
-        }
-    }
 }

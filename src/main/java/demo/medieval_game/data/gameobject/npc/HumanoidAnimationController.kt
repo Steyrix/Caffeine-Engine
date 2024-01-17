@@ -20,7 +20,7 @@ abstract class HumanoidAnimationController(
         const val WALK = "WALK"
     }
 
-    protected var direction: Direction = Direction.LEFT
+    var direction: Direction = Direction.LEFT
     var isStriking = false
     var isWalking = false
 

@@ -36,6 +36,7 @@ class Player(
     )
 
     private val controller = SimpleController2D(
+        drawableComponent,
         params,
         absVelocityY = 10f,
         absVelocityX = 10f,
