@@ -1,5 +1,6 @@
 package demo.medieval_game.data.gameobject.npc.goblin
 
+import demo.medieval_game.data.AnimationKey
 import demo.medieval_game.data.gameobject.TempSpritesHolder
 import demo.medieval_game.data.gameobject.npc.NPC
 import engine.core.render.AnimatedModel2D
@@ -26,17 +27,23 @@ class GoblinNPC(
         val entity = Goblin(
             animatedModel2D,
             parameters,
-            getHpBar(renderProjection),
             tempSpritesHolder,
             controller
+        )
+
+        val hpBar = getHpBar(
+            renderProjection
         ).apply {
-            addComponent(tileTraverser, parameters)
+            onEmptyCallback = {
+                animatedModel2D.setAnimationByKey(AnimationKey.GOBLIN_DEFEAT)
+                entity.removeComponent(tileTraverser)
+                entity.removeComponent(controller)
+                entity.isDisposed = true
+            }
         }
 
-        entity.onDispose = {
-            entity.removeComponent(tileTraverser)
-            entity.removeComponent(controller)
-        }
+        entity.addComponent(hpBar, parameters)
+        entity.addComponent(tileTraverser, parameters)
 
         return entity
     }
