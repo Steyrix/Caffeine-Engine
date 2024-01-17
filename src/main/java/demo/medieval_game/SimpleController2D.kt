@@ -13,6 +13,7 @@ import engine.core.window.Window
 import engine.core.geometry.Point2D
 import org.lwjgl.glfw.GLFW
 
+// TODO: reuse human animation controller
 class SimpleController2D(
     private val params: SetOf2DParametersWithVelocity,
     private var absVelocityY: Float = 0f,
