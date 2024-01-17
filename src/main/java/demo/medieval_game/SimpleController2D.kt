@@ -80,6 +80,7 @@ class SimpleController2D(
     }
 
     override fun update(deltaTime: Float) {
+        super.update(deltaTime)
         playStrikingAnimation.schedule(deltaTime)
 
         val center = params.getCenterPoint()

@@ -58,7 +58,6 @@ class Player(
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
-        drawableComponent.setAnimationByKey(controller.getAnimationKey())
         attackCoolDown.schedule(deltaTime)
         takeHitCoolDown.schedule(deltaTime)
     }
@@ -87,7 +86,6 @@ class Player(
                         currPos.y,
                         posZ = drawableComponent.zLevel + 0.5f
                     )
-                    // hp.filled -= interaction.damage
                 }
             }
         }
