@@ -5,8 +5,10 @@ import demo.medieval_game.data.gameobject.*
 import demo.medieval_game.data.gameobject.npc.goblin.GoblinNPC
 import demo.medieval_game.data.gameobject.npc.goblin.GoblinPreset
 import demo.medieval_game.data.gameobject.on_map.Campfire
+import demo.medieval_game.data.gameobject.on_map.WoodenChest
 import demo.medieval_game.data.goblinParams1
 import demo.medieval_game.data.goblinParams2
+import demo.medieval_game.data.woodenChestParameters
 import demo.medieval_game.scene.MedievalGame
 import engine.core.game_object.GameEntity
 import engine.core.scene.SceneInitializer
@@ -27,6 +29,12 @@ object StartMapInitializer : SceneInitializer {
             init(MedievalGame.renderProjection)
         }
 
+        val chest = WoodenChest(
+            parameters = woodenChestParameters
+        ).apply {
+            init(MedievalGame.renderProjection)
+        }
+
         val listOfNpc = initGoblins(
             boundingBoxCollisionContext,
             boxInteractionContext,
@@ -34,6 +42,7 @@ object StartMapInitializer : SceneInitializer {
 
         val out = mutableListOf<GameEntity>().apply {
             add(campfire)
+            add(chest)
             addAll(listOfNpc)
         }
 

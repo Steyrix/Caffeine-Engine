@@ -22,6 +22,10 @@ object AnimationKey {
 
     const val BURN = "BURN"
     const val HIT = "HIT"
+
+    const val OPEN = "OPEN"
+    const val CLOSE = "CLOSE"
+    const val DESTROY = "DESTROY"
 }
 
 val characterAnimations = mutableListOf<Animation>(
@@ -161,6 +165,24 @@ val campfireAnimations = mutableListOf<Animation>(
         name = AnimationKey.BURN,
         frames = FrameParametersGenerator.generate(Pair(0, 3), Pair(0, 0), 0.2f, 1.0f),
         timeLimit = 0.1f
+    )
+)
+
+val chestAnimations = mutableListOf<Animation>(
+    SequenceAtlasAnimation(
+        name = AnimationKey.OPEN,
+        frames = FrameParametersGenerator.generate(Pair(0, 2), Pair(0, 0), 0.166f, 0.5f),
+        timeLimit = 0.2f
+    ),
+    SequenceAtlasAnimation(
+        name = AnimationKey.CLOSE,
+        frames = FrameParametersGenerator.generate(Pair(2, 0), Pair(0, 0), 0.166f, 0.5f),
+        timeLimit = 0.2f
+    ),
+    SequenceAtlasAnimation(
+        name = AnimationKey.DESTROY,
+        frames = FrameParametersGenerator.generate(Pair(0, 5), Pair(1, 1), 0.166f, 0.5f),
+        timeLimit = 0.2f
     )
 )
 

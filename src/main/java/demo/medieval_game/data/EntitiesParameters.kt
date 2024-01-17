@@ -51,8 +51,12 @@ const val HUMANOID_BOX_OFFSET = 11.596801f
 
 const val HUMANOID_BOX_SIZE = 79.2064f
 
-val campfireParameters: SetOfStatic2DParameters = SetOfStatic2DParameters(
+val campfireParameters = SetOfStatic2DParameters(
     800f, 800f, 100f, 100f, 0f
+)
+
+val woodenChestParameters = SetOfStatic2DParameters(
+    500f, 300f, 125f, 125f, 0f
 )
 
 fun getMapParameters(screenWidth: Float, screenHeight: Float): SetOfStatic2DParameters {
