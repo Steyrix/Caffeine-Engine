@@ -7,7 +7,6 @@ import engine.core.entity.CompositeEntity
 import engine.core.loop.PredicateTimeEvent
 import engine.core.render.AnimatedModel2D
 import engine.core.update.SetOf2DParametersWithVelocity
-import engine.core.update.getCenterPoint
 import engine.feature.interaction.Interaction
 
 class Player(
@@ -45,7 +44,7 @@ class Player(
         modifier = 20f,
         isControlledByUser = true,
         onStrikingChange = {
-            isStriking = !isStriking
+            this.isStriking = it
         }
     )
 
@@ -63,13 +62,16 @@ class Player(
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
+
+        println("isStriking: $isStriking")
+        println("isAttack: $isAttack")
         attackCoolDown.schedule(deltaTime)
         takeHitCoolDown.schedule(deltaTime)
     }
 
     override fun getInteractions(): List<Interaction> {
         val out = mutableListOf<Interaction>()
-        if (controller.isStriking && !isAttack) {
+        if (isStriking && !isAttack) {
             isAttack = true
             out.add(AttackInteraction(this))
         }
