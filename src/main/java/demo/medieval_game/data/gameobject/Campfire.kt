@@ -13,8 +13,6 @@ class Campfire(
     private val parameters: SetOfStatic2DParameters
 ) : SingleGameEntity() {
 
-    private var graphicalComponent: AnimatedModel2D? = null
-
     fun init(
         renderProjection: Matrix4f
     ) {
@@ -22,7 +20,7 @@ class Campfire(
         val frameHeight = 1.0f
 
         val texturePath = this.javaClass.getResource("/textures/CampFireAtlas.png")!!.path
-        graphicalComponent = AnimatedModel2D(
+        val graphicalComponent = AnimatedModel2D(
             frameWidth = frameWidth,
             frameHeight = frameHeight,
             texture = Texture2D.createInstance(texturePath),
