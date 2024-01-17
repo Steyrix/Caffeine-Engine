@@ -13,6 +13,7 @@ import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.interaction.Interaction
 import engine.feature.tiled.traversing.TileTraverser
 
+// TODO: remove coupling with tile traverser
 class Goblin(
     private val drawableComponent: AnimatedModel2D,
     params: SetOf2DParametersWithVelocity,
