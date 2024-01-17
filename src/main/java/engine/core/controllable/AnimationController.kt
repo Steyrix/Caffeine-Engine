@@ -1,6 +1,14 @@
 package engine.core.controllable
 
-interface AnimationController : Controller {
+import engine.core.render.AnimatedModel2D
 
-    fun getAnimationKey(): String
+abstract class AnimationController(
+    private val drawableComponent: AnimatedModel2D
+) : Controller {
+
+    abstract fun getAnimationKey(): String
+
+    override fun update(deltaTime: Float) {
+        drawableComponent.setAnimationByKey(getAnimationKey())
+    }
 }

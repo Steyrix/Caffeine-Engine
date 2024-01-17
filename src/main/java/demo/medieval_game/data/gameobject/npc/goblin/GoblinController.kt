@@ -11,17 +11,20 @@ import engine.core.update.SetOfParameters
 import engine.core.update.Updatable
 import engine.core.update.getCenterPoint
 import engine.core.geometry.Point2D
+import engine.core.render.AnimatedModel2D
 import engine.feature.interaction.Interaction
 import kotlin.math.abs
 
 class GoblinController(
+    drawableComponent: AnimatedModel2D,
     private val params: SetOf2DParametersWithVelocity,
     private var modifier: Float = 20f
 ) : HumanoidAnimationController(
+    drawableComponent,
     HumanoidAnimationMaps.getIdleMap(),
     HumanoidAnimationMaps.getStrikeMap(),
     HumanoidAnimationMaps.getWalkMap()
-), Entity, Updatable {
+) {
 
     private val playStrikingAnimation = PredicateTimeEvent(
         timeLimit = 0.5f,
@@ -38,6 +41,7 @@ class GoblinController(
     )
 
     override fun update(deltaTime: Float) {
+        super.update(deltaTime)
         playStrikingAnimation.schedule(deltaTime)
         strikeCoolDown.schedule(deltaTime)
 

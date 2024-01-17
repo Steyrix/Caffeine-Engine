@@ -20,6 +20,7 @@ class GoblinNPC(
     ): Goblin {
 
         val controller = GoblinController(
+            animatedModel2D,
             parameters,
             modifier = 20f
         )
@@ -27,8 +28,7 @@ class GoblinNPC(
         val entity = Goblin(
             animatedModel2D,
             parameters,
-            tempSpritesHolder,
-            controller
+            tempSpritesHolder
         )
 
         val hpBar = getHpBar(
@@ -44,6 +44,7 @@ class GoblinNPC(
 
         entity.addComponent(hpBar, parameters)
         entity.addComponent(tileTraverser, parameters)
+        entity.addComponent(controller, parameters)
 
         return entity
     }

@@ -2,15 +2,17 @@ package demo.medieval_game.data.gameobject.npc
 
 import engine.core.controllable.AnimationController
 import engine.core.controllable.Direction
+import engine.core.render.AnimatedModel2D
 import java.util.EnumMap
 
 typealias MultiMap = HashMap<String, MutableMap<Direction, String>>
 
 abstract class HumanoidAnimationController(
+    drawableComponent: AnimatedModel2D,
     idleMap: EnumMap<Direction, String>,
     strikeMap: EnumMap<Direction, String>,
     walkMap: EnumMap<Direction, String>,
-) : AnimationController {
+) : AnimationController(drawableComponent) {
 
     companion object {
         const val IDLE = "IDLE"

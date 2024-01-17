@@ -6,38 +6,25 @@ import demo.medieval_game.interaction.AttackInteraction
 import engine.core.entity.CompositeEntity
 import engine.core.render.AnimatedModel2D
 import engine.core.update.SetOf2DParametersWithVelocity
+import engine.core.update.getCenterPoint
 import engine.feature.interaction.Interaction
 
 class Goblin(
     private val drawableComponent: AnimatedModel2D,
-    params: SetOf2DParametersWithVelocity,
-    private val tempSpritesHolder: TempSpritesHolder,
-    private val controller: GoblinController
+    private val parameters: SetOf2DParametersWithVelocity,
+    private val tempSpritesHolder: TempSpritesHolder
 ) : CompositeEntity() {
 
     init {
         addComponent(
             component = drawableComponent,
-            parameters = params
-        )
-
-        addComponent(
-            component = controller,
-            parameters = params
+            parameters = parameters
         )
 
         addComponent(
             component = tempSpritesHolder,
-            parameters = params
+            parameters = parameters
         )
-    }
-
-    override fun update(deltaTime: Float) {
-        super.update(deltaTime)
-
-        if (entitiesMap.containsKey(controller)) {
-            drawableComponent.setAnimationByKey(controller.getAnimationKey())
-        }
     }
 
     override fun consumeInteraction(interaction: Interaction) {
@@ -46,7 +33,7 @@ class Goblin(
         when (interaction) {
             is AttackInteraction -> {
                 if (interaction.producer !is Player) return
-                val currPos = controller.getCurrentCenterPos()
+                val currPos = parameters.getCenterPoint()
                 tempSpritesHolder.generateHit(
                     currPos.x,
                     currPos.y,
@@ -61,7 +48,7 @@ class Goblin(
     override fun getInteractions(): List<Interaction> {
         val out = mutableListOf<Interaction>()
 
-        if (controller.isStriking && !isDisposed) {
+        if (!isDisposed) {
             out.add(
                 AttackInteraction(
                     producer = this,
