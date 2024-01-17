@@ -2,6 +2,7 @@ package engine.feature.tiled.traversing
 
 import engine.core.entity.CompositeEntity
 import engine.core.geometry.Point2D
+import engine.core.loop.PredicateTimeEvent
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.getCenterPoint
 import engine.feature.tiled.data.TileMap
@@ -21,6 +22,14 @@ class TileTraverser(
         private const val VELOCITY = 5f
         private const val INSIGNIFICANT_DIFFERENCE = 2f
     }
+
+    private val startChasing = PredicateTimeEvent(
+        timeLimit = 2f,
+        predicate = { (!isPaused) },
+        action = {
+            moveToTarget()
+        }
+    )
 
     private var currentPath: ArrayDeque<Int> = ArrayDeque()
     private var currentDestination: Int = INDEX_NOT_FOUND
@@ -45,6 +54,7 @@ class TileTraverser(
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
+        startChasing.schedule(deltaTime)
         if (!isPaused) traverse()
     }
 

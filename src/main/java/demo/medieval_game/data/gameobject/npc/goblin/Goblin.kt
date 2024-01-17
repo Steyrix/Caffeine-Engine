@@ -13,7 +13,6 @@ import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.interaction.Interaction
 import engine.feature.tiled.traversing.TileTraverser
 
-// TODO: remove coupling with tile traverser
 class Goblin(
     private val drawableComponent: AnimatedModel2D,
     params: SetOf2DParametersWithVelocity,
@@ -21,14 +20,6 @@ class Goblin(
     private val hp: HealthBar,
     private val tempSpritesHolder: TempSpritesHolder
 ) : CompositeEntity() {
-
-    private val startChasing = PredicateTimeEvent(
-        timeLimit = 2f,
-        predicate = { entitiesMap.containsKey(tileTraverser) },
-        action = {
-            tileTraverser.moveToTarget()
-        }
-    )
 
     private var isMovingStopped = false
 
@@ -74,7 +65,6 @@ class Goblin(
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
-        startChasing.schedule(deltaTime)
         suspendMove.schedule(deltaTime)
 
         if (entitiesMap.containsKey(controller)) {
