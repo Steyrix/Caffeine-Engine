@@ -8,7 +8,6 @@ import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.tiled.traversing.TileTraverser
 import org.joml.Matrix4f
 
-// TODO: possibly redundant
 class GoblinNPC(
     params: SetOf2DParametersWithVelocity,
     private val tileTraverser: TileTraverser,
