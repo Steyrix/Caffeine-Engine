@@ -113,6 +113,4 @@ class SimpleController2D(
             isWalking = false
         }
     }
-
-    fun getCurrentCenterPos() = Point2D(params.x, params.y)
 }

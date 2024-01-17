@@ -7,11 +7,12 @@ import engine.core.entity.CompositeEntity
 import engine.core.loop.PredicateTimeEvent
 import engine.core.render.AnimatedModel2D
 import engine.core.update.SetOf2DParametersWithVelocity
+import engine.core.update.getCenterPoint
 import engine.feature.interaction.Interaction
 
 class Player(
     private val drawableComponent: AnimatedModel2D,
-    private val params: SetOf2DParametersWithVelocity,
+    private val parameters: SetOf2DParametersWithVelocity,
     private val tempSpritesHolder: TempSpritesHolder
 ) : CompositeEntity() {
 
@@ -37,7 +38,7 @@ class Player(
 
     private val controller = SimpleController2D(
         drawableComponent,
-        params,
+        parameters,
         absVelocityY = 10f,
         absVelocityX = 10f,
         modifier = 20f,
@@ -47,12 +48,12 @@ class Player(
     init {
         addComponent(
             component = drawableComponent,
-            parameters = params
+            parameters = parameters
         )
 
         addComponent(
             component = controller,
-            parameters = params
+            parameters = parameters
         )
     }
 
@@ -69,7 +70,7 @@ class Player(
             out.add(AttackInteraction(this))
         }
 
-        out.add(IsAttackableInteraction(params))
+        out.add(IsAttackableInteraction(parameters))
         return out.toList()
     }
 
@@ -80,7 +81,7 @@ class Player(
             is AttackInteraction -> {
                 if (!isHit) {
                     isHit = true
-                    val currPos = controller.getCurrentCenterPos()
+                    val currPos = parameters.getCenterPoint()
                     tempSpritesHolder.generateHit(
                         currPos.x,
                         currPos.y,

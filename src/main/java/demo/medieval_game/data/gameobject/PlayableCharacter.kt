@@ -45,7 +45,7 @@ class PlayableCharacter(
 
         it = Player(
             drawableComponent = graphicalComponent!!,
-            params = characterParameters,
+            parameters = characterParameters,
             tempSpritesHolder = tempSprites
         )
 
