@@ -33,10 +33,9 @@ class Goblin(
         when (interaction) {
             is AttackInteraction -> {
                 if (interaction.producer !is Player) return
-                val currPos = parameters.getCenterPoint()
                 tempSpritesHolder.generateHit(
-                    currPos.x,
-                    currPos.y,
+                    parameters.x,
+                    parameters.y,
                     posZ = drawableComponent.zLevel + 0.5f
                 )
             }
