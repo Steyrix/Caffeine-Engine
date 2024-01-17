@@ -26,6 +26,7 @@ object AnimationKey {
     const val OPEN = "OPEN"
     const val CLOSE = "CLOSE"
     const val DESTROY = "DESTROY"
+    const val IDLE_CHEST = "IDLE"
 }
 
 val characterAnimations = mutableListOf<Animation>(
@@ -169,6 +170,11 @@ val campfireAnimations = mutableListOf<Animation>(
 )
 
 val chestAnimations = mutableListOf<Animation>(
+    SequenceAtlasAnimation(
+        name = AnimationKey.IDLE_CHEST,
+        frames = FrameParametersGenerator.generate(Pair(0, 0), Pair(0, 0), 0.166f, 0.5f),
+        timeLimit = 1f
+    ),
     SequenceAtlasAnimation(
         name = AnimationKey.OPEN,
         frames = FrameParametersGenerator.generate(Pair(0, 2), Pair(0, 0), 0.166f, 0.5f),
