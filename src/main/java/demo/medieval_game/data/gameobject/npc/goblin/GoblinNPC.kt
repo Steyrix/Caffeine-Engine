@@ -17,12 +17,14 @@ class GoblinNPC(
         renderProjection: Matrix4f,
         animatedModel2D: AnimatedModel2D
     ): Goblin {
+
         return Goblin(
             animatedModel2D,
             parameters,
-            tileTraverser,
             getHpBar(renderProjection),
-            tempSpritesHolder
-        )
+            tempSpritesHolder,
+        ).apply {
+            addComponent(tileTraverser, parameters)
+        }
     }
 }

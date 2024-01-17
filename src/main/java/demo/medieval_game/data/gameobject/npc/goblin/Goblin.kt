@@ -5,31 +5,17 @@ import demo.medieval_game.data.AnimationKey
 import demo.medieval_game.data.gameobject.TempSpritesHolder
 import demo.medieval_game.hp.HealthBar
 import demo.medieval_game.interaction.AttackInteraction
-import demo.medieval_game.interaction.IsAttackableInteraction
 import engine.core.entity.CompositeEntity
-import engine.core.loop.PredicateTimeEvent
 import engine.core.render.AnimatedModel2D
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.interaction.Interaction
-import engine.feature.tiled.traversing.TileTraverser
 
 class Goblin(
     private val drawableComponent: AnimatedModel2D,
     params: SetOf2DParametersWithVelocity,
-    private val tileTraverser: TileTraverser,
     private val hp: HealthBar,
     private val tempSpritesHolder: TempSpritesHolder
 ) : CompositeEntity() {
-
-    private var isMovingStopped = false
-
-    private val suspendMove = PredicateTimeEvent(
-        timeLimit = 1.5f,
-        predicate = { isMovingStopped },
-        action = {
-            tileTraverser.resume()
-        }
-    )
 
     private val controller = GoblinController(
         params,
@@ -48,11 +34,6 @@ class Goblin(
         )
 
         addComponent(
-            component = tileTraverser,
-            parameters = params
-        )
-
-        addComponent(
             component = hp,
             parameters = params
         )
@@ -65,14 +46,12 @@ class Goblin(
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
-        suspendMove.schedule(deltaTime)
 
         if (entitiesMap.containsKey(controller)) {
             drawableComponent.setAnimationByKey(controller.getAnimationKey())
         }
 
         if (hp.filled <= 0) {
-            entitiesMap.remove(tileTraverser)
             entitiesMap.remove(controller)
             drawableComponent.setAnimationByKey(AnimationKey.GOBLIN_DEFEAT)
             isDisposed = true
@@ -92,12 +71,6 @@ class Goblin(
                     currPos.y,
                     posZ = drawableComponent.zLevel + 0.5f
                 )
-            }
-            is IsAttackableInteraction -> {
-                if (!isMovingStopped) {
-                    tileTraverser.pause()
-                    isMovingStopped = true
-                }
             }
         }
 
