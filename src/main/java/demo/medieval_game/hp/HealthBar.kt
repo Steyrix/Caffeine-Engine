@@ -22,6 +22,8 @@ class HealthBar(
 
     private val graphicalComponent: Model
 
+    var onEmptyCallback: () -> Unit = {}
+
     var filled: Float = 1.0f
         private set
 
@@ -48,6 +50,10 @@ class HealthBar(
         graphicalComponent.shader?.let {
             it.bind()
             it.setUniform(SHADER_UNIFORM_NAME, filled)
+        }
+
+        if (filled <= 0) {
+            onEmptyCallback.invoke()
         }
     }
 
