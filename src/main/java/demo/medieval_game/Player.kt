@@ -2,6 +2,7 @@ package demo.medieval_game
 
 import demo.medieval_game.data.gameobject.TempSpritesHolder
 import demo.medieval_game.interaction.AttackInteraction
+import demo.medieval_game.interaction.ChestInteraction
 import demo.medieval_game.interaction.IsAttackableInteraction
 import engine.core.entity.CompositeEntity
 import engine.core.loop.PredicateTimeEvent
@@ -17,6 +18,7 @@ class Player(
 
     private var isAttack = false
     var isStriking = false
+    var isLooting = false
 
     private val attackCoolDown = PredicateTimeEvent(
         timeLimit = 0.5f,
@@ -54,6 +56,10 @@ class Player(
         if (isStriking && !isAttack) {
             isAttack = true
             out.add(AttackInteraction(this))
+        }
+        if (isLooting) {
+            isLooting
+            out.add(ChestInteraction.Open)
         }
 
         out.add(IsAttackableInteraction(parameters))
