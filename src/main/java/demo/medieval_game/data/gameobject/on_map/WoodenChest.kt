@@ -32,5 +32,6 @@ class WoodenChest(
         it = object : CompositeEntity() {}
 
         addComponent(graphicalComponent, parameters)
+        addComponent(ChestController(graphicalComponent), parameters)
     }
 }

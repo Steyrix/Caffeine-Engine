@@ -6,12 +6,11 @@ import engine.core.controllable.AnimationController
 import engine.core.entity.Entity
 import engine.core.loop.PredicateTimeEvent
 import engine.core.render.AnimatedModel2D
-import engine.core.update.Updatable
 import engine.feature.interaction.Interaction
 
 class ChestController(
     drawableComponent: AnimatedModel2D
-) : AnimationController(drawableComponent), Entity, Updatable {
+) : AnimationController(drawableComponent), Entity {
 
     private val playOpeningAnimation = PredicateTimeEvent(
         timeLimit = 0.2f,
@@ -38,11 +37,15 @@ class ChestController(
     private var isOpening = false
 
     override fun update(deltaTime: Float) {
+        super.update(deltaTime)
         playOpeningAnimation.schedule(deltaTime)
         playClosingAnimation.schedule(deltaTime)
     }
 
     override fun getAnimationKey(): String {
+        println("isClosed: $isClosed")
+        println("isClosing: $isClosing")
+        println("isOpening: $isOpening")
         return when {
             isClosed -> AnimationKey.CLOSED_CHEST
             isClosing -> AnimationKey.CLOSE
