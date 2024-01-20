@@ -56,14 +56,11 @@ class ChestController(
 
     override fun consumeInteraction(interaction: Interaction) {
         when(interaction) {
-            is ChestInteraction.Open -> {
+            is ChestInteraction.OpenClose -> {
                 if (isClosed) {
                     isClosed = false
                     isOpening = true
-                }
-            }
-            is ChestInteraction.Close -> {
-                if (!isClosed) {
+                } else {
                     isClosing = true
                 }
             }
