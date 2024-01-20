@@ -1,4 +1,4 @@
-package demo.medieval_game.data.gameobject.on_map
+package demo.medieval_game.data.gameobject.on_map.chest
 
 import engine.core.game_object.SingleGameEntity
 import engine.core.update.SetOfStatic2DParameters

@@ -1,4 +1,4 @@
-package demo.medieval_game.data.gameobject.on_map
+package demo.medieval_game.data.gameobject.on_map.chest
 
 import demo.medieval_game.ShaderController
 import demo.medieval_game.data.chestAnimations

@@ -5,8 +5,8 @@ import demo.medieval_game.data.gameobject.*
 import demo.medieval_game.data.gameobject.npc.goblin.GoblinNPC
 import demo.medieval_game.data.gameobject.npc.goblin.GoblinPreset
 import demo.medieval_game.data.gameobject.on_map.Campfire
-import demo.medieval_game.data.gameobject.on_map.ChestCreator
-import demo.medieval_game.data.gameobject.on_map.ChestType
+import demo.medieval_game.data.gameobject.on_map.chest.ChestCreator
+import demo.medieval_game.data.gameobject.on_map.chest.ChestType
 import demo.medieval_game.scene.MedievalGame
 import engine.core.game_object.GameEntity
 import engine.core.game_object.SingleGameEntity
@@ -59,7 +59,7 @@ object StartMapInitializer : SceneInitializer {
         val out = mutableListOf<GameEntity>().apply {
             add(campfire)
             addAll(chests)
-            //addAll(listOfNpc)
+            addAll(listOfNpc)
         }
 
         return out
