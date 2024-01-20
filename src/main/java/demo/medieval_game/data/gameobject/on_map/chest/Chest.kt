@@ -13,7 +13,6 @@ import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.interaction.BoxInteractionContext
 import org.joml.Matrix4f
 
-// TODO: divide large method
 class Chest(
     private val parameters: SetOfStatic2DParameters
 ) : SingleGameEntity() {
@@ -23,11 +22,31 @@ class Chest(
         boxInteractionContext: BoxInteractionContext,
         path: String
     ) {
+        val graphicalComponent = createGraphicalComponent(path, renderProjection)
+
+        val boundingBox = createBoundingBox(renderProjection)
+        val controller = ChestController(graphicalComponent)
+        val hpBar = createHpBar(renderProjection, controller)
+
+        it = object : CompositeEntity() {}
+
+        addComponent(graphicalComponent, parameters)
+        addComponent(controller, parameters)
+        addComponent(boundingBox, parameters)
+        addComponent(hpBar, parameters)
+
+        boxInteractionContext.addAgent(it as Entity, boundingBox)
+    }
+
+    private fun createGraphicalComponent(
+        path: String,
+        renderProjection: Matrix4f
+    ): AnimatedModel2D {
         val frameWidth = 0.166f
         val frameHeight = 0.5f
 
         val texturePath = this.javaClass.getResource(path)!!.path
-        val graphicalComponent = AnimatedModel2D(
+        return AnimatedModel2D(
             frameWidth = frameWidth,
             frameHeight = frameHeight,
             texture = Texture2D.createInstance(texturePath),
@@ -35,8 +54,10 @@ class Chest(
         ).apply {
             shader = ShaderController.createAnimationShader(renderProjection)
         }
+    }
 
-        val boundingBox = BoundingBox(
+    private fun createBoundingBox(renderProjection: Matrix4f) =
+        BoundingBox(
             xSize = parameters.xSize - 50f,
             ySize = parameters.ySize - 50f,
             isSizeBoundToHolder = false,
@@ -46,31 +67,26 @@ class Chest(
             shader = ShaderController.createBoundingBoxShader(renderProjection)
         }
 
-        val controller = ChestController(graphicalComponent)
+    private fun createHpBar(
+        renderProjection: Matrix4f,
+        controller: ChestController
+    ): HealthBar {
+        val defaultBarParams = SetOfStatic2DParameters(
+            x = 0f,
+            y = 0f,
+            xSize = 50f,
+            ySize = 12.5f,
+            rotationAngle = 0f
+        )
 
-        it = object : CompositeEntity() {}
-
-        val hpBar = HealthBar(
+        return HealthBar(
             parameters,
-            SetOfStatic2DParameters(
-                x = 0f,
-                y = 0f,
-                xSize = 50f,
-                ySize = 12.5f,
-                rotationAngle = 0f
-            ),
+            defaultBarParams,
             renderProjection
         ).apply {
             onEmptyCallback = {
                 controller.isBreaking = true
             }
         }
-
-        addComponent(graphicalComponent, parameters)
-        addComponent(controller, parameters)
-        addComponent(boundingBox, parameters)
-        addComponent(hpBar, parameters)
-
-        boxInteractionContext.addAgent(it as Entity, boundingBox)
     }
 }
