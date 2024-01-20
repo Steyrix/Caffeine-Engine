@@ -18,11 +18,13 @@ import engine.feature.interaction.BoxInteractionContext
 import engine.feature.tiled.traversing.TileTraverser
 
 object StartMapInitializer : SceneInitializer {
+
     fun initAll(
         boundingBoxCollisionContext: BoundingBoxCollisionContext,
         boxInteractionContext: BoxInteractionContext,
         tileTraverserCreator: (SetOf2DParametersWithVelocity) -> TileTraverser
     ): MutableList<out GameEntity> {
+
         val campfire = Campfire(
             parameters = campfireParameters
         ).apply {
@@ -32,13 +34,17 @@ object StartMapInitializer : SceneInitializer {
         val chest = WoodenChest(
             parameters = woodenChestParameters
         ).apply {
-            init(MedievalGame.renderProjection)
+            init(
+                MedievalGame.renderProjection,
+                boxInteractionContext
+            )
         }
 
         val listOfNpc = initGoblins(
             boundingBoxCollisionContext,
             boxInteractionContext,
         ) { params: SetOf2DParametersWithVelocity -> tileTraverserCreator.invoke(params) }
+
 
         val out = mutableListOf<GameEntity>().apply {
             add(campfire)
