@@ -72,6 +72,7 @@ class Chest(
         renderProjection: Matrix4f,
         controller: ChestController
     ): HealthBar {
+        // TODO: keep in presets
         val defaultBarParams = SetOfStatic2DParameters(
             x = 0f,
             y = 0f,
