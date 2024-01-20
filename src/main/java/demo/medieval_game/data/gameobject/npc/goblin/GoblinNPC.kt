@@ -18,7 +18,6 @@ class GoblinNPC(
         renderProjection: Matrix4f,
         animatedModel2D: AnimatedModel2D
     ): Goblin {
-
         val controller = GoblinController(
             animatedModel2D,
             parameters,
