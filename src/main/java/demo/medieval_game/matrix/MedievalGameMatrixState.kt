@@ -1,6 +1,6 @@
 package demo.medieval_game.matrix
 
-import demo.medieval_game.data.characterParameters
+import demo.medieval_game.data.static_parameters.characterParameters
 import engine.core.controllable.Direction
 import engine.core.update.getCenterPoint
 import engine.feature.matrix.MatrixState

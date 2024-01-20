@@ -4,6 +4,10 @@ import demo.medieval_game.Player
 import demo.medieval_game.ShaderController
 import demo.medieval_game.SimpleController2D
 import demo.medieval_game.data.*
+import demo.medieval_game.data.static_parameters.HUMANOID_BOX_OFFSET
+import demo.medieval_game.data.static_parameters.HUMANOID_BOX_SIZE
+import demo.medieval_game.data.static_parameters.characterParameters
+import demo.medieval_game.data.static_parameters.hpBarParameters1
 import demo.medieval_game.hp.HealthBar
 import demo.medieval_game.scene.MedievalGame
 import engine.core.controllable.Direction
