@@ -4,13 +4,10 @@ import demo.medieval_game.data.gameobject.npc.HumanoidAnimationController
 import demo.medieval_game.data.gameobject.npc.HumanoidAnimationMaps
 import demo.medieval_game.interaction.IsAttackableInteraction
 import engine.core.controllable.Direction
-import engine.core.entity.Entity
 import engine.core.loop.PredicateTimeEvent
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfParameters
-import engine.core.update.Updatable
 import engine.core.update.getCenterPoint
-import engine.core.geometry.Point2D
 import engine.core.render.AnimatedModel2D
 import engine.feature.interaction.Interaction
 import kotlin.math.abs
@@ -89,8 +86,6 @@ class GoblinController(
             directToTarget(targetParams)
         }
     }
-
-    fun getCurrentCenterPos() = Point2D(params.x, params.y)
 
     private fun directToTarget(targetParams: SetOfParameters) {
         val targetCenter = targetParams.getCenterPoint()
