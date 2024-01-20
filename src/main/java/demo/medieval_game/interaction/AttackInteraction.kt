@@ -7,3 +7,7 @@ data class AttackInteraction(
     val producer: CompositeEntity,
     val damage: Float = 0.25f
 ) : Interaction
+
+data class PlayerAttackInteraction(
+    val damage: Float = 0.25f
+) : Interaction

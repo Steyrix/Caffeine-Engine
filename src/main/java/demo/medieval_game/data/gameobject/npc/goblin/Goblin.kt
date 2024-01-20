@@ -3,6 +3,7 @@ package demo.medieval_game.data.gameobject.npc.goblin
 import demo.medieval_game.Player
 import demo.medieval_game.data.gameobject.TempSpritesHolder
 import demo.medieval_game.interaction.AttackInteraction
+import demo.medieval_game.interaction.PlayerAttackInteraction
 import engine.core.entity.CompositeEntity
 import engine.core.render.AnimatedModel2D
 import engine.core.update.SetOf2DParametersWithVelocity
@@ -31,8 +32,7 @@ class Goblin(
         if (isDisposed) return
 
         when (interaction) {
-            is AttackInteraction -> {
-                if (interaction.producer !is Player) return
+            is PlayerAttackInteraction -> {
                 tempSpritesHolder.generateHit(
                     parameters.x,
                     parameters.y,

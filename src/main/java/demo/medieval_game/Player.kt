@@ -4,6 +4,7 @@ import demo.medieval_game.data.gameobject.TempSpritesHolder
 import demo.medieval_game.interaction.AttackInteraction
 import demo.medieval_game.interaction.ChestInteraction
 import demo.medieval_game.interaction.IsAttackableInteraction
+import demo.medieval_game.interaction.PlayerAttackInteraction
 import engine.core.entity.CompositeEntity
 import engine.core.loop.PredicateTimeEvent
 import engine.core.render.AnimatedModel2D
@@ -67,7 +68,7 @@ class Player(
         val out = mutableListOf<Interaction>()
         if (isStriking && !isAttack) {
             isAttack = true
-            out.add(AttackInteraction(this))
+            out.add(PlayerAttackInteraction())
         }
         if (isInteractingWithChest && !isChestInteraction) {
             isChestInteraction = true

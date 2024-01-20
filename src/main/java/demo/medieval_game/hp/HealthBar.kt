@@ -2,6 +2,7 @@ package demo.medieval_game.hp
 
 import demo.medieval_game.ShaderController
 import demo.medieval_game.interaction.AttackInteraction
+import demo.medieval_game.interaction.PlayerAttackInteraction
 import engine.core.entity.CompositeEntity
 import engine.core.render.Model
 import engine.core.texture.Texture2D
@@ -61,7 +62,7 @@ class HealthBar(
 
     override fun consumeInteraction(interaction: Interaction) {
         when (interaction) {
-            is AttackInteraction -> filled -= interaction.damage
+            is PlayerAttackInteraction -> filled -= interaction.damage
         }
     }
 }
