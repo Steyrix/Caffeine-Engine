@@ -59,6 +59,26 @@ val woodenChestParameters = SetOfStatic2DParameters(
     500f, 300f, 125f, 125f, 0f
 )
 
+val ironChestParameters = SetOfStatic2DParameters(
+    700f, 300f, 125f, 125f, 0f
+)
+
+val rustyIronChestParameters = SetOfStatic2DParameters(
+    900f, 300f, 125f, 125f, 0f
+)
+
+val blueChestParameters = SetOfStatic2DParameters(
+    500f, 500f, 125f, 125f, 0f
+)
+
+val purpleChestParameters = SetOfStatic2DParameters(
+    500f, 700f, 125f, 125f, 0f
+)
+
+val greenChestParameters = SetOfStatic2DParameters(
+    500f, 900f, 125f, 125f, 0f
+)
+
 fun getMapParameters(screenWidth: Float, screenHeight: Float): SetOfStatic2DParameters {
     return SetOfStatic2DParameters(
         x = 0f, y = 0f, xSize = screenWidth, ySize = screenHeight, rotationAngle = 0f
