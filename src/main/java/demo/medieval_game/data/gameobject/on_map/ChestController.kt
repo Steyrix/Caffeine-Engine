@@ -32,18 +32,32 @@ class ChestController(
         }
     )
 
+    private val playBreakingAnimation = PredicateTimeEvent(
+        timeLimit = 0.3f,
+        predicate = { isBreaking },
+        action = {
+            isBreaking = false
+            isBroken = true
+        }
+    ).apply { reset() }
+
     private var isClosed = true
     private var isClosing = false
     private var isOpening = false
+    private var isBroken = false
+    var isBreaking = false
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
         playOpeningAnimation.schedule(deltaTime)
         playClosingAnimation.schedule(deltaTime)
+        playBreakingAnimation.schedule(deltaTime)
     }
 
     override fun getAnimationKey(): String {
         return when {
+            isBreaking -> AnimationKey.BREAKING
+            isBroken -> AnimationKey.BROKEN
             isClosed -> AnimationKey.CLOSED_CHEST
             isClosing -> AnimationKey.CLOSE
             isOpening -> AnimationKey.OPEN
@@ -52,6 +66,8 @@ class ChestController(
     }
 
     override fun consumeInteraction(interaction: Interaction) {
+        if (isBreaking || isBroken) return
+
         when(interaction) {
             is ChestInteraction.OpenClose -> {
                 if (isClosed) {

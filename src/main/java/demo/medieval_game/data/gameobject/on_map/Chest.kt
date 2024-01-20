@@ -45,6 +45,10 @@ class Chest(
             shader = ShaderController.createBoundingBoxShader(renderProjection)
         }
 
+        val controller = ChestController(graphicalComponent)
+
+        it = object : CompositeEntity() {}
+
         val hpBar = HealthBar(
             parameters,
             SetOfStatic2DParameters(
@@ -55,12 +59,14 @@ class Chest(
                 rotationAngle = 0f
             ),
             renderProjection
-        )
-
-        it = object : CompositeEntity() {}
+        ).apply {
+            onEmptyCallback = {
+                controller.isBreaking = true
+            }
+        }
 
         addComponent(graphicalComponent, parameters)
-        addComponent(ChestController(graphicalComponent), parameters)
+        addComponent(controller, parameters)
         addComponent(boundingBox, parameters)
         addComponent(hpBar, parameters)
 
