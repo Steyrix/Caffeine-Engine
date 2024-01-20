@@ -29,7 +29,7 @@ class Chest(
             frameWidth = frameWidth,
             frameHeight = frameHeight,
             texture = Texture2D.createInstance(texturePath),
-            animations = chestAnimations
+            animations = chestAnimations.map { it.copy() }
         ).apply {
             shader = ShaderController.createAnimationShader(renderProjection)
         }
