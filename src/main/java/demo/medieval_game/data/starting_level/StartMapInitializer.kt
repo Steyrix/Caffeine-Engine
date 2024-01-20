@@ -59,7 +59,7 @@ object StartMapInitializer : SceneInitializer {
         val out = mutableListOf<GameEntity>().apply {
             add(campfire)
             addAll(chests)
-            addAll(listOfNpc)
+            //addAll(listOfNpc)
         }
 
         return out
