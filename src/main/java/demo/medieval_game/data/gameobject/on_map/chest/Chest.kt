@@ -30,6 +30,7 @@ class Chest(
 
         it = object : CompositeEntity() {}
 
+        // TODO: remove components on destruction
         addComponent(graphicalComponent, parameters)
         addComponent(controller, parameters)
         addComponent(boundingBox, parameters)
