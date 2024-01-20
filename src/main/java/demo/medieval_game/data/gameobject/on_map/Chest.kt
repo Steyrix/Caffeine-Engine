@@ -12,18 +12,19 @@ import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.interaction.BoxInteractionContext
 import org.joml.Matrix4f
 
-class WoodenChest(
+class Chest(
     private val parameters: SetOfStatic2DParameters
 ) : SingleGameEntity() {
 
     fun init(
         renderProjection: Matrix4f,
-        boxInteractionContext: BoxInteractionContext
+        boxInteractionContext: BoxInteractionContext,
+        path: String
     ) {
         val frameWidth = 0.166f
         val frameHeight = 0.5f
 
-        val texturePath = this.javaClass.getResource("/textures/WoodenChestAtlas.png")!!.path
+        val texturePath = this.javaClass.getResource(path)!!.path
         val graphicalComponent = AnimatedModel2D(
             frameWidth = frameWidth,
             frameHeight = frameHeight,
