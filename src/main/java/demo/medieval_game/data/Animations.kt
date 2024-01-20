@@ -25,7 +25,8 @@ object AnimationKey {
 
     const val OPEN = "OPEN"
     const val CLOSE = "CLOSE"
-    const val DESTROY = "DESTROY"
+    const val BREAKING = "BREAKING"
+    const val BROKEN = "BROKEN"
     const val CLOSED_CHEST = "CLOSED_CHEST"
     const val OPENED_CHEST = "OPENED_CHEST"
 }
@@ -192,9 +193,14 @@ val chestAnimations = mutableListOf<Animation>(
         timeLimit = 1f
     ),
     SequenceAtlasAnimation(
-        name = AnimationKey.DESTROY,
+        name = AnimationKey.BREAKING,
         frames = FrameParametersGenerator.generate(Pair(0, 5), Pair(1, 1), 0.166f, 0.5f),
-        timeLimit = 0.2f
+        timeLimit = 0.05f
+    ),
+    SequenceAtlasAnimation(
+        name = AnimationKey.BROKEN,
+        frames = FrameParametersGenerator.generate(Pair(5, 5), Pair(1, 1), 0.166f, 0.5f),
+        timeLimit = 1f
     )
 )
 
