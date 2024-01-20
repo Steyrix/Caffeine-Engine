@@ -21,7 +21,7 @@ class SimpleController2D(
     private var modifier: Float = 20f,
     private var isControlledByUser: Boolean = false,
     private val onStrikingChange: (Boolean) -> Unit = {},
-    private val onLooting: (Boolean) -> Unit = {}
+    private val onLooting: () -> Unit = {}
 ) : HumanoidAnimationController(
     drawableComponent,
     HumanoidAnimationMaps.getIdleMap(),
@@ -88,7 +88,8 @@ class SimpleController2D(
 
         if (window.isKeyPressed(GLFW.GLFW_KEY_F)) {
             isLooting = true
-            onLooting(true)
+            onLooting()
+            isLooting = false
         }
     }
 

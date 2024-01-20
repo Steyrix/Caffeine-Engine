@@ -58,7 +58,7 @@ class Player(
             out.add(AttackInteraction(this))
         }
         if (isLooting) {
-            isLooting
+            isLooting = false
             out.add(ChestInteraction.OpenClose)
         }
 
