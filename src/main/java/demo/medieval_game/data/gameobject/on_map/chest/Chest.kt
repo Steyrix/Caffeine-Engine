@@ -42,6 +42,7 @@ class Chest(
         path: String,
         renderProjection: Matrix4f
     ): AnimatedModel2D {
+        // TODO: keep in presets
         val frameWidth = 0.166f
         val frameHeight = 0.5f
 
