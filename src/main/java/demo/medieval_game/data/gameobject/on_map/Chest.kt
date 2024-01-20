@@ -13,6 +13,7 @@ import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.interaction.BoxInteractionContext
 import org.joml.Matrix4f
 
+// TODO: divide large method
 class Chest(
     private val parameters: SetOfStatic2DParameters
 ) : SingleGameEntity() {
