@@ -2,6 +2,7 @@ package demo.medieval_game.data.gameobject.on_map
 
 import demo.medieval_game.ShaderController
 import demo.medieval_game.data.chestAnimations
+import demo.medieval_game.hp.HealthBar
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.game_object.SingleGameEntity
@@ -44,11 +45,24 @@ class Chest(
             shader = ShaderController.createBoundingBoxShader(renderProjection)
         }
 
+        val hpBar = HealthBar(
+            parameters,
+            SetOfStatic2DParameters(
+                x = 0f,
+                y = 0f,
+                xSize = 50f,
+                ySize = 12.5f,
+                rotationAngle = 0f
+            ),
+            renderProjection
+        )
+
         it = object : CompositeEntity() {}
 
         addComponent(graphicalComponent, parameters)
         addComponent(ChestController(graphicalComponent), parameters)
         addComponent(boundingBox, parameters)
+        addComponent(hpBar, parameters)
 
         boxInteractionContext.addAgent(it as Entity, boundingBox)
     }
