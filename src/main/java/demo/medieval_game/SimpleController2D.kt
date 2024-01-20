@@ -21,7 +21,7 @@ class SimpleController2D(
     private var modifier: Float = 20f,
     private var isControlledByUser: Boolean = false,
     private val onStrikingChange: (Boolean) -> Unit = {},
-    private val onLooting: () -> Unit = {}
+    private val onChestInteraction: () -> Unit = {}
 ) : HumanoidAnimationController(
     drawableComponent,
     HumanoidAnimationMaps.getIdleMap(),
@@ -40,7 +40,7 @@ class SimpleController2D(
 
     private val previousPosition = Point2D(0f, 0f)
 
-    private var isLooting = false
+    private var isInteractingWithChest = false
 
     init {
         val center = params.getCenterPoint()
@@ -87,9 +87,9 @@ class SimpleController2D(
         }
 
         if (window.isKeyPressed(GLFW.GLFW_KEY_F)) {
-            isLooting = true
-            onLooting()
-            isLooting = false
+            isInteractingWithChest = true
+            onChestInteraction()
+            isInteractingWithChest = false
         }
     }
 

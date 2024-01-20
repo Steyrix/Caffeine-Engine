@@ -63,8 +63,8 @@ class PlayableCharacter(
             onStrikingChange = { value ->
                 (it as Player).isStriking = value
             },
-            onLooting = {
-                (it as Player).isLooting = true
+            onChestInteraction = {
+                (it as Player).isInteractingWithChest = true
             }
         )
 

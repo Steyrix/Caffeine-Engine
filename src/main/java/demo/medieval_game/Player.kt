@@ -18,13 +18,24 @@ class Player(
 
     private var isAttack = false
     var isStriking = false
-    var isLooting = false
+
+    private var isChestInteraction = false
+    var isInteractingWithChest = false
 
     private val attackCoolDown = PredicateTimeEvent(
         timeLimit = 0.5f,
         predicate = { isAttack },
         action = {
             isAttack = false
+        }
+    )
+
+    private val chestInteractionCooldown = PredicateTimeEvent(
+        timeLimit = 0.5f,
+        predicate = { isChestInteraction },
+        action = {
+            isChestInteraction = false
+            isInteractingWithChest = false
         }
     )
 
@@ -49,6 +60,7 @@ class Player(
         super.update(deltaTime)
         attackCoolDown.schedule(deltaTime)
         takeHitCoolDown.schedule(deltaTime)
+        chestInteractionCooldown.schedule(deltaTime)
     }
 
     override fun getInteractions(): List<Interaction> {
@@ -57,8 +69,8 @@ class Player(
             isAttack = true
             out.add(AttackInteraction(this))
         }
-        if (isLooting) {
-            isLooting = false
+        if (isInteractingWithChest && !isChestInteraction) {
+            isChestInteraction = true
             out.add(ChestInteraction.OpenClose)
         }
 
