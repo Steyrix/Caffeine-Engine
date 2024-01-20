@@ -1,16 +1,15 @@
 package demo.medieval_game.data.starting_level
 
-import demo.medieval_game.data.campfireParameters
+import demo.medieval_game.data.*
 import demo.medieval_game.data.gameobject.*
 import demo.medieval_game.data.gameobject.npc.goblin.GoblinNPC
 import demo.medieval_game.data.gameobject.npc.goblin.GoblinPreset
 import demo.medieval_game.data.gameobject.on_map.Campfire
-import demo.medieval_game.data.gameobject.on_map.WoodenChest
-import demo.medieval_game.data.goblinParams1
-import demo.medieval_game.data.goblinParams2
-import demo.medieval_game.data.woodenChestParameters
+import demo.medieval_game.data.gameobject.on_map.ChestCreator
+import demo.medieval_game.data.gameobject.on_map.ChestType
 import demo.medieval_game.scene.MedievalGame
 import engine.core.game_object.GameEntity
+import engine.core.game_object.SingleGameEntity
 import engine.core.scene.SceneInitializer
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
@@ -31,12 +30,23 @@ object StartMapInitializer : SceneInitializer {
             init(MedievalGame.renderProjection)
         }
 
-        val chest = WoodenChest(
-            parameters = woodenChestParameters
-        ).apply {
-            init(
-                MedievalGame.renderProjection,
-                boxInteractionContext
+        val chestParametersList = listOf(
+            woodenChestParameters,
+            ironChestParameters,
+            rustyIronChestParameters,
+            blueChestParameters,
+            greenChestParameters,
+            purpleChestParameters
+        )
+        val chests = mutableListOf<SingleGameEntity>()
+        ChestType.values().forEachIndexed { i, it ->
+            chests.add(
+                ChestCreator.create(
+                    MedievalGame.renderProjection,
+                    boxInteractionContext,
+                    it,
+                    chestParametersList[i]
+                )
             )
         }
 
@@ -48,7 +58,7 @@ object StartMapInitializer : SceneInitializer {
 
         val out = mutableListOf<GameEntity>().apply {
             add(campfire)
-            add(chest)
+            addAll(chests)
             addAll(listOfNpc)
         }
 

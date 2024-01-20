@@ -35,9 +35,11 @@ class Chest(
         }
 
         val boundingBox = BoundingBox(
-            xSize = parameters.xSize,
-            ySize = parameters.ySize,
-            isSizeBoundToHolder = false
+            xSize = parameters.xSize - 50f,
+            ySize = parameters.ySize - 50f,
+            isSizeBoundToHolder = false,
+            xOffset = 25f,
+            yOffset = 25f
         ).apply {
             shader = ShaderController.createBoundingBoxShader(renderProjection)
         }
