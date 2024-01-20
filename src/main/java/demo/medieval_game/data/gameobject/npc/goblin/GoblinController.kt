@@ -27,7 +27,7 @@ class GoblinController(
 ) {
 
     private val playStrikingAnimation = PredicateTimeEvent(
-        timeLimit = 0.5f,
+        timeLimit = 0.4f,
         predicate = { isStriking },
         action = { isStriking = false }
     )
