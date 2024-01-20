@@ -13,7 +13,7 @@ class ChestController(
 ) : AnimationController(drawableComponent), Entity {
 
     private val playOpeningAnimation = PredicateTimeEvent(
-        timeLimit = 0.2f,
+        timeLimit = 0.6f,
         predicate = { isOpening },
         action = {
             isOpening = false
@@ -23,7 +23,7 @@ class ChestController(
     )
 
     private val playClosingAnimation = PredicateTimeEvent(
-        timeLimit = 0.2f,
+        timeLimit = 0.6f,
         predicate = { isClosing },
         action = {
             isOpening = false
@@ -32,29 +32,39 @@ class ChestController(
         }
     )
 
+    private val interactionCooldown = PredicateTimeEvent(
+        timeLimit = 0.1f,
+        predicate = { isInteracting },
+        action = {
+            isInteracting = false
+        }
+    )
+
     private var isClosed = true
     private var isClosing = false
     private var isOpening = false
+    private var isInteracting = false
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
         playOpeningAnimation.schedule(deltaTime)
         playClosingAnimation.schedule(deltaTime)
+        interactionCooldown.schedule(deltaTime)
     }
 
     override fun getAnimationKey(): String {
-        println("isClosed: $isClosed")
-        println("isClosing: $isClosing")
-        println("isOpening: $isOpening")
         return when {
-            isClosed -> AnimationKey.CLOSED_CHEST
             isClosing -> AnimationKey.CLOSE
             isOpening -> AnimationKey.OPEN
+            isClosed -> AnimationKey.CLOSED_CHEST
             else -> AnimationKey.OPENED_CHEST
         }
     }
 
     override fun consumeInteraction(interaction: Interaction) {
+        if (isInteracting) return
+        isInteracting = true
+
         when(interaction) {
             is ChestInteraction.OpenClose -> {
                 if (isClosed) {

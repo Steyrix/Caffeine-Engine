@@ -179,7 +179,7 @@ val chestAnimations = mutableListOf<Animation>(
     SequenceAtlasAnimation(
         name = AnimationKey.OPENED_CHEST,
         frames = FrameParametersGenerator.generate(Pair(2, 2), Pair(0, 0), 0.166f, 0.5f),
-        timeLimit = 0.2f
+        timeLimit = 1f
     ),
     SequenceAtlasAnimation(
         name = AnimationKey.CLOSE,
