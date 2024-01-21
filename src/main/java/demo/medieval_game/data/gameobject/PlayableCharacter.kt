@@ -4,10 +4,7 @@ import demo.medieval_game.Player
 import demo.medieval_game.ShaderController
 import demo.medieval_game.SimpleController2D
 import demo.medieval_game.data.*
-import demo.medieval_game.data.static_parameters.HUMANOID_BOX_OFFSET
-import demo.medieval_game.data.static_parameters.HUMANOID_BOX_SIZE
-import demo.medieval_game.data.static_parameters.characterParameters
-import demo.medieval_game.data.static_parameters.hpBarParameters1
+import demo.medieval_game.data.static_parameters.*
 import demo.medieval_game.hp.HealthBar
 import demo.medieval_game.scene.MedievalGame
 import engine.core.controllable.Direction
@@ -97,10 +94,11 @@ class PlayableCharacter(
         renderProjection: Matrix4f
     ): BoundingBox {
         return BoundingBox(
-            xOffset = HUMANOID_BOX_OFFSET,
-            xSize = HUMANOID_BOX_SIZE,
-            ySize = parameters.ySize,
-            isSizeBoundToHolder = false
+            xOffset = HUMANOID_BOX_OFFSET_X,
+            xSize = HUMANOID_BOX_WIDTH,
+            yOffset = HUMANOID_BOX_OFFSET_Y,
+            ySize = HUMANOID_BOX_HEIGHT,
+            isSizeBoundToHolder = false,
         ).apply {
             shader = ShaderController.createBoundingBoxShader(renderProjection)
         }
