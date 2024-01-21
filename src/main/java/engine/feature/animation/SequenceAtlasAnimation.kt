@@ -5,7 +5,7 @@ import engine.core.shader.Shader
 // TODO: ability to reset animations
 class SequenceAtlasAnimation(
     override val name: String,
-    override val isReplayable: Boolean = true,
+    override val isCycled: Boolean = true,
     private val frames: List<FrameParameters>,
     initialIndex: Int = 0,
     private val timeLimit: Float
@@ -39,7 +39,7 @@ class SequenceAtlasAnimation(
             if (currIndex + 1 < frames.size) {
                 currIndex++
             } else {
-                if (isReplayable) {
+                if (isCycled) {
                     currIndex = 0
                     // TODO: This causes frame glitch of chests
                 }
@@ -65,7 +65,7 @@ class SequenceAtlasAnimation(
     override fun copy(): SequenceAtlasAnimation {
         return SequenceAtlasAnimation(
             name,
-            isReplayable,
+            isCycled,
             frames = frames.map { it.copy() },
             initialIndex = 0,
             timeLimit = timeLimit
