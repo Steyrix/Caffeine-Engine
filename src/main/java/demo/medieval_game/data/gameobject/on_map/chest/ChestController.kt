@@ -13,7 +13,7 @@ class ChestController(
 ) : AnimationController(drawableComponent), Entity {
 
     private val playOpeningAnimation = PredicateTimeEvent(
-        timeLimit = 0.5f,
+        timeLimit = 0.6f,
         predicate = { isOpening },
         action = {
             isClosed = false
@@ -58,10 +58,16 @@ class ChestController(
         return when {
             isBreaking -> AnimationKey.BREAKING
             isBroken -> AnimationKey.BROKEN
-            isClosed -> AnimationKey.CLOSED_CHEST
+            isClosed -> {
+                drawableComponent.resetAnimation(AnimationKey.CLOSE)
+                AnimationKey.CLOSED_CHEST
+            }
             isClosing -> AnimationKey.CLOSE
             isOpening -> AnimationKey.OPEN
-            else -> AnimationKey.OPENED_CHEST
+            else -> {
+                drawableComponent.resetAnimation(AnimationKey.OPEN)
+                AnimationKey.OPENED_CHEST
+            }
         }
     }
 
