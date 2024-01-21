@@ -2,6 +2,7 @@ package engine.feature.animation
 
 import engine.core.shader.Shader
 
+// TODO: ability to reset animations
 class SequenceAtlasAnimation(
     override val name: String,
     override val isReplayable: Boolean = true,
@@ -38,7 +39,10 @@ class SequenceAtlasAnimation(
             if (currIndex + 1 < frames.size) {
                 currIndex++
             } else {
-                if (isReplayable) currIndex = 0
+                if (isReplayable) {
+                    currIndex = 0
+                    // TODO: This causes frame glitch of chests
+                }
             }
 
             currentFrame = frames[currIndex]
