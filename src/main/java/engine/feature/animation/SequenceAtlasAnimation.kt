@@ -7,7 +7,7 @@ class SequenceAtlasAnimation(
     override val name: String,
     override val isCycled: Boolean = true,
     private val frames: List<FrameParameters>,
-    initialIndex: Int = 0,
+    private val initialIndex: Int = 0,
     private val timeLimit: Float
 ) : Animation {
 
@@ -17,15 +17,7 @@ class SequenceAtlasAnimation(
     private var currentFrame: FrameParameters? = null
 
     init {
-        if (frames.isNotEmpty()) {
-            currentFrame = if (initialIndex < frames.size) {
-                frames[initialIndex]
-            } else {
-                frames.first()
-            }
-        }
-
-        currIndex = initialIndex
+        reset()
     }
 
     override fun play(deltaTime: Float) {
@@ -70,5 +62,17 @@ class SequenceAtlasAnimation(
             initialIndex = 0,
             timeLimit = timeLimit
         )
+    }
+
+    override fun reset() {
+        if (frames.isNotEmpty()) {
+            currentFrame = if (initialIndex < frames.size) {
+                frames[initialIndex]
+            } else {
+                frames.first()
+            }
+        }
+
+        currIndex = initialIndex
     }
 }
