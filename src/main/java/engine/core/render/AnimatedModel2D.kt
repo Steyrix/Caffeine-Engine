@@ -68,4 +68,8 @@ class AnimatedModel2D(
     fun setAnimationByKey(key: String) {
         animationHolder.setAnimationByKey(key)
     }
+
+    fun resetAnimation(key: String) {
+        animationHolder.resetAnimation(key)
+    }
 }

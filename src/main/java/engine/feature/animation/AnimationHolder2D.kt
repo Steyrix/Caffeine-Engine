@@ -22,4 +22,9 @@ class AnimationHolder2D(
         if (currentAnimation.name == key) return
         currentAnimation = animations.firstOrNull { it.name == key } ?: currentAnimation
     }
+
+    fun resetAnimation(key: String) {
+        val target = animations.firstOrNull { it.name == key } ?: currentAnimation
+        target.reset()
+    }
 }
