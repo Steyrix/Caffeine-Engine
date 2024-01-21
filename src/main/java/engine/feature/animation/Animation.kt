@@ -13,4 +13,6 @@ interface Animation {
     fun setUniforms(shader: Shader)
 
     fun copy(): Animation
+
+    fun reset() {}
 }
