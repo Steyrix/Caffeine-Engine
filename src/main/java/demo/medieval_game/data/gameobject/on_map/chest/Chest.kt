@@ -34,7 +34,7 @@ class Chest(
         val hpBar = createHpBar(renderProjection) {
             // TODO: onEmpty callback should probably be called outside of hp bar
             controller.isBreaking = true
-            disposalEvent?.let { event -> gameLoopEvents.add(event) }
+            disposalEvent?.let { event -> addEvent(event) }
         }
 
         disposalEvent =
@@ -44,6 +44,7 @@ class Chest(
                     it?.removeComponent(boundingBox)
                     it?.removeComponent(controller)
                     it?.removeComponent(hpBar)
+                    removeEvent(disposalEvent!!)
                 },
                 initialTime = 0f
             )

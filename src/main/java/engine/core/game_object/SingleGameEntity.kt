@@ -10,11 +10,21 @@ open class SingleGameEntity : GameEntity {
 
     var it: CompositeEntity? = null
 
-    protected val gameLoopEvents = mutableListOf<GameLoopTimeEvent>()
+    private val gameLoopEvents = mutableListOf<GameLoopTimeEvent>()
+    private val eventsToRemove = mutableListOf<GameLoopTimeEvent>()
 
     override fun update(deltaTime: Float) {
         it?.update(deltaTime)
-        gameLoopEvents.forEach { it.schedule(deltaTime) }
+        val iterator = gameLoopEvents.iterator()
+        while (iterator.hasNext()) {
+            val item = iterator.next()
+            if (eventsToRemove.contains(item)) {
+                iterator.remove()
+                eventsToRemove.remove(item)
+            } else {
+                item.schedule(deltaTime)
+            }
+        }
     }
 
     override fun draw() {
@@ -31,6 +41,14 @@ open class SingleGameEntity : GameEntity {
         }
 
         return this
+    }
+
+    fun addEvent(event: GameLoopTimeEvent) {
+        gameLoopEvents.add(event)
+    }
+
+    fun removeEvent(event: GameLoopTimeEvent) {
+        eventsToRemove.add(event)
     }
 
     override fun isDisposed() = it?.isDisposed ?: false
