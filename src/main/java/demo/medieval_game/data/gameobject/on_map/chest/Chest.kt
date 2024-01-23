@@ -7,6 +7,8 @@ import demo.medieval_game.hp.HealthBar
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.game_object.SingleGameEntity
+import engine.core.loop.GameLoopTimeEvent
+import engine.core.loop.SingleTimeEvent
 import engine.core.render.AnimatedModel2D
 import engine.core.texture.Texture2D
 import engine.core.update.SetOfStatic2DParameters
@@ -17,6 +19,8 @@ import org.joml.Matrix4f
 class Chest(
     private val parameters: SetOfStatic2DParameters
 ) : SingleGameEntity() {
+
+    private var disposalEvent: GameLoopTimeEvent? = null
 
     fun init(
         renderProjection: Matrix4f,
@@ -30,13 +34,22 @@ class Chest(
         val hpBar = createHpBar(renderProjection) {
             // TODO: onEmpty callback should probably be called outside of hp bar
             controller.isBreaking = true
-            it?.removeComponent(boundingBox)
-            //it?.removeComponent(controller)
+            disposalEvent?.let { event -> gameLoopEvents.add(event) }
         }
+
+        disposalEvent =
+            SingleTimeEvent(
+                timeLimit = 1.5f,
+                action = { _ ->
+                    it?.removeComponent(boundingBox)
+                    it?.removeComponent(controller)
+                    it?.removeComponent(hpBar)
+                },
+                initialTime = 0f
+            )
 
         it = object : CompositeEntity() {}
 
-        // TODO: remove components on destruction
         addComponent(graphicalComponent, parameters)
         addComponent(controller, parameters)
         addComponent(boundingBox, parameters)
