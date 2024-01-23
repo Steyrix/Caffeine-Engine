@@ -4,10 +4,10 @@ class PredicateTimeEvent(
     private val timeLimit: Float,
     private val predicate: () -> Boolean,
     private val action: (Float) -> Unit
-) {
+): GameLoopTimeEvent {
     private var accumulatedTime = timeLimit
 
-    fun schedule(deltaTime: Float) {
+    override fun schedule(deltaTime: Float) {
         if (predicate.invoke()) {
             accumulatedTime += deltaTime
         }

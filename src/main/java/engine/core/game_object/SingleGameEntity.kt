@@ -2,12 +2,15 @@ package engine.core.game_object
 
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
+import engine.core.loop.PredicateTimeEvent
 import engine.core.update.SetOfParameters
 import engine.core.window.Window
 
 open class SingleGameEntity : GameEntity {
 
     var it: CompositeEntity? = null
+
+    protected val gameLoopEvents = listOf<PredicateTimeEvent>()
 
     override fun update(deltaTime: Float) {
         it?.update(deltaTime)
