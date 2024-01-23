@@ -69,7 +69,7 @@ class PlayableCharacter(
             }
         )
 
-        hp = HealthBar(characterParameters, hpBarParameters1, projection)
+        hp = HealthBar(characterParameters, defaultHpBarParams, projection)
 
         boxCollider = getBoundingBoxCollider(bbCollisionContext)
 

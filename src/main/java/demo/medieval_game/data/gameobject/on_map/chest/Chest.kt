@@ -2,6 +2,7 @@ package demo.medieval_game.data.gameobject.on_map.chest
 
 import demo.medieval_game.ShaderController
 import demo.medieval_game.data.chestAnimations
+import demo.medieval_game.data.static_parameters.*
 import demo.medieval_game.hp.HealthBar
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
@@ -60,11 +61,11 @@ class Chest(
 
     private fun createBoundingBox(renderProjection: Matrix4f) =
         BoundingBox(
-            xSize = parameters.xSize - 50f,
-            ySize = parameters.ySize - 50f,
+            xSize = CHEST_BOX_WIDTH,
+            ySize = CHEST_BOX_HEIGHT,
             isSizeBoundToHolder = false,
-            xOffset = 25f,
-            yOffset = 25f
+            xOffset = CHEST_BOX_X_OFFSET,
+            yOffset = CHEST_BOX_Y_OFFSET
         ).apply {
             shader = ShaderController.createBoundingBoxShader(renderProjection)
         }
@@ -73,18 +74,9 @@ class Chest(
         renderProjection: Matrix4f,
         controller: ChestController
     ): HealthBar {
-        // TODO: keep in presets
-        val defaultBarParams = SetOfStatic2DParameters(
-            x = 0f,
-            y = 0f,
-            xSize = 50f,
-            ySize = 12.5f,
-            rotationAngle = 0f
-        )
-
         return HealthBar(
             parameters,
-            defaultBarParams,
+            defaultHpBarParams,
             renderProjection
         ).apply {
             onEmptyCallback = {

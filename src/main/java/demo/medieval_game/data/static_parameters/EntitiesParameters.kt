@@ -10,7 +10,7 @@ const val HUMANOID_SIZE_TO_MAP_RELATION = 0.128f
 var HUMANOID_SIZE_X = 102.4f
 var HUMANOID_SIZE_Y = 102.4f
 
-var hpBarParameters1 = SetOfStatic2DParameters(
+var defaultHpBarParams = SetOfStatic2DParameters(
     x = 0f,
     y = 0f,
     xSize = 50f,
@@ -81,6 +81,11 @@ val purpleChestParameters = SetOfStatic2DParameters(
 val greenChestParameters = SetOfStatic2DParameters(
     500f, 800f, 125f, 125f, 0f
 )
+
+const val CHEST_BOX_WIDTH = 75f
+const val CHEST_BOX_X_OFFSET = 25f
+const val CHEST_BOX_HEIGHT = 75f
+const val CHEST_BOX_Y_OFFSET = 25f
 
 fun getMapParameters(screenWidth: Float, screenHeight: Float): SetOfStatic2DParameters {
     return SetOfStatic2DParameters(
