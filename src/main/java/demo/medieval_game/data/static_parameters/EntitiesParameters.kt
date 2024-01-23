@@ -18,6 +18,16 @@ var defaultHpBarParams = SetOfStatic2DParameters(
     rotationAngle = 0f
 )
 
+fun createDefaultHpBarParams(): SetOfStatic2DParameters {
+    return SetOfStatic2DParameters(
+        x = 0f,
+        y = 0f,
+        xSize = 50f,
+        ySize = 12.5f,
+        rotationAngle = 0f
+    )
+}
+
 var characterParameters = SetOf2DParametersWithVelocity(
     x = 500f,
     y = 500f,

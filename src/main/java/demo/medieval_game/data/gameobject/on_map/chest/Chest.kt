@@ -27,7 +27,12 @@ class Chest(
 
         val boundingBox = createBoundingBox(renderProjection)
         val controller = ChestController(graphicalComponent)
-        val hpBar = createHpBar(renderProjection, controller)
+        val hpBar = createHpBar(renderProjection) {
+            // TODO: onEmpty callback should probably be called outside of hp bar
+            controller.isBreaking = true
+            it?.removeComponent(boundingBox)
+            //it?.removeComponent(controller)
+        }
 
         it = object : CompositeEntity() {}
 
@@ -72,16 +77,14 @@ class Chest(
 
     private fun createHpBar(
         renderProjection: Matrix4f,
-        controller: ChestController
+        onEmpty: () -> Unit
     ): HealthBar {
         return HealthBar(
             parameters,
-            defaultHpBarParams,
+            createDefaultHpBarParams(),
             renderProjection
         ).apply {
-            onEmptyCallback = {
-                controller.isBreaking = true
-            }
+            onEmptyCallback = onEmpty
         }
     }
 }
