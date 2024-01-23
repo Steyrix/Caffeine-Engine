@@ -4,10 +4,10 @@ open class AccumulatedTimeEvent(
     protected val timeLimit: Float,
     protected val action: (Float) -> Unit,
     initialTime: Float = timeLimit
-) {
+) : GameLoopTimeEvent {
     protected var accumulatedTime = initialTime
 
-    open fun schedule(deltaTime: Float) {
+    override fun schedule(deltaTime: Float) {
         accumulatedTime += deltaTime
 
         if (accumulatedTime >= timeLimit) {
