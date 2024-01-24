@@ -27,8 +27,7 @@ class HealthBar(
     private var isCallbackInvoked = false
 
     // TODO: allow subscription
-    var filled: Float = 1.0f
-        private set
+    private var filled: Float = 1.0f
 
     init {
         val textureFilePath = this.javaClass.getResource("/textures/HealthBarAtlas.png")!!.path
