@@ -14,7 +14,8 @@ import org.joml.Matrix4f
 class HealthBar(
     private val objParams: SetOfParameters,
     private val barParams: SetOfStatic2DParameters,
-    private val projection: Matrix4f
+    private val projection: Matrix4f,
+    private val onFilledChange: (Float) -> Unit = {}
 ) : CompositeEntity() {
 
     companion object {
@@ -64,6 +65,7 @@ class HealthBar(
         when (interaction) {
             is PlayerAttackInteraction -> {
                 filled -= interaction.damage
+                onFilledChange(filled)
             }
         }
     }
