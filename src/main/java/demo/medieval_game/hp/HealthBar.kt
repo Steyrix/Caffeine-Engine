@@ -26,6 +26,7 @@ class HealthBar(
     var onEmptyCallback: () -> Unit = {}
     private var isCallbackInvoked = false
 
+    // TODO: allow subscription
     var filled: Float = 1.0f
         private set
 
