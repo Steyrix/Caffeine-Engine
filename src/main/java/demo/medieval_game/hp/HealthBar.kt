@@ -24,9 +24,6 @@ class HealthBar(
 
     private val graphicalComponent: Model
 
-    var onEmptyCallback: () -> Unit = {}
-    private var isCallbackInvoked = false
-
     // TODO: allow subscription
     private var filled: Float = 1.0f
 
@@ -53,11 +50,6 @@ class HealthBar(
         graphicalComponent.shader?.let {
             it.bind()
             it.setUniform(SHADER_UNIFORM_NAME, filled)
-        }
-
-        if (filled <= 0 && !isCallbackInvoked) {
-            onEmptyCallback.invoke()
-            isCallbackInvoked = true
         }
     }
 

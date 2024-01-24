@@ -89,7 +89,10 @@ abstract class NPC<E : CompositeEntity>(
         animatedModel2D: AnimatedModel2D
     ): E
 
-    protected fun getHpBar(renderProjection: Matrix4f): HealthBar {
+    protected fun getHpBar(
+        renderProjection: Matrix4f,
+        onEmpty: () -> Unit
+    ): HealthBar {
         return HealthBar(
             parameters,
             SetOfStatic2DParameters(
@@ -100,6 +103,10 @@ abstract class NPC<E : CompositeEntity>(
                 rotationAngle = 0f
             ),
             renderProjection
-        )
+        ) { hpAmount ->
+            if (hpAmount <= 0) {
+                onEmpty.invoke()
+            }
+        }
     }
 }

@@ -32,7 +32,6 @@ class Chest(
         val boundingBox = createBoundingBox(renderProjection)
         val controller = ChestController(graphicalComponent)
         val hpBar = createHpBar(renderProjection) {
-            // TODO: onEmpty callback should probably be called outside of hp bar
             controller.isBreaking = true
             disposalEvent?.let { event -> addEvent(event) }
         }
@@ -97,8 +96,10 @@ class Chest(
             parameters,
             createDefaultHpBarParams(),
             renderProjection
-        ).apply {
-            onEmptyCallback = onEmpty
+        ) { hpAmount ->
+            if (hpAmount <= 0) {
+                onEmpty.invoke()
+            }
         }
     }
 }

@@ -32,13 +32,11 @@ class GoblinNPC(
 
         val hpBar = getHpBar(
             renderProjection
-        ).apply {
-            onEmptyCallback = {
-                animatedModel2D.setAnimationByKey(AnimationKey.GOBLIN_DEFEAT)
-                entity.removeComponent(tileTraverser)
-                entity.removeComponent(controller)
-                entity.isDisposed = true
-            }
+        ) {
+            animatedModel2D.setAnimationByKey(AnimationKey.GOBLIN_DEFEAT)
+            entity.removeComponent(tileTraverser)
+            entity.removeComponent(controller)
+            entity.isDisposed = true
         }
 
         entity.addComponent(hpBar, parameters)
