@@ -77,7 +77,7 @@ abstract class NPC<E : CompositeEntity>(
             return 0.1f
         }
 
-        return parameters.y
+        return parameters.y + parameters.ySize
     }
 
     override fun getParams(): SetOf2DParametersWithVelocity {

@@ -50,7 +50,7 @@ class PlayableCharacter(
 
         it = Player(
             drawableComponent = graphicalComponent!!,
-            parameters = characterParameters,
+            parameters = parameters,
             tempSpritesHolder = tempSprites
         )
 
@@ -181,7 +181,7 @@ class PlayableCharacter(
     fun getDirection() = controller?.direction ?: Direction.RIGHT
 
     override fun getZLevel(): Float {
-        return parameters.y
+        return parameters.y + parameters.ySize
     }
 
     override fun getParams(): SetOf2DParametersWithVelocity {
