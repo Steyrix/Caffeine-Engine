@@ -4,6 +4,7 @@ import engine.core.entity.CompositeEntity
 import engine.core.render.Drawable
 import engine.core.render.Model
 import engine.core.shader.Shader
+import engine.core.update.ParametersFactory
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.tiled.property.Property
 
@@ -33,8 +34,7 @@ class TileLayer(
     // TODO: cover by debug flag
     private val debugGraphicalComponent: Model = TileLayerInitializer.genDebugGraphicalComponent(this)
 
-    // TODO: hack, remove it
-    private val paramsKey = SetOfStatic2DParameters(0f, 0f, 0f, 0f, 0f)
+    private val paramsKey = ParametersFactory.createEmptyStatic()
 
     init {
         addComponent(graphicalComponent, paramsKey)
