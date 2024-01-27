@@ -14,4 +14,6 @@ class LayerObject(
 
     var isTransparent = false
 
+    var maxTransparency: Float = 0f
+
 }
