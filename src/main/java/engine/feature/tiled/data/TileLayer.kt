@@ -1,7 +1,6 @@
 package engine.feature.tiled.data
 
 import engine.core.entity.CompositeEntity
-import engine.core.render.Drawable
 import engine.core.render.Model
 import engine.core.shader.Shader
 import engine.core.update.ParametersFactory
