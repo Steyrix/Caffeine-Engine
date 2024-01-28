@@ -28,7 +28,7 @@ class TileLayer(
             debugGraphicalComponent.shader = value
         }
 
-    private val graphicalComponent: Model = TileLayerInitializer.genGraphicalComponent(this)
+    private val graphicalComponent: Model = TileLayerInitializer.genLayerModel(this)
 
     // TODO: cover by debug flag
     private val debugGraphicalComponent: Model = TileLayerInitializer.genDebugGraphicalComponent(this)

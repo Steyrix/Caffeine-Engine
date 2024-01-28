@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL33C
 object TileLayerInitializer {
     private const val EMPTY_TILE_ID = -1
 
-    internal fun genGraphicalComponent(
+    internal fun genLayerModel(
         layer: TileLayer
     ): Model {
         val allVertices: ArrayList<Float> = ArrayList()
