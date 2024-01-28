@@ -2,18 +2,22 @@ package engine.feature.tiled.data
 
 import engine.core.entity.CompositeEntity
 import engine.core.render.Model
-import engine.core.texture.Texture2D
 
 class LayerObject(
     val tileIndices: List<Int>,
-    texture2D: Texture2D,
-    uv: FloatArray
+    private val graphicalComponent: Model,
+    private val transparencyUniform: String
 ) : CompositeEntity() {
-
-    val graphicalComponent = Model(texture2D, uv)
 
     var isTransparent = false
 
-    var maxTransparency: Float = 0f
+    var transparencyValue: Float = 0f
 
+    override fun update(deltaTime: Float) {
+        super.update(deltaTime)
+        graphicalComponent.shader?.let {
+            it.bind()
+            it.setUniform(transparencyUniform, transparencyValue)
+        }
+    }
 }
