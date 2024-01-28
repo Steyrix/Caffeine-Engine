@@ -35,8 +35,6 @@ class TileLayer(
 
     private val paramsKey = ParametersFactory.createEmptyStatic()
 
-    val dynamicObjects = mutableListOf<LayerObject>()
-
     init {
         addComponent(graphicalComponent, paramsKey)
         addComponent(debugGraphicalComponent, paramsKey)
