@@ -8,6 +8,85 @@ import org.lwjgl.opengl.GL33C
 object TileLayerInitializer {
     private const val EMPTY_TILE_ID = -1
 
+    internal fun genLayerObjects(
+        layer: TileLayer,
+        transparencyUniform: String
+    ): List<LayerObject> {
+        val out = mutableListOf<LayerObject>()
+        val addedTiles = mutableSetOf<Int>()
+        val data = layer.tileIdsData
+        val set = layer.set
+
+        for (num in data.indices) {
+            if (!addedTiles.contains(num) && data[num] != EMPTY_TILE_ID) {
+                addedTiles.add(num)
+                val objectIndices = getObjectTiles(
+                    layer.widthInTiles, data, num, addedTiles
+                )
+
+                val objectVertices = mutableListOf<Float>()
+                val objectUv = mutableListOf<Float>()
+                objectIndices.forEach {
+                    val pos = getPositionByTileIndex(num, layer.widthInTiles)
+                    objectUv.addAll(set.getTileByNumber(it).tileUV.toList())
+                    objectVertices.addAll(genVertices(pos, set).toList())
+                }
+
+                val model = Model(
+                    dataArrays = listOf(
+                        objectVertices.toFloatArray(),
+                        objectUv.toFloatArray()
+                    ),
+                    verticesCount = objectVertices.size / 2,
+                    texture = set.texture2D
+                )
+
+                out.add(
+                    LayerObject(
+                        objectIndices,
+                        model,
+                        transparencyUniform
+                    )
+                )
+            }
+        }
+
+        return out
+    }
+
+    private fun getObjectTiles(
+        width: Int,
+        data: List<Int>,
+        initialTile: Int,
+        addedTiles: MutableSet<Int>
+    ): List<Int> {
+        val indices = mutableListOf(initialTile)
+        val indicesToCheck = ArrayDeque<Int>()
+        indicesToCheck.add(initialTile)
+
+        while (indicesToCheck.isNotEmpty()) {
+            val num = indicesToCheck.removeFirst()
+            val adjacentTiles = getAdjacentTiles(
+                data,
+                width,
+                num
+            )
+
+            val toAdd = mutableListOf<Int>()
+            adjacentTiles.forEach {
+                if (!addedTiles.contains(it)) {
+                    toAdd.add(it)
+                    indicesToCheck.add(it)
+                }
+            }
+
+            indices.addAll(toAdd)
+            addedTiles.addAll(toAdd)
+        }
+
+        return indices
+    }
+
     internal fun genLayerModel(
         layer: TileLayer
     ): Model {
@@ -131,7 +210,7 @@ object TileLayerInitializer {
         }
 
         diagonalPredicates.forEachIndexed { i, it ->
-            val condition = when(i) {
+            val condition = when (i) {
                 0 -> { x: Int -> predicates[3].first(x) && predicates[2].first(x) }
                 1 -> { x: Int -> predicates[0].first(x) && predicates[2].first(x) }
                 2 -> { x: Int -> predicates[0].first(x) && predicates[1].first(x) }
