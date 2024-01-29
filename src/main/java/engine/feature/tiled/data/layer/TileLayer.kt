@@ -12,8 +12,8 @@ class TileLayer(
     override val name: String,
     override val widthInTiles: Int,
     override val heightInTiles: Int,
-    val tileIdsData: MutableList<Int>,
     override val set: TileSet,
+    override val tileIdsData: MutableList<Int>,
     private val properties: ArrayList<Property>
 ) : CompositeEntity(), Layer {
 

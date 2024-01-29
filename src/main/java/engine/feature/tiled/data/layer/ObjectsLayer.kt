@@ -10,7 +10,7 @@ class ObjectsLayer(
     override val widthInTiles: Int,
     override val heightInTiles: Int,
     override val set: TileSet,
-    private val tileIdsData: MutableList<Int>,
+    override val tileIdsData: MutableList<Int>,
     transparencyUniformName: String
 ): CompositeEntity(), Layer {
 

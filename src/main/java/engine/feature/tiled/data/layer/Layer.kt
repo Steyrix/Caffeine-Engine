@@ -7,11 +7,13 @@ interface Layer {
 
     val name: String
 
-    val set: TileSet
-
     val widthInTiles: Int
 
     val heightInTiles: Int
+
+    val set: TileSet
+
+    val tileIdsData: List<Int>
 
     fun updateParameters(parameters: SetOfStatic2DParameters)
 
