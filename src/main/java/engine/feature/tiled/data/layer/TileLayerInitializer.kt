@@ -152,8 +152,8 @@ object TileLayerInitializer {
     }
 
     internal fun generateTileGraph(
-        walkableLayers: List<TileLayer>,
-        obstacleLayers: List<TileLayer> = emptyList()
+        walkableLayers: List<Layer>,
+        obstacleLayers: List<Layer> = emptyList()
     ): TileGraph? {
         val out = hashMapOf<Int, MutableList<Int>>()
         val dataLists = walkableLayers.map { it.tileIdsData }

@@ -4,6 +4,7 @@ import engine.core.texture.Texture2D
 import engine.feature.tiled.data.layer.TileLayer
 import engine.feature.tiled.data.TileMap
 import engine.feature.tiled.data.TileSet
+import engine.feature.tiled.data.layer.Layer
 import engine.feature.tiled.property.*
 import org.lwjgl.opengl.GL11.*
 import org.w3c.dom.Document
@@ -58,8 +59,8 @@ internal object TiledResourceParser {
         heightInTiles: Int,
         doc: Document,
         tileSet: TileSet
-    ): ArrayList<TileLayer> {
-        val out = ArrayList<TileLayer>()
+    ): ArrayList<Layer> {
+        val out = ArrayList<Layer>()
         val layers = doc.getElementsByTagName(LAYER)
 
         for (layerIndex in 0 until layers.length) {

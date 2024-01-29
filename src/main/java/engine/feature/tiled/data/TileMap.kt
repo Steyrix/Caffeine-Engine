@@ -5,6 +5,8 @@ import engine.core.render.Drawable
 import engine.core.shader.Shader
 import engine.core.update.SetOfStatic2DParameters
 import engine.core.geometry.Point2D
+import engine.feature.tiled.data.layer.Layer
+import engine.feature.tiled.data.layer.ObjectsLayer
 import engine.feature.tiled.data.layer.TileLayer
 import engine.feature.tiled.data.layer.TileLayerInitializer
 import engine.feature.tiled.traversing.TileGraph
@@ -13,7 +15,7 @@ import kotlin.math.roundToInt
 // TODO: remove doc for properties and rename them for clearance
 // TODO: make composite entity
 class TileMap(
-    private val layers: MutableList<TileLayer>,
+    private val layers: MutableList<Layer>,
 ) : Drawable<SetOfStatic2DParameters>, Entity {
 
     companion object {
@@ -24,7 +26,15 @@ class TileMap(
         set(value) {
             field = value
             layers.forEach {
-                it.shader = value
+                if (it is TileLayer) it.shader = value
+            }
+        }
+
+    var objectShader: Shader? = null
+        set(value) {
+            field = value
+            layers.forEach {
+                if (it is ObjectsLayer) it.shader = value
             }
         }
 
@@ -32,7 +42,7 @@ class TileMap(
         set(value) {
             field = value
             layers.forEach {
-                it.debugShader = value
+                if (it is TileLayer) it.debugShader = value
             }
         }
 
@@ -84,7 +94,7 @@ class TileMap(
 
     fun getTileWidth() = absoluteTileWidth
 
-    fun getLayerByName(name: String): TileLayer = layersMap[name]
+    fun getLayerByName(name: String): Layer = layersMap[name]
         ?: throw IllegalStateException("Layer with name $name not found")
 
     fun getTileValue(posX: Float, posY: Float, layerName: String): Int {
@@ -148,7 +158,12 @@ class TileMap(
     }
 
     override fun draw() {
-        layers.forEach { it.draw() }
+        layers.forEach {
+            when(it) {
+                is TileLayer -> it.draw()
+                is ObjectsLayer -> it.draw()
+            }
+        }
     }
 
     fun getWorldWidth(): Float {
