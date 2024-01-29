@@ -4,7 +4,7 @@ import engine.core.entity.CompositeEntity
 import engine.core.render.Model
 
 class LayerObject(
-    val tileIndices: List<Int>,
+    val tileIndices: Set<Int>,
     private val graphicalComponent: Model,
     private val transparencyUniform: String
 ) : CompositeEntity() {
@@ -19,5 +19,9 @@ class LayerObject(
             it.bind()
             it.setUniform(transparencyUniform, transparencyValue)
         }
+    }
+
+    fun isIntersecting(tileIndex: Int): Boolean {
+        return tileIndices.contains(tileIndex)
     }
 }
