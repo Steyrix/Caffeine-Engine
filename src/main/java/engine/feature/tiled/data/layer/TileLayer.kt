@@ -8,14 +8,14 @@ import engine.core.update.SetOfStatic2DParameters
 import engine.feature.tiled.data.TileSet
 import engine.feature.tiled.property.Property
 
-open class TileLayer(
+class TileLayer(
     val name: String,
     val widthInTiles: Int,
     val heightInTiles: Int,
     val tileIdsData: MutableList<Int>,
     internal val set: TileSet,
-    protected val properties: ArrayList<Property>
-) : CompositeEntity() {
+    private val properties: ArrayList<Property>
+) : CompositeEntity(), Layer {
 
     var shader: Shader? = null
         set(value) {
@@ -45,12 +45,12 @@ open class TileLayer(
         addComponent(debugGraphicalComponent, paramsKey)
     }
 
-    fun updateParameters(parameters: SetOfStatic2DParameters) {
+    override fun updateParameters(parameters: SetOfStatic2DParameters) {
         graphicalComponent.updateParameters(parameters)
         debugGraphicalComponent.updateParameters(parameters)
     }
 
-    fun getTileValueByIndex(index: Int): Int {
+    override fun getTileValueByIndex(index: Int): Int {
         return when {
             index < 0 || index >= tileIdsData.size -> -1
             index <= tileIdsData.size - 1 -> tileIdsData[index]
@@ -59,7 +59,7 @@ open class TileLayer(
     }
 
     // todo: move magic numbers to constants
-    fun setTileAt(index: Int, tileId: Int) {
+    override fun setTileAt(index: Int, tileId: Int) {
         tileIdsData[index] = tileId
 
         val data = set.getTileByNumber(tileId).tileUV

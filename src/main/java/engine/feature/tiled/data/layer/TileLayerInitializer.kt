@@ -11,25 +11,25 @@ object TileLayerInitializer {
     private const val EMPTY_TILE_ID = -1
 
     internal fun genLayerObjects(
-        layer: TileLayer,
+        widthInTiles: Int,
+        data: List<Int>,
+        set: TileSet,
         transparencyUniform: String
     ): List<LayerObject> {
         val out = mutableListOf<LayerObject>()
         val addedTiles = mutableSetOf<Int>()
-        val data = layer.tileIdsData
-        val set = layer.set
 
         for (num in data.indices) {
             if (!addedTiles.contains(num) && data[num] != EMPTY_TILE_ID) {
                 addedTiles.add(num)
                 val objectIndices = getObjectTiles(
-                    layer.widthInTiles, data, num, addedTiles
+                    widthInTiles, data, num, addedTiles
                 )
 
                 val objectVertices = mutableListOf<Float>()
                 val objectUv = mutableListOf<Float>()
                 objectIndices.forEach {
-                    val pos = getPositionByTileIndex(num, layer.widthInTiles)
+                    val pos = getPositionByTileIndex(num, widthInTiles)
                     objectUv.addAll(set.getTileByNumber(it).tileUV.toList())
                     objectVertices.addAll(genVertices(pos, set).toList())
                 }
