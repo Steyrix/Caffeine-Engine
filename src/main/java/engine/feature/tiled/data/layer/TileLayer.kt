@@ -9,11 +9,11 @@ import engine.feature.tiled.data.TileSet
 import engine.feature.tiled.property.Property
 
 class TileLayer(
-    val name: String,
-    val widthInTiles: Int,
-    val heightInTiles: Int,
+    override val name: String,
+    override val widthInTiles: Int,
+    override val heightInTiles: Int,
     val tileIdsData: MutableList<Int>,
-    internal val set: TileSet,
+    override val set: TileSet,
     private val properties: ArrayList<Property>
 ) : CompositeEntity(), Layer {
 

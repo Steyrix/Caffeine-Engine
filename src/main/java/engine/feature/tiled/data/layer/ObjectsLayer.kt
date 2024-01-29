@@ -6,10 +6,11 @@ import engine.core.update.SetOfStatic2DParameters
 import engine.feature.tiled.data.TileSet
 
 class ObjectsLayer(
-    val name: String,
-    widthInTiles: Int,
+    override val name: String,
+    override val widthInTiles: Int,
+    override val heightInTiles: Int,
+    override val set: TileSet,
     private val tileIdsData: MutableList<Int>,
-    internal val set: TileSet,
     transparencyUniformName: String
 ): CompositeEntity(), Layer {
 
