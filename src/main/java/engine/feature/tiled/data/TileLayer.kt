@@ -7,13 +7,13 @@ import engine.core.update.ParametersFactory
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.tiled.property.Property
 
-class TileLayer(
+open class TileLayer(
     val name: String,
     val widthInTiles: Int,
     val heightInTiles: Int,
     val tileIdsData: MutableList<Int>,
     internal val set: TileSet,
-    private val properties: ArrayList<Property>
+    protected val properties: ArrayList<Property>
 ) : CompositeEntity() {
 
     var shader: Shader? = null
@@ -28,10 +28,14 @@ class TileLayer(
             debugGraphicalComponent.shader = value
         }
 
-    private val graphicalComponent: Model = TileLayerInitializer.genLayerModel(this)
+    private val graphicalComponent: Model = TileLayerInitializer.genLayerModel(
+        tileIdsData, set, widthInTiles
+    )
 
     // TODO: cover by debug flag
-    private val debugGraphicalComponent: Model = TileLayerInitializer.genDebugGraphicalComponent(this)
+    private val debugGraphicalComponent: Model = TileLayerInitializer.genDebugGraphicalComponent(
+        tileIdsData, set, widthInTiles
+    )
 
     private val paramsKey = ParametersFactory.createEmptyStatic()
 

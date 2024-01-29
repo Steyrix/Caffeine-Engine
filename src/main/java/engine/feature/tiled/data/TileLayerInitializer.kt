@@ -6,6 +6,7 @@ import engine.feature.tiled.traversing.TileGraph
 import org.lwjgl.opengl.GL33C
 
 object TileLayerInitializer {
+
     private const val EMPTY_TILE_ID = -1
 
     internal fun genLayerObjects(
@@ -88,15 +89,15 @@ object TileLayerInitializer {
     }
 
     internal fun genLayerModel(
-        layer: TileLayer
+        data: List<Int>,
+        set: TileSet,
+        widthInTiles: Int
     ): Model {
         val allVertices: ArrayList<Float> = ArrayList()
         val allUV: ArrayList<Float> = ArrayList()
-        val data = layer.tileIdsData
-        val set = layer.set
 
         for (num in data.indices) {
-            val pos = getPositionByTileIndex(num, layer.widthInTiles)
+            val pos = getPositionByTileIndex(num, widthInTiles)
             val verticesArray = genVertices(pos, set)
 
             val tileNumber = data[num]
@@ -120,12 +121,14 @@ object TileLayerInitializer {
         ).apply { zLevel = 1f }
     }
 
-    internal fun genDebugGraphicalComponent(layer: TileLayer): Model {
+    internal fun genDebugGraphicalComponent(
+        data: List<Int>,
+        set: TileSet,
+        widthInTiles: Int
+    ): Model {
         val allVertices: ArrayList<Float> = ArrayList()
-        val data = layer.tileIdsData
-        val set = layer.set
         for (num in data.indices) {
-            val pos = getPositionByTileIndex(num, layer.widthInTiles)
+            val pos = getPositionByTileIndex(num, widthInTiles)
             val tileNumber = data[num]
 
             val verticesArray = genDebugVertices(pos, set)
