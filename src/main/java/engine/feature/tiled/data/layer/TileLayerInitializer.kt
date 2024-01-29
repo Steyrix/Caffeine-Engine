@@ -1,7 +1,8 @@
-package engine.feature.tiled.data
+package engine.feature.tiled.data.layer
 
 import engine.core.render.Model
 import engine.core.geometry.Point2D
+import engine.feature.tiled.data.TileSet
 import engine.feature.tiled.traversing.TileGraph
 import org.lwjgl.opengl.GL33C
 

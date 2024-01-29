@@ -1,4 +1,4 @@
-package engine.feature.tiled.data
+package engine.feature.tiled.data.layer
 
 import engine.core.entity.CompositeEntity
 import engine.core.render.Model

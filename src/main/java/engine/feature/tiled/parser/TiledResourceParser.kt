@@ -1,7 +1,7 @@
 package engine.feature.tiled.parser
 
 import engine.core.texture.Texture2D
-import engine.feature.tiled.data.TileLayer
+import engine.feature.tiled.data.layer.TileLayer
 import engine.feature.tiled.data.TileMap
 import engine.feature.tiled.data.TileSet
 import engine.feature.tiled.property.*

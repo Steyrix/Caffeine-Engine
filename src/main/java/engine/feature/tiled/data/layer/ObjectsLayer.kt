@@ -1,6 +1,7 @@
-package engine.feature.tiled.data
+package engine.feature.tiled.data.layer
 
 import engine.core.entity.CompositeEntity
+import engine.feature.tiled.data.TileSet
 import engine.feature.tiled.property.Property
 
 class ObjectsLayer(
