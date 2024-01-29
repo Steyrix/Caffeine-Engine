@@ -44,7 +44,7 @@ object TileLayerInitializer {
 
                 out.add(
                     LayerObject(
-                        objectIndices,
+                        objectIndices.toSet(),
                         model,
                         transparencyUniform
                     )
