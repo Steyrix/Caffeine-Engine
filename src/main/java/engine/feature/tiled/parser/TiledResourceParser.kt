@@ -5,6 +5,7 @@ import engine.feature.tiled.data.layer.TileLayer
 import engine.feature.tiled.data.TileMap
 import engine.feature.tiled.data.TileSet
 import engine.feature.tiled.data.layer.Layer
+import engine.feature.tiled.data.layer.ObjectsLayer
 import engine.feature.tiled.property.*
 import org.lwjgl.opengl.GL11.*
 import org.w3c.dom.Document
@@ -70,16 +71,29 @@ internal object TiledResourceParser {
             val primitiveProperties = convertToPrimitiveProperties(properties)
             val name = currentLayer.attributes.getNamedItem(PROPERTY_NAME).nodeValue
 
-            out.add(
-                TileLayer(
-                    name = name,
-                    widthInTiles = widthInTiles,
-                    heightInTiles = heightInTiles,
-                    tileIdsData = data,
-                    set = tileSet,
-                    properties = primitiveProperties
+            if (name.contains("objectL")) {
+                out.add(
+                    ObjectsLayer(
+                        name = name,
+                        widthInTiles = widthInTiles,
+                        heightInTiles = heightInTiles,
+                        tileIdsData = data,
+                        set = tileSet,
+                        transparencyUniformName = "transparency"
+                    )
                 )
-            )
+            } else {
+                out.add(
+                    TileLayer(
+                        name = name,
+                        widthInTiles = widthInTiles,
+                        heightInTiles = heightInTiles,
+                        tileIdsData = data,
+                        set = tileSet,
+                        properties = primitiveProperties
+                    )
+                )
+            }
         }
 
         return out
