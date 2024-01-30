@@ -39,6 +39,8 @@ fun getStartingMapPreset(screenWidth: Float, screenHeight: Float): TileMapPreset
         mapSourcePath = "/tiled/port_map.xml",
         vertexShaderPath = "/shaders/lightingShaders/lightingVertexShader.glsl",
         fragmentShaderPath = "/shaders/lightingShaders/lightingFragmentShader.glsl",
+        objectFragmentShaderPath = "/shaders/mapShaders/layerObjectsFragmentShader.glsl",
+        objectVertexShaderPath = "/shaders/mapShaders/layerObjectsVertexShader.glsl",
         shaderUniforms = mapOf(
             "screenSize" to Vector2f(screenWidth, screenHeight),
             "lightSourceSize" to Vector2f(campfireParameters.xSize, campfireParameters.ySize),
@@ -47,7 +49,7 @@ fun getStartingMapPreset(screenWidth: Float, screenHeight: Float): TileMapPreset
         ),
         updateEvents = listOf { drawable: Drawable<*> -> getLightBlinkingEvent(drawable) },
         walkingLayers = listOf("walking_layer", "walkable_objects_layer"),
-        obstacleLayers = listOf("obstacles_layer")
+        obstacleLayers = listOf("objectL_obstacles_layer"),
     )
 
 fun getNexusMapPreset(): TileMapPreset =
@@ -57,6 +59,8 @@ fun getNexusMapPreset(): TileMapPreset =
         mapSourcePath = "/tiled/nexus_map.xml",
         vertexShaderPath = "/shaders/texturedShaders/texturedVertexShader.glsl",
         fragmentShaderPath = "/shaders/texturedShaders/texturedFragmentShader.glsl",
+        objectFragmentShaderPath = "/shaders/mapShaders/layerObjectsFragmentShader.glsl",
+        objectVertexShaderPath = "/shaders/mapShaders/layerObjectsVertexShader.glsl",
         shaderUniforms = mapOf(),
         updateEvents = listOf(),
         walkingLayers = listOf("walking_layer"),

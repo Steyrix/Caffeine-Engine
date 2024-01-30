@@ -29,8 +29,9 @@ object TileLayerInitializer {
                 val objectVertices = mutableListOf<Float>()
                 val objectUv = mutableListOf<Float>()
                 objectIndices.forEach {
-                    val pos = getPositionByTileIndex(num, widthInTiles)
-                    objectUv.addAll(set.getTileByNumber(it).tileUV.toList())
+                    val number = data[it]
+                    val pos = getPositionByTileIndex(it, widthInTiles)
+                    objectUv.addAll(set.getTileByNumber(number).tileUV.toList())
                     objectVertices.addAll(genVertices(pos, set).toList())
                 }
 
@@ -107,12 +108,15 @@ object TileLayerInitializer {
                 val uvArray = set.getTileByNumber(tileNumber).tileUV
                 allVertices.addAll(verticesArray.toList())
                 allUV.addAll(uvArray.toList())
+                println(verticesArray.toList())
+                println(uvArray.toList())
             } else {
                 val uvArray = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
                 val vertices = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
                 allVertices.addAll(vertices.toList())
                 allUV.addAll(uvArray.toList())
             }
+
         }
 
         return Model(

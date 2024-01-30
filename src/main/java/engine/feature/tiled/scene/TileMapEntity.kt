@@ -83,6 +83,12 @@ class TileMapEntity(
         val fragmentShaderPath = this.javaClass.getResource(mapPresets.fragmentShaderPath)?.path
             ?: throw IllegalStateException()
 
+        val vertexObjectShaderPath = this.javaClass.getResource(mapPresets.objectVertexShaderPath)?.path
+            ?: throw IllegalStateException()
+
+        val fragmentObjectShaderPath = this.javaClass.getResource(mapPresets.objectFragmentShaderPath)?.path
+            ?: throw IllegalStateException()
+
         val sourcePath = this.javaClass.getResource(mapPresets.mapSourcePath)?.path
             ?: throw IllegalStateException()
 
@@ -100,6 +106,15 @@ class TileMapEntity(
             mapPresets.shaderUniforms.forEach {
                 shader.setUniform(it.key, it.value)
             }
+        }
+
+        graphicalComponent.objectShader = ShaderLoader.loadFromFile(
+            vertexShaderFilePath = vertexObjectShaderPath,
+            fragmentShaderFilePath = fragmentObjectShaderPath
+        ).also { shader ->
+            shader.bind()
+            shader.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection)
+            //shader.setUniform("transparency", 0f)
         }
 
         // TODO: cover with debug flag

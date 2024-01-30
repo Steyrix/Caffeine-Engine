@@ -2,6 +2,7 @@ package engine.feature.tiled.data.layer
 
 import engine.core.entity.CompositeEntity
 import engine.core.shader.Shader
+import engine.core.update.ParametersFactory
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.tiled.data.TileSet
 
@@ -12,16 +13,26 @@ class ObjectsLayer(
     override val set: TileSet,
     override val tileIdsData: MutableList<Int>,
     transparencyUniformName: String
-): CompositeEntity(), Layer {
+) : CompositeEntity(), Layer {
 
     var shader: Shader? = null
+        set(value) {
+            field = value
+            objects.forEach {
+                it.shader = value
+            }
+        }
 
-    private val objects = mutableListOf<LayerObject>()
+    private val objects: List<LayerObject>
 
     init {
-        objects.addAll(TileLayerInitializer.genLayerObjects(
-            widthInTiles, tileIdsData, set, transparencyUniformName
-        ))
+        objects = TileLayerInitializer.genLayerObjects(widthInTiles, tileIdsData, set, transparencyUniformName)
+
+        val paramsKey = ParametersFactory.createEmptyStatic()
+
+        objects.forEach {
+            this.addComponent(it, paramsKey)
+        }
     }
 
     override fun updateParameters(parameters: SetOfStatic2DParameters) {

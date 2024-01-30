@@ -9,6 +9,8 @@ data class TileMapPreset(
     val mapSourcePath: String,
     val vertexShaderPath: String,
     val fragmentShaderPath: String,
+    val objectVertexShaderPath: String,
+    val objectFragmentShaderPath: String,
     val shaderUniforms: Map<String, Any>,
     val updateEvents: List<(Drawable<*>) -> AccumulatedTimeEvent>,
     val walkingLayers: List<String>,
