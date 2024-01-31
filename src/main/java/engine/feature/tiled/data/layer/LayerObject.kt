@@ -13,8 +13,6 @@ class LayerObject(
     private val transparencyUniform: String
 ) : CompositeEntity() {
 
-    var isTransparent = false
-
     var transparencyValue: Float = 1f
 
     var shader: Shader? = null
