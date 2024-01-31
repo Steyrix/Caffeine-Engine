@@ -64,7 +64,7 @@ object TileLayerInitializer {
         width: Int,
         data: List<Int>,
         initialTile: Int,
-        addedTiles: MutableSet<Int>
+        addedIndices: MutableSet<Int>
     ): List<Int> {
         val indices = mutableListOf(initialTile)
         val indicesToCheck = ArrayDeque<Int>()
@@ -72,22 +72,22 @@ object TileLayerInitializer {
 
         while (indicesToCheck.isNotEmpty()) {
             val num = indicesToCheck.removeFirst()
-            val adjacentTiles = getAdjacentTiles(
+            val adjacentIndices = getAdjacentTiles(
                 data,
                 width,
                 num
             )
 
             val toAdd = mutableListOf<Int>()
-            adjacentTiles.forEach {
-                if (!addedTiles.contains(it)) {
+            adjacentIndices.forEach {
+                if (!addedIndices.contains(it)) {
                     toAdd.add(it)
                     indicesToCheck.add(it)
                 }
             }
 
             indices.addAll(toAdd)
-            addedTiles.addAll(toAdd)
+            addedIndices.addAll(toAdd)
         }
 
         return indices
