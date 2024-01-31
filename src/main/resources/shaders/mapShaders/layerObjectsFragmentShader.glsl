@@ -8,8 +8,7 @@ uniform float transparency;
 
 void main(void)
 {
-    fColor = texture(textureSample, fragmentUV).rgba;
-    fColor.a = transparency;
+    fColor = vec4(1.0, 1.0, 1.0, transparency) * texture(textureSample, fragmentUV);
 
     if (fColor.a <= 0) {
         discard;
