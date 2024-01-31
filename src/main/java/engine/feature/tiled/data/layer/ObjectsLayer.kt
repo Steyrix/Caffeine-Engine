@@ -35,6 +35,12 @@ class ObjectsLayer(
         }
     }
 
+    fun processIntersection(index: Int) {
+        objects.find {
+            it.tileIndices.contains(index)
+        }?.transparencyValue = 0.5f
+    }
+
     override fun updateParameters(parameters: SetOfStatic2DParameters) {
         objects.forEach {
             it.updateParameters(parameters)
