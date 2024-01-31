@@ -15,18 +15,12 @@ class LayerObject(
 
     var isTransparent = false
 
-    var transparencyValue: Float = 0f
+    var transparencyValue: Float = 1f
 
     var shader: Shader? = null
         set(value) {
             field = value
             graphicalComponent.shader = value
-        }
-
-    var zLevel: Float = Float.POSITIVE_INFINITY
-        set(value) {
-            field = value
-            graphicalComponent.zLevel = value
         }
 
     init {
