@@ -75,7 +75,8 @@ object TileLayerInitializer {
             val adjacentIndices = getAdjacentTiles(
                 data,
                 width,
-                num
+                num,
+                shouldIncludeDiagonals = false
             )
 
             val toAdd = mutableListOf<Int>()
@@ -190,7 +191,8 @@ object TileLayerInitializer {
     private fun getAdjacentTiles(
         data: List<Int>,
         widthInTiles: Int,
-        num: Int
+        num: Int,
+        shouldIncludeDiagonals: Boolean = true
     ): MutableList<Int> {
         val predicates = listOf(
             { i: Int -> i < data.size - 1 } to { i: Int -> i + 1 }, // right tile
@@ -217,18 +219,20 @@ object TileLayerInitializer {
             }
         }
 
-        diagonalPredicates.forEachIndexed { i, it ->
-            val condition = when (i) {
-                0 -> { x: Int -> predicates[3].first(x) && predicates[2].first(x) }
-                1 -> { x: Int -> predicates[0].first(x) && predicates[2].first(x) }
-                2 -> { x: Int -> predicates[0].first(x) && predicates[1].first(x) }
-                else -> { x: Int -> predicates[3].first(x) && predicates[1].first(x) }
-            }
+        if (shouldIncludeDiagonals) {
+            diagonalPredicates.forEachIndexed { i, it ->
+                val condition = when (i) {
+                    0 -> { x: Int -> predicates[3].first(x) && predicates[2].first(x) }
+                    1 -> { x: Int -> predicates[0].first(x) && predicates[2].first(x) }
+                    2 -> { x: Int -> predicates[0].first(x) && predicates[1].first(x) }
+                    else -> { x: Int -> predicates[3].first(x) && predicates[1].first(x) }
+                }
 
-            if (it.first(num) && condition(num) && data[num] != EMPTY_TILE_ID) {
-                val toAdd = it.second(num)
-                if (data[toAdd] != EMPTY_TILE_ID) {
-                    out.add(toAdd)
+                if (it.first(num) && condition(num) && data[num] != EMPTY_TILE_ID) {
+                    val toAdd = it.second(num)
+                    if (data[toAdd] != EMPTY_TILE_ID) {
+                        out.add(toAdd)
+                    }
                 }
             }
         }
