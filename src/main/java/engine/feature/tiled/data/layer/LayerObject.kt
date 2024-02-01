@@ -14,6 +14,12 @@ class LayerObject(
 ) : CompositeEntity() {
 
     var transparencyValue: Float = 1f
+        set(value) {
+            graphicalComponent.shader?.let {
+                it.bind()
+                it.setUniform(transparencyUniform, value)
+            }
+        }
 
     var shader: Shader? = null
         set(value) {
@@ -23,10 +29,6 @@ class LayerObject(
 
     init {
         addComponent(graphicalComponent, ParametersFactory.createEmptyStatic())
-    }
-
-    fun isIntersecting(tileIndex: Int): Boolean {
-        return tileIndices.contains(tileIndex)
     }
 
     fun updateParameters(parameters: SetOfStatic2DParameters) {
