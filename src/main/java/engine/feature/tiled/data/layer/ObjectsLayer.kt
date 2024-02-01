@@ -15,11 +15,13 @@ class ObjectsLayer(
     transparencyUniformName: String
 ) : CompositeEntity(), Layer {
 
-    var shader: Shader? = null
+    var objectShaderCreator: () -> Shader? = {
+        null
+    }
         set(value) {
             field = value
             objects.forEach {
-                it.shader = value
+                it.shader = value.invoke()
             }
         }
 
@@ -36,9 +38,12 @@ class ObjectsLayer(
     }
 
     fun processIntersection(index: Int) {
-        objects.find {
+        val target = objects.find {
             it.tileIndices.contains(index)
-        }?.transparencyValue = 0.5f
+        }
+        if (target != null) {
+            target.transparencyValue = 0.5f
+        }
     }
 
     override fun updateParameters(parameters: SetOfStatic2DParameters) {

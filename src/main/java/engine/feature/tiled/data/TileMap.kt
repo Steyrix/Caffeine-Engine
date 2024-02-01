@@ -30,11 +30,13 @@ class TileMap(
             }
         }
 
-    var objectShader: Shader? = null
+    var objectShaderCreator: () -> Shader? = {
+        null
+    }
         set(value) {
             field = value
             layers.forEach {
-                if (it is ObjectsLayer) it.shader = value
+                if (it is ObjectsLayer) it.objectShaderCreator = value
             }
         }
 
@@ -47,7 +49,7 @@ class TileMap(
         }
 
     override var zLevel: Float = 0f
-    
+
     private val set: TileSet
     private val layersMap = layers.associateBy { it.name }
 
@@ -100,6 +102,11 @@ class TileMap(
     fun getTileValue(posX: Float, posY: Float, layerName: String): Int {
         val layer = layersMap[layerName] ?: return NOT_FOUND
         val index = getTileIndex(posX, posY)
+        return layer.getTileValueByIndex(index)
+    }
+
+    fun getTileValue(index: Int, layerName: String): Int {
+        val layer = layersMap[layerName] ?: return NOT_FOUND
         return layer.getTileValueByIndex(index)
     }
 
@@ -159,7 +166,7 @@ class TileMap(
 
     override fun draw() {
         layers.forEach {
-            when(it) {
+            when (it) {
                 is TileLayer -> it.draw()
                 is ObjectsLayer -> it.draw()
             }
@@ -172,5 +179,14 @@ class TileMap(
 
     fun getWorldHeight(): Float {
         return relativeHeight * absoluteHeight
+    }
+
+    fun processIntersectionIfNeeded(point: Point2D) {
+        val index = getTileIndex(point.x, point.y)
+        layers.filterIsInstance<ObjectsLayer>().forEach {
+            if (getTileValue(index, it.name) >= 0) {
+                it.processIntersection(index)
+            }
+        }
     }
 }

@@ -50,6 +50,8 @@ class TiledCollider(
             if (map.getTileValue(centerX, bottomY, layer) >= EMPTY_TILE_VALUE) isBottomColliding = false
         }
 
+        map.processIntersectionIfNeeded(Point2D(centerX, centerY))
+
         isOutOfMap = when {
             centerX < 0 || centerX >= map.getWorldWidth() -> true
             bottomY < 0 || topY >= map.getWorldHeight() -> true

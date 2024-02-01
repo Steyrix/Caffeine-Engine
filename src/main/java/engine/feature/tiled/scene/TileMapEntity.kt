@@ -108,13 +108,14 @@ class TileMapEntity(
             }
         }
 
-        graphicalComponent.objectShader = ShaderLoader.loadFromFile(
-            vertexShaderFilePath = vertexObjectShaderPath,
-            fragmentShaderFilePath = fragmentObjectShaderPath
-        ).also { shader ->
-            shader.bind()
-            shader.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection)
-            //shader.setUniform("transparency", 0f)
+        graphicalComponent.objectShaderCreator = {
+            ShaderLoader.loadFromFile(
+                vertexShaderFilePath = vertexObjectShaderPath,
+                fragmentShaderFilePath = fragmentObjectShaderPath
+            ).also { shader ->
+                shader.bind()
+                shader.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection)
+            }
         }
 
         // TODO: cover with debug flag
