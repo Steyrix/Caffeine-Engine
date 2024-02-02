@@ -43,7 +43,7 @@ class TiledCollider(
         val topY = parameters.y
 
         var isCenterColliding = true
-        var isBottomColliding = true
+        var isBottomColliding = false
 
         nonCollisionLayers.forEach { layer ->
             if (map.getTileValue(centerX, centerY, layer) >= EMPTY_TILE_VALUE) isCenterColliding = false
