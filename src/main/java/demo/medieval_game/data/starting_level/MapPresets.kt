@@ -36,7 +36,7 @@ fun getStartingMapPreset(screenWidth: Float, screenHeight: Float): TileMapPreset
     TileMapPreset(
         width = 800f,
         height = 800f,
-        mapSourcePath = "/tiled/port_map.xml",
+        mapSourcePath = "/tiled/general_map.xml",
         vertexShaderPath = "/shaders/lightingShaders/lightingVertexShader.glsl",
         fragmentShaderPath = "/shaders/lightingShaders/lightingFragmentShader.glsl",
         objectFragmentShaderPath = "/shaders/mapShaders/layerObjectsFragmentShader.glsl",
@@ -48,8 +48,8 @@ fun getStartingMapPreset(screenWidth: Float, screenHeight: Float): TileMapPreset
             "lightIntensityCap" to lightIntensityCap
         ),
         updateEvents = listOf { drawable: Drawable<*> -> getLightBlinkingEvent(drawable) },
-        walkingLayers = listOf("walking_layer", "walkable_objects_layer"),
-        obstacleLayers = listOf("objectL_obstacles_layer"),
+        walkingLayers = listOf("walkable_layer", "transparent_obstacles_layer"),
+        obstacleLayers = listOf("obstacles_layer"),
     )
 
 fun getNexusMapPreset(): TileMapPreset =
