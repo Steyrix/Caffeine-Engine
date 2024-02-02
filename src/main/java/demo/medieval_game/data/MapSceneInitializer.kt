@@ -15,7 +15,7 @@ object MapSceneInitializer {
         preset: TileMapPreset,
         renderProjection: Matrix4f,
         collisionContexts: List<CollisionContext>,
-        isAutoAdjustEnabled: Boolean = false
+        isAutoAdjustEnabled: Boolean = true
     ): TileMapEntity {
         return TileMapEntity(preset).apply {
             init(
