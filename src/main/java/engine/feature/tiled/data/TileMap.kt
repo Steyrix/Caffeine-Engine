@@ -5,10 +5,7 @@ import engine.core.render.Drawable
 import engine.core.shader.Shader
 import engine.core.update.SetOfStatic2DParameters
 import engine.core.geometry.Point2D
-import engine.feature.tiled.data.layer.Layer
-import engine.feature.tiled.data.layer.ObjectsLayer
-import engine.feature.tiled.data.layer.TileLayer
-import engine.feature.tiled.data.layer.TileLayerInitializer
+import engine.feature.tiled.data.layer.*
 import engine.feature.tiled.traversing.TileGraph
 import kotlin.math.roundToInt
 
@@ -193,5 +190,15 @@ class TileMap(
                 it.processIntersection(index)
             }
         }
+    }
+
+    fun retrieveObjects(): List<LayerObject> {
+        val out = mutableListOf<LayerObject>()
+        layers.forEach {
+            if (it is ObjectsLayer) {
+                out.addAll(it.objects)
+            }
+        }
+        return out
     }
 }
