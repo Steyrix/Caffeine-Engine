@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="1">
- <tileset firstgid="1" source="../Documents/general_tileset_2.tsx"/>
+ <tileset firstgid="1" source="/tiled/general_tileset.xml"/>
  <layer id="1" name="walkable_layer" width="30" height="30">
   <data encoding="csv">
 69,69,69,69,69,218,219,220,69,69,69,69,69,69,69,69,69,69,69,69,69,69,69,69,69,69,69,69,69,69,
