@@ -25,7 +25,7 @@ class ObjectsLayer(
             }
         }
 
-    private val objects: List<LayerObject>
+    val objects: List<LayerObject>
 
     init {
         objects = TileLayerInitializer.genLayerObjects(widthInTiles, tileIdsData, set, transparencyUniformName)
