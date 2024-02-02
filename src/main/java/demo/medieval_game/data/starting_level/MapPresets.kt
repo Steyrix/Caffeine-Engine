@@ -49,7 +49,7 @@ fun getStartingMapPreset(screenWidth: Float, screenHeight: Float): TileMapPreset
         ),
         updateEvents = listOf { drawable: Drawable<*> -> getLightBlinkingEvent(drawable) },
         walkingLayers = listOf("walkable_layer", "transparent_obstacles_layer"),
-        obstacleLayers = listOf("obstacles_layer"),
+        obstacleLayers = listOf("obstacles_layer", "unwalkable_bg_layer"),
     )
 
 fun getNexusMapPreset(): TileMapPreset =
