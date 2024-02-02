@@ -29,8 +29,8 @@ fun createDefaultHpBarParams(): SetOfStatic2DParameters {
 }
 
 var characterParameters = SetOf2DParametersWithVelocity(
-    x = 500f,
-    y = 500f,
+    x = 100f,
+    y = 100f,
     xSize = HUMANOID_SIZE_X,
     ySize = HUMANOID_SIZE_Y + 60f,
     rotationAngle = 0f,
