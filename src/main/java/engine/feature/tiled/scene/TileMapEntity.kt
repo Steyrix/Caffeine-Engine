@@ -166,8 +166,8 @@ class TileMapEntity(
         params: List<SetOfParameters>
     ) {
         params.forEach {
-            it.xSize = sizeToMapRelation * parameters.xSize
-            it.ySize = sizeToMapRelation * parameters.ySize
+            it.xSize = (graphicalComponent?.getTileWidth() ?: 0f) * 1.72f
+            it.ySize = (graphicalComponent?.getTileHeight() ?: 0f) * 3
         }
     }
 

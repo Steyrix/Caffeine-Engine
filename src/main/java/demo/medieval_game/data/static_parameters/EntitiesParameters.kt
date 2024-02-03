@@ -7,8 +7,8 @@ import engine.core.update.SetOfStatic2DParameters
 // TODO: divide
 const val HUMANOID_SIZE_TO_MAP_RELATION = 0.128f
 
-var HUMANOID_SIZE_X = 102.4f
-var HUMANOID_SIZE_Y = 102.4f
+var HUMANOID_SIZE_X = 55f
+var HUMANOID_SIZE_Y = 87f
 
 var defaultHpBarParams = SetOfStatic2DParameters(
     x = 0f,
@@ -62,7 +62,7 @@ const val HUMANOID_BOX_OFFSET_X = 18.59680f
 const val HUMANOID_BOX_OFFSET_Y = 20f
 
 const val HUMANOID_BOX_WIDTH = 65.2064f
-const val HUMANOID_BOX_HEIGHT = 130f
+const val HUMANOID_BOX_HEIGHT = 90f
 
 val campfireParameters = SetOfStatic2DParameters(
     800f, 800f, 100f, 100f, 0f
