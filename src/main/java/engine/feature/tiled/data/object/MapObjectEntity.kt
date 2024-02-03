@@ -7,11 +7,13 @@ class MapObjectEntity(
     private val layerObject: LayerObject
 ) : SingleGameEntity() {
 
+    var level = 0f
+
     init {
         it = layerObject
     }
 
     override fun getZLevel(): Float {
-        return layerObject.graphicalComponent.y + layerObject.graphicalComponent.ySize
+        return level
     }
 }
