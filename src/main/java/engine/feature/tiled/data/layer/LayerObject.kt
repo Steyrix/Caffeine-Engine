@@ -31,6 +31,10 @@ class LayerObject(
         addComponent(graphicalComponent, ParametersFactory.createEmptyStatic())
     }
 
+    override fun update(deltaTime: Float) {
+        Unit //TODO: That's a hack
+    }
+
     fun updateParameters(parameters: SetOfStatic2DParameters) {
         graphicalComponent.updateParameters(parameters)
         graphicalComponent.shader?.let {
