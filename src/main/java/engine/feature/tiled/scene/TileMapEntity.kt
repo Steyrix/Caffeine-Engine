@@ -12,6 +12,8 @@ import engine.core.update.SetOfStatic2DParameters
 import engine.feature.collision.CollisionContext
 import engine.core.geometry.Point2D
 import engine.feature.tiled.data.TileMap
+import engine.feature.tiled.data.`object`.MapObjectEntity
+import engine.feature.tiled.data.`object`.MapObjectRetriever
 import engine.feature.tiled.parser.TiledResourceParser
 import engine.feature.tiled.traversing.TileGraph
 import engine.feature.tiled.traversing.TileTraverser
@@ -167,6 +169,14 @@ class TileMapEntity(
             it.xSize = sizeToMapRelation * parameters.xSize
             it.ySize = sizeToMapRelation * parameters.ySize
         }
+    }
+
+    fun retrieveObjectEntities(): List<MapObjectEntity> {
+        graphicalComponent?.let {
+            return MapObjectRetriever.getObjectsAsEntities(it, parameters)
+        }
+
+        return emptyList()
     }
 
     override fun getZLevel(): Float {
