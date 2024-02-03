@@ -10,7 +10,9 @@ object MapObjectRetriever {
         val objects = tileMap.retrieveObjects()
 
         return objects.map {
-            MapObjectEntity(it)
+            MapObjectEntity(it).apply {
+                level = tileMap.getTilePosition(it.tileIndices.maxOrNull() ?: 0).y + tileMap.getTileHeight()
+            }
         }
     }
 }
