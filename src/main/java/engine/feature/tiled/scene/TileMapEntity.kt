@@ -173,7 +173,7 @@ class TileMapEntity(
 
     fun retrieveObjectEntities(): List<MapObjectEntity> {
         graphicalComponent?.let {
-            return MapObjectRetriever.getObjectsAsEntities(it, parameters)
+            return MapObjectRetriever.getObjectsAsEntities(it)
         }
 
         return emptyList()
