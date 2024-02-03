@@ -12,6 +12,6 @@ class MapObjectEntity(
     }
 
     override fun getZLevel(): Float {
-        return layerObject.graphicalComponent.y + 100
+        return layerObject.graphicalComponent.y + layerObject.graphicalComponent.ySize
     }
 }
