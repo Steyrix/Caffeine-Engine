@@ -170,7 +170,6 @@ class TileMap(
         layers.forEach {
             when (it) {
                 is TileLayer -> it.draw()
-                is ObjectsLayer -> it.draw()
             }
         }
     }
