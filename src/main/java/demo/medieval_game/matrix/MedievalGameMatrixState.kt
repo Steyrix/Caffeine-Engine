@@ -59,7 +59,7 @@ object MedievalGameMatrixState : MatrixState {
 
     private fun isHorizontalTranslationPossible(
         x: Float,
-        worldWidth: Float = 1500f,
+        worldWidth: Float = 1140f,
         screenWidth: Float = 999.375f
     ): Boolean {
         return (screenWidth + abs(worldTranslation.x + x) < worldWidth)
@@ -68,7 +68,7 @@ object MedievalGameMatrixState : MatrixState {
 
     private fun isVerticalTranslationPossible(
         y: Float,
-        worldHeight: Float = 1500f,
+        worldHeight: Float = 1140f,
         screenHeight: Float = 999.375f
     ): Boolean {
         return (screenHeight + abs(worldTranslation.y + y) < worldHeight)
