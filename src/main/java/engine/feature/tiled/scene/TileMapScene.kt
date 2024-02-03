@@ -20,13 +20,15 @@ abstract class TileMapScene(
         super.init(session, intent)
 
         tiledMap = initTileMap(
-            renderProjection!!,
+            renderProjection,
             screenWidth,
             screenHeight
         )
 
         tiledMap?.let {
             context.add(it)
+            val objects = it.retrieveObjectEntities()
+            context.addAll(objects)
         }
     }
 
