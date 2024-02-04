@@ -42,7 +42,7 @@ class TileLayer(
 
     init {
         addComponent(graphicalComponent, paramsKey)
-        addComponent(debugGraphicalComponent, paramsKey)
+        //addComponent(debugGraphicalComponent, paramsKey)
     }
 
     override fun updateParameters(parameters: SetOfStatic2DParameters) {
