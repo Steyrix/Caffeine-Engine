@@ -39,18 +39,17 @@ class TiledCollider(
     private fun isCollidingWithMapObjects(map: TileMap): Boolean {
         val centerX = parameters.x + parameters.xSize / 2
         val centerY = parameters.y + parameters.ySize / 2
-        val bottomY = parameters.y + parameters.ySize
+        val bottomY = parameters.y + parameters.ySize * 0.71f
         val topY = parameters.y
 
-        var isCenterColliding = true
         var isBottomColliding = true
 
         nonCollisionLayers.forEach { layer ->
-            if (map.getTileValue(centerX, centerY, layer) >= EMPTY_TILE_VALUE) isCenterColliding = false
             if (map.getTileValue(centerX, bottomY, layer) >= EMPTY_TILE_VALUE) isBottomColliding = false
         }
 
         map.processIntersectionIfNeeded(Point2D(centerX, centerY))
+        map.processIntersectionIfNeeded(Point2D(centerX, bottomY))
 
         isOutOfMap = when {
             centerX < 0 || centerX >= map.getWorldWidth() -> true
@@ -58,7 +57,7 @@ class TiledCollider(
             else -> false
         }
 
-        if (isCenterColliding || isBottomColliding) {
+        if (isBottomColliding) {
             return true
         } else {
             previousTilePos = Point2D(parameters.x, parameters.y)
