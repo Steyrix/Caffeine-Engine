@@ -17,9 +17,9 @@ object GoblinPreset {
                 SetOfStatic2DParametersWithOffset(
                     x = 0f,
                     y = 0f,
-                    xSize = HUMANOID_BOX_WIDTH,
+                    xSize = HUMANOID_BOX_WIDTH - 30f,
                     xOffset = HUMANOID_BOX_OFFSET_X,
-                    ySize = HUMANOID_SIZE_Y,
+                    ySize = HUMANOID_SIZE_Y - 20f,
                     yOffset = 0f,
                     rotationAngle = 0f
                 ),
