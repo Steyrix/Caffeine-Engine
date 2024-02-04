@@ -56,8 +56,8 @@ class ChestController(
 
     override fun getAnimationKey(): String {
         return when {
-            isBreaking -> AnimationKey.BREAKING
             isBroken -> AnimationKey.BROKEN
+            isBreaking -> AnimationKey.BREAKING
             isClosed -> {
                 drawableComponent.resetAnimation(AnimationKey.CLOSE)
                 AnimationKey.CLOSED_CHEST
