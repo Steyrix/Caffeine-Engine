@@ -46,8 +46,8 @@ class TempSpritesHolder : CompositeEntity() {
         val params = SetOfStatic2DParameters(
             x = posX,
             y = posY,
-            xSize = 128f,
-            ySize = 128f,
+            xSize = 64f,
+            ySize = 64f,
             rotationAngle = 0f
         )
 
