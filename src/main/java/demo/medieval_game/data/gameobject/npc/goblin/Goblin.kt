@@ -1,13 +1,11 @@
 package demo.medieval_game.data.gameobject.npc.goblin
 
-import demo.medieval_game.Player
 import demo.medieval_game.data.gameobject.TempSpritesHolder
 import demo.medieval_game.interaction.AttackInteraction
 import demo.medieval_game.interaction.PlayerAttackInteraction
 import engine.core.entity.CompositeEntity
 import engine.core.render.AnimatedModel2D
 import engine.core.update.SetOf2DParametersWithVelocity
-import engine.core.update.getCenterPoint
 import engine.feature.interaction.Interaction
 
 class Goblin(
