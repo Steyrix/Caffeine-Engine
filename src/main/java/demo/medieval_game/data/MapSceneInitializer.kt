@@ -27,9 +27,7 @@ object MapSceneInitializer {
                 adjustParameters(
                     HUMANOID_SIZE_TO_MAP_RELATION,
                     listOf(
-                        characterParameters,
-                        goblinParams1,
-                        goblinParams2
+                        characterParameters
                     )
                 )
             }
