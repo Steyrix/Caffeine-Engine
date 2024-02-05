@@ -42,7 +42,6 @@ class PlayableCharacter(
 
     fun init(
         bbCollisionContext: BoundingBoxCollisionContext,
-        tiledCollisionContext: TiledCollisionContext?,
         boxInteractionContext: BoxInteractionContext
     ) {
         projection = MedievalGame.renderProjection
@@ -74,11 +73,6 @@ class PlayableCharacter(
         hp = HealthBar(characterParameters, defaultHpBarParams, projection)
 
         boxCollider = getBoundingBoxCollider(bbCollisionContext)
-
-        tiledCollisionContext?.let {
-            tiledCollider = getTiledCollider(tiledCollisionContext)
-            addComponent(tiledCollider, characterParameters)
-        }
 
         addComponent(boundingBox, characterParameters)
         addComponent(hp, characterParameters)

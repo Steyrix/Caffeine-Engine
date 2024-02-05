@@ -20,11 +20,7 @@ object Initializer {
     ): List<GameEntity> {
         val out = mutableListOf<GameEntity>()
 
-        val character = initPlayableCharacter(
-            bbCollisionContext,
-            tiledCollisionContext = null,
-            boxInteractionContext
-        )
+        val character = initPlayableCharacter(bbCollisionContext, boxInteractionContext)
 
         out.add(character)
 
@@ -40,18 +36,13 @@ object Initializer {
 
     private fun initPlayableCharacter(
         boundingBoxCollisionContext: BoundingBoxCollisionContext,
-        tiledCollisionContext: TiledCollisionContext?,
         boxInteractionContext: BoxInteractionContext
     ): PlayableCharacter {
         return PlayableCharacter(
             characterParameters
         ).apply {
-            init(
-                boundingBoxCollisionContext,
-                tiledCollisionContext,
-                boxInteractionContext
-            )
-            spawn(Point2D(100f, 100f))
+            init(boundingBoxCollisionContext, boxInteractionContext)
+            spawn(Point2D(500f, 500f))
         }
     }
 }
