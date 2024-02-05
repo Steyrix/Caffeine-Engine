@@ -21,8 +21,8 @@ import engine.feature.interaction.BoxInteractionContext
 import org.joml.Matrix4f
 
 class PlayableCharacter(
-    params: SetOf2DParametersWithVelocity
-) : DynamicGameEntity<SetOf2DParametersWithVelocity>(params) {
+    private val parameters: SetOf2DParametersWithVelocity
+) : DynamicGameEntity<SetOf2DParametersWithVelocity>() {
 
     private var graphicalComponent: AnimatedModel2D? = null
     private var hp: HealthBar? = null

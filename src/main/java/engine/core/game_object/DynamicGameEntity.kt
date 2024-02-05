@@ -9,9 +9,7 @@ import engine.core.window.Window
     Dynamic entities are entities that can leave the game context.
  */
 //TODO: get rid of parameters
-abstract class DynamicGameEntity<P : SetOfParameters>(
-    protected val parameters: P
-) : SingleGameEntity() {
+abstract class DynamicGameEntity<P : SetOfParameters> : SingleGameEntity() {
 
     private var isSpawned = false
 

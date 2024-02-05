@@ -16,8 +16,8 @@ import engine.feature.interaction.BoxInteractionContext
 import org.joml.Matrix4f
 
 abstract class NPC<E : CompositeEntity>(
-    params: SetOf2DParametersWithVelocity
-) : DynamicGameEntity<SetOf2DParametersWithVelocity>(params) {
+    private val parameters: SetOf2DParametersWithVelocity
+) : DynamicGameEntity<SetOf2DParametersWithVelocity>() {
 
     override fun preSpawn(position: Point2D) {
     }

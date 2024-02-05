@@ -9,10 +9,10 @@ import engine.feature.tiled.traversing.TileTraverser
 import org.joml.Matrix4f
 
 class GoblinNPC(
-    params: SetOf2DParametersWithVelocity,
+    private val parameters: SetOf2DParametersWithVelocity,
     private val tileTraverser: TileTraverser,
     private val tempSpritesHolder: TempSpritesHolder
-) : NPC<Goblin>(params) {
+) : NPC<Goblin>(parameters) {
 
     override fun initEntity(
         renderProjection: Matrix4f,
