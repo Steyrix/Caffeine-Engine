@@ -15,7 +15,7 @@ abstract class TileMapScene(
 
     override val context: GameContext = GameContext.getInstance()
 
-    protected val tiledCollisionContext = TiledCollisionContext()
+    protected var tiledCollisionContext: TiledCollisionContext? = null
     protected var tiledMap: TileMapEntity? = null
 
     override fun init(session: Session, intent: SceneIntent?) {
@@ -31,6 +31,9 @@ abstract class TileMapScene(
             context.add(it)
             val objects = it.retrieveObjectEntities()
             context.addAll(objects)
+
+            tiledCollisionContext = TiledCollisionContext(it.retrieveCollisionLayers())
+            it.addToCollisionContext(tiledCollisionContext!!)
         }
     }
 

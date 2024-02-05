@@ -35,7 +35,10 @@ class StartMap(
             ) { params -> it.createTraverser(params, characterParameters) }
 
             context.addAll(objects)
-            character?.addTiledCollider(tiledCollisionContext)
+
+            tiledCollisionContext?.let {
+                character?.addTiledCollider(it)
+            }
         }
     }
 

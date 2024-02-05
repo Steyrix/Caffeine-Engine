@@ -57,10 +57,14 @@ abstract class MedievalGameScene(
     }
 
     override fun initTileMap(projection: Matrix4f, screenWidth: Float, screenHeight: Float): TileMapEntity {
+        val collisionContexts = tiledCollisionContext?.let {
+            listOf(it)
+        } ?: emptyList()
+
         return MapSceneInitializer.initTileMapObject(
             preset,
             projection,
-            listOf(tiledCollisionContext)
+            collisionContexts
         )
     }
 
@@ -87,7 +91,7 @@ abstract class MedievalGameScene(
 
         actions.forEach { it.schedule(deltaTime) }
 
-        tiledCollisionContext.update()
+        tiledCollisionContext?.update()
         bbCollisionContext?.update()
         boxInteractionContext?.update()
     }
@@ -107,7 +111,7 @@ abstract class MedievalGameScene(
     }
 
     override fun onSwitch() {
-        tiledCollisionContext.dispose()
+        tiledCollisionContext?.dispose()
     }
 
     protected open fun handleMapTransaction(intent: MedievalGameSceneIntent) {

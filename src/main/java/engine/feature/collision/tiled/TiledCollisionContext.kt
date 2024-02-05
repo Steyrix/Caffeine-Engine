@@ -5,7 +5,9 @@ import engine.core.update.SetOfParameters
 import engine.feature.collision.Collider
 import engine.feature.collision.CollisionContext
 
-class TiledCollisionContext : CollisionContext {
+class TiledCollisionContext(
+    val collisionLayers: MutableList<String> = mutableListOf()
+) : CollisionContext {
 
     override val colliders: MutableSet<Collider> = mutableSetOf()
 

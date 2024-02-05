@@ -11,6 +11,7 @@ import engine.core.update.SetOfParameters
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.collision.CollisionContext
 import engine.core.geometry.Point2D
+import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.tiled.data.TileMap
 import engine.feature.tiled.data.`object`.MapObjectEntity
 import engine.feature.tiled.data.`object`.MapObjectRetriever
@@ -149,6 +150,10 @@ class TileMapEntity(
         }
     }
 
+    fun addToCollisionContext(collisionContext: TiledCollisionContext) {
+        collisionContext.addEntity(graphicalComponent as Entity, parameters)
+    }
+
     fun createTraverser(
         holderParams: SetOf2DParametersWithVelocity,
         targetParams: SetOf2DParametersWithVelocity
@@ -177,6 +182,10 @@ class TileMapEntity(
         }
 
         return emptyList()
+    }
+
+    fun retrieveCollisionLayers(): MutableList<String> {
+        return mapPresets.obstacleLayers.toMutableList()
     }
 
     override fun getZLevel(): Float {
