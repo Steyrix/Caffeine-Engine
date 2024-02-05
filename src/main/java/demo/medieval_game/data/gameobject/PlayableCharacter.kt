@@ -41,7 +41,6 @@ class PlayableCharacter(
     }
 
     fun init(
-        bbCollisionContext: BoundingBoxCollisionContext,
         boxInteractionContext: BoxInteractionContext
     ) {
         projection = MedievalGame.renderProjection
@@ -72,15 +71,11 @@ class PlayableCharacter(
 
         hp = HealthBar(characterParameters, defaultHpBarParams, projection)
 
-        boxCollider = getBoundingBoxCollider(bbCollisionContext)
-
         addComponent(boundingBox, characterParameters)
         addComponent(hp, characterParameters)
         addComponent(boxCollider, characterParameters)
         addComponent(tempSprites, characterParameters)
         addComponent(controller, characterParameters)
-
-        bbCollisionContext.addEntity(boundingBox as Entity, characterParameters)
 
         currentInteractionContext = boxInteractionContext
         boxInteractionContext.addAgent(it as Entity, boundingBox as BoundingBox)
@@ -133,9 +128,11 @@ class PlayableCharacter(
         )
     }
 
-    private fun addBoundingBoxCollider(
+    fun addBoundingBoxCollider(
         collisionContext: BoundingBoxCollisionContext
     ) {
+        updateBoundingBox()
+
         if (boxCollider != null) {
             it?.removeComponent(boxCollider as Entity)
         }
@@ -176,7 +173,7 @@ class PlayableCharacter(
         }
     }
 
-    fun updateBoundingBox() {
+    private fun updateBoundingBox() {
         it?.removeComponent(boundingBox!!)
         currentInteractionContext?.removeAgent(boundingBox!!)
 

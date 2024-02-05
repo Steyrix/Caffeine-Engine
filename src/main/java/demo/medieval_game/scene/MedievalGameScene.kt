@@ -45,10 +45,13 @@ abstract class MedievalGameScene(
 
         super.init(session, intent)
 
-        character = session.sessionCharacter
-
-        bbCollisionContext = session.bbCollisionContext
+        bbCollisionContext = BoundingBoxCollisionContext()
         boxInteractionContext = session.boxInteractionContext
+
+        character = session.sessionCharacter
+        bbCollisionContext?.let {
+            character?.addBoundingBoxCollider(it)
+        }
 
         intent?.let {
             handleMapTransaction(it as MedievalGameSceneIntent)

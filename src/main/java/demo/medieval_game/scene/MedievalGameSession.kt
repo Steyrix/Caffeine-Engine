@@ -21,7 +21,6 @@ object MedievalGameSession : Session() {
         private set
 
     // TODO: scene holder should probably be responsible of this
-    val bbCollisionContext = BoundingBoxCollisionContext()
     val boxInteractionContext = BoxInteractionContext()
 
     var textRenderer: TextRenderer? = null
@@ -35,7 +34,6 @@ object MedievalGameSession : Session() {
             Initializer.initPersistentObjects(
                 presets.screenWidth,
                 presets.screenHeight,
-                bbCollisionContext,
                 boxInteractionContext
             )
         )

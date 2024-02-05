@@ -36,7 +36,6 @@ class StartMap(
 
             context.addAll(objects)
             character?.addTiledCollider(tiledCollisionContext)
-            character?.updateBoundingBox()
         }
     }
 

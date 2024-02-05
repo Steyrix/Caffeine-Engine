@@ -15,12 +15,11 @@ object Initializer {
     fun initPersistentObjects(
         screenWidth: Float,
         screenHeight: Float,
-        bbCollisionContext: BoundingBoxCollisionContext,
         boxInteractionContext: BoxInteractionContext
     ): List<GameEntity> {
         val out = mutableListOf<GameEntity>()
 
-        val character = initPlayableCharacter(bbCollisionContext, boxInteractionContext)
+        val character = initPlayableCharacter(boxInteractionContext)
 
         out.add(character)
 
@@ -35,13 +34,12 @@ object Initializer {
     }
 
     private fun initPlayableCharacter(
-        boundingBoxCollisionContext: BoundingBoxCollisionContext,
         boxInteractionContext: BoxInteractionContext
     ): PlayableCharacter {
         return PlayableCharacter(
             characterParameters
         ).apply {
-            init(boundingBoxCollisionContext, boxInteractionContext)
+            init(boxInteractionContext)
             spawn(Point2D(500f, 500f))
         }
     }
