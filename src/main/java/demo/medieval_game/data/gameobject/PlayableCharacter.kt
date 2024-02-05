@@ -159,7 +159,6 @@ class PlayableCharacter(
         return TiledCollider(
             it as Entity,
             characterParameters,
-            listOf("walkable_layer"),
             tiledCollisionContext
         )
     }

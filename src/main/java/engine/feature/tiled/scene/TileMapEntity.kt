@@ -184,8 +184,8 @@ class TileMapEntity(
         return emptyList()
     }
 
-    fun retrieveCollisionLayers(): MutableList<String> {
-        return mapPresets.obstacleLayers.toMutableList()
+    fun retrieveNonCollisionLayers(): MutableList<String> {
+        return mapPresets.walkingLayers.toMutableList()
     }
 
     override fun getZLevel(): Float {
