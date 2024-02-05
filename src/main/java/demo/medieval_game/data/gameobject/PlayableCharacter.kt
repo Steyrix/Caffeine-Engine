@@ -98,6 +98,7 @@ class PlayableCharacter(
         }
     }
 
+    // TODO: move to interface
     fun <T>addToInteractionContext(interactionContext: InteractionContext<T>) {
         if (interactionContext is BoxInteractionContext) {
             currentInteractionContext = interactionContext
