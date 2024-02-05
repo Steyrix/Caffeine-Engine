@@ -122,15 +122,30 @@ class PlayableCharacter(
     }
 
     private fun getBoundingBoxCollider(
-        bbCollisionContext: BoundingBoxCollisionContext
+        collisionContext: BoundingBoxCollisionContext
     ): BoundingBoxCollider {
         return BoundingBoxCollider(
             it as Entity,
             boundingBox!!,
             characterParameters,
-            bbCollisionContext,
+            collisionContext,
             emptyBehavior
         )
+    }
+
+    private fun addBoundingBoxCollider(
+        collisionContext: BoundingBoxCollisionContext
+    ) {
+        if (boxCollider != null) {
+            it?.removeComponent(boxCollider as Entity)
+        }
+
+        boxCollider = getBoundingBoxCollider(collisionContext)
+        addComponent(boxCollider, characterParameters)
+
+        boxCollider?.let {
+            collisionContext.addCollider(it)
+        }
     }
 
     // TODO: configure layers via getTiledCollider method's parameters
@@ -145,7 +160,7 @@ class PlayableCharacter(
         )
     }
 
-    fun updateCollisionContext(
+    fun addTiledCollider(
         collisionContext: TiledCollisionContext
     ) {
         if (tiledCollider != null) {

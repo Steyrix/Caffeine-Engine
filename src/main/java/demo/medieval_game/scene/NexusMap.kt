@@ -25,7 +25,7 @@ class NexusMap(
                 boxInteractionContext!!,
             ) { params -> it.createTraverser(params, characterParameters) }
             context.addAll(objects)
-            character?.updateCollisionContext(tiledCollisionContext)
+            character?.addTiledCollider(tiledCollisionContext)
             character?.updateBoundingBox()
         }
     }
