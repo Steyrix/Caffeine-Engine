@@ -4,6 +4,7 @@ import engine.core.scene.GameContext
 import engine.core.scene.Scene
 import engine.core.scene.SceneIntent
 import engine.core.session.Session
+import engine.feature.collision.tiled.TiledCollisionContext
 import org.joml.Matrix4f
 
 abstract class TileMapScene(
@@ -14,6 +15,7 @@ abstract class TileMapScene(
 
     override val context: GameContext = GameContext.getInstance()
 
+    protected val tiledCollisionContext = TiledCollisionContext()
     protected var tiledMap: TileMapEntity? = null
 
     override fun init(session: Session, intent: SceneIntent?) {

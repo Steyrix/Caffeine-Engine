@@ -9,7 +9,6 @@ import engine.core.scene.SceneIntent
 import engine.core.session.Session
 import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
-import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.interaction.BoxInteractionContext
 import engine.feature.text.TextRenderer
 import engine.feature.tiled.scene.TileMapEntity
@@ -26,8 +25,6 @@ abstract class MedievalGameScene(
 ) : TileMapScene(projection) {
 
     protected var character: PlayableCharacter? = null
-
-    protected val tiledCollisionContext = TiledCollisionContext()
 
     protected val actions: MutableList<AccumulatedTimeEvent> = mutableListOf()
 
