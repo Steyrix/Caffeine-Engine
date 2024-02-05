@@ -6,20 +6,16 @@ import demo.medieval_game.data.static_parameters.characterParameters
 import engine.core.game_object.GameEntity
 import engine.core.geometry.Point2D
 import engine.core.update.getCenterPoint
-import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
-import engine.feature.collision.tiled.TiledCollisionContext
-import engine.feature.interaction.BoxInteractionContext
 
 object Initializer {
 
     fun initPersistentObjects(
         screenWidth: Float,
-        screenHeight: Float,
-        boxInteractionContext: BoxInteractionContext
+        screenHeight: Float
     ): List<GameEntity> {
         val out = mutableListOf<GameEntity>()
 
-        val character = initPlayableCharacter(boxInteractionContext)
+        val character = initPlayableCharacter()
 
         out.add(character)
 
@@ -33,13 +29,9 @@ object Initializer {
         return out
     }
 
-    private fun initPlayableCharacter(
-        boxInteractionContext: BoxInteractionContext
-    ): PlayableCharacter {
-        return PlayableCharacter(
-            characterParameters
-        ).apply {
-            init(boxInteractionContext)
+    private fun initPlayableCharacter(): PlayableCharacter {
+        return PlayableCharacter(characterParameters).apply {
+            init()
             spawn(Point2D(500f, 500f))
         }
     }

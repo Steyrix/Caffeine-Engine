@@ -7,8 +7,6 @@ import engine.core.game_object.GameEntity
 import engine.core.session.Session
 import engine.core.session.SessionPresets
 import engine.core.session.SimpleGamePresets
-import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
-import engine.feature.interaction.BoxInteractionContext
 import engine.feature.text.TextRenderer
 import engine.feature.text.data.TextDataUtils
 import java.awt.Dimension
@@ -20,9 +18,6 @@ object MedievalGameSession : Session() {
     var sessionCharacter: PlayableCharacter? = null
         private set
 
-    // TODO: scene holder should probably be responsible of this
-    val boxInteractionContext = BoxInteractionContext()
-
     var textRenderer: TextRenderer? = null
 
     override fun init(presets: SessionPresets) {
@@ -33,8 +28,7 @@ object MedievalGameSession : Session() {
         persistentGameEntities.addAll(
             Initializer.initPersistentObjects(
                 presets.screenWidth,
-                presets.screenHeight,
-                boxInteractionContext
+                presets.screenHeight
             )
         )
 

@@ -18,6 +18,7 @@ import engine.feature.collision.boundingbox.*
 import engine.feature.collision.tiled.TiledCollider
 import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.interaction.BoxInteractionContext
+import engine.feature.interaction.InteractionContext
 import org.joml.Matrix4f
 
 class PlayableCharacter(
@@ -40,9 +41,7 @@ class PlayableCharacter(
         parameters.y = position.y
     }
 
-    fun init(
-        boxInteractionContext: BoxInteractionContext
-    ) {
+    fun init() {
         projection = MedievalGame.renderProjection
         boundingBox = getBoundingBox(projection)
         graphicalComponent = getAnimatedObjectComponent(projection)
@@ -76,23 +75,6 @@ class PlayableCharacter(
         addComponent(boxCollider, characterParameters)
         addComponent(tempSprites, characterParameters)
         addComponent(controller, characterParameters)
-
-        currentInteractionContext = boxInteractionContext
-        boxInteractionContext.addAgent(it as Entity, boundingBox as BoundingBox)
-    }
-
-    private fun getBoundingBox(
-        renderProjection: Matrix4f
-    ): BoundingBox {
-        return BoundingBox(
-            xOffset = 10f,
-            xSize = characterParameters.xSize - 20f,
-            yOffset = 30f,
-            ySize = characterParameters.ySize * 0.71f,
-            isSizeBoundToHolder = false,
-        ).apply {
-            shader = ShaderController.createBoundingBoxShader(renderProjection)
-        }
     }
 
     private fun getAnimatedObjectComponent(
@@ -113,6 +95,27 @@ class PlayableCharacter(
             animations = characterAnimations
         ).apply {
             shader = ShaderController.createAnimationShader(renderProjection)
+        }
+    }
+
+    fun <T>addToInteractionContext(interactionContext: InteractionContext<T>) {
+        if (interactionContext is BoxInteractionContext) {
+            currentInteractionContext = interactionContext
+            currentInteractionContext?.addAgent(it as Entity, boundingBox as BoundingBox)
+        }
+    }
+
+    private fun getBoundingBox(
+        renderProjection: Matrix4f
+    ): BoundingBox {
+        return BoundingBox(
+            xOffset = 10f,
+            xSize = characterParameters.xSize - 20f,
+            yOffset = 30f,
+            ySize = characterParameters.ySize * 0.71f,
+            isSizeBoundToHolder = false,
+        ).apply {
+            shader = ShaderController.createBoundingBoxShader(renderProjection)
         }
     }
 
@@ -142,6 +145,10 @@ class PlayableCharacter(
 
         boxCollider?.let {
             collisionContext.addCollider(it)
+        }
+
+        boundingBox?.let {
+            collisionContext.addEntity(it, characterParameters)
         }
     }
 

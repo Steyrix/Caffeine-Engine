@@ -32,7 +32,7 @@ abstract class MedievalGameScene(
     protected val actions: MutableList<AccumulatedTimeEvent> = mutableListOf()
 
     protected var bbCollisionContext: BoundingBoxCollisionContext? = null
-    protected var boxInteractionContext: BoxInteractionContext? = null
+    protected var boxInteractionContext: BoxInteractionContext = BoxInteractionContext()
 
     private var updateRounds = 0
 
@@ -46,12 +46,13 @@ abstract class MedievalGameScene(
         super.init(session, intent)
 
         bbCollisionContext = BoundingBoxCollisionContext()
-        boxInteractionContext = session.boxInteractionContext
 
         character = session.sessionCharacter
         bbCollisionContext?.let {
             character?.addBoundingBoxCollider(it)
         }
+
+        character?.addToInteractionContext(boxInteractionContext)
 
         intent?.let {
             handleMapTransaction(it as MedievalGameSceneIntent)
