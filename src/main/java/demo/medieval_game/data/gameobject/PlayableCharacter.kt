@@ -10,6 +10,7 @@ import demo.medieval_game.scene.MedievalGame
 import engine.core.controllable.Direction
 import engine.core.entity.Entity
 import engine.core.game_object.DynamicGameEntity
+import engine.core.geometry.Point2D
 import engine.core.render.AnimatedModel2D
 import engine.core.texture.Texture2D
 import engine.core.update.SetOf2DParametersWithVelocity
@@ -34,7 +35,7 @@ class PlayableCharacter(
 
     private var controller: SimpleController2D? = null
 
-    override fun preSpawn(setOfParameters: SetOf2DParametersWithVelocity) {
+    override fun preSpawn(position: Point2D) {
         // TODO: implement
     }
 

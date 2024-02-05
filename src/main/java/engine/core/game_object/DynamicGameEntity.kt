@@ -1,5 +1,6 @@
 package engine.core.game_object
 
+import engine.core.geometry.Point2D
 import engine.core.update.SetOfParameters
 import engine.core.window.Window
 
@@ -13,10 +14,10 @@ abstract class DynamicGameEntity<P : SetOfParameters>(
 
     private var isSpawned = false
 
-    abstract fun preSpawn(setOfParameters: P)
+    abstract fun preSpawn(position: Point2D)
 
-    fun spawn(setOfParameters: P) {
-        preSpawn(setOfParameters)
+    fun spawn(position: Point2D) {
+        preSpawn(position)
         isSpawned = true
     }
 

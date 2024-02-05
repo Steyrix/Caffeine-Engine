@@ -10,6 +10,7 @@ import demo.medieval_game.data.static_parameters.*
 import demo.medieval_game.scene.MedievalGame
 import engine.core.game_object.GameEntity
 import engine.core.game_object.SingleGameEntity
+import engine.core.geometry.Point2D
 import engine.core.scene.SceneInitializer
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
@@ -88,7 +89,7 @@ object StartMapInitializer : SceneInitializer {
             }
 
             out.add(goblin)
-            goblin.spawn(it)
+            goblin.spawn(Point2D(200f, 200f))
         }
 
         return out

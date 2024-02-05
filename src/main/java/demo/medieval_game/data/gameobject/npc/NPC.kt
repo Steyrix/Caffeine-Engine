@@ -5,6 +5,7 @@ import demo.medieval_game.hp.HealthBar
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.game_object.DynamicGameEntity
+import engine.core.geometry.Point2D
 import engine.core.render.AnimatedModel2D
 import engine.core.texture.Texture2D
 import engine.core.update.SetOf2DParametersWithVelocity
@@ -18,7 +19,7 @@ abstract class NPC<E : CompositeEntity>(
     params: SetOf2DParametersWithVelocity
 ) : DynamicGameEntity<SetOf2DParametersWithVelocity>(params) {
 
-    override fun preSpawn(setOfParameters: SetOf2DParametersWithVelocity) {
+    override fun preSpawn(position: Point2D) {
     }
 
     fun init(
