@@ -36,7 +36,8 @@ class PlayableCharacter(
     private var controller: SimpleController2D? = null
 
     override fun preSpawn(position: Point2D) {
-        // TODO: implement
+        parameters.x = position.x
+        parameters.y = position.y
     }
 
     fun init(
