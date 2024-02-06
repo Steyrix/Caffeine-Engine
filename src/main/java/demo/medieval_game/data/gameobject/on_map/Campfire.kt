@@ -16,10 +16,10 @@ class Campfire(
     fun init(
         renderProjection: Matrix4f
     ) {
-        val frameWidth = 0.2f
+        val frameWidth = 0.1428f
         val frameHeight = 1.0f
 
-        val texturePath = this.javaClass.getResource("/textures/CampFireAtlas.png")!!.path
+        val texturePath = this.javaClass.getResource("/textures/LowBonfireAtlasWithContour.png")!!.path
         val graphicalComponent = AnimatedModel2D(
             frameWidth = frameWidth,
             frameHeight = frameHeight,
@@ -34,6 +34,6 @@ class Campfire(
     }
 
     override fun getZLevel(): Float {
-        return parameters.y
+        return parameters.y + parameters.ySize + 1f
     }
 }

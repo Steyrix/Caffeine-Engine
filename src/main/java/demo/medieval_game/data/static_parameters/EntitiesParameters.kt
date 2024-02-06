@@ -65,7 +65,7 @@ const val HUMANOID_BOX_WIDTH = 65.2064f
 const val HUMANOID_BOX_HEIGHT = 90f
 
 val campfireParameters = SetOfStatic2DParameters(
-    800f, 800f, 100f, 100f, 0f
+    568f, 765f, 158f, 150f, 0f
 )
 
 val woodenChestParameters = SetOfStatic2DParameters(

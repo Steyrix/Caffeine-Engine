@@ -166,7 +166,7 @@ val goblinsAnimations = mutableListOf<Animation>(
 val campfireAnimations = mutableListOf<Animation>(
     SequenceAtlasAnimation(
         name = AnimationKey.BURN,
-        frames = FrameParametersGenerator.generate(Pair(0, 3), Pair(0, 0), 0.2f, 1.0f),
+        frames = FrameParametersGenerator.generate(Pair(0, 6), Pair(0, 0), 0.1428f, 1.0f),
         timeLimit = 0.1f
     )
 )
