@@ -3,7 +3,6 @@ package engine.feature.tiled.scene
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.game_object.SingleGameEntity
-import engine.core.render.Drawable
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
 import engine.core.update.SetOf2DParametersWithVelocity
@@ -11,6 +10,7 @@ import engine.core.update.SetOfParameters
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.collision.CollisionContext
 import engine.core.geometry.Point2D
+import engine.core.loop.AccumulatedTimeEvent
 import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.tiled.data.TileMap
 import engine.feature.tiled.data.`object`.MapObjectEntity
@@ -51,6 +51,8 @@ class TileMapEntity(
             }
         }
 
+    private val eventSet: MutableSet<AccumulatedTimeEvent> = mutableSetOf()
+
     init {
         it = CompositeEntity()
     }
@@ -75,6 +77,10 @@ class TileMapEntity(
         }
 
         graphicalComponent?.updateParameters(parameters)
+        mapPresets.updateEvents.forEach {
+            val event = it.invoke(graphicalComponent!!)
+            eventSet.add(event)
+        }
     }
 
     private fun getGraphicalComponent(
@@ -145,9 +151,7 @@ class TileMapEntity(
         deltaTime: Float
     ) {
         super.update(deltaTime)
-        mapPresets.updateEvents.forEach {
-            it.invoke(graphicalComponent as Drawable<*>).schedule(deltaTime)
-        }
+        eventSet.forEach { it.schedule(deltaTime) }
     }
 
     fun addToCollisionContext(collisionContext: TiledCollisionContext) {
