@@ -13,8 +13,6 @@ uniform sampler2D textureSample;
 
 void main(void)
 {
-    vec2 screenCenter = vec2(screenSize.x / 2, screenSize.y / 2);
-
     float horizontalDiff = -lightSourceSize.x / 2;
     float verticalDiff = lightSourceSize.y;
 
