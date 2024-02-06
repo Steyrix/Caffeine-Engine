@@ -24,7 +24,16 @@ void main(void)
 
     vec2 lightSourcePos = vec2(lightSourceX, lightSourceY);
 
-    float lightIntensity = 1.0/distance(lightSourcePos, pos.xy);
+    vec3 ambient = vec3(0.8, 0.8, 0.8);
+
+    float dist = distance(lightSourcePos, pos.xy);
+    float lightIntensity = 1.0/dist;
+    float targetIntensity = 0.4;
+    float diffuse = 0;
+
+    if(dist < targetIntensity) {
+        diffuse = 1.0 - abs(dist / targetIntensity);
+    }
 
     if (lightIntensity >= lightIntensityCap) {
         lightIntensity = lightIntensityCap;
@@ -34,8 +43,9 @@ void main(void)
         lightIntensity = 1;
     }
 
-    vec4 lightCol = vec4(lightIntensity, lightIntensity, lightIntensity, 1.0);
-    fColor = texture(textureSample, fragmentUV).rgba * lightCol;
+    vec4 fragColor = texture(textureSample, fragmentUV).rgba;
+    vec3 lightCol = vec3(lightIntensity, lightIntensity, lightIntensity);
+    fColor = vec4(min(fragColor.rgb * ((lightCol * diffuse) + ambient), fragColor.rgb), 1.0);
 
     if (fColor.a <= 0){
         discard;
