@@ -195,7 +195,7 @@ class PlayableCharacter(
     fun getDirection() = controller?.direction ?: Direction.RIGHT
 
     override fun getZLevel(): Float {
-        return parameters.y + parameters.ySize * 0.71f
+        return parameters.y + parameters.ySize * 0.75f
     }
 
     override fun getParams(): SetOf2DParametersWithVelocity {
