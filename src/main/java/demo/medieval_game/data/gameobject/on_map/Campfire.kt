@@ -34,6 +34,6 @@ class Campfire(
     }
 
     override fun getZLevel(): Float {
-        return parameters.y + parameters.ySize + 1f
+        return parameters.y + parameters.ySize
     }
 }
