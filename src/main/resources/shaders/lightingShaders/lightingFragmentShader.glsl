@@ -28,11 +28,11 @@ void main(void)
 
     float dist = distance(lightSourcePos, pos.xy);
     float lightIntensity = 1.0/dist;
-    float targetIntensity = 0.4;
+    float targetRadius = 0.3;
     float diffuse = 0;
 
-    if(dist < targetIntensity) {
-        diffuse = 1.0 - abs(dist / targetIntensity);
+    if(dist < targetRadius) {
+        diffuse = 1.0 - abs(dist / targetRadius);
     }
 
     if (lightIntensity >= lightIntensityCap) {
