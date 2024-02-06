@@ -24,7 +24,7 @@ fun getLightBlinkingEvent(graphicalComponent: Drawable<*>) = AccumulatedTimeEven
                 "lightSourceCoords",
                 Vector2f(
                     campfireParameters.x + MedievalGameMatrixState.worldTranslation.x,
-                    campfireParameters.y + MedievalGameMatrixState.worldTranslation.y
+                    campfireParameters.y - campfireParameters.ySize / 2 + MedievalGameMatrixState.worldTranslation.y
                 )
             )
         }
