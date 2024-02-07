@@ -27,7 +27,8 @@ class GoblinNPC(
         val entity = Goblin(
             animatedModel2D,
             parameters,
-            tempSpritesHolder
+            tempSpritesHolder,
+            attackPredicate = { controller.isStriking }
         )
 
         val hpBar = getHpBar(

@@ -11,7 +11,8 @@ import engine.feature.interaction.Interaction
 class Goblin(
     private val drawableComponent: AnimatedModel2D,
     private val parameters: SetOf2DParametersWithVelocity,
-    private val tempSpritesHolder: TempSpritesHolder
+    private val tempSpritesHolder: TempSpritesHolder,
+    private val attackPredicate: () -> Boolean = { false }
 ) : CompositeEntity() {
 
     init {
@@ -45,7 +46,7 @@ class Goblin(
     override fun getInteractions(): List<Interaction> {
         val out = mutableListOf<Interaction>()
 
-        if (!isDisposed) {
+        if (!isDisposed && attackPredicate()) {
             out.add(
                 AttackInteraction(
                     producer = this,
