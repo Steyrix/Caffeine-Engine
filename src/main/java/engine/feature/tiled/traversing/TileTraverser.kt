@@ -8,8 +8,6 @@ import engine.core.update.getCenterPoint
 import engine.feature.tiled.data.TileMap
 import kotlin.math.abs
 
-// TODO: 06.01.24 - known bug - traversing entity stops traversing at some point (when it has no way to go)
-// TODO: is solved by hacky solution
 class TileTraverser(
     private val graph: TileGraph,
     private val tileMap: TileMap,
@@ -24,7 +22,7 @@ class TileTraverser(
     }
 
     private val startChasing = PredicateTimeEvent(
-        timeLimit = 2f,
+        timeLimit = 5f,
         predicate = { (!isPaused) },
         action = {
             moveToTarget()
@@ -59,13 +57,20 @@ class TileTraverser(
     }
 
     fun moveToTarget() {
+        println("move to target")
         val destCenter = targetParams.getCenterPoint()
-        val destination = tileMap.getTileIndex(
-            destCenter.x,
-            destCenter.y
+
+        val possibleTargetCoords = listOf(
+            Point2D(destCenter.x, destCenter.y),
+            Point2D(destCenter.x, targetParams.y),
+            Point2D(destCenter.x, targetParams.y + targetParams.ySize),
         )
 
-        if (currentDestination == destination) return
+        val destinations = mutableListOf<Int>()
+        possibleTargetCoords.forEach {
+            val result = tileMap.getTileIndex(it.x, it.y)
+            if (result != -1) destinations.add(result)
+        }
 
         if (!isStumble) {
             val entityCenter = holderParams.getCenterPoint()
@@ -73,19 +78,27 @@ class TileTraverser(
             currentTile = start
         }
 
-        currentDestination = destination
-        dropVelocity()
-
-        val nextPath = PathFinder.pathToByDijkstra(
-            graph,
-            currentTile,
-            destination
-        )
+        var currDestIndex = 0
+        var nextPath = ArrayDeque<Int>()
+        while (nextPath.isEmpty() && currDestIndex < destinations.size) {
+            println("Curr dest: ${destinations[currDestIndex]}")
+            currentDestination = destinations[currDestIndex]
+            dropVelocity()
+            nextPath = PathFinder.pathToByDijkstra(
+                graph,
+                currentTile,
+                currentDestination
+            )
+            currDestIndex++
+        }
 
         extendCurrentPath(nextPath)
     }
 
     private fun extendCurrentPath(nextPath: ArrayDeque<Int>) {
+        println("Curr tile: ${tileMap.getTileIndex(holderParams.getCenterPoint().x, holderParams.getCenterPoint().y)}")
+        println("Next path: $nextPath")
+        println("Curr path: $currentPath")
         if (nextPath.isNotEmpty()) {
             isStumble = false
             val indexOfJoin = if (currentPath.isEmpty()) {
@@ -103,6 +116,10 @@ class TileTraverser(
             }
         } else if (isStumble) {
             solveStumbling()
+        }
+
+        if (currentPath.isEmpty()) {
+
         }
     }
 
