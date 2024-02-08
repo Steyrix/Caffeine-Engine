@@ -37,6 +37,7 @@ class MedievalGame(
 
     private var sharedSpritesHolder: SharedSpritesHolder? = null
 
+    // TODO: move out to presets
     private var gui: HotBar = HotBar(
         SetOfStatic2DParameters(
             screenWidth / 4,
