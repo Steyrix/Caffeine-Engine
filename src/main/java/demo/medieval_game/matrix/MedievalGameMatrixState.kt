@@ -40,8 +40,6 @@ object MedievalGameMatrixState : MatrixState {
         x: Float,
         y: Float
     ) {
-        var sumX = 0f
-        var sumY = 0f
         if (isHorizontalTranslationPossible(x)) {
             if (tempTranslation.x > 0f) {
                 tempTranslation.x -= abs(x)
