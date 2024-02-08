@@ -2,6 +2,7 @@ package demo.medieval_game.matrix
 
 import demo.medieval_game.data.static_parameters.characterParameters
 import engine.core.controllable.Direction
+import engine.core.update.SetOfStatic2DParameters
 import engine.core.update.getCenterPoint
 import engine.feature.matrix.MatrixState
 import org.joml.Matrix4f
@@ -13,6 +14,8 @@ object MedievalGameMatrixState : MatrixState {
 
     val worldTranslation = Vector2f(0f, 0f)
     val tempTranslation = Vector2f(0f, 0f)
+
+    val nonTranslatedParams: MutableList<SetOfStatic2DParameters> = mutableListOf()
 
     override fun getResultMatrix(
         posX: Float,
@@ -33,13 +36,21 @@ object MedievalGameMatrixState : MatrixState {
         }
     }
 
-    fun translateWorld(x: Float, y: Float) {
+    fun translateWorld(
+        x: Float,
+        y: Float
+    ) {
+        var sumX = 0f
+        var sumY = 0f
         if (isHorizontalTranslationPossible(x)) {
             if (tempTranslation.x > 0f) {
                 tempTranslation.x -= abs(x)
             } else {
                 tempTranslation.x = 0f
                 worldTranslation.x += x
+                nonTranslatedParams.forEach {
+                    it.x -= x
+                }
             }
         } else {
             tempTranslation.x += abs(x)
@@ -51,6 +62,9 @@ object MedievalGameMatrixState : MatrixState {
             } else {
                 tempTranslation.y = 0f
                 worldTranslation.y += y
+                nonTranslatedParams.forEach {
+                    it.y -= y
+                }
             }
         } else {
             tempTranslation.y += abs(y)
