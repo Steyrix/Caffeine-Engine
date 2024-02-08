@@ -39,10 +39,10 @@ class MedievalGame(
 
     private var gui: HotBar = HotBar(
         SetOfStatic2DParameters(
-            0f,
-            screenHeight - screenWidth * 0.191f,
-            screenWidth,
-            screenWidth * 0.191f,
+            screenWidth / 4,
+            screenHeight - ((screenWidth / 2) * 0.191f),
+            screenWidth / 2,
+            ((screenWidth / 2) * 0.191f),
             0f
         )
     )
