@@ -15,6 +15,11 @@ import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.interaction.BoxInteractionContext
 import org.joml.Matrix4f
 
+/*
+    NPC class is designed to allow easy creation of npc-relate components like hp bar,
+    collider, bounding box and etc. It also overrides DynamicGameEntity and can be used
+    to define shared pre-spawn logic.
+ */
 abstract class NPC<E : CompositeEntity>(
     private val parameters: SetOf2DParametersWithVelocity
 ) : DynamicGameEntity<SetOf2DParametersWithVelocity>() {
