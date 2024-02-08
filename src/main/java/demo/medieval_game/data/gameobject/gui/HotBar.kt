@@ -5,9 +5,12 @@ import demo.medieval_game.data.gameobject.hp.HealthBar
 import engine.core.entity.CompositeEntity
 import engine.core.render.Model
 import engine.core.texture.Texture2D
+import engine.core.update.SetOfStatic2DParameters
 import org.joml.Matrix4f
 
-class HotBar : CompositeEntity() {
+class HotBar(
+    val parameters: SetOfStatic2DParameters
+) : CompositeEntity() {
 
     private var hpBar: HealthBar? = null
     private var manaBar: HealthBar? = null
@@ -23,5 +26,7 @@ class HotBar : CompositeEntity() {
         ).apply {
             shader = ShaderController.createTexturedShader(renderProjection)
         }
+
+        addComponent(graphicalComponent!!, parameters)
     }
 }
