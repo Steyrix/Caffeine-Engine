@@ -1,7 +1,6 @@
-package demo.medieval_game.hp
+package demo.medieval_game.data.gameobject.hp
 
 import demo.medieval_game.ShaderController
-import demo.medieval_game.interaction.AttackInteraction
 import demo.medieval_game.interaction.PlayerAttackInteraction
 import engine.core.entity.CompositeEntity
 import engine.core.render.Model

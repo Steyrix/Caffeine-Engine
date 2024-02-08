@@ -5,7 +5,7 @@ import demo.medieval_game.ShaderController
 import demo.medieval_game.SimpleController2D
 import demo.medieval_game.data.*
 import demo.medieval_game.data.static_parameters.*
-import demo.medieval_game.hp.HealthBar
+import demo.medieval_game.data.gameobject.hp.HealthBar
 import demo.medieval_game.scene.MedievalGame
 import engine.core.controllable.Direction
 import engine.core.entity.Entity

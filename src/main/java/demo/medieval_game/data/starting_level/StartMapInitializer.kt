@@ -72,7 +72,7 @@ object StartMapInitializer : SceneInitializer {
         creator: (SetOf2DParametersWithVelocity) -> TileTraverser
     ): List<GameEntity> {
         val out = mutableListOf<GameEntity>()
-        val paramsList = listOf(goblinParams1, goblinParams2)
+        val paramsList = listOf(goblinParams1)
 
         paramsList.forEach {
             val goblin = GoblinNPC(
