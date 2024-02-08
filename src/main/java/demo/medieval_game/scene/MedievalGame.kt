@@ -1,6 +1,7 @@
 package demo.medieval_game.scene
 
 import demo.medieval_game.data.gameobject.SharedSpritesHolder
+import demo.medieval_game.data.gameobject.gui.HotBar
 import demo.medieval_game.data.starting_level.getNexusMapPreset
 import demo.medieval_game.data.starting_level.getStartingMapPreset
 import demo.medieval_game.matrix.MedievalGameMatrixState
@@ -9,6 +10,7 @@ import engine.core.scene.Scene
 import engine.core.scene.SceneHolder
 import engine.core.scene.SceneIntent
 import engine.core.session.SimpleGamePresets
+import engine.core.update.SetOfStatic2DParameters
 import engine.core.window.Window
 import engine.feature.matrix.MatrixComputer
 import org.joml.Matrix4f
@@ -35,6 +37,16 @@ class MedievalGame(
 
     private var sharedSpritesHolder: SharedSpritesHolder? = null
 
+    private var gui: HotBar = HotBar(
+        SetOfStatic2DParameters(
+            0f,
+            screenHeight - screenWidth * 0.191f,
+            screenWidth,
+            screenWidth * 0.191f,
+            0f
+        )
+    )
+
     init {
         renderProjection = Matrix4f()
             .ortho(
@@ -53,6 +65,11 @@ class MedievalGame(
 
     override fun init() {
         MatrixComputer.matrixState = MedievalGameMatrixState
+        MedievalGameMatrixState.nonTranslatedParams.add(gui.parameters)
+
+        gui.apply {
+            init(renderProjection)
+        }
 
         MedievalGameSession.init(
             SimpleGamePresets(
@@ -97,10 +114,12 @@ class MedievalGame(
     override fun render(window: Window) {
         super.render(window)
         sharedSpritesHolder?.draw()
+        gui.draw()
     }
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
         sharedSpritesHolder?.update(deltaTime)
+        gui.update(deltaTime)
     }
 }
