@@ -11,7 +11,6 @@ class HotBar : CompositeEntity() {
 
     private var hpBar: HealthBar? = null
     private var manaBar: HealthBar? = null
-
     private var skills: List<Any> = emptyList()
 
     private var graphicalComponent: Model? = null
