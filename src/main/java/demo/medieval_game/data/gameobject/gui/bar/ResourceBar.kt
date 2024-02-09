@@ -1,4 +1,4 @@
-package demo.medieval_game.data.gameobject.gui.hp
+package demo.medieval_game.data.gameobject.gui.bar
 
 import demo.medieval_game.ShaderController
 import engine.core.entity.CompositeEntity
