@@ -19,7 +19,7 @@ class HotBar(
     private var graphicalComponent: Model? = null
 
     fun init(renderProjection: Matrix4f) {
-        val texturePath = this.javaClass.getResource("/textures/HotBarContainer.png")!!.path
+        val texturePath = this.javaClass.getResource("/textures/gui/HotBarContainer.png")!!.path
 
         graphicalComponent = Model(
             texture = Texture2D.createInstance(texturePath)
