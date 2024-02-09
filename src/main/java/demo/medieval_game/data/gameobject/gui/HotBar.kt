@@ -33,6 +33,7 @@ class HotBar(
             texture = Texture2D.createInstance(texturePath)
         ).apply {
             shader = ShaderController.createTexturedShader(renderProjection)
+            zLevel = Float.NEGATIVE_INFINITY
         }
 
         addComponent(graphicalComponent!!, parameters)

@@ -95,7 +95,8 @@ class Chest(
         return HealthBar(
             parameters,
             createDefaultHpBarParams(),
-            renderProjection
+            renderProjection,
+            texturePath = this.javaClass.getResource("/textures/gui/HealthBarAtlas.png")!!.path
         ) { hpAmount ->
             if (hpAmount <= 0) {
                 onEmpty.invoke()

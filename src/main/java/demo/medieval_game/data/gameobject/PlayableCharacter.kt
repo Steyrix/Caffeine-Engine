@@ -68,7 +68,12 @@ class PlayableCharacter(
             }
         )
 
-        hp = HealthBar(characterParameters, defaultHpBarParams, projection)
+        hp = HealthBar(
+            characterParameters,
+            defaultHpBarParams,
+            projection,
+            texturePath = this.javaClass.getResource("/textures/gui/HealthBarAtlas.png")!!.path
+        )
 
         addComponent(boundingBox, characterParameters)
         addComponent(hp, characterParameters)
