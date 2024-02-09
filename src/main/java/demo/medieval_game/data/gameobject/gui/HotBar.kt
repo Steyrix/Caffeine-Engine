@@ -1,7 +1,7 @@
 package demo.medieval_game.data.gameobject.gui
 
 import demo.medieval_game.ShaderController
-import demo.medieval_game.data.gameobject.hp.HealthBar
+import demo.medieval_game.data.gameobject.gui.hp.HealthBar
 import engine.core.entity.CompositeEntity
 import engine.core.render.Model
 import engine.core.texture.Texture2D

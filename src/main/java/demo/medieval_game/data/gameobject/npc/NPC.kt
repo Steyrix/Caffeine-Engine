@@ -1,7 +1,7 @@
 package demo.medieval_game.data.gameobject.npc
 
 import demo.medieval_game.ShaderController
-import demo.medieval_game.data.gameobject.hp.HealthBar
+import demo.medieval_game.data.gameobject.gui.hp.HealthBar
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.game_object.DynamicGameEntity

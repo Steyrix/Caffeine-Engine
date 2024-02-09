@@ -3,7 +3,7 @@ package demo.medieval_game.data.gameobject.on_map.chest
 import demo.medieval_game.ShaderController
 import demo.medieval_game.data.chestAnimations
 import demo.medieval_game.data.static_parameters.*
-import demo.medieval_game.data.gameobject.hp.HealthBar
+import demo.medieval_game.data.gameobject.gui.hp.HealthBar
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.game_object.SingleGameEntity

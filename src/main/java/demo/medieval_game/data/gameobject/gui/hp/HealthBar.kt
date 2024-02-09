@@ -1,4 +1,4 @@
-package demo.medieval_game.data.gameobject.hp
+package demo.medieval_game.data.gameobject.gui.hp
 
 import demo.medieval_game.ShaderController
 import demo.medieval_game.interaction.PlayerAttackInteraction
