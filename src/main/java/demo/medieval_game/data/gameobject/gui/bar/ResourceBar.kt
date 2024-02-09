@@ -13,6 +13,7 @@ open class ResourceBar(
     private val barParams: SetOfStatic2DParameters,
     private val projection: Matrix4f,
     protected val onFilledChange: (Float) -> Unit = {},
+    protected val isBoundToParams: Boolean = true,
     texturePath: String
 ) : CompositeEntity() {
 
@@ -37,9 +38,11 @@ open class ResourceBar(
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
 
-        with(objParams) {
-            barParams.x = x - ((barParams.xSize - xSize) / 2)
-            barParams.y = y - 2 - barParams.ySize
+        if (isBoundToParams) {
+            with(objParams) {
+                barParams.x = x - ((barParams.xSize - xSize) / 2)
+                barParams.y = y - 2 - barParams.ySize
+            }
         }
 
         graphicalComponent.shader?.let {

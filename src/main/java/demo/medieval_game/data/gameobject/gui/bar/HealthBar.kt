@@ -11,12 +11,14 @@ class HealthBar(
     objParams: SetOfParameters,
     barParams: SetOfStatic2DParameters,
     projection: Matrix4f,
-    onFilledChange: (Float) -> Unit = {}
+    onFilledChange: (Float) -> Unit = {},
+    isBoundToParams: Boolean = true
 ) : ResourceBar(
     objParams,
     barParams,
     projection,
     onFilledChange,
+    isBoundToParams,
     texturePath = javaClass.getResource("/textures/gui/HealthBarAtlas.png")!!.path
 ) {
 
