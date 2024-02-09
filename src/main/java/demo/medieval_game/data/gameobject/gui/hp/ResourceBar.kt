@@ -8,11 +8,11 @@ import engine.core.update.SetOfParameters
 import engine.core.update.SetOfStatic2DParameters
 import org.joml.Matrix4f
 
-class ResourceBar(
+open class ResourceBar(
     private val objParams: SetOfParameters,
     private val barParams: SetOfStatic2DParameters,
     private val projection: Matrix4f,
-    private val onFilledChange: (Float) -> Unit = {},
+    protected val onFilledChange: (Float) -> Unit = {},
     texturePath: String
 ) : CompositeEntity() {
 

@@ -12,6 +12,14 @@ class HotBar(
     val parameters: SetOfStatic2DParameters
 ) : CompositeEntity() {
 
+    companion object {
+        fun createInstance(
+            hpBar: HealthBar
+        ): HotBar? {
+            return null
+        }
+    }
+
     private var hpBar: HealthBar? = null
     private var manaBar: HealthBar? = null
     private var skills: List<Any> = emptyList()
