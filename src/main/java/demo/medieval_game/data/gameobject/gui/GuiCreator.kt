@@ -4,13 +4,15 @@ import demo.medieval_game.data.gameobject.gui.bar.HealthBar
 import demo.medieval_game.scene.MedievalGame
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.matrix.MatrixState
+import org.joml.Matrix4f
 
 object GuiCreator {
 
     fun createGuiEntity(
         screenWidth: Float,
         screenHeight: Float,
-        matrixState: MatrixState
+        matrixState: MatrixState,
+        renderProjection: Matrix4f
     ): GuiContainer {
 
         val containerParams = createParametersForContainer(screenWidth, screenHeight)
@@ -19,6 +21,7 @@ object GuiCreator {
         val healthBar = createHealthBar(containerParams, hpBarParams)
         val guiContainer = GuiContainer(containerParams)
 
+        guiContainer.init(renderProjection)
         guiContainer.addComponent(healthBar, hpBarParams)
         matrixState.nonTranslatedParams.addAll(
             listOf(containerParams, hpBarParams)
