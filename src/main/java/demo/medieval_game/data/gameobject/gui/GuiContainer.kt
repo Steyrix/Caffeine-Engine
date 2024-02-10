@@ -12,8 +12,6 @@ class GuiContainer(
     val parameters: SetOfStatic2DParameters
 ) : CompositeEntity() {
 
-    private var skills: List<Any> = emptyList()
-
     private var graphicalComponent: Model? = null
 
     fun init(renderProjection: Matrix4f) {
