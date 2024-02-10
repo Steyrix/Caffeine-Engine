@@ -2,7 +2,7 @@ package demo.medieval_game.scene
 
 import demo.medieval_game.data.gameobject.SharedSpritesHolder
 import demo.medieval_game.data.gameobject.gui.GuiContainer
-import demo.medieval_game.data.gameobject.gui.bar.HealthBar
+import demo.medieval_game.data.gameobject.gui.GuiCreator
 import demo.medieval_game.data.starting_level.getNexusMapPreset
 import demo.medieval_game.data.starting_level.getStartingMapPreset
 import demo.medieval_game.matrix.MedievalGameMatrixState
@@ -11,7 +11,6 @@ import engine.core.scene.Scene
 import engine.core.scene.SceneHolder
 import engine.core.scene.SceneIntent
 import engine.core.session.SimpleGamePresets
-import engine.core.update.SetOfStatic2DParameters
 import engine.core.window.Window
 import engine.feature.matrix.MatrixComputer
 import org.joml.Matrix4f
@@ -38,24 +37,7 @@ class MedievalGame(
 
     private var sharedSpritesHolder: SharedSpritesHolder? = null
 
-    // TODO: move out to presets
-    private var gui: GuiContainer = GuiContainer(
-        SetOfStatic2DParameters(
-            screenWidth / 4,
-            screenHeight - ((screenWidth / 2) * 0.191f),
-            screenWidth / 2,
-            ((screenWidth / 2) * 0.191f),
-            0f
-        )
-    )
-
-    private val hpParams = SetOfStatic2DParameters(
-        x = gui.parameters.x + gui.parameters.xSize * 0.295f,
-        y = gui.parameters.y + gui.parameters.ySize * 0.234f,
-        xSize = gui.parameters.xSize * 0.202f,
-        ySize = gui.parameters.ySize * 0.205f,
-        rotationAngle = 0f
-    )
+    private var gui: GuiContainer? = null
 
     init {
         renderProjection = Matrix4f()
@@ -75,22 +57,13 @@ class MedievalGame(
 
     override fun init() {
         MatrixComputer.matrixState = MedievalGameMatrixState
-        MedievalGameMatrixState.nonTranslatedParams.add(gui.parameters)
-        MedievalGameMatrixState.nonTranslatedParams.add(hpParams)
 
-        val hpBar = HealthBar(
-            objParams = gui.parameters,
-            barParams = hpParams,
-            onFilledChange = {},
-            projection = renderProjection,
-            texturePath = this.javaClass.getResource("/textures/gui/HealthBarAtlas.png")!!.path,
-            isBoundToParams = false
+        gui = GuiCreator.createGuiEntity(
+            screenWidth,
+            screenHeight,
+            MatrixComputer.matrixState,
+            renderProjection
         )
-
-        gui.apply {
-            init(renderProjection)
-            addComponent(hpBar, gui.parameters)
-        }
 
         MedievalGameSession.init(
             SimpleGamePresets(
@@ -135,12 +108,12 @@ class MedievalGame(
     override fun render(window: Window) {
         super.render(window)
         sharedSpritesHolder?.draw()
-        gui.draw()
+        gui?.draw()
     }
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
         sharedSpritesHolder?.update(deltaTime)
-        gui.update(deltaTime)
+        gui?.update(deltaTime)
     }
 }
