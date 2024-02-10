@@ -8,14 +8,14 @@ import engine.core.texture.Texture2D
 import engine.core.update.SetOfStatic2DParameters
 import org.joml.Matrix4f
 
-class HotBar(
+class GuiContainer(
     val parameters: SetOfStatic2DParameters
 ) : CompositeEntity() {
 
     companion object {
         fun createInstance(
             hpBar: HealthBar
-        ): HotBar? {
+        ): GuiContainer? {
             return null
         }
     }

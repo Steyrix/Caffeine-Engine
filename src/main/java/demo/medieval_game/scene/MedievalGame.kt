@@ -1,11 +1,10 @@
 package demo.medieval_game.scene
 
 import demo.medieval_game.data.gameobject.SharedSpritesHolder
-import demo.medieval_game.data.gameobject.gui.HotBar
+import demo.medieval_game.data.gameobject.gui.GuiContainer
 import demo.medieval_game.data.gameobject.gui.bar.HealthBar
 import demo.medieval_game.data.starting_level.getNexusMapPreset
 import demo.medieval_game.data.starting_level.getStartingMapPreset
-import demo.medieval_game.data.static_parameters.characterParameters
 import demo.medieval_game.matrix.MedievalGameMatrixState
 import engine.core.scene.GameContext
 import engine.core.scene.Scene
@@ -40,7 +39,7 @@ class MedievalGame(
     private var sharedSpritesHolder: SharedSpritesHolder? = null
 
     // TODO: move out to presets
-    private var gui: HotBar = HotBar(
+    private var gui: GuiContainer = GuiContainer(
         SetOfStatic2DParameters(
             screenWidth / 4,
             screenHeight - ((screenWidth / 2) * 0.191f),
