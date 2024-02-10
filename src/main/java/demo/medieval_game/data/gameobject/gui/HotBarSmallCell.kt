@@ -10,7 +10,7 @@ import engine.core.update.SetOfStatic2DParameters
 class HotBarSmallCell(
     private val parameters: SetOfStatic2DParameters,
     private val containerParameters: SetOfStatic2DParameters,
-    private val content: Pair<Entity, SetOfParameters>,
+    private val content: Pair<Entity, SetOfParameters>? = null,
     texturePath: String
 ) : CompositeEntity() {
 
@@ -21,7 +21,10 @@ class HotBarSmallCell(
             texture = Texture2D.createInstance(texturePath)
         )
         addComponent(graphicalComponent, parameters)
-        addComponent(content.first, content.second)
+
+        content?.let {
+            addComponent(content.first, content.second)
+        }
     }
 
 }
