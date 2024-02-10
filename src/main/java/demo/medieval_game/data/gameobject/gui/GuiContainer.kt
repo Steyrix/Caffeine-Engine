@@ -12,16 +12,6 @@ class GuiContainer(
     val parameters: SetOfStatic2DParameters
 ) : CompositeEntity() {
 
-    companion object {
-        fun createInstance(
-            hpBar: HealthBar
-        ): GuiContainer? {
-            return null
-        }
-    }
-
-    private var hpBar: HealthBar? = null
-    private var manaBar: HealthBar? = null
     private var skills: List<Any> = emptyList()
 
     private var graphicalComponent: Model? = null
