@@ -8,7 +8,7 @@ import engine.core.update.SetOfParameters
 import engine.core.update.SetOfStatic2DParameters
 
 class HotBarSmallCell(
-    private val parameters: SetOfStatic2DParameters,
+    val parameters: SetOfStatic2DParameters,
     private val containerParameters: SetOfStatic2DParameters,
     private val content: Pair<Entity, SetOfParameters>? = null,
     texturePath: String
