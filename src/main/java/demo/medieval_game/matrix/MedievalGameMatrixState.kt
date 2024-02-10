@@ -15,7 +15,7 @@ object MedievalGameMatrixState : MatrixState {
     val worldTranslation = Vector2f(0f, 0f)
     val tempTranslation = Vector2f(0f, 0f)
 
-    val nonTranslatedParams: MutableList<SetOfStatic2DParameters> = mutableListOf()
+    override val nonTranslatedParams: MutableList<SetOfStatic2DParameters> = mutableListOf()
 
     override fun getResultMatrix(
         posX: Float,
