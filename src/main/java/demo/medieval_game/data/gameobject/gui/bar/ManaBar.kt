@@ -8,11 +8,14 @@ class ManaBar(
     objParams: SetOfParameters,
     barParams: SetOfStatic2DParameters,
     projection: Matrix4f,
-    onFilledChange: (Float) -> Unit = {}
+    isBoundToParams: Boolean,
+    onFilledChange: (Float) -> Unit = {},
+    texturePath: String
 ) : ResourceBar(
     objParams,
     barParams,
     projection,
     onFilledChange,
-    texturePath = javaClass.getResource("/textures/gui/ManaBarAtlas.png")!!.path
+    isBoundToParams,
+    texturePath
 )
