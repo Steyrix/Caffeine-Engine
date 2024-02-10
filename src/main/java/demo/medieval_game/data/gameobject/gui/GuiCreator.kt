@@ -2,7 +2,6 @@ package demo.medieval_game.data.gameobject.gui
 
 import demo.medieval_game.data.gameobject.gui.bar.HealthBar
 import demo.medieval_game.data.gameobject.gui.bar.ManaBar
-import demo.medieval_game.scene.MedievalGame
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.matrix.MatrixState
 import org.joml.Matrix4f
@@ -20,15 +19,23 @@ object GuiCreator {
         val hpBarParams = createParametersForHpBar(containerParams)
         val manaBarParams = createParametersForManaBar(containerParams)
 
-        val healthBar = createHealthBar(containerParams, hpBarParams)
-        val manaBar = createManaBar(containerParams, manaBarParams)
+        val healthBar = createHealthBar(containerParams, hpBarParams, renderProjection)
+        val manaBar = createManaBar(containerParams, manaBarParams, renderProjection)
+        val smallCells = createCells(containerParams, renderProjection)
         val guiContainer = GuiContainer(containerParams)
 
         guiContainer.init(renderProjection)
         guiContainer.addComponent(healthBar, hpBarParams)
         guiContainer.addComponent(manaBar, manaBarParams)
+        smallCells.forEach {
+            guiContainer.addComponent(it, it.parameters)
+        }
+
         matrixState.nonTranslatedParams.addAll(
             listOf(containerParams, hpBarParams, manaBarParams)
+        )
+        matrixState.nonTranslatedParams.addAll(
+            smallCells.map { it.parameters }
         )
 
         return guiContainer
@@ -57,12 +64,13 @@ object GuiCreator {
 
     private fun createHealthBar(
         containerParams: SetOfStatic2DParameters,
-        hpBarParams: SetOfStatic2DParameters
+        hpBarParams: SetOfStatic2DParameters,
+        renderProjection: Matrix4f
     ) = HealthBar(
         objParams = containerParams,
         barParams = hpBarParams,
         onFilledChange = {},
-        projection = MedievalGame.renderProjection,
+        projection = renderProjection,
         texturePath = this.javaClass.getResource("/textures/gui/HealthBarAtlas.png")!!.path,
         isBoundToParams = false
     )
@@ -79,13 +87,48 @@ object GuiCreator {
 
     private fun createManaBar(
         containerParams: SetOfStatic2DParameters,
-        manaBarParams: SetOfStatic2DParameters
+        manaBarParams: SetOfStatic2DParameters,
+        renderProjection: Matrix4f
     ) = ManaBar(
         objParams = containerParams,
         barParams = manaBarParams,
         onFilledChange = {},
-        projection = MedievalGame.renderProjection,
+        projection = renderProjection,
         texturePath = this.javaClass.getResource("/textures/gui/ManaBarAtlas.png")!!.path,
         isBoundToParams = false
     )
+
+    private fun createCells(
+        containerParams: SetOfStatic2DParameters,
+        renderProjection: Matrix4f
+    ): List<HotBarSmallCell> {
+        val cellsCount = 10
+        val out = mutableListOf<HotBarSmallCell>()
+
+        var prevX = containerParams.x + containerParams.xSize * 0.305f
+
+        while (out.size < cellsCount) {
+
+            val params = SetOfStatic2DParameters(
+                x = prevX,
+                y = containerParams.y + (containerParams.ySize * 0.439f),
+                xSize = containerParams.xSize * 0.039f,
+                ySize = containerParams.ySize * 0.233f,
+                rotationAngle = 0f
+            )
+
+            prevX += params.xSize + containerParams.xSize * 0.002f
+
+            out.add(
+                HotBarSmallCell(
+                    renderProjection = renderProjection,
+                    parameters = params,
+                    containerParameters = containerParams,
+                    texturePath = this.javaClass.getResource("/textures/gui/HotBarCellSmall.png")!!.path
+                )
+            )
+        }
+
+        return out.toList()
+    }
 }
