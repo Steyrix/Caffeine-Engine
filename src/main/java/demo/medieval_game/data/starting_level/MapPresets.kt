@@ -56,13 +56,13 @@ fun getNexusMapPreset(): TileMapPreset =
     TileMapPreset(
         width = 800f,
         height = 800f,
-        mapSourcePath = "/tiled/nexus_map.xml",
+        mapSourcePath = "/tiled/tilemap_2.xml",
         vertexShaderPath = "/shaders/texturedShaders/texturedVertexShader.glsl",
         fragmentShaderPath = "/shaders/texturedShaders/texturedFragmentShader.glsl",
         objectFragmentShaderPath = "/shaders/mapShaders/layerObjectsFragmentShader.glsl",
         objectVertexShaderPath = "/shaders/mapShaders/layerObjectsVertexShader.glsl",
         shaderUniforms = mapOf(),
         updateEvents = listOf(),
-        walkingLayers = listOf("walking_layer"),
-        obstacleLayers = listOf("obstacles_layer", "obstacles_layer_2")
+        walkingLayers = listOf("walkable_layer", "transparent_obstacles_layer"),
+        obstacleLayers = listOf("obstacles_layer", "unwalkable_bg_layer")
     )
