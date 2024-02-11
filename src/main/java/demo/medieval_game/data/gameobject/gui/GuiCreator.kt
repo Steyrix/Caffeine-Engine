@@ -101,9 +101,9 @@ object GuiCreator {
     private fun createCells(
         containerParams: SetOfStatic2DParameters,
         renderProjection: Matrix4f
-    ): List<HotBarSmallCell> {
+    ): List<HotBarCellSmall> {
         val cellsCount = 10
-        val out = mutableListOf<HotBarSmallCell>()
+        val out = mutableListOf<HotBarCellSmall>()
 
         var prevX = containerParams.x + containerParams.xSize * 0.305f
 
@@ -120,7 +120,7 @@ object GuiCreator {
             prevX += params.xSize + containerParams.xSize * 0.002f
 
             out.add(
-                HotBarSmallCell(
+                HotBarCellSmall(
                     renderProjection = renderProjection,
                     parameters = params,
                     containerParameters = containerParams,

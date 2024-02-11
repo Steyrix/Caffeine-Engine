@@ -9,7 +9,7 @@ import engine.core.update.SetOfParameters
 import engine.core.update.SetOfStatic2DParameters
 import org.joml.Matrix4f
 
-class HotBarSmallCell(
+class HotBarCellSmall(
     val renderProjection: Matrix4f,
     val parameters: SetOfStatic2DParameters,
     private val containerParameters: SetOfStatic2DParameters,
