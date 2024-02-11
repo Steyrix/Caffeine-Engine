@@ -6,7 +6,6 @@ import engine.core.update.SetOfStatic2DParameters
 import engine.feature.interaction.Interaction
 import org.joml.Matrix4f
 
-// TODO: set texture path from outside
 class HealthBar(
     objParams: SetOfParameters,
     barParams: SetOfStatic2DParameters,
