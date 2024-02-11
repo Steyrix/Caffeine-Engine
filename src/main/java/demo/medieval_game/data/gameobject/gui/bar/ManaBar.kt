@@ -10,12 +10,14 @@ class ManaBar(
     projection: Matrix4f,
     isBoundToParams: Boolean,
     onFilledChange: (Float) -> Unit = {},
-    texturePath: String
+    texturePath: String,
+    isPartOfWorldTranslation: Boolean
 ) : ResourceBar(
     objParams,
     barParams,
     projection,
     onFilledChange,
     isBoundToParams,
-    texturePath
+    texturePath,
+    isPartOfWorldTranslation
 )

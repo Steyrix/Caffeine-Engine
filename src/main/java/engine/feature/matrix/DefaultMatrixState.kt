@@ -13,7 +13,8 @@ object DefaultMatrixState : MatrixState {
         posY: Float,
         xSize: Float,
         ySize: Float,
-        rotationAngle: Float
+        rotationAngle: Float,
+        isWorldTranslationEnabled: Boolean
     ): Matrix4f {
         val model = Matrix4f().identity()
 

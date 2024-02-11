@@ -22,7 +22,8 @@ object MedievalGameMatrixState : MatrixState {
         posY: Float,
         xSize: Float,
         ySize: Float,
-        rotationAngle: Float
+        rotationAngle: Float,
+        isWorldTranslationEnabled: Boolean
     ): Matrix4f {
         val model = Matrix4f().identity()
 
@@ -30,7 +31,12 @@ object MedievalGameMatrixState : MatrixState {
         // val scaleMatrix = Matrix4f().scaleXY(xSize, ySize)
 
         return model.apply {
-            translate(Vector3f(posX + worldTranslation.x, posY + worldTranslation.y, 0f))
+            if (isWorldTranslationEnabled) {
+                translate(Vector3f(posX + worldTranslation.x, posY + worldTranslation.y, 0f))
+            } else {
+                translate(Vector3f(posX, posY, 0f))
+            }
+
             rotateZ(rotationAngle)
             scaleXY(xSize, ySize)
         }

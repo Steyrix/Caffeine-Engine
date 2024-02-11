@@ -14,7 +14,8 @@ open class ResourceBar(
     private val projection: Matrix4f,
     protected val onFilledChange: (Float) -> Unit = {},
     protected val isBoundToParams: Boolean = true,
-    texturePath: String
+    texturePath: String,
+    isPartOfWorldTranslation: Boolean = true
 ) : CompositeEntity() {
 
     companion object {
@@ -30,6 +31,7 @@ open class ResourceBar(
             texture = Texture2D.createInstance(texturePath),
         ).apply {
             shader = ShaderController.createHpBarShader(projection)
+            this.isPartOfWorldTranslation = isPartOfWorldTranslation
         }
 
         addComponent(graphicalComponent, barParams)

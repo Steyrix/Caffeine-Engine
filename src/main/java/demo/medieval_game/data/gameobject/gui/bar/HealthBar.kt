@@ -13,13 +13,15 @@ class HealthBar(
     isBoundToParams: Boolean = true,
     texturePath: String,
     onFilledChange: (Float) -> Unit = {},
+    isPartOfWorldTranslation: Boolean = true
 ) : ResourceBar(
     objParams,
     barParams,
     projection,
     onFilledChange,
     isBoundToParams,
-    texturePath
+    texturePath,
+    isPartOfWorldTranslation
 ) {
 
     override fun consumeInteraction(interaction: Interaction) {

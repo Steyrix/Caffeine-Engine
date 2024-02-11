@@ -11,6 +11,7 @@ object MatrixComputer {
         posY: Float,
         xSize: Float,
         ySize: Float,
-        rotationAngle: Float
-    ): Matrix4f = matrixState.getResultMatrix(posX, posY, xSize, ySize, rotationAngle)
+        rotationAngle: Float,
+        isWorldTranslationEnabled: Boolean
+    ): Matrix4f = matrixState.getResultMatrix(posX, posY, xSize, ySize, rotationAngle, isWorldTranslationEnabled)
 }

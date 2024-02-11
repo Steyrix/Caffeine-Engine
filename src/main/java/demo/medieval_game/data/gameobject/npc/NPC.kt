@@ -109,11 +109,13 @@ abstract class NPC<E : CompositeEntity>(
                 rotationAngle = 0f
             ),
             renderProjection,
-            texturePath = this.javaClass.getResource("/textures/gui/HealthBarAtlas.png")!!.path
-        ) { hpAmount ->
-            if (hpAmount <= 0) {
-                onEmpty.invoke()
-            }
-        }
+            texturePath = this.javaClass.getResource("/textures/gui/HealthBarAtlas.png")!!.path,
+            onFilledChange = { hpAmount ->
+                if (hpAmount <= 0) {
+                    onEmpty.invoke()
+                }
+            },
+            isPartOfWorldTranslation = true
+        )
     }
 }

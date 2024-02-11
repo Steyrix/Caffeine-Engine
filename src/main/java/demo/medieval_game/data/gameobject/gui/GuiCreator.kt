@@ -31,12 +31,12 @@ object GuiCreator {
             guiContainer.addComponent(it, it.parameters)
         }
 
-        matrixState.nonTranslatedParams.addAll(
-            listOf(containerParams, hpBarParams, manaBarParams)
-        )
-        matrixState.nonTranslatedParams.addAll(
-            smallCells.map { it.parameters }
-        )
+//        matrixState.nonTranslatedParams.addAll(
+//            listOf(containerParams, hpBarParams, manaBarParams)
+//        )
+//        matrixState.nonTranslatedParams.addAll(
+//            smallCells.map { it.parameters }
+//        )
 
         return guiContainer
     }
@@ -72,7 +72,8 @@ object GuiCreator {
         onFilledChange = {},
         projection = renderProjection,
         texturePath = this.javaClass.getResource("/textures/gui/HealthBarAtlas.png")!!.path,
-        isBoundToParams = false
+        isBoundToParams = false,
+        isPartOfWorldTranslation = false
     )
 
     private fun createParametersForManaBar(
@@ -95,7 +96,8 @@ object GuiCreator {
         onFilledChange = {},
         projection = renderProjection,
         texturePath = this.javaClass.getResource("/textures/gui/ManaBarAtlas.png")!!.path,
-        isBoundToParams = false
+        isBoundToParams = false,
+        isPartOfWorldTranslation = false
     )
 
     private fun createCells(

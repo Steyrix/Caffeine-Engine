@@ -12,6 +12,7 @@ interface MatrixState {
         posY: Float,
         xSize: Float,
         ySize: Float,
-        rotationAngle: Float
+        rotationAngle: Float,
+        isWorldTranslationEnabled: Boolean = true
     ): Matrix4f
 }

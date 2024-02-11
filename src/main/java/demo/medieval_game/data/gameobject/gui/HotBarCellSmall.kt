@@ -24,6 +24,7 @@ class HotBarCellSmall(
             texture = Texture2D.createInstance(texturePath)
         ).apply {
             shader = ShaderController.createTexturedShader(renderProjection)
+            isPartOfWorldTranslation = false
         }
         addComponent(graphicalComponent, parameters)
 

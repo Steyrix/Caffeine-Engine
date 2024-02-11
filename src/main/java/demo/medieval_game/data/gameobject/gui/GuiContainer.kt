@@ -22,6 +22,7 @@ class GuiContainer(
         ).apply {
             shader = ShaderController.createTexturedShader(renderProjection)
             zLevel = Float.NEGATIVE_INFINITY
+            isPartOfWorldTranslation = false
         }
 
         addComponent(graphicalComponent!!, parameters)

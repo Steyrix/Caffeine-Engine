@@ -12,7 +12,8 @@ import org.lwjgl.opengl.GL33C.*
 open class Model(
     private val mesh: Mesh,
     private var texture: Texture2D? = null,
-    private var arrayTexture: ArrayTexture2D? = null
+    private var arrayTexture: ArrayTexture2D? = null,
+    var isPartOfWorldTranslation: Boolean = true
 ) : Drawable<SetOfParameters>, Entity {
 
     constructor(
@@ -68,7 +69,7 @@ open class Model(
             mesh.prepare()
             it.bind()
 
-            val model = MatrixComputer.getResultMatrix(x, y, xSize, ySize, rotationAngle)
+            val model = MatrixComputer.getResultMatrix(x, y, xSize, ySize, rotationAngle, isPartOfWorldTranslation)
 
             defineTextureState()
             it.setUniform(Shader.VAR_KEY_MODEL, model)
