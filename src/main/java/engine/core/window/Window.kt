@@ -52,6 +52,10 @@ class Window(
             } // We will detect this in the rendering loop
         }
 
+        glfwSetMouseButtonCallback(window) { window: Long, key: Int, scancode: Int, action: Int ->
+            // TODO: implement
+        }
+
         glfwSetFramebufferSizeCallback(window) { window, newWidth, newHeight ->
             width = newWidth
             height = newHeight
