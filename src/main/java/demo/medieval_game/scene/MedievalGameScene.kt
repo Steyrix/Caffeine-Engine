@@ -26,7 +26,7 @@ abstract class MedievalGameScene(
 
     protected var character: PlayableCharacter? = null
 
-    protected val actions: MutableList<AccumulatedTimeEvent> = mutableListOf()
+    private val actions: MutableList<AccumulatedTimeEvent> = mutableListOf()
 
     protected var bbCollisionContext: BoundingBoxCollisionContext? = null
     protected var boxInteractionContext: BoxInteractionContext = BoxInteractionContext()
