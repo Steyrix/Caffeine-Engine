@@ -52,6 +52,8 @@ class Window(
             } // We will detect this in the rendering loop
         }
 
+        //glfwSetCursorPosCallback()
+
         glfwSetMouseButtonCallback(window) { window: Long, key: Int, scancode: Int, action: Int ->
             // TODO: implement
         }
