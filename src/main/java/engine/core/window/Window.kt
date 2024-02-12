@@ -1,5 +1,7 @@
 package engine.core.window
 
+import engine.core.geometry.Point2D
+import org.lwjgl.BufferUtils
 import org.lwjgl.glfw.Callbacks.glfwFreeCallbacks
 import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.glfw.GLFWErrorCallback
@@ -103,6 +105,13 @@ class Window(
 
     fun isKeyPressed(keyCode: Int): Boolean {
         return glfwGetKey(window, keyCode) == GLFW_PRESS
+    }
+
+    fun getCursorPosition(): Point2D {
+        val bufferX = BufferUtils.createDoubleBuffer(1)
+        val bufferY = BufferUtils.createDoubleBuffer(1)
+        glfwGetCursorPos(window, bufferX, bufferY)
+        return Point2D(bufferX.get(0).toFloat(), bufferY.get(0).toFloat())
     }
 
     fun shouldClose(): Boolean {
