@@ -96,10 +96,15 @@ abstract class MedievalGameScene(
         boxInteractionContext?.update()
     }
 
-    private inline fun renderSetup() {
+    private fun renderSetup() {
         glEnable(GL_BLEND)
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+
+        glEnable(GL_STENCIL_TEST)
         glClear(GL_COLOR_BUFFER_BIT)
+        glClear(GL_STENCIL_BUFFER_BIT)
+
+        glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE)
         glClearColor(0f, 0.5f, 0f, 0.5f)
     }
 
