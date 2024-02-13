@@ -1,9 +1,18 @@
 #version 330
 
-in vec4 vColor;
+in vec2 fragmentUV;
+
 out vec4 fColor;
+
+uniform sampler2D textureSample;
 
 void main(void)
 {
-    fColor = vColor;
+    fColor = texture(textureSample, fragmentUV).rgba;
+
+    if (fColor.a <= 0){
+        discard;
+    }
+
+    fColor = vec4(1.0f, 1.0f, 0.0f, 1.0f);
 }
