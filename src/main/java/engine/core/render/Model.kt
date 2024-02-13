@@ -7,6 +7,7 @@ import engine.core.texture.Texture2D
 import engine.feature.matrix.MatrixComputer
 import engine.core.render.util.DefaultBufferData
 import engine.core.update.SetOfParameters
+import org.joml.Matrix4f
 import org.joml.Vector3f
 import org.lwjgl.opengl.GL33C.*
 
@@ -85,10 +86,7 @@ open class Model(
             mesh.prepare()
             it.bind()
 
-            stencilShader?.let {
-                glStencilFunc(GL_ALWAYS, 1, 0xFF)
-                glStencilMask(0xFF)
-            }
+            writeToStencilBuffer()
 
             val model = MatrixComputer.getResultMatrix(x, y, xSize, ySize, rotationAngle, isPartOfWorldTranslation)
 
@@ -98,19 +96,7 @@ open class Model(
 
             glDrawArrays(drawMode, 0, mesh.verticesCount)
 
-            stencilShader?.let { sShader ->
-                sShader.bind()
-                bindTextureToStencil()
-                glStencilFunc(GL_NOTEQUAL, 1, 0xFF)
-                glStencilMask(0x00)
-                var scaledModel = model.scaleXY(1.02f, 1.02f)
-                scaledModel = scaledModel.translate(Vector3f(-0.01f, -0.01f, 0f))
-                sShader.setUniform(Shader.VAR_KEY_MODEL, scaledModel)
-                sShader.validate()
-                glDrawArrays(drawMode, 0, mesh.verticesCount)
-                glStencilMask(0xFF)
-                glStencilFunc(GL_ALWAYS, 0, 0xFF)
-            }
+            applyStencil(model)
         }
     }
 
@@ -147,6 +133,29 @@ open class Model(
         arrayTexture!!.bind()
         shader!!.bind()
         shader!!.setUniform(textureUniformName, 0)
+    }
+
+    private fun writeToStencilBuffer() {
+        stencilShader?.let {
+            glStencilFunc(GL_ALWAYS, 1, 0xFF)
+            glStencilMask(0xFF)
+        }
+    }
+
+    private fun applyStencil(srcModel: Matrix4f) {
+        stencilShader?.let { sShader ->
+            sShader.bind()
+            bindTextureToStencil()
+            glStencilFunc(GL_NOTEQUAL, 1, 0xFF)
+            glStencilMask(0x00)
+            var scaledModel = srcModel.scaleXY(1.02f, 1.02f)
+            scaledModel = scaledModel.translate(Vector3f(-0.01f, -0.01f, 0f))
+            sShader.setUniform(Shader.VAR_KEY_MODEL, scaledModel)
+            sShader.validate()
+            glDrawArrays(drawMode, 0, mesh.verticesCount)
+            glStencilMask(0xFF)
+            glStencilFunc(GL_ALWAYS, 0, 0xFF)
+        }
     }
 
     fun isTextured(): Boolean {
