@@ -75,6 +75,7 @@ class Chest(
         ).apply {
             shader = ShaderController.createAnimationShader(renderProjection)
             stencilShader = ShaderController.createSingleColorShader(renderProjection)
+            isStencilBufferEnabled = true
         }
     }
 

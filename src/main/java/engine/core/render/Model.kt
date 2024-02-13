@@ -16,7 +16,7 @@ open class Model(
     private var texture: Texture2D? = null,
     private var arrayTexture: ArrayTexture2D? = null,
     var isPartOfWorldTranslation: Boolean = true,
-    val isStencilBufferEnabled: Boolean = false,
+    var isStencilBufferEnabled: Boolean = false,
     val stencilBufferFunction: () -> Unit = {}
 ) : Drawable<SetOfParameters>, Entity {
 
