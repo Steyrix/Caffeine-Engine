@@ -74,6 +74,7 @@ class Chest(
             animations = chestAnimations.map { it.copy() }
         ).apply {
             shader = ShaderController.createAnimationShader(renderProjection)
+            stencilShader = ShaderController.createSingleColorShader(renderProjection)
         }
     }
 
