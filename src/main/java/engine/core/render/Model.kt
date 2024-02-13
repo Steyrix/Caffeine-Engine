@@ -13,12 +13,16 @@ open class Model(
     private val mesh: Mesh,
     private var texture: Texture2D? = null,
     private var arrayTexture: ArrayTexture2D? = null,
-    var isPartOfWorldTranslation: Boolean = true
+    var isPartOfWorldTranslation: Boolean = true,
+    val isStencilBufferEnabled: Boolean = false,
+    val stencilBufferFunction: () -> Unit = {}
 ) : Drawable<SetOfParameters>, Entity {
 
     constructor(
         texture: Texture2D,
-        uv: FloatArray = DefaultBufferData.getRectangleSectorVertices(1.0f, 1.0f)
+        uv: FloatArray = DefaultBufferData.getRectangleSectorVertices(1.0f, 1.0f),
+        isStencilBufferEnabled: Boolean = false,
+        stencilBufferFunction: () -> Unit = {}
     ) : this(
         mesh = Mesh(
             dataArrays = listOf(
@@ -31,7 +35,11 @@ open class Model(
         arrayTexture = null
     )
 
-    constructor(arrayTexture: ArrayTexture2D) : this(
+    constructor(
+        arrayTexture: ArrayTexture2D,
+        isStencilBufferEnabled: Boolean = false,
+        stencilBufferFunction: () -> Unit = {}
+    ) : this(
         mesh = Mesh(
             dataArrays = DefaultBufferData.getRectangleSectorBuffers(),
             verticesCount = 6
@@ -44,9 +52,14 @@ open class Model(
         dataArrays: List<FloatArray>,
         verticesCount: Int,
         texture: Texture2D? = null,
-        arrayTexture: ArrayTexture2D? = null
+        arrayTexture: ArrayTexture2D? = null,
+        isStencilBufferEnabled: Boolean = false,
+        stencilBufferFunction: () -> Unit = {}
     ) : this(
-        mesh = Mesh(dataArrays, verticesCount),
+        mesh = Mesh(
+            dataArrays = dataArrays,
+            verticesCount = verticesCount
+        ),
         texture = texture,
         arrayTexture = arrayTexture
     )
@@ -68,6 +81,9 @@ open class Model(
         shader?.let {
             mesh.prepare()
             it.bind()
+
+            glStencilFunc(GL_ALWAYS, 1, 0xFF)
+            glStencilMask(0xFF)
 
             val model = MatrixComputer.getResultMatrix(x, y, xSize, ySize, rotationAngle, isPartOfWorldTranslation)
 
