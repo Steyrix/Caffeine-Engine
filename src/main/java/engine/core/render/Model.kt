@@ -136,6 +136,7 @@ open class Model(
     }
 
     private fun writeToStencilBuffer() {
+        if (!isStencilBufferEnabled) return
         stencilShader?.let {
             glStencilFunc(GL_ALWAYS, 1, 0xFF)
             glStencilMask(0xFF)
@@ -143,6 +144,7 @@ open class Model(
     }
 
     private fun applyStencil(srcModel: Matrix4f) {
+        if (!isStencilBufferEnabled) return
         stencilShader?.let { sShader ->
             sShader.bind()
             bindTextureToStencil()
