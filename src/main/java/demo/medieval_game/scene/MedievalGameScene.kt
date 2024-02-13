@@ -101,11 +101,12 @@ abstract class MedievalGameScene(
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
         glEnable(GL_STENCIL_TEST)
+        glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE)
+
+        glClearColor(0f, 0.5f, 0f, 0.5f)
         glClear(GL_COLOR_BUFFER_BIT)
         glClear(GL_STENCIL_BUFFER_BIT)
-
-        glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE)
-        glClearColor(0f, 0.5f, 0f, 0.5f)
+        glStencilMask(0x00)
     }
 
     override fun render(window: Window) {
