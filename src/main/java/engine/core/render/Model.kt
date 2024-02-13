@@ -68,6 +68,8 @@ open class Model(
 
     override var shader: Shader? = null
 
+    var stencilShader: Shader? = null
+
     var x: Float = 0f
     var y: Float = 0f
     var xSize: Float = 0f
@@ -92,6 +94,18 @@ open class Model(
             it.validate()
 
             glDrawArrays(drawMode, 0, mesh.verticesCount)
+
+            stencilShader?.let { sShader ->
+                glStencilFunc(GL_NOTEQUAL, 1, 0xFF)
+                glStencilMask(0x00)
+                sShader.bind()
+                val scaledModel = MatrixComputer.getResultMatrix(x, y, xSize + 2f, ySize + 2f, rotationAngle, isPartOfWorldTranslation)
+                sShader.setUniform(Shader.VAR_KEY_MODEL, scaledModel)
+                sShader.validate()
+                glDrawArrays(drawMode, 0, mesh.verticesCount)
+                glStencilMask(0xFF)
+                glStencilFunc(GL_ALWAYS, 1, 0xFF)
+            }
         }
     }
 
