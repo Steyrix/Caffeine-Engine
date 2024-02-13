@@ -41,6 +41,7 @@ class Window(
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE)
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE) // the window will stay hidden after creation
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE) // the window will be resizable
+        glfwWindowHint(GLFW_STENCIL_BITS, 8)
 
         window = glfwCreateWindow(width, height, title, MemoryUtil.NULL, MemoryUtil.NULL)
 
