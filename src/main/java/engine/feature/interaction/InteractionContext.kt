@@ -27,6 +27,7 @@ interface InteractionContext<T> {
             agents.forEach { agent ->
                 if (isInteracting(current, agent)) {
                     consumersList.add(agent)
+                    // agent.onInteracting(producer)
                 }
             }
 
