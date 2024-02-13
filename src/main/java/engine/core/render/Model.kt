@@ -17,7 +17,7 @@ open class Model(
     private var arrayTexture: ArrayTexture2D? = null,
     var isPartOfWorldTranslation: Boolean = true,
     var isStencilBufferEnabled: Boolean = false,
-    val stencilBufferFunction: () -> Unit = {}
+    var stencilBufferFunction: () -> Unit = {}
 ) : Drawable<SetOfParameters>, Entity {
 
     constructor(
@@ -148,7 +148,7 @@ open class Model(
         stencilShader?.let { sShader ->
             sShader.bind()
             bindTextureToStencil()
-            glStencilFunc(GL_NOTEQUAL, 1, 0xFF)
+            stencilBufferFunction.invoke()
             glStencilMask(0x00)
             var scaledModel = srcModel.scaleXY(1.02f, 1.02f)
             scaledModel = scaledModel.translate(Vector3f(-0.01f, -0.01f, 0f))

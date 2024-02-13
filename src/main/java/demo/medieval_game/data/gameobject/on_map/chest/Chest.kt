@@ -15,6 +15,7 @@ import engine.core.update.SetOfStatic2DParameters
 import engine.feature.collision.boundingbox.BoundingBox
 import engine.feature.interaction.BoxInteractionContext
 import org.joml.Matrix4f
+import org.lwjgl.opengl.GL33C
 
 class Chest(
     private val parameters: SetOfStatic2DParameters
@@ -76,6 +77,7 @@ class Chest(
             shader = ShaderController.createAnimationShader(renderProjection)
             stencilShader = ShaderController.createSingleColorShader(renderProjection)
             isStencilBufferEnabled = true
+            stencilBufferFunction = { GL33C.glStencilFunc(GL33C.GL_NOTEQUAL, 1, 0xFF) }
         }
     }
 
