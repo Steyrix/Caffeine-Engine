@@ -84,8 +84,10 @@ open class Model(
             mesh.prepare()
             it.bind()
 
-            glStencilFunc(GL_ALWAYS, 1, 0xFF)
-            glStencilMask(0xFF)
+            stencilShader?.let {
+                glStencilFunc(GL_ALWAYS, 1, 0xFF)
+                glStencilMask(0xFF)
+            }
 
             val model = MatrixComputer.getResultMatrix(x, y, xSize, ySize, rotationAngle, isPartOfWorldTranslation)
 
@@ -96,15 +98,16 @@ open class Model(
             glDrawArrays(drawMode, 0, mesh.verticesCount)
 
             stencilShader?.let { sShader ->
+                sShader.bind()
+                bindTextureToStencil()
                 glStencilFunc(GL_NOTEQUAL, 1, 0xFF)
                 glStencilMask(0x00)
-                sShader.bind()
-                val scaledModel = MatrixComputer.getResultMatrix(x, y, xSize + 2f, ySize + 2f, rotationAngle, isPartOfWorldTranslation)
+                val scaledModel = model.scaleXY(1.01f, 1.01f)
                 sShader.setUniform(Shader.VAR_KEY_MODEL, scaledModel)
                 sShader.validate()
                 glDrawArrays(drawMode, 0, mesh.verticesCount)
                 glStencilMask(0xFF)
-                glStencilFunc(GL_ALWAYS, 1, 0xFF)
+                glStencilFunc(GL_ALWAYS, 0, 0xFF)
             }
         }
     }
@@ -128,6 +131,13 @@ open class Model(
         texture!!.bind()
         shader!!.bind()
         shader!!.setUniform(textureUniformName, 0)
+    }
+
+    private fun bindTextureToStencil() {
+        glActiveTexture(GL_TEXTURE0)
+        texture!!.bind()
+        stencilShader!!.bind()
+        stencilShader!!.setUniform(textureUniformName, 0)
     }
 
     private fun bindArrayTexture() {
