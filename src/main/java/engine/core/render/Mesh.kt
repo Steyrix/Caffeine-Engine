@@ -6,6 +6,8 @@ import engine.core.render.opengl_wrapper.VertexArray
 open class Mesh(
     dataArrays: List<FloatArray>,
     val verticesCount: Int,
+    val isStencilBufferEnabled: Boolean = false,
+    val stencilBufferFunction: () -> Unit = {}
 ) {
 
     private val buffers: MutableList<Buffer> = mutableListOf()
