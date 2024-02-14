@@ -9,4 +9,6 @@ interface Entity {
     fun consumeInteraction(interaction: Interaction) {}
 
     fun getInteractions(): List<Interaction> = emptyList()
+
+    fun onInteraction() {}
 }
