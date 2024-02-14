@@ -90,4 +90,8 @@ class ChestController(
     override fun onInteractionAvailable(producer: Entity) {
         drawableComponent.isStencilBufferEnabled = true
     }
+
+    override fun onInteractionUnavailable(producer: Entity) {
+        drawableComponent.isStencilBufferEnabled = false
+    }
 }
