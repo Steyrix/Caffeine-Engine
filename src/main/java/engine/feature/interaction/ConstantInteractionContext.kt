@@ -9,4 +9,6 @@ class ConstantInteractionContext : InteractionContext<Unit> {
     override val paramsMap: MutableMap<Entity, Unit> = mutableMapOf()
 
     override val isInteracting = { _: Entity, _: Entity -> true }
+
+    override val eventReceivers: MutableList<Entity> = mutableListOf()
 }
