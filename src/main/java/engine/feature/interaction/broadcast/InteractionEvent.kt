@@ -1,0 +1,3 @@
+package engine.feature.interaction.broadcast
+
+interface InteractionEvent
