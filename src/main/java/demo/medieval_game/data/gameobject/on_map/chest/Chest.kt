@@ -4,6 +4,7 @@ import demo.medieval_game.ShaderController
 import demo.medieval_game.data.chestAnimations
 import demo.medieval_game.data.static_parameters.*
 import demo.medieval_game.data.gameobject.gui.bar.HealthBar
+import demo.medieval_game.data.gameobject.gui.chest.ChestGuiContainer
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.game_object.SingleGameEntity
@@ -29,6 +30,16 @@ class Chest(
         path: String
     ) {
         val graphicalComponent = createGraphicalComponent(path, renderProjection)
+        val gui = ChestGuiContainer(
+            SetOfStatic2DParameters(
+                parameters.x,
+                parameters.y,
+                xSize = 200f,
+                ySize = 248f,
+                rotationAngle = 0f
+            )
+        )
+        gui.init(renderProjection)
 
         val boundingBox = createBoundingBox(renderProjection)
         val controller = ChestController(graphicalComponent)
