@@ -62,6 +62,11 @@ class AnimatedModel2D(
             it.bind()
             animationHolder.updateAnimationUniforms(this, it)
         }
+
+        stencilShader?.let {
+            it.bind()
+            animationHolder.updateAnimationUniforms(this, it)
+        }
         animationHolder.playAnimation(deltaTime)
     }
 
