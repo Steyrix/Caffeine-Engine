@@ -10,8 +10,6 @@ interface InteractionContext<T> {
 
     val paramsMap: MutableMap<Entity, T>
 
-    val currentlyInteractingAgents: MutableMap<Entity, MutableSet<Entity>>
-
     fun addAgent(entity: Entity, value: T) {
         agents.add(entity)
         paramsMap[entity] = value
@@ -29,9 +27,8 @@ interface InteractionContext<T> {
             agents.forEach { agent ->
                 if (isInteracting(current, agent)) {
                     consumersList.add(agent)
-                    currentlyInteractingAgents.getOrPut(current) { mutableSetOf() }.add(agent)
                 } else {
-                    currentlyInteractingAgents.getOrDefault(current, mutableSetOf()).remove(agent)
+                    agent.onInteractionUnavailable(current)
                 }
             }
 

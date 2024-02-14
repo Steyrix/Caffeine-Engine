@@ -11,8 +11,6 @@ class BoxInteractionContext : InteractionContext<BoundingBox> {
 
     override val isInteracting = { target: Entity, agent: Entity -> isIntersecting(target, agent) }
 
-    override val currentlyInteractingAgents: MutableMap<Entity, MutableSet<Entity>> = mutableMapOf()
-
     private fun isIntersecting(target: Entity, agent: Entity): Boolean {
         if (target == agent) return false
 
