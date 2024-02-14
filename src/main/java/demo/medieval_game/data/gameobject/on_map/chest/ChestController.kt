@@ -47,6 +47,8 @@ class ChestController(
     private var isBroken = false
     var isBreaking = false
 
+    private var interactionProducer: Entity? = null
+
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
         playOpeningAnimation.schedule(deltaTime)
@@ -89,9 +91,12 @@ class ChestController(
 
     override fun onInteractionAvailable(producer: Entity) {
         drawableComponent.isStencilBufferEnabled = true
+        interactionProducer = producer
     }
 
     override fun onInteractionUnavailable(producer: Entity) {
-        drawableComponent.isStencilBufferEnabled = false
+        if (producer == interactionProducer) {
+            drawableComponent.isStencilBufferEnabled = false
+        }
     }
 }
