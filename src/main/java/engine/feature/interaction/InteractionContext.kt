@@ -41,4 +41,8 @@ interface InteractionContext<T> {
             consumersList.clear()
         }
     }
+
+    fun broadcastEvent() {
+        // TODO: implement
+    }
 }
