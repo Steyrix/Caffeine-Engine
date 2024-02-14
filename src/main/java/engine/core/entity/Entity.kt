@@ -11,4 +11,6 @@ interface Entity {
     fun getInteractions(): List<Interaction> = emptyList()
 
     fun onInteractionAvailable(producer: Entity) {}
+
+    fun onInteractionUnavailable(producer: Entity) {}
 }

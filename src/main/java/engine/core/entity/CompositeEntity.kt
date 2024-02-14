@@ -84,6 +84,12 @@ open class CompositeEntity : Entity, Updatable {
         }
     }
 
+    override fun onInteractionUnavailable(producer: Entity) {
+        entitiesMap.keys.forEach { entity ->
+            entity.onInteractionUnavailable(producer)
+        }
+    }
+
     fun input(window: Window) {
         entitiesMap.keys.forEach { entity ->
             (entity as? Controllable)?.input(window)
