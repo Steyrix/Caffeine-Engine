@@ -78,9 +78,9 @@ open class CompositeEntity : Entity, Updatable {
         }
     }
 
-    override fun onInteraction(producer: Entity) {
+    override fun onInteractionAvailable(producer: Entity) {
         entitiesMap.keys.forEach { entity ->
-            entity.onInteraction(producer)
+            entity.onInteractionAvailable(producer)
         }
     }
 

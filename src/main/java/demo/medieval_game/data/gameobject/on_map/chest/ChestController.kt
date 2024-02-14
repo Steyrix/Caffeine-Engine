@@ -87,7 +87,7 @@ class ChestController(
         }
     }
 
-    override fun onInteraction(producer: Entity) {
+    override fun onInteractionAvailable(producer: Entity) {
         drawableComponent.isStencilBufferEnabled = true
     }
 }

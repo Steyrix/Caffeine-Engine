@@ -27,13 +27,13 @@ interface InteractionContext<T> {
             agents.forEach { agent ->
                 if (isInteracting(current, agent)) {
                     consumersList.add(agent)
-                    agent.onInteraction(producer = current)
                 }
             }
 
             current.getInteractions().forEach { interaction ->
                 consumersList.forEach {
                     it.consumeInteraction(interaction)
+                    it.onInteractionAvailable(current)
                 }
             }
             consumersList.clear()
