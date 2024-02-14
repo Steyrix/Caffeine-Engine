@@ -76,7 +76,7 @@ class Chest(
         ).apply {
             shader = ShaderController.createAnimationShader(renderProjection)
             stencilShader = ShaderController.createSingleColorShader(renderProjection)
-            isStencilBufferEnabled = true
+            isStencilBufferEnabled = false
             stencilBufferFunction = { GL33C.glStencilFunc(GL33C.GL_NOTEQUAL, 1, 0xFF) }
         }
     }
