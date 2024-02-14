@@ -20,7 +20,7 @@ class ChestGuiContainer(
             texture = Texture2D.createInstance(texturePath)
         ).apply {
             shader = ShaderController.createTexturedShader(renderProjection)
-            zLevel = Float.POSITIVE_INFINITY
+            zLevel = Float.NEGATIVE_INFINITY
             isPartOfWorldTranslation = false
         }
 
