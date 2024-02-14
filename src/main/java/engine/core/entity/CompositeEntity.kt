@@ -78,6 +78,12 @@ open class CompositeEntity : Entity, Updatable {
         }
     }
 
+    override fun onInteraction(producer: Entity) {
+        entitiesMap.keys.forEach { entity ->
+            entity.onInteraction(producer)
+        }
+    }
+
     fun input(window: Window) {
         entitiesMap.keys.forEach { entity ->
             (entity as? Controllable)?.input(window)
