@@ -10,5 +10,5 @@ interface Entity {
 
     fun getInteractions(): List<Interaction> = emptyList()
 
-    fun onInteraction() {}
+    fun onInteraction(producer: Entity) {}
 }
