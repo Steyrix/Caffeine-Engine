@@ -26,5 +26,4 @@ class ChestGuiContainer(
 
         addComponent(graphicalComponent!!, parameters)
     }
-
 }
