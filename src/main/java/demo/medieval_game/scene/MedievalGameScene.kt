@@ -166,6 +166,8 @@ abstract class MedievalGameScene(
 
     override fun proccessEvent(event: InteractionEvent) {
         when(event) {
+            // TODO: eventReceivers.forEach { processEvent }
+            // TODO: get rid of responsibility in this class
             is Loot -> {
                 chestGui.parameters.apply {
                     x = characterParameters.x
