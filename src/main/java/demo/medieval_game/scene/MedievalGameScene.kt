@@ -3,6 +3,7 @@ package demo.medieval_game.scene
 import demo.medieval_game.data.MapSceneInitializer
 import demo.medieval_game.data.gameobject.PlayableCharacter
 import demo.medieval_game.data.gameobject.gui.chest.ChestGuiContainer
+import demo.medieval_game.interaction.event.Loot
 import demo.medieval_game.matrix.MedievalGameMatrixState
 import engine.core.controllable.Direction
 import engine.core.loop.AccumulatedTimeEvent
@@ -13,6 +14,7 @@ import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.interaction.BoxInteractionContext
 import engine.feature.interaction.broadcast.EventReceiver
+import engine.feature.interaction.broadcast.InteractionEvent
 import engine.feature.text.TextRenderer
 import engine.feature.tiled.scene.TileMapEntity
 import engine.feature.tiled.scene.TileMapPreset
@@ -153,6 +155,14 @@ abstract class MedievalGameScene(
                 screenWidth,
                 screenHeight
             )
+        }
+    }
+
+    override fun proccessEvent(event: InteractionEvent) {
+        when(event) {
+            is Loot -> {
+                chestGui.draw()
+            }
         }
     }
 }
