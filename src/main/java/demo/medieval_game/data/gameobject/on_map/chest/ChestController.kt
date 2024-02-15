@@ -9,7 +9,8 @@ import engine.core.render.AnimatedModel2D
 import engine.feature.interaction.Interaction
 
 class ChestController(
-    drawableComponent: AnimatedModel2D
+    drawableComponent: AnimatedModel2D,
+    private val onInteraction: (interaction: Interaction) -> Unit = {}
 ) : AnimationController(drawableComponent), Entity {
 
     private val playOpeningAnimation = PredicateTimeEvent(
@@ -87,6 +88,8 @@ class ChestController(
                 }
             }
         }
+
+        onInteraction(interaction)
     }
 
     override fun onInteractionAvailable(producer: Entity) {
