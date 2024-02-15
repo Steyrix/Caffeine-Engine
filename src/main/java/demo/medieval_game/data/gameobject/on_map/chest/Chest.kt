@@ -4,6 +4,8 @@ import demo.medieval_game.ShaderController
 import demo.medieval_game.data.chestAnimations
 import demo.medieval_game.data.static_parameters.*
 import demo.medieval_game.data.gameobject.gui.bar.HealthBar
+import demo.medieval_game.interaction.ChestInteraction
+import demo.medieval_game.interaction.event.Loot
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.game_object.SingleGameEntity
@@ -31,7 +33,16 @@ class Chest(
         val graphicalComponent = createGraphicalComponent(path, renderProjection)
 
         val boundingBox = createBoundingBox(renderProjection)
-        val controller = ChestController(graphicalComponent)
+
+        val controller = ChestController(
+            graphicalComponent
+        ) { interaction ->
+            when(interaction) {
+                is ChestInteraction.OpenClose ->
+                    boxInteractionContext.broadcastEvent(Loot(mutableListOf()))
+            }
+        }
+
         val hpBar = createHpBar(renderProjection) {
             controller.isBreaking = true
             disposalEvent?.let { event -> addEvent(event) }
