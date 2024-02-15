@@ -40,9 +40,6 @@ interface InteractionContext<T> {
                 consumersList.forEach {
                     it.consumeInteraction(interaction)
                     it.onInteractionAvailable(current)
-                    listeners.forEach { receiver ->
-                        receiver.proccessEvent(interaction)
-                    }
                 }
             }
             consumersList.clear()
@@ -50,6 +47,8 @@ interface InteractionContext<T> {
     }
 
     fun broadcastEvent(event: InteractionEvent) {
-        // TODO: implement
+        listeners.forEach {
+            it.proccessEvent(event)
+        }
     }
 }
