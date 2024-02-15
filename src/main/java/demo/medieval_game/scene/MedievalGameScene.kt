@@ -3,6 +3,7 @@ package demo.medieval_game.scene
 import demo.medieval_game.data.MapSceneInitializer
 import demo.medieval_game.data.gameobject.PlayableCharacter
 import demo.medieval_game.data.gameobject.gui.chest.ChestGuiContainer
+import demo.medieval_game.data.static_parameters.characterParameters
 import demo.medieval_game.interaction.event.Loot
 import demo.medieval_game.matrix.MedievalGameMatrixState
 import engine.core.controllable.Direction
@@ -46,6 +47,7 @@ abstract class MedievalGameScene(
     protected var textRenderer: TextRenderer? = null
 
     protected var chestGui: ChestGuiContainer = ChestGuiContainer(ParametersFactory.createEmptyStatic())
+    private var showChestGui = false
 
     override fun init(session: Session, intent: SceneIntent?) {
         if (session !is MedievalGameSession) return
@@ -106,6 +108,7 @@ abstract class MedievalGameScene(
         tiledCollisionContext?.update()
         bbCollisionContext?.update()
         boxInteractionContext?.update()
+        chestGui.update(deltaTime)
     }
 
     private fun renderSetup() {
@@ -125,6 +128,9 @@ abstract class MedievalGameScene(
         renderSetup()
         context.entitiesSortedByLevelZ().forEach {
             it.draw()
+        }
+        if (showChestGui) {
+            chestGui.draw()
         }
     }
 
@@ -161,7 +167,13 @@ abstract class MedievalGameScene(
     override fun proccessEvent(event: InteractionEvent) {
         when(event) {
             is Loot -> {
-                chestGui.draw()
+                chestGui.parameters.apply {
+                    x = characterParameters.x
+                    y = characterParameters.y
+                    xSize = 400f
+                    ySize = 496f
+                }
+                showChestGui = true
             }
         }
     }
