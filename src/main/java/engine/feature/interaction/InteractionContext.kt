@@ -40,6 +40,9 @@ interface InteractionContext<T> {
                 consumersList.forEach {
                     it.consumeInteraction(interaction)
                     it.onInteractionAvailable(current)
+                    listeners.forEach { receiver ->
+                        receiver.proccessEvent(interaction)
+                    }
                 }
             }
             consumersList.clear()
