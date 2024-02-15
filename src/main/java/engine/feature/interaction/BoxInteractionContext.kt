@@ -2,6 +2,7 @@ package engine.feature.interaction
 
 import engine.core.entity.Entity
 import engine.feature.collision.boundingbox.BoundingBox
+import engine.feature.interaction.broadcast.EventReceiver
 
 class BoxInteractionContext : InteractionContext<BoundingBox> {
 
@@ -11,7 +12,7 @@ class BoxInteractionContext : InteractionContext<BoundingBox> {
 
     override val isInteracting = { target: Entity, agent: Entity -> isIntersecting(target, agent) }
 
-    override val eventReceivers: MutableList<Entity> = mutableListOf()
+    override val listeners: MutableList<EventReceiver> = mutableListOf()
 
     private fun isIntersecting(target: Entity, agent: Entity): Boolean {
         if (target == agent) return false

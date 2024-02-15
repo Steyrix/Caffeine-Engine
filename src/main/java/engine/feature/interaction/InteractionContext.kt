@@ -1,6 +1,7 @@
 package engine.feature.interaction
 
 import engine.core.entity.Entity
+import engine.feature.interaction.broadcast.EventReceiver
 import engine.feature.interaction.broadcast.InteractionEvent
 
 interface InteractionContext<T> {
@@ -11,7 +12,7 @@ interface InteractionContext<T> {
 
     val paramsMap: MutableMap<Entity, T>
 
-    val eventReceivers: MutableList<Entity>
+    val listeners: MutableList<EventReceiver>
 
     fun addAgent(entity: Entity, value: T) {
         agents.add(entity)

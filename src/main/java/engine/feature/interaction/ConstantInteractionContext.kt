@@ -1,6 +1,7 @@
 package engine.feature.interaction
 
 import engine.core.entity.Entity
+import engine.feature.interaction.broadcast.EventReceiver
 
 class ConstantInteractionContext : InteractionContext<Unit> {
 
@@ -10,5 +11,5 @@ class ConstantInteractionContext : InteractionContext<Unit> {
 
     override val isInteracting = { _: Entity, _: Entity -> true }
 
-    override val eventReceivers: MutableList<Entity> = mutableListOf()
+    override val listeners: MutableList<EventReceiver> = mutableListOf()
 }
