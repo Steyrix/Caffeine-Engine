@@ -2,14 +2,17 @@ package demo.medieval_game.scene
 
 import demo.medieval_game.data.MapSceneInitializer
 import demo.medieval_game.data.gameobject.PlayableCharacter
+import demo.medieval_game.data.gameobject.gui.chest.ChestGuiContainer
 import demo.medieval_game.matrix.MedievalGameMatrixState
 import engine.core.controllable.Direction
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.scene.SceneIntent
 import engine.core.session.Session
+import engine.core.update.ParametersFactory
 import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.interaction.BoxInteractionContext
+import engine.feature.interaction.broadcast.EventReceiver
 import engine.feature.text.TextRenderer
 import engine.feature.tiled.scene.TileMapEntity
 import engine.feature.tiled.scene.TileMapPreset
@@ -22,20 +25,25 @@ abstract class MedievalGameScene(
     override val screenWidth: Float,
     override val screenHeight: Float,
     projection: Matrix4f
-) : TileMapScene(projection) {
+) : TileMapScene(projection), EventReceiver {
 
     protected var character: PlayableCharacter? = null
 
     private val actions: MutableList<AccumulatedTimeEvent> = mutableListOf()
 
     protected var bbCollisionContext: BoundingBoxCollisionContext? = null
-    protected var boxInteractionContext: BoxInteractionContext = BoxInteractionContext()
+    protected var boxInteractionContext: BoxInteractionContext =
+        BoxInteractionContext().also {
+            it.listeners.add(this)
+        }
 
     private var updateRounds = 0
 
     private var isHorizontalMapTransaction = false
 
     protected var textRenderer: TextRenderer? = null
+
+    protected var chestGui: ChestGuiContainer = ChestGuiContainer(ParametersFactory.createEmptyStatic())
 
     override fun init(session: Session, intent: SceneIntent?) {
         if (session !is MedievalGameSession) return
@@ -54,6 +62,8 @@ abstract class MedievalGameScene(
         intent?.let {
             handleMapTransaction(it as MedievalGameSceneIntent)
         }
+
+        chestGui.init(renderProjection)
     }
 
     override fun initTileMap(projection: Matrix4f, screenWidth: Float, screenHeight: Float): TileMapEntity {
