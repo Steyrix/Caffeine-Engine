@@ -46,7 +46,7 @@ class Chest(
                 is ChestInteraction.OpenClose ->
                     boxInteractionContext.broadcastEvent(
                         createEvent(
-                            controller.isClosed,
+                            controller.isClosing,
                             Point2D(parameters.x, parameters.y),
                             mutableListOf()
                         )
@@ -132,11 +132,11 @@ class Chest(
     }
 
     private fun createEvent(
-        isClosed: Boolean,
+        isClosing: Boolean,
         pos: Point2D,
         content: MutableList<Entity>
     ): MedievalGameInteractionEvent =
-        if (isClosed) {
+        if (isClosing) {
             CloseChest
         } else {
             OpenChest(content, pos)

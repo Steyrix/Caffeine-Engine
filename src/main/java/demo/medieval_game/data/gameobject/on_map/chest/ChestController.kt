@@ -42,11 +42,11 @@ class ChestController(
         }
     ).apply { reset() }
 
-    private var isClosing = false
+    private var isClosed = true
     private var isOpening = false
     private var isBroken = false
+    var isClosing = false
     var isBreaking = false
-    var isClosed = true
 
     private var interactionProducer: Entity? = null
 
