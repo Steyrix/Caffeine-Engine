@@ -5,6 +5,8 @@ import demo.medieval_game.data.chestAnimations
 import demo.medieval_game.data.static_parameters.*
 import demo.medieval_game.data.gameobject.gui.bar.HealthBar
 import demo.medieval_game.interaction.ChestInteraction
+import demo.medieval_game.interaction.event.CloseChest
+import demo.medieval_game.interaction.event.MedievalGameInteractionEvent
 import demo.medieval_game.interaction.event.OpenChest
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
@@ -37,13 +39,16 @@ class Chest(
 
         val controller = ChestController(
             graphicalComponent
-        ) { interaction ->
-            when(interaction) {
+        )
+
+        controller.onInteraction = { interaction ->
+            when (interaction) {
                 is ChestInteraction.OpenClose ->
                     boxInteractionContext.broadcastEvent(
-                        OpenChest(
-                            mutableListOf(),
-                            Point2D(parameters.x, parameters.y)
+                        createEvent(
+                            controller.isClosed,
+                            Point2D(parameters.x, parameters.y),
+                            mutableListOf()
                         )
                     )
             }
@@ -125,4 +130,15 @@ class Chest(
             }
         )
     }
+
+    private fun createEvent(
+        isClosed: Boolean,
+        pos: Point2D,
+        content: MutableList<Entity>
+    ): MedievalGameInteractionEvent =
+        if (isClosed) {
+            CloseChest
+        } else {
+            OpenChest(content, pos)
+        }
 }
