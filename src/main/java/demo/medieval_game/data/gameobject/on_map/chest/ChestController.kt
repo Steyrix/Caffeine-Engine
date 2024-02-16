@@ -10,7 +10,7 @@ import engine.feature.interaction.Interaction
 
 class ChestController(
     drawableComponent: AnimatedModel2D,
-    private val onInteraction: (interaction: Interaction) -> Unit = {}
+    var onInteraction: (interaction: Interaction) -> Unit = {}
 ) : AnimationController(drawableComponent), Entity {
 
     private val playOpeningAnimation = PredicateTimeEvent(
@@ -42,11 +42,11 @@ class ChestController(
         }
     ).apply { reset() }
 
-    private var isClosed = true
     private var isClosing = false
     private var isOpening = false
     private var isBroken = false
     var isBreaking = false
+    var isClosed = true
 
     private var interactionProducer: Entity? = null
 
