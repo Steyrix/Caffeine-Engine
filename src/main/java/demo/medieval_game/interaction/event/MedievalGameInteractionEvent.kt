@@ -10,3 +10,5 @@ data class OpenChest(
     val content: MutableList<Entity>,
     val pos: Point2D
 ) : MedievalGameInteractionEvent
+
+object CloseChest : MedievalGameInteractionEvent
