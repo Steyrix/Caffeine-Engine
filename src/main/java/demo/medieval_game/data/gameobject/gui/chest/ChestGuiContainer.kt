@@ -26,4 +26,8 @@ class ChestGuiContainer(
 
         addComponent(graphicalComponent!!, parameters)
     }
+
+    fun setContent() {
+    // TODO: implement
+    }
 }
