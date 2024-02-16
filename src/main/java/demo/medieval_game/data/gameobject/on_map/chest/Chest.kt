@@ -9,6 +9,7 @@ import demo.medieval_game.interaction.event.Loot
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.game_object.SingleGameEntity
+import engine.core.geometry.Point2D
 import engine.core.loop.GameLoopTimeEvent
 import engine.core.loop.SingleTimeEvent
 import engine.core.render.AnimatedModel2D
@@ -39,7 +40,12 @@ class Chest(
         ) { interaction ->
             when(interaction) {
                 is ChestInteraction.OpenClose ->
-                    boxInteractionContext.broadcastEvent(Loot(mutableListOf()))
+                    boxInteractionContext.broadcastEvent(
+                        Loot(
+                            mutableListOf(),
+                            Point2D(parameters.x, parameters.y)
+                        )
+                    )
             }
         }
 
