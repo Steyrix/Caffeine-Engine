@@ -5,7 +5,7 @@ import demo.medieval_game.data.chestAnimations
 import demo.medieval_game.data.static_parameters.*
 import demo.medieval_game.data.gameobject.gui.bar.HealthBar
 import demo.medieval_game.interaction.ChestInteraction
-import demo.medieval_game.interaction.event.Loot
+import demo.medieval_game.interaction.event.OpenChest
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.game_object.SingleGameEntity
@@ -41,7 +41,7 @@ class Chest(
             when(interaction) {
                 is ChestInteraction.OpenClose ->
                     boxInteractionContext.broadcastEvent(
-                        Loot(
+                        OpenChest(
                             mutableListOf(),
                             Point2D(parameters.x, parameters.y)
                         )

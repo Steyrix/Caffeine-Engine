@@ -6,7 +6,7 @@ import engine.feature.interaction.broadcast.InteractionEvent
 
 sealed interface MedievalGameInteractionEvent : InteractionEvent
 
-data class Loot(
+data class OpenChest(
     val content: MutableList<Entity>,
     val pos: Point2D
 ) : MedievalGameInteractionEvent
