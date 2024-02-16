@@ -69,27 +69,27 @@ val campfireParameters = SetOfStatic2DParameters(
 )
 
 val woodenChestParameters = SetOfStatic2DParameters(
-    300f, 300f, 125f, 125f, 0f
+    300f, 300f, 100f, 100f, 0f
 )
 
 val ironChestParameters = SetOfStatic2DParameters(
-    450f, 300f, 125f, 125f, 0f
+    450f, 300f, 100f, 100f, 0f
 )
 
 val rustyIronChestParameters = SetOfStatic2DParameters(
-    600f, 300f, 125f, 125f, 0f
+    600f, 300f, 100f, 100f, 0f
 )
 
 val blueChestParameters = SetOfStatic2DParameters(
-    500f, 400f, 125f, 125f, 0f
+    500f, 400f, 100f, 100f, 0f
 )
 
 val purpleChestParameters = SetOfStatic2DParameters(
-    500f, 650f, 125f, 125f, 0f
+    500f, 650f, 100f, 100f, 0f
 )
 
 val greenChestParameters = SetOfStatic2DParameters(
-    500f, 800f, 125f, 125f, 0f
+    500f, 800f, 100f, 100f, 0f
 )
 
 const val CHEST_BOX_WIDTH = 75f
