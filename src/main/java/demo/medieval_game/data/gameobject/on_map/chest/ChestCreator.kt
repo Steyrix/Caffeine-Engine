@@ -6,12 +6,12 @@ import engine.feature.interaction.BoxInteractionContext
 import org.joml.Matrix4f
 
 enum class ChestType(val path: String) {
-    WOODEN("/textures/WoodenChestAtlas.png"),
-    IRON("/textures/IronChestAtlas.png"),
+    //WOODEN("/textures/WoodenChestAtlas.png"),
+    //IRON("/textures/IronChestAtlas.png"),
     RUSTY_IRON("/textures/RustyIronChestAtlas.png"),
-    BLUE("/textures/BlueChestAtlas.png"),
-    GREEN("/textures/GreenChestAtlas.png"),
-    PURPLE("/textures/PurpleChestAtlas.png")
+    //BLUE("/textures/BlueChestAtlas.png"),
+    //GREEN("/textures/GreenChestAtlas.png"),
+    //PURPLE("/textures/PurpleChestAtlas.png")
 }
 
 object ChestCreator {
