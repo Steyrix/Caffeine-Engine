@@ -2,15 +2,14 @@ package demo.medieval_game.scene
 
 import demo.medieval_game.data.MapSceneInitializer
 import demo.medieval_game.data.gameobject.PlayableCharacter
-import demo.medieval_game.data.gameobject.gui.chest.ChestGuiContainer
-import demo.medieval_game.data.static_parameters.characterParameters
-import demo.medieval_game.interaction.event.Loot
+import demo.medieval_game.interaction.event_receivers.GuiController
 import demo.medieval_game.matrix.MedievalGameMatrixState
 import engine.core.controllable.Direction
+import engine.core.entity.CompositeEntity
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.scene.SceneIntent
 import engine.core.session.Session
-import engine.core.update.ParametersFactory
+import engine.core.update.Updatable
 import engine.core.window.Window
 import engine.feature.collision.boundingbox.BoundingBoxCollisionContext
 import engine.feature.interaction.BoxInteractionContext
@@ -46,8 +45,7 @@ abstract class MedievalGameScene(
 
     protected var textRenderer: TextRenderer? = null
 
-    protected var chestGui: ChestGuiContainer = ChestGuiContainer(ParametersFactory.createEmptyStatic())
-    private var showChestGui = false
+    private val eventReceivers = mutableListOf<EventReceiver>()
 
     override fun init(session: Session, intent: SceneIntent?) {
         if (session !is MedievalGameSession) return
@@ -67,7 +65,7 @@ abstract class MedievalGameScene(
             handleMapTransaction(it as MedievalGameSceneIntent)
         }
 
-        chestGui.init(renderProjection)
+        eventReceivers.add(GuiController)
     }
 
     override fun initTileMap(projection: Matrix4f, screenWidth: Float, screenHeight: Float): TileMapEntity {
@@ -108,7 +106,12 @@ abstract class MedievalGameScene(
         tiledCollisionContext?.update()
         bbCollisionContext?.update()
         boxInteractionContext?.update()
-        chestGui.update(deltaTime)
+
+        eventReceivers.forEach {
+            if (it is Updatable) {
+                it.update(deltaTime)
+            }
+        }
     }
 
     private fun renderSetup() {
@@ -129,8 +132,10 @@ abstract class MedievalGameScene(
         context.entitiesSortedByLevelZ().forEach {
             it.draw()
         }
-        if (showChestGui) {
-            chestGui.draw()
+        eventReceivers.forEach {
+            if (it is CompositeEntity) {
+                it.draw()
+            }
         }
     }
 
@@ -165,18 +170,6 @@ abstract class MedievalGameScene(
     }
 
     override fun proccessEvent(event: InteractionEvent) {
-        when(event) {
-            // TODO: eventReceivers.forEach { processEvent }
-            // TODO: get rid of responsibility in this class
-            is Loot -> {
-                chestGui.parameters.apply {
-                    x = characterParameters.x
-                    y = characterParameters.y
-                    xSize = 400f
-                    ySize = 496f
-                }
-                showChestGui = true
-            }
-        }
+        eventReceivers.forEach { it.proccessEvent(event) }
     }
 }
