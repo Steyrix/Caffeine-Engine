@@ -28,7 +28,6 @@ class InventoryItemWrapper(
     fun init(renderProjection: Matrix4f) {
         backgroundGraphicalComponent?.apply {
             shader = ShaderController.createTexturedShader(renderProjection)
-            zLevel = 1f
             isPartOfWorldTranslation = false
         }
     }
