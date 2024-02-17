@@ -14,6 +14,8 @@ class ChestGuiContainer(
 
     private var graphicalComponent: Model? = null
 
+    private val grid: Array<IntArray> = arrayOf()
+
     fun init(renderProjection: Matrix4f) {
         val texturePath = this.javaClass.getResource("/textures/gui/chest/OpenedChestGui.png")!!.path
 
