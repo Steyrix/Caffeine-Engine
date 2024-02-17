@@ -22,6 +22,7 @@ class InventoryItemWrapper(
         )
 
         addComponent(backgroundGraphicalComponent!!, parameters)
+        addComponent(item, parameters)
     }
 
     fun init(renderProjection: Matrix4f) {
