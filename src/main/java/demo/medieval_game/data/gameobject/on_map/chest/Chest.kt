@@ -4,6 +4,8 @@ import demo.medieval_game.ShaderController
 import demo.medieval_game.data.chestAnimations
 import demo.medieval_game.data.static_parameters.*
 import demo.medieval_game.data.gameobject.gui.bar.HealthBar
+import demo.medieval_game.data.gameobject.inventory_item.InventoryItemWrapper
+import demo.medieval_game.data.gameobject.inventory_item.LootCreator
 import demo.medieval_game.interaction.ChestInteraction
 import demo.medieval_game.interaction.event.CloseChest
 import demo.medieval_game.interaction.event.MedievalGameInteractionEvent
@@ -48,7 +50,7 @@ class Chest(
                         createEvent(
                             controller.isClosing,
                             Point2D(parameters.x, parameters.y),
-                            mutableListOf()
+                            LootCreator.createBasicLoot(parameters)
                         )
                     )
             }
@@ -134,7 +136,7 @@ class Chest(
     private fun createEvent(
         isClosing: Boolean,
         pos: Point2D,
-        content: MutableList<Entity>
+        content: MutableList<InventoryItemWrapper>
     ): MedievalGameInteractionEvent =
         if (isClosing) {
             CloseChest
