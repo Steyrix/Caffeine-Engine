@@ -18,22 +18,42 @@ class ChestGuiContainer(
         private const val CELLS_COUNT = 35
     }
 
-    private var graphicalComponent: Model? = null
+    private var containerModel: Model? = null
+    private var closeButtonModel: Model? = null
+    private var takeAllButtonModel: Model? = null
 
     private val grid: Array<IntArray> = Array(COLUMN_COUNT) { IntArray(ROW_COUNT) }
 
     fun init(renderProjection: Matrix4f) {
         val texturePath = this.javaClass.getResource("/textures/gui/chest/OpenedChestGui.png")!!.path
 
-        graphicalComponent = Model(
+        containerModel = createContainerModel(renderProjection)
+
+        addComponent(containerModel!!, parameters)
+    }
+
+    private fun createContainerModel(renderProjection: Matrix4f): Model {
+        val texturePath = this.javaClass.getResource("/textures/gui/chest/OpenedChestGui.png")!!.path
+
+        return Model(
             texture = Texture2D.createInstance(texturePath)
         ).apply {
             shader = ShaderController.createTexturedShader(renderProjection)
             zLevel = Float.NEGATIVE_INFINITY
             isPartOfWorldTranslation = false
         }
+    }
 
-        addComponent(graphicalComponent!!, parameters)
+    private fun createCloseButtonModel(renderProjection: Matrix4f): Model {
+        val texturePath = this.javaClass.getResource("/textures/gui/chest/OpenedChestGui.png")!!.path
+
+        return Model(
+            texture = Texture2D.createInstance(texturePath)
+        ).apply {
+            shader = ShaderController.createTexturedShader(renderProjection)
+            zLevel = Float.NEGATIVE_INFINITY
+            isPartOfWorldTranslation = false
+        }
     }
 
     fun setContent(content: MutableList<InventoryItemWrapper>) {
