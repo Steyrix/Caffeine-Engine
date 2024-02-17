@@ -37,7 +37,10 @@ class ChestGuiContainer(
     }
 
     fun setContent(content: MutableList<InventoryItemWrapper>) {
+        var id = 1
         content.forEach {
+            // TODO: place in grid
+
             it.updateParameters(parameters)
             addComponent(it, it.parameters)
         }
