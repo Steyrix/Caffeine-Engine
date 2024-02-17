@@ -11,7 +11,8 @@ import org.joml.Matrix4f
 class InventoryItemWrapper(
     val parameters: SetOfStatic2DParameters,
     rarity: ItemRarity,
-    private val item: Entity
+    private val item: Entity,
+    val cellCount: Int = 1
 ) : CompositeEntity() {
 
     private var backgroundGraphicalComponent: Model? = null

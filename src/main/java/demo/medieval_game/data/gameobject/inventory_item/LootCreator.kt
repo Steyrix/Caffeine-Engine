@@ -25,7 +25,8 @@ object LootCreator {
         val wrapper = InventoryItemWrapper(
             params,
             ItemRarity.COMMON,
-            sword
+            sword,
+            2
         ).also {
             it.init(MedievalGame.renderProjection)
         }
