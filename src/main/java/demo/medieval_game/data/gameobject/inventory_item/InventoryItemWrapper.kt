@@ -35,10 +35,14 @@ class InventoryItemWrapper(
         }
     }
 
-    fun updateParameters(parameters: SetOfStatic2DParameters) {
+    fun updateParameters(
+        parameters: SetOfStatic2DParameters,
+        horizontalModifier: Float = 1f,
+        verticalModifier: Float = 1f
+    ) {
         this.parameters.apply {
-            x = parameters.x + 0.13f * parameters.xSize
-            y = parameters.y + 0.306f * parameters.ySize
+            x = parameters.x + 0.13f * parameters.xSize * horizontalModifier
+            y = parameters.y + 0.306f * parameters.ySize * verticalModifier
             xSize = parameters.xSize * 0.1f
             ySize = parameters.ySize * 0.1909f
         }
