@@ -12,9 +12,15 @@ class ChestGuiContainer(
     val parameters: SetOfStatic2DParameters
 ) : CompositeEntity() {
 
+    companion object {
+        private const val COLUMN_COUNT = 7
+        private const val ROW_COUNT = 5
+        private const val CELLS_COUNT = 35
+    }
+
     private var graphicalComponent: Model? = null
 
-    private val grid: Array<IntArray> = arrayOf()
+    private val grid: Array<IntArray> = Array(COLUMN_COUNT) { IntArray(ROW_COUNT) }
 
     fun init(renderProjection: Matrix4f) {
         val texturePath = this.javaClass.getResource("/textures/gui/chest/OpenedChestGui.png")!!.path
