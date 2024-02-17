@@ -1,6 +1,7 @@
 package demo.medieval_game.interaction.event_receivers
 
 import demo.medieval_game.data.gameobject.gui.chest.ChestGuiContainer
+import demo.medieval_game.data.gameobject.inventory_item.InventoryItemWrapper
 import demo.medieval_game.interaction.event.CloseChest
 import demo.medieval_game.interaction.event.OpenChest
 import demo.medieval_game.scene.MedievalGame
@@ -24,11 +25,17 @@ object GuiController : CompositeEntity(), EventReceiver {
         chestGui.init(renderProjection)
     }
 
-    private fun showChestGui(pos: Point2D) {
+    private fun showChestGui(
+        pos: Point2D,
+        content: MutableList<InventoryItemWrapper>
+    ) {
         chestGui.parameters.apply {
             x = pos.x
             y = pos.y
         }
+
+        chestGui.setContent(content)
+
         isInputBlocked = true
         addComponent(chestGui, chestGui.parameters)
     }
@@ -40,7 +47,7 @@ object GuiController : CompositeEntity(), EventReceiver {
 
     override fun proccessEvent(event: InteractionEvent) {
         when(event) {
-            is OpenChest -> showChestGui(event.pos)
+            is OpenChest -> showChestGui(event.pos, event.content)
             is CloseChest -> hideChestGui()
         }
     }
