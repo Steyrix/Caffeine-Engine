@@ -29,21 +29,26 @@ object GuiController : CompositeEntity(), EventReceiver {
         pos: Point2D,
         content: MutableList<InventoryItemWrapper>
     ) {
-        chestGui.parameters.apply {
+        val guiParams = chestGui.parameters
+
+        guiParams.apply {
             x = pos.x
             y = pos.y
         }
 
         content.forEach {
             it.parameters.apply {
-
+                x = guiParams.x + 0.13f * guiParams.xSize
+                y = guiParams.y + 0.306f * guiParams.ySize
+                xSize = guiParams.xSize * 0.1f
+                ySize = guiParams.ySize * 0.1909f
             }
         }
 
         chestGui.setContent(content)
 
         isInputBlocked = true
-        addComponent(chestGui, chestGui.parameters)
+        addComponent(chestGui, guiParams)
     }
 
     private fun hideChestGui() {
