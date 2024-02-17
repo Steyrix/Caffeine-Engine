@@ -19,6 +19,7 @@ object LootCreator {
         ).also {
             it.shader = ShaderController.createTexturedShader(MedievalGame.renderProjection)
             it.zLevel = 1f
+            it.isPartOfWorldTranslation = false
         }
 
         val wrapper = InventoryItemWrapper(
