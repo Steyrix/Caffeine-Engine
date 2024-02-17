@@ -81,6 +81,7 @@ abstract class MedievalGameScene(
     }
 
     override fun input(window: Window) {
+        //if (GuiController.isInputBlocked) return
         context.forEach { it.input(window) }
     }
 
