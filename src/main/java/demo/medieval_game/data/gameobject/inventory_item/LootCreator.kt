@@ -26,6 +26,7 @@ object LootCreator {
             params,
             ItemRarity.COMMON,
             sword,
+            1,
             2
         ).also {
             it.init(MedievalGame.renderProjection)
