@@ -1,6 +1,7 @@
 package demo.medieval_game.data.gameobject.gui.chest
 
 import demo.medieval_game.ShaderController
+import demo.medieval_game.data.gameobject.inventory_item.InventoryItemWrapper
 import engine.core.entity.CompositeEntity
 import engine.core.render.Model
 import engine.core.texture.Texture2D
@@ -27,7 +28,9 @@ class ChestGuiContainer(
         addComponent(graphicalComponent!!, parameters)
     }
 
-    fun setContent() {
-    // TODO: implement
+    fun setContent(content: MutableList<InventoryItemWrapper>) {
+        content.forEach {
+            addComponent(it, it.parameters)
+        }
     }
 }
