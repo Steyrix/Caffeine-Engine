@@ -32,6 +32,7 @@ class ChestGuiContainer(
 
     fun setContent(content: MutableList<InventoryItemWrapper>) {
         content.forEach {
+            it.updateParameters(parameters)
             addComponent(it, it.parameters)
         }
     }

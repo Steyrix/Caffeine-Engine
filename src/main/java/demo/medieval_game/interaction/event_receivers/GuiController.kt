@@ -36,10 +36,6 @@ object GuiController : CompositeEntity(), EventReceiver {
             y = pos.y
         }
 
-        content.forEach {
-            it.updateParameters(guiParams)
-        }
-
         chestGui.setContent(content)
 
         isInputBlocked = true
