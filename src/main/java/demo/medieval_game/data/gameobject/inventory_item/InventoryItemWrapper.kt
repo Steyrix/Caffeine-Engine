@@ -34,4 +34,13 @@ class InventoryItemWrapper(
             zLevel = 0f
         }
     }
+
+    fun updateParameters(parameters: SetOfStatic2DParameters) {
+        this.parameters.apply {
+            x = parameters.x + 0.13f * parameters.xSize
+            y = parameters.y + 0.306f * parameters.ySize
+            xSize = parameters.xSize * 0.1f
+            ySize = parameters.ySize * 0.1909f
+        }
+    }
 }

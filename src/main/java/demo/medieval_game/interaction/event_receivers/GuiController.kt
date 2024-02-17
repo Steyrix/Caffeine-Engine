@@ -37,12 +37,7 @@ object GuiController : CompositeEntity(), EventReceiver {
         }
 
         content.forEach {
-            it.parameters.apply {
-                x = guiParams.x + 0.13f * guiParams.xSize
-                y = guiParams.y + 0.306f * guiParams.ySize
-                xSize = guiParams.xSize * 0.1f
-                ySize = guiParams.ySize * 0.1909f
-            }
+            it.updateParameters(guiParams)
         }
 
         chestGui.setContent(content)
