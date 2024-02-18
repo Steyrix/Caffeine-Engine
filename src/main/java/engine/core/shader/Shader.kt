@@ -95,6 +95,10 @@ class Shader {
                     value.y
                 )
                 is Int -> glUniform1i(uniforms[uniformName]!!, value)
+                is Boolean -> glUniform1i(
+                    uniforms[uniformName]!!,
+                    if (value) 1 else 0
+                )
                 is Matrix4f -> glUniformMatrix4fv(
                     uniforms[uniformName]!!,
                     false,
