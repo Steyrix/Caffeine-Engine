@@ -30,15 +30,8 @@ class ChestGuiContainer(
         closeButtonModel = createCloseButtonModel(renderProjection)
         //takeAllButtonModel = createTakeButtonModel(renderProjection)
 
-        val closeButtonParams = parameters.copy(
-            x = parameters.x + 0.726f * parameters.xSize,
-            y = parameters.y + 0.966f * parameters.ySize,
-            xSize = parameters.xSize * 0.11f,
-            ySize = parameters.ySize * 0.103f
-        )
-
         addComponent(containerModel!!, parameters)
-        addComponent(closeButtonModel!!, closeButtonParams)
+        addComponent(closeButtonModel!!, parameters)
     }
 
     private fun createContainerModel(renderProjection: Matrix4f): Model {
@@ -56,10 +49,18 @@ class ChestGuiContainer(
     private fun createCloseButtonModel(renderProjection: Matrix4f): GenericButton {
         val texturePath = this.javaClass.getResource("/textures/gui/chest/ButtonClose.png")!!.path
 
+        val closeButtonParams = SetOfStatic2DParameters(
+            x = parameters.x + 0.726f * parameters.xSize,
+            y = parameters.y + 0.966f * parameters.ySize,
+            xSize = parameters.xSize * 0.11f,
+            ySize = parameters.ySize * 0.103f,
+            rotationAngle = 0f
+        )
+
         return GenericButton(
             onClick = { println("onClick close!") },
             texturePath = texturePath,
-            parameters = parameters
+            parameters = closeButtonParams
         )
     }
 
