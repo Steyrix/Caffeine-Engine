@@ -2,6 +2,7 @@ package demo.medieval_game.data.gameobject.gui.button
 
 import demo.medieval_game.ShaderController
 import demo.medieval_game.scene.MedievalGame
+import engine.core.controllable.Controllable
 import engine.core.entity.CompositeEntity
 import engine.core.geometry.Point2D
 import engine.core.render.Model
@@ -12,7 +13,7 @@ class GenericButton(
     onClick: (Any?) -> Unit,
     texturePath: String,
     private val parameters: SetOfStatic2DParameters
-) : CompositeEntity() {
+) : CompositeEntity(), Controllable {
 
     companion object {
         private const val shaderUniformName = "isPressed"

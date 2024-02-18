@@ -3,6 +3,7 @@ package demo.medieval_game.data.gameobject.gui.chest
 import demo.medieval_game.ShaderController
 import demo.medieval_game.data.gameobject.gui.button.GenericButton
 import demo.medieval_game.data.gameobject.inventory_item.InventoryItemWrapper
+import engine.core.controllable.Controllable
 import engine.core.entity.CompositeEntity
 import engine.core.geometry.Point2D
 import engine.core.render.Model
@@ -12,7 +13,7 @@ import org.joml.Matrix4f
 
 class ChestGuiContainer(
     val parameters: SetOfStatic2DParameters
-) : CompositeEntity() {
+) : CompositeEntity(), Controllable {
 
     companion object {
         private const val COLUMN_COUNT = 7
