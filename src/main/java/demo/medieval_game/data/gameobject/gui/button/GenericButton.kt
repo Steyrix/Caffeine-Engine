@@ -3,6 +3,7 @@ package demo.medieval_game.data.gameobject.gui.button
 import demo.medieval_game.ShaderController
 import demo.medieval_game.scene.MedievalGame
 import engine.core.entity.CompositeEntity
+import engine.core.geometry.Point2D
 import engine.core.render.Model
 import engine.core.texture.Texture2D
 import engine.core.update.SetOfStatic2DParameters
@@ -45,5 +46,10 @@ class GenericButton(
             it.setUniform(shaderUniformName, isPressed)
         }
         super.update(deltaTime)
+    }
+
+    fun updatePosition(pos: Point2D) {
+        parameters.x = pos.x
+        parameters.y = pos.y
     }
 }
