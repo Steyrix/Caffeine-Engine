@@ -109,4 +109,12 @@ class ChestGuiContainer(
         takeButtonParams.y = parameters.y + 0.993f * parameters.ySize
         takeAllButton.updatePosition(Point2D(takeButtonParams.x, takeButtonParams.y))
     }
+
+    fun setOnCloseClick(func: (Any?) -> Unit) {
+        closeButton.onClick = func
+    }
+
+    fun setOnTakeClick(func: (Any?) -> Unit) {
+        takeAllButton.onClick = func
+    }
 }

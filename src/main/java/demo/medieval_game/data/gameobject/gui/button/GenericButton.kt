@@ -10,7 +10,7 @@ import engine.core.texture.Texture2D
 import engine.core.update.SetOfStatic2DParameters
 
 class GenericButton(
-    onClick: (Any?) -> Unit,
+    var onClick: (Any?) -> Unit,
     texturePath: String,
     private val parameters: SetOfStatic2DParameters
 ) : CompositeEntity(), Controllable {

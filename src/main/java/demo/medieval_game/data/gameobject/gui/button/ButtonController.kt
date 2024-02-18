@@ -8,6 +8,7 @@ import engine.core.update.SetOfStatic2DParameters
 import engine.core.window.Window
 import org.joml.Matrix4f
 import org.joml.Vector4f
+import org.lwjgl.glfw.GLFW
 
 internal class ButtonController(
     var parameters: SetOfStatic2DParameters,
@@ -30,6 +31,9 @@ internal class ButtonController(
         val y = vecEye.y * vecEye.w - MedievalGameMatrixState.worldTranslation.y / 2
 
         if (isIntersecting(x, y)) {
+            if (window.isKeyPressed(GLFW.GLFW_KEY_1)) {
+                onClick.invoke("")
+            }
             onHover.invoke(true)
         } else {
             onHover.invoke(false)

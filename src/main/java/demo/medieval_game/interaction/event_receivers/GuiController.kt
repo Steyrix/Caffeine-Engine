@@ -34,6 +34,7 @@ object GuiController : CompositeEntity(), EventReceiver {
         chestGui.updatePosition(pos)
 
         chestGui.setContent(content)
+        chestGui.setOnCloseClick { hideChestGui() }
 
         isInputBlocked = true
         addComponent(chestGui, guiParams)
