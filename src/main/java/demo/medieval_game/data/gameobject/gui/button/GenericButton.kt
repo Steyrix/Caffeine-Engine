@@ -23,7 +23,7 @@ class GenericButton(
 
     private var model: Model? = null
 
-    private val controller = ButtonController { arg ->
+    private val controller = ButtonController(parameters) { arg ->
         onClick.invoke(arg)
         isPressed = !isPressed
     }
@@ -52,5 +52,7 @@ class GenericButton(
     fun updatePosition(pos: Point2D) {
         parameters.x = pos.x
         parameters.y = pos.y
+        controller.parameters.x = parameters.x
+        controller.parameters.y = parameters.y
     }
 }
