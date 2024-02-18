@@ -21,8 +21,8 @@ class ChestGuiContainer(
     }
 
     private var containerModel: Model? = null
-    private var closeButtonModel: GenericButton? = null
-    private var takeAllButtonModel: Model? = null
+    private val closeButton: GenericButton
+    private val takeAllButton: GenericButton
 
     private val grid: Array<IntArray> = Array(COLUMN_COUNT) { IntArray(ROW_COUNT) }
 
@@ -34,13 +34,24 @@ class ChestGuiContainer(
         rotationAngle = 0f
     )
 
+    private val takeButtonParams = SetOfStatic2DParameters(
+        x = 0f,
+        y = 0f,
+        xSize = parameters.xSize * 0.3f,
+        ySize = parameters.ySize * 0.1155f,
+        rotationAngle = 0f
+    )
+
+    init {
+        closeButton = createCloseButtonModel()
+        takeAllButton = createTakeButtonModel()
+    }
+
     fun init(renderProjection: Matrix4f) {
         containerModel = createContainerModel(renderProjection)
-        closeButtonModel = createCloseButtonModel()
-        //takeAllButtonModel = createTakeButtonModel()
-
         addComponent(containerModel!!, parameters)
-        addComponent(closeButtonModel!!, parameters)
+        addComponent(closeButton, parameters)
+        addComponent(takeAllButton, parameters)
     }
 
     private fun createContainerModel(renderProjection: Matrix4f): Model {
@@ -69,9 +80,9 @@ class ChestGuiContainer(
         val texturePath = this.javaClass.getResource("/textures/gui/chest/ButtonTakeAll.png")!!.path
 
         return GenericButton(
-            onClick = { println("onClick close!") },
+            onClick = { println("onClick take all!") },
             texturePath = texturePath,
-            parameters = parameters
+            parameters = takeButtonParams
         )
     }
 
@@ -88,8 +99,13 @@ class ChestGuiContainer(
     fun updatePosition(pos: Point2D) {
         parameters.x = pos.x
         parameters.y = pos.y
+
         closeButtonParams.x = parameters.x + 0.726f * parameters.xSize
         closeButtonParams.y = parameters.y + 0.966f * parameters.ySize
-        closeButtonModel?.updatePosition(Point2D(closeButtonParams.x, closeButtonParams.y))
+        closeButton.updatePosition(Point2D(closeButtonParams.x, closeButtonParams.y))
+
+        takeButtonParams.x = parameters.x + 0.13f * parameters.xSize
+        takeButtonParams.y = parameters.y + 0.993f * parameters.ySize
+        takeAllButton.updatePosition(Point2D(takeButtonParams.x, takeButtonParams.y))
     }
 }
