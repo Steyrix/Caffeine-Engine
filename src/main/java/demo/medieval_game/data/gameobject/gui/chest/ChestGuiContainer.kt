@@ -51,7 +51,7 @@ class ChestGuiContainer(
 
         val closeButtonParams = SetOfStatic2DParameters(
             x = parameters.x + 0.726f * parameters.xSize,
-            y = parameters.y + 0.966f * parameters.ySize,
+            y = parameters.y + 0.857f * parameters.ySize,
             xSize = parameters.xSize * 0.11f,
             ySize = parameters.ySize * 0.103f,
             rotationAngle = 0f
