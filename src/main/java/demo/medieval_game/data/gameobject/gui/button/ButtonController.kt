@@ -1,9 +1,13 @@
 package demo.medieval_game.data.gameobject.gui.button
 
+import demo.medieval_game.matrix.MedievalGameMatrixState
+import demo.medieval_game.scene.MedievalGame
 import engine.core.controllable.Controllable
 import engine.core.entity.Entity
 import engine.core.update.SetOfStatic2DParameters
 import engine.core.window.Window
+import org.joml.Matrix4f
+import org.joml.Vector4f
 
 internal class ButtonController(
     var parameters: SetOfStatic2DParameters,
@@ -14,7 +18,18 @@ internal class ButtonController(
     override fun input(window: Window) {
         val cursorPos = window.getCursorPosition()
 
-        if (isIntersecting(cursorPos.x, cursorPos.y)) {
+        val xNdc = cursorPos.x / MedievalGame.screenWidth * 2 - 1
+        val yNdc = -1 * cursorPos.y / MedievalGame.screenHeight * 2 + 1
+
+        val vecNdc = Vector4f(xNdc, yNdc, -1f, 1f)
+        val mat = Matrix4f()
+        MedievalGame.renderProjection.invert(mat)
+        val vecEye = vecNdc.mul(mat)
+
+        val x = vecEye.x * vecEye.w
+        val y = vecEye.y * vecEye.w - MedievalGameMatrixState.worldTranslation.y / 2
+
+        if (isIntersecting(x, y)) {
             onHover.invoke(true)
         } else {
             onHover.invoke(false)

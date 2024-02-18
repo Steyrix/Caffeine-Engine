@@ -23,6 +23,8 @@ class MedievalGame(
 
     companion object {
         var renderProjection: Matrix4f = Matrix4f().ortho(0f, 0f, 0f, 0f, 0f, 0f)
+        var screenWidth = 0f
+        var screenHeight = 0f
     }
 
     // TODO: initialize
@@ -53,6 +55,9 @@ class MedievalGame(
         // TODO: deserialize maps from presets
         sceneMap["nexus"] = NexusMap(getNexusMapPreset(), screenWidth, screenHeight, renderProjection)
         sharedSpritesHolder = SharedSpritesHolder().apply { init(renderProjection) }
+
+        MedievalGame.screenWidth = screenWidth
+        MedievalGame.screenHeight = screenHeight
     }
 
     override fun init() {
