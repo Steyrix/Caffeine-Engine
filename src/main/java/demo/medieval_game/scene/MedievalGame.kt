@@ -116,4 +116,9 @@ class MedievalGame(
         sharedSpritesHolder?.update(deltaTime)
         gui?.update(deltaTime)
     }
+
+    override fun input(window: Window) {
+        super.input(window)
+        gui?.input(window)
+    }
 }
