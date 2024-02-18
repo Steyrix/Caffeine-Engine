@@ -31,10 +31,7 @@ object GuiController : CompositeEntity(), EventReceiver {
     ) {
         val guiParams = chestGui.parameters
 
-        guiParams.apply {
-            x = pos.x
-            y = pos.y
-        }
+        chestGui.updatePosition(pos)
 
         chestGui.setContent(content)
 
