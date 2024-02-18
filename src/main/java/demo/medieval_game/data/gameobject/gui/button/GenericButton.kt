@@ -60,4 +60,8 @@ class GenericButton(
         controller.parameters.x = parameters.x
         controller.parameters.y = parameters.y
     }
+
+    fun updateOnClick(func: (Any?) -> Unit) {
+        controller.onClick = func
+    }
 }

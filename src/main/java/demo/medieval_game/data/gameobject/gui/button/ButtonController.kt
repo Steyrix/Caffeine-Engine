@@ -12,7 +12,7 @@ import org.lwjgl.glfw.GLFW
 
 internal class ButtonController(
     var parameters: SetOfStatic2DParameters,
-    val onClick: (Any?) -> Unit,
+    var onClick: (Any?) -> Unit,
     val onHover: (Boolean) -> Unit
 ) : Entity, Controllable {
 

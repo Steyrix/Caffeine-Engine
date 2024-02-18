@@ -111,10 +111,10 @@ class ChestGuiContainer(
     }
 
     fun setOnCloseClick(func: (Any?) -> Unit) {
-        closeButton.onClick = func
+        closeButton.updateOnClick(func)
     }
 
     fun setOnTakeClick(func: (Any?) -> Unit) {
-        takeAllButton.onClick = func
+        takeAllButton.updateOnClick(func)
     }
 }
