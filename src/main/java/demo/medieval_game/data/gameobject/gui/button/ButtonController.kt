@@ -7,11 +7,22 @@ import engine.core.window.Window
 
 internal class ButtonController(
     var parameters: SetOfStatic2DParameters,
-    val onClick: (Any?) -> Unit
+    val onClick: (Any?) -> Unit,
+    val onHover: (Boolean) -> Unit
 ) : Entity, Controllable {
 
     override fun input(window: Window) {
         val cursorPos = window.getCursorPosition()
-        println("cursorPos: $cursorPos")
+
+        if (isIntersecting(cursorPos.x, cursorPos.y)) {
+            onHover.invoke(true)
+        } else {
+            onHover.invoke(false)
+        }
     }
+
+    private fun isIntersecting(x: Float, y: Float) = isIntersectingHorizontally(x) && isIntersectingVertically(y)
+
+    private fun isIntersectingHorizontally(x: Float) = x >= parameters.x && x <= parameters.x + parameters.xSize
+    private fun isIntersectingVertically(y: Float) = y >= parameters.y && y <= parameters.y + parameters.ySize
 }

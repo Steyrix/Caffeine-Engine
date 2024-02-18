@@ -23,10 +23,15 @@ class GenericButton(
 
     private var model: Model? = null
 
-    private val controller = ButtonController(parameters) { arg ->
-        onClick.invoke(arg)
-        isPressed = !isPressed
+    private val onHover = { value: Boolean ->
+        isPressed = value
     }
+
+    private val controller = ButtonController(
+        parameters,
+        onHover = onHover,
+        onClick = onClick
+    )
 
     init {
         val texture = Texture2D.createInstance(texturePath)
