@@ -1,9 +1,9 @@
 package demo.medieval_game.data.gameobject.gui.chest
 
 import demo.medieval_game.ShaderController
+import demo.medieval_game.data.gameobject.gui.button.GenericButton
 import demo.medieval_game.data.gameobject.inventory_item.InventoryItemWrapper
 import engine.core.entity.CompositeEntity
-import engine.core.render.AnimatedModel2D
 import engine.core.render.Model
 import engine.core.texture.Texture2D
 import engine.core.update.SetOfStatic2DParameters
@@ -20,16 +20,14 @@ class ChestGuiContainer(
     }
 
     private var containerModel: Model? = null
-    private var closeButtonModel: Model? = null
+    private var closeButtonModel: GenericButton? = null
     private var takeAllButtonModel: Model? = null
 
     private val grid: Array<IntArray> = Array(COLUMN_COUNT) { IntArray(ROW_COUNT) }
 
     fun init(renderProjection: Matrix4f) {
-        val texturePath = this.javaClass.getResource("/textures/gui/chest/OpenedChestGui.png")!!.path
-
         containerModel = createContainerModel(renderProjection)
-        //closeButtonModel = createCloseButtonModel(renderProjection)
+        closeButtonModel = createCloseButtonModel(renderProjection)
         //takeAllButtonModel = createTakeButtonModel(renderProjection)
 
         val closeButtonParams = parameters.copy(
@@ -40,7 +38,7 @@ class ChestGuiContainer(
         )
 
         addComponent(containerModel!!, parameters)
-        //addComponent(closeButtonModel!!, closeButtonParams)
+        addComponent(closeButtonModel!!, closeButtonParams)
     }
 
     private fun createContainerModel(renderProjection: Matrix4f): Model {
@@ -55,34 +53,24 @@ class ChestGuiContainer(
         }
     }
 
-    private fun createCloseButtonModel(renderProjection: Matrix4f): AnimatedModel2D {
+    private fun createCloseButtonModel(renderProjection: Matrix4f): GenericButton {
         val texturePath = this.javaClass.getResource("/textures/gui/chest/ButtonClose.png")!!.path
 
-        return AnimatedModel2D(
-            frameWidth = 0.5f,
-            frameHeight = 1f,
-            texture = Texture2D.createInstance(texturePath),
-            animations = mutableListOf()
-        ).apply {
-            shader = ShaderController.createTexturedShader(renderProjection)
-            zLevel = Float.NEGATIVE_INFINITY
-            isPartOfWorldTranslation = false
-        }
+        return GenericButton(
+            onClick = { println("onClick close!") },
+            texturePath = texturePath,
+            parameters = parameters
+        )
     }
 
-    private fun createTakeButtonModel(renderProjection: Matrix4f): AnimatedModel2D {
+    private fun createTakeButtonModel(renderProjection: Matrix4f): GenericButton {
         val texturePath = this.javaClass.getResource("/textures/gui/chest/ButtonTakeAll.png")!!.path
 
-        return AnimatedModel2D(
-            frameWidth = 0.5f,
-            frameHeight = 1f,
-            texture = Texture2D.createInstance(texturePath),
-            animations = mutableListOf()
-        ).apply {
-            shader = ShaderController.createTexturedShader(renderProjection)
-            zLevel = Float.NEGATIVE_INFINITY
-            isPartOfWorldTranslation = false
-        }
+        return GenericButton(
+            onClick = { println("onClick close!") },
+            texturePath = texturePath,
+            parameters = parameters
+        )
     }
 
     fun setContent(content: MutableList<InventoryItemWrapper>) {
