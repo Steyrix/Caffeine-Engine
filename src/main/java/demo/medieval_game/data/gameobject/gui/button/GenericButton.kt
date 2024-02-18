@@ -1,4 +1,4 @@
-package demo.medieval_game.data.gameobject.gui
+package demo.medieval_game.data.gameobject.gui.button
 
 import demo.medieval_game.ShaderController
 import demo.medieval_game.scene.MedievalGame
