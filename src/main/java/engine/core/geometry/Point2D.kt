@@ -1,6 +1,6 @@
 package engine.core.geometry
 
-class Point2D(
+data class Point2D(
     var x: Float,
     var y: Float
 )
