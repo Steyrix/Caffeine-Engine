@@ -40,8 +40,6 @@ object GuiController : CompositeEntity(), EventReceiver {
     }
 
     private fun hideChestGui() {
-        println("Hide chest gui")
-        //if (!isInputBlocked) return
         removeComponent(chestGui)
         isInputBlocked = false
     }
