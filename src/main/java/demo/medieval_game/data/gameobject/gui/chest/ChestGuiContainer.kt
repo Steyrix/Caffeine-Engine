@@ -91,6 +91,9 @@ class ChestGuiContainer(
         var id = 1
         content.forEach {
             // TODO: place in grid
+            val itemSize = it.horizontalCellCount * it.verticalCellCount
+
+            // grid.find(itemSize): List<Int>
 
             it.updateParameters(parameters)
             addComponent(it, it.parameters)
@@ -116,5 +119,18 @@ class ChestGuiContainer(
 
     fun setOnTakeClick(func: (Any?) -> Unit) {
         takeAllButton.updateOnClick(func)
+    }
+
+    fun IntArray.findEmptyHorizontalSpaceOf(size: Int): List<Int> {
+        this.forEachIndexed { index, it ->
+            if (it == 0) {
+                if (index + 2 < this.size) {
+                    if (this[index + 1] == 0 && this[index + 2] == 0)
+                        return mutableListOf(index, index + 1, index + 2)
+                }
+            }
+        }
+
+        return emptyList()
     }
 }
