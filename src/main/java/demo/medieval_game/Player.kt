@@ -72,7 +72,7 @@ class Player(
         }
         if (isInteractingWithChest && !isChestInteraction) {
             isChestInteraction = true
-            out.add(ChestInteraction.OpenClose)
+            out.add(ChestInteraction.Open)
         }
 
         out.add(IsAttackableInteraction(parameters))

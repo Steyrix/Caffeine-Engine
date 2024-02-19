@@ -78,13 +78,11 @@ class ChestController(
         if (isBreaking || isBroken) return
 
         when(interaction) {
-            is ChestInteraction.OpenClose -> {
+            is ChestInteraction.Open -> {
                 if (isClosed) {
                     isClosed = false
                     isClosing = false
                     isOpening = true
-                } else {
-                    isClosing = true
                 }
             }
         }
@@ -100,6 +98,7 @@ class ChestController(
     override fun onInteractionUnavailable(producer: Entity) {
         if (producer == interactionProducer) {
             drawableComponent.isStencilBufferEnabled = false
+            if (!isClosing) isClosing = true
         }
     }
 }

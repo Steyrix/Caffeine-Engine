@@ -4,11 +4,8 @@ import demo.medieval_game.ShaderController
 import demo.medieval_game.data.chestAnimations
 import demo.medieval_game.data.static_parameters.*
 import demo.medieval_game.data.gameobject.gui.bar.HealthBar
-import demo.medieval_game.data.gameobject.inventory_item.InventoryItemWrapper
 import demo.medieval_game.data.gameobject.inventory_item.LootCreator
 import demo.medieval_game.interaction.ChestInteraction
-import demo.medieval_game.interaction.event.CloseChest
-import demo.medieval_game.interaction.event.MedievalGameInteractionEvent
 import demo.medieval_game.interaction.event.OpenChest
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
@@ -46,15 +43,14 @@ class Chest(
         // TODO: problem is that chest remains open after this interaction and needs to be closed to be opened again
         controller.onInteraction = { interaction ->
             when (interaction) {
-                is ChestInteraction.OpenClose ->
-                    if (!controller.isClosing) {
-                        boxInteractionContext.broadcastEvent(
-                            OpenChest(
-                                LootCreator.createBasicLoot(parameters),
-                                Point2D(parameters.x, parameters.y)
-                            )
+                is ChestInteraction.Open -> {
+                    boxInteractionContext.broadcastEvent(
+                        OpenChest(
+                            LootCreator.createBasicLoot(parameters),
+                            Point2D(parameters.x, parameters.y)
                         )
-                    }
+                    )
+                }
             }
         }
 

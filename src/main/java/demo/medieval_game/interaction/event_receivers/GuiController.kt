@@ -2,7 +2,6 @@ package demo.medieval_game.interaction.event_receivers
 
 import demo.medieval_game.data.gameobject.gui.chest.ChestGuiContainer
 import demo.medieval_game.data.gameobject.inventory_item.InventoryItemWrapper
-import demo.medieval_game.interaction.event.CloseChest
 import demo.medieval_game.interaction.event.OpenChest
 import demo.medieval_game.scene.MedievalGame
 import engine.core.entity.CompositeEntity
@@ -41,6 +40,7 @@ object GuiController : CompositeEntity(), EventReceiver {
     }
 
     private fun hideChestGui() {
+        if (!isInputBlocked) return
         removeComponent(chestGui)
         isInputBlocked = false
     }
@@ -48,7 +48,6 @@ object GuiController : CompositeEntity(), EventReceiver {
     override fun proccessEvent(event: InteractionEvent) {
         when(event) {
             is OpenChest -> showChestGui(event.pos, event.content)
-            is CloseChest -> hideChestGui()
         }
     }
 
