@@ -133,4 +133,13 @@ class ChestGuiContainer(
 
         return emptyList()
     }
+
+    fun Array<IntArray>.findEmptyHorizontalSpaceOf(size: Int): Pair<Int, List<Int>> {
+        this.forEachIndexed { index, it ->
+            val res = it.findEmptyHorizontalSpaceOf(size)
+            if (res.isNotEmpty()) return Pair(index, res)
+        }
+
+        return Pair(-1, emptyList())
+    }
 }
