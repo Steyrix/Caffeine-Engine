@@ -146,7 +146,7 @@ class ChestGuiContainer(
     fun Array<IntArray>.findEmptyVerticalSpaceOf(size: Int): Int {
         var currSize = 0
 
-        for( i in 0 until ROW_COUNT) {
+        for (i in 0 until ROW_COUNT) {
             this.forEachIndexed { index, it ->
                 if (it[i] == 0) {
                     currSize++
