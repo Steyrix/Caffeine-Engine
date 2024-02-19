@@ -16,7 +16,7 @@ import engine.feature.interaction.Interaction
 open class CompositeEntity : Entity, Updatable {
 
     protected val entitiesMap: HashMap<Entity, SetOfParameters> = hashMapOf()
-    private val toRemove = mutableListOf<Entity>()
+    private val toRemove = mutableSetOf<Entity>()
 
     var isDisposed = false
 
@@ -33,8 +33,7 @@ open class CompositeEntity : Entity, Updatable {
     fun removeComponent(
         entity: Entity
     ) {
-        // TODO: seems like it is working even when condition is not true
-        if (entitiesMap.contains(entity)) {
+        if (entitiesMap.contains(entity) && !toRemove.contains(entity)) {
             toRemove.add(entity)
         }
     }
