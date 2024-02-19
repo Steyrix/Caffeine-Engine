@@ -33,6 +33,7 @@ open class CompositeEntity : Entity, Updatable {
     fun removeComponent(
         entity: Entity
     ) {
+        // TODO: seems like it is working even when condition is not true
         if (entitiesMap.contains(entity)) {
             toRemove.add(entity)
         }
