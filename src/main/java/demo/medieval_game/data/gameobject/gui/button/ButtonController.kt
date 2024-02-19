@@ -17,6 +17,7 @@ internal class ButtonController(
 ) : Entity, Controllable {
 
     override fun input(window: Window) {
+        // TODO: this logic should probably be moved to single entity and become reusable
         val cursorPos = window.getCursorPosition()
 
         val xNdc = cursorPos.x / MedievalGame.screenWidth * 2 - 1
