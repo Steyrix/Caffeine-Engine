@@ -13,7 +13,8 @@ class InventoryItemWrapper(
     rarity: ItemRarity,
     private val item: Entity,
     val horizontalCellCount: Int = 1,
-    val verticalCellCount: Int = 1
+    val verticalCellCount: Int = 1,
+    val isAlignedHorizontally: Boolean = false
 ) : CompositeEntity() {
 
     private var backgroundGraphicalComponent: Model? = null
