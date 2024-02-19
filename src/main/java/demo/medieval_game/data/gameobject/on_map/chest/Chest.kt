@@ -43,16 +43,18 @@ class Chest(
             graphicalComponent
         )
 
+        // TODO: problem is that chest remains open after this interaction and needs to be closed to be opened again
         controller.onInteraction = { interaction ->
             when (interaction) {
                 is ChestInteraction.OpenClose ->
-                    boxInteractionContext.broadcastEvent(
-                        createEvent(
-                            controller.isClosing,
-                            Point2D(parameters.x, parameters.y),
-                            LootCreator.createBasicLoot(parameters)
+                    if (!controller.isClosing) {
+                        boxInteractionContext.broadcastEvent(
+                            OpenChest(
+                                LootCreator.createBasicLoot(parameters),
+                                Point2D(parameters.x, parameters.y)
+                            )
                         )
-                    )
+                    }
             }
         }
 
@@ -132,15 +134,4 @@ class Chest(
             }
         )
     }
-
-    private fun createEvent(
-        isClosing: Boolean,
-        pos: Point2D,
-        content: MutableList<InventoryItemWrapper>
-    ): MedievalGameInteractionEvent =
-        if (isClosing) {
-            CloseChest
-        } else {
-            OpenChest(content, pos)
-        }
 }
