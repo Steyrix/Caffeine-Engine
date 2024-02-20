@@ -25,7 +25,7 @@ class ChestGuiContainer(
     private val closeButton: GenericButton
     private val takeAllButton: GenericButton
 
-    private val grid: Array<IntArray> = Array(COLUMN_COUNT) { IntArray(ROW_COUNT) }
+    private val grid: Array<IntArray> = Array(ROW_COUNT) { IntArray(COLUMN_COUNT) }
 
     private val closeButtonParams = SetOfStatic2DParameters(
         x = 0f,
@@ -46,6 +46,20 @@ class ChestGuiContainer(
     init {
         closeButton = createCloseButtonModel()
         takeAllButton = createTakeButtonModel()
+
+        //grid
+        // 1, 1, 0, 0, 0, 1, 1,
+        // 1, 1, 0, 0, 0, 1, 1,
+        // 1, 1, 0, 0, 0, 1, 1,
+        // 1, 1, 0, 0, 0, 1, 1,
+        // 1, 1, 0, 0, 0, 1, 1,
+        grid[0] = intArrayOf(1, 1, 1, 0, 0, 0, 1)
+        grid[1] = intArrayOf(1, 0, 0, 0, 0, 0, 1)
+        grid[2] = intArrayOf(1, 0, 0, 0, 0, 1, 1)
+        grid[3] = intArrayOf(1, 1, 0, 0, 0, 1, 1)
+        grid[4] = intArrayOf(1, 1, 1, 0, 0, 1, 1)
+
+        println(ArraysUtil.findRectangle(7, 5, 2, grid))
     }
 
     fun init(renderProjection: Matrix4f) {
