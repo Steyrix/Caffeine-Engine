@@ -1,5 +1,7 @@
 package demo.medieval_game.data.gameobject.gui.chest
 
+typealias IndexMap = List<Pair<Int, List<Int>>>
+
 object ArraysUtil {
 
     private fun IntArray.findEmptyHorizontalSpace(size: Int): List<Int> {
@@ -15,7 +17,7 @@ object ArraysUtil {
         return emptyList()
     }
 
-    private fun Array<IntArray>.findEmptyHorizontalSpaces(size: Int): List<Pair<Int, List<Int>>> {
+    private fun Array<IntArray>.findEmptyHorizontalSpaces(size: Int): IndexMap {
         val out = mutableListOf<Pair<Int, List<Int>>>()
 
         this.forEachIndexed { rowIndex, it ->
@@ -30,7 +32,7 @@ object ArraysUtil {
     private fun Array<IntArray>.findEmptyVerticalSpaces(
         columnCount: Int,
         size: Int
-    ): List<Pair<Int, List<Int>>> {
+    ): IndexMap {
         var currSize = 0
         val rowIndices = mutableListOf<Int>()
         val out = mutableListOf<Pair<Int, List<Int>>>()
@@ -54,9 +56,8 @@ object ArraysUtil {
         return out
     }
 
-    private fun findIntersectionIndices(indicesOfColumns: Int, indicesOfRows: Int) {
+    private fun findIntersectionIndices(rowToColumns: IndexMap, columnsToRows: IndexMap) {
         val out = mutableListOf<Pair<Int, MutableList<Int>>>()
-
 
     }
 }
