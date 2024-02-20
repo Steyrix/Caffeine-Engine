@@ -4,10 +4,11 @@ typealias IndexMap = List<Pair<Int, List<Int>>>
 
 object ArraysUtil {
 
+    // TODO fix count dynamic
     private fun IntArray.findEmptyHorizontalSpace(size: Int): List<Int> {
         this.forEachIndexed { index, it ->
             if (it == 0) {
-                if (index + 2 < this.size) {
+                if (index + size  < this.size) {
                     if (this[index + 1] == 0 && this[index + 2] == 0)
                         return mutableListOf(index, index + 1, index + 2)
                 }
