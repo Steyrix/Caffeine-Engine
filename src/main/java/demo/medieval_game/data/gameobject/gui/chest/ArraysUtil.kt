@@ -56,8 +56,44 @@ object ArraysUtil {
         return out
     }
 
-    private fun findIntersectionIndices(rowToColumns: IndexMap, columnsToRows: IndexMap) {
-        val out = mutableListOf<Pair<Int, MutableList<Int>>>()
+    private fun findIntersectionIndices(
+        rectHeight: Int,
+        rowToColumns: IndexMap,
+        columnsToRows: IndexMap
+    ): IndexMap {
+        val temp = mutableListOf<Pair<Int, List<Int>>>()
 
+        var counter = 0
+        // rowColumns.first is row index
+        // columnRows.first is columnIndex
+        columnsToRows.forEach { columnRows ->
+            rowToColumns.forEach { rowColumns ->
+                if (columnRows.second.contains(rowColumns.first)) {
+                    temp.add(Pair(columnRows.first, rowColumns.second))
+                    counter++
+                    if (counter == rectHeight) {
+                        return temp
+                    }
+                } else {
+                    counter = 0
+                    temp.clear()
+                }
+            }
+        }
+
+        return emptyList()
+    }
+
+    private fun findRectangle(
+        columnCount: Int,
+        height: Int,
+        width: Int,
+        source: Array<IntArray>
+    ): IndexMap {
+        val rowToColumns = source.findEmptyHorizontalSpaces(width)
+        val columnsToRows = source.findEmptyVerticalSpaces(columnCount, height)
+        val rectangleIndices = findIntersectionIndices(height, rowToColumns, columnsToRows)
+
+        return rectangleIndices
     }
 }
