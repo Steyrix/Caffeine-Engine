@@ -2,16 +2,25 @@ package demo.medieval_game.data.gameobject.gui.chest
 
 typealias IndexMap = List<Pair<Int, List<Int>>>
 
+// TODO: optimize
 object ArraysUtil {
 
-    // TODO fix count dynamic
     private fun IntArray.findEmptyHorizontalSpace(size: Int): List<Int> {
+        val tempList = mutableListOf<Int>()
+
         this.forEachIndexed { index, it ->
             if (it == 0) {
-                if (index + size  < this.size) {
-                    if (this[index + 1] == 0 && this[index + 2] == 0)
-                        return mutableListOf(index, index + 1, index + 2)
+                tempList.add(index)
+                if (index + size > this.size) return@forEachIndexed
+                for (i in index + 1 until  this.size) {
+                    if (this[i] == 0) {
+                        tempList.add(i)
+                    }
                 }
+                if (tempList.size >= size) {
+                    return tempList
+                }
+                tempList.clear()
             }
         }
 
