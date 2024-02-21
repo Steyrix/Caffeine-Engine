@@ -25,7 +25,7 @@ class ChestGuiContainer(
     private val closeButton: GenericButton
     private val takeAllButton: GenericButton
 
-    private val grid: Array<IntArray> = Array(ROW_COUNT) { IntArray(COLUMN_COUNT) }
+    private val grid: Array<IntArray> = Array(ROW_COUNT) { IntArray(COLUMN_COUNT) { 0 } }
 
     private val closeButtonParams = SetOfStatic2DParameters(
         x = 0f,
@@ -47,12 +47,6 @@ class ChestGuiContainer(
         closeButton = createCloseButtonModel()
         takeAllButton = createTakeButtonModel()
 
-        //grid
-        // 1, 1, 0, 0, 0, 1, 1,
-        // 1, 1, 0, 0, 0, 1, 1,
-        // 1, 1, 0, 0, 0, 1, 1,
-        // 1, 1, 0, 0, 0, 1, 1,
-        // 1, 1, 0, 0, 0, 1, 1,
         grid[0] = intArrayOf(1, 1, 1, 0, 0, 0, 1)
         grid[1] = intArrayOf(1, 0, 0, 0, 0, 0, 1)
         grid[2] = intArrayOf(1, 0, 0, 0, 0, 1, 1)
