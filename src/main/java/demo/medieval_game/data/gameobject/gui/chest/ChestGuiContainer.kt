@@ -98,13 +98,18 @@ class ChestGuiContainer(
     fun setContent(content: MutableList<InventoryItemWrapper>) {
         var id = 1
         content.forEach {
-            // TODO: place in grid
-            val itemSize = it.horizontalCellCount * it.verticalCellCount
-
-            if (it.isAlignedHorizontally) {
-
+            val rect = ArraysUtil.findRectangle(
+                COLUMN_COUNT,
+                it.verticalCellCount,
+                it.horizontalCellCount,
+                grid
+            )
+            rect.forEach { indices ->
+                indices.second.forEach { it ->
+                    grid[indices.first][it] = id
+                }
             }
-            // grid.find(itemSize): List<Int>
+            id++
 
             it.updateParameters(parameters)
             addComponent(it, it.parameters)
