@@ -105,8 +105,8 @@ class ChestGuiContainer(
                 grid
             )
             rect.forEach { indices ->
-                indices.second.forEach { it ->
-                    grid[indices.first][it] = id
+                indices.second.forEach { columnIndex ->
+                    grid[indices.first][columnIndex] = id
                 }
             }
             id++
