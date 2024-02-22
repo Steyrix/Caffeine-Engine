@@ -96,7 +96,7 @@ class ChestGuiContainer(
     }
 
     fun setContent(content: MutableList<InventoryItemWrapper>) {
-        var id = 1
+        var id = 2
         content.forEach {
             val rect = ArraysUtil.findRectangle(
                 COLUMN_COUNT,
@@ -111,7 +111,11 @@ class ChestGuiContainer(
             }
             id++
 
-            it.updateParameters(parameters)
+            it.updateParameters(
+                parameters,
+                horizontalModifier = rect.first().second.first().toFloat(),
+                verticalModifier = rect.first().first.toFloat()
+            )
             addComponent(it, it.parameters)
         }
     }
