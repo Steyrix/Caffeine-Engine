@@ -44,9 +44,6 @@ class InventoryItemWrapper(
         horizontalCellBorderSize: Float,
         verticalCellBorderSize: Float
     ) {
-        println("HorizontalMod: $horizontalModifier")
-        println("VerticalMod: $verticalModifier")
-
         this.parameters.apply {
             x = srcParams.x + 0.13f * srcParams.xSize
             y = srcParams.y + 0.306f * srcParams.ySize
