@@ -114,7 +114,9 @@ class ChestGuiContainer(
             it.updateParameters(
                 parameters,
                 horizontalModifier = rect.first().second.first().toFloat(),
-                verticalModifier = rect.first().first.toFloat()
+                verticalModifier = rect.first().first.toFloat(),
+                horizontalCellBorderSize = parameters.xSize * 0.0066f,
+                verticalCellBorderSize = parameters.ySize * 0.0212f
             )
             addComponent(it, it.parameters)
         }
