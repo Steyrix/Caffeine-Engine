@@ -8,6 +8,7 @@ import engine.feature.animation.Animation
 
 abstract class ShortSword(
     texturePath: String,
+    override val baseDamage: Float,
     override val rarity: ItemRarity,
     override val afterEquipAnimation: List<Animation>,
 ) : Weapon() {
