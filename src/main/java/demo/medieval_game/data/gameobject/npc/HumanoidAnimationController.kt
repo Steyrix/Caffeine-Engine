@@ -12,6 +12,7 @@ abstract class HumanoidAnimationController(
     idleMap: EnumMap<Direction, String>,
     strikeMap: EnumMap<Direction, String>,
     walkMap: EnumMap<Direction, String>,
+    altStrikeMap: EnumMap<Direction, String>,
 ) : AnimationController(drawableComponent) {
 
     companion object {
@@ -27,8 +28,7 @@ abstract class HumanoidAnimationController(
 
     var isAltStrike = false
 
-    // TODO: move out later
-    private val altStrikeMap = HumanoidAnimationMaps.getCharacterAlternativeStrikeMap()
+    private var isAltStrikeMapPresent = false
 
     private val animationMultiMap: MultiMap = hashMapOf(
         IDLE to idleMap,
@@ -36,6 +36,10 @@ abstract class HumanoidAnimationController(
         ALT_STRIKE to altStrikeMap,
         WALK to walkMap
     )
+
+    init {
+        isAltStrikeMapPresent = altStrikeMap.isNotEmpty()
+    }
 
     override fun getAnimationKey(): String {
         return when {
@@ -46,7 +50,7 @@ abstract class HumanoidAnimationController(
     }
 
     private fun getStrikingAnimation(): String {
-        return if (isAltStrike) {
+        return if (isAltStrike && isAltStrikeMapPresent) {
             animationMultiMap[ALT_STRIKE]?.get(direction) ?: ""
         } else {
             animationMultiMap[STRIKE]?.get(direction) ?: ""

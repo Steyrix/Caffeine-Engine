@@ -26,7 +26,8 @@ class SimpleController2D(
     drawableComponent,
     HumanoidAnimationMaps.getIdleMap(),
     HumanoidAnimationMaps.getCharacterStrikeMap(),
-    HumanoidAnimationMaps.getWalkMap()
+    HumanoidAnimationMaps.getWalkMap(),
+    HumanoidAnimationMaps.getCharacterAlternativeStrikeMap()
 ), Controllable {
 
     private val playStrikingAnimation = PredicateTimeEvent(

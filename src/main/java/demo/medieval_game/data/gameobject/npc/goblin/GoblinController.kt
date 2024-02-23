@@ -10,6 +10,7 @@ import engine.core.update.SetOfParameters
 import engine.core.update.getCenterPoint
 import engine.core.render.AnimatedModel2D
 import engine.feature.interaction.Interaction
+import java.util.EnumMap
 import kotlin.math.abs
 
 class GoblinController(
@@ -20,7 +21,8 @@ class GoblinController(
     drawableComponent,
     HumanoidAnimationMaps.getIdleMap(),
     HumanoidAnimationMaps.getStrikeMap(),
-    HumanoidAnimationMaps.getWalkMap()
+    HumanoidAnimationMaps.getWalkMap(),
+    EnumMap<Direction, String>(Direction::class.java)
 ) {
 
     private val playStrikingAnimation = PredicateTimeEvent(
