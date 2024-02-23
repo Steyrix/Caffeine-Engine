@@ -9,7 +9,7 @@ abstract class InventoryItem : CompositeEntity() {
 
     protected abstract val drawableComponent: Model
 
-    protected abstract val parameters: SetOfStatic2DParameters
+    abstract val parameters: SetOfStatic2DParameters
 
     abstract val canBeEquipped: Boolean
 
