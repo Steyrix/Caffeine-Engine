@@ -4,7 +4,7 @@ import engine.core.render.Model
 import engine.core.shader.Shader
 
 class AnimationHolder2D(
-    private val animations: List<Animation>
+    private val animations: MutableList<Animation>
 ) {
     private var currentAnimation: Animation = animations.first()
 
@@ -26,5 +26,11 @@ class AnimationHolder2D(
     fun resetAnimation(key: String) {
         val target = animations.firstOrNull { it.name == key } ?: currentAnimation
         target.reset()
+    }
+
+    fun changeAnimationSet(new: List<Animation>) {
+        animations.clear()
+        animations.addAll(new)
+        currentAnimation = animations.first()
     }
 }

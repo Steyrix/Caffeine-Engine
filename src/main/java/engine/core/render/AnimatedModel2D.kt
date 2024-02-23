@@ -26,7 +26,7 @@ class AnimatedModel2D(
         ),
         texture,
         arrayTexture = null,
-        animationHolder = AnimationHolder2D(animations)
+        animationHolder = AnimationHolder2D(animations.toMutableList())
     )
 
     constructor(
@@ -76,5 +76,9 @@ class AnimatedModel2D(
 
     fun resetAnimation(key: String) {
         animationHolder.resetAnimation(key)
+    }
+
+    fun changeAnimationSet(new: List<Animation>) {
+        animationHolder.changeAnimationSet(new)
     }
 }
