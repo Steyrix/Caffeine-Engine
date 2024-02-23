@@ -1,4 +1,4 @@
-package demo.medieval_game
+package demo.medieval_game.data.gameobject.character
 
 import demo.medieval_game.data.gameobject.sprite_holder.TempSpritesHolder
 import demo.medieval_game.interaction.AttackInteraction
