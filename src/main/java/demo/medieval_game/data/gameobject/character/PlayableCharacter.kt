@@ -86,9 +86,9 @@ class PlayableCharacter(
     private fun getAnimatedObjectComponent(
         renderProjection: Matrix4f
     ): AnimatedModel2D {
-        val frameWidth = 0.066f
-        val frameHeight = 0.25f
-        val path = this.javaClass.getResource("/textures/KnightAtlas.png")!!.path
+        val frameWidth = 0.1111f
+        val frameHeight = 0.0714f
+        val path = this.javaClass.getResource("/textures/CharacterWithSwordAtlas.png")!!.path
 
         val textureArray = Texture2D.createInstance(
             path
@@ -98,7 +98,7 @@ class PlayableCharacter(
             frameWidth,
             frameHeight,
             texture = textureArray,
-            animations = characterAnimations
+            animations = characterWithSwordAnimation
         ).apply {
             shader = ShaderController.createAnimationShader(renderProjection)
         }

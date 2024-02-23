@@ -17,6 +17,7 @@ abstract class HumanoidAnimationController(
     companion object {
         const val IDLE = "IDLE"
         const val STRIKE = "STRIKE"
+        const val ALT_STRIKE = "ALT_STRIKE"
         const val WALK = "WALK"
     }
 
@@ -24,9 +25,15 @@ abstract class HumanoidAnimationController(
     var isStriking = false
     var isWalking = false
 
+    var isAltStrike = false
+
+    // TODO: move out later
+    private val altStrikeMap = HumanoidAnimationMaps.getCharacterAlternativeStrikeMap()
+
     private val animationMultiMap: MultiMap = hashMapOf(
         IDLE to idleMap,
         STRIKE to strikeMap,
+        ALT_STRIKE to altStrikeMap,
         WALK to walkMap
     )
 
@@ -39,7 +46,11 @@ abstract class HumanoidAnimationController(
     }
 
     private fun getStrikingAnimation(): String {
-        return animationMultiMap[STRIKE]?.get(direction) ?: ""
+        return if (isAltStrike) {
+            animationMultiMap[ALT_STRIKE]?.get(direction) ?: ""
+        } else {
+            animationMultiMap[STRIKE]?.get(direction) ?: ""
+        }
     }
 
     private fun getWalkingAnimation(): String {

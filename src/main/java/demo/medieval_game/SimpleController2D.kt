@@ -25,15 +25,16 @@ class SimpleController2D(
 ) : HumanoidAnimationController(
     drawableComponent,
     HumanoidAnimationMaps.getIdleMap(),
-    HumanoidAnimationMaps.getStrikeMap(),
+    HumanoidAnimationMaps.getCharacterStrikeMap(),
     HumanoidAnimationMaps.getWalkMap()
 ), Controllable {
 
     private val playStrikingAnimation = PredicateTimeEvent(
-        timeLimit = 0.5f,
+        timeLimit = 0.6f,
         predicate = { isStriking },
         action = {
             isStriking = false
+            isAltStrike = !isAltStrike
             onStrikingChange.invoke(false)
         }
     )
