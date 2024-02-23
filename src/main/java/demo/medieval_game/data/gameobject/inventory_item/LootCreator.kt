@@ -22,7 +22,6 @@ object LootCreator {
 
         val wrapper = InventoryItemWrapper(
             params,
-            ItemRarity.COMMON,
             sword,
             1,
             2

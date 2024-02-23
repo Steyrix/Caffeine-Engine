@@ -9,7 +9,6 @@ import org.joml.Matrix4f
 
 class InventoryItemWrapper(
     val parameters: SetOfStatic2DParameters,
-    rarity: ItemRarity,
     val item: InventoryItem,
     val horizontalCellCount: Int = 1,
     val verticalCellCount: Int = 1,
@@ -19,7 +18,7 @@ class InventoryItemWrapper(
     private var backgroundGraphicalComponent: Model? = null
 
     init {
-        val bgTexturePath = rarity.getResourcePath()
+        val bgTexturePath = item.rarity.getResourcePath()
         backgroundGraphicalComponent = Model(
             texture = Texture2D.createInstance(bgTexturePath)
         )
