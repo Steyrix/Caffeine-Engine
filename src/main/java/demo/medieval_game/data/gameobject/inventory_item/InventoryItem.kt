@@ -14,7 +14,7 @@ abstract class InventoryItem : CompositeEntity() {
 
     abstract val onUseAnimations: List<Animation>
 
-    abstract val onEquipAnimations: List<Animation>
+    abstract val afterEquipAnimation: List<Animation>
 
     fun getDrawable(): Model {
         return drawableComponent
