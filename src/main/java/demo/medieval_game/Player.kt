@@ -24,7 +24,7 @@ class Player(
     var isInteractingWithChest = false
 
     private val attackCoolDown = PredicateTimeEvent(
-        timeLimit = 0.5f,
+        timeLimit = 0.6f,
         predicate = { isAttack },
         action = {
             isAttack = false
