@@ -1,6 +1,6 @@
 package demo.medieval_game
 
-import demo.medieval_game.data.gameobject.TempSpritesHolder
+import demo.medieval_game.data.gameobject.sprite_holder.TempSpritesHolder
 import demo.medieval_game.interaction.AttackInteraction
 import demo.medieval_game.interaction.ChestInteraction
 import demo.medieval_game.interaction.IsAttackableInteraction

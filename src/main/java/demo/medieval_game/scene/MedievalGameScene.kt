@@ -1,7 +1,7 @@
 package demo.medieval_game.scene
 
 import demo.medieval_game.data.MapSceneInitializer
-import demo.medieval_game.data.gameobject.PlayableCharacter
+import demo.medieval_game.data.gameobject.character.PlayableCharacter
 import demo.medieval_game.interaction.event_receivers.GuiController
 import demo.medieval_game.matrix.MedievalGameMatrixState
 import engine.core.controllable.Direction

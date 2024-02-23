@@ -1,6 +1,6 @@
 package demo.medieval_game.data.gameobject.npc.goblin
 
-import demo.medieval_game.data.gameobject.TempSpritesHolder
+import demo.medieval_game.data.gameobject.sprite_holder.TempSpritesHolder
 import demo.medieval_game.interaction.AttackInteraction
 import demo.medieval_game.interaction.PlayerAttackInteraction
 import engine.core.entity.CompositeEntity

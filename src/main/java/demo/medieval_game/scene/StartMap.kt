@@ -1,7 +1,7 @@
 package demo.medieval_game.scene
 
 import demo.medieval_game.data.static_parameters.characterParameters
-import demo.medieval_game.data.gameobject.*
+import demo.medieval_game.data.gameobject.character.PlayableCharacter
 import demo.medieval_game.data.starting_level.StartMapInitializer
 import engine.core.scene.SceneIntent
 import engine.core.session.Session

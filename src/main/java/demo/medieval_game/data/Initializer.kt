@@ -1,7 +1,7 @@
 package demo.medieval_game.data
 
 import demo.medieval_game.matrix.MedievalGameMatrixState
-import demo.medieval_game.data.gameobject.PlayableCharacter
+import demo.medieval_game.data.gameobject.character.PlayableCharacter
 import demo.medieval_game.data.static_parameters.characterParameters
 import engine.core.game_object.GameEntity
 import engine.core.geometry.Point2D

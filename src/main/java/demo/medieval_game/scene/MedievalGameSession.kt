@@ -2,7 +2,7 @@ package demo.medieval_game.scene
 
 import demo.medieval_game.ShaderController
 import demo.medieval_game.data.Initializer
-import demo.medieval_game.data.gameobject.PlayableCharacter
+import demo.medieval_game.data.gameobject.character.PlayableCharacter
 import engine.core.game_object.GameEntity
 import engine.core.session.Session
 import engine.core.session.SessionPresets

@@ -1,6 +1,6 @@
 package demo.medieval_game.scene
 
-import demo.medieval_game.data.gameobject.SharedSpritesHolder
+import demo.medieval_game.data.gameobject.sprite_holder.SharedSpritesHolder
 import demo.medieval_game.data.gameobject.gui.GuiContainer
 import demo.medieval_game.data.gameobject.gui.GuiCreator
 import demo.medieval_game.data.starting_level.getNexusMapPreset

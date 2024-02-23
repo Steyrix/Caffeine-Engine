@@ -1,7 +1,7 @@
 package demo.medieval_game.data.gameobject.npc.goblin
 
 import demo.medieval_game.data.AnimationKey
-import demo.medieval_game.data.gameobject.TempSpritesHolder
+import demo.medieval_game.data.gameobject.sprite_holder.TempSpritesHolder
 import demo.medieval_game.data.gameobject.npc.NPC
 import engine.core.render.AnimatedModel2D
 import engine.core.update.SetOf2DParametersWithVelocity

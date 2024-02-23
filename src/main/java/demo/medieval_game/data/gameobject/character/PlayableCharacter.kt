@@ -1,9 +1,10 @@
-package demo.medieval_game.data.gameobject
+package demo.medieval_game.data.gameobject.character
 
 import demo.medieval_game.Player
 import demo.medieval_game.ShaderController
 import demo.medieval_game.SimpleController2D
 import demo.medieval_game.data.*
+import demo.medieval_game.data.gameobject.sprite_holder.TempSpritesHolder
 import demo.medieval_game.data.static_parameters.*
 import demo.medieval_game.data.gameobject.gui.bar.HealthBar
 import demo.medieval_game.scene.MedievalGame

@@ -1,11 +1,11 @@
 package demo.medieval_game.data.starting_level
 
-import demo.medieval_game.data.gameobject.*
 import demo.medieval_game.data.gameobject.npc.goblin.GoblinNPC
 import demo.medieval_game.data.gameobject.npc.goblin.GoblinPreset
 import demo.medieval_game.data.gameobject.on_map.Campfire
 import demo.medieval_game.data.gameobject.on_map.chest.ChestCreator
 import demo.medieval_game.data.gameobject.on_map.chest.ChestType
+import demo.medieval_game.data.gameobject.sprite_holder.TempSpritesHolder
 import demo.medieval_game.data.static_parameters.*
 import demo.medieval_game.scene.MedievalGame
 import engine.core.game_object.GameEntity
@@ -59,8 +59,8 @@ object StartMapInitializer : SceneInitializer {
 
         val out = mutableListOf<GameEntity>().apply {
             add(campfire)
-            //addAll(chests)
-            addAll(listOfNpc)
+            addAll(chests)
+            //addAll(listOfNpc)
         }
 
         return out

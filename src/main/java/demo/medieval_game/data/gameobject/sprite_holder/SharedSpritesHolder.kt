@@ -1,4 +1,4 @@
-package demo.medieval_game.data.gameobject
+package demo.medieval_game.data.gameobject.sprite_holder
 
 import demo.medieval_game.ShaderController
 import engine.core.entity.CompositeEntity
