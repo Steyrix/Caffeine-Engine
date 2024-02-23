@@ -11,7 +11,7 @@ abstract class InventoryItem : CompositeEntity() {
 
     protected abstract val parameters: SetOfStatic2DParameters
 
-    abstract val canBeEquiped: Boolean
+    abstract val canBeEquipped: Boolean
 
     abstract val isConsumable: Boolean
 
