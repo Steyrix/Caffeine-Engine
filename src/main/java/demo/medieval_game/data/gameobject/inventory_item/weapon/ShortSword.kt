@@ -11,7 +11,7 @@ import engine.feature.animation.Animation
 
 abstract class ShortSword(
     texturePath: String,
-    private val parameters: SetOfStatic2DParameters,
+    override val parameters: SetOfStatic2DParameters,
     override val baseDamage: Float,
     override val rarity: ItemRarity,
     override val afterEquipAnimation: List<Animation>,

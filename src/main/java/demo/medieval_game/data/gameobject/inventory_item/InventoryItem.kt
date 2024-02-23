@@ -2,11 +2,14 @@ package demo.medieval_game.data.gameobject.inventory_item
 
 import engine.core.entity.CompositeEntity
 import engine.core.render.Model
+import engine.core.update.SetOfStatic2DParameters
 import engine.feature.animation.Animation
 
 abstract class InventoryItem : CompositeEntity() {
 
     protected abstract val drawableComponent: Model
+
+    protected abstract val parameters: SetOfStatic2DParameters
 
     abstract val canBeEquiped: Boolean
 
