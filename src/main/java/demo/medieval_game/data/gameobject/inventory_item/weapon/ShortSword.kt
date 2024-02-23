@@ -1,7 +1,9 @@
 package demo.medieval_game.data.gameobject.inventory_item.weapon
 
 
+import demo.medieval_game.ShaderController
 import demo.medieval_game.data.gameobject.inventory_item.ItemRarity
+import demo.medieval_game.scene.MedievalGame
 import engine.core.render.Model
 import engine.core.texture.Texture2D
 import engine.feature.animation.Animation
@@ -20,6 +22,10 @@ abstract class ShortSword(
     init {
         drawableComponent = Model(
             texture = Texture2D.createInstance(texturePath)
-        )
+        ).apply {
+            shader = ShaderController.createTexturedShader(MedievalGame.renderProjection)
+            zLevel = 1f
+            isPartOfWorldTranslation = false
+        }
     }
 }
