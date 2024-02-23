@@ -1,9 +1,7 @@
 package demo.medieval_game.data.gameobject.inventory_item
 
-import demo.medieval_game.ShaderController
+import demo.medieval_game.data.gameobject.inventory_item.weapon.ShortSword
 import demo.medieval_game.scene.MedievalGame
-import engine.core.render.Model
-import engine.core.texture.Texture2D
 import engine.core.update.SetOfStatic2DParameters
 
 object LootCreator {
@@ -14,13 +12,13 @@ object LootCreator {
 
         val path = this.javaClass.getResource("/textures/gui/item/weapon/WarriorSwordIcon.png")!!.path
 
-        val sword = Model(
-            texture = Texture2D.createInstance(path)
-        ).also {
-            it.shader = ShaderController.createTexturedShader(MedievalGame.renderProjection)
-            it.zLevel = 1f
-            it.isPartOfWorldTranslation = false
-        }
+        val sword = object : ShortSword(
+            texturePath = path,
+            baseDamage = 100f,
+            rarity = ItemRarity.COMMON,
+            afterEquipAnimation = emptyList(),
+            parameters = params
+        ) {}
 
         val wrapper = InventoryItemWrapper(
             params,
