@@ -1,6 +1,7 @@
 package demo.medieval_game.data.gameobject.gui.inventory
 
 import demo.medieval_game.ShaderController
+import engine.core.controllable.Controllable
 import engine.core.entity.CompositeEntity
 import engine.core.render.Model
 import engine.core.texture.Texture2D
@@ -9,7 +10,7 @@ import org.joml.Matrix4f
 
 class InventoryGuiContainer(
     val parameters: SetOfStatic2DParameters
-) : CompositeEntity() {
+) : CompositeEntity(), Controllable {
 
     private var graphicalComponent: Model? = null
 
