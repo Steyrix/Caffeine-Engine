@@ -34,7 +34,7 @@ object GuiController : CompositeEntity(), EventReceiver {
         content: MutableList<InventoryItemWrapper>
     ) {
         val guiParams = inventoryGui.parameters
-        val newPosition = Point2D(450f, 0f)
+        val newPosition = Point2D(450f, 185f)
 
         inventoryGui.updatePosition(newPosition)
         // inventoryGui.setContent
