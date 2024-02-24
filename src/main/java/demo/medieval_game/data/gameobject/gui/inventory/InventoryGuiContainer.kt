@@ -49,6 +49,7 @@ class InventoryGuiContainer(
         parameters.y = pos.y
     }
 
+    // TODO: close button model can be reused
     private fun createCloseButtonModel(): GenericButton {
         val texturePath = this.javaClass.getResource("/textures/gui/chest/ButtonClose.png")!!.path
 
