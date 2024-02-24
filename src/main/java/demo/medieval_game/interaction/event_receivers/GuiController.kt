@@ -20,34 +20,35 @@ object GuiController : CompositeEntity(), EventReceiver {
     )
 
     private val inventoryGui: InventoryGuiContainer = InventoryGuiContainer(
-        SetOfStatic2DParameters(x = 0f, y = 0f, xSize = 400f, ySize = 496f, rotationAngle = 0f)
+        SetOfStatic2DParameters(x = 0f, y = 0f, xSize = 530f, ySize = 635f, rotationAngle = 0f)
     )
 
     var isInputBlocked: Boolean = false
 
     init {
         chestGui.init(renderProjection)
+        inventoryGui.init(renderProjection)
     }
 
     private fun showInventoryGui(
         content: MutableList<InventoryItemWrapper>
     ) {
         val guiParams = inventoryGui.parameters
-        val newPosition = Point2D(0f, 0f)
+        val newPosition = Point2D(450f, 0f)
 
         inventoryGui.updatePosition(newPosition)
         // inventoryGui.setContent
-        // addComponent
+        addComponent(inventoryGui, guiParams)
         // setOnClicks
     }
 
     private fun showChestGui(
-        pos: Point2D,
         content: MutableList<InventoryItemWrapper>
     ) {
         val guiParams = chestGui.parameters
+        val newPosition = Point2D(0f, 225f)
 
-        chestGui.updatePosition(pos)
+        chestGui.updatePosition(newPosition)
 
         chestGui.setContent(content)
 
@@ -64,7 +65,10 @@ object GuiController : CompositeEntity(), EventReceiver {
 
     override fun proccessEvent(event: InteractionEvent) {
         when(event) {
-            is OpenChest -> showChestGui(event.pos, event.content)
+            is OpenChest -> {
+                showInventoryGui(mutableListOf())
+                showChestGui(event.content)
+            }
         }
     }
 

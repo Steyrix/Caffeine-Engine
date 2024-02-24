@@ -10,7 +10,6 @@ import demo.medieval_game.interaction.event.OpenChest
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.game_object.SingleGameEntity
-import engine.core.geometry.Point2D
 import engine.core.loop.GameLoopTimeEvent
 import engine.core.loop.SingleTimeEvent
 import engine.core.render.AnimatedModel2D
@@ -46,8 +45,7 @@ class Chest(
                 is ChestInteraction.Open -> {
                     boxInteractionContext.broadcastEvent(
                         OpenChest(
-                            LootCreator.createBasicLoot(parameters),
-                            Point2D(parameters.x, parameters.y)
+                            LootCreator.createBasicLoot(parameters)
                         )
                     )
                 }
