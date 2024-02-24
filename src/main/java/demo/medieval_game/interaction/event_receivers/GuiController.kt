@@ -1,6 +1,7 @@
 package demo.medieval_game.interaction.event_receivers
 
 import demo.medieval_game.data.gameobject.gui.chest.ChestGuiContainer
+import demo.medieval_game.data.gameobject.gui.inventory.InventoryGuiContainer
 import demo.medieval_game.data.gameobject.inventory_item.InventoryItemWrapper
 import demo.medieval_game.interaction.event.OpenChest
 import demo.medieval_game.scene.MedievalGame
@@ -18,10 +19,26 @@ object GuiController : CompositeEntity(), EventReceiver {
         SetOfStatic2DParameters(x = 0f, y = 0f, xSize = 400f, ySize = 496f, rotationAngle = 0f)
     )
 
+    private val inventoryGui: InventoryGuiContainer = InventoryGuiContainer(
+        SetOfStatic2DParameters(x = 0f, y = 0f, xSize = 400f, ySize = 496f, rotationAngle = 0f)
+    )
+
     var isInputBlocked: Boolean = false
 
     init {
         chestGui.init(renderProjection)
+    }
+
+    private fun showInventoryGui(
+        content: MutableList<InventoryItemWrapper>
+    ) {
+        val guiParams = inventoryGui.parameters
+        val newPosition = Point2D(0f, 0f)
+
+        inventoryGui.updatePosition(newPosition)
+        // inventoryGui.setContent
+        // addComponent
+        // setOnClicks
     }
 
     private fun showChestGui(
@@ -34,6 +51,7 @@ object GuiController : CompositeEntity(), EventReceiver {
 
         chestGui.setContent(content)
 
+        // TODO: move out state setting
         isInputBlocked = true
         addComponent(chestGui, guiParams)
         chestGui.setOnCloseClick { hideChestGui() }
