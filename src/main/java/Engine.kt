@@ -14,7 +14,7 @@ class Engine(
     private var gameLoop: GameLoop = FixedStepGameLoop(window, timer)
 
     private fun init() {
-        sceneHolder.init()
+        sceneHolder.init(window.width.toFloat(), window.height.toFloat())
     }
 
     override fun run() {

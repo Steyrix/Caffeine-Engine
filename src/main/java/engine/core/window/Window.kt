@@ -43,7 +43,11 @@ class Window(
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE) // the window will be resizable
         glfwWindowHint(GLFW_STENCIL_BITS, 8)
 
+        val videoMode = glfwGetVideoMode(glfwGetPrimaryMonitor())
+        width = videoMode?.width() ?: width
+        height = videoMode?.height() ?: height
         window = glfwCreateWindow(width, height, title, MemoryUtil.NULL, MemoryUtil.NULL)
+
 
         if (window == MemoryUtil.NULL) {
             throw RuntimeException(WINDOW_CREATE_ERR_MSG)

@@ -8,15 +8,15 @@ interface SceneHolder {
 
     val session: Session
 
-    val screenWidth: Float
-    val screenHeight: Float
+    var screenWidth: Float
+    var screenHeight: Float
 
     val sceneMap: MutableMap<String, Scene>
     val sharedContext: GameContext
 
     var currentScene: Scene?
 
-    fun init()
+    fun init(width: Float, height: Float)
 
     fun render(window: Window) {
         currentScene?.render(window)

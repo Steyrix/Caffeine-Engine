@@ -16,10 +16,7 @@ import engine.feature.matrix.MatrixComputer
 import org.joml.Matrix4f
 
 // TODO: 29.12.2023 move shared entities to shared context
-class MedievalGame(
-    override val screenWidth: Float,
-    override val screenHeight: Float
-) : SceneHolder {
+class MedievalGame() : SceneHolder {
 
     companion object {
         var renderProjection: Matrix4f = Matrix4f().ortho(0f, 0f, 0f, 0f, 0f, 0f)
@@ -39,9 +36,22 @@ class MedievalGame(
 
     private var sharedSpritesHolder: SharedSpritesHolder? = null
 
+    override var screenHeight: Float = 0f
+
+    override var screenWidth: Float = 0f
+
     private var gui: GuiContainer? = null
 
-    init {
+    override fun init(width: Float, height: Float) {
+        screenWidth = width
+        screenHeight = height
+
+        sceneMap["nexus"] = NexusMap(getNexusMapPreset(), screenWidth, screenHeight, renderProjection)
+        sharedSpritesHolder = SharedSpritesHolder().apply { init(renderProjection) }
+
+        MedievalGame.screenWidth = screenWidth
+        MedievalGame.screenHeight = screenHeight
+
         renderProjection = Matrix4f()
             .ortho(
                 0f,
@@ -52,15 +62,6 @@ class MedievalGame(
                 1f
             )
 
-        // TODO: deserialize maps from presets
-        sceneMap["nexus"] = NexusMap(getNexusMapPreset(), screenWidth, screenHeight, renderProjection)
-        sharedSpritesHolder = SharedSpritesHolder().apply { init(renderProjection) }
-
-        MedievalGame.screenWidth = screenWidth
-        MedievalGame.screenHeight = screenHeight
-    }
-
-    override fun init() {
         MatrixComputer.matrixState = MedievalGameMatrixState
 
         gui = GuiCreator.createGuiEntity(

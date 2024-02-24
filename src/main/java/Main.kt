@@ -7,8 +7,7 @@ object Main {
     @JvmStatic
     fun main(args: Array<String>) {
         try {
-            // TODO: pass from windows
-            val mockObj = MedievalGame(1728f, 1117f)
+            val mockObj = MedievalGame()
             val engine = Engine(mockObj)
             engine.run()
         } catch (e: Exception) {
