@@ -39,9 +39,8 @@ object GuiController : CompositeEntity(), EventReceiver {
         val newPosition = Point2D(MedievalGame.screenWidth / 4 * 2, 185f)
 
         inventoryGui.updatePosition(newPosition)
-        // inventoryGui.setContent
         addComponent(inventoryGui, guiParams)
-        // setOnClicks
+        inventoryGui.setOnCloseClick { hideGui() }
     }
 
     private fun showChestGui(

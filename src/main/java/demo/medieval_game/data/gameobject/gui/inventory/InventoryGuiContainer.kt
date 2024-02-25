@@ -65,4 +65,8 @@ class InventoryGuiContainer(
             parameters = closeButtonParams
         )
     }
+
+    fun setOnCloseClick(func: (Any?) -> Unit) {
+        closeButton.updateOnClick(func)
+    }
 }
