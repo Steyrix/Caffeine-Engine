@@ -19,7 +19,7 @@ class TempSpritesHolder : CompositeEntity() {
     private val texture: Texture2D
 
     init {
-        val texturePath = this.javaClass.getResource("/textures/BloodHitAtlas.png")!!.path
+        val texturePath = this.javaClass.getResource("/textures/effect/HitEffectAtlas.png")!!.path
         texture = Texture2D.createInstance(texturePath)
     }
 
@@ -31,7 +31,7 @@ class TempSpritesHolder : CompositeEntity() {
         if (renderProjection == null) return
 
         val frameWidth = 0.25f
-        val frameHeight = 0.25f
+        val frameHeight = 0.3333f
 
         val graphicalComponent = AnimatedModel2D(
             frameWidth,
