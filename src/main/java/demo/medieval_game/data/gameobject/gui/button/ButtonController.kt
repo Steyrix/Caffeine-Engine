@@ -1,13 +1,9 @@
 package demo.medieval_game.data.gameobject.gui.button
 
-import demo.medieval_game.matrix.MedievalGameMatrixState
-import demo.medieval_game.scene.MedievalGame
 import engine.core.controllable.Controllable
 import engine.core.entity.Entity
 import engine.core.update.SetOfStatic2DParameters
 import engine.core.window.Window
-import org.joml.Matrix4f
-import org.joml.Vector4f
 import org.lwjgl.glfw.GLFW
 
 internal class ButtonController(
@@ -17,21 +13,12 @@ internal class ButtonController(
 ) : Entity, Controllable {
 
     override fun input(window: Window) {
-        // TODO: this logic should probably be moved to single entity and become reusable
         val cursorPos = window.getCursorPosition()
 
-        val xNdc = cursorPos.x / MedievalGame.screenWidth * 2 - 1
-        val yNdc = -1 * cursorPos.y / MedievalGame.screenHeight * 2 + 1
+        println("CursorPosition x = ${cursorPos.x} , y = ${cursorPos.y}")
+        println("ButtonParams x = ${parameters.x} -> ${parameters.x + parameters.ySize}, y = ${parameters.y} -> ${parameters.y + parameters.ySize}")
 
-        val vecNdc = Vector4f(xNdc, yNdc, -1f, 1f)
-        val mat = Matrix4f()
-        MedievalGame.renderProjection.invert(mat)
-        val vecEye = vecNdc.mul(mat)
-
-        val x = vecEye.x * vecEye.w
-        val y = vecEye.y * vecEye.w - MedievalGameMatrixState.worldTranslation.y / 2
-
-        if (isIntersecting(x, y)) {
+        if (isIntersecting(cursorPos.x, cursorPos.y)) {
             if (window.isKeyPressed(GLFW.GLFW_KEY_1)) {
                 onClick.invoke("")
             }
