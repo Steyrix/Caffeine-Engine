@@ -79,7 +79,7 @@ class ChestGuiContainer(
         val texturePath = this.javaClass.getResource("/textures/gui/chest/ButtonClose.png")!!.path
 
         return GenericButton(
-            onClick = { println("onClick close!") },
+            onClick = {},
             texturePath = texturePath,
             parameters = closeButtonParams
         )
@@ -89,7 +89,7 @@ class ChestGuiContainer(
         val texturePath = this.javaClass.getResource("/textures/gui/chest/ButtonTakeAll.png")!!.path
 
         return GenericButton(
-            onClick = { println("onClick take all!") },
+            onClick = {},
             texturePath = texturePath,
             parameters = takeButtonParams
         )

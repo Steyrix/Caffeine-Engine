@@ -81,13 +81,6 @@ object ArraysUtil {
         val tempList = mutableListOf<Int>()
 
         var counter = 0
-        // rowColumns.first is row index
-        // columnRows.first is columnIndex
-        println("columnToRows")
-        println(columnsToRows)
-        println("rowToColumns")
-        println(rowToColumns)
-        println("----------")
 
         rowToColumns.forEach { rowColumns ->
             columnsToRows.forEach { columnRows ->
