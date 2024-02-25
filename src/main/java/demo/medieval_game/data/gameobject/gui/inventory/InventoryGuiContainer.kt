@@ -47,6 +47,11 @@ class InventoryGuiContainer(
     fun updatePosition(pos: Point2D) {
         parameters.x = pos.x
         parameters.y = pos.y
+        closeButtonParams.xSize = parameters.xSize * 0.0954f
+        closeButtonParams.ySize = parameters.ySize * 0.0706f
+        closeButtonParams.x = parameters.x + parameters.xSize * 0.7663f
+        closeButtonParams.y = parameters.y + parameters.ySize * 0.1221f
+        closeButton.updatePosition(Point2D(closeButtonParams.x, closeButtonParams.y))
     }
 
     // TODO: close button model can be reused
