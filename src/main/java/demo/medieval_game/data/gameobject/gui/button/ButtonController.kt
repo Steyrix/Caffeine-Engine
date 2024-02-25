@@ -13,13 +13,9 @@ internal class ButtonController(
     val onHover: (Boolean) -> Unit
 ) : Entity, Controllable {
 
+    // TODO: offset between top bar and windows top border is making cursor height invalid
     override fun input(window: Window) {
         val cursorPos = window.getCursorPosition()
-
-        println("$buttonName ----------------")
-        println("CursorPosition x = ${cursorPos.x} , y = ${cursorPos.y}")
-        println("ButtonParams x = ${parameters.x} -> ${parameters.x + parameters.ySize}, y = ${parameters.y} -> ${parameters.y + parameters.ySize}")
-        println("------------------------------")
 
         if (isIntersecting(cursorPos.x, cursorPos.y)) {
             if (window.isKeyPressed(GLFW.GLFW_KEY_1)) {
