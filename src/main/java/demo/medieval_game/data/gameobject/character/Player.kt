@@ -85,8 +85,8 @@ class Player(
                 if (!isHit) {
                     isHit = true
                     tempSpritesHolder.generateHit(
-                        parameters.x,
-                        parameters.y,
+                        parameters.x + parameters.xSize / 2,
+                        parameters.y + parameters.ySize / 2,
                         posZ = drawableComponent.zLevel + 0.5f
                     )
                 }
