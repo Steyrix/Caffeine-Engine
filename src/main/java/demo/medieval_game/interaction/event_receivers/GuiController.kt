@@ -25,6 +25,8 @@ object GuiController : CompositeEntity(), EventReceiver {
 
     var isInputBlocked: Boolean = false
 
+    private var isOpened: Boolean = false
+
     init {
         chestGui.init(renderProjection)
         inventoryGui.init(renderProjection)
@@ -55,20 +57,29 @@ object GuiController : CompositeEntity(), EventReceiver {
         // TODO: move out state setting
         isInputBlocked = true
         addComponent(chestGui, guiParams)
-        chestGui.setOnCloseClick { hideChestGui() }
+        chestGui.setOnCloseClick { hideGui() }
     }
 
-    private fun hideChestGui() {
+    private fun hideGui() {
         removeComponent(chestGui)
+        removeComponent(inventoryGui)
         isInputBlocked = false
+    }
+
+    private fun openGui(
+        inventoryContents: MutableList<InventoryItemWrapper>,
+        chestContents: MutableList<InventoryItemWrapper>
+    ) {
+        if (isOpened) return
+        isOpened = true
+
+        showInventoryGui(inventoryContents)
+        showChestGui(chestContents)
     }
 
     override fun proccessEvent(event: InteractionEvent) {
         when(event) {
-            is OpenChest -> {
-                showInventoryGui(mutableListOf())
-                showChestGui(event.content)
-            }
+            is OpenChest -> openGui(mutableListOf(), event.content)
         }
     }
 
