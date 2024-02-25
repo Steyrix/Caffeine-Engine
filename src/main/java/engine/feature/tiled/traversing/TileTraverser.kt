@@ -57,7 +57,6 @@ class TileTraverser(
     }
 
     fun moveToTarget() {
-        println("move to target")
         val destCenter = targetParams.getCenterPoint()
 
         val possibleTargetCoords = listOf(
@@ -96,9 +95,6 @@ class TileTraverser(
     }
 
     private fun extendCurrentPath(nextPath: ArrayDeque<Int>) {
-        println("Curr tile: ${tileMap.getTileIndex(holderParams.getCenterPoint().x, holderParams.getCenterPoint().y)}")
-        println("Next path: $nextPath")
-        println("Curr path: $currentPath")
         if (nextPath.isNotEmpty()) {
             isStumble = false
             val indexOfJoin = if (currentPath.isEmpty()) {
