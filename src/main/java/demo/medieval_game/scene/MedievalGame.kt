@@ -63,6 +63,8 @@ class MedievalGame() : SceneHolder {
             )
 
         MatrixComputer.matrixState = MedievalGameMatrixState
+        MedievalGameMatrixState.screenWidth = screenWidth
+        MedievalGameMatrixState.screenHeight = screenHeight
 
         gui = GuiCreator.createGuiEntity(
             screenWidth,

@@ -15,6 +15,11 @@ object MedievalGameMatrixState : MatrixState {
     val worldTranslation = Vector2f(0f, 0f)
     val tempTranslation = Vector2f(0f, 0f)
 
+    var worldWidth: Float = 0f
+    var worldHeight: Float = 0f
+    var screenWidth: Float = 0f
+    var screenHeight: Float = 0f
+
     override val nonTranslatedParams: MutableList<SetOfStatic2DParameters> = mutableListOf()
 
     override fun getResultMatrix(
@@ -75,32 +80,22 @@ object MedievalGameMatrixState : MatrixState {
         }
     }
 
-    // TODO: pass parameters dynamically
     private fun isHorizontalTranslationPossible(
-        x: Float,
-        worldWidth: Float = 2285.7144f,
-        screenWidth: Float = 1728f
+        x: Float
     ): Boolean {
         return (screenWidth + abs(worldTranslation.x + x) < worldWidth)
                 && (worldTranslation.x + x) < 0
     }
 
-    // TODO: pass parameters dynamically
     private fun isVerticalTranslationPossible(
-        y: Float,
-        worldHeight: Float = 2285.7144f,
-        screenHeight: Float = 1117f
+        y: Float
     ): Boolean {
         return (screenHeight + abs(worldTranslation.y + y) < worldHeight)
                 && (worldTranslation.y + y) < 0
     }
 
     fun handleMapTransaction(
-        direction: Direction,
-        screenWidth: Float,
-        screenHeight: Float,
-        worldWidth: Float,
-        worldHeight: Float
+        direction: Direction
     ) {
         var xMod = 0f
         var yMod = 0f

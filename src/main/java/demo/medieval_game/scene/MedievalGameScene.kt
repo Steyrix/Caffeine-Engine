@@ -73,11 +73,16 @@ abstract class MedievalGameScene(
             listOf(it)
         } ?: emptyList()
 
-        return MapSceneInitializer.initTileMapObject(
+        val out = MapSceneInitializer.initTileMapObject(
             preset,
             projection,
             collisionContexts
         )
+
+        MedievalGameMatrixState.worldWidth = out.worldSize.x
+        MedievalGameMatrixState.worldHeight = out.worldSize.y
+
+        return out
     }
 
     override fun input(window: Window) {
@@ -151,11 +156,7 @@ abstract class MedievalGameScene(
                     || intent.direction == Direction.LEFT
 
         MedievalGameMatrixState.handleMapTransaction(
-            intent.direction,
-            screenWidth,
-            screenHeight,
-            worldWidth = tiledMap?.worldSize?.x ?: 0f,
-            worldHeight = tiledMap?.worldSize?.y ?: 0f
+            intent.direction
         )
     }
 
