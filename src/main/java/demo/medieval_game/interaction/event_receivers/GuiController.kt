@@ -36,7 +36,7 @@ object GuiController : CompositeEntity(), EventReceiver {
         content: MutableList<InventoryItemWrapper>
     ) {
         val guiParams = inventoryGui.parameters
-        val newPosition = Point2D(450f, 185f)
+        val newPosition = Point2D(MedievalGame.screenWidth / 4 * 2, 185f)
 
         inventoryGui.updatePosition(newPosition)
         // inventoryGui.setContent
@@ -48,7 +48,8 @@ object GuiController : CompositeEntity(), EventReceiver {
         content: MutableList<InventoryItemWrapper>
     ) {
         val guiParams = chestGui.parameters
-        val newPosition = Point2D(0f, 225f)
+
+        val newPosition = Point2D(MedievalGame.screenWidth / 4, 225f)
 
         chestGui.updatePosition(newPosition)
 
