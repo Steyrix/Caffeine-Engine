@@ -7,6 +7,7 @@ import engine.core.window.Window
 import org.lwjgl.glfw.GLFW
 
 internal class ButtonController(
+    var buttonName: String = "",
     var parameters: SetOfStatic2DParameters,
     var onClick: (Any?) -> Unit,
     val onHover: (Boolean) -> Unit
@@ -15,8 +16,10 @@ internal class ButtonController(
     override fun input(window: Window) {
         val cursorPos = window.getCursorPosition()
 
+        println("$buttonName ----------------")
         println("CursorPosition x = ${cursorPos.x} , y = ${cursorPos.y}")
         println("ButtonParams x = ${parameters.x} -> ${parameters.x + parameters.ySize}, y = ${parameters.y} -> ${parameters.y + parameters.ySize}")
+        println("------------------------------")
 
         if (isIntersecting(cursorPos.x, cursorPos.y)) {
             if (window.isKeyPressed(GLFW.GLFW_KEY_1)) {

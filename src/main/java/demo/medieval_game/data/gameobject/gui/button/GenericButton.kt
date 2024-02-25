@@ -10,6 +10,7 @@ import engine.core.texture.Texture2D
 import engine.core.update.SetOfStatic2DParameters
 
 class GenericButton(
+    buttonName: String,
     var onClick: (Any?) -> Unit,
     texturePath: String,
     private val parameters: SetOfStatic2DParameters
@@ -28,6 +29,7 @@ class GenericButton(
     }
 
     private val controller = ButtonController(
+        buttonName,
         parameters,
         onHover = onHover,
         onClick = onClick

@@ -54,6 +54,7 @@ class InventoryGuiContainer(
         val texturePath = this.javaClass.getResource("/textures/gui/chest/ButtonClose.png")!!.path
 
         return GenericButton(
+            "Inventory close",
             onClick = { println("onClick close!") },
             texturePath = texturePath,
             parameters = closeButtonParams
