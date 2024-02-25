@@ -22,7 +22,7 @@ class TileTraverser(
     }
 
     private val startChasing = PredicateTimeEvent(
-        timeLimit = 5f,
+        timeLimit = 2.5f,
         predicate = { (!isPaused) },
         action = {
             moveToTarget()
