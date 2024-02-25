@@ -56,7 +56,7 @@ class TempSpritesHolder : CompositeEntity() {
 
         actions.add(
             SingleTimeEvent(
-                timeLimit = 0.8f,
+                timeLimit = 0.6f,
                 action = {
                     removeComponent(obj)
                 },

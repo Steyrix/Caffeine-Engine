@@ -146,7 +146,7 @@ val chestAnimations = mutableListOf<Animation>(
 val hitAnimation = mutableListOf<Animation>(
     SequenceAtlasAnimation(
         name = AnimationKey.HIT,
-        frames = FrameParametersGenerator.generate(Pair(0, 3), Pair(0, 3), 0.25f, 0.25f),
+        frames = FrameParametersGenerator.generate(Pair(0, 3), Pair(0, 2), 0.25f, 0.333f),
         timeLimit = 0.05f
     )
 )
