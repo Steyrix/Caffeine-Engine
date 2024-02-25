@@ -75,19 +75,21 @@ object MedievalGameMatrixState : MatrixState {
         }
     }
 
+    // TODO: pass parameters dynamically
     private fun isHorizontalTranslationPossible(
         x: Float,
-        worldWidth: Float = 1140f,
-        screenWidth: Float = 999.375f
+        worldWidth: Float = 2285.7144f,
+        screenWidth: Float = 1728f
     ): Boolean {
         return (screenWidth + abs(worldTranslation.x + x) < worldWidth)
                 && (worldTranslation.x + x) < 0
     }
 
+    // TODO: pass parameters dynamically
     private fun isVerticalTranslationPossible(
         y: Float,
-        worldHeight: Float = 1140f,
-        screenHeight: Float = 999.375f
+        worldHeight: Float = 2285.7144f,
+        screenHeight: Float = 1117f
     ): Boolean {
         return (screenHeight + abs(worldTranslation.y + y) < worldHeight)
                 && (worldTranslation.y + y) < 0
