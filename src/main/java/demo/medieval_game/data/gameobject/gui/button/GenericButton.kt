@@ -66,4 +66,6 @@ class GenericButton(
     fun updateOnClick(func: (Any?) -> Unit) {
         controller.onClick = func
     }
+
+    // TODO: mechanism to update other buttons
 }
