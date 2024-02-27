@@ -1,0 +1,22 @@
+{
+  "name": "Starting level",
+  "type": "Tiled",
+  "dynamicEntities": [
+    {
+      "type": "NPC",
+      "textureAtlasPath": "",
+      "controllerType": "Simple2D",
+      "healthAmount": 100.0,
+      "damageType": "physical",
+      "damageAmount": 10.0
+    },
+    {
+      "type": "NPC",
+      "textureAtlasPath": "",
+      "controllerType": "Simple2D",
+      "healthAmount": 100.0,
+      "damageType": "physical",
+      "damageAmount": 10.0
+    }
+  ]
+}
