@@ -128,6 +128,15 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <excludes>
+                    <exclude>Main.kr</exclude>
+                </excludes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
     </build>
 
 </project>

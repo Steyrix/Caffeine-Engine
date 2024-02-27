@@ -1,6 +1,0 @@
-### Medieval game TODO list (sorted by descending priority):
-- Fix character disappearing on the top/bottom edge of the map [DONE]
-- Save direction of a map leaving / proper matrix translations [DONE]
-- Different initializers for scenes
-- Universal scene initializer using serialized data
-- Serialized maps
