@@ -17,7 +17,6 @@ open class CompositeEntity : Entity, Updatable {
 
     protected val entitiesMap: HashMap<Entity, SetOfParameters> = hashMapOf()
     private val toRemove = mutableSetOf<Entity>()
-    private val toAdd = mutableSetOf<Pair<Entity, SetOfParameters>>()
 
     var isDisposed = false
 
@@ -25,7 +24,9 @@ open class CompositeEntity : Entity, Updatable {
         component: Entity,
         parameters: SetOfParameters
     ): CompositeEntity {
-        toAdd.add(Pair(component, parameters))
+        entitiesMap[component] = parameters
+        component.onAdd()
+
         return this
     }
 
@@ -69,46 +70,33 @@ open class CompositeEntity : Entity, Updatable {
                 (item.key as? Parameterized<SetOfParameters>)?.updateParameters(item.value)
             }
         }
-        addEntities()
     }
 
     override fun consumeInteraction(interaction: Interaction) {
         entitiesMap.keys.forEach { entity ->
             entity.consumeInteraction(interaction)
         }
-        addEntities()
     }
 
     override fun onInteractionAvailable(producer: Entity) {
         entitiesMap.keys.forEach { entity ->
             entity.onInteractionAvailable(producer)
         }
-        addEntities()
     }
 
     override fun onInteractionUnavailable(producer: Entity) {
         entitiesMap.keys.forEach { entity ->
             entity.onInteractionUnavailable(producer)
         }
-        addEntities()
     }
 
     fun input(window: Window) {
         entitiesMap.keys.forEach { entity ->
             (entity as? Controllable)?.input(window)
         }
-        addEntities()
     }
 
     fun contains(entity: Entity): Boolean {
         return entitiesMap.containsKey(entity)
-    }
-
-    private fun addEntities() {
-        toAdd.forEach {
-            entitiesMap[it.first] = it.second
-            it.first.onAdd()
-        }
-        toAdd.clear()
     }
 }
