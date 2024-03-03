@@ -90,7 +90,7 @@ open class CompositeEntity : Entity, Updatable {
         }
     }
 
-    fun input(window: Window) {
+    open fun input(window: Window) {
         entitiesMap.keys.forEach { entity ->
             (entity as? Controllable)?.input(window)
         }
