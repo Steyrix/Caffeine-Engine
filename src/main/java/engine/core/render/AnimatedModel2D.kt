@@ -6,6 +6,7 @@ import engine.core.update.Updatable
 import engine.feature.animation.Animation
 import engine.feature.animation.AnimationHolder2D
 import engine.core.render.util.DefaultBufferData
+import engine.feature.animation.AtlasData
 
 class AnimatedModel2D(
     mesh: Mesh,
@@ -55,6 +56,19 @@ class AnimatedModel2D(
         texture = texture,
         arrayTexture = arrayTexture,
         animationHolder = animationHolder
+    )
+
+    constructor(
+        data: AtlasData,
+        texture: Texture2D?,
+    ) : this(
+        mesh = Mesh(
+            dataArrays = DefaultBufferData.getRectangleSectorBuffers(data.frameWidth, data.frameHeight),
+            verticesCount = 6
+        ),
+        texture,
+        arrayTexture = null,
+        animationHolder = AnimationHolder2D(data.animations.toMutableList())
     )
 
     override fun update(deltaTime: Float) {
