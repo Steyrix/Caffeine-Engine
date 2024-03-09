@@ -192,6 +192,10 @@ class TileMapEntity(
         return mapPresets.walkingLayers.toMutableList()
     }
 
+    fun retrieveObjectLayers(): MutableList<String> {
+        return mapPresets.obstacleLayers.toMutableList()
+    }
+
     override fun getZLevel(): Float {
         return Float.NEGATIVE_INFINITY
     }

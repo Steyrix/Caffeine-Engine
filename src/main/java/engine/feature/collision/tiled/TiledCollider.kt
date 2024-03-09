@@ -18,6 +18,7 @@ class TiledCollider(
     private var previousTilePos: Point2D = Point2D(parameters.x, parameters.y)
 
     val nonCollisionLayers: MutableList<String> = mutableListOf()
+    val objectLayers: MutableList<String> = mutableListOf()
 
     var isOutOfMap = false
         private set
@@ -46,7 +47,14 @@ class TiledCollider(
         var isBottomColliding = true
 
         nonCollisionLayers.forEach { layer ->
-            if (map.getTileValue(centerX, bottomY, layer) >= EMPTY_TILE_VALUE) isBottomColliding = false
+            if (map.getTileValue(centerX, bottomY, layer) >= EMPTY_TILE_VALUE) {
+                isBottomColliding = false
+            }
+        }
+        objectLayers.forEach { layer ->
+            if (map.getTileValue(centerX, bottomY, layer) >= EMPTY_TILE_VALUE) {
+                isBottomColliding = true
+            }
         }
 
         map.processIntersectionIfNeeded(Point2D(centerX, centerY))

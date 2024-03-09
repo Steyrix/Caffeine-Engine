@@ -32,7 +32,10 @@ abstract class TileMapScene(
             val objects = it.retrieveObjectEntities()
             context.addAll(objects)
 
-            tiledCollisionContext = TiledCollisionContext(it.retrieveNonCollisionLayers())
+            tiledCollisionContext = TiledCollisionContext(
+                it.retrieveNonCollisionLayers(),
+                it.retrieveObjectLayers()
+            )
             it.addToCollisionContext(tiledCollisionContext!!)
         }
     }

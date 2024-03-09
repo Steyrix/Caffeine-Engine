@@ -6,7 +6,8 @@ import engine.feature.collision.Collider
 import engine.feature.collision.CollisionContext
 
 class TiledCollisionContext(
-    private val nonCollisionLayers: MutableList<String> = mutableListOf()
+    private val nonCollisionLayers: MutableList<String> = mutableListOf(),
+    private val objectLayers: MutableList<String> = mutableListOf()
 ) : CollisionContext {
 
     override val colliders: MutableSet<Collider> = mutableSetOf()
@@ -20,11 +21,16 @@ class TiledCollisionContext(
         super.addCollider(collider)
 
         if (collider is TiledCollider) {
-            val toAdd = nonCollisionLayers.filter {
+            val toAddNonCollisionLayers = nonCollisionLayers.filter {
                 !collider.nonCollisionLayers.contains(it)
             }
 
-            collider.nonCollisionLayers.addAll(toAdd)
+            val toAddObjectLayers = objectLayers.filter {
+                !collider.objectLayers.contains(it)
+            }
+
+            collider.nonCollisionLayers.addAll(toAddNonCollisionLayers)
+            collider.objectLayers.addAll(toAddObjectLayers)
         }
     }
 }
