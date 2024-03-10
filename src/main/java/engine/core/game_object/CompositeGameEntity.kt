@@ -7,6 +7,8 @@ open class CompositeGameEntity : GameEntity {
 
     private val objectList = mutableListOf<GameEntity>()
 
+    override var isSpawned: Boolean = false
+
     override fun update(deltaTime: Float) {
         objectList.forEach {
             it.update(deltaTime)
@@ -41,6 +43,10 @@ open class CompositeGameEntity : GameEntity {
     override fun getZLevel(): Float {
         if (objectList.isEmpty()) return Float.NEGATIVE_INFINITY
         return objectList.maxOf { it.getZLevel() }
+    }
+
+    override fun preSpawn(spawnOptions: SpawnOptions) {
+        TODO("Not yet implemented")
     }
 
     fun getInnerObjects() = objectList.toList()

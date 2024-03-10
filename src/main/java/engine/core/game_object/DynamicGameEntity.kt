@@ -1,6 +1,5 @@
 package engine.core.game_object
 
-import engine.core.geometry.Point2D
 import engine.core.update.SetOfParameters
 import engine.core.window.Window
 
@@ -11,15 +10,7 @@ import engine.core.window.Window
 //TODO: get rid of parameters
 abstract class DynamicGameEntity<P : SetOfParameters> : SingleGameEntity() {
 
-    private var isSpawned = false
-
-    abstract fun preSpawn(position: Point2D)
-
-    fun spawn(position: Point2D) {
-        preSpawn(position)
-        isSpawned = true
-    }
-
+    override var isSpawned: Boolean = false
     open fun despawn() {
         isSpawned = false
     }

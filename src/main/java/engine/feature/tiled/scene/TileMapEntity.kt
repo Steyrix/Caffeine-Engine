@@ -81,6 +81,8 @@ class TileMapEntity(
             val event = it.invoke(graphicalComponent!!)
             eventSet.add(event)
         }
+
+        isSpawned = true
     }
 
     private fun getGraphicalComponent(

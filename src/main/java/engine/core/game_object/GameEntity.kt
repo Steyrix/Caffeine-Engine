@@ -8,6 +8,8 @@ import engine.core.window.Window
  */
 interface GameEntity {
 
+    var isSpawned: Boolean
+
     fun update(deltaTime: Float)
 
     fun draw()
@@ -17,4 +19,11 @@ interface GameEntity {
     fun isDisposed(): Boolean
 
     fun getZLevel(): Float
+
+    abstract fun preSpawn(spawnOptions: SpawnOptions)
+
+    fun spawn(spawnOptions: SpawnOptions) {
+        preSpawn(spawnOptions)
+        isSpawned = true
+    }
 }
