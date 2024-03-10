@@ -1,6 +1,7 @@
 package engine.core.game_object
 
-import java.awt.geom.Point2D
+import engine.core.geometry.Point2D
+
 
 sealed class SpawnOptions {
     abstract val pos: Point2D
