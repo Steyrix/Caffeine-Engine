@@ -11,9 +11,6 @@ import engine.core.window.Window
 abstract class DynamicGameEntity<P : SetOfParameters> : SingleGameEntity() {
 
     override var isSpawned: Boolean = false
-    open fun despawn() {
-        isSpawned = false
-    }
 
     override fun draw() {
         if (!isSpawned) return

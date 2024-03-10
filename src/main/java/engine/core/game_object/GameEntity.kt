@@ -26,4 +26,8 @@ interface GameEntity {
         preSpawn(spawnOptions)
         isSpawned = true
     }
+
+    fun despawn() {
+        isSpawned = false
+    }
 }
