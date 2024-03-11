@@ -34,4 +34,16 @@ open class GameContext {
 
         return out.sortedBy { it.getZLevel() }
     }
+
+    fun update(deltaTime: Float) {
+        val iterator = entities.iterator()
+        while (iterator.hasNext()) {
+            val item = iterator.next()
+            if (item.isDisposed()) {
+                iterator.remove()
+            } else {
+                item.update(deltaTime)
+            }
+        }
+    }
 }
