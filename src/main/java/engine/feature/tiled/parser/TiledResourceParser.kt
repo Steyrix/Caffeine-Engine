@@ -71,7 +71,7 @@ internal object TiledResourceParser {
             val primitiveProperties = convertToPrimitiveProperties(properties)
             val name = currentLayer.attributes.getNamedItem(PROPERTY_NAME).nodeValue
 
-            if (name.contains("obstacle")) {
+            if (name.contains("obstacle") || name.contains("shadows")) {
                 out.add(
                     ObjectsLayer(
                         name = name,
@@ -79,7 +79,8 @@ internal object TiledResourceParser {
                         heightInTiles = heightInTiles,
                         tileIdsData = data,
                         set = tileSet,
-                        transparencyUniformName = "transparency"
+                        transparencyUniformName = "transparency",
+                        isShadow = name.contains("shadows")
                     )
                 )
             } else {

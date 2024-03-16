@@ -11,7 +11,8 @@ class ObjectsLayer(
     override val heightInTiles: Int,
     override val set: TileSet,
     override val tileIdsData: MutableList<Int>,
-    transparencyUniformName: String
+    transparencyUniformName: String,
+    val isShadow: Boolean = false
 ) : CompositeEntity(), Layer {
 
     var objectShaderCreator: () -> Shader? = {
@@ -31,6 +32,8 @@ class ObjectsLayer(
     }
 
     fun processIntersection(index: Int) {
+        if (isShadow) return
+
         val target = objects.find {
             it.tileIndices.contains(index)
         }
