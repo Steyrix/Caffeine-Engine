@@ -17,7 +17,6 @@ import engine.feature.tiled.data.`object`.MapObjectEntity
 import engine.feature.tiled.data.`object`.MapObjectRetriever
 import engine.feature.tiled.parser.TiledResourceParser
 import engine.feature.tiled.traversing.TileGraph
-import engine.feature.tiled.traversing.TileTraverser
 import org.joml.Matrix4f
 import java.io.File
 
@@ -30,7 +29,7 @@ class TileMapEntity(
             0f, 0f, 0f, 0f, 0f
         )
 
-    private var graph: TileGraph? = null
+    var graph: TileGraph? = null
 
     val worldSize: Point2D
         get() {
@@ -39,7 +38,7 @@ class TileMapEntity(
             return Point2D(w, h)
         }
 
-    private var graphicalComponent: TileMap? = null
+    var graphicalComponent: TileMap? = null
         set(value) {
             value?.let {
                 graph = value.getGraph(
@@ -158,18 +157,6 @@ class TileMapEntity(
 
     fun addToCollisionContext(collisionContext: TiledCollisionContext) {
         collisionContext.addEntity(graphicalComponent as Entity, parameters)
-    }
-
-    fun createTraverser(
-        holderParams: SetOf2DParametersWithVelocity,
-        targetParams: SetOf2DParametersWithVelocity
-    ): TileTraverser {
-        return TileTraverser(
-            graph!!,
-            graphicalComponent!!,
-            holderParams,
-            targetParams
-        )
     }
 
     fun adjustParameters(
