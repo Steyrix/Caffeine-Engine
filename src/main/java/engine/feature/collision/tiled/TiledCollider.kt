@@ -3,16 +3,18 @@ package engine.feature.collision.tiled
 import engine.core.entity.Entity
 import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.collision.Collider
-import engine.feature.collision.CollisionContext
 import engine.core.geometry.Point2D
+import engine.core.update.SetOfParameters
+import engine.core.update.Updatable
 import engine.feature.tiled.data.TileMap
 
 private const val EMPTY_TILE_VALUE = 0
 
 class TiledCollider(
     override val holderEntity: Entity,
-    private val parameters: SetOf2DParametersWithVelocity
-) : Collider {
+    private val parameters: SetOfParameters,
+    private val map: TileMap
+) : Collider, Updatable {
 
     private var previousTilePos: Point2D = Point2D(parameters.x, parameters.y)
 
@@ -22,19 +24,20 @@ class TiledCollider(
     var isOutOfMap = false
         private set
 
+    var currentOccupiedTile: Int = -1
+
     override fun reactToCollision() {
         parameters.x = previousTilePos.x
         parameters.y = previousTilePos.y
-        parameters.velocityX = 0f
-        parameters.velocityY = 0f
+
+        if (parameters is SetOf2DParametersWithVelocity) {
+            parameters.velocityX = 0f
+            parameters.velocityY = 0f
+        }
     }
 
     override fun isColliding(entity: Entity): Boolean {
-        return if (entity is TileMap) {
-            isCollidingWithMapObjects(entity)
-        } else {
-            false
-        }
+        return isCollidingWithMapObjects(map)
     }
 
     private fun isCollidingWithMapObjects(map: TileMap): Boolean {
@@ -72,5 +75,11 @@ class TiledCollider(
         }
 
         return false
+    }
+
+    override fun update(deltaTime: Float) {
+        currentOccupiedTile = map.getTileIndex(
+            parameters.x, parameters.y
+        )
     }
 }
