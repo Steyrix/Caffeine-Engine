@@ -15,7 +15,7 @@ class BoundingBoxCollisionContext : CollisionContext {
 
     override val toRemove: MutableSet<Entity> = mutableSetOf()
 
-    override val collisions: MutableSet<Entity> = mutableSetOf()
+    override val collisions: MutableMap<Collider, MutableList<Entity>> = mutableMapOf()
 
     override fun addCollider(collider: Collider) {
         if (collider !is BoundingBoxCollider) return
