@@ -24,17 +24,15 @@ class TiledCollisionContext(
         if (collider !is TiledCollider) return
         super.addCollider(collider)
 
-        if (collider is TiledCollider) {
-            val toAddNonCollisionLayers = nonCollisionLayers.filter {
-                !collider.nonCollisionLayers.contains(it)
-            }
-
-            val toAddObjectLayers = objectLayers.filter {
-                !collider.objectLayers.contains(it)
-            }
-
-            collider.nonCollisionLayers.addAll(toAddNonCollisionLayers)
-            collider.objectLayers.addAll(toAddObjectLayers)
+        val toAddNonCollisionLayers = nonCollisionLayers.filter {
+            !collider.nonCollisionLayers.contains(it)
         }
+
+        val toAddObjectLayers = objectLayers.filter {
+            !collider.objectLayers.contains(it)
+        }
+
+        collider.nonCollisionLayers.addAll(toAddNonCollisionLayers)
+        collider.objectLayers.addAll(toAddObjectLayers)
     }
 }

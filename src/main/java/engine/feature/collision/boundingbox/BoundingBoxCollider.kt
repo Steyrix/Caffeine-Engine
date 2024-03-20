@@ -10,7 +10,6 @@ class BoundingBoxCollider(
     override val holderEntity: Entity,
     private val box: BoundingBox,
     private val parameters: SetOfParameters,
-    override var collisionContext: CollisionContext,
     private val onCollision: (BoundingBox, BoundingBox, SetOfParameters) -> Unit,
     private val onCollisionExitFunc: () -> Unit = {}
 ) : Collider {

@@ -11,8 +11,7 @@ private const val EMPTY_TILE_VALUE = 0
 
 class TiledCollider(
     override val holderEntity: Entity,
-    private val parameters: SetOf2DParametersWithVelocity,
-    override var collisionContext: CollisionContext
+    private val parameters: SetOf2DParametersWithVelocity
 ) : Collider {
 
     private var previousTilePos: Point2D = Point2D(parameters.x, parameters.y)
