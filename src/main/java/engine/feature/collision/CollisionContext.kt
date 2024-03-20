@@ -13,6 +13,8 @@ interface CollisionContext {
 
     val toRemove: MutableSet<Entity>
 
+    val collisions: MutableSet<Entity>
+
     fun addCollider(collider: Collider) {
         colliders.add(collider)
     }
@@ -47,9 +49,25 @@ interface CollisionContext {
                 if (entity != collider.holderEntity && collider.isColliding(entity)) {
                     collider.reactToCollision()
 
+                    collisions.add(entity)
                     if (entity is CollisionReactive) {
                         entity.reactToCollision()
                     }
+                }
+            }
+        }
+
+        checkExitCollisions()
+    }
+
+    private fun checkExitCollisions() {
+        colliders.forEach { collider ->
+            val iterator = collisions.iterator()
+            while (iterator.hasNext()) {
+                val collision = iterator.next()
+                if (!collider.isColliding(collision)) {
+                    iterator.remove()
+                    collider.onCollisionExit()
                 }
             }
         }

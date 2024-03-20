@@ -18,6 +18,8 @@ class TiledCollisionContext(
 
     override val toRemove: MutableSet<Entity> = mutableSetOf()
 
+    override val collisions: MutableSet<Entity> = mutableSetOf()
+
     override fun addCollider(collider: Collider) {
         if (collider !is TiledCollider) return
         super.addCollider(collider)
