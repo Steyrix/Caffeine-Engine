@@ -2,15 +2,16 @@ package engine.feature.collision.boundingbox
 
 import engine.core.entity.Entity
 import engine.core.update.SetOf2DParametersWithVelocity
+import engine.core.update.SetOfParameters
 import engine.feature.collision.Collider
 import engine.feature.collision.CollisionContext
 
 class BoundingBoxCollider(
     override val holderEntity: Entity,
     private val box: BoundingBox,
-    private val parameters: SetOf2DParametersWithVelocity,
+    private val parameters: SetOfParameters,
     override var collisionContext: CollisionContext,
-    private val onCollision: (BoundingBox, BoundingBox, SetOf2DParametersWithVelocity) -> Unit
+    private val onCollision: (BoundingBox, BoundingBox, SetOfParameters) -> Unit
 ) : Collider {
 
     private var intersectedBox: BoundingBox? = null
