@@ -8,7 +8,7 @@ import engine.feature.tiled.data.TileMap
 class TiledCollisionContext(
     private val nonCollisionLayers: MutableList<String> = mutableListOf(),
     private val objectLayers: MutableList<String> = mutableListOf(),
-    private val tileMap: TileMap
+    val tileMap: TileMap
 ) : CollisionContext<TiledCollider> {
 
     override val colliders: MutableSet<TiledCollider> = mutableSetOf()
