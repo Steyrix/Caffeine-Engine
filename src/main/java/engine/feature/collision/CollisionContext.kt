@@ -11,6 +11,8 @@ interface CollisionContext {
 
     val entitiesParams: MutableMap<Entity, SetOfParameters>
 
+    val toRemove: MutableSet<Entity>
+
     fun addCollider(collider: Collider) {
         colliders.add(collider)
     }
@@ -21,8 +23,7 @@ interface CollisionContext {
     }
 
     fun removeEntity(entity: Entity) {
-        entities.remove(entity)
-        entitiesParams.remove(entity)
+        toRemove.add(entity)
     }
 
     fun containsEntity(entity: Entity): Boolean {
@@ -35,7 +36,14 @@ interface CollisionContext {
 
     fun update() {
         colliders.forEach { collider ->
-            entities.forEach { entity ->
+            val iterator = entities.iterator()
+            while (iterator.hasNext()) {
+                val entity = iterator.next()
+                if (toRemove.contains(entity)) {
+                    iterator.remove()
+                    entitiesParams.remove(entity)
+                }
+
                 if (entity != collider.holderEntity && collider.isColliding(entity)) {
                     collider.reactToCollision()
 
