@@ -11,7 +11,8 @@ class BoundingBoxCollider(
     private val box: BoundingBox,
     private val parameters: SetOfParameters,
     override var collisionContext: CollisionContext,
-    private val onCollision: (BoundingBox, BoundingBox, SetOfParameters) -> Unit
+    private val onCollision: (BoundingBox, BoundingBox, SetOfParameters) -> Unit,
+    private val onCollisionExit: () -> Unit = {}
 ) : Collider {
 
     private var intersectedBox: BoundingBox? = null
