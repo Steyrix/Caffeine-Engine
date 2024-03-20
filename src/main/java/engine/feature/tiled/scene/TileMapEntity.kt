@@ -5,7 +5,6 @@ import engine.core.entity.Entity
 import engine.core.game_object.SingleGameEntity
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
-import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfParameters
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.collision.CollisionContext
@@ -33,12 +32,12 @@ class TileMapEntity(
 
     val worldSize: Point2D
         get() {
-            val w = graphicalComponent?.getWorldWidth() ?: 0f
-            val h = graphicalComponent?.getWorldHeight() ?: 0f
+            val w = mapComponent?.getWorldWidth() ?: 0f
+            val h = mapComponent?.getWorldHeight() ?: 0f
             return Point2D(w, h)
         }
 
-    var graphicalComponent: TileMap? = null
+    var mapComponent: TileMap? = null
         set(value) {
             value?.let {
                 graph = value.getGraph(
@@ -68,16 +67,16 @@ class TileMapEntity(
             rotationAngle = 0f
         )
 
-        graphicalComponent = getGraphicalComponent(renderProjection)
-        addComponent(graphicalComponent, parameters)
+        mapComponent = getGraphicalComponent(renderProjection)
+        addComponent(mapComponent, parameters)
 
         collisionContexts.forEach {
-            it.addEntity(graphicalComponent as Entity, parameters)
+            it.addEntity(mapComponent as Entity, parameters)
         }
 
-        graphicalComponent?.updateParameters(parameters)
+        mapComponent?.updateParameters(parameters)
         mapPresets.updateEvents.forEach {
-            val event = it.invoke(graphicalComponent!!)
+            val event = it.invoke(mapComponent!!)
             eventSet.add(event)
         }
 
@@ -156,7 +155,7 @@ class TileMapEntity(
     }
 
     fun addToCollisionContext(collisionContext: TiledCollisionContext) {
-        collisionContext.addEntity(graphicalComponent as Entity, parameters)
+        collisionContext.addEntity(mapComponent as Entity, parameters)
     }
 
     fun adjustParameters(
@@ -164,13 +163,13 @@ class TileMapEntity(
         params: List<SetOfParameters>
     ) {
         params.forEach {
-            it.xSize = (graphicalComponent?.getTileWidth() ?: 0f) * 3
-            it.ySize = (graphicalComponent?.getTileHeight() ?: 0f) * 3
+            it.xSize = (mapComponent?.getTileWidth() ?: 0f) * 3
+            it.ySize = (mapComponent?.getTileHeight() ?: 0f) * 3
         }
     }
 
     fun retrieveObjectEntities(): List<MapObjectEntity> {
-        graphicalComponent?.let {
+        mapComponent?.let {
             return MapObjectRetriever.getObjectsAsEntities(it)
         }
 

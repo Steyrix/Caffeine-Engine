@@ -36,7 +36,8 @@ abstract class TileMapScene(
 
             tiledCollisionContext = TiledCollisionContext(
                 it.retrieveNonCollisionLayers(),
-                it.retrieveObjectLayers()
+                it.retrieveObjectLayers(),
+                it.mapComponent!!
             )
             it.addToCollisionContext(tiledCollisionContext!!)
         }

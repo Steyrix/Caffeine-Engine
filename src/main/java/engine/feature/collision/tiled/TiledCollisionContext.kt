@@ -3,10 +3,12 @@ package engine.feature.collision.tiled
 import engine.core.entity.Entity
 import engine.core.update.SetOfParameters
 import engine.feature.collision.CollisionContext
+import engine.feature.tiled.data.TileMap
 
 class TiledCollisionContext(
     private val nonCollisionLayers: MutableList<String> = mutableListOf(),
-    private val objectLayers: MutableList<String> = mutableListOf()
+    private val objectLayers: MutableList<String> = mutableListOf(),
+    private val tileMap: TileMap
 ) : CollisionContext<TiledCollider> {
 
     override val colliders: MutableSet<TiledCollider> = mutableSetOf()
