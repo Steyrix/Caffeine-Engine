@@ -2,15 +2,14 @@ package engine.feature.collision.tiled
 
 import engine.core.entity.Entity
 import engine.core.update.SetOfParameters
-import engine.feature.collision.Collider
 import engine.feature.collision.CollisionContext
 
 class TiledCollisionContext(
     private val nonCollisionLayers: MutableList<String> = mutableListOf(),
     private val objectLayers: MutableList<String> = mutableListOf()
-) : CollisionContext {
+) : CollisionContext<TiledCollider> {
 
-    override val colliders: MutableSet<Collider> = mutableSetOf()
+    override val colliders: MutableSet<TiledCollider> = mutableSetOf()
 
     override val entities: MutableSet<Entity> = mutableSetOf()
 
@@ -18,10 +17,9 @@ class TiledCollisionContext(
 
     override val toRemove: MutableSet<Entity> = mutableSetOf()
 
-    override val collisions: MutableMap<Collider, MutableList<Entity>> = mutableMapOf()
+    override val collisions: MutableMap<TiledCollider, MutableList<Entity>> = mutableMapOf()
 
-    override fun addCollider(collider: Collider) {
-        if (collider !is TiledCollider) return
+    override fun addCollider(collider: TiledCollider) {
         super.addCollider(collider)
 
         val toAddNonCollisionLayers = nonCollisionLayers.filter {

@@ -3,9 +3,9 @@ package engine.feature.collision
 import engine.core.entity.Entity
 import engine.core.update.SetOfParameters
 
-interface CollisionContext {
+interface CollisionContext<T : Collider> {
 
-    val colliders: MutableSet<Collider>
+    val colliders: MutableSet<T>
 
     val entities: MutableSet<Entity>
 
@@ -13,9 +13,9 @@ interface CollisionContext {
 
     val toRemove: MutableSet<Entity>
 
-    val collisions: MutableMap<Collider, MutableList<Entity>>
+    val collisions: MutableMap<T, MutableList<Entity>>
 
-    fun addCollider(collider: Collider) {
+    fun addCollider(collider: T) {
         colliders.add(collider)
         collisions[collider] = mutableListOf()
     }

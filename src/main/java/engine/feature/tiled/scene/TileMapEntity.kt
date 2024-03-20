@@ -58,7 +58,7 @@ class TileMapEntity(
 
     fun init(
         renderProjection: Matrix4f,
-        collisionContexts: List<CollisionContext>
+        collisionContexts: List<CollisionContext<*>>
     ) {
         parameters = SetOfStatic2DParameters(
             x = 0f,
