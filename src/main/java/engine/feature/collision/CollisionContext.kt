@@ -45,14 +45,14 @@ interface CollisionContext {
                 if (toRemove.contains(entity)) {
                     iterator.remove()
                     entitiesParams.remove(entity)
-                }
+                } else {
+                    if (entity != collider.holderEntity && collider.isColliding(entity)) {
+                        collider.reactToCollision()
 
-                if (entity != collider.holderEntity && collider.isColliding(entity)) {
-                    collider.reactToCollision()
-
-                    collisions[collider]?.add(entity)
-                    if (entity is CollisionReactive) {
-                        entity.reactToCollision()
+                        collisions[collider]?.add(entity)
+                        if (entity is CollisionReactive) {
+                            entity.reactToCollision()
+                        }
                     }
                 }
             }
