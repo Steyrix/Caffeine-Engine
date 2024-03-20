@@ -12,7 +12,7 @@ class BoundingBoxCollider(
     private val parameters: SetOfParameters,
     override var collisionContext: CollisionContext,
     private val onCollision: (BoundingBox, BoundingBox, SetOfParameters) -> Unit,
-    private val onCollisionExit: () -> Unit = {}
+    private val onCollisionExitFunc: () -> Unit = {}
 ) : Collider {
 
     private var intersectedBox: BoundingBox? = null
@@ -21,6 +21,10 @@ class BoundingBoxCollider(
         intersectedBox?.let {
             onCollision(it, box, parameters)
         }
+    }
+
+    override fun onCollisionExit() {
+        onCollisionExitFunc.invoke()
     }
 
     override fun isColliding(entity: Entity): Boolean {
