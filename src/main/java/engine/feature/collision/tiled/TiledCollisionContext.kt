@@ -35,4 +35,14 @@ class TiledCollisionContext(
         collider.nonCollisionLayers.addAll(toAddNonCollisionLayers)
         collider.objectLayers.addAll(toAddObjectLayers)
     }
+
+    override fun update() {
+        val occupiedTiles = colliders.map { it.currentOccupiedTile }
+        colliders.forEach { collider ->
+            collider.tilesOccupiedByOtherEntities = occupiedTiles.filter {
+                it != collider.currentOccupiedTile
+            }
+        }
+        super.update()
+    }
 }

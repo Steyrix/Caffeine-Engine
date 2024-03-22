@@ -26,6 +26,8 @@ class TiledCollider(
 
     var currentOccupiedTile: Int = -1
 
+    var tilesOccupiedByOtherEntities: List<Int> = emptyList()
+
     override fun reactToCollision() {
         parameters.x = previousTilePos.x
         parameters.y = previousTilePos.y
@@ -68,7 +70,21 @@ class TiledCollider(
             else -> false
         }
 
-        if (isBottomColliding) {
+        if (isBottomColliding || isCollidingWithOccupiedTiles()) {
+            return true
+        } else {
+            previousTilePos = Point2D(parameters.x, parameters.y)
+        }
+
+        return false
+    }
+
+    private fun isCollidingWithOccupiedTiles(): Boolean {
+        val centerX = parameters.x + parameters.xSize / 2
+        val bottomY = parameters.y + parameters.ySize * 0.71f
+
+        val tile = map.getTileIndex(centerX, bottomY)
+        if (tilesOccupiedByOtherEntities.contains(tile)) {
             return true
         } else {
             previousTilePos = Point2D(parameters.x, parameters.y)
@@ -79,7 +95,7 @@ class TiledCollider(
 
     override fun update(deltaTime: Float) {
         currentOccupiedTile = map.getTileIndex(
-            parameters.x, parameters.y
+            parameters.x + parameters.xSize / 2, parameters.y + parameters.ySize / 2
         )
     }
 }
