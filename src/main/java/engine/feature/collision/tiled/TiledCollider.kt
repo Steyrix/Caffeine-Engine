@@ -95,7 +95,8 @@ class TiledCollider(
 
     override fun update(deltaTime: Float) {
         currentOccupiedTile = map.getTileIndex(
-            parameters.x + parameters.xSize / 2, parameters.y + parameters.ySize / 2
+            parameters.x + parameters.xSize / 2,
+            parameters.y + parameters.ySize / 2
         )
     }
 }
