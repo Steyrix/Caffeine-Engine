@@ -2,6 +2,7 @@ package engine.core.scene
 
 import engine.core.session.Session
 import engine.core.window.Window
+import engine.feature.interaction.broadcast.EventReceiver
 
 // TODO: fix relation between scene holder and session
 interface SceneHolder {
@@ -13,6 +14,8 @@ interface SceneHolder {
 
     val sceneMap: MutableMap<String, Scene>
     val sharedContext: GameContext
+
+    val sharedReceivers: MutableList<EventReceiver>
 
     var currentScene: Scene?
 
