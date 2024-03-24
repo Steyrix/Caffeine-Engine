@@ -5,6 +5,7 @@ import engine.core.scene.SceneHolder
 import engine.core.scene.SceneIntent
 import engine.core.session.Session
 import engine.core.session.SessionPresets
+import engine.feature.interaction.broadcast.EventReceiver
 import java.lang.Exception
 import kotlin.system.exitProcess
 
@@ -26,6 +27,7 @@ object Main {
                 override var screenHeight: Float = 1000f
                 override val sceneMap: MutableMap<String, Scene> = mutableMapOf()
                 override val sharedContext: GameContext = GameContext()
+                override val sharedReceivers: MutableList<EventReceiver> = mutableListOf()
                 override var currentScene: Scene? = null
 
                 override fun init(width: Float, height: Float) {}
