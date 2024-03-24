@@ -2,7 +2,6 @@ package engine.core.game_object
 
 import engine.core.window.Window
 
-// TODO disposing
 open class CompositeGameEntity : GameEntity {
 
     private val objectList = mutableListOf<GameEntity>()
