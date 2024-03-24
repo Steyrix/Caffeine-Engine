@@ -27,7 +27,6 @@ object Main {
                 override var screenHeight: Float = 1000f
                 override val sceneMap: MutableMap<String, Scene> = mutableMapOf()
                 override val sharedContext: GameContext = GameContext()
-                override val sharedReceivers: MutableList<EventReceiver> = mutableListOf()
                 override var currentScene: Scene? = null
 
                 override fun init(width: Float, height: Float) {}
