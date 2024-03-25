@@ -1,6 +1,7 @@
 package engine.feature.collision.boundingbox
 
 import engine.core.entity.CompositeEntity
+import engine.core.geometry.Point2D
 import engine.core.render.Drawable
 import engine.core.render.Model
 import engine.core.shader.Shader
@@ -86,5 +87,12 @@ class BoundingBox(
     fun forceUpdateSize(width: Float, height: Float) {
         xSize = width
         ySize = height
+    }
+
+    fun getActualPosition(): Point2D {
+        return Point2D(
+            x = params.x + xOffset,
+            y = params.y + yOffset
+        )
     }
 }
