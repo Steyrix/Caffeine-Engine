@@ -95,4 +95,11 @@ class BoundingBox(
             y = params.y + yOffset
         )
     }
+
+    fun getActualParameters(): SetOfStatic2DParameters {
+        return params.copy(
+            x = x + xOffset,
+            y = y + yOffset
+        )
+    }
 }
