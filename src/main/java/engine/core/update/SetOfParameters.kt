@@ -16,7 +16,20 @@ data class SetOfStatic2DParameters(
     override var xSize: Float,
     override var ySize: Float,
     override var rotationAngle: Float,
-) : SetOfParameters
+) : SetOfParameters {
+
+    companion object {
+        fun createEmpty(): SetOfStatic2DParameters {
+            return SetOfStatic2DParameters(
+                x = 0f,
+                y = 0f,
+                xSize = 0f,
+                ySize = 0f,
+                rotationAngle = 0f
+            )
+        }
+    }
+}
 
 data class SetOf2DParametersWithVelocity(
     override var x: Float,
