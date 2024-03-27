@@ -21,6 +21,8 @@ class TiledCollisionContext(
 
     override val collisions: MutableMap<TiledCollider, MutableList<Entity>> = mutableMapOf()
 
+    private val tilesWithIncreasedCost: MutableSet<Int> = mutableSetOf()
+
     override fun addCollider(collider: TiledCollider) {
         super.addCollider(collider)
 
@@ -38,11 +40,36 @@ class TiledCollisionContext(
 
     override fun update() {
         val occupiedTiles = colliders.map { it.currentOccupiedTile }
+
+        updateCosts(occupiedTiles)
+
+        tileMap.graph?.let {
+            occupiedTiles.forEach { tileIndex ->
+                if (!tilesWithIncreasedCost.contains(tileIndex)) {
+                    it.increaseCost(tileIndex)
+                    tilesWithIncreasedCost.add(tileIndex)
+                }
+            }
+        }
+
         colliders.forEach { collider ->
             collider.tilesOccupiedByOtherEntities = occupiedTiles.filter {
                 it != collider.currentOccupiedTile
             }
         }
         super.update()
+    }
+
+    private fun updateCosts(occupiedTiles: List<Int>) {
+        val iterator = tilesWithIncreasedCost.iterator()
+        while (iterator.hasNext()) {
+            val tile = iterator.next()
+            if (!occupiedTiles.contains(tile)) {
+                tileMap.graph?.let {
+                    it.decreaseCost(tile)
+                }
+                iterator.remove()
+            }
+        }
     }
 }
