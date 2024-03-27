@@ -1,7 +1,7 @@
 package engine.feature.tiled.traversing
 
 class TileGraph(
-    val nodes: Map<Int, List<Int>>
+    val nodes: Map<Int, MutableList<Int>>
 ) {
     companion object {
         const val DEFAULT_COST = 1
@@ -45,5 +45,12 @@ class TileGraph(
         }
 
         return out
+    }
+
+    fun remove(target: Int) {
+        distinct.remove(target)
+        nodes.forEach {
+            it.value.remove(target)
+        }
     }
 }
