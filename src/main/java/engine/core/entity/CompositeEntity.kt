@@ -24,17 +24,13 @@ open class CompositeEntity : Entity, Updatable {
 
     fun addComponent(
         component: Entity,
-        parameters: SetOfParameters
-    ) {
-        entitiesMap[component] = parameters
+        parameters: SetOfParameters? = null
+    ): CompositeEntity {
+        val def = parameters ?: SetOfStatic2DParameters.createEmpty()
+        entitiesMap[component] = def
         component.onAdd()
-    }
 
-    fun addComponent(
-        component: Entity
-    ) {
-        val value = SetOfStatic2DParameters.createEmpty()
-        entitiesMap[component] = value
+        return this
     }
 
     fun removeComponent(
