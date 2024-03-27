@@ -3,6 +3,7 @@ package engine.core.entity
 import engine.core.controllable.Controllable
 import engine.core.render.Drawable
 import engine.core.update.SetOfParameters
+import engine.core.update.SetOfStatic2DParameters
 import engine.core.update.Updatable
 import engine.core.update.update2D.Parameterized
 import engine.core.window.Window
@@ -15,7 +16,8 @@ import engine.feature.interaction.Interaction
  */
 open class CompositeEntity : Entity, Updatable {
 
-    protected val entitiesMap: HashMap<Entity, SetOfParameters> = hashMapOf()
+    private val entitiesMap: HashMap<Entity, SetOfParameters> = hashMapOf()
+
     private val toRemove = mutableSetOf<Entity>()
 
     var isDisposed = false
@@ -23,11 +25,16 @@ open class CompositeEntity : Entity, Updatable {
     fun addComponent(
         component: Entity,
         parameters: SetOfParameters
-    ): CompositeEntity {
+    ) {
         entitiesMap[component] = parameters
         component.onAdd()
+    }
 
-        return this
+    fun addComponent(
+        component: Entity
+    ) {
+        val value = SetOfStatic2DParameters.createEmpty()
+        entitiesMap[component] = value
     }
 
     fun removeComponent(
