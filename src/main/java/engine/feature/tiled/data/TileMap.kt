@@ -77,6 +77,8 @@ class TileMap(
     val tilesCount: Int
         get() = widthInTiles * heightInTiles
 
+    var graph: TileGraph? = null
+
     init {
         if (layers.isEmpty()) throw IllegalStateException("Cannot initialize map with empty list of layers")
 
@@ -126,13 +128,13 @@ class TileMap(
         return yTileNumber * widthInTiles + xTileNumber
     }
 
-    fun getGraph(
+    fun generateGraph(
         walkableLayers: List<String>,
         obstacleLayers: List<String>
-    ): TileGraph? {
+    ) {
         val walkable = walkableLayers.map { getLayerByName(it) }
         val obstacle = obstacleLayers.map { getLayerByName(it) }
-        return TileLayerInitializer.generateTileGraph(walkable, obstacle)
+        graph = TileLayerInitializer.generateTileGraph(walkable, obstacle)
     }
 
     fun setTileAt(layerName: String, posX: Float, posY: Float, tileId: Int) {

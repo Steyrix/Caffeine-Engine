@@ -28,8 +28,6 @@ class TileMapEntity(
             0f, 0f, 0f, 0f, 0f
         )
 
-    var graph: TileGraph? = null
-
     val worldSize: Point2D
         get() {
             val w = mapComponent?.getWorldWidth() ?: 0f
@@ -38,14 +36,14 @@ class TileMapEntity(
         }
 
     var mapComponent: TileMap? = null
-        set(value) {
+        private set(value) {
             value?.let {
-                graph = value.getGraph(
+                it.generateGraph(
                     mapPresets.walkingLayers,
                     mapPresets.obstacleLayers
                 )
 
-                field = value
+                field = it
             }
         }
 
