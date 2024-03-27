@@ -34,6 +34,10 @@ class TiledCollisionContext(
             !collider.objectLayers.contains(it)
         }
 
+        if(collider.shouldBlockTile) {
+            tileMap.graph?.remove(collider.currentOccupiedTile)
+        }
+
         collider.nonCollisionLayers.addAll(toAddNonCollisionLayers)
         collider.objectLayers.addAll(toAddObjectLayers)
     }

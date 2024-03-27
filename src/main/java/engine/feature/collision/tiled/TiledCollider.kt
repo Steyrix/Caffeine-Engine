@@ -13,7 +13,8 @@ private const val EMPTY_TILE_VALUE = 0
 class TiledCollider(
     override val holderEntity: Entity,
     private val parameters: SetOfParameters,
-    private val map: TileMap
+    private val map: TileMap,
+    val shouldBlockTile: Boolean = false
 ) : Collider, Updatable {
 
     private var previousTilePos: Point2D = Point2D(parameters.x, parameters.y)
@@ -24,7 +25,9 @@ class TiledCollider(
     var isOutOfMap = false
         private set
 
-    var currentOccupiedTile: Int = -1
+    var currentOccupiedTile: Int = map.getTileIndex(
+        parameters.x, parameters.y
+    )
 
     var tilesOccupiedByOtherEntities: List<Int> = emptyList()
 
