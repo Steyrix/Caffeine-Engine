@@ -166,15 +166,7 @@ object TileLayerInitializer {
         for (num in data.indices) {
             val pos = getPositionByTileIndex(num, widthInTiles)
             val verticesArray = genVertices(pos, set)
-
-            val tileNumber = data[num]
-
-            if (tileNumber != EMPTY_TILE_ID) {
-                allVertices.addAll(verticesArray.toList())
-            } else {
-                val vertices = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
-                allVertices.addAll(vertices.toList())
-            }
+            allVertices.addAll(verticesArray.toList())
         }
 
         return allVertices
