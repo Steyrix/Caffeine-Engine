@@ -47,8 +47,11 @@ object DefaultBufferData {
     )
 
     fun getColorBuffer(r: Float, g: Float, b: Float) = floatArrayOf(
-        r, g, b, r, g, b,
-        r, g, b, r, g, b,
-        r, g, b, r, g, b
+        r, g, b,
+        r, g, b,
+        r, g, b,
+        r, g, b,
+        r, g, b,
+        r, g, b
     )
 }
