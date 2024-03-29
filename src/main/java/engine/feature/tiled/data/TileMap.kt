@@ -202,4 +202,8 @@ class TileMap(
         }
         return out
     }
+
+    fun getVertices(): MutableList<Float> {
+        return TileLayerInitializer.genVerticesBuffer(layers[0].tileIdsData, set, widthInTiles)
+    }
 }
