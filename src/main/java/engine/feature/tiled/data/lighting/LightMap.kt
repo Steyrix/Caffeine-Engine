@@ -1,6 +1,7 @@
 package engine.feature.tiled.data.lighting
 
 import engine.core.geometry.Point2D
+import engine.core.render.Model
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.tiled.data.TileMap
 import org.joml.Vector2f
@@ -18,7 +19,7 @@ object LightMap {
         lightSources: List<SetOfStatic2DParameters>,
         lightSourceTargetRadius: Float = DEFAULT_RADIUS,
         lightIntensityCap: Float = INTENSITY_CAP
-    ): List<Float> {
+    ): Model {
         val lightPerTileList = mutableListOf<Float>()
 
         val tilesCount = tileMap.tilesCount
@@ -63,6 +64,20 @@ object LightMap {
             lightPerTileList.add(out)
         }
 
-        return lightPerTileList
+        val colorBuffer = convertToBuffer(lightPerTileList)
+        val verticesBuffer = tileMap.getVertices()
+
+        return Model(
+            dataArrays = listOf(verticesBuffer.toFloatArray(), colorBuffer),
+            verticesCount = verticesBuffer.size / 2
+        )
+    }
+
+    fun convertToBuffer(list: List<Float>): FloatArray {
+        val out = mutableListOf<Float>()
+        list.forEach {
+            out.addAll(listOf(it, it, it, it, it, it))
+        }
+        return out.toFloatArray()
     }
 }
