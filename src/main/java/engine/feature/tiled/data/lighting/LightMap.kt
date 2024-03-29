@@ -18,7 +18,7 @@ object LightMap {
         lightSources: List<SetOfStatic2DParameters>,
         lightSourceTargetRadius: Float = DEFAULT_RADIUS,
         lightIntensityCap: Float = INTENSITY_CAP
-    ) {
+    ): List<Float> {
         val lightPerTileList = mutableListOf<Float>()
 
         val tilesCount = tileMap.tilesCount
@@ -62,5 +62,7 @@ object LightMap {
 
             lightPerTileList.add(out)
         }
+
+        return lightPerTileList
     }
 }
