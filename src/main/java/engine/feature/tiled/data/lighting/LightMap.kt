@@ -12,7 +12,7 @@ import kotlin.math.min
 object LightMap {
 
     private const val AMBIENT_VALUE = 0.8f
-    private const val DEFAULT_RADIUS = 0.2f
+    private const val DEFAULT_RADIUS = 0.1f
     private const val INTENSITY_CAP = 1.5f
 
     fun generate(
@@ -43,20 +43,18 @@ object LightMap {
         val lightsVectors = lightSources.map {
             val horizontalDiff = -it.xSize / 2
             val verticalDiff = it.ySize
-            val x = ((it.x - horizontalDiff) / screenSizeX) * 2 - 1
-            val y = ((-it.y + verticalDiff) / screenSizeY) * 2 + 1
+            val x = (it.x - horizontalDiff) / screenSizeX * 2 - 1
+            val y = (-it.y + verticalDiff) / screenSizeY * 2 + 1
             Vector2f(x, y)
         }
 
-        var diffusionValue = 0f
-
         tileVectors.forEach { tile ->
-
+            var diffusionValue = 0f
             var totalIntensity = 0f
 
             lightsVectors.forEach { lightSource ->
                 val distance = lightSource.distance(tile)
-                var intensity = 1f / distance
+                val intensity = 1f / distance
 
                 if (distance < lightSourceTargetRadius) {
                     diffusionValue = 1f - abs(distance / lightSourceTargetRadius)
@@ -65,17 +63,17 @@ object LightMap {
                 if (totalIntensity == 0f) {
                     totalIntensity = intensity
                 } else {
-                    totalIntensity *= intensity
+                    totalIntensity += intensity
                 }
             }
-            if (totalIntensity > lightIntensityCap) {
+            if (totalIntensity >= lightIntensityCap) {
                 totalIntensity = lightIntensityCap
             }
-            if (totalIntensity < 1f) {
-                totalIntensity = 1f
+            if (totalIntensity <= AMBIENT_VALUE) {
+                totalIntensity = AMBIENT_VALUE
             }
 
-            val out = min(totalIntensity * diffusionValue + AMBIENT_VALUE, 1.0f)
+            val out = min(totalIntensity * diffusionValue + AMBIENT_VALUE, 1f)
 
             lightPerTileList.add(
                 Vector3f(out, out, out)
@@ -91,7 +89,7 @@ object LightMap {
         )
     }
 
-    fun convertToBuffer(list: List<Vector3f>): FloatArray {
+    private fun convertToBuffer(list: List<Vector3f>): FloatArray {
         val out = mutableListOf<Float>()
         list.forEach {
             out.addAll(
