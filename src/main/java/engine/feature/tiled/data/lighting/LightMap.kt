@@ -4,6 +4,7 @@ import engine.core.entity.CompositeEntity
 import engine.core.game_object.SingleGameEntity
 import engine.core.geometry.Point2D
 import engine.core.render.Model
+import engine.core.shader.Shader
 import engine.core.update.SetOfParameters
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.tiled.data.TileMap
@@ -120,7 +121,7 @@ class LightMap(
         }
     }
 
-    private var graphicalComponent: Model?
+    private var graphicalComponent: Model
 
     init {
         it = CompositeEntity()
@@ -134,8 +135,14 @@ class LightMap(
             screenSizeY
         )
 
-        graphicalComponent?.let { model ->
-            it?.addComponent(model, parameters)
-        }
+        it?.addComponent(graphicalComponent, parameters)
+    }
+
+    fun setShader(
+        shader: Shader,
+        initialUniformOperation: (Shader) -> Unit,
+    ) {
+        graphicalComponent.shader = shader
+        initialUniformOperation(shader)
     }
 }
