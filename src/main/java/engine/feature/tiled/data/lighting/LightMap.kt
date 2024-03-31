@@ -1,7 +1,6 @@
 package engine.feature.tiled.data.lighting
 
 import engine.core.entity.CompositeEntity
-import engine.core.game_object.SingleGameEntity
 import engine.core.geometry.Point2D
 import engine.core.render.Model
 import engine.core.shader.Shader
@@ -21,7 +20,7 @@ class LightMap(
     lightIntensityCap: Float = INTENSITY_CAP,
     screenSizeX: Float,
     screenSizeY: Float
-) : SingleGameEntity() {
+) : CompositeEntity() {
 
     companion object {
 
@@ -124,8 +123,6 @@ class LightMap(
     private var graphicalComponent: Model
 
     init {
-        it = CompositeEntity()
-
         graphicalComponent = getGraphicalComponent(
             tileMap,
             lightSources,
@@ -135,7 +132,7 @@ class LightMap(
             screenSizeY
         )
 
-        it?.addComponent(graphicalComponent, parameters)
+        addComponent(graphicalComponent, parameters)
     }
 
     fun setShader(
