@@ -41,7 +41,7 @@ open class CompositeEntity : Entity, Updatable {
         }
     }
 
-    fun draw() {
+    open fun draw() {
         this.getDrawablesFlatList().forEach {
             (it as? Drawable<*>)?.draw()
         }
