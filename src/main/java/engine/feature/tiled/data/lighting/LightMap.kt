@@ -9,6 +9,7 @@ import engine.core.update.SetOfStatic2DParameters
 import engine.feature.tiled.data.TileMap
 import org.joml.Vector2f
 import org.joml.Vector3f
+import org.lwjgl.opengl.GL11.*
 import kotlin.math.abs
 import kotlin.math.min
 
@@ -141,5 +142,11 @@ class LightMap(
     ) {
         graphicalComponent.shader = shader
         initialUniformOperation(shader)
+    }
+
+    override fun draw() {
+        glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA)
+        super.draw()
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
     }
 }
