@@ -1,12 +1,12 @@
 package engine.feature.tiled.data.lighting
 
-import engine.core.update.SetOfStatic2DParameters
+import engine.core.update.SetOfParameters
 
 interface LightSource {
-
-    val parameters: SetOfStatic2DParameters
 
     val radius: Float
 
     val intensityCap: Float
+
+    fun getParameters(): SetOfParameters
 }
