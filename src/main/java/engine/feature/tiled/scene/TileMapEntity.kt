@@ -12,7 +12,6 @@ import engine.core.geometry.Point2D
 import engine.core.loop.AccumulatedTimeEvent
 import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.tiled.data.TileMap
-import engine.feature.tiled.data.lighting.LightMap
 import engine.feature.tiled.data.`object`.MapObjectEntity
 import engine.feature.tiled.data.`object`.MapObjectRetriever
 import engine.feature.tiled.parser.TiledResourceParser
@@ -46,15 +45,6 @@ class TileMapEntity(
                 field = it
             }
         }
-
-    // TODO: automatically create light map on light sources update
-    var lightMap: LightMap? = null
-    set(value) {
-        field = value
-        field?.let { map ->
-            it?.addComponent(map, map.parameters)
-        }
-    }
 
     private val eventSet: MutableSet<AccumulatedTimeEvent> = mutableSetOf()
 
