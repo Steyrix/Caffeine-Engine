@@ -131,7 +131,10 @@ class LightMap(
             lightIntensityCap,
             screenSizeX,
             screenSizeY
-        )
+        ).apply {
+            preDrawFunc = { glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA) }
+            postDrawFunc = { glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA) }
+        }
 
         addComponent(graphicalComponent, parameters)
     }
@@ -142,11 +145,5 @@ class LightMap(
     ) {
         graphicalComponent.shader = shader
         initialUniformOperation(shader)
-    }
-
-    override fun draw() {
-        glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA)
-        super.draw()
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
     }
 }
