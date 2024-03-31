@@ -81,7 +81,11 @@ open class Model(
 
     var drawMode = GL_TRIANGLES
 
+    var preDrawFunc: (() -> Unit)? = null
+    var postDrawFunc: (() -> Unit)? = null
+
     override fun draw() {
+        preDrawFunc?.invoke()
         shader?.let {
             mesh.prepare()
             it.bind()
@@ -98,6 +102,7 @@ open class Model(
 
             applyStencil(model)
         }
+        postDrawFunc?.invoke()
     }
 
     fun dispose() {
