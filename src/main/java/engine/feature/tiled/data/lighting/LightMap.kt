@@ -48,9 +48,7 @@ class LightMap(
 
     fun setShader(
         shader: Shader,
-        initialUniformOperation: (Shader) -> Unit,
     ) {
         graphicalComponent.shader = shader
-        initialUniformOperation(shader)
     }
 }
