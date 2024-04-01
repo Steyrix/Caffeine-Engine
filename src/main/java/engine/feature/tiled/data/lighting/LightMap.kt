@@ -6,8 +6,10 @@ import engine.core.shader.Shader
 import engine.core.update.SetOfParameters
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.tiled.data.TileMap
+import org.joml.Matrix4f
 
 class LightMap(
+    matrix4f: Matrix4f,
     val parameters: SetOfParameters,
     tileMap: TileMap,
     lightSources: List<SetOfStatic2DParameters>,
@@ -22,7 +24,13 @@ class LightMap(
 
     init {
         val texture = DataGenerator.generateInstance(
-            tileMap, lightSources, lightSourceTargetRadius, lightIntensityCap, screenSizeX, screenSizeY
+            matrix4f,
+            tileMap,
+            lightSources,
+            lightSourceTargetRadius,
+            lightIntensityCap,
+            screenSizeX,
+            screenSizeY
         )
 
         graphicalComponent = Model(texture)

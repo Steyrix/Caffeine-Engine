@@ -7,6 +7,7 @@ import engine.core.shader.ShaderLoader
 import engine.core.texture.Texture2D
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.tiled.data.TileMap
+import org.joml.Matrix4f
 import org.joml.Vector2f
 import org.joml.Vector3f
 import kotlin.math.abs
@@ -109,14 +110,18 @@ internal object DataGenerator {
         return out.toFloatArray()
     }
 
-    private fun createShader(): Shader {
+    private fun createShader(projection: Matrix4f): Shader {
         return ShaderLoader.loadFromFile(
             this.javaClass.getResource("utilityVertexShader.glsl")!!.path,
             this.javaClass.getResource("utilityFragmentShader.glsl")!!.path
-        )
+        ).also {
+            it.bind()
+            it.setUniform(Shader.VAR_KEY_PROJECTION, projection)
+        }
     }
 
     fun generateInstance(
+        projection: Matrix4f,
         tileMap: TileMap,
         lightSources: List<SetOfStatic2DParameters>,
         lightSourceTargetRadius: Float = DEFAULT_RADIUS,
@@ -125,7 +130,7 @@ internal object DataGenerator {
         screenSizeY: Float
     ): Texture2D {
 
-        val shader = createShader()
+        val shader = createShader(projection)
 
         val model = getGraphicalComponent(
             tileMap,
