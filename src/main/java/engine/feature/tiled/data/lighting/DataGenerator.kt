@@ -13,8 +13,8 @@ import kotlin.math.min
 internal object DataGenerator {
 
     private const val AMBIENT_VALUE = 0.4f
-    private const val DEFAULT_RADIUS = 0.1f
-    private const val INTENSITY_CAP = 1.5f
+    internal const val DEFAULT_RADIUS = 0.1f
+    internal const val INTENSITY_CAP = 1.5f
 
     private fun getGraphicalComponent(
         tileMap: TileMap,
