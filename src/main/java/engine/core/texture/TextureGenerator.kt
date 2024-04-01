@@ -2,7 +2,6 @@ package engine.core.texture
 
 import engine.core.render.Model
 import org.lwjgl.opengl.GL32.*
-import java.nio.ByteBuffer
 
 internal object TextureGenerator {
 
@@ -14,22 +13,26 @@ internal object TextureGenerator {
         val frameBufferName: Int = glGenFramebuffers()
         glBindFramebuffer(GL_FRAMEBUFFER, frameBufferName)
 
-        val nullBuffer: ByteBuffer? = null
-
         val renderTexture: Int = glGenTextures()
         glBindTexture(GL_TEXTURE_2D, renderTexture)
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width.toInt(), height.toInt(), 0, GL_RGBA, GL_UNSIGNED_BYTE, nullBuffer)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width.toInt(), height.toInt(), 0, GL_RGBA, GL_UNSIGNED_BYTE, 0)
 
-        glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, renderTexture, 0)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
+        glBindTexture(GL_TEXTURE_2D, 0)
 
-        if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-            return -1
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, renderTexture, 0)
+        glDrawBuffers(GL_COLOR_ATTACHMENT0)
+
+        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+            throw IllegalStateException("Texture loading failed")
         }
+        println(glCheckFramebufferStatus(GL_FRAMEBUFFER))
 
-        glBindFramebuffer(GL_FRAMEBUFFER, frameBufferName)
+        glClear(GL_COLOR_BUFFER_BIT)
         model.draw()
         glBindFramebuffer(GL_FRAMEBUFFER, 0)
-        glBindTexture(GL_TEXTURE_2D, 0)
+        glClear(GL_COLOR_BUFFER_BIT)
 
         return renderTexture
     }
