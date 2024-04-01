@@ -3,7 +3,7 @@ package engine.core.texture
 import org.lwjgl.opengl.GL33C.*
 
 // TODO use specific import instead of wildcard
-interface Texture {
+internal interface Texture {
     val id: Int
     val bindTarget: Int
 

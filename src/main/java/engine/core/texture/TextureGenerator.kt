@@ -4,7 +4,7 @@ import engine.core.render.Model
 import org.lwjgl.opengl.GL32.*
 import java.nio.ByteBuffer
 
-object TextureGenerator {
+internal object TextureGenerator {
 
     fun createFromFBO(
         width: Float,

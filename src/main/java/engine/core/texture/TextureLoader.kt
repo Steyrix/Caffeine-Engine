@@ -5,13 +5,13 @@ import org.lwjgl.system.MemoryStack
 import java.nio.ByteBuffer
 import org.lwjgl.opengl.GL42C.*
 
-data class LoadingResult(
+internal data class LoadingResult(
     val width: Int,
     val height: Int,
     val buffer: ByteBuffer
 )
 
-object TextureLoader {
+internal object TextureLoader {
 
     private fun loadViaStbi(src: String): LoadingResult {
         val buff: ByteBuffer
