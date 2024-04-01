@@ -1,5 +1,6 @@
 package engine.core.texture
 
+import engine.core.render.Model
 import org.lwjgl.opengl.GL33C.*
 import java.awt.Dimension
 
@@ -14,6 +15,14 @@ class Texture2D(
     companion object {
         fun createInstance(src: String): Texture2D {
             return Texture2D(TextureLoader.loadTexture2D(src))
+        }
+
+        fun createInstance(
+            width: Float,
+            height: Float,
+            model: Model
+        ): Texture2D {
+            return Texture2D(TextureGenerator.createFromFBO(width, height, model))
         }
     }
 
