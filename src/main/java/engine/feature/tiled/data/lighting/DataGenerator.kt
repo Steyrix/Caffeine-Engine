@@ -2,6 +2,8 @@ package engine.feature.tiled.data.lighting
 
 import engine.core.geometry.Point2D
 import engine.core.render.Model
+import engine.core.shader.Shader
+import engine.core.shader.ShaderLoader
 import engine.core.texture.Texture2D
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.tiled.data.TileMap
@@ -107,6 +109,13 @@ internal object DataGenerator {
         return out.toFloatArray()
     }
 
+    private fun createShader(): Shader {
+        return ShaderLoader.loadFromFile(
+            this.javaClass.getResource("utilityVertexShader.glsl")!!.path,
+            this.javaClass.getResource("utilityFragmentShader.glsl")!!.path
+        )
+    }
+
     fun generateInstance(
         tileMap: TileMap,
         lightSources: List<SetOfStatic2DParameters>,
@@ -116,6 +125,8 @@ internal object DataGenerator {
         screenSizeY: Float
     ): Texture2D {
 
+        val shader = createShader()
+
         val model = getGraphicalComponent(
             tileMap,
             lightSources,
@@ -123,7 +134,9 @@ internal object DataGenerator {
             lightIntensityCap,
             screenSizeX,
             screenSizeY
-        )
+        ).apply {
+            this.shader = shader
+        }
 
         return Texture2D.createInstance(screenSizeX, screenSizeY, model)
     }
