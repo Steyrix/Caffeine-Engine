@@ -7,6 +7,7 @@ import engine.core.update.SetOfParameters
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.tiled.data.TileMap
 import org.joml.Matrix4f
+import org.lwjgl.opengl.GL11.*
 
 class LightMap(
     matrix4f: Matrix4f,
@@ -33,7 +34,14 @@ class LightMap(
             screenSizeY
         )
 
-        graphicalComponent = Model(texture)
+        graphicalComponent = Model(texture).apply {
+            preDrawFunc = {
+                glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA)
+            }
+            postDrawFunc = {
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+            }
+        }
 
         addComponent(graphicalComponent, parameters)
     }
