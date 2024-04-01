@@ -112,8 +112,8 @@ internal object DataGenerator {
 
     private fun createShader(projection: Matrix4f): Shader {
         return ShaderLoader.loadFromFile(
-            this.javaClass.getResource("utilityVertexShader.glsl")!!.path,
-            this.javaClass.getResource("utilityFragmentShader.glsl")!!.path
+            this.javaClass.getResource("/shaders/utilityVertexShader.glsl")!!.path,
+            this.javaClass.getResource("/shaders/utilityFragmentShader.glsl")!!.path
         ).also {
             it.bind()
             it.setUniform(Shader.VAR_KEY_PROJECTION, projection)
@@ -141,6 +141,11 @@ internal object DataGenerator {
             screenSizeY
         ).apply {
             this.shader = shader
+            x = 0f
+            y = 0f
+            xSize = screenSizeX
+            ySize = screenSizeY
+            rotationAngle = 0f
         }
 
         return Texture2D.createInstance(screenSizeX, screenSizeY, model)
