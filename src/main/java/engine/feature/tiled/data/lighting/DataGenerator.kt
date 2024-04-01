@@ -110,6 +110,7 @@ internal object DataGenerator {
         return out.toFloatArray()
     }
 
+    // TODO: pass from outside
     private fun createShader(projection: Matrix4f): Shader {
         return ShaderLoader.loadFromFile(
             this.javaClass.getResource("/shaders/utilityVertexShader.glsl")!!.path,
