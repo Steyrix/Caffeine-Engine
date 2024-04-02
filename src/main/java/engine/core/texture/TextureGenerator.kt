@@ -17,6 +17,8 @@ internal object TextureGenerator {
         glBindTexture(GL_TEXTURE_2D, renderTexture)
 
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width.toInt() * 2, height.toInt() * 2, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0)
+        glGenerateMipmap(GL_TEXTURE_2D)
+
         glBindTexture(GL_TEXTURE_2D, 0)
 
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, renderTexture, 0)

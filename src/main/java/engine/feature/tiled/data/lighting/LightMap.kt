@@ -35,6 +35,8 @@ class LightMap(
             screenSizeY
         )
 
+        texture.setParameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR)
+
         graphicalComponent = Model(
             texture = texture,
             uv = DefaultBufferData.getRectangleSectorVerticesReversed(1f, 1f)
