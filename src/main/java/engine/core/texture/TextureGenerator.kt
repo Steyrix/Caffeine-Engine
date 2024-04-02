@@ -6,6 +6,7 @@ import org.lwjgl.opengl.GL32.*
 internal object TextureGenerator {
 
     fun createFromFBO(
+        precision: Float,
         width: Float,
         height: Float,
         model: Model
@@ -16,7 +17,7 @@ internal object TextureGenerator {
         val renderTexture: Int = glGenTextures()
         glBindTexture(GL_TEXTURE_2D, renderTexture)
 
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width.toInt() * 2, height.toInt() * 2, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width.toInt(), height.toInt(), 0, GL_RGBA, GL_UNSIGNED_BYTE, 0)
         glGenerateMipmap(GL_TEXTURE_2D)
 
         glBindTexture(GL_TEXTURE_2D, 0)
@@ -28,9 +29,12 @@ internal object TextureGenerator {
             throw IllegalStateException("Texture loading failed")
         }
         println(glCheckFramebufferStatus(GL_FRAMEBUFFER))
-        glViewport(0, 0, width.toInt() * 2, height.toInt() * 2)
+        glViewport(0, 0, width.toInt(), height.toInt())
         glClear(GL_COLOR_BUFFER_BIT)
-        model.draw()
+        model.apply {
+            xSize = precision
+            ySize = precision
+        }.draw()
         glBindFramebuffer(GL_FRAMEBUFFER, 0)
         glViewport(0, 0, width.toInt() * 2, height.toInt() * 2)
         glClear(GL_COLOR_BUFFER_BIT)

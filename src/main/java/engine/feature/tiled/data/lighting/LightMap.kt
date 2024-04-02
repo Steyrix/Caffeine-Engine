@@ -11,6 +11,7 @@ import org.joml.Matrix4f
 import org.lwjgl.opengl.GL11.*
 
 class LightMap(
+    precision: Float,
     matrix4f: Matrix4f,
     val parameters: SetOfParameters,
     tileMap: TileMap,
@@ -26,6 +27,7 @@ class LightMap(
 
     init {
         val texture = DataGenerator.generateInstance(
+            precision,
             matrix4f,
             tileMap,
             lightSources,

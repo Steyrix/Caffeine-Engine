@@ -122,6 +122,7 @@ internal object DataGenerator {
     }
 
     fun generateInstance(
+        precision: Float,
         projection: Matrix4f,
         tileMap: TileMap,
         lightSources: List<SetOfStatic2DParameters>,
@@ -144,11 +145,11 @@ internal object DataGenerator {
             this.shader = shader
             x = 0f
             y = 0f
-            xSize = screenSizeX
-            ySize = screenSizeY
+            xSize = precision
+            ySize = precision
             rotationAngle = 0f
         }
 
-        return Texture2D.createInstance(screenSizeX, screenSizeY, model)
+        return Texture2D.createInstance(precision, screenSizeX, screenSizeY, model)
     }
 }
