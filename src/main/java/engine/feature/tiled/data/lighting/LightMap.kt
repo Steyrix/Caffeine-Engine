@@ -2,6 +2,7 @@ package engine.feature.tiled.data.lighting
 
 import engine.core.entity.CompositeEntity
 import engine.core.render.Model
+import engine.core.render.util.DefaultBufferData
 import engine.core.shader.Shader
 import engine.core.update.SetOfParameters
 import engine.core.update.SetOfStatic2DParameters
@@ -34,7 +35,10 @@ class LightMap(
             screenSizeY
         )
 
-        graphicalComponent = Model(texture).apply {
+        graphicalComponent = Model(
+            texture = texture,
+            uv = DefaultBufferData.getRectangleSectorVerticesReversed(1f, 1f)
+        ).apply {
             preDrawFunc = {
                 glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA)
             }

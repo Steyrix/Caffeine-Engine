@@ -30,6 +30,21 @@ object DefaultBufferData {
         sectorWidth, sectorHeight
     )
 
+    fun getRectangleSectorVerticesReversed(sectorWidth: Float = 1f, sectorHeight: Float = 1f) = floatArrayOf(
+//        0f, sectorHeight,
+//        0f, 0f,
+//        sectorWidth, 0f,
+//        0f, sectorHeight,
+//        sectorWidth, sectorHeight,
+//        0f, 0f
+        0f, sectorHeight,
+        sectorWidth, 0f,
+        0f, 0f,
+        0f, sectorHeight,
+        sectorWidth, sectorHeight,
+        sectorWidth, 0f
+    )
+
     fun getRectangleSectorBuffers(sectorWidth: Float = 1f, sectorHeight: Float = 1f) = listOf(
         RECTANGLE_INDICES,
         getRectangleSectorVertices(sectorWidth, sectorHeight)

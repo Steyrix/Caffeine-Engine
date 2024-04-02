@@ -15,8 +15,8 @@ internal object TextureGenerator {
 
         val renderTexture: Int = glGenTextures()
         glBindTexture(GL_TEXTURE_2D, renderTexture)
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width.toInt(), height.toInt(), 0, GL_RGBA, GL_UNSIGNED_BYTE, 0)
 
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width.toInt() * 2, height.toInt() * 2, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
         glBindTexture(GL_TEXTURE_2D, 0)
@@ -28,10 +28,11 @@ internal object TextureGenerator {
             throw IllegalStateException("Texture loading failed")
         }
         println(glCheckFramebufferStatus(GL_FRAMEBUFFER))
-
+        glViewport(0, 0, width.toInt() * 2, height.toInt() * 2)
         glClear(GL_COLOR_BUFFER_BIT)
         model.draw()
         glBindFramebuffer(GL_FRAMEBUFFER, 0)
+        glViewport(0, 0, width.toInt() * 2, height.toInt() * 2)
         glClear(GL_COLOR_BUFFER_BIT)
 
         return renderTexture
