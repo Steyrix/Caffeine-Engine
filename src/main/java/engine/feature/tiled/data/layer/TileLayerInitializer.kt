@@ -263,14 +263,19 @@ object TileLayerInitializer {
         return Point2D(x.toFloat(), y.toFloat())
     }
 
-    private fun genVertices(pos: Point2D, set: TileSet): FloatArray {
+    private fun genVertices(
+        pos: Point2D,
+        set: TileSet,
+        width: Float = set.relativeTileWidth,
+        height: Float = set.relativeTileHeight
+    ): FloatArray {
         return floatArrayOf(
-            set.relativeTileWidth * pos.x, set.relativeTileHeight * (pos.y + 1),
-            set.relativeTileWidth * (pos.x + 1), set.relativeTileHeight * pos.y,
-            set.relativeTileWidth * pos.x, set.relativeTileHeight * pos.y,
-            set.relativeTileWidth * pos.x, set.relativeTileHeight * (pos.y + 1),
-            set.relativeTileWidth * (pos.x + 1), set.relativeTileHeight * (pos.y + 1),
-            set.relativeTileWidth * (pos.x + 1), set.relativeTileHeight * pos.y
+            width * pos.x, height * (pos.y + 1),
+            width * (pos.x + 1), height * pos.y,
+            width * pos.x, height * pos.y,
+            width * pos.x, height * (pos.y + 1),
+            width * (pos.x + 1), height * (pos.y + 1),
+            width * (pos.x + 1), height * pos.y
         )
     }
 
