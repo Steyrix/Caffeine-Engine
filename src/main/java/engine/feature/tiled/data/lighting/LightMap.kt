@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11.*
 
 class LightMap(
     precision: Float,
-    matrix4f: Matrix4f,
+    projection: Matrix4f,
     val parameters: SetOfParameters,
     tileMap: TileMap,
     lightSources: List<SetOfStatic2DParameters>,
@@ -28,7 +28,7 @@ class LightMap(
     init {
         val texture = DataGenerator.generateInstance(
             precision,
-            matrix4f,
+            projection,
             tileMap,
             lightSources,
             lightSourceTargetRadius,
