@@ -22,6 +22,8 @@ open class GameContext {
 
     fun find(predicate: (GameEntity) -> Boolean) = entities.find { predicate(it) }
 
+    fun filter(predicate: (GameEntity) -> Boolean) = entities.filter(predicate)
+
     fun entitiesSortedByLevelZ(): List<GameEntity> {
         val out = mutableListOf<GameEntity>()
         entities.forEach {
