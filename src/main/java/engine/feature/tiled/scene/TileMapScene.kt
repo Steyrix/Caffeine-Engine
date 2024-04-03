@@ -66,7 +66,7 @@ abstract class TileMapScene(
         tiledMap?.mapComponent?.let {
 
             val litLightSources = mutableListOf<LightSource>()
-            litLightSources.addAll(lightSources.filter { it.isLit })
+            litLightSources.addAll(lightSources.filter { src -> src.isLit })
 
             return LightMap(
                 precision = LIGHTMAP_PRECISION,
