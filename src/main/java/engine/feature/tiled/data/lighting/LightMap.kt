@@ -5,7 +5,6 @@ import engine.core.render.Model
 import engine.core.render.util.DefaultBufferData
 import engine.core.shader.Shader
 import engine.core.update.SetOfParameters
-import engine.core.update.SetOfStatic2DParameters
 import engine.feature.tiled.data.TileMap
 import org.joml.Matrix4f
 import org.lwjgl.opengl.GL11.*
@@ -15,9 +14,7 @@ class LightMap(
     projection: Matrix4f,
     val parameters: SetOfParameters,
     tileMap: TileMap,
-    lightSources: List<SetOfStatic2DParameters>,
-    lightSourceTargetRadius: Float = DataGenerator.DEFAULT_RADIUS,
-    lightIntensityCap: Float = DataGenerator.INTENSITY_CAP,
+    lightSources: List<LightSource>,
     screenSizeX: Float,
     screenSizeY: Float
 ) : CompositeEntity() {
@@ -31,8 +28,6 @@ class LightMap(
             projection,
             tileMap,
             lightSources,
-            lightSourceTargetRadius,
-            lightIntensityCap,
             screenSizeX,
             screenSizeY
         )

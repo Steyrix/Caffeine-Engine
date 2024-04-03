@@ -5,7 +5,6 @@ import engine.core.render.Model
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
 import engine.core.texture.Texture2D
-import engine.core.update.SetOfStatic2DParameters
 import engine.feature.tiled.data.TileMap
 import org.joml.Matrix4f
 import org.joml.Vector2f
@@ -16,14 +15,11 @@ import kotlin.math.min
 internal object DataGenerator {
 
     private const val AMBIENT_VALUE = 0.4f
-    internal const val DEFAULT_RADIUS = 0.1f
-    internal const val INTENSITY_CAP = 1.5f
+    private const val INTENSITY_CAP = 1.5f
 
     private fun getGraphicalComponent(
         tileMap: TileMap,
-        lightSources: List<SetOfStatic2DParameters>,
-        lightSourceTargetRadius: Float = DEFAULT_RADIUS,
-        lightIntensityCap: Float = INTENSITY_CAP,
+        lightSources: List<LightSource>,
         screenSizeX: Float,
         screenSizeY: Float
     ): Model {
@@ -44,24 +40,18 @@ internal object DataGenerator {
             Vector2f(x, y)
         }
 
-        val lightsVectors = lightSources.map {
-            val horizontalDiff = -it.xSize / 2
-            val verticalDiff = it.ySize
-            val x = (it.x - horizontalDiff) / screenSizeX * 2 - 1
-            val y = (-it.y + verticalDiff) / screenSizeY * 2 + 1
-            Vector2f(x, y)
-        }
-
         tileVectors.forEach { tile ->
             var diffusionValue = 0f
             var totalIntensity = 0f
 
-            lightsVectors.forEach { lightSource ->
+            lightSources.forEach { src ->
+                val lightSource = getVector(src, screenSizeX, screenSizeY)
+
                 val distance = lightSource.distance(tile)
                 val intensity = 1f / distance
 
-                if (distance < lightSourceTargetRadius) {
-                    diffusionValue += 1f - abs(distance / lightSourceTargetRadius)
+                if (distance < src.radius) {
+                    diffusionValue += 1f - abs(distance / src.radius)
                 }
 
                 if (totalIntensity == 0f) {
@@ -70,9 +60,13 @@ internal object DataGenerator {
                     totalIntensity += intensity
                 }
             }
-            if (totalIntensity >= lightIntensityCap) {
-                totalIntensity = lightIntensityCap
+
+            // TODO: ref
+            val intensityCap = lightSources.minOfOrNull { it.intensityCap } ?: INTENSITY_CAP
+            if (totalIntensity >= intensityCap) {
+                totalIntensity = intensityCap
             }
+
             if (totalIntensity <= AMBIENT_VALUE) {
                 totalIntensity = AMBIENT_VALUE
             }
@@ -91,6 +85,18 @@ internal object DataGenerator {
             dataArrays = listOf(verticesBuffer.toFloatArray(), colorBuffer),
             verticesCount = verticesBuffer.size / 2
         )
+    }
+
+    private fun getVector(
+        it: LightSource,
+        screenSizeX: Float,
+        screenSizeY: Float
+    ): Vector2f {
+        val horizontalDiff = -it.getParameters().xSize / 2
+        val verticalDiff = it.getParameters().ySize
+        val x = (it.getParameters().x - horizontalDiff) / screenSizeX * 2 - 1
+        val y = (-it.getParameters().y + verticalDiff) / screenSizeY * 2 + 1
+        return Vector2f(x, y)
     }
 
     private fun convertToBuffer(list: List<Vector3f>): FloatArray {
@@ -125,9 +131,7 @@ internal object DataGenerator {
         precision: Float,
         projection: Matrix4f,
         tileMap: TileMap,
-        lightSources: List<SetOfStatic2DParameters>,
-        lightSourceTargetRadius: Float = DEFAULT_RADIUS,
-        lightIntensityCap: Float = INTENSITY_CAP,
+        lightSources: List<LightSource>,
         screenSizeX: Float,
         screenSizeY: Float
     ): Texture2D {
@@ -137,8 +141,6 @@ internal object DataGenerator {
         val model = getGraphicalComponent(
             tileMap,
             lightSources,
-            lightSourceTargetRadius,
-            lightIntensityCap,
             screenSizeX,
             screenSizeY
         ).apply {
