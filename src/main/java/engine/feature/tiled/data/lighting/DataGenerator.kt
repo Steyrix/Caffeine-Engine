@@ -61,7 +61,7 @@ internal object DataGenerator {
                 val intensity = 1f / distance
 
                 if (distance < lightSourceTargetRadius) {
-                    diffusionValue = 1f - abs(distance / lightSourceTargetRadius)
+                    diffusionValue += 1f - abs(distance / lightSourceTargetRadius)
                 }
 
                 if (totalIntensity == 0f) {
