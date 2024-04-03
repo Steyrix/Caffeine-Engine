@@ -8,5 +8,7 @@ interface LightSource {
 
     val intensityCap: Float
 
+    var isLit: Boolean
+
     fun getParameters(): SetOfParameters
 }
