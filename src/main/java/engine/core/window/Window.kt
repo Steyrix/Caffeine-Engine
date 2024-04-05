@@ -65,11 +65,7 @@ class Window(
 
         glfwSetMouseButtonCallback(window) { window: Long, key: Int, scancode: Int, action: Int ->
             if (key == GLFW_MOUSE_BUTTON_LEFT) {
-                if (action == GLFW_PRESS) {
-                    isDragging = true
-                } else if (action == GLFW_RELEASE) {
-                    isDragging = false
-                }
+                isDragging = !isDragging
             }
         }
 
