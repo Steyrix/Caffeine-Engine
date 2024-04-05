@@ -27,6 +27,8 @@ class Window(
     private val window: Long
     private var isResized: Boolean = false
 
+    var isDragging: Boolean = false
+
     init {
         GLFWErrorCallback.createPrint(System.err).set()
 
@@ -62,7 +64,13 @@ class Window(
         //glfwSetCursorPosCallback()
 
         glfwSetMouseButtonCallback(window) { window: Long, key: Int, scancode: Int, action: Int ->
-            // TODO: implement
+            if (key == GLFW_MOUSE_BUTTON_LEFT) {
+                if (action == GLFW_PRESS) {
+                    isDragging = true
+                } else if (action == GLFW_RELEASE) {
+                    isDragging = false
+                }
+            }
         }
 
         glfwSetFramebufferSizeCallback(window) { window, newWidth, newHeight ->
