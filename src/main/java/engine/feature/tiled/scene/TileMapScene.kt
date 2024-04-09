@@ -2,6 +2,7 @@ package engine.feature.tiled.scene
 
 import engine.core.game_object.GameEntity
 import engine.core.game_object.SpawnOptions
+import engine.core.geometry.Point2D
 import engine.core.scene.GameContext
 import engine.core.scene.Scene
 import engine.core.scene.SceneIntent
@@ -113,5 +114,9 @@ abstract class TileMapScene(
             lightSource.isLit = value
             lightMap = generateLightMap(renderProjection, lightSources)
         }
+    }
+
+    fun highlightTile(pos: Point2D) {
+        tiledMap?.mapComponent?.highlightTile(pos)
     }
 }

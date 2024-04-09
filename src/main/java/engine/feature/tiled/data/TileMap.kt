@@ -206,4 +206,8 @@ class TileMap(
     fun getVertices(): MutableList<Float> {
         return TileLayerInitializer.genVerticesBuffer(layers[0].tileIdsData, set, widthInTiles)
     }
+
+    fun highlightTile(pos: Point2D) {
+        val tileIndex = getTileIndex(pos.x, pos.y)
+    }
 }
