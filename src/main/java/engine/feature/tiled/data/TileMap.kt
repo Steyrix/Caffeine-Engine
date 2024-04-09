@@ -65,8 +65,8 @@ class TileMap(
     /*
         Represents the absolute size of tile in pixels
      */
-    private var absoluteTileWidth: Float = 0f
-    private var absoluteTileHeight: Float = 0f
+    var absoluteTileWidth: Float = 0f
+    var absoluteTileHeight: Float = 0f
 
     /*
         Represents the number of rows and columns of tiles in the map
@@ -205,9 +205,5 @@ class TileMap(
 
     fun getVertices(): MutableList<Float> {
         return TileLayerInitializer.genVerticesBuffer(layers[0].tileIdsData, set, widthInTiles)
-    }
-
-    fun highlightTile(pos: Point2D) {
-        val tileIndex = getTileIndex(pos.x, pos.y)
     }
 }

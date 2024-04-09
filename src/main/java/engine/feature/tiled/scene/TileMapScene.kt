@@ -3,11 +3,14 @@ package engine.feature.tiled.scene
 import engine.core.game_object.GameEntity
 import engine.core.game_object.SpawnOptions
 import engine.core.geometry.Point2D
+import engine.core.render.Model
+import engine.core.render.util.DefaultBufferData
 import engine.core.scene.GameContext
 import engine.core.scene.Scene
 import engine.core.scene.SceneIntent
 import engine.core.session.Session
 import engine.core.update.SetOfStatic2DParameters
+import engine.core.window.Window
 import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.tiled.data.lighting.LightMap
 import engine.feature.tiled.data.lighting.LightSource
@@ -31,6 +34,9 @@ abstract class TileMapScene(
     private val lightSources: MutableList<LightSource> = mutableListOf()
 
     protected var lightMap: LightMap? = null
+
+    private var tileHighlighting: Model? = null
+    private var highlightedTile: Int = -1
 
     override fun init(session: Session, intent: SceneIntent?) {
         super.init(session, intent)
@@ -58,6 +64,10 @@ abstract class TileMapScene(
             lightMap = generateLightMap(renderProjection, lightSources)
         }
 
+    }
+
+    override fun render(window: Window) {
+        tileHighlighting?.draw()
     }
 
     private fun generateLightMap(
@@ -116,7 +126,33 @@ abstract class TileMapScene(
         }
     }
 
-    fun highlightTile(pos: Point2D) {
-        tiledMap?.mapComponent?.highlightTile(pos)
+    fun highlightTile(pos: Point2D): Model? {
+        val map = tiledMap?.mapComponent ?: return null
+        val tileIndex = map.getTileIndex(pos.x, pos.y)
+        val startPos = map.getTilePosition(tileIndex)
+
+        if (tileIndex != highlightedTile) {
+            tileHighlighting = Model(
+                dataArrays = listOf(
+                    DefaultBufferData.RECTANGLE_INDICES,
+                    DefaultBufferData.getColorBuffer(0f, 0.5f, 0f)
+                ),
+                verticesCount = DefaultBufferData.RECTANGLE_INDICES.size / 2
+            ).apply {
+                x = startPos.x
+                y = startPos.y
+                xSize = map.absoluteTileWidth
+                ySize = map.absoluteTileHeight
+            }
+
+            highlightedTile = tileIndex
+        }
+
+        return tileHighlighting
+    }
+
+    fun disableHighlighting() {
+        highlightedTile = -1
+        tileHighlighting = null
     }
 }
