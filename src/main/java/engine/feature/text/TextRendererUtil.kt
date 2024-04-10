@@ -12,21 +12,16 @@ internal object TextRendererUtil {
         characters: List<Char>
     ): HashMap<Char, Point2D> {
         val out = HashMap<Char, Point2D>()
-        val charsCount: Int
-
-        val xStep: Int = (textureAtlas.getWidthF() / charSize.getWidth()).toInt()
-        val yStep: Int = (textureAtlas.getHeightF() / charSize.getHeight()).toInt()
-        charsCount = xStep * yStep
 
         var j = 0
         var k = 0
 
-        for (i in 0 until charsCount) {
+        for (element in characters) {
             if (charSize.getWidth() * j >= textureAtlas.getWidthF()) {
                 j = 0
                 k++
             }
-            out[characters[i]] = Point2D(j++.toFloat(), k.toFloat())
+            out[element] = Point2D(j++.toFloat(), k.toFloat())
         }
 
         return out
