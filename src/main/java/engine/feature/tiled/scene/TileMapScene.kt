@@ -124,7 +124,9 @@ abstract class TileMapScene(
 
     protected fun highlightTile(
         pos: Point2D,
-        highlightingShader: Shader
+        highlightingShader: Shader,
+        selectionHeight: Int = 1,
+        selectionWidth: Int = 1
     ) {
         val map = tiledMap?.mapComponent ?: return
         val tileIndex = map.getTileIndex(pos.x, pos.y)
@@ -140,8 +142,8 @@ abstract class TileMapScene(
             ).apply {
                 x = startPos.x
                 y = startPos.y
-                xSize = map.absoluteTileWidth
-                ySize = map.absoluteTileHeight
+                xSize = map.absoluteTileWidth * selectionWidth
+                ySize = map.absoluteTileHeight * selectionHeight
                 rotationAngle = 0f
                 shader = highlightingShader
             }
