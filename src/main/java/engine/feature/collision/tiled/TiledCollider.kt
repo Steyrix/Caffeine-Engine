@@ -104,9 +104,9 @@ class TiledCollider(
         val out = mutableListOf<Int>()
 
         for (j in 0 until  height) {
-            val tileY = parameters.y + map.absoluteTileHeight * j
+            val tileY = parameters.y + map.absoluteTileHeight * j + map.absoluteTileHeight / 2
             for (i in 0 until  width) {
-                val tileX = parameters.x + map.absoluteTileWidth * i
+                val tileX = parameters.x + map.absoluteTileWidth * i + map.absoluteTileWidth / 2
                 out.add(map.getTileIndex(tileX, tileY))
             }
         }
