@@ -103,10 +103,10 @@ class TiledCollider(
     private fun calculateOccupiedTiles(): MutableList<Int> {
         val out = mutableListOf<Int>()
 
-        for (j in 1 .. height) {
-            val tileY = (parameters.y + parameters.ySize / 2) * j
-            for (i in 1 .. width) {
-                val tileX = (parameters.x + parameters.xSize / 2) * i
+        for (j in 0 until  height) {
+            val tileY = parameters.y + map.absoluteTileHeight * j
+            for (i in 0 until  width) {
+                val tileX = parameters.x + map.absoluteTileWidth * i
                 out.add(map.getTileIndex(tileX, tileY))
             }
         }
