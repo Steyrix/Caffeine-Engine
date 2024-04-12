@@ -35,7 +35,9 @@ class TiledCollisionContext(
         }
 
         if(collider.shouldBlockTile) {
-            tileMap.graph?.remove(collider.currentOccupiedTile)
+            collider.currentOccupiedTiles.forEach {
+                tileMap.graph?.remove(it)
+            }
         }
 
         collider.nonCollisionLayers.addAll(toAddNonCollisionLayers)
@@ -43,7 +45,7 @@ class TiledCollisionContext(
     }
 
     override fun update() {
-        val occupiedTiles = colliders.map { it.currentOccupiedTile }
+        val occupiedTiles = colliders.map { it.currentOccupiedTiles }.flatten()
 
         updateCosts(occupiedTiles)
 
@@ -58,7 +60,7 @@ class TiledCollisionContext(
 
         colliders.forEach { collider ->
             collider.tilesOccupiedByOtherEntities = occupiedTiles.filter {
-                it != collider.currentOccupiedTile
+                !collider.currentOccupiedTiles.contains(it)
             }
         }
         super.update()

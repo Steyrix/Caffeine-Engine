@@ -14,7 +14,9 @@ class TiledCollider(
     override val holderEntity: Entity,
     private val parameters: SetOfParameters,
     private val map: TileMap,
-    val shouldBlockTile: Boolean = false
+    val shouldBlockTile: Boolean = false,
+    val width: Int = 0,
+    val height: Int = 0
 ) : Collider, Updatable {
 
     private var previousTilePos: Point2D = Point2D(parameters.x, parameters.y)
@@ -25,9 +27,7 @@ class TiledCollider(
     var isOutOfMap = false
         private set
 
-    var currentOccupiedTile: Int = map.getTileIndex(
-        parameters.x, parameters.y
-    )
+    var currentOccupiedTiles: MutableList<Int> = calculateOccupiedTiles()
 
     var tilesOccupiedByOtherEntities: List<Int> = emptyList()
 
@@ -97,9 +97,20 @@ class TiledCollider(
     }
 
     override fun update(deltaTime: Float) {
-        currentOccupiedTile = map.getTileIndex(
-            parameters.x + parameters.xSize / 2,
-            parameters.y + parameters.ySize / 2
-        )
+        currentOccupiedTiles = calculateOccupiedTiles()
+    }
+
+    private fun calculateOccupiedTiles(): MutableList<Int> {
+        val out = mutableListOf<Int>()
+
+        for (j in 1 .. height) {
+            val initialTile = map.getTileIndex(parameters.x, parameters.y * j)
+            out.add(initialTile)
+            for (i in 1 .. width) {
+                out.add(initialTile + i)
+            }
+        }
+
+        return out
     }
 }
