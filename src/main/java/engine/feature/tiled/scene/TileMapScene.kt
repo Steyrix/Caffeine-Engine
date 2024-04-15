@@ -1,5 +1,6 @@
 package engine.feature.tiled.scene
 
+import engine.core.entity.CompositeEntity
 import engine.core.game_object.GameEntity
 import engine.core.game_object.SpawnOptions
 import engine.core.geometry.Point2D
@@ -35,7 +36,8 @@ abstract class TileMapScene(
 
     protected var lightMap: LightMap? = null
 
-    protected var tileHighlighting: Model? = null
+    protected var tileHighlighting: CompositeEntity? = null
+    private val highlightParams = SetOfStatic2DParameters.createEmpty()
     private var highlightedTile: Int = -1
 
     override fun init(session: Session, intent: SceneIntent?) {
@@ -126,26 +128,35 @@ abstract class TileMapScene(
         pos: Point2D,
         highlightingShader: Shader,
         selectionHeight: Int = 1,
-        selectionWidth: Int = 1
+        selectionWidth: Int = 1,
+        extraModel: Model? = null
     ) {
         val map = tiledMap?.mapComponent ?: return
         val tileIndex = map.getTileIndex(pos.x, pos.y)
         val startPos = map.getTilePosition(tileIndex)
 
+        highlightParams.apply {
+            x = startPos.x
+            y = startPos.y
+            xSize = map.absoluteTileWidth * selectionWidth
+            ySize = map.absoluteTileHeight * selectionHeight
+        }
+
         if (tileIndex != highlightedTile) {
-            tileHighlighting = Model(
+            tileHighlighting = CompositeEntity()
+
+            val underlyingHighlight = Model(
                 dataArrays = listOf(
                     DefaultBufferData.RECTANGLE_INDICES,
                     DefaultBufferData.getColorBuffer(0f, 1f, 0f)
                 ),
                 verticesCount = DefaultBufferData.RECTANGLE_INDICES.size / 2
             ).apply {
-                x = startPos.x
-                y = startPos.y
-                xSize = map.absoluteTileWidth * selectionWidth
-                ySize = map.absoluteTileHeight * selectionHeight
-                rotationAngle = 0f
                 shader = highlightingShader
+            }
+            tileHighlighting?.addComponent(underlyingHighlight, highlightParams)
+            extraModel?.let {
+                tileHighlighting?.addComponent(it, highlightParams)
             }
 
             highlightedTile = tileIndex
