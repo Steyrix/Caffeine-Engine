@@ -154,11 +154,13 @@ abstract class TileMapScene(
             ).apply {
                 shader = highlightingShader
                 isPartOfWorldTranslation = false
+                zLevel = 0f
             }
             tileHighlighting?.addComponent(underlyingHighlight, highlightParams)
             extraModel?.let {
                 tileHighlighting?.addComponent(it, highlightParams)
                 it.isPartOfWorldTranslation = false
+                it.zLevel = 1f
             }
 
             highlightedTile = tileIndex
