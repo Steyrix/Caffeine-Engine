@@ -153,10 +153,12 @@ abstract class TileMapScene(
                 verticesCount = DefaultBufferData.RECTANGLE_INDICES.size / 2
             ).apply {
                 shader = highlightingShader
+                isPartOfWorldTranslation = false
             }
             tileHighlighting?.addComponent(underlyingHighlight, highlightParams)
             extraModel?.let {
                 tileHighlighting?.addComponent(it, highlightParams)
+                it.isPartOfWorldTranslation = false
             }
 
             highlightedTile = tileIndex
