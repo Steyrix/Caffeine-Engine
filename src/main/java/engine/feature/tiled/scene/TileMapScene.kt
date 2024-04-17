@@ -127,9 +127,7 @@ abstract class TileMapScene(
     protected fun highlightTile(
         pos: Point2D,
         highlightingShader: Shader,
-        selectionHeight: Int = 1,
-        selectionWidth: Int = 1,
-        extraModel: Model? = null
+        selection: TileSelectionData
     ) {
         val map = tiledMap?.mapComponent ?: return
         val tileIndex = map.getTileIndex(pos.x, pos.y)
@@ -138,8 +136,8 @@ abstract class TileMapScene(
         highlightParams.apply {
             x = startPos.x
             y = startPos.y
-            xSize = map.absoluteTileWidth * selectionWidth
-            ySize = map.absoluteTileHeight * selectionHeight
+            xSize = map.absoluteTileWidth * selection.width
+            ySize = map.absoluteTileHeight * selection.height
         }
 
         if (tileIndex != highlightedTile) {
@@ -157,7 +155,7 @@ abstract class TileMapScene(
                 zLevel = 0f
             }
             tileHighlighting?.addComponent(underlyingHighlight, highlightParams)
-            extraModel?.let {
+            selection.extraModel?.let {
                 tileHighlighting?.addComponent(it, highlightParams)
                 it.isPartOfWorldTranslation = false
                 it.zLevel = 1f
