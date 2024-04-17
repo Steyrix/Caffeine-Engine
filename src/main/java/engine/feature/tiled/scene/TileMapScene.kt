@@ -37,7 +37,7 @@ abstract class TileMapScene(
     protected var lightMap: LightMap? = null
 
     protected var tileHighlighting: CompositeEntity? = null
-    private val highlightParams = SetOfStatic2DParameters.createEmpty()
+    protected val highlightParams = SetOfStatic2DParameters.createEmpty()
     private var highlightedTile: Int = -1
 
     override fun init(session: Session, intent: SceneIntent?) {
