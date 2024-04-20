@@ -1,9 +1,8 @@
 package engine.feature.collision.boundingbox
 
-import engine.core.update.SetOfParameters
 import engine.core.geometry.Point2D
+import kotlin.math.abs
 
-// TODO handle offsets
 interface IntersectableBox {
 
     var x: Float
@@ -14,21 +13,27 @@ interface IntersectableBox {
     var ySize: Float
 
     val rightX: Float
-        get() = x + xSize
+        get() = x + xOffset + xSize
 
     val bottomY: Float
-        get() = y + ySize
+        get() = y + yOffset + ySize
+
+    val startX: Float
+        get() = x + xOffset
+
+    val startY: Float
+        get() = y + yOffset
 
     fun setPosition(nX: Float, nY: Float) {
         x = nX
         y = nY
     }
 
-    fun isIntersectingByX(anotherBox: BoundingBox) = x + xOffset < anotherBox.rightX && rightX > anotherBox.x
-    fun isIntersectingByX(params: SetOfParameters) = x + xOffset < (params.x + params.xSize) && rightX > params.x
+    fun isIntersectingByX(anotherBox: BoundingBox) =
+        abs((startX + xSize / 2) - (anotherBox.startX + anotherBox.xSize / 2)) * 2 < (xSize + anotherBox.xSize)
 
-    fun isIntersectingByY(anotherBox: BoundingBox) = y + yOffset < anotherBox.bottomY && bottomY > anotherBox.y
-    fun isIntersectingByY(params: SetOfParameters) = y + yOffset < (params.y + params.ySize) && bottomY > params.y
+    fun isIntersectingByY(anotherBox: BoundingBox) =
+        abs((startY + ySize / 2) - (anotherBox.startY + anotherBox.ySize / 2)) * 2 < (ySize + anotherBox.ySize)
 
     fun isIntersecting(anotherBox: BoundingBox) = isIntersectingByX(anotherBox) && isIntersectingByY(anotherBox)
 
@@ -36,8 +41,6 @@ interface IntersectableBox {
         val center = anotherBox.getCenterPoint()
         return center.x in x..(x + xSize) && center.y in y..(y + ySize)
     }
-
-    fun isIntersecting(params: SetOfParameters) = isIntersectingByX(params) && isIntersectingByY(params)
 
     fun isContainingEveryOf(points: List<Point2D>): Boolean {
         points.forEach {
