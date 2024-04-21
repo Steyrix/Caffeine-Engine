@@ -31,6 +31,8 @@ class TiledCollider(
 
     var tilesOccupiedByOtherEntities: List<Int> = emptyList()
 
+    var shouldCheckForOccupiedTiles = true
+
     override fun reactToCollision() {
         parameters.x = previousTilePos.x
         parameters.y = previousTilePos.y
@@ -83,6 +85,7 @@ class TiledCollider(
     }
 
     private fun isCollidingWithOccupiedTiles(): Boolean {
+        if (!shouldCheckForOccupiedTiles) return false
         val centerX = parameters.x + parameters.xSize / 2
         val bottomY = parameters.y + parameters.ySize * 0.71f
 
