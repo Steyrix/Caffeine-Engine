@@ -28,6 +28,7 @@ class Window(
     private var isResized: Boolean = false
 
     var isDragging: Boolean = false
+    var isItemDragged: Boolean = false
 
     init {
         GLFWErrorCallback.createPrint(System.err).set()
