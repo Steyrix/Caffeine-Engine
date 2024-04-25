@@ -35,6 +35,7 @@ abstract class TileMapScene(
     private val lightSources: MutableList<LightSource> = mutableListOf()
 
     protected var lightMap: LightMap? = null
+    protected var lightMapShader: Shader? = null
 
     protected var tileHighlighting: CompositeEntity? = null
     protected val highlightParams = SetOfStatic2DParameters.createEmpty()
@@ -91,7 +92,11 @@ abstract class TileMapScene(
                 lightSources = litLightSources,
                 screenSizeX = screenWidth,
                 screenSizeY = screenHeight
-            )
+            ).apply {
+                lightMapShader?.let { shader ->
+                    this.setShader(shader)
+                }
+            }
         } ?: throw IllegalStateException()
     }
 
@@ -168,5 +173,10 @@ abstract class TileMapScene(
     fun disableHighlighting() {
         highlightedTile = -1
         tileHighlighting = null
+    }
+
+    fun updateLightMapShader(shader: Shader) {
+        lightMap?.setShader(shader)
+        lightMapShader = shader
     }
 }
