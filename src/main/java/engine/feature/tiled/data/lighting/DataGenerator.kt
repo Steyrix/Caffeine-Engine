@@ -150,6 +150,7 @@ internal object DataGenerator {
             xSize = precision
             ySize = precision
             rotationAngle = 0f
+            isPartOfWorldTranslation = false
         }
 
         return Texture2D.createInstance(precision, screenSizeX, screenSizeY, model)
