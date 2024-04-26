@@ -28,7 +28,7 @@ internal object TextureGenerator {
         if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
             throw IllegalStateException("Texture loading failed")
         }
-        println(glCheckFramebufferStatus(GL_FRAMEBUFFER))
+
         glViewport(0, 0, width.toInt(), height.toInt())
         glClear(GL_COLOR_BUFFER_BIT)
         model.apply {
