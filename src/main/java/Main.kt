@@ -6,6 +6,8 @@ import engine.core.scene.SceneIntent
 import engine.core.session.Session
 import engine.core.session.SessionPresets
 import engine.feature.interaction.broadcast.EventReceiver
+import engine.feature.matrix.DefaultMatrixState
+import engine.feature.matrix.MatrixState
 import java.lang.Exception
 import kotlin.system.exitProcess
 
@@ -18,6 +20,7 @@ object Main {
             val mockObj = object : SceneHolder {
                 override val session: Session = object : Session() {
                     override val persistentGameEntities: MutableList<GameEntity> = mutableListOf()
+                    override val matrixState: MatrixState = DefaultMatrixState
                     override fun init(presets: SessionPresets) {}
                     override fun getPersistentObjects(): List<GameEntity> {
                         return emptyList()

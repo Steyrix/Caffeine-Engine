@@ -7,6 +7,7 @@ import engine.core.shader.Shader
 import engine.core.update.SetOfParameters
 import engine.feature.tiled.data.TileMap
 import org.joml.Matrix4f
+import org.joml.Vector2f
 import org.lwjgl.opengl.GL11.*
 
 class LightMap(
@@ -16,7 +17,8 @@ class LightMap(
     tileMap: TileMap,
     lightSources: List<LightSource>,
     screenSizeX: Float,
-    screenSizeY: Float
+    screenSizeY: Float,
+    translation: Vector2f
 ) : CompositeEntity() {
 
 
@@ -29,7 +31,8 @@ class LightMap(
             tileMap,
             lightSources,
             screenSizeX,
-            screenSizeY
+            screenSizeY,
+            translation
         )
 
         texture.setParameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR)

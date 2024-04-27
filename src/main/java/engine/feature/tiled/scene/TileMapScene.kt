@@ -13,9 +13,11 @@ import engine.core.session.Session
 import engine.core.shader.Shader
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.collision.tiled.TiledCollisionContext
+import engine.feature.matrix.MatrixState
 import engine.feature.tiled.data.lighting.LightMap
 import engine.feature.tiled.data.lighting.LightSource
 import org.joml.Matrix4f
+import org.joml.Vector2f
 
 abstract class TileMapScene(
     projection: Matrix4f
@@ -41,6 +43,8 @@ abstract class TileMapScene(
     protected val highlightParams = SetOfStatic2DParameters.createEmpty()
     private var highlightedTile: Int = -1
 
+    private var matrixState: MatrixState? = null
+
     override fun init(session: Session, intent: SceneIntent?) {
         super.init(session, intent)
 
@@ -63,10 +67,11 @@ abstract class TileMapScene(
             it.addToCollisionContext(tiledCollisionContext!!)
         }
 
+        matrixState = session.matrixState
+
         if (lightSources.isNotEmpty()) {
             lightMap = generateLightMap(renderProjection, lightSources)
         }
-
     }
 
     private fun generateLightMap(
@@ -91,7 +96,9 @@ abstract class TileMapScene(
                 tileMap = it,
                 lightSources = litLightSources,
                 screenSizeX = screenWidth,
-                screenSizeY = screenHeight
+                screenSizeY = screenHeight,
+                translation = matrixState?.worldTranslation ?: Vector2f(0f, 0f)
+
             ).apply {
                 lightMapShader?.let { shader ->
                     this.setShader(shader)
