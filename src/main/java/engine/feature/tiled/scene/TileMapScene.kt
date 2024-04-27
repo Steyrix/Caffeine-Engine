@@ -23,9 +23,7 @@ abstract class TileMapScene(
     projection: Matrix4f
 ) : Scene {
 
-    companion object {
-        private const val LIGHTMAP_PRECISION = 10f
-    }
+    protected var lightmapPrecision = 10f
 
     override val renderProjection = projection
 
@@ -84,13 +82,13 @@ abstract class TileMapScene(
             litLightSources.addAll(lightSources.filter { src -> src.isLit })
 
             return LightMap(
-                precision = LIGHTMAP_PRECISION,
+                precision = lightmapPrecision,
                 projection = renderProjection,
                 parameters = SetOfStatic2DParameters(
                     x = 0f,
                     y = 0f,
-                    xSize = screenWidth * (screenWidth / LIGHTMAP_PRECISION),
-                    ySize = screenHeight * (screenHeight / LIGHTMAP_PRECISION),
+                    xSize = screenWidth * (screenWidth / lightmapPrecision),
+                    ySize = screenHeight * (screenHeight / lightmapPrecision),
                     rotationAngle = 0f
                 ),
                 tileMap = it,
