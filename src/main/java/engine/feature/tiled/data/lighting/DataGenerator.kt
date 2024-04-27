@@ -36,9 +36,9 @@ internal object DataGenerator {
         }
 
         val tileVectors = tilePositions.map {
-            val x = it.x / screenSizeX * 2 - 1
-            val y = -it.y / screenSizeY * 2 + 1
-            Vector2f(x + translation.x, y + translation.y)
+            val x = (it.x - translation.x) / screenSizeX * 2 - 1
+            val y = (-it.y + translation.y) / screenSizeY * 2 + 1
+            Vector2f(x, y)
         }
 
         tileVectors.forEach { tile ->
@@ -96,9 +96,9 @@ internal object DataGenerator {
     ): Vector2f {
         val horizontalDiff = -it.getParameters().xSize / 2
         val verticalDiff = it.getParameters().ySize
-        val x = (it.getParameters().x - horizontalDiff) / screenSizeX * 2 - 1
-        val y = (-it.getParameters().y + verticalDiff) / screenSizeY * 2 + 1
-        return Vector2f(x + translation.x, y + translation.y)
+        val x = (it.getParameters().x - horizontalDiff - translation.x) / screenSizeX * 2 - 1
+        val y = (-it.getParameters().y + verticalDiff + translation.y) / screenSizeY * 2 + 1
+        return Vector2f(x, y)
     }
 
     private fun convertToBuffer(list: List<Vector3f>): FloatArray {
