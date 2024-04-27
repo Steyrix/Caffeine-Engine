@@ -24,7 +24,7 @@ abstract class TileMapScene(
 ) : Scene {
 
     companion object {
-        private const val LIGHTMAP_PRECISION = 50f
+        private const val LIGHTMAP_PRECISION = 10f
     }
 
     override val renderProjection = projection
