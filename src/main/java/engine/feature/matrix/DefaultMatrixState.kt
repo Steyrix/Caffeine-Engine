@@ -2,9 +2,18 @@ package engine.feature.matrix
 
 import engine.core.update.SetOfStatic2DParameters
 import org.joml.Matrix4f
+import org.joml.Vector2f
 import org.joml.Vector3f
 
 object DefaultMatrixState : MatrixState {
+
+    override val worldTranslation = Vector2f(0f, 0f)
+    override val tempTranslation = Vector2f(0f, 0f)
+
+    override var worldWidth = 0f
+    override var worldHeight = 0f
+    override var screenWidth = 0f
+    override var screenHeight = 0f
 
     override val nonTranslatedParams: MutableList<SetOfStatic2DParameters> = mutableListOf()
 
