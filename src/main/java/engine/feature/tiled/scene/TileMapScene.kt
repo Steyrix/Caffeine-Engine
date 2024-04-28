@@ -95,8 +95,6 @@ abstract class TileMapScene(
                 lightSources = litLightSources,
                 screenSizeX = screenWidth,
                 screenSizeY = screenHeight,
-                translation = matrixState?.worldTranslation ?: Vector2f(0f, 0f)
-
             ).apply {
                 lightMapShader?.let { shader ->
                     this.setShader(shader)

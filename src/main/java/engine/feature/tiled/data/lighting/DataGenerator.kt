@@ -22,7 +22,6 @@ internal object DataGenerator {
         lightSources: List<LightSource>,
         screenSizeX: Float,
         screenSizeY: Float,
-        translation: Vector2f
     ): Model {
         val lightPerTileList = mutableListOf<Vector3f>()
 
@@ -31,13 +30,16 @@ internal object DataGenerator {
 
         for (index in 0 until tilesCount) {
             tilePositions.add(
-                tileMap.getTilePosition(index)
+                tileMap.getTilePosition(index).apply {
+                    x += tileMap.getTileWidth() / 2
+                    y += tileMap.getTileHeight() / 2
+                }
             )
         }
 
         val tileVectors = tilePositions.map {
-            val x = (it.x - translation.x) / screenSizeX * 2 - 1
-            val y = (-it.y + translation.y) / screenSizeY * 2 + 1
+            val x = it.x / screenSizeX * 2 - 1
+            val y = it.y / screenSizeY * 2 - 1
             Vector2f(x, y)
         }
 
@@ -46,7 +48,7 @@ internal object DataGenerator {
             var totalIntensity = 0f
 
             lightSources.forEach { src ->
-                val lightSource = getVector(src, screenSizeX, screenSizeY, translation)
+                val lightSource = getVector(src, screenSizeX, screenSizeY)
 
                 val distance = lightSource.distance(tile)
                 val intensity = 1f / distance
@@ -92,12 +94,11 @@ internal object DataGenerator {
         it: LightSource,
         screenSizeX: Float,
         screenSizeY: Float,
-        translation: Vector2f
     ): Vector2f {
         val horizontalDiff = -it.getParameters().xSize / 2
         val verticalDiff = it.getParameters().ySize
-        val x = (it.getParameters().x - horizontalDiff - translation.x) / screenSizeX * 2 - 1
-        val y = (-it.getParameters().y + verticalDiff + translation.y) / screenSizeY * 2 + 1
+        val x = (it.getParameters().x - horizontalDiff) / screenSizeX * 2 - 1
+        val y = (it.getParameters().y - verticalDiff) / screenSizeY * 2 - 1
         return Vector2f(x, y)
     }
 
@@ -135,8 +136,7 @@ internal object DataGenerator {
         tileMap: TileMap,
         lightSources: List<LightSource>,
         screenSizeX: Float,
-        screenSizeY: Float,
-        translation: Vector2f
+        screenSizeY: Float
     ): Texture2D {
 
         val shader = createShader(projection)
@@ -145,8 +145,7 @@ internal object DataGenerator {
             tileMap,
             lightSources,
             screenSizeX,
-            screenSizeY,
-            translation
+            screenSizeY
         ).apply {
             this.shader = shader
             x = 0f
