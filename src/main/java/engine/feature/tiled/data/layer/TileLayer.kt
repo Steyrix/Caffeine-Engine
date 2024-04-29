@@ -29,6 +29,8 @@ class TileLayer(
             debugGraphicalComponent.shader = value
         }
 
+    var isDebugMeshEnabled: Boolean = false
+
     private val graphicalComponent: Model = TileLayerInitializer.genLayerModel(
         tileIdsData, set, widthInTiles
     )
@@ -42,7 +44,9 @@ class TileLayer(
 
     init {
         addComponent(graphicalComponent, paramsKey)
-        //addComponent(debugGraphicalComponent, paramsKey)
+        if (isDebugMeshEnabled) {
+            addComponent(debugGraphicalComponent, paramsKey)
+        }
     }
 
     override fun updateParameters(parameters: SetOfStatic2DParameters) {
