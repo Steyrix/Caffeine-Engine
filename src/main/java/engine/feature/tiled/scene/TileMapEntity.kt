@@ -44,6 +44,12 @@ class TileMapEntity(
 
     private val eventSet: MutableSet<AccumulatedTimeEvent> = mutableSetOf()
 
+    var isDebugMeshEnabled: Boolean = false
+    set(value) {
+        mapComponent?.isDebugMeshEnabled = value
+        field = value
+    }
+
     init {
         it = CompositeEntity()
     }
