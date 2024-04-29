@@ -45,6 +45,16 @@ class TileMap(
             }
         }
 
+    var isDebugMeshEnabled: Boolean = false
+    set(value) {
+        field = value
+        layers.forEach {
+            if (it is TileLayer) {
+                it.isDebugMeshEnabled = value
+            }
+        }
+    }
+
     override var zLevel: Float = 0f
 
     private val set: TileSet
