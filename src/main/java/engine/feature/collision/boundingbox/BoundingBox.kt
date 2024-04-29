@@ -68,10 +68,6 @@ class BoundingBox(
         field = value
     }
 
-    init {
-        addComponent(model, params)
-    }
-
     override fun updateParameters(parameters: SetOfParameters) {
         parameters.let {
             x = it.x + xOffset
