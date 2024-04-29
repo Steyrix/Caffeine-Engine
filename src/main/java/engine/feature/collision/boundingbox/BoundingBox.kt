@@ -58,6 +58,16 @@ class BoundingBox(
         rotationAngle
     )
 
+    var isDebugMeshEnabled: Boolean = false
+    set(value) {
+        if (value) {
+            addComponent(model, params)
+        } else {
+            removeComponent(model)
+        }
+        field = value
+    }
+
     init {
         addComponent(model, params)
     }
