@@ -17,8 +17,8 @@ import engine.feature.matrix.MatrixState
 import engine.feature.tiled.data.lighting.LightMap
 import engine.feature.tiled.data.lighting.LightSource
 import org.joml.Matrix4f
-import org.joml.Vector2f
 
+// TODO separate
 abstract class TileMapScene(
     projection: Matrix4f
 ) : Scene {
