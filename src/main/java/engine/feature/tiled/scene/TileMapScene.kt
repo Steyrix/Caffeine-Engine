@@ -14,28 +14,24 @@ import engine.core.shader.Shader
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.matrix.MatrixState
-import engine.feature.tiled.data.lighting.LightMap
-import engine.feature.tiled.data.lighting.LightSource
+import engine.feature.tiled.data.TileMap
 import org.joml.Matrix4f
 
 // TODO separate
 abstract class TileMapScene(
     projection: Matrix4f
-) : Scene {
-
-    protected var lightmapPrecision = 10f
+) : Scene, LightMapHolder() {
 
     override val renderProjection = projection
+    override val lightMapProjection = projection
+    override var lightMapScreenWidth = 0f
+    override var lightMapScreenHeight = 0f
+    override var holderMap: TileMap? = null
 
     override val context: GameContext = GameContext.getInstance()
 
     protected var tiledCollisionContext: TiledCollisionContext? = null
     protected var tiledMap: TileMapEntity? = null
-
-    private val lightSources: MutableList<LightSource> = mutableListOf()
-
-    protected var lightMap: LightMap? = null
-    protected var lightMapShader: Shader? = null
 
     protected var tileHighlighting: CompositeEntity? = null
     protected val highlightParams = SetOfStatic2DParameters.createEmpty()
@@ -52,7 +48,11 @@ abstract class TileMapScene(
             screenHeight
         )
 
+        lightMapScreenWidth = screenWidth
+        lightMapScreenHeight = screenHeight
+
         tiledMap?.let {
+            holderMap = it.mapComponent
             context.add(it)
             val objects = it.retrieveObjectEntities()
             context.addAll(objects)
@@ -66,41 +66,6 @@ abstract class TileMapScene(
         }
 
         matrixState = session.matrixState
-
-        if (lightSources.isNotEmpty()) {
-            lightMap = generateLightMap(renderProjection, lightSources)
-        }
-    }
-
-    private fun generateLightMap(
-        renderProjection: Matrix4f,
-        lightSources: MutableList<LightSource>
-    ): LightMap {
-        tiledMap?.mapComponent?.let {
-
-            val litLightSources = mutableListOf<LightSource>()
-            litLightSources.addAll(lightSources.filter { src -> src.isLit })
-
-            return LightMap(
-                precision = lightmapPrecision,
-                projection = renderProjection,
-                parameters = SetOfStatic2DParameters(
-                    x = 0f,
-                    y = 0f,
-                    xSize = screenWidth * (screenWidth / lightmapPrecision),
-                    ySize = screenHeight * (screenHeight / lightmapPrecision),
-                    rotationAngle = 0f
-                ),
-                tileMap = it,
-                lightSources = litLightSources,
-                screenSizeX = screenWidth,
-                screenSizeY = screenHeight,
-            ).apply {
-                lightMapShader?.let { shader ->
-                    this.setShader(shader)
-                }
-            }
-        } ?: throw IllegalStateException()
     }
 
     abstract fun initTileMap(
@@ -110,27 +75,6 @@ abstract class TileMapScene(
     ): TileMapEntity
 
     fun spawn(entity: GameEntity, spawnOptions: SpawnOptions) {}
-
-    fun addLightSource(lightSource: LightSource) {
-        lightSources.add(lightSource)
-        if (lightSource.isLit) {
-            lightMap = generateLightMap(renderProjection, lightSources)
-        }
-    }
-
-    fun removeLightSource(lightSource: LightSource) {
-        lightSources.remove(lightSource)
-        if (lightSource.isLit) {
-            lightMap = generateLightMap(renderProjection, lightSources)
-        }
-    }
-
-    fun setLightSourceLit(lightSource: LightSource, value: Boolean) {
-        if (value != lightSource.isLit) {
-            lightSource.isLit = value
-            lightMap = generateLightMap(renderProjection, lightSources)
-        }
-    }
 
     protected fun highlightTile(
         pos: Point2D,
@@ -176,10 +120,5 @@ abstract class TileMapScene(
     fun disableHighlighting() {
         highlightedTile = -1
         tileHighlighting = null
-    }
-
-    fun updateLightMapShader(shader: Shader) {
-        lightMap?.setShader(shader)
-        lightMapShader = shader
     }
 }
