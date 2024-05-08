@@ -28,6 +28,7 @@ object Main {
                 }
                 override var screenWidth: Float = 1000f
                 override var screenHeight: Float = 1000f
+                override var isDebugFlag: Boolean = false
                 override val sceneMap: MutableMap<String, Scene> = mutableMapOf()
                 override val sharedContext: GameContext = GameContext()
                 override var currentScene: Scene? = null

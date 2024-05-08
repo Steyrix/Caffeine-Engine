@@ -16,6 +16,8 @@ interface SceneHolder {
 
     var currentScene: Scene?
 
+    var isDebugFlag: Boolean
+
     fun init(width: Float, height: Float)
 
     fun render(window: Window) {
