@@ -13,6 +13,8 @@ interface Scene {
 
     val context: GameContext
 
+    var isDebugFlag: Boolean
+
     fun init(
         session: Session,
         intent: SceneIntent? = null

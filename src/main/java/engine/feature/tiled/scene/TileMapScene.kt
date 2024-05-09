@@ -26,6 +26,7 @@ abstract class TileMapScene(
     override var lightMapScreenWidth = 0f
     override var lightMapScreenHeight = 0f
     override var holderMap: TileMap? = null
+    override var isDebugFlag: Boolean = false
 
     override val context: GameContext = GameContext.getInstance()
 
