@@ -39,8 +39,12 @@ abstract class TileMapScene(
 
     private var matrixState: MatrixState? = null
 
-    override fun init(session: Session, intent: SceneIntent?) {
-        super.init(session, intent)
+    override fun init(
+        session: Session,
+        intent: SceneIntent?,
+        isDebugFlag: Boolean
+    ) {
+        super.init(session, intent, isDebugFlag)
 
         tiledMap = initTileMap(
             renderProjection,
