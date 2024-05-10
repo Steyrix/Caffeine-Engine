@@ -63,6 +63,7 @@ abstract class TileMapScene(
                 it.mapComponent!!
             )
             it.addToCollisionContext(tiledCollisionContext!!)
+            it.isDebugMeshEnabled= this.isDebugFlag
         }
 
         matrixState = session.matrixState
