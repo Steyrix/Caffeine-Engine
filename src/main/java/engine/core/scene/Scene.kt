@@ -17,8 +17,10 @@ interface Scene {
 
     fun init(
         session: Session,
-        intent: SceneIntent? = null
+        intent: SceneIntent? = null,
+        isDebugFlag: Boolean = false
     ) {
+        this.isDebugFlag = isDebugFlag
         context.addAll(session.getPersistentObjects())
     }
 
