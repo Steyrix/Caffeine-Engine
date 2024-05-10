@@ -37,6 +37,7 @@ interface SceneHolder {
         val intent = currentScene?.getNextSceneIntent()
         currentScene = sceneMap[nextSceneName]
         currentScene?.init(session, intent)
+        currentScene?.isDebugFlag = this.isDebugFlag
     }
 
     fun getNextSceneName(intent: SceneIntent): String
