@@ -1,5 +1,6 @@
 package engine.core.render
 
+import engine.core.ResourceLoader
 import engine.core.texture.ArrayTexture2D
 import engine.core.texture.Texture2D
 import engine.core.update.Updatable
@@ -60,13 +61,25 @@ class AnimatedModel2D(
 
     constructor(
         data: AtlasData,
-        texture: Texture2D?,
+        texture: Texture2D? = null,
     ) : this(
         mesh = Mesh(
             dataArrays = DefaultBufferData.getRectangleSectorBuffers(data.frameWidth, data.frameHeight),
             verticesCount = 6
         ),
         texture,
+        arrayTexture = null,
+        animationHolder = AnimationHolder2D(data.animations.toMutableList())
+    )
+
+    constructor(
+        data: AtlasData
+    ) : this(
+        mesh = Mesh(
+            dataArrays = DefaultBufferData.getRectangleSectorBuffers(data.frameWidth, data.frameHeight),
+            verticesCount = 6
+        ),
+        texture = ResourceLoader.loadTexture(data.texturePath!!),
         arrayTexture = null,
         animationHolder = AnimationHolder2D(data.animations.toMutableList())
     )
