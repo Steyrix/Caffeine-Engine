@@ -31,11 +31,11 @@ internal object TextureGenerator {
             throw IllegalStateException("Texture loading failed")
         }
 
-        glViewport(0, 0, worldWidth.toInt(), worldHeight.toInt())
+        glViewport(0, 0, screenWidth.toInt(), screenHeight.toInt())
         glClear(GL_COLOR_BUFFER_BIT)
         model.apply {
-            xSize = worldWidth / precision
-            ySize = worldHeight / precision
+            xSize = precision
+            ySize = precision
         }.draw()
         glBindFramebuffer(GL_FRAMEBUFFER, 0)
         glViewport(0, 0, screenWidth.toInt() * 2, screenHeight.toInt() * 2)

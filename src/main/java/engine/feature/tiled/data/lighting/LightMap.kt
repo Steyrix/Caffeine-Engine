@@ -42,6 +42,9 @@ class LightMap(
             texture = texture,
             uv = DefaultBufferData.getRectangleSectorVerticesReversed(1f, 1f)
         ).apply {
+            x = parameters.x
+            y = parameters.y
+
             preDrawFunc = {
                 glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA)
             }
