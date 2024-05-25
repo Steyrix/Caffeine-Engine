@@ -20,8 +20,8 @@ internal object DataGenerator {
     private fun getGraphicalComponent(
         tileMap: TileMap,
         lightSources: List<LightSource>,
-        screenSizeX: Float,
-        screenSizeY: Float,
+        worldWidth: Float,
+        worldHeight: Float
     ): Model {
         val lightPerTileList = mutableListOf<Vector3f>()
 
@@ -38,8 +38,8 @@ internal object DataGenerator {
         }
 
         val tileVectors = tilePositions.map {
-            val x = it.x / screenSizeX * 2 - 1
-            val y = it.y / screenSizeY * 2 - 1
+            val x = it.x / worldWidth * 2 - 1
+            val y = -it.y / worldHeight * 2 + 1
             Vector2f(x, y)
         }
 
@@ -48,7 +48,7 @@ internal object DataGenerator {
             var totalIntensity = 0f
 
             lightSources.forEach { src ->
-                val lightSource = getVector(src, screenSizeX, screenSizeY)
+                val lightSource = getVector(src, worldWidth, worldHeight)
 
                 val distance = lightSource.distance(tile)
                 val intensity = 1f / distance
@@ -92,13 +92,13 @@ internal object DataGenerator {
 
     private fun getVector(
         it: LightSource,
-        screenSizeX: Float,
-        screenSizeY: Float,
+        worldWidth: Float,
+        worldHeight: Float
     ): Vector2f {
         val horizontalDiff = -it.getParameters().xSize / 2
         val verticalDiff = it.getParameters().ySize
-        val x = (it.getParameters().x - horizontalDiff) / screenSizeX * 2 - 1
-        val y = (it.getParameters().y - verticalDiff) / screenSizeY * 2 - 1
+        val x = (it.getParameters().x - horizontalDiff) / worldWidth * 2 - 1
+        val y = -(it.getParameters().y + verticalDiff) / worldHeight * 2 + 1
         return Vector2f(x, y)
     }
 
@@ -135,8 +135,10 @@ internal object DataGenerator {
         projection: Matrix4f,
         tileMap: TileMap,
         lightSources: List<LightSource>,
-        screenSizeX: Float,
-        screenSizeY: Float
+        screenWidth: Float,
+        screenHeight: Float,
+        worldWidth: Float,
+        worldHeight: Float
     ): Texture2D {
 
         val shader = createShader(projection)
@@ -144,18 +146,22 @@ internal object DataGenerator {
         val model = getGraphicalComponent(
             tileMap,
             lightSources,
-            screenSizeX,
-            screenSizeY
+            worldWidth,
+            worldHeight
         ).apply {
             this.shader = shader
             x = 0f
             y = 0f
-            xSize = precision
-            ySize = precision
-            rotationAngle = 0f
             isPartOfWorldTranslation = false
         }
 
-        return Texture2D.createInstance(precision, screenSizeX, screenSizeY, model)
+        return Texture2D.createInstance(
+            precision,
+            screenWidth,
+            screenHeight,
+            worldWidth,
+            worldHeight,
+            model
+        )
     }
 }

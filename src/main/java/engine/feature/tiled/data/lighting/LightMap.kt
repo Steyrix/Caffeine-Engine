@@ -17,7 +17,9 @@ class LightMap(
     tileMap: TileMap,
     lightSources: List<LightSource>,
     screenSizeX: Float,
-    screenSizeY: Float
+    screenSizeY: Float,
+    worldSizeX: Float,
+    worldSizeY: Float
 ) : CompositeEntity() {
 
 
@@ -30,7 +32,9 @@ class LightMap(
             tileMap,
             lightSources,
             screenSizeX,
-            screenSizeY
+            screenSizeY,
+            worldSizeX,
+            worldSizeY
         )
 
         texture.setParameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR)

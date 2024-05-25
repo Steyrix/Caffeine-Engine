@@ -12,6 +12,8 @@ abstract class LightMapHolder {
     abstract val lightMapProjection: Matrix4f
     abstract var lightMapScreenWidth: Float
     abstract var lightMapScreenHeight: Float
+    abstract var worldWidth: Float
+    abstract var worldHeight: Float
     abstract var holderMap: TileMap?
 
     protected val lightSources: MutableList<LightSource> = mutableListOf()
@@ -64,6 +66,8 @@ abstract class LightMapHolder {
             lightSources = litLightSources,
             screenSizeX = lightMapScreenWidth,
             screenSizeY = lightMapScreenHeight,
+            worldSizeX = worldWidth,
+            worldSizeY = worldHeight
         ).apply {
             lightMapShader?.let {
                 this.setShader(it)

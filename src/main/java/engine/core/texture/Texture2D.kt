@@ -19,11 +19,22 @@ class Texture2D(
 
         fun createInstance(
             precision: Float,
-            width: Float,
-            height: Float,
+            screenWidth: Float,
+            screenHeight: Float,
+            worldWidth: Float,
+            worldHeight: Float,
             model: Model
         ): Texture2D {
-            return Texture2D(TextureGenerator.createFromFBO(precision, width, height, model))
+            return Texture2D(
+                TextureGenerator.createFromFBO(
+                    precision,
+                    screenWidth,
+                    screenHeight,
+                    worldWidth,
+                    worldHeight,
+                    model
+                )
+            )
         }
     }
 

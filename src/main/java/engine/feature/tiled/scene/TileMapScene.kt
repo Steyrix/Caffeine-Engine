@@ -22,10 +22,14 @@ abstract class TileMapScene(
 ) : Scene, LightMapHolder() {
 
     override val renderProjection = projection
+
     override val lightMapProjection = projection
     override var lightMapScreenWidth = 0f
     override var lightMapScreenHeight = 0f
+    override var worldWidth = 0f
+    override var worldHeight = 0f
     override var holderMap: TileMap? = null
+
     override var isDebugFlag: Boolean = false
 
     override val context: GameContext = GameContext.getInstance()
@@ -54,6 +58,8 @@ abstract class TileMapScene(
 
         lightMapScreenWidth = screenWidth
         lightMapScreenHeight = screenHeight
+        worldWidth = tiledMap?.mapComponent?.getWorldWidth() ?: 0f
+        worldHeight = tiledMap?.mapComponent?.getWorldHeight() ?: 0f
 
         tiledMap?.let {
             holderMap = it.mapComponent
