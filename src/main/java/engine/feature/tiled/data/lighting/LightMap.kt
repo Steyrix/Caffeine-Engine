@@ -7,7 +7,6 @@ import engine.core.shader.Shader
 import engine.core.update.SetOfParameters
 import engine.feature.tiled.data.TileMap
 import org.joml.Matrix4f
-import org.joml.Vector2f
 import org.lwjgl.opengl.GL11.*
 
 class LightMap(
