@@ -96,7 +96,7 @@ internal object DataGenerator {
         worldHeight: Float
     ): Vector2f {
         val horizontalDiff = -it.getParameters().xSize / 2
-        val verticalDiff = it.getParameters().ySize
+        val verticalDiff = it.getParameters().ySize / 2
         val x = (it.getParameters().x - horizontalDiff) / worldWidth * 2 - 1
         val y = -(it.getParameters().y - verticalDiff) / worldHeight * 2 + 1
         return Vector2f(x, y)

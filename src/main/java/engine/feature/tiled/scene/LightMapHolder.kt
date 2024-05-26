@@ -52,14 +52,16 @@ abstract class LightMapHolder {
 
     protected fun generateLightMap(): LightMap {
         val litLightSources = lightSources.filter { it.isLit }
+        val approximateWidth = lightMapScreenWidth * (lightMapScreenWidth / lightmapPrecision) // too small
+        val approximateHeight = lightMapScreenHeight * (lightMapScreenHeight / lightmapPrecision) // too large
         return LightMap(
             precision = lightmapPrecision,
             projection = lightMapProjection,
             parameters = SetOfStatic2DParameters(
                 x = 0f,
                 y = 0f,
-                xSize = lightMapScreenWidth * (lightMapScreenWidth / lightmapPrecision),
-                ySize = lightMapScreenHeight * (lightMapScreenHeight / lightmapPrecision),
+                xSize = approximateWidth * 1.1f,
+                ySize = approximateHeight / 1.35f,
                 rotationAngle = 0f
             ),
             tileMap = holderMap ?: throw IllegalStateException(),
