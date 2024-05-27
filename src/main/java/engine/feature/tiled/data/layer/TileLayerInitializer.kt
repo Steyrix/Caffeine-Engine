@@ -279,7 +279,27 @@ object TileLayerInitializer {
         )
     }
 
-    private fun genDebugVertices(pos: Point2D, set: TileSet): FloatArray {
+    fun getDebugNetForTiles(
+        tiles: List<Int>,
+        set: TileSet,
+        widthInTiles: Int
+    ): Model {
+        val allVertices = mutableListOf<Float>()
+        tiles.forEach {
+            val vertices = genDebugVertices(getPositionByTileIndex(it, widthInTiles), set)
+            allVertices.addAll(vertices.toList())
+        }
+
+        return Model(
+            dataArrays = listOf(allVertices.toFloatArray()),
+            verticesCount = allVertices.size / 2
+        ).apply {
+            drawMode = GL33C.GL_LINES
+            zLevel = 2f
+        }
+    }
+
+    fun genDebugVertices(pos: Point2D, set: TileSet): FloatArray {
         return floatArrayOf(
             set.relativeTileWidth * pos.x, set.relativeTileHeight * pos.y,
             set.relativeTileWidth * (pos.x + 1), set.relativeTileHeight * pos.y,

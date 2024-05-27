@@ -73,7 +73,7 @@ abstract class TileMapScene(
                 it.mapComponent!!
             )
             it.addToCollisionContext(tiledCollisionContext!!)
-            it.isDebugMeshEnabled= this.isDebugFlag
+            it.isDebugMeshEnabled = this.isDebugFlag
         }
 
         matrixState = session.matrixState
@@ -117,7 +117,21 @@ abstract class TileMapScene(
                 isPartOfWorldTranslation = false
                 zLevel = 0f
             }
+
+            val tileNet = tiledMap?.mapComponent?.getDebugNetForTiles(tileIndex, selection)
+                ?.apply {
+                    tiledMap?.mapComponent?.debugShader?.let {
+                        shader = it
+                    }
+                    isPartOfWorldTranslation = false
+                    zLevel = 2f
+                }
+
             tileHighlighting?.addComponent(underlyingHighlight, highlightParams)
+            tileNet?.let {
+                tileHighlighting?.addComponent(it, highlightParams)
+            }
+
             selection.extraModel?.let {
                 tileHighlighting?.addComponent(it, highlightParams)
                 it.isPartOfWorldTranslation = false

@@ -5,7 +5,9 @@ import engine.core.render.Drawable
 import engine.core.shader.Shader
 import engine.core.update.SetOfStatic2DParameters
 import engine.core.geometry.Point2D
+import engine.core.render.Model
 import engine.feature.tiled.data.layer.*
+import engine.feature.tiled.scene.TileSelectionData
 import engine.feature.tiled.traversing.TileGraph
 import kotlin.math.roundToInt
 
@@ -44,14 +46,14 @@ class TileMap(
         }
 
     var isDebugMeshEnabled: Boolean = false
-    set(value) {
-        field = value
-        layers.forEach {
-            if (it is TileLayer) {
-                it.isDebugMeshEnabled = value
+        set(value) {
+            field = value
+            layers.forEach {
+                if (it is TileLayer) {
+                    it.isDebugMeshEnabled = value
+                }
             }
         }
-    }
 
     override var zLevel: Float = 0f
 
@@ -213,5 +215,23 @@ class TileMap(
 
     fun getVertices(): MutableList<Float> {
         return TileLayerInitializer.genVerticesBuffer(layers[0].tileIdsData, set, widthInTiles)
+    }
+
+    fun getDebugNetForTiles(
+        startTileIndex: Int,
+        tileSelectionData: TileSelectionData
+    ): Model {
+        val tiles = mutableListOf<Int>()
+
+        for (i in 0 until tileSelectionData.height) {
+            val currentStartIndex = startTileIndex + widthInTiles * i
+            for (j in currentStartIndex..(currentStartIndex + tileSelectionData.width)) {
+                tiles.add(j)
+            }
+        }
+
+        println("tiles: $tiles")
+
+        return TileLayerInitializer.getDebugNetForTiles(tiles, set, widthInTiles)
     }
 }
