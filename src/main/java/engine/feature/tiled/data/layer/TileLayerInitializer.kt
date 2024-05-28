@@ -280,26 +280,28 @@ object TileLayerInitializer {
     }
 
     fun getDebugNetForTiles(
-        tiles: List<Int>,
-        set: TileSet,
-        widthInTiles: Int
+        positions: List<Point2D>,
+        absoluteTileWidth: Float
     ): Model {
         val allVertices = mutableListOf<Float>()
-        tiles.forEach {
-            val vertices = genDebugVertices(getPositionByTileIndex(it, widthInTiles), set)
+        positions.forEach {
+            val vertices = genSelectionDebugVertices(it, absoluteTileWidth)
+            println(vertices.toList())
             allVertices.addAll(vertices.toList())
         }
 
+        println(positions.size)
+
         return Model(
             dataArrays = listOf(allVertices.toFloatArray()),
-            verticesCount = allVertices.size / 2
+            verticesCount = allVertices.size
         ).apply {
             drawMode = GL33C.GL_LINES
             zLevel = 2f
         }
     }
 
-    fun genDebugVertices(pos: Point2D, set: TileSet): FloatArray {
+    private fun genDebugVertices(pos: Point2D, set: TileSet): FloatArray {
         return floatArrayOf(
             set.relativeTileWidth * pos.x, set.relativeTileHeight * pos.y,
             set.relativeTileWidth * (pos.x + 1), set.relativeTileHeight * pos.y,
@@ -309,6 +311,19 @@ object TileLayerInitializer {
             set.relativeTileWidth * pos.x, set.relativeTileHeight * (pos.y + 1),
             set.relativeTileWidth * pos.x, set.relativeTileHeight * (pos.y + 1),
             set.relativeTileWidth * pos.x, set.relativeTileHeight * pos.y
+        )
+    }
+
+    private fun genSelectionDebugVertices(pos: Point2D, tileWidth: Float): FloatArray {
+        return floatArrayOf(
+            pos.x, pos.y,
+            pos.x + tileWidth, pos.y,
+            pos.x + tileWidth, pos.y,
+            pos.x + tileWidth, pos.y + tileWidth,
+            pos.x + tileWidth, pos.y + tileWidth,
+            pos.x, pos.y + tileWidth,
+            pos.x, pos.y + tileWidth,
+            pos.x, pos.y
         )
     }
 }

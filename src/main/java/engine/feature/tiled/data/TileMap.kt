@@ -221,17 +221,19 @@ class TileMap(
         startTileIndex: Int,
         tileSelectionData: TileSelectionData
     ): Model {
-        val tiles = mutableListOf<Int>()
+        val positions = mutableListOf<Point2D>()
 
         for (i in 0 until tileSelectionData.height) {
             val currentStartIndex = startTileIndex + widthInTiles * i
-            for (j in currentStartIndex..(currentStartIndex + tileSelectionData.width)) {
-                tiles.add(j)
+            for (j in currentStartIndex until (currentStartIndex + tileSelectionData.width)) {
+                positions.add(getTilePosition(j))
             }
         }
 
-        println("tiles: $tiles")
-
-        return TileLayerInitializer.getDebugNetForTiles(tiles, set, widthInTiles)
+        return TileLayerInitializer.getDebugNetForTiles(positions, absoluteTileWidth).apply {
+            shader = debugShader
+            isPartOfWorldTranslation = false
+            zLevel = 2f
+        }
     }
 }

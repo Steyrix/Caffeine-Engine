@@ -101,6 +101,7 @@ abstract class TileMapScene(
             y = startPos.y
             xSize = map.absoluteTileWidth * selection.width
             ySize = map.absoluteTileHeight * selection.height
+            rotationAngle = 0f
         }
 
         if (tileIndex != highlightedTile) {
@@ -119,15 +120,9 @@ abstract class TileMapScene(
             }
 
             val tileNet = tiledMap?.mapComponent?.getDebugNetForTiles(tileIndex, selection)
-                ?.apply {
-                    tiledMap?.mapComponent?.debugShader?.let {
-                        shader = it
-                    }
-                    isPartOfWorldTranslation = false
-                    zLevel = 2f
-                }
 
             tileHighlighting?.addComponent(underlyingHighlight, highlightParams)
+
             tileNet?.let {
                 tileHighlighting?.addComponent(it, highlightParams)
             }
