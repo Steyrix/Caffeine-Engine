@@ -321,14 +321,14 @@ object TileLayerInitializer {
     private fun genSelectionDebugVertices(pos: Point2D, data: TileSelectionData): FloatArray {
         val divider = if (data.width < data.height) data.width else data.height
         return floatArrayOf(
-            pos.x / data.width, pos.y / divider,
-            (pos.x + 1) / data.width, pos.y / divider,
-            (pos.x + 1) / data.width, pos.y / divider,
-            (pos.x + 1) / data.width, (pos.y + 1) / divider,
-            (pos.x + 1) / data.width, (pos.y + 1) / divider,
-            pos.x / data.width, (pos.y + 1) / divider,
-            pos.x / data.width, (pos.y + 1) / divider,
-            pos.x / data.width, pos.y / divider
+            pos.x / divider, pos.y / divider,
+            (pos.x + 1) / divider, pos.y / divider,
+            (pos.x + 1) / divider, pos.y / divider,
+            (pos.x + 1) / divider, (pos.y + 1) / divider,
+            (pos.x + 1) / divider, (pos.y + 1) / divider,
+            pos.x / divider, (pos.y + 1) / divider,
+            pos.x / divider, (pos.y + 1) / divider,
+            pos.x / divider, pos.y / divider
         )
     }
 }
