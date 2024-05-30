@@ -281,20 +281,22 @@ object TileLayerInitializer {
 
     fun getDebugNetForTiles(
         positions: List<Point2D>,
-        absoluteTileWidth: Float
+        absoluteWidth: Float
     ): Model {
         val allVertices = mutableListOf<Float>()
+        val last = positions.last()
+        val first = positions.first()
+        val threshold = Point2D(last.x - first.x, last.y - first.y)
         positions.forEach {
-            val vertices = genSelectionDebugVertices(it, absoluteTileWidth)
-            println(vertices.toList())
+            val pos = Point2D((it.x - first.x) / threshold.x, (it.y - first.y) / threshold.y)
+            println(pos)
+            val vertices = genSelectionDebugVertices(pos, absoluteWidth)
             allVertices.addAll(vertices.toList())
         }
 
-        println(positions.size)
-
         return Model(
             dataArrays = listOf(allVertices.toFloatArray()),
-            verticesCount = allVertices.size
+            verticesCount = allVertices.size / 2
         ).apply {
             drawMode = GL33C.GL_LINES
             zLevel = 2f
@@ -314,16 +316,16 @@ object TileLayerInitializer {
         )
     }
 
-    private fun genSelectionDebugVertices(pos: Point2D, tileWidth: Float): FloatArray {
+    private fun genSelectionDebugVertices(pos: Point2D, absoluteWidth: Float): FloatArray {
         return floatArrayOf(
-            pos.x, pos.y,
-            pos.x + tileWidth, pos.y,
-            pos.x + tileWidth, pos.y,
-            pos.x + tileWidth, pos.y + tileWidth,
-            pos.x + tileWidth, pos.y + tileWidth,
-            pos.x, pos.y + tileWidth,
-            pos.x, pos.y + tileWidth,
-            pos.x, pos.y
+            pos.x / absoluteWidth, pos.y / absoluteWidth,
+            (pos.x + 1) / absoluteWidth, pos.y / absoluteWidth,
+            (pos.x + 1) / absoluteWidth, pos.y / absoluteWidth,
+            (pos.x + 1) / absoluteWidth, (pos.y + 1) / absoluteWidth,
+            (pos.x + 1) / absoluteWidth, (pos.y + 1) / absoluteWidth,
+            pos.x / absoluteWidth, (pos.y + 1) / absoluteWidth,
+            pos.x / absoluteWidth, (pos.y + 1) / absoluteWidth,
+            pos.x / absoluteWidth, pos.y / absoluteWidth
         )
     }
 }
