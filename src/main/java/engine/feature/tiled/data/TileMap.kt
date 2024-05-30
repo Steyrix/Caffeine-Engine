@@ -230,7 +230,7 @@ class TileMap(
             }
         }
 
-        return TileLayerInitializer.getDebugNetForTiles(positions, absoluteTileWidth).apply {
+        return TileLayerInitializer.getDebugNetForTiles(positions, tileSelectionData).apply {
             shader = debugShader
             isPartOfWorldTranslation = false
             zLevel = 2f

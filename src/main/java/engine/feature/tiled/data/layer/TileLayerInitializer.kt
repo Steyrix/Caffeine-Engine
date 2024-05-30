@@ -3,6 +3,7 @@ package engine.feature.tiled.data.layer
 import engine.core.render.Model
 import engine.core.geometry.Point2D
 import engine.feature.tiled.data.TileSet
+import engine.feature.tiled.scene.TileSelectionData
 import engine.feature.tiled.traversing.TileGraph
 import org.lwjgl.opengl.GL33C
 
@@ -281,7 +282,7 @@ object TileLayerInitializer {
 
     fun getDebugNetForTiles(
         positions: List<Point2D>,
-        absoluteWidth: Float
+        tileSelectionData: TileSelectionData
     ): Model {
         val allVertices = mutableListOf<Float>()
         val last = positions.last()
@@ -290,9 +291,10 @@ object TileLayerInitializer {
         positions.forEach {
             val pos = Point2D((it.x - first.x) / threshold.x, (it.y - first.y) / threshold.y)
             println(pos)
-            val vertices = genSelectionDebugVertices(pos, absoluteWidth)
+            val vertices = genSelectionDebugVertices(pos, tileSelectionData)
             allVertices.addAll(vertices.toList())
         }
+        println("positionS: ${positions.size}")
 
         return Model(
             dataArrays = listOf(allVertices.toFloatArray()),
@@ -316,16 +318,17 @@ object TileLayerInitializer {
         )
     }
 
-    private fun genSelectionDebugVertices(pos: Point2D, absoluteWidth: Float): FloatArray {
+    private fun genSelectionDebugVertices(pos: Point2D, data: TileSelectionData): FloatArray {
+        val divider = if (data.width < data.height) data.width else data.height
         return floatArrayOf(
-            pos.x / absoluteWidth, pos.y / absoluteWidth,
-            (pos.x + 1) / absoluteWidth, pos.y / absoluteWidth,
-            (pos.x + 1) / absoluteWidth, pos.y / absoluteWidth,
-            (pos.x + 1) / absoluteWidth, (pos.y + 1) / absoluteWidth,
-            (pos.x + 1) / absoluteWidth, (pos.y + 1) / absoluteWidth,
-            pos.x / absoluteWidth, (pos.y + 1) / absoluteWidth,
-            pos.x / absoluteWidth, (pos.y + 1) / absoluteWidth,
-            pos.x / absoluteWidth, pos.y / absoluteWidth
+            pos.x / data.width, pos.y / divider,
+            (pos.x + 1) / data.width, pos.y / divider,
+            (pos.x + 1) / data.width, pos.y / divider,
+            (pos.x + 1) / data.width, (pos.y + 1) / divider,
+            (pos.x + 1) / data.width, (pos.y + 1) / divider,
+            pos.x / data.width, (pos.y + 1) / divider,
+            pos.x / data.width, (pos.y + 1) / divider,
+            pos.x / data.width, pos.y / divider
         )
     }
 }
