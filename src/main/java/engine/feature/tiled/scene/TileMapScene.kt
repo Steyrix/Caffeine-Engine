@@ -40,6 +40,7 @@ abstract class TileMapScene(
     protected var tileHighlighting: CompositeEntity? = null
     protected val highlightParams = SetOfStatic2DParameters.createEmpty()
     private var highlightedTile: Int = -1
+    protected var tileNetShader: Shader? = null
 
     private var matrixState: MatrixState? = null
 
@@ -119,7 +120,10 @@ abstract class TileMapScene(
                 zLevel = 0f
             }
 
-            val tileNet = tiledMap?.mapComponent?.getDebugNetForTiles(tileIndex, selection)
+            var tileNet: Model? = null
+            tileNetShader?.let {
+                tileNet = tiledMap?.mapComponent?.getDebugNetForTiles(tileIndex, selection, it)
+            }
 
             tileHighlighting?.addComponent(underlyingHighlight, highlightParams)
 

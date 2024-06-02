@@ -2,6 +2,7 @@ package engine.feature.tiled.data.layer
 
 import engine.core.render.Model
 import engine.core.geometry.Point2D
+import engine.core.shader.Shader
 import engine.feature.tiled.data.TileSet
 import engine.feature.tiled.scene.TileSelectionData
 import engine.feature.tiled.traversing.TileGraph
@@ -282,7 +283,8 @@ object TileLayerInitializer {
 
     fun getDebugNetForTiles(
         positions: List<Point2D>,
-        tileSelectionData: TileSelectionData
+        tileSelectionData: TileSelectionData,
+        shader: Shader
     ): Model {
         val allVertices = mutableListOf<Float>()
         val last = positions.last()
@@ -300,6 +302,7 @@ object TileLayerInitializer {
             dataArrays = listOf(allVertices.toFloatArray()),
             verticesCount = allVertices.size / 2
         ).apply {
+            this.shader = shader
             drawMode = GL33C.GL_LINES
             zLevel = 2f
         }
