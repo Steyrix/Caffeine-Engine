@@ -120,16 +120,15 @@ abstract class TileMapScene(
                 zLevel = 0f
             }
 
-            var tileNet: Model? = null
-            tileNetShader?.let {
-                tileNet = tiledMap?.mapComponent?.getDebugNetForTiles(tileIndex, selection, it)
+            var tileNet: Model?
+            tileNetShader?.let { shader ->
+                tileNet = tiledMap?.mapComponent?.getDebugNetForTiles(tileIndex, selection, shader)
+                tileNet?.let {
+                    tileHighlighting?.addComponent(it, highlightParams)
+                }
             }
 
             tileHighlighting?.addComponent(underlyingHighlight, highlightParams)
-
-            tileNet?.let {
-                tileHighlighting?.addComponent(it, highlightParams)
-            }
 
             selection.extraModel?.let {
                 tileHighlighting?.addComponent(it, highlightParams)
