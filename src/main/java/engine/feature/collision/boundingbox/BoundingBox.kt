@@ -108,4 +108,11 @@ class BoundingBox(
             y = y + yOffset
         )
     }
+
+    fun applyOffsets(offsetData: OffsetData) {
+        xOffset = offsetData.xOffset
+        yOffset = offsetData.yOffset
+        xSize = offsetData.xSize
+        ySize = offsetData.ySize
+    }
 }
