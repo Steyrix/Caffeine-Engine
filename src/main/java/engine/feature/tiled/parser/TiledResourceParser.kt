@@ -28,7 +28,7 @@ internal object TiledResourceParser {
         )
     }
 
-    private fun retrieveTileSet(doc: Document): TileSet {
+    fun retrieveTileSet(doc: Document): TileSet {
         val mapTileSetNode = doc.getElementsByTagName(TILE_SET)
         val mapTileSetAttribs = mapTileSetNode!!.item(0).attributes
         val tileSetPath = mapTileSetAttribs.getNamedItem(SOURCE).nodeValue
@@ -55,7 +55,7 @@ internal object TiledResourceParser {
         return TileSet(tileWidth.toFloat(), tileHeight.toFloat(), texture, tileCount.toInt(), columnCount.toInt())
     }
 
-    private fun retrieveLayers(
+    fun retrieveLayers(
         widthInTiles: Int,
         heightInTiles: Int,
         doc: Document,
