@@ -75,6 +75,7 @@ internal object TiledResourceParser {
             val primitiveProperties = convertToPrimitiveProperties(properties)
             val name = currentLayer.attributes.getNamedItem(PROPERTY_NAME).nodeValue
 
+            // TODO: HARDCODE
             if (name.contains("obstacle") || name.contains("shadows")) {
                 out.add(
                     ObjectsLayer(
