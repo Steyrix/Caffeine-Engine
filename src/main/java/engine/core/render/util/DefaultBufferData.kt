@@ -1,6 +1,7 @@
 package engine.core.render.util
 
 object DefaultBufferData {
+
     val RECTANGLE_INDICES = floatArrayOf(
         0f, 0f,
         1f, 1f,

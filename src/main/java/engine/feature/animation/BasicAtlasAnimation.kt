@@ -12,6 +12,7 @@ class BasicAtlasAnimation(
     private var currentFrameY: Int,
     private val timeLimit: Float
 ) : Animation {
+
     private var playFunction: ((Float, Int, Int, Int, Int) -> Unit)? = null
 
     private var lastPosX: Int = framesCountX

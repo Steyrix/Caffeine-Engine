@@ -21,7 +21,6 @@ class LightMap(
     worldSizeY: Float
 ) : CompositeEntity() {
 
-
     private var graphicalComponent: Model
 
     init {

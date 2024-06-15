@@ -6,6 +6,7 @@ import engine.core.shader.Shader
 class AnimationHolder2D(
     private val animations: MutableList<Animation>
 ) {
+
     private var currentAnimation: Animation = animations.first()
 
     fun updateAnimationUniforms(target: Model, shader: Shader) {
