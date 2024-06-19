@@ -9,5 +9,4 @@ object NoiseGenerator {
             System.currentTimeMillis(), pos.x.toDouble(), pos.y.toDouble()
         )
     }
-
 }
