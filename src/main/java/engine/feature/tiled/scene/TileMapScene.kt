@@ -123,7 +123,7 @@ abstract class TileMapScene(
 
             var tileNet: Model?
             tileNetShader?.let { shader ->
-                tileNet = tiledMap?.mapComponent?.getDebugNetForTiles(tileIndex, selection, shader)
+                tileNet = tiledMap?.mapComponent?.getDebugNetForTiles(selection, shader)
                 tileNet?.let {
                     tileHighlighting?.addComponent(it, highlightParams)
                 }

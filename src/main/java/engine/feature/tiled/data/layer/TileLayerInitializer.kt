@@ -282,21 +282,34 @@ object TileLayerInitializer {
     }
 
     fun getDebugNetForTiles(
-        positions: List<Point2D>,
         tileSelectionData: TileSelectionData,
         shader: Shader
     ): Model {
+        val diff = if (tileSelectionData.height > tileSelectionData.width) 2 else 1
         val allVertices = mutableListOf<Float>()
-        val last = positions.last()
-        val first = positions.first()
-        val threshold = Point2D(last.x - first.x, last.y - first.y)
-        positions.forEach {
-            val pos = Point2D((it.x - first.x) / threshold.x, (it.y - first.y) / threshold.y)
-            println(pos)
+        val maxWidth = tileSelectionData.width - 1
+        val maxHeight = tileSelectionData.height - diff
+
+        var currentRow = 0
+        var currentColumn = 0
+        var counter = 0
+
+        while (counter != tileSelectionData.width * tileSelectionData.height) {
+            if (currentColumn >= tileSelectionData.width) {
+                currentRow++
+                currentColumn = 0
+            }
+            val pos = Point2D(
+                (currentColumn / maxWidth).toFloat(),
+                (currentRow / maxHeight).toFloat()
+            )
+
+            currentColumn++
+
             val vertices = genSelectionDebugVertices(pos, tileSelectionData)
             allVertices.addAll(vertices.toList())
+            counter++
         }
-        println("positionS: ${positions.size}")
 
         return Model(
             dataArrays = listOf(allVertices.toFloatArray()),
@@ -322,16 +335,15 @@ object TileLayerInitializer {
     }
 
     private fun genSelectionDebugVertices(pos: Point2D, data: TileSelectionData): FloatArray {
-        val divider = if (data.width < data.height) data.width else data.height
         return floatArrayOf(
-            pos.x / divider, pos.y / divider,
-            (pos.x + 1) / divider, pos.y / divider,
-            (pos.x + 1) / divider, pos.y / divider,
-            (pos.x + 1) / divider, (pos.y + 1) / divider,
-            (pos.x + 1) / divider, (pos.y + 1) / divider,
-            pos.x / divider, (pos.y + 1) / divider,
-            pos.x / divider, (pos.y + 1) / divider,
-            pos.x / divider, pos.y / divider
+            pos.x / data.width, pos.y / data.height,
+            (pos.x + 1) / data.width, pos.y / data.height,
+            (pos.x + 1) / data.width, pos.y / data.height,
+            (pos.x + 1) / data.width, (pos.y + 1) / data.height,
+            (pos.x + 1) / data.width, (pos.y + 1) / data.height,
+            pos.x / data.width, (pos.y + 1) / data.height,
+            pos.x / data.width, (pos.y + 1) / data.height,
+            pos.x / data.width, pos.y / data.height
         )
     }
 }

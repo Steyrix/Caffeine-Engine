@@ -218,20 +218,13 @@ class TileMap(
     }
 
     fun getDebugNetForTiles(
-        startTileIndex: Int,
         tileSelectionData: TileSelectionData,
         shader: Shader
     ): Model {
-        val positions = mutableListOf<Point2D>()
-
-        for (i in 0 until tileSelectionData.height) {
-            val currentStartIndex = startTileIndex + widthInTiles * i
-            for (j in currentStartIndex until (currentStartIndex + tileSelectionData.width)) {
-                positions.add(getTilePosition(j))
-            }
-        }
-
-        return TileLayerInitializer.getDebugNetForTiles(positions, tileSelectionData, shader).apply {
+        return TileLayerInitializer.getDebugNetForTiles(
+            tileSelectionData,
+            shader
+        ).apply {
             isPartOfWorldTranslation = false
             zLevel = 2f
         }
