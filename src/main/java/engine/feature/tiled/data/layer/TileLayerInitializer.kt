@@ -281,7 +281,7 @@ object TileLayerInitializer {
         )
     }
 
-    fun getDebugNetForTiles(
+    fun getNetForTileSelection(
         tileSelectionData: TileSelectionData,
         shader: Shader
     ): Model {
@@ -303,7 +303,7 @@ object TileLayerInitializer {
 
             currentColumn++
 
-            val vertices = genSelectionDebugVertices(pos, tileSelectionData)
+            val vertices = genSelectionNetVertices(pos, tileSelectionData)
             allVertices.addAll(vertices.toList())
             counter++
         }
@@ -331,7 +331,7 @@ object TileLayerInitializer {
         )
     }
 
-    private fun genSelectionDebugVertices(pos: Point2D, data: TileSelectionData): FloatArray {
+    private fun genSelectionNetVertices(pos: Point2D, data: TileSelectionData): FloatArray {
         return floatArrayOf(
             pos.x / data.width, pos.y / data.height,
             (pos.x + 1) / data.width, pos.y / data.height,

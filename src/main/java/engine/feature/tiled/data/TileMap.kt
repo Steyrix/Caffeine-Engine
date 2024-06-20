@@ -217,11 +217,11 @@ class TileMap(
         return TileLayerInitializer.genVerticesBuffer(layers[0].tileIdsData, set, widthInTiles)
     }
 
-    fun getDebugNetForTiles(
+    fun getNetForTileSelection(
         tileSelectionData: TileSelectionData,
         shader: Shader
     ): Model {
-        return TileLayerInitializer.getDebugNetForTiles(
+        return TileLayerInitializer.getNetForTileSelection(
             tileSelectionData,
             shader
         ).apply {
