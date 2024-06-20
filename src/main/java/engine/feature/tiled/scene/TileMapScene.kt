@@ -109,11 +109,8 @@ abstract class TileMapScene(
         if (tileIndex != highlightedTile) {
             tileHighlighting = CompositeEntity()
 
-            val underlyingHighlight = createHighlightModel(highlightingShader)
-            tileHighlighting?.addComponent(underlyingHighlight, highlightParams)
-
-            val tileNet = createTileNet(selection)
-            tileNet?.let { tileHighlighting?.addComponent(it, highlightParams) }
+            tileHighlighting?.addComponent(createHighlightModel(highlightingShader), highlightParams)
+            tileHighlighting?.addComponent(createTileNet(selection), highlightParams)
 
             selection.extraModel?.let {
                 tileHighlighting?.addComponent(it, highlightParams)
@@ -139,13 +136,10 @@ abstract class TileMapScene(
         }
     }
 
-    private fun createTileNet(selection: TileSelectionData): Model? {
-        var tileNet: Model? = null
+    private fun createTileNet(selection: TileSelectionData): Model {
         tileNetShader?.let { shader ->
-            tileNet = tiledMap?.mapComponent?.getNetForTileSelection(selection, shader)
-        }
-
-        return tileNet
+            return tiledMap?.mapComponent?.getNetForTileSelection(selection, shader) ?: throw Exception()
+        } ?: throw Exception()
     }
 
     fun disableHighlighting() {
