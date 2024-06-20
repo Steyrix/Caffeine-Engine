@@ -287,6 +287,7 @@ object TileLayerInitializer {
     ): Model {
         val allVertices = mutableListOf<Float>()
 
+        // TODO: equal width and height greater than 2 bug
         val horizontalDiff = if (tileSelectionData.height >= tileSelectionData.width) {
             1
         } else {
