@@ -287,18 +287,23 @@ object TileLayerInitializer {
     ): Model {
         val allVertices = mutableListOf<Float>()
 
-        // TODO: equal width and height greater than 2 bug
-        val horizontalDiff = if (tileSelectionData.height >= tileSelectionData.width) {
+        var horizontalDiff = if (tileSelectionData.height > tileSelectionData.width) {
             1
         } else {
             (tileSelectionData.width - tileSelectionData.height) + 1
         }
 
-        val verticalDiff = if (tileSelectionData.height > tileSelectionData.width) {
+        var verticalDiff = if (tileSelectionData.height > tileSelectionData.width) {
             (tileSelectionData.height - tileSelectionData.width) + 1
         } else {
             1
         }
+
+        if (tileSelectionData.height == tileSelectionData.width) {
+            horizontalDiff = tileSelectionData.width - 1
+            verticalDiff = tileSelectionData.height - 1
+        }
+
         val maxWidth = tileSelectionData.width - horizontalDiff
         val maxHeight = tileSelectionData.height - verticalDiff
 
