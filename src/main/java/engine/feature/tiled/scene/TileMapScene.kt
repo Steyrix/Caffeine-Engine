@@ -109,27 +109,11 @@ abstract class TileMapScene(
         if (tileIndex != highlightedTile) {
             tileHighlighting = CompositeEntity()
 
-            val underlyingHighlight = Model(
-                dataArrays = listOf(
-                    DefaultBufferData.RECTANGLE_INDICES,
-                    DefaultBufferData.getColorBuffer(0f, 1f, 0f)
-                ),
-                verticesCount = DefaultBufferData.RECTANGLE_INDICES.size / 2
-            ).apply {
-                shader = highlightingShader
-                isPartOfWorldTranslation = false
-                zLevel = 0f
-            }
-
-            var tileNet: Model?
-            tileNetShader?.let { shader ->
-                tileNet = tiledMap?.mapComponent?.getNetForTileSelection(selection, shader)
-                tileNet?.let {
-                    tileHighlighting?.addComponent(it, highlightParams)
-                }
-            }
-
+            val underlyingHighlight = createHighlightModel(highlightingShader)
             tileHighlighting?.addComponent(underlyingHighlight, highlightParams)
+
+            val tileNet = createTileNet(selection)
+            tileNet?.let { tileHighlighting?.addComponent(it, highlightParams) }
 
             selection.extraModel?.let {
                 tileHighlighting?.addComponent(it, highlightParams)
@@ -139,6 +123,29 @@ abstract class TileMapScene(
 
             highlightedTile = tileIndex
         }
+    }
+
+    private fun createHighlightModel(highlightingShader: Shader): Model {
+        return Model(
+            dataArrays = listOf(
+                DefaultBufferData.RECTANGLE_INDICES,
+                DefaultBufferData.getColorBuffer(0f, 1f, 0f)
+            ),
+            verticesCount = DefaultBufferData.RECTANGLE_INDICES.size / 2
+        ).apply {
+            shader = highlightingShader
+            isPartOfWorldTranslation = false
+            zLevel = 0f
+        }
+    }
+
+    private fun createTileNet(selection: TileSelectionData): Model? {
+        var tileNet: Model? = null
+        tileNetShader?.let { shader ->
+            tileNet = tiledMap?.mapComponent?.getNetForTileSelection(selection, shader)
+        }
+
+        return tileNet
     }
 
     fun disableHighlighting() {
