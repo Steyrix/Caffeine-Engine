@@ -285,10 +285,21 @@ object TileLayerInitializer {
         tileSelectionData: TileSelectionData,
         shader: Shader
     ): Model {
-        val diff = if (tileSelectionData.height > tileSelectionData.width) 2 else 1
         val allVertices = mutableListOf<Float>()
-        val maxWidth = tileSelectionData.width - 1
-        val maxHeight = tileSelectionData.height - diff
+
+        val horizontalDiff = if (tileSelectionData.height >= tileSelectionData.width) {
+            1
+        } else {
+            2
+        }
+
+        val verticalDiff = if (tileSelectionData.height > tileSelectionData.width) {
+            2
+        } else {
+            1
+        }
+        val maxWidth = tileSelectionData.width - horizontalDiff
+        val maxHeight = tileSelectionData.height - verticalDiff
 
         var currentRow = 0
         var currentColumn = 0
