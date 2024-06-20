@@ -287,26 +287,6 @@ object TileLayerInitializer {
     ): Model {
         val allVertices = mutableListOf<Float>()
 
-        var horizontalDiff = if (tileSelectionData.height > tileSelectionData.width) {
-            1
-        } else {
-            (tileSelectionData.width - tileSelectionData.height) + 1
-        }
-
-        var verticalDiff = if (tileSelectionData.height > tileSelectionData.width) {
-            (tileSelectionData.height - tileSelectionData.width) + 1
-        } else {
-            1
-        }
-
-        if (tileSelectionData.height == tileSelectionData.width) {
-            horizontalDiff = tileSelectionData.width - 1
-            verticalDiff = tileSelectionData.height - 1
-        }
-
-        val maxWidth = tileSelectionData.width - horizontalDiff
-        val maxHeight = tileSelectionData.height - verticalDiff
-
         var currentRow = 0
         var currentColumn = 0
         var counter = 0
@@ -317,8 +297,8 @@ object TileLayerInitializer {
                 currentColumn = 0
             }
             val pos = Point2D(
-                (currentColumn / maxWidth).toFloat(),
-                (currentRow / maxHeight).toFloat()
+                currentColumn.toFloat(),
+                currentRow.toFloat()
             )
 
             currentColumn++
