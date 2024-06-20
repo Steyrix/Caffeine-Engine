@@ -290,11 +290,11 @@ object TileLayerInitializer {
         val horizontalDiff = if (tileSelectionData.height >= tileSelectionData.width) {
             1
         } else {
-            2
+            (tileSelectionData.width - tileSelectionData.height) + 1
         }
 
         val verticalDiff = if (tileSelectionData.height > tileSelectionData.width) {
-            2
+            (tileSelectionData.height - tileSelectionData.width) + 1
         } else {
             1
         }
