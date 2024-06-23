@@ -145,7 +145,7 @@ internal object TiledResourceParser {
         return out
     }
 
-    private fun convertToPrimitiveProperties(list: ArrayList<Node>): ArrayList<Property> {
+    private fun convertToPrimitiveProperties(list: ArrayList<Node>): MutableList<Property> {
         val out = ArrayList<Property>()
 
         list.forEach {
