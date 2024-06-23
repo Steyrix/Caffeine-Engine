@@ -10,6 +10,13 @@ object Procedural {
         // use noise
     }
 
+    private fun normalizeForTileset(
+        uniqueTilesCount: Int,
+        values: List<Float>
+    ): List<Float> {
+        return values.map { it % uniqueTilesCount }
+    }
+
     private fun getNoiseForCoordinate(pos: Point2D): Float {
         return OpenSimplex2S.noise2_ImproveX(
             System.currentTimeMillis(), pos.x.toDouble(), pos.y.toDouble()
