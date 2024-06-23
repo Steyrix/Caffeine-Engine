@@ -3,6 +3,7 @@ package engine.feature.procedural
 import engine.core.geometry.Point2D
 import engine.feature.tiled.data.TileSet
 import engine.feature.tiled.data.layer.TileLayer
+import kotlin.random.Random
 
 object Procedural {
 
@@ -25,6 +26,8 @@ object Procedural {
             set.getUniqueTilesCount(),
             rawList
         ).toMutableList()
+
+        println("Normalized: $normalizedList")
 
         return TileLayer(
             "",
@@ -54,10 +57,26 @@ object Procedural {
         uniqueTilesCount: Int,
         values: List<Float>
     ): List<Int> {
-        return values.map { (it % uniqueTilesCount).toInt() }
+
+        val randomSet = mutableSetOf<Int>()
+
+        while (randomSet.size < uniqueTilesCount) {
+            randomSet.add(Random.nextInt(uniqueTilesCount))
+        }
+
+        val valueMap = hashMapOf<Float, Int>()
+
+        randomSet.forEachIndexed { index, it ->
+            if (!valueMap.contains(values[index])) {
+                valueMap[values[index]] = it
+            }
+        }
+
+        return valueMap.values.toList()
     }
 
     private fun getNoiseForCoordinate(pos: Point2D): Float {
+        println(pos)
         return OpenSimplex2S.noise2_ImproveX(
             System.currentTimeMillis(), pos.x.toDouble(), pos.y.toDouble()
         )
