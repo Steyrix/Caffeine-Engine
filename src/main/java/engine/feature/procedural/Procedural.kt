@@ -5,6 +5,7 @@ import engine.feature.tiled.data.TileSet
 import engine.feature.tiled.data.layer.TileLayer
 import kotlin.random.Random
 
+// TODO: use noise to generate biomes characteristics rather than tiles itself
 object Procedural {
 
     fun generateLayer(
