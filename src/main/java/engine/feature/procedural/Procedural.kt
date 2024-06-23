@@ -1,7 +1,6 @@
 package engine.feature.procedural
 
 import engine.core.geometry.Point2D
-import engine.feature.tiled.data.TileMap
 import engine.feature.tiled.data.TileSet
 import engine.feature.tiled.data.layer.TileLayer
 
@@ -9,7 +8,6 @@ object Procedural {
 
     fun generateLayer(
         set: TileSet,
-        map: TileMap,
         widthInTiles: Int = 64,
         heightInTiles: Int = 64,
         tilesCount: Int
@@ -18,7 +16,7 @@ object Procedural {
         for (i in 0 until tilesCount) {
             rawList.add(
                 getNoiseForCoordinate(
-                    map.getTilePosition(i)
+                    determinePosition(i, widthInTiles, set)
                 )
             )
         }
@@ -36,6 +34,20 @@ object Procedural {
             normalizedList,
             mutableListOf()
         )
+    }
+
+    private fun determinePosition(
+        index: Int,
+        widthInTiles: Int,
+        set: TileSet
+    ): Point2D {
+        val rowIndex = index / widthInTiles
+        val columnIndex = index - rowIndex * widthInTiles
+
+        val x = columnIndex * set.relativeTileWidth
+        val y = rowIndex * set.relativeTileHeight
+
+        return Point2D(x, y)
     }
 
     private fun normalizeForTileset(
