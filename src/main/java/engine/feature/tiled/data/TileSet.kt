@@ -46,4 +46,8 @@ class TileSet(
             (currentColumn + 1) * x, currentRow * y
         )
     }
+
+    fun getUniqueTilesCount(): Int {
+        return textureTileCount
+    }
 }
