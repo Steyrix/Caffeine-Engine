@@ -7,6 +7,8 @@ object Procedural {
 
     fun generateMap(set: TileSet) {
         // retrieve biomes
+        // should probably use different tilesets for biomes
+        // and then apply partial intersection of biomes
         // use noise
     }
 
