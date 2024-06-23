@@ -1,22 +1,48 @@
 package engine.feature.procedural
 
 import engine.core.geometry.Point2D
+import engine.feature.tiled.data.TileMap
 import engine.feature.tiled.data.TileSet
+import engine.feature.tiled.data.layer.TileLayer
 
 object Procedural {
 
-    fun generateMap(set: TileSet) {
-        // retrieve biomes
-        // should probably use different tilesets for biomes
-        // and then apply partial intersection of biomes
-        // use noise
+    fun generateLayer(
+        set: TileSet,
+        map: TileMap,
+        widthInTiles: Int = 64,
+        heightInTiles: Int = 64,
+        tilesCount: Int
+    ): TileLayer {
+        val rawList = mutableListOf<Float>()
+        for (i in 0 until tilesCount) {
+            rawList.add(
+                getNoiseForCoordinate(
+                    map.getTilePosition(i)
+                )
+            )
+        }
+
+        val normalizedList = normalizeForTileset(
+            set.getUniqueTilesCount(),
+            rawList
+        ).toMutableList()
+
+        return TileLayer(
+            "",
+            widthInTiles,
+            heightInTiles,
+            set,
+            normalizedList,
+            mutableListOf()
+        )
     }
 
     private fun normalizeForTileset(
         uniqueTilesCount: Int,
         values: List<Float>
-    ): List<Float> {
-        return values.map { it % uniqueTilesCount }
+    ): List<Int> {
+        return values.map { (it % uniqueTilesCount).toInt() }
     }
 
     private fun getNoiseForCoordinate(pos: Point2D): Float {
