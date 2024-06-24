@@ -28,8 +28,6 @@ object Procedural {
             rawList
         ).toMutableList()
 
-        println("Normalized: $normalizedList")
-
         return TileLayer(
             "",
             widthInTiles,
