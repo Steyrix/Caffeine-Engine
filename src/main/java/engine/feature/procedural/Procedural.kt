@@ -38,6 +38,14 @@ object Procedural {
         )
     }
 
+    private fun generateBiome(): Biome {
+        TODO()
+    }
+
+    private fun generateBiomeData() {
+        TODO()
+    }
+
     private fun determinePosition(
         index: Int,
         widthInTiles: Int,
