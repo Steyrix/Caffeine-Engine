@@ -1,6 +1,7 @@
 package engine.feature.procedural
 
 import engine.core.geometry.Point2D
+import engine.feature.tiled.data.TileMap
 import engine.feature.tiled.data.TileSet
 import engine.feature.tiled.data.layer.TileLayer
 import kotlin.random.Random
@@ -40,10 +41,17 @@ object Procedural {
 
     private fun generateBiome(): Biome {
         TODO()
+        // generate layer for biome using noise
     }
 
     private fun generateBiomeData() {
         TODO()
+        // generate biomes data for map
+    }
+
+    private fun composeMap(): TileMap {
+        TODO()
+        // combine biome layers
     }
 
     private fun determinePosition(
