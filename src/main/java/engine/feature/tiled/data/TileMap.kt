@@ -6,7 +6,6 @@ import engine.core.shader.Shader
 import engine.core.update.SetOfStatic2DParameters
 import engine.core.geometry.Point2D
 import engine.core.render.Model
-import engine.feature.procedural.Procedural
 import engine.feature.tiled.data.layer.*
 import engine.feature.tiled.scene.TileSelectionData
 import engine.feature.tiled.traversing.TileGraph
@@ -97,10 +96,6 @@ class TileMap(
 
         widthInTiles = layers.first().widthInTiles
         heightInTiles = layers.first().heightInTiles
-
-//        layers.add(
-//            Procedural.generateLayer(set, widthInTiles, heightInTiles, tilesCount)
-//        )
 
         relativeHeight = heightInTiles * set.relativeTileHeight
         relativeWidth = widthInTiles * set.relativeTileWidth
