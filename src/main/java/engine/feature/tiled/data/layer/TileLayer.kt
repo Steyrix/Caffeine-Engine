@@ -14,7 +14,7 @@ class TileLayer(
     override val heightInTiles: Int,
     override val set: TileSet,
     override val tileIdsData: MutableList<Int>,
-    private val properties: MutableList<Property>
+    private val properties: MutableList<Property> = mutableListOf()
 ) : CompositeEntity(), Layer {
 
     var shader: Shader? = null
