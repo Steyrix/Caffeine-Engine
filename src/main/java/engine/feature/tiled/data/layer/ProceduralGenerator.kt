@@ -10,18 +10,52 @@ typealias MapData = MutableList<Pair<Point2D, Int>>
 object ProceduralGenerator {
 
     fun createTileMap(
-        data: Map<TileSet, MapData>
+        data: Map<TileSet, MapData>,
+        widthInTiles: Int,
+        heightInTiles: Int
     ): TileMap {
-
-        val graphicalLayers = mutableListOf<Model>()
+        val graphicalLayers = mutableListOf<Pair<TileSet, Model>>()
 
         data.keys.forEach { set ->
             data[set]?.let { mapData ->
                 graphicalLayers.add(
+                    set to
                     TileLayerInitializer.genLayerModelByData(mapData, set)
                 )
             }
         }
-        TODO()
+
+        val layers = createLayers(
+            graphicalLayers,
+            data,
+            widthInTiles,
+            heightInTiles
+        )
+
+        return TileMap(layers)
+    }
+
+    private fun createLayers(
+        graphicalLayers: List<Pair<TileSet, Model>>,
+        data: Map<TileSet, MapData>,
+        widthInTiles: Int,
+        heightInTiles: Int
+    ): MutableList<Layer> {
+        val layers: MutableList<Layer> = graphicalLayers.mapIndexed { index, it ->
+            val tileIdsData = data[it.first]!!.map {
+                it.second
+            }.toMutableList()
+
+            TileLayer(
+                "generated_layer_$index",
+                widthInTiles,
+                heightInTiles,
+                set = it.first,
+                tileIdsData,
+                model = it.second
+            )
+        }.toMutableList()
+
+        return layers
     }
 }
