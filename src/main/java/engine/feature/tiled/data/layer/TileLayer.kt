@@ -8,6 +8,7 @@ import engine.core.update.SetOfStatic2DParameters
 import engine.feature.tiled.data.TileSet
 import engine.feature.tiled.property.Property
 
+// TODO: condense
 class TileLayer(
     override val name: String,
     override val widthInTiles: Int,
