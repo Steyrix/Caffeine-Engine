@@ -14,7 +14,8 @@ class TileLayer(
     override val heightInTiles: Int,
     override val set: TileSet,
     override val tileIdsData: MutableList<Int>,
-    private val properties: MutableList<Property> = mutableListOf()
+    private val properties: MutableList<Property> = mutableListOf(),
+    model: Model?
 ) : CompositeEntity(), Layer {
 
     var shader: Shader? = null
@@ -39,7 +40,7 @@ class TileLayer(
         field = value
     }
 
-    private val graphicalComponent: Model = TileLayerInitializer.genLayerModel(
+    private val graphicalComponent: Model = model ?: TileLayerInitializer.genLayerModel(
         tileIdsData, set, widthInTiles
     )
 
