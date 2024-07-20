@@ -15,8 +15,12 @@ object ProceduralGenerator {
 
         val graphicalLayers = mutableListOf<Model>()
 
-        data.keys.forEach {
-
+        data.keys.forEach { set ->
+            data[set]?.let { mapData ->
+                graphicalLayers.add(
+                    TileLayerInitializer.genLayerModelByData(mapData, set)
+                )
+            }
         }
         TODO()
     }
