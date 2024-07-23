@@ -22,39 +22,26 @@ class TileMap(
     private val set: TileSet
     private val layersMap = layers.associateBy { it.name }
     private val settings: TileMapSettings = TileMapSettings()
-    private val shaders: TileMapShaders = TileMapShaders()
+
+    var shaders: TileMapShaders = TileMapShaders()
+        set(value) {
+            layers.forEach {
+                if (it is ObjectsLayer) it.objectShaderCreator = value.objectShaderCreator
+                if (it is TileLayer) {
+                    it.debugShader = value.debugShader
+                    it.shader = value.mainShader
+                }
+            }
+            this.shader = value.mainShader
+            field = value
+        }
 
     val tilesCount: Int
         get() = settings.tilesCount()
     var graph: TileGraph? = null
 
     override var zLevel: Float = 0f
-
     override var shader: Shader? = null
-        set(value) {
-            field = value
-            layers.forEach {
-                if (it is TileLayer) it.shader = value
-            }
-        }
-
-    var objectShaderCreator: () -> Shader? = {
-        null
-    }
-        set(value) {
-            field = value
-            layers.forEach {
-                if (it is ObjectsLayer) it.objectShaderCreator = value
-            }
-        }
-
-    var debugShader: Shader? = null
-        set(value) {
-            field = value
-            layers.forEach {
-                if (it is TileLayer) it.debugShader = value
-            }
-        }
 
     var isDebugMeshEnabled: Boolean = false
         set(value) {

@@ -3,6 +3,7 @@ package engine.feature.tiled.scene
 import engine.core.shader.Shader
 import engine.core.shader.ShaderLoader
 import engine.feature.tiled.data.TileMap
+import engine.feature.tiled.data.TileMapShaders
 import engine.feature.tiled.parser.TiledResourceParser
 import org.joml.Matrix4f
 import java.io.File
@@ -32,7 +33,7 @@ internal object TileMapGraphicsProvider {
             File(sourcePath)
         )
 
-        graphicalComponent.shader = ShaderLoader.loadFromFile(
+        val mainShader = ShaderLoader.loadFromFile(
             vertexShaderFilePath = vertexShaderPath,
             fragmentShaderFilePath = fragmentShaderPath
         ).also { shader ->
@@ -44,7 +45,7 @@ internal object TileMapGraphicsProvider {
             }
         }
 
-        graphicalComponent.objectShaderCreator = {
+        val objectShaderCreator = {
             ShaderLoader.loadFromFile(
                 vertexShaderFilePath = vertexObjectShaderPath,
                 fragmentShaderFilePath = fragmentObjectShaderPath
@@ -63,13 +64,19 @@ internal object TileMapGraphicsProvider {
             this.javaClass.getResource("/shaders/boundingBoxShaders/boundingBoxFragmentShader.glsl")?.path
                 ?: throw IllegalStateException()
 
-        graphicalComponent.debugShader = ShaderLoader.loadFromFile(
+        val debugShader = ShaderLoader.loadFromFile(
             vertexShaderFilePath = debugVertexShaderPath,
             fragmentShaderFilePath = debugFragmentShaderPath
         ).also { shader ->
             shader.bind()
             shader.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection)
         }
+
+        val shaders = TileMapShaders(
+            mainShader = mainShader,
+            objectShaderCreator = objectShaderCreator,
+            debugShader = debugShader
+        )
 
         return graphicalComponent
     }
