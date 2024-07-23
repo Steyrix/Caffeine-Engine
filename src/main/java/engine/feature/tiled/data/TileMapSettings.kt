@@ -1,14 +1,14 @@
 package engine.feature.tiled.data
 
 data class TileMapSettings(
-    val relativeWidth: Float,
-    val relativeHeight: Float,
-    var absoluteWidth: Float,
-    var absoluteHeight: Float,
-    var absoluteTileWidth: Float,
-    var absoluteTileHeight: Float,
-    var widthInTiles: Int,
-    var heightInTiles: Int
+    val relativeWidth: Float = 0f,
+    val relativeHeight: Float = 0f,
+    var absoluteWidth: Float = 0f,
+    var absoluteHeight: Float = 0f,
+    var absoluteTileWidth: Float = 0f,
+    var absoluteTileHeight: Float = 0f,
+    var widthInTiles: Int = 0,
+    var heightInTiles: Int = 0
 ) {
-    var tilesCount = widthInTiles * heightInTiles
+    fun tilesCount(): Int = widthInTiles * heightInTiles
 }
