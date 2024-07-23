@@ -22,6 +22,7 @@ class TileMap(
     private val set: TileSet
     private val layersMap = layers.associateBy { it.name }
     private val settings: TileMapSettings = TileMapSettings()
+    private val shaders: TileMapShaders = TileMapShaders()
 
     val tilesCount: Int
         get() = settings.tilesCount()
