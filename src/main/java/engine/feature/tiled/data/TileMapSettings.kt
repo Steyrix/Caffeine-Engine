@@ -1,5 +1,7 @@
 package engine.feature.tiled.data
 
+import engine.core.update.SetOfStatic2DParameters
+
 data class TileMapSettings(
     var relativeWidth: Float = 0f,
     var relativeHeight: Float = 0f,
@@ -16,4 +18,11 @@ data class TileMapSettings(
     fun worldWidth(): Float = relativeWidth * absoluteWidth
 
     fun worldHeight(): Float = relativeHeight * absoluteHeight
+
+    fun update(parameters: SetOfStatic2DParameters) {
+        absoluteWidth = parameters.xSize
+        absoluteHeight = parameters.ySize
+        absoluteTileWidth = relativeWidth / widthInTiles * absoluteWidth
+        absoluteTileHeight = relativeHeight / heightInTiles * absoluteHeight
+    }
 }
