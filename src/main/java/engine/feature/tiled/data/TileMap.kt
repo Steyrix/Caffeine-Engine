@@ -19,6 +19,16 @@ class TileMap(
         private const val NOT_FOUND = -1
     }
 
+    private val set: TileSet
+    private val layersMap = layers.associateBy { it.name }
+    private val settings: TileMapSettings = TileMapSettings()
+
+    val tilesCount: Int
+        get() = settings.tilesCount()
+    var graph: TileGraph? = null
+
+    override var zLevel: Float = 0f
+
     override var shader: Shader? = null
         set(value) {
             field = value
@@ -54,18 +64,6 @@ class TileMap(
                 }
             }
         }
-
-    override var zLevel: Float = 0f
-
-    private val set: TileSet
-    private val layersMap = layers.associateBy { it.name }
-
-    val tilesCount: Int
-        get() = settings.tilesCount()
-
-    var graph: TileGraph? = null
-
-    private val settings: TileMapSettings = TileMapSettings()
 
     init {
         if (layers.isEmpty()) throw IllegalStateException("Cannot initialize map with empty list of layers")
