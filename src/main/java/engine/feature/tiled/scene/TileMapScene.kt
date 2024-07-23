@@ -101,8 +101,8 @@ abstract class TileMapScene(
         highlightParams.apply {
             x = startPos.x
             y = startPos.y
-            xSize = map.absoluteTileWidth * selection.width
-            ySize = map.absoluteTileHeight * selection.height
+            xSize = map.absoluteTileWidth() * selection.width
+            ySize = map.absoluteTileHeight() * selection.height
             rotationAngle = 0f
         }
 

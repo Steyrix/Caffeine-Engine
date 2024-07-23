@@ -60,50 +60,27 @@ class TileMap(
     private val set: TileSet
     private val layersMap = layers.associateBy { it.name }
 
-    /*
-        Represents the size of map relative to the screen size
-     */
-    val relativeHeight: Float
-    val relativeWidth: Float
-
-    /*
-        Represents the absolute size of map in pixels
-     */
-    private var absoluteHeight: Float = 0f
-    private var absoluteWidth: Float = 0f
-
-    /*
-        Represents the absolute size of tile in pixels
-     */
-    var absoluteTileWidth: Float = 0f
-    var absoluteTileHeight: Float = 0f
-
-    /*
-        Represents the number of rows and columns of tiles in the map
-     */
-    private var widthInTiles: Int = 0
-    private var heightInTiles: Int = 0
-
     val tilesCount: Int
-        get() = widthInTiles * heightInTiles
+        get() = settings.tilesCount()
 
     var graph: TileGraph? = null
+
+    private val settings: TileMapSettings = TileMapSettings()
 
     init {
         if (layers.isEmpty()) throw IllegalStateException("Cannot initialize map with empty list of layers")
 
         set = layers.first().set
 
-        widthInTiles = layers.first().widthInTiles
-        heightInTiles = layers.first().heightInTiles
-
-        relativeHeight = heightInTiles * set.relativeTileHeight
-        relativeWidth = widthInTiles * set.relativeTileWidth
+        settings.widthInTiles = layers.first().widthInTiles
+        settings.heightInTiles = layers.first().heightInTiles
+        settings.relativeHeight = settings.heightInTiles * set.relativeTileHeight
+        settings.relativeWidth = settings.widthInTiles * set.relativeTileWidth
     }
 
-    fun getTileHeight() = absoluteTileHeight
+    fun getTileHeight() = settings.absoluteTileHeight
 
-    fun getTileWidth() = absoluteTileWidth
+    fun getTileWidth() = settings.absoluteTileWidth
 
     fun getLayerByName(name: String): Layer = layersMap[name]
         ?: throw IllegalStateException("Layer with name $name not found")
@@ -120,22 +97,22 @@ class TileMap(
     }
 
     fun getTilePosition(index: Int): Point2D {
-        val rowIndex = index / widthInTiles
-        val columnIndex = index - rowIndex * widthInTiles
+        val rowIndex = index / settings.widthInTiles
+        val columnIndex = index - rowIndex * settings.widthInTiles
 
-        val x = columnIndex * absoluteWidth * set.relativeTileWidth
-        val y = rowIndex * absoluteHeight * set.relativeTileHeight
+        val x = columnIndex * settings.absoluteWidth * set.relativeTileWidth
+        val y = rowIndex * settings.absoluteHeight * set.relativeTileHeight
 
         return Point2D(x, y)
     }
 
     fun getTileIndex(posX: Float, posY: Float): Int {
-        val xTileNumber = getTileAlignmentInMap(absoluteTileWidth, posX)
-        val yTileNumber = getTileAlignmentInMap(absoluteTileHeight, posY)
+        val xTileNumber = getTileAlignmentInMap(settings.absoluteTileWidth, posX)
+        val yTileNumber = getTileAlignmentInMap(settings.absoluteTileHeight, posY)
 
         if (xTileNumber < 0 || yTileNumber < 0) return -1
 
-        return yTileNumber * widthInTiles + xTileNumber
+        return yTileNumber * settings.widthInTiles + xTileNumber
     }
 
     fun generateGraph(
@@ -166,10 +143,7 @@ class TileMap(
         val initial = parameters.xSize
 
         parameters.xSize /= set.tilesetWidthHeightRatio
-        absoluteWidth = parameters.xSize
-        absoluteHeight = parameters.ySize
-        absoluteTileWidth = relativeWidth / widthInTiles * absoluteWidth
-        absoluteTileHeight = relativeHeight / heightInTiles * absoluteHeight
+        settings.update(parameters)
 
         layers.forEach {
             it.updateParameters(parameters)
@@ -186,13 +160,13 @@ class TileMap(
         }
     }
 
-    fun getWorldWidth(): Float {
-        return relativeWidth * absoluteWidth
-    }
+    fun getWorldWidth() = settings.worldWidth()
 
-    fun getWorldHeight(): Float {
-        return relativeHeight * absoluteHeight
-    }
+    fun getWorldHeight() = settings.worldHeight()
+
+    fun absoluteTileWidth() = settings.absoluteTileWidth
+
+    fun absoluteTileHeight() = settings.absoluteTileHeight
 
     fun processIntersectionIfNeeded(point: Point2D) {
         val index = getTileIndex(point.x, point.y)
@@ -214,7 +188,11 @@ class TileMap(
     }
 
     fun getVertices(): MutableList<Float> {
-        return TileLayerInitializer.genVerticesBuffer(layers[0].tileIdsData, set, widthInTiles)
+        return TileLayerInitializer.genVerticesBuffer(
+            layers[0].tileIdsData,
+            set,
+            settings.widthInTiles
+        )
     }
 
     fun getNetForTileSelection(
