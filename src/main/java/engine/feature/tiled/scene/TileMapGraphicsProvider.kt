@@ -78,6 +78,8 @@ internal object TileMapGraphicsProvider {
             debugShader = debugShader
         )
 
+        graphicalComponent.shaders = shaders
+
         return graphicalComponent
     }
 }
