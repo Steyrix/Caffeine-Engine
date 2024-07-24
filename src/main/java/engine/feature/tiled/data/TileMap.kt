@@ -11,6 +11,8 @@ import engine.feature.tiled.scene.TileSelectionData
 import engine.feature.tiled.traversing.TileGraph
 import kotlin.math.roundToInt
 
+// TODO: parameters should be set from outside
+// TODO: get rid of retrieving shared parameters from layers and tilesets
 class TileMap(
     private val layers: MutableList<Layer>,
 ) : Drawable<SetOfStatic2DParameters>, Entity {
