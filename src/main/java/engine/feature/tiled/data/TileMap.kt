@@ -15,6 +15,8 @@ import kotlin.math.roundToInt
 // TODO: get rid of retrieving shared parameters from layers and tilesets
 class TileMap(
     private val layers: MutableList<Layer>,
+    widthInTiles: Int = 0,
+    heightInTiles: Int = 0
 ) : Drawable<SetOfStatic2DParameters>, Entity {
 
     companion object {
