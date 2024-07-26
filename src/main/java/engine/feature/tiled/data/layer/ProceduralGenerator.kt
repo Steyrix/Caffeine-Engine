@@ -32,7 +32,11 @@ object ProceduralGenerator {
             heightInTiles
         )
 
-        return TileMap(layers)
+        return TileMap(
+            layers,
+            widthInTiles = widthInTiles,
+            heightInTiles = heightInTiles
+        )
     }
 
     private fun createLayers(

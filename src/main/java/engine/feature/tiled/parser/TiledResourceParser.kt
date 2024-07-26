@@ -24,7 +24,9 @@ internal object TiledResourceParser {
         val tileSet = retrieveTileSet(document)
 
         return TileMap(
-            layers = retrieveLayers(mapWidth, mapHeight, document, tileSet)
+            layers = retrieveLayers(mapWidth, mapHeight, document, tileSet),
+            widthInTiles = mapWidth,
+            heightInTiles = mapHeight
         )
     }
 
