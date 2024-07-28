@@ -68,6 +68,21 @@ class TileMap(
         settings.relativeWidth = settings.widthInTiles * set.relativeTileWidth
     }
 
+    private fun checkSetParameters(set: TileSet) {
+        val relativeWidth = set.relativeTileWidth
+        val relativeHeight = set.relativeTileHeight
+
+
+        layers.forEach {
+            if (
+                it.set.relativeTileWidth != relativeWidth
+                || it.set.relativeTileHeight != relativeHeight
+            ) {
+                throw IllegalStateException("Tile sets dimension are not equal")
+            }
+        }
+    }
+
     fun getTileHeight() = settings.absoluteTileHeight
 
     fun getTileWidth() = settings.absoluteTileWidth
