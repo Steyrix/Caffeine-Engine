@@ -16,7 +16,9 @@ import kotlin.math.roundToInt
 class TileMap(
     private val layers: MutableList<Layer>,
     widthInTiles: Int = 0,
-    heightInTiles: Int = 0
+    heightInTiles: Int = 0,
+    relativeTileWidth: Float = 0f,
+    relativeTileHeight: Float = 0f
 ) : Drawable<SetOfStatic2DParameters>, Entity {
 
     companion object {
