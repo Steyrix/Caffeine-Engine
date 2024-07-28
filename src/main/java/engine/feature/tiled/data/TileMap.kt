@@ -62,8 +62,8 @@ class TileMap(
 
         set = layers.first().set
 
-        settings.widthInTiles = layers.first().widthInTiles
-        settings.heightInTiles = layers.first().heightInTiles
+        settings.widthInTiles = widthInTiles
+        settings.heightInTiles = heightInTiles
         settings.relativeHeight = settings.heightInTiles * set.relativeTileHeight
         settings.relativeWidth = settings.widthInTiles * set.relativeTileWidth
     }
