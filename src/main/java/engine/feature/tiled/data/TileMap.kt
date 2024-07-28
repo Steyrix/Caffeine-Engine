@@ -61,6 +61,7 @@ class TileMap(
         if (layers.isEmpty()) throw IllegalStateException("Cannot initialize map with empty list of layers")
 
         set = layers.first().set
+        checkSetParameters(set)
 
         settings.widthInTiles = widthInTiles
         settings.heightInTiles = heightInTiles
