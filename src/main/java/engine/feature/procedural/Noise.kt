@@ -2,9 +2,9 @@ package engine.feature.procedural
 
 interface NoiseParameterSet
 
-interface NoiseParameter<T: Comparable<T>> {
+abstract class NoiseParameter<T: Comparable<T>> {
 
-    var value: T
+    abstract var value: T
 
-    fun getRange(): ClosedRange<T>
+    // abstract fun getRange(): ClosedRange<T>
 }
