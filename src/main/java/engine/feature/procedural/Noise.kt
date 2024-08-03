@@ -4,7 +4,7 @@ interface NoiseParameterSet
 
 interface NoiseParameter<T: Comparable<T>> {
 
-    fun getValue(): T
+    var value: T
 
     fun getRange(): ClosedRange<T>
 }
