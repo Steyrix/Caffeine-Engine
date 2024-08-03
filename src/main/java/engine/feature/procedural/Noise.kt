@@ -2,7 +2,9 @@ package engine.feature.procedural
 
 interface NoiseParameterSet
 
-interface NoiseParameter<T> {
+interface NoiseParameter<T: Comparable<T>> {
 
     fun getValue(): T
+
+    fun getRange(): ClosedRange<T>
 }
