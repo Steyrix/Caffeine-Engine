@@ -1,7 +1,8 @@
 package engine.feature.procedural
 
-interface NoiseParameterSet
+interface NoiseParameterType
 
 class NoiseParameter (
-    var value: Float
+    var value: Float,
+    val type: NoiseParameterType
 )
