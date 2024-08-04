@@ -1,6 +1,9 @@
 package engine.feature.procedural.generators
 
 import engine.core.geometry.Point2D
+import engine.feature.procedural.NoiseParameter
+import engine.feature.procedural.NoiseParameterType
+import engine.feature.procedural.ProceduralEnum
 
 typealias ProceduralData = MutableList<Pair<Point2D, Float>>
 
