@@ -3,14 +3,14 @@ package engine.feature.procedural
 typealias MinMax = Pair<Float, Float>
 
 interface ProceduralEnum {
-    val rangeMap: Map<NoiseParameter, MinMax>
+    val rangeMap: Map<NoiseParameterType, MinMax>
 
-    fun checkIfMatch(): Boolean {
-        rangeMap.entries.forEach {
-            val condition = it.key.value >= it.value.first && it.key.value <= it.value.second
-            if (!condition) {
-                return false
-            }
+    fun checkIfMatch(parameters: List<NoiseParameter>): Boolean {
+        parameters.forEach { param ->
+            rangeMap[param.type]?.let {
+                val condition = param.value >= it.first && param.value <= it.second
+                if (!condition) return false
+            } ?: return false
         }
 
         return true
