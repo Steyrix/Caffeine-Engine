@@ -1,14 +1,14 @@
 package engine.feature.procedural.generators
 
 import engine.core.geometry.Point2D
-import engine.feature.procedural.ProceduralEnum
+import engine.feature.procedural.MapElementType
 import engine.feature.tiled.data.TileSet
 import kotlin.random.Random
 
 typealias NormalizedData = MutableList<Pair<Point2D, Int>>
 
 class ProceduralGenerator(
-    private val tileSets: Map<ProceduralEnum, TileSet>,
+    private val tileSets: Map<MapElementType, TileSet>,
     private val noise: (Long, Double, Double) -> Float,
     private val worldData: List<Point2D>
 ) {

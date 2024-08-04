@@ -3,13 +3,13 @@ package engine.feature.procedural.generators
 import engine.core.geometry.Point2D
 import engine.feature.procedural.NoiseParameter
 import engine.feature.procedural.NoiseParameterType
-import engine.feature.procedural.ProceduralEnum
+import engine.feature.procedural.MapElementType
 
 typealias ProceduralData = MutableList<Pair<Point2D, Float>>
 
 abstract class TerrainGenerator(
     private val noiseTypeValues: List<NoiseParameterType> = listOf(),
-    private val targetTypeValues: List<ProceduralEnum> = listOf()
+    private val targetTypeValues: List<MapElementType> = listOf()
 ) {
 
     abstract val noiseFunc: (Long, Double, Double) -> Float
@@ -23,8 +23,8 @@ abstract class TerrainGenerator(
     fun generate(
         seed: Long,
         worldData: List<Point2D>,
-    ): Map<ProceduralEnum, ProceduralData> {
-        val result = hashMapOf<ProceduralEnum, ProceduralData>()
+    ): Map<MapElementType, ProceduralData> {
+        val result = hashMapOf<MapElementType, ProceduralData>()
 
         val proceduralData = distributeProceduralTypes(seed, worldData)
 
@@ -57,8 +57,8 @@ abstract class TerrainGenerator(
     private fun distributeProceduralTypes(
         seed: Long,
         worldData: List<Point2D>
-    ): Map<Point2D, ProceduralEnum> {
-        val result = mutableMapOf<Point2D, ProceduralEnum>()
+    ): Map<Point2D, MapElementType> {
+        val result = mutableMapOf<Point2D, MapElementType>()
 
         worldData.forEach {
 

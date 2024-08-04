@@ -2,7 +2,7 @@ package engine.feature.procedural
 
 typealias MinMax = Pair<Float, Float>
 
-interface ProceduralEnum {
+interface MapElementType {
     val rangeMap: Map<NoiseParameterType, MinMax>
 
     fun checkIfMatch(parameters: List<NoiseParameter>): Boolean {
