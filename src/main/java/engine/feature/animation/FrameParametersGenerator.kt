@@ -5,6 +5,19 @@ object FrameParametersGenerator {
     fun generate(
         xRange: Pair<Int, Int>,
         yRange: Pair<Int, Int>,
+        atlasData: AtlasData
+    ): List<FrameParameters> {
+        return generate(
+            xRange,
+            yRange,
+            atlasData.frameWidth,
+            atlasData.frameHeight
+        )
+    }
+
+    fun generate(
+        xRange: Pair<Int, Int>,
+        yRange: Pair<Int, Int>,
         frameWidth: Float,
         frameHeight: Float
     ): List<FrameParameters> {
