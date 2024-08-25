@@ -2,6 +2,7 @@ package engine.feature.collision.boundingbox
 
 import engine.core.geometry.Point2D
 
+// TODO: make immutable
 interface IntersectableBox {
 
     var x: Float
