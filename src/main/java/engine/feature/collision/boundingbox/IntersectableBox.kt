@@ -1,7 +1,6 @@
 package engine.feature.collision.boundingbox
 
 import engine.core.geometry.Point2D
-import kotlin.math.abs
 
 interface IntersectableBox {
 
@@ -18,22 +17,34 @@ interface IntersectableBox {
     val bottomY: Float
         get() = y + yOffset + ySize
 
-    val startX: Float
-        get() = x + xOffset
+    fun start(): Float {
+        return x + xOffset
+    }
 
-    val startY: Float
-        get() = y + yOffset
+    fun end(): Float {
+        return x + xOffset + xSize
+    }
+
+    fun bottom(): Float {
+        return y + yOffset + ySize
+    }
+
+    fun top(): Float {
+        return y + yOffset
+    }
 
     fun setPosition(nX: Float, nY: Float) {
         x = nX
         y = nY
     }
 
-    fun isIntersectingByX(anotherBox: BoundingBox) =
-        abs((startX + xSize / 2) - (anotherBox.startX + anotherBox.xSize / 2)) * 2 < (xSize + anotherBox.xSize)
+    fun isIntersectingByX(anotherBox: BoundingBox): Boolean {
+        return end() >= anotherBox.start() && anotherBox.end() >= start()
+    }
 
-    fun isIntersectingByY(anotherBox: BoundingBox) =
-        abs((startY + ySize / 2) - (anotherBox.startY + anotherBox.ySize / 2)) * 2 < (ySize + anotherBox.ySize)
+    fun isIntersectingByY(anotherBox: BoundingBox): Boolean {
+        return bottom() >= anotherBox.top() && anotherBox.bottom() >= top()
+    }
 
     fun isIntersecting(anotherBox: BoundingBox) = isIntersectingByX(anotherBox) && isIntersectingByY(anotherBox)
 
