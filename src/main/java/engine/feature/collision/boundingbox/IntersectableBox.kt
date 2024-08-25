@@ -11,12 +11,6 @@ interface IntersectableBox {
     var xSize: Float
     var ySize: Float
 
-    val rightX: Float
-        get() = x + xOffset + xSize
-
-    val bottomY: Float
-        get() = y + yOffset + ySize
-
     fun start(): Float {
         return x + xOffset
     }
@@ -55,9 +49,9 @@ interface IntersectableBox {
 
     fun isContainingEveryOf(points: List<Point2D>): Boolean {
         points.forEach {
-            val doesNotContain = it.x > rightX
+            val doesNotContain = it.x > end()
                     || it.x < x
-                    || it.y > bottomY
+                    || it.y > bottom()
                     || it.y < y
             if (doesNotContain) {
                 return false
@@ -87,17 +81,17 @@ interface IntersectableBox {
 
     fun getIntersectionWidth(anotherBox: BoundingBox): Float {
         return if (anotherBox.x >= x) {
-            -(rightX - anotherBox.x)
+            -(end() - anotherBox.x)
         } else {
-            anotherBox.rightX - x
+            anotherBox.end() - x
         }
     }
 
     fun getIntersectionHeight(anotherBox: BoundingBox): Float {
-        return if (anotherBox.y >= y) {
-            -(bottomY - anotherBox.y)
+        return if (anotherBox.top() >= top()) {
+            -(bottom() - anotherBox.start())
         } else {
-            anotherBox.bottomY - y
+            anotherBox.bottom() - top()
         }
     }
 
@@ -107,13 +101,13 @@ interface IntersectableBox {
 
     private fun isPointInBox(point: Point2D, isStrict: Boolean): Boolean {
         return if (isStrict) {
-            point.x < rightX
+            point.x < end()
                     && point.x > x
-                    && point.y < bottomY
+                    && point.y < bottom()
                     && point.y > y
         } else {
-            point.x in x..rightX
-                    && point.y <= bottomY
+            point.x in x..end()
+                    && point.y <= bottom()
                     && point.y >= y
         }
     }
