@@ -35,6 +35,24 @@ class BoundingBox(
                 isSizeBoundToHolder
             )
 
+    constructor(
+        x: Float,
+        y: Float,
+        offsets: OffsetData,
+        rotationAngle: Float = 0f,
+        isSizeBoundToHolder: Boolean = true
+    ) :
+            this(
+                x = x,
+                y = y,
+                offsets.xSize,
+                offsets.ySize,
+                offsets.xOffset,
+                offsets.yOffset,
+                rotationAngle,
+                isSizeBoundToHolder
+            )
+
     private val model = Model(
         dataArrays = listOf(DefaultBufferData.RECTANGLE_VERTICES),
         verticesCount = 8
