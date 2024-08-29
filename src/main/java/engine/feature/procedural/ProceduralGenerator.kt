@@ -1,9 +1,12 @@
-package engine.feature.tiled.data.layer
+package engine.feature.procedural
 
 import engine.core.geometry.Point2D
 import engine.core.render.Model
 import engine.feature.tiled.data.TileMap
 import engine.feature.tiled.data.TileSet
+import engine.feature.tiled.data.layer.Layer
+import engine.feature.tiled.data.layer.TileLayer
+import engine.feature.tiled.data.layer.TileLayerInitializer
 
 typealias MapData = MutableList<Pair<Point2D, Int>>
 
