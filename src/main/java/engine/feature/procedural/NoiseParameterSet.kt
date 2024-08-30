@@ -1,0 +1,3 @@
+package engine.feature.procedural
+
+interface NoiseParameterSet
