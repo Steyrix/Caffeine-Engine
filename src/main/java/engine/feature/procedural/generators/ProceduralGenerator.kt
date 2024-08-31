@@ -12,19 +12,29 @@ typealias NormalizedData = MutableList<Pair<Point2D, Int>>
 class ProceduralGenerator(
     private val tileSets: Map<MapElementType, TileSet>,
     private val noise: (Long, Double, Double) -> Float,
-    // TODO: generate world data dynamically
-    private val worldData: List<Point2D>,
+    private val tileSize: Float,
     private val widthInTiles: Int,
     private val heightInTiles: Int
 ) {
-    init {
-        if (widthInTiles * heightInTiles != worldData.size) {
-            throw IllegalStateException("Tiles count is not valid")
-        }
-    }
+
+    private val worldData: MutableList<Point2D> = mutableListOf()
 
     private val terrainGenerator = object : TerrainGenerator() {
         override val noiseFunc: (Long, Double, Double) -> Float = noise
+    }
+
+    init {
+        for (row in 0 until heightInTiles) {
+            for (column in 0 until widthInTiles) {
+                worldData.add(
+                    Point2D(row * tileSize, column * tileSize)
+                )
+            }
+        }
+
+        if (widthInTiles * heightInTiles != worldData.size) {
+            throw IllegalStateException("Tiles count is not valid")
+        }
     }
 
     fun generateMap(
@@ -45,7 +55,7 @@ class ProceduralGenerator(
             }
         }
 
-        TODO("return tile map")
+        TODO()
 //        val layers = resultMap.keys.mapIndexed { index, it ->
 //            TileLayer("layer $index", )
 //        }
