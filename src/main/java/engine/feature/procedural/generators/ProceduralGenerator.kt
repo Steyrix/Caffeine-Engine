@@ -2,6 +2,7 @@ package engine.feature.procedural.generators
 
 import engine.core.geometry.Point2D
 import engine.feature.procedural.MapElementType
+import engine.feature.procedural.OpenSimplex2S
 import engine.feature.tiled.data.TileMap
 import engine.feature.tiled.data.TileSet
 import engine.feature.tiled.data.layer.Layer
@@ -13,7 +14,9 @@ typealias NormalizedData = MutableList<Pair<Point2D, Int>>
 
 class ProceduralGenerator(
     private val tileSets: Map<MapElementType, TileSet>,
-    private val noise: (Long, Double, Double) -> Float,
+    private val noise: (Long, Double, Double) -> Float = { l, x, y ->
+        OpenSimplex2S.noise2(l, x, y)
+    },
     private val widthInTiles: Int,
     private val heightInTiles: Int,
     tileSize: Float
