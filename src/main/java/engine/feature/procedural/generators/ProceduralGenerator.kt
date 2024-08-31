@@ -13,9 +13,9 @@ typealias NormalizedData = MutableList<Pair<Point2D, Int>>
 class ProceduralGenerator(
     private val tileSets: Map<MapElementType, TileSet>,
     private val noise: (Long, Double, Double) -> Float,
-    private val tileSize: Float,
     private val widthInTiles: Int,
-    private val heightInTiles: Int
+    private val heightInTiles: Int,
+    tileSize: Float
 ) {
 
     private val worldData: MutableList<Point2D> = mutableListOf()
@@ -57,14 +57,20 @@ class ProceduralGenerator(
         }
 
 
-
         val layers = resultMap.keys.mapIndexed { index, it ->
+            val tileIds = resultMap[it]!!
+                .map {
+                    it.first.toTileId() to it.second
+                }.sortedBy { it.first }
+                .map { it.second }
+                .toMutableList()
+
             TileLayer(
                 name = "ProceduralLayer_$index",
                 widthInTiles = widthInTiles,
                 heightInTiles = heightInTiles,
                 set = it,
-                tileIdsData = mutableListOf(), // TODO
+                tileIdsData = tileIds, // TODO
                 properties = mutableListOf(),
                 model = null
             )
@@ -92,5 +98,15 @@ class ProceduralGenerator(
         }
 
         return valueMap.values.toList().toMutableList()
+    }
+
+    private fun Point2D.toTileId(): Int {
+        worldData.forEachIndexed { index, it ->
+            if (it == this) {
+                return index
+            }
+        }
+
+        return 0
     }
 }
