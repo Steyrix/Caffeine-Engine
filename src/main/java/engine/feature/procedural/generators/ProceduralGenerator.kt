@@ -7,6 +7,7 @@ import engine.feature.tiled.data.TileSet
 import engine.feature.tiled.data.layer.TileLayer
 import kotlin.random.Random
 
+// TODO: (number in tileIdsData) to (number in tileSet)
 typealias NormalizedData = MutableList<Pair<Point2D, Int>>
 
 class ProceduralGenerator(
@@ -55,10 +56,21 @@ class ProceduralGenerator(
             }
         }
 
+
+
+        val layers = resultMap.keys.mapIndexed { index, it ->
+            TileLayer(
+                name = "ProceduralLayer_$index",
+                widthInTiles = widthInTiles,
+                heightInTiles = heightInTiles,
+                set = it,
+                tileIdsData = mutableListOf(), // TODO
+                properties = mutableListOf(),
+                model = null
+            )
+        }
+
         TODO()
-//        val layers = resultMap.keys.mapIndexed { index, it ->
-//            TileLayer("layer $index", )
-//        }
     }
 
 
