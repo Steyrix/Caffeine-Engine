@@ -2,7 +2,9 @@ package engine.feature.procedural.generators
 
 import engine.core.geometry.Point2D
 import engine.feature.procedural.MapElementType
+import engine.feature.tiled.data.TileMap
 import engine.feature.tiled.data.TileSet
+import engine.feature.tiled.data.layer.TileLayer
 import kotlin.random.Random
 
 typealias NormalizedData = MutableList<Pair<Point2D, Int>>
@@ -10,15 +12,24 @@ typealias NormalizedData = MutableList<Pair<Point2D, Int>>
 class ProceduralGenerator(
     private val tileSets: Map<MapElementType, TileSet>,
     private val noise: (Long, Double, Double) -> Float,
-    private val worldData: List<Point2D>
+    // TODO: generate world data dynamically
+    private val worldData: List<Point2D>,
+    private val widthInTiles: Int,
+    private val heightInTiles: Int
 ) {
+    init {
+        if (widthInTiles * heightInTiles != worldData.size) {
+            throw IllegalStateException("Tiles count is not valid")
+        }
+    }
+
     private val terrainGenerator = object : TerrainGenerator() {
         override val noiseFunc: (Long, Double, Double) -> Float = noise
     }
 
     fun generateMap(
         seed: Long
-    ) {
+    ): TileMap {
         val data = terrainGenerator.generate(
             seed, worldData
         )
@@ -34,7 +45,10 @@ class ProceduralGenerator(
             }
         }
 
-        TODO("generate tile map")
+        TODO("return tile map")
+//        val layers = resultMap.keys.mapIndexed { index, it ->
+//            TileLayer("layer $index", )
+//        }
     }
 
 
