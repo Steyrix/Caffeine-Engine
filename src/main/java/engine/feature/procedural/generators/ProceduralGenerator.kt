@@ -4,6 +4,7 @@ import engine.core.geometry.Point2D
 import engine.feature.procedural.MapElementType
 import engine.feature.tiled.data.TileMap
 import engine.feature.tiled.data.TileSet
+import engine.feature.tiled.data.layer.Layer
 import engine.feature.tiled.data.layer.TileLayer
 import kotlin.random.Random
 
@@ -56,8 +57,7 @@ class ProceduralGenerator(
             }
         }
 
-
-        val layers = resultMap.keys.mapIndexed { index, it ->
+        val layers: MutableList<Layer> = resultMap.keys.mapIndexed { index, it ->
             val tileIds = resultMap[it]!!
                 .map {
                     it.first.toTileId() to it.second
@@ -74,9 +74,13 @@ class ProceduralGenerator(
                 properties = mutableListOf(),
                 model = null
             )
-        }
+        }.toMutableList()
 
-        TODO()
+        return TileMap(
+            layers = layers,
+            widthInTiles = widthInTiles,
+            heightInTiles = heightInTiles
+        )
     }
 
 
