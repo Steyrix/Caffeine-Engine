@@ -2,7 +2,9 @@ package engine.feature.procedural.generators
 
 import engine.core.geometry.Point2D
 import engine.feature.procedural.MapElementType
+import engine.feature.procedural.NoiseParameterType
 import engine.feature.procedural.OpenSimplex2S
+import engine.feature.tiled.data.TileMap
 import engine.feature.tiled.data.TileSet
 import engine.feature.tiled.data.layer.Layer
 import engine.feature.tiled.data.layer.TileLayer
@@ -19,15 +21,16 @@ class ProceduralGenerator(
     },
     private val widthInTiles: Int,
     private val heightInTiles: Int,
-    tileSize: Float
+    tileSize: Float,
+    elementTypes: List<MapElementType> = emptyList(),
+    noiseParametersTypes: List<NoiseParameterType> = emptyList()
 ) {
 
     private val worldData: MutableList<Point2D> = mutableListOf()
 
-    // TODO: stub
     private val terrainGenerator = object : TerrainGenerator(
-        noiseTypeValues = listOf(tileSets.keys.first().rangeMap.keys.first()),
-        targetTypeValues = listOf(tileSets.keys.first())
+        noiseTypeValues = noiseParametersTypes,
+        targetTypeValues = elementTypes
     ) {
         override val noiseFunc: (Long, Double, Double) -> Float = noise
     }
@@ -40,11 +43,19 @@ class ProceduralGenerator(
                 )
             }
         }
-        println("worldDataSize: ${worldData.size}")
 
         if (widthInTiles * heightInTiles != worldData.size) {
             throw IllegalStateException("Tiles count is not valid")
         }
+    }
+
+    fun generateMap(seed: Long): TileMap {
+        val layers = generateLayers(seed)
+        return TileMap(
+            layers = layers,
+            widthInTiles = widthInTiles,
+            heightInTiles = heightInTiles
+        )
     }
 
     fun generateLayers(
@@ -63,7 +74,6 @@ class ProceduralGenerator(
         data.keys.forEach {
             val targetSet = tileSets[it]
             data[it]?.let { proceduralData ->
-                println("procedural data: ${proceduralData.size}")
                 val normalizedValues = normalizeForTileSet(proceduralData, targetSet!!)
                 resultMap[targetSet] = normalizedValues
             }
