@@ -24,6 +24,7 @@ class TileMap(
     }
 
     private val set: TileSet
+    private val tileSets: MutableList<TileSet> = mutableListOf()
     private val layersMap = layers.associateBy { it.name }
     private val settings: TileMapSettings = TileMapSettings()
 
@@ -61,7 +62,10 @@ class TileMap(
         if (layers.isEmpty()) throw IllegalStateException("Cannot initialize map with empty list of layers")
 
         set = layers.first().set
-        checkSetParameters(set)
+        layers.forEach {
+            checkSetParameters(it)
+            tileSets.add(it.set)
+        }
 
         settings.widthInTiles = widthInTiles
         settings.heightInTiles = heightInTiles
@@ -69,18 +73,15 @@ class TileMap(
         settings.relativeWidth = settings.widthInTiles * set.relativeTileWidth
     }
 
-    private fun checkSetParameters(set: TileSet) {
-        val relativeWidth = set.relativeTileWidth
-        val relativeHeight = set.relativeTileHeight
+    private fun checkSetParameters(layer: Layer) {
+        val relativeWidth = layer.set.relativeTileWidth
+        val relativeHeight = layer.set.relativeTileHeight
 
-
-        layers.forEach {
-            if (
-                it.set.relativeTileWidth != relativeWidth
-                || it.set.relativeTileHeight != relativeHeight
-            ) {
-                throw IllegalStateException("Tile sets dimension are not equal")
-            }
+        if (
+            layer.set.relativeTileWidth != relativeWidth
+            || layer.set.relativeTileHeight != relativeHeight
+        ) {
+            throw IllegalStateException("Tile sets dimension are not equal")
         }
     }
 
