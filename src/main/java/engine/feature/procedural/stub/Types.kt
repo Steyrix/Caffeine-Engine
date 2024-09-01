@@ -8,5 +8,5 @@ class StubParameter : NoiseParameterType
 
 class StubType : MapElementType {
     override val rangeMap: Map<NoiseParameterType, MinMax> =
-        mapOf(StubParameter() to Pair(Float.MIN_VALUE, Float.MAX_VALUE))
+        mapOf(StubParameter() to Pair(Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY))
 }
