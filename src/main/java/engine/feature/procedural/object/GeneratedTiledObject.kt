@@ -3,6 +3,7 @@ package engine.feature.procedural.`object`
 import engine.core.geometry.Point2D
 import engine.feature.procedural.MapElementType
 import engine.feature.tiled.data.TileSet
+import engine.feature.tiled.data.layer.LayerObject
 import engine.feature.tiled.data.layer.ObjectsLayer
 
 typealias PositionToTileSetIndex = Pair<Point2D, Int>
@@ -16,10 +17,6 @@ interface GeneratedTiledObject {
      * Should be sorted from highest to lowest
      */
     val tileIdsInSet: List<Int>
-
-    fun List<GeneratedTiledObject>.toObjecstLayer(): ObjectsLayer {
-        TODO()
-    }
 
     /**
      * Method for determining positions' indices of object tiles on tile map
