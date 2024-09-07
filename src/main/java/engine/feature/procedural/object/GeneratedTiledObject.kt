@@ -5,6 +5,8 @@ import engine.feature.procedural.MapElementType
 import engine.feature.tiled.data.TileSet
 import engine.feature.tiled.data.layer.ObjectsLayer
 
+typealias PositionToTileSetIndex = Pair<Point2D, Int>
+
 interface GeneratedTiledObject {
 
     val type: MapElementType
@@ -26,8 +28,8 @@ interface GeneratedTiledObject {
         startPos: Point2D,
         widthInTiles: Int,
         tileSize: Float
-    ): List<Pair<Point2D, Int>> {
-        val result = mutableListOf<Pair<Point2D, Int>>()
+    ): List<PositionToTileSetIndex> {
+        val result = mutableListOf<PositionToTileSetIndex>()
 
         var previousIndex = -1
         var previousPoint = Point2D(0f, 0f)
