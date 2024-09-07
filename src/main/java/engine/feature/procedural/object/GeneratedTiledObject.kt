@@ -3,6 +3,7 @@ package engine.feature.procedural.`object`
 import engine.feature.procedural.MapElementType
 import engine.feature.tiled.data.TileSet
 import engine.feature.tiled.data.layer.ObjectsLayer
+import java.awt.geom.Point2D
 
 interface GeneratedTiledObject {
 
@@ -14,7 +15,10 @@ interface GeneratedTiledObject {
         TODO()
     }
 
-    fun getObjectTilesPositions(): List<Int> {
+    /**
+     * Method for determining positions' indices of object tiles on tile map
+     */
+    fun getObjectTilesPositions(startPos: Point2D): List<Int> {
         TODO()
     }
 }
