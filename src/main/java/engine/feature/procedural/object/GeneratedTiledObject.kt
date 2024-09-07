@@ -18,6 +18,7 @@ interface GeneratedTiledObject {
      */
     val tileIdsInSet: List<Int>
 
+    // TODO: after that method, all objects' values should be combined and passed to TileLayerInitializer.genLayerObjects
     /**
      * Method for determining positions' indices of object tiles on tile map
      */
