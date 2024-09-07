@@ -9,7 +9,11 @@ interface GeneratedTiledObject {
 
     val type: MapElementType
     val tileSet: TileSet
-    val tileIds: List<Int>
+
+    /**
+     * Should be sorted
+     */
+    val tileIdsInSet: List<Int>
 
     fun List<GeneratedTiledObject>.toObjecstLayer(): ObjectsLayer {
         TODO()
