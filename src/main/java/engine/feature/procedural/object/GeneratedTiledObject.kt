@@ -11,7 +11,7 @@ interface GeneratedTiledObject {
     val tileSet: TileSet
 
     /**
-     * Should be sorted
+     * Should be sorted from highest to lowest
      */
     val tileIdsInSet: List<Int>
 
