@@ -3,8 +3,6 @@ package engine.feature.procedural.`object`
 import engine.core.geometry.Point2D
 import engine.feature.procedural.MapElementType
 import engine.feature.tiled.data.TileSet
-import engine.feature.tiled.data.layer.LayerObject
-import engine.feature.tiled.data.layer.ObjectsLayer
 
 typealias PositionToTileSetIndex = Pair<Point2D, Int>
 
