@@ -7,6 +7,7 @@ import javax.xml.parsers.DocumentBuilderFactory
 object XmlParser {
     private const val EXTENSION_XML = "xml"
     private const val EXTENSION_TSX = "tsx"
+    private const val EXTENSION_TMX = "tmx"
     private const val ERROR_MSG_NOT_XML = "The file supplied is not XML!"
     private const val ERROR_MSG_NOT_FOUND = "The file supplied is not found!"
     private const val ERROR_MSG_PARSE_ERR = "Unable to parse xml file"
