@@ -21,7 +21,7 @@ internal object TiledResourceParser {
         val mapWidth = mapNodeAttribs.getNamedItem(MAP_WIDTH).nodeValue.toInt()
         val mapHeight = mapNodeAttribs.getNamedItem(MAP_HEIGHT).nodeValue.toInt()
 
-        val tileSet = retrieveTileSet(document)
+        val tileSet = retrieveTileSetFromMap(document)
 
         return TileMap(
             layers = retrieveLayers(mapWidth, mapHeight, document, tileSet),
@@ -30,18 +30,21 @@ internal object TiledResourceParser {
         )
     }
 
-    fun loadTileSet(xmlFile: File): TileSet {
-        return retrieveTileSet(XmlParser.getDocument(xmlFile))
+    fun loadTileSet(path: String): TileSet {
+        return readTileset(path)
     }
 
-    private fun retrieveTileSet(doc: Document): TileSet {
+    private fun retrieveTileSetFromMap(doc: Document): TileSet {
         val mapTileSetNode = doc.getElementsByTagName(TILE_SET)
         val mapTileSetAttribs = mapTileSetNode!!.item(0).attributes
         val tileSetPath = mapTileSetAttribs.getNamedItem(SOURCE).nodeValue
+        return readTileset(tileSetPath)
+    }
 
+    private fun readTileset(tileSetPath: String): TileSet {
         val tileSetFile = File(this.javaClass.getResource(tileSetPath)!!.path)
 
-        val document = XmlParser.getDocument(tileSetFile)!!
+        val document = XmlParser.getDocument(tileSetFile)
 
         val tileSetNode = document.getElementsByTagName(TILE_SET)
         val tileSetAttribs = tileSetNode.item(0).attributes
