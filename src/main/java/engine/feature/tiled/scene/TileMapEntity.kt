@@ -18,7 +18,8 @@ import org.joml.Matrix4f
 class TileMapEntity(
     private val mapPresets: TileMapPreset,
     private val isProcedural: Boolean = false,
-    private var proceduralGenerator: ProceduralGenerator? = null
+    private val proceduralGenerator: ProceduralGenerator? = null,
+    private val seed: Long = 0
 ) : SingleGameEntity() {
 
     var parameters: SetOfStatic2DParameters =
@@ -70,10 +71,15 @@ class TileMapEntity(
             rotationAngle = 0f
         )
 
-        mapComponent = TileMapGraphicsProvider.getGraphicalComponent(
-            mapPresets,
-            renderProjection
-        )
+        mapComponent = if (isProcedural && proceduralGenerator != null) {
+            proceduralGenerator.generateMap(seed)
+        } else {
+            TileMapGraphicsProvider.getGraphicalComponent(
+                mapPresets,
+                renderProjection
+            )
+        }
+
         addComponent(mapComponent, parameters)
 
         collisionContexts.forEach {
