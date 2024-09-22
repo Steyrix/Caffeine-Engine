@@ -9,13 +9,16 @@ import engine.feature.collision.CollisionContext
 import engine.core.geometry.Point2D
 import engine.core.loop.AccumulatedTimeEvent
 import engine.feature.collision.tiled.TiledCollisionContext
+import engine.feature.procedural.generators.ProceduralGenerator
 import engine.feature.tiled.data.TileMap
 import engine.feature.tiled.data.`object`.MapObjectEntity
 import engine.feature.tiled.data.`object`.MapObjectRetriever
 import org.joml.Matrix4f
 
 class TileMapEntity(
-    private val mapPresets: TileMapPreset
+    private val mapPresets: TileMapPreset,
+    private val isProcedural: Boolean = false,
+    private var proceduralGenerator: ProceduralGenerator? = null
 ) : SingleGameEntity() {
 
     var parameters: SetOfStatic2DParameters =
@@ -34,6 +37,7 @@ class TileMapEntity(
         private set(value) {
             value?.let {
                 it.generateGraph(
+                    // TODO: provide from procedural
                     mapPresets.walkingLayers,
                     mapPresets.obstacleLayers
                 )
