@@ -17,7 +17,11 @@ object XmlParser {
             throw IllegalArgumentException(ERROR_MSG_NOT_FOUND)
         }
 
-        if (xmlFile.extension != EXTENSION_XML) {
+        if (
+            xmlFile.extension != EXTENSION_XML
+            && xmlFile.extension != EXTENSION_TMX
+            && xmlFile.extension != EXTENSION_TSX
+        ) {
             throw IllegalArgumentException(ERROR_MSG_NOT_XML)
         }
 
