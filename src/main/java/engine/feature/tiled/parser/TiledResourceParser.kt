@@ -12,7 +12,7 @@ import org.w3c.dom.Document
 import org.w3c.dom.Node
 import java.io.File
 
-internal object TiledResourceParser {
+object TiledResourceParser {
 
     fun createTileMapFromXml(xmlFile: File): TileMap {
         val document = XmlParser.getDocument(xmlFile)
