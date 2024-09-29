@@ -56,6 +56,7 @@ object TiledResourceParser {
 
         val imageNode = document.getElementsByTagName(IMAGE)
         val sourcePath = imageNode.item(0).attributes.getNamedItem(SOURCE).nodeValue
+        // TODO: fix
         val texturePath = this.javaClass.getResource(sourcePath)!!.path
         val texture = Texture2D.createInstance(texturePath)
 
