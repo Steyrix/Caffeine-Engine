@@ -207,9 +207,10 @@ object TileLayerInitializer {
     }
 
     internal fun generateTileGraph(
-        walkableLayers: List<Layer>,
+        walkableLayers: List<Layer> = emptyList(),
         obstacleLayers: List<Layer> = emptyList()
     ): TileGraph? {
+        if (walkableLayers.isEmpty()) return null
         val out = hashMapOf<Int, MutableList<Int>>()
         val dataLists = walkableLayers.map { it.tileIdsData }
         val widthInTiles = walkableLayers.firstOrNull()?.widthInTiles ?: return null
