@@ -87,8 +87,11 @@ class ProceduralGenerator(
                 .map { it.second }
                 .toMutableList()
 
+            println(tileIds)
+            println("set params: ${it.getUniqueTilesCount()}")
+
             TileLayer(
-                name = "ProceduralLayer_$index",
+                name = "walkable_layer",
                 widthInTiles = widthInTiles,
                 heightInTiles = heightInTiles,
                 set = it,
@@ -97,6 +100,7 @@ class ProceduralGenerator(
                 model = null
             )
         }.toMutableList()
+
 
         return layers
     }
@@ -112,7 +116,7 @@ class ProceduralGenerator(
      */
     private fun normalizeForTileSet(values: List<Pair<Point2D, Float>>, set: TileSet): NormalizedData {
         val count = set.getUniqueTilesCount()
-        val setOfIds = (0..count).toList()
+        val setOfIds = (0 until count).toList()
 
         val valueMap = hashMapOf<Float, Pair<Point2D, Int>>()
         val result: NormalizedData = mutableListOf()
