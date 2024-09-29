@@ -10,10 +10,10 @@ import java.io.File
 
 internal object TileMapGraphicsProvider {
 
-    fun getGraphicalComponent(
+    fun getShaders(
         mapPresets: TileMapPreset,
         renderProjection: Matrix4f
-    ): TileMap {
+    ): TileMapShaders {
         val vertexShaderPath = this.javaClass.getResource(mapPresets.vertexShaderPath)?.path
             ?: throw IllegalStateException()
 
@@ -25,13 +25,6 @@ internal object TileMapGraphicsProvider {
 
         val fragmentObjectShaderPath = this.javaClass.getResource(mapPresets.objectFragmentShaderPath)?.path
             ?: throw IllegalStateException()
-
-        val sourcePath = this.javaClass.getResource(mapPresets.mapSourcePath)?.path
-            ?: throw IllegalStateException()
-
-        val graphicalComponent = TiledResourceParser.createTileMapFromXml(
-            File(sourcePath)
-        )
 
         val mainShader = ShaderLoader.loadFromFile(
             vertexShaderFilePath = vertexShaderPath,
@@ -78,7 +71,20 @@ internal object TileMapGraphicsProvider {
             debugShader = debugShader
         )
 
-        graphicalComponent.shaders = shaders
+        return shaders
+    }
+
+    fun getGraphicalComponent(
+        mapPresets: TileMapPreset,
+        renderProjection: Matrix4f
+    ): TileMap {
+        val sourcePath = this.javaClass.getResource(mapPresets.mapSourcePath)?.path
+            ?: throw IllegalStateException()
+        val graphicalComponent = TiledResourceParser.createTileMapFromXml(
+            File(sourcePath)
+        )
+
+        graphicalComponent.shaders = getShaders(mapPresets, renderProjection)
 
         return graphicalComponent
     }
