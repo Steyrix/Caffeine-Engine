@@ -72,7 +72,9 @@ class TileMapEntity(
         )
 
         mapComponent = if (isProcedural && proceduralGenerator != null) {
-            proceduralGenerator.generateMap(seed)
+            proceduralGenerator.generateMap(seed).apply {
+                shaders = TileMapGraphicsProvider.getShaders(mapPresets, renderProjection)
+            }
         } else {
             TileMapGraphicsProvider.getGraphicalComponent(
                 mapPresets,
