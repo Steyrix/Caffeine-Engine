@@ -14,6 +14,9 @@ import engine.feature.tiled.data.layer.TileLayer
  */
 typealias NormalizedData = MutableList<Pair<Point2D, Int>>
 
+private const val WALKABLE_MARK = "walkable_layer"
+private const val OBSTACLE_MARK = "objects_layer"
+
 class ProceduralGenerator(
     private val tileSets: Map<MapElementType, TileSet>,
     private val noise: (Long, Double, Double) -> Float = { l, x, y ->
