@@ -90,7 +90,7 @@ class TileMap(
     fun getTileWidth() = settings.absoluteTileWidth
 
     // TODO: generate procedurally, retrieve by type, not by name
-    fun getLayerByName(name: String): Layer = layersMap[name]
+    fun getLayerByName(name: String): Layer? = layersMap[name]
         ?: throw IllegalStateException("Layer with name $name not found")
 
     fun getTileValue(posX: Float, posY: Float, layerName: String): Int {
@@ -127,14 +127,14 @@ class TileMap(
         walkableLayers: List<String>,
         obstacleLayers: List<String>
     ) {
-        //val walkable = walkableLayers.map { getLayerByName(it) }
-        //val obstacle = obstacleLayers.map { getLayerByName(it) }
-        graph = TileLayerInitializer.generateTileGraph(emptyList(), emptyList())
+        val walkable = walkableLayers.mapNotNull { getLayerByName(it) }
+        val obstacle = obstacleLayers.mapNotNull { getLayerByName(it) }
+        graph = TileLayerInitializer.generateTileGraph(walkable, obstacle)
     }
 
     fun setTileAt(layerName: String, posX: Float, posY: Float, tileId: Int) {
         val layer = getLayerByName(layerName)
-        layer.setTileAt(getTileIndex(posX, posY), tileId)
+        layer?.setTileAt(getTileIndex(posX, posY), tileId)
     }
 
     private fun getTileAlignmentInMap(tileSize: Float, pos: Float): Int {
