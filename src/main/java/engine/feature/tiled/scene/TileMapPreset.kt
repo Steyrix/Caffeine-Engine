@@ -16,3 +16,14 @@ data class TileMapPreset(
     val walkingLayers: List<String>,
     val obstacleLayers: List<String>
 )
+
+data class ProceduralMapPreset(
+    val width: Float,
+    val height: Float,
+    val vertexShaderPath: String,
+    val fragmentShaderPath: String,
+    val objectVertexShaderPath: String,
+    val objectFragmentShaderPath: String,
+    val shaderUniforms: Map<String, Any>,
+    val updateEvents: List<(Drawable<*>) -> AccumulatedTimeEvent>,
+)
