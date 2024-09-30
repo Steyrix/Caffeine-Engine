@@ -11,9 +11,10 @@ import java.io.File
 internal object TileMapGraphicsProvider {
 
     fun getShaders(
-        mapPresets: TileMapPreset,
+        mapPresets: ProceduralMapPreset,
         renderProjection: Matrix4f
     ): TileMapShaders {
+
         val vertexShaderPath = this.javaClass.getResource(mapPresets.vertexShaderPath)?.path
             ?: throw IllegalStateException()
 
@@ -26,27 +27,14 @@ internal object TileMapGraphicsProvider {
         val fragmentObjectShaderPath = this.javaClass.getResource(mapPresets.objectFragmentShaderPath)?.path
             ?: throw IllegalStateException()
 
-        val mainShader = ShaderLoader.loadFromFile(
-            vertexShaderFilePath = vertexShaderPath,
-            fragmentShaderFilePath = fragmentShaderPath
-        ).also { shader ->
-            shader.bind()
-            shader.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection)
-
-            mapPresets.shaderUniforms.forEach {
-                shader.setUniform(it.key, it.value)
-            }
-        }
-
-        val objectShaderCreator = {
-            ShaderLoader.loadFromFile(
-                vertexShaderFilePath = vertexObjectShaderPath,
-                fragmentShaderFilePath = fragmentObjectShaderPath
-            ).also { shader ->
-                shader.bind()
-                shader.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection)
-            }
-        }
+        val shaders = compileBaseShaders(
+            vertexShaderPath,
+            fragmentShaderPath,
+            vertexObjectShaderPath,
+            fragmentObjectShaderPath,
+            renderProjection,
+            mapPresets.shaderUniforms
+        )
 
         // TODO: cover with debug flag
         val debugVertexShaderPath =
@@ -65,11 +53,54 @@ internal object TileMapGraphicsProvider {
             shader.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection)
         }
 
-        val shaders = TileMapShaders(
-            mainShader = mainShader,
-            objectShaderCreator = objectShaderCreator,
-            debugShader = debugShader
+        shaders.debugShader = debugShader
+
+        return shaders
+    }
+
+    fun getShaders(
+        mapPresets: TileMapPreset,
+        renderProjection: Matrix4f
+    ): TileMapShaders {
+        val vertexShaderPath = this.javaClass.getResource(mapPresets.vertexShaderPath)?.path
+            ?: throw IllegalStateException()
+
+        val fragmentShaderPath = this.javaClass.getResource(mapPresets.fragmentShaderPath)?.path
+            ?: throw IllegalStateException()
+
+        val vertexObjectShaderPath = this.javaClass.getResource(mapPresets.objectVertexShaderPath)?.path
+            ?: throw IllegalStateException()
+
+        val fragmentObjectShaderPath = this.javaClass.getResource(mapPresets.objectFragmentShaderPath)?.path
+            ?: throw IllegalStateException()
+
+        val shaders = compileBaseShaders(
+            vertexShaderPath,
+            fragmentShaderPath,
+            vertexObjectShaderPath,
+            fragmentObjectShaderPath,
+            renderProjection,
+            mapPresets.shaderUniforms
         )
+
+        // TODO: cover with debug flag
+        val debugVertexShaderPath =
+            this.javaClass.getResource("/shaders/boundingBoxShaders/boundingBoxVertexShader.glsl")?.path
+                ?: throw IllegalStateException()
+
+        val debugFragmentShaderPath =
+            this.javaClass.getResource("/shaders/boundingBoxShaders/boundingBoxFragmentShader.glsl")?.path
+                ?: throw IllegalStateException()
+
+        val debugShader = ShaderLoader.loadFromFile(
+            vertexShaderFilePath = debugVertexShaderPath,
+            fragmentShaderFilePath = debugFragmentShaderPath
+        ).also { shader ->
+            shader.bind()
+            shader.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection)
+        }
+
+        shaders.debugShader = debugShader
 
         return shaders
     }
@@ -87,5 +118,38 @@ internal object TileMapGraphicsProvider {
         graphicalComponent.shaders = getShaders(mapPresets, renderProjection)
 
         return graphicalComponent
+    }
+
+    private fun compileBaseShaders(
+        vertexShaderPath: String,
+        fragmentShaderPath: String,
+        vertexObjectShaderPath: String,
+        fragmentObjectShaderPath: String,
+        renderProjection: Matrix4f,
+        shaderUniforms: Map<String, Any>
+    ): TileMapShaders  {
+        val mainShader = ShaderLoader.loadFromFile(
+            vertexShaderFilePath = vertexShaderPath,
+            fragmentShaderFilePath = fragmentShaderPath
+        ).also { shader ->
+            shader.bind()
+            shader.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection)
+
+            shaderUniforms.forEach {
+                shader.setUniform(it.key, it.value)
+            }
+        }
+
+        val objectShaderCreator = {
+            ShaderLoader.loadFromFile(
+                vertexShaderFilePath = vertexObjectShaderPath,
+                fragmentShaderFilePath = fragmentObjectShaderPath
+            ).also { shader ->
+                shader.bind()
+                shader.setUniform(Shader.VAR_KEY_PROJECTION, renderProjection)
+            }
+        }
+
+        return TileMapShaders(mainShader, objectShaderCreator)
     }
 }
