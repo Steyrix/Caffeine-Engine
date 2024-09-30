@@ -91,7 +91,6 @@ class TileMap(
 
     // TODO: generate procedurally, retrieve by type, not by name
     fun getLayerByName(name: String): Layer? = layersMap[name]
-        ?: throw IllegalStateException("Layer with name $name not found")
 
     fun getTileValue(posX: Float, posY: Float, layerName: String): Int {
         val layer = layersMap[layerName] ?: return NOT_FOUND
