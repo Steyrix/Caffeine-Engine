@@ -15,7 +15,7 @@ import engine.feature.tiled.data.`object`.MapObjectEntity
 import engine.feature.tiled.data.`object`.MapObjectRetriever
 import org.joml.Matrix4f
 
-class TileMapEntity(
+open class TileMapEntity(
     private val mapPresets: TileMapPreset,
     private val isProcedural: Boolean = false,
     private val proceduralGenerator: ProceduralGenerator? = null,
