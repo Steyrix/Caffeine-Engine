@@ -7,35 +7,32 @@ import engine.core.update.SetOfParameters
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.collision.CollisionContext
 import engine.core.geometry.Point2D
-import engine.core.loop.AccumulatedTimeEvent
-import engine.feature.collision.tiled.TiledCollisionContext
+import engine.core.loop.GameLoopTimeEvent
 import engine.feature.procedural.generators.ProceduralGenerator
 import engine.feature.tiled.data.TileMap
-import engine.feature.tiled.data.`object`.MapObjectEntity
-import engine.feature.tiled.data.`object`.MapObjectRetriever
 import org.joml.Matrix4f
 
-open class TileMapEntity(
+open class PresettedTileMap(
     private val mapPresets: TileMapPreset,
     private val isProcedural: Boolean = false,
     private val proceduralGenerator: ProceduralGenerator? = null,
     private val seed: Long = 0
-) : SingleGameEntity() {
+) : SingleGameEntity(), TileMapController {
 
-    var parameters: SetOfStatic2DParameters =
+    override var parameters: SetOfStatic2DParameters =
         SetOfStatic2DParameters(
             0f, 0f, 0f, 0f, 0f
         )
 
-    val worldSize: Point2D
+    override val worldSize: Point2D
         get() {
             val w = mapComponent?.getWorldWidth() ?: 0f
             val h = mapComponent?.getWorldHeight() ?: 0f
             return Point2D(w, h)
         }
 
-    var mapComponent: TileMap? = null
-        private set(value) {
+    override var mapComponent: TileMap? = null
+        set(value) {
             value?.let {
                 it.generateGraph(
                     // TODO: provide from procedural
@@ -47,7 +44,7 @@ open class TileMapEntity(
             }
         }
 
-    private val eventSet: MutableSet<AccumulatedTimeEvent> = mutableSetOf()
+    override val eventSet: MutableSet<GameLoopTimeEvent> = mutableSetOf()
 
     var isDebugMeshEnabled: Boolean = false
     set(value) {
@@ -59,7 +56,7 @@ open class TileMapEntity(
         it = CompositeEntity()
     }
 
-    fun init(
+    override fun init(
         renderProjection: Matrix4f,
         collisionContexts: List<CollisionContext<*>>
     ) {
@@ -104,10 +101,6 @@ open class TileMapEntity(
         eventSet.forEach { it.schedule(deltaTime) }
     }
 
-    fun addToCollisionContext(collisionContext: TiledCollisionContext) {
-        collisionContext.addEntity(mapComponent as Entity, parameters)
-    }
-
     fun adjustParameters(
         sizeToMapRelation: Float,
         params: List<SetOfParameters>
@@ -118,19 +111,11 @@ open class TileMapEntity(
         }
     }
 
-    fun retrieveObjectEntities(): List<MapObjectEntity> {
-        mapComponent?.let {
-            return MapObjectRetriever.getObjectsAsEntities(it)
-        }
-
-        return emptyList()
-    }
-
-    fun retrieveNonCollisionLayers(): MutableList<String> {
+    override fun retrieveNonCollisionLayers(): MutableList<String> {
         return mapPresets.walkingLayers.toMutableList()
     }
 
-    fun retrieveObjectLayers(): MutableList<String> {
+    override fun retrieveObjectLayers(): MutableList<String> {
         return mapPresets.obstacleLayers.toMutableList()
     }
 
