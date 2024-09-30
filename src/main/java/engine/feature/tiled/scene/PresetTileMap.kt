@@ -8,11 +8,10 @@ import engine.core.update.SetOfStatic2DParameters
 import engine.feature.collision.CollisionContext
 import engine.core.geometry.Point2D
 import engine.core.loop.GameLoopTimeEvent
-import engine.feature.procedural.generators.ProceduralGenerator
 import engine.feature.tiled.data.TileMap
 import org.joml.Matrix4f
 
-class PresettedTileMap(
+class PresetTileMap(
     private val mapPresets: TileMapPreset
 ) : SingleGameEntity(), TileMapController {
 

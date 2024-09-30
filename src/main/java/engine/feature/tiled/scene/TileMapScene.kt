@@ -36,7 +36,7 @@ abstract class TileMapScene(
     override val context: GameContext = GameContext.getInstance()
 
     protected var tiledCollisionContext: TiledCollisionContext? = null
-    protected var tiledMap: PresettedTileMap? = null
+    protected var tiledMap: PresetTileMap? = null
 
     protected var tileHighlighting: CompositeEntity? = null
     protected val highlightParams = SetOfStatic2DParameters.createEmpty()
@@ -85,7 +85,7 @@ abstract class TileMapScene(
         projection: Matrix4f,
         screenWidth: Float,
         screenHeight: Float
-    ): PresettedTileMap
+    ): PresetTileMap
 
     fun spawn(entity: GameEntity, spawnOptions: SpawnOptions) {}
 
