@@ -12,11 +12,8 @@ import engine.feature.procedural.generators.ProceduralGenerator
 import engine.feature.tiled.data.TileMap
 import org.joml.Matrix4f
 
-open class PresettedTileMap(
-    private val mapPresets: TileMapPreset,
-    private val isProcedural: Boolean = false,
-    private val proceduralGenerator: ProceduralGenerator? = null,
-    private val seed: Long = 0
+class PresettedTileMap(
+    private val mapPresets: TileMapPreset
 ) : SingleGameEntity(), TileMapController {
 
     override var parameters: SetOfStatic2DParameters =
@@ -68,16 +65,11 @@ open class PresettedTileMap(
             rotationAngle = 0f
         )
 
-        mapComponent = if (isProcedural && proceduralGenerator != null) {
-            proceduralGenerator.generateMap(seed).apply {
-                shaders = TileMapGraphicsProvider.getShaders(mapPresets, renderProjection)
-            }
-        } else {
+        mapComponent =
             TileMapGraphicsProvider.getGraphicalComponent(
                 mapPresets,
                 renderProjection
             )
-        }
 
         addComponent(mapComponent, parameters)
 
