@@ -45,7 +45,7 @@ class ProceduralTileMap(
 
     override val eventSet: MutableSet<GameLoopTimeEvent> = mutableSetOf()
 
-    var isDebugMeshEnabled: Boolean = false
+    override var isDebugMeshEnabled: Boolean = false
         set(value) {
             mapComponent?.isDebugMeshEnabled = value
             field = value

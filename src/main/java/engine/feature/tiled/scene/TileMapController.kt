@@ -19,6 +19,8 @@ interface TileMapController {
 
     var mapComponent: TileMap?
 
+    var isDebugMeshEnabled: Boolean
+
     val eventSet: MutableSet<GameLoopTimeEvent>
 
     fun init(
