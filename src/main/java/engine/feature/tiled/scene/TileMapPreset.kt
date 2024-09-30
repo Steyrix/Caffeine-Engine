@@ -3,6 +3,8 @@ package engine.feature.tiled.scene
 import engine.core.loop.AccumulatedTimeEvent
 import engine.core.render.Drawable
 
+sealed interface MapPreset
+
 data class TileMapPreset(
     val width: Float,
     val height: Float,
@@ -15,7 +17,7 @@ data class TileMapPreset(
     val updateEvents: List<(Drawable<*>) -> AccumulatedTimeEvent>,
     val walkingLayers: List<String>,
     val obstacleLayers: List<String>
-)
+) : MapPreset
 
 data class ProceduralMapPreset(
     val width: Float,
@@ -26,4 +28,4 @@ data class ProceduralMapPreset(
     val objectFragmentShaderPath: String,
     val shaderUniforms: Map<String, Any>,
     val updateEvents: List<(Drawable<*>) -> AccumulatedTimeEvent>,
-)
+) : MapPreset
