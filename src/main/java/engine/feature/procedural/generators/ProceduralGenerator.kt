@@ -53,15 +53,15 @@ class ProceduralGenerator(
     }
 
     fun generateMap(seed: Long): TileMap {
-        val layers = generateLayers(seed)
+        val walkableLayers = generateWalkableLayers(seed)
         return TileMap(
-            layers = layers,
+            layers = walkableLayers,
             widthInTiles = widthInTiles,
             heightInTiles = heightInTiles
         )
     }
 
-    fun generateLayers(
+    private fun generateWalkableLayers(
         seed: Long
     ): List<Layer> {
         val data = terrainGenerator.generate(
