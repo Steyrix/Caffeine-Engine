@@ -70,8 +70,8 @@ abstract class TileMapScene(
             context.addAll(objects)
 
             tiledCollisionContext = TiledCollisionContext(
-                it.retrieveNonCollisionLayers(),
-                it.retrieveObjectLayers(),
+                it.walkableLayers,
+                it.obstacleLayers,
                 it.mapComponent!!
             )
             it.addToCollisionContext(tiledCollisionContext!!)

@@ -27,11 +27,13 @@ class PresetTileMap(
             return Point2D(w, h)
         }
 
+    override val walkableLayers = mapPresets.walkingLayers.toMutableList()
+    override val obstacleLayers = mapPresets.obstacleLayers.toMutableList()
+
     override var mapComponent: TileMap? = null
         set(value) {
             value?.let {
                 it.generateGraph(
-                    // TODO: provide from procedural
                     mapPresets.walkingLayers,
                     mapPresets.obstacleLayers
                 )
@@ -100,14 +102,6 @@ class PresetTileMap(
             it.xSize = (mapComponent?.getTileWidth() ?: 0f) * 3
             it.ySize = (mapComponent?.getTileHeight() ?: 0f) * 3
         }
-    }
-
-    override fun retrieveNonCollisionLayers(): MutableList<String> {
-        return mapPresets.walkingLayers.toMutableList()
-    }
-
-    override fun retrieveObjectLayers(): MutableList<String> {
-        return mapPresets.obstacleLayers.toMutableList()
     }
 
     override fun getZLevel(): Float {

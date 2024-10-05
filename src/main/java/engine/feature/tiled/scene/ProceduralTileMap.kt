@@ -10,7 +10,6 @@ import engine.core.update.SetOfStatic2DParameters
 import engine.feature.collision.CollisionContext
 import engine.feature.procedural.generators.ProceduralGenerator
 import engine.feature.tiled.data.TileMap
-import engine.feature.tiled.data.layer.Layer
 import org.joml.Matrix4f
 
 class ProceduralTileMap(
@@ -31,8 +30,8 @@ class ProceduralTileMap(
             return Point2D(w, h)
         }
 
-    private val walkableLayers = mutableListOf<String>()
-    private val obstacleLayers = mutableListOf<String>()
+    override val walkableLayers = mutableListOf<String>()
+    override val obstacleLayers = mutableListOf<String>()
 
     override var mapComponent: TileMap? = null
         set(value) {
@@ -113,14 +112,6 @@ class ProceduralTileMap(
             it.xSize = (mapComponent?.getTileWidth() ?: 0f) * 3
             it.ySize = (mapComponent?.getTileHeight() ?: 0f) * 3
         }
-    }
-
-    override fun retrieveNonCollisionLayers(): MutableList<String> {
-        return walkableLayers
-    }
-
-    override fun retrieveObjectLayers(): MutableList<String> {
-        return mutableListOf()
     }
 
     override fun getZLevel(): Float {

@@ -23,6 +23,10 @@ interface TileMapController {
 
     val eventSet: MutableSet<GameLoopTimeEvent>
 
+    val walkableLayers: MutableList<String>
+
+    val obstacleLayers: MutableList<String>
+
     fun init(
         renderProjection: Matrix4f,
         collisionContexts: List<CollisionContext<*>>
@@ -39,8 +43,4 @@ interface TileMapController {
 
         return emptyList()
     }
-
-    fun retrieveNonCollisionLayers(): MutableList<String>
-
-    fun retrieveObjectLayers(): MutableList<String>
 }
