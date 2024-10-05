@@ -90,9 +90,6 @@ class ProceduralGenerator(
                 .map { it.second }
                 .toMutableList()
 
-            println(tileIds)
-            println("set params: ${it.getUniqueTilesCount()}")
-
             TileLayer(
                 name = "walkable_layer",
                 widthInTiles = widthInTiles,
