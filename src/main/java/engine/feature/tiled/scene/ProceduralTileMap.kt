@@ -32,14 +32,19 @@ class ProceduralTileMap(
 
     override var mapComponent: TileMap? = null
         set(value) {
-            value?.let {
-//                it.generateGraph(
-//                    // TODO: provide from procedural
-//                    ma.walkingLayers,
-//                    mapPresets.obstacleLayers
-//                )
+            value?.let { map ->
+                val walkableLayers = map.layers
+                    .filter { layer -> layer.name.contains("walkable") }
+                    .map { it.name }
+                val obstacleLayers = map.layers
+                    .filter { layer -> !layer.name.contains("walkable") }
+                    .map { it.name }
+                map.generateGraph(
+                    walkableLayers,
+                    obstacleLayers
+                )
 
-                field = it
+                field = map
             }
         }
 
