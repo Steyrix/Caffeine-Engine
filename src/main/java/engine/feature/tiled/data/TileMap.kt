@@ -14,7 +14,7 @@ import kotlin.math.roundToInt
 // TODO: parameters should be set from outside
 // TODO: get rid of retrieving shared parameters from layers and tilesets
 class TileMap(
-    private val layers: List<Layer>,
+    val layers: List<Layer>,
     widthInTiles: Int = 0,
     heightInTiles: Int = 0
 ) : Drawable<SetOfStatic2DParameters>, Entity {
