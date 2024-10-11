@@ -1,10 +1,10 @@
 package engine.feature.procedural.autotiling
 
 class AutotilingProvider(
-    private val tileAdjacencyMap: HashMap<Int, Adjacent>
+    private val tileAdjacencyMap: HashMap<Int, AdjacentIds>
 ) {
 
-    fun getAdjacentTiles(id: Int): Adjacent? {
+    fun getAdjacentTiles(id: Int): AdjacentIds? {
         return tileAdjacencyMap[id]
     }
 
