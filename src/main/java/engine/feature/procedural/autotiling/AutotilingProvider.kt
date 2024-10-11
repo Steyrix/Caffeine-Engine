@@ -23,4 +23,16 @@ class AutotilingProvider(
     fun getEastTileFor(id: Int): Int {
         return tileAdjacencyMap[id]?.eastId ?: - 1
     }
+
+    // TODO: define tiles graph
+    fun generateAutoTiledArea(sourceTileId: Int) {
+        val q = ArrayDeque<Int>()
+        q.addFirst(sourceTileId)
+        q.forEach {
+            val adjacent = getAdjacentTiles(it)
+            adjacent?.run {
+                TODO()
+            }
+        }
+    }
 }
