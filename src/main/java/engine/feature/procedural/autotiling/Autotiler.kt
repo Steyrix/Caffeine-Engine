@@ -4,7 +4,7 @@ object Autotiler {
 
     fun assignTiles(
         bitValueToId: Map<Int,Int>,
-        layerData: List<Int>,
+        layerData: List<Int>, // list of 0s and 1s
         widthInTiles: Int,
         heightInTiles: Int
     ) {
