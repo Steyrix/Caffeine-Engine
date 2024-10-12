@@ -2,7 +2,7 @@ package engine.feature.procedural.autotiling
 
 object Autotiler {
 
-    fun generateAutoTiledArea(
+    fun assignTiles(
         bitValueToId: Map<Int,Int>,
         layerData: List<Int>,
         widthInTiles: Int,
