@@ -4,40 +4,71 @@ object Autotiler {
 
     fun assignTiles(
         bitValueToId: Map<Int,Int>,
-        layerData: List<Int>, // list of 0s and 1s
-        widthInTiles: Int,
-        heightInTiles: Int
-    ) {
+        layerData: List<Int>,
+        widthInTiles: Int
+    ): List<Int> {
 
-        layerData.forEachIndexed { index, it ->
-            var bitValue = 0
+        val out = mutableListOf<Int>()
 
-            var leftValue = if (index % widthInTiles > 0) {
-                layerData[index - 1]
-            } else {
-                0
-            }
-
-            var rightValue = if (index % widthInTiles < widthInTiles) {
-                layerData[index + 1]
-            } else {
-                0
-            }
-
-            var topValue = if (index + widthInTiles < layerData.size - 1) {
-                layerData[index + widthInTiles]
-            } else {
-                0
-            }
-
-            var bottomValue = if(index - widthInTiles >= 0) {
-                layerData[index - widthInTiles]
-            } else {
-                0
-            }
-
-            // TODO: calculate bit value
-            // TODO: get corresponding tile
+        val binaryData = layerData.map {
+            if (it != 0) {
+                1
+            } else { 0 }
         }
+
+        layerData.forEachIndexed { index, _ ->
+            val bitValue = calculateBitMasks(index, widthInTiles, binaryData)
+            out.add(bitValueToId[bitValue] ?: -1)
+        }
+
+        return out
+    }
+
+    private fun calculateBitMasks(
+        index: Int,
+        widthInTiles: Int,
+        binaryData: List<Int>
+    ): Int {
+        val leftTopCornerValue = if (index % widthInTiles > 0 && index / widthInTiles > 0) {
+            binaryData[index - widthInTiles - 1]
+        } else { 0 } * 1
+
+        val topValue = if (index - widthInTiles >= 0) {
+            binaryData[index - widthInTiles]
+        } else { 0 } * 2
+
+        val rightTopCornerValue = if (index % widthInTiles < widthInTiles && index / widthInTiles > 0) {
+            binaryData[index - widthInTiles + 1]
+        } else { 0 } * 4
+
+        val leftValue = if (index % widthInTiles > 0) {
+            binaryData[index - 1]
+        } else { 0 } * 8
+
+        val rightValue = if (index % widthInTiles < widthInTiles) {
+            binaryData[index + 1]
+        } else { 0 } * 16
+
+        val leftBottomCornerValue = if (index + widthInTiles <= binaryData.size - 1 && index % widthInTiles > 0) {
+            binaryData[index + widthInTiles - 1]
+        } else { 0 } * 32
+
+        val bottomValue = if(index + widthInTiles <= binaryData.size - 1) {
+            binaryData[index + widthInTiles]
+        } else { 0 } * 64
+
+        val rightBottomCornerValue = if (index + widthInTiles < binaryData.size - 1 && index % widthInTiles < widthInTiles
+        ) {
+            binaryData[index + widthInTiles + 1]
+        } else { 0 } * 128
+
+        return leftTopCornerValue
+            .plus(topValue)
+            .plus(rightTopCornerValue)
+            .plus(leftValue)
+            .plus(rightValue)
+            .plus(leftBottomCornerValue)
+            .plus(bottomValue)
+            .plus(rightBottomCornerValue)
     }
 }
