@@ -29,17 +29,14 @@ object Autotiler {
         widthInTiles: Int,
         binaryData: List<Int>
     ): Int {
-        val leftTopCornerValue = if (index % widthInTiles > 0 && index / widthInTiles > 0) {
-            binaryData[index - widthInTiles - 1]
-        } else { 0 } * 1
+
+        val bottomValue = if(index + widthInTiles <= binaryData.size - 1) {
+            binaryData[index + widthInTiles]
+        } else { 0 } * 64
 
         val topValue = if (index - widthInTiles >= 0) {
             binaryData[index - widthInTiles]
         } else { 0 } * 2
-
-        val rightTopCornerValue = if (index % widthInTiles < widthInTiles && index / widthInTiles > 0) {
-            binaryData[index - widthInTiles + 1]
-        } else { 0 } * 4
 
         val leftValue = if (index % widthInTiles > 0) {
             binaryData[index - 1]
@@ -49,15 +46,33 @@ object Autotiler {
             binaryData[index + 1]
         } else { 0 } * 16
 
-        val leftBottomCornerValue = if (index + widthInTiles <= binaryData.size - 1 && index % widthInTiles > 0) {
+        val leftTopCornerValue = if (
+            index % widthInTiles > 0
+            && index / widthInTiles > 0
+            && leftValue != 0 || topValue != 0
+        ) {
+            binaryData[index - widthInTiles - 1]
+        } else { 0 } * 1
+
+        val leftBottomCornerValue = if (
+            index + widthInTiles <= binaryData.size - 1 && index % widthInTiles > 0
+            && bottomValue != 0 || leftValue != 0
+        ) {
             binaryData[index + widthInTiles - 1]
         } else { 0 } * 32
 
-        val bottomValue = if(index + widthInTiles <= binaryData.size - 1) {
-            binaryData[index + widthInTiles]
-        } else { 0 } * 64
+        val rightTopCornerValue = if (
+            index % widthInTiles < widthInTiles
+            && index / widthInTiles > 0
+            && topValue != 0 || rightValue != 0
+        ) {
+            binaryData[index - widthInTiles + 1]
+        } else { 0 } * 4
 
-        val rightBottomCornerValue = if (index + widthInTiles < binaryData.size - 1 && index % widthInTiles < widthInTiles
+        val rightBottomCornerValue = if (
+            index + widthInTiles < binaryData.size - 1
+            && index % widthInTiles < widthInTiles
+            && bottomValue != 0 || rightValue != 0
         ) {
             binaryData[index + widthInTiles + 1]
         } else { 0 } * 128
