@@ -11,7 +11,7 @@ object Autotiler {
         val out = mutableListOf<Int>()
 
         val binaryData = layerData.map {
-            if (it != 0) {
+            if (it != -1) {
                 1
             } else { 0 }
         }
