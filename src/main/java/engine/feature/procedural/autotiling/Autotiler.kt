@@ -86,4 +86,63 @@ object Autotiler {
             .plus(bottomValue)
             .plus(rightBottomCornerValue)
     }
+
+    private fun ifBottomExists(
+        index: Int,
+        widthInTiles: Int,
+        size: Int
+    ): Boolean = index + widthInTiles <= size - 1
+
+    private fun ifTopExists(
+        index: Int,
+        widthInTiles: Int
+    ): Boolean = index - widthInTiles >= 0
+
+    private fun ifLeftExists(
+        index: Int,
+        widthInTiles: Int
+    ): Boolean = index % widthInTiles > 0
+
+    private fun ifRightExists(
+        index: Int,
+        widthInTiles: Int
+    ): Boolean = index % widthInTiles < widthInTiles
+
+    private fun ifLeftTopExists(
+        index: Int,
+        widthInTiles: Int,
+        leftValue: Int,
+        topValue: Int
+    ): Boolean = index % widthInTiles > 0
+            && index / widthInTiles > 0
+            && leftValue != 0 || topValue != 0
+
+    private fun ifLeftBottomExists(
+        index: Int,
+        widthInTiles: Int,
+        size: Int,
+        leftValue: Int,
+        bottomValue: Int
+    ): Boolean = index + widthInTiles <= size - 1
+            && index % widthInTiles > 0
+            && bottomValue != 0 || leftValue != 0
+
+    private fun ifRightTopExists(
+        index: Int,
+        widthInTiles: Int,
+        topValue: Int,
+        rightValue: Int
+    ): Boolean = index % widthInTiles < widthInTiles
+            && index / widthInTiles > 0
+            && topValue != 0 || rightValue != 0
+
+    private fun ifRightBottomExists(
+        index: Int,
+        widthInTiles: Int,
+        size: Int,
+        rightValue: Int,
+        bottomValue: Int
+    ): Boolean = index + widthInTiles < size - 1
+            && index % widthInTiles < widthInTiles
+            && bottomValue != 0 || rightValue != 0
 }
