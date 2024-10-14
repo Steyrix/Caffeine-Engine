@@ -30,49 +30,42 @@ object Autotiler {
         binaryData: List<Int>
     ): Int {
 
-        val bottomValue = if(index + widthInTiles <= binaryData.size - 1) {
+        val bottomValue = if(bottomExists(index,  widthInTiles, binaryData.size)) {
             binaryData[index + widthInTiles]
         } else { 0 } * 64
 
-        val topValue = if (index - widthInTiles >= 0) {
+        val topValue = if (topExists(index, widthInTiles)) {
             binaryData[index - widthInTiles]
         } else { 0 } * 2
 
-        val leftValue = if (index % widthInTiles > 0) {
+        val leftValue = if (leftExists(index, widthInTiles)) {
             binaryData[index - 1]
         } else { 0 } * 8
 
-        val rightValue = if (index % widthInTiles < widthInTiles) {
+        val rightValue = if (rightExists(index, widthInTiles)) {
             binaryData[index + 1]
         } else { 0 } * 16
 
         val leftTopCornerValue = if (
-            index % widthInTiles > 0
-            && index / widthInTiles > 0
-            && leftValue != 0 || topValue != 0
+            leftTopExists(index, widthInTiles, leftValue, topValue)
         ) {
             binaryData[index - widthInTiles - 1]
         } else { 0 } * 1
 
         val leftBottomCornerValue = if (
-            index + widthInTiles <= binaryData.size - 1 && index % widthInTiles > 0
-            && bottomValue != 0 || leftValue != 0
+            leftBottomExists(index, widthInTiles, binaryData.size, leftValue, bottomValue)
         ) {
             binaryData[index + widthInTiles - 1]
         } else { 0 } * 32
 
         val rightTopCornerValue = if (
-            index % widthInTiles < widthInTiles
-            && index / widthInTiles > 0
-            && topValue != 0 || rightValue != 0
+            rightTopExists(index, widthInTiles, topValue, rightValue)
         ) {
             binaryData[index - widthInTiles + 1]
         } else { 0 } * 4
 
         val rightBottomCornerValue = if (
-            index + widthInTiles < binaryData.size - 1
-            && index % widthInTiles < widthInTiles
-            && bottomValue != 0 || rightValue != 0
+            rightBottomExists(index, widthInTiles, binaryData.size, rightValue, bottomValue)
         ) {
             binaryData[index + widthInTiles + 1]
         } else { 0 } * 128
@@ -87,28 +80,28 @@ object Autotiler {
             .plus(rightBottomCornerValue)
     }
 
-    private fun ifBottomExists(
+    private fun bottomExists(
         index: Int,
         widthInTiles: Int,
         size: Int
     ): Boolean = index + widthInTiles <= size - 1
 
-    private fun ifTopExists(
+    private fun topExists(
         index: Int,
         widthInTiles: Int
     ): Boolean = index - widthInTiles >= 0
 
-    private fun ifLeftExists(
+    private fun leftExists(
         index: Int,
         widthInTiles: Int
     ): Boolean = index % widthInTiles > 0
 
-    private fun ifRightExists(
+    private fun rightExists(
         index: Int,
         widthInTiles: Int
     ): Boolean = index % widthInTiles < widthInTiles
 
-    private fun ifLeftTopExists(
+    private fun leftTopExists(
         index: Int,
         widthInTiles: Int,
         leftValue: Int,
@@ -117,7 +110,7 @@ object Autotiler {
             && index / widthInTiles > 0
             && leftValue != 0 || topValue != 0
 
-    private fun ifLeftBottomExists(
+    private fun leftBottomExists(
         index: Int,
         widthInTiles: Int,
         size: Int,
@@ -127,7 +120,7 @@ object Autotiler {
             && index % widthInTiles > 0
             && bottomValue != 0 || leftValue != 0
 
-    private fun ifRightTopExists(
+    private fun rightTopExists(
         index: Int,
         widthInTiles: Int,
         topValue: Int,
@@ -136,7 +129,7 @@ object Autotiler {
             && index / widthInTiles > 0
             && topValue != 0 || rightValue != 0
 
-    private fun ifRightBottomExists(
+    private fun rightBottomExists(
         index: Int,
         widthInTiles: Int,
         size: Int,
