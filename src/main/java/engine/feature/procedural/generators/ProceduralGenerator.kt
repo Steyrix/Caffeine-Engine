@@ -17,6 +17,7 @@ typealias ProceduralData = MutableList<Pair<Point2D, Float>>
 
 const val WALKABLE_MARK = "walkable_layer"
 
+// TODO: put layer creation directly in nested generators
 class ProceduralGenerator(
     private val dataSet: ProceduralDataSet,
     private val noise: (Long, Double, Double) -> Float = { l, x, y ->
