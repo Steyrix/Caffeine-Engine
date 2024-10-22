@@ -4,7 +4,7 @@ import engine.core.geometry.Point2D
 
 abstract class AbstractGenerator {
 
-    abstract val noiseFunc: (Long, Double, Double) -> Float
+    abstract var noiseFunc: (Long, Double, Double) -> Float
 
     protected fun getNoiseForCoordinate(
         seed: Long,
