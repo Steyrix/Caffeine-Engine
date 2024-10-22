@@ -31,11 +31,11 @@ class ProceduralGenerator(
 
     private val worldData: MutableList<Point2D> = mutableListOf()
 
-    private val terrainGenerator = object : TerrainGenerator(
+    private val terrainGenerator = TerrainGenerator(
         noiseTypeValues = noiseParametersTypes,
         targetTypeValues = elementTypes
-    ) {
-        override val noiseFunc: (Long, Double, Double) -> Float = noise
+    ).apply {
+        noiseFunc = noise
     }
 
     init {

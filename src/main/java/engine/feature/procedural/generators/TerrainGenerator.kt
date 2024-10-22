@@ -5,12 +5,14 @@ import engine.feature.procedural.NoiseParameter
 import engine.feature.procedural.NoiseParameterType
 import engine.feature.procedural.MapElementType
 
-abstract class TerrainGenerator(
+class TerrainGenerator(
     private val noiseTypeValues: List<NoiseParameterType> = listOf(),
     private val targetTypeValues: List<MapElementType> = listOf()
-) {
+) : AbstractGenerator() {
 
-    abstract val noiseFunc: (Long, Double, Double) -> Float
+   override var noiseFunc: (Long, Double, Double) -> Float = { _, _, _ ->
+       0f
+   }
 
     /*
         Algorithm: distribute biomes among tiles' coordinates.
@@ -38,18 +40,6 @@ abstract class TerrainGenerator(
         }
 
         return result
-    }
-
-
-    private fun getNoiseForCoordinate(
-        seed: Long,
-        pos: Point2D
-    ): Float {
-        return noiseFunc(
-            seed,
-            pos.x.toDouble(),
-            pos.y.toDouble()
-        )
     }
 
     private fun distributeProceduralTypes(
