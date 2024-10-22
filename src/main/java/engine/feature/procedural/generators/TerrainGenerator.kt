@@ -5,8 +5,6 @@ import engine.feature.procedural.NoiseParameter
 import engine.feature.procedural.NoiseParameterType
 import engine.feature.procedural.MapElementType
 
-typealias ProceduralData = MutableList<Pair<Point2D, Float>>
-
 abstract class TerrainGenerator(
     private val noiseTypeValues: List<NoiseParameterType> = listOf(),
     private val targetTypeValues: List<MapElementType> = listOf()

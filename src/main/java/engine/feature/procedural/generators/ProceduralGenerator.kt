@@ -13,6 +13,7 @@ import engine.feature.tiled.data.layer.TileLayer
  * (number in tileIdsData) to (number in tileSet)
  */
 typealias NormalizedData = MutableList<Pair<Point2D, Int>>
+typealias ProceduralData = MutableList<Pair<Point2D, Float>>
 
 const val WALKABLE_MARK = "walkable_layer"
 
