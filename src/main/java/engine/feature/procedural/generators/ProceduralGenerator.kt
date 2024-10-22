@@ -17,7 +17,7 @@ typealias NormalizedData = MutableList<Pair<Point2D, Int>>
 const val WALKABLE_MARK = "walkable_layer"
 
 class ProceduralGenerator(
-    private val tileSets: Map<MapElementType, TileSet>,
+    private val dataSet: ProceduralDataSet,
     private val noise: (Long, Double, Double) -> Float = { l, x, y ->
         OpenSimplex2S.noise2(l, x, y)
     },
@@ -74,7 +74,7 @@ class ProceduralGenerator(
          * Former is being normalized for latter.
          */
         data.keys.forEach {
-            val targetSet = tileSets[it]
+            val targetSet = dataSet.terrainData[it]
             data[it]?.let { proceduralData ->
                 val normalizedValues = normalizeForTileSet(proceduralData, targetSet!!)
                 resultMap[targetSet] = normalizedValues
