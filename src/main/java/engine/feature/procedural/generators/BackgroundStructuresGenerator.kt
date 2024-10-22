@@ -18,13 +18,20 @@ class BackgroundStructuresGenerator(
         seed: Long,
         worldData: List<Point2D>,
     ): ProceduralData {
+        val result: ProceduralData = mutableListOf()
 
         worldData.forEach {
             val noiseValue = getNoiseForCoordinate(
                 seed, it
             )
+
+            if (genericNoiseCondition(noiseValue)) {
+                result.add(it to noiseValue)
+            } else {
+                result.add(it to 0f)
+            }
         }
 
-        return mutableListOf()
+        return result
     }
 }
