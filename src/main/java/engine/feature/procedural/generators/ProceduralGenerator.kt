@@ -13,8 +13,6 @@ import engine.feature.tiled.data.TileSet
 typealias NormalizedData = MutableList<Pair<Point2D, Int>>
 typealias ProceduralData = MutableList<Pair<Point2D, Float>>
 
-const val WALKABLE_MARK = "walkable_layer"
-
 class ProceduralGenerator(
     private val dataSet: ProceduralDataSet,
     private val noise: (Long, Double, Double) -> Float = { l, x, y ->
