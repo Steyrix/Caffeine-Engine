@@ -1,8 +1,6 @@
 package engine.feature.procedural.generators
 
 import engine.core.geometry.Point2D
-import engine.feature.procedural.MapElementType
-import engine.feature.procedural.NoiseParameterType
 import engine.feature.procedural.OpenSimplex2S
 import engine.feature.tiled.data.TileMap
 
@@ -19,16 +17,14 @@ class ProceduralGenerator(
     },
     private val widthInTiles: Int,
     private val heightInTiles: Int,
-    tileSize: Float,
-    elementTypes: List<MapElementType> = emptyList(),
-    noiseParametersTypes: List<NoiseParameterType> = emptyList()
+    tileSize: Float
 ) {
 
     private val worldData: MutableList<Point2D> = mutableListOf()
 
     private val walkableTerrainGenerator = WalkableTerrainGenerator(
-        noiseTypeValues = noiseParametersTypes,
-        targetTypeValues = elementTypes
+        noiseTypeValues = dataSet.terrainData.noiseParameterTypes,
+        targetTypeValues = dataSet.terrainData.elementTypes
     ).apply {
         noiseFunc = noise
     }
@@ -51,7 +47,7 @@ class ProceduralGenerator(
         val walkableTerrainLayers = walkableTerrainGenerator.generateLayers(
             seed,
             worldData,
-            dataSet.terrainData,
+            dataSet.terrainData.value,
             widthInTiles,
             heightInTiles
         )
