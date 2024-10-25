@@ -6,8 +6,6 @@ import engine.feature.procedural.NoiseParameterType
 import engine.feature.procedural.OpenSimplex2S
 import engine.feature.tiled.data.TileMap
 import engine.feature.tiled.data.TileSet
-import engine.feature.tiled.data.layer.Layer
-import engine.feature.tiled.data.layer.TileLayer
 
 /**
  * (number in tileIdsData) to (number in tileSet)
@@ -17,7 +15,6 @@ typealias ProceduralData = MutableList<Pair<Point2D, Float>>
 
 const val WALKABLE_MARK = "walkable_layer"
 
-// TODO: put layer creation directly in nested generators
 class ProceduralGenerator(
     private val dataSet: ProceduralDataSet,
     private val noise: (Long, Double, Double) -> Float = { l, x, y ->
@@ -32,7 +29,7 @@ class ProceduralGenerator(
 
     private val worldData: MutableList<Point2D> = mutableListOf()
 
-    private val terrainGenerator = TerrainGenerator(
+    private val walkableTerrainGenerator = WalkableTerrainGenerator(
         noiseTypeValues = noiseParametersTypes,
         targetTypeValues = elementTypes
     ).apply {
@@ -54,97 +51,17 @@ class ProceduralGenerator(
     }
 
     fun generateMap(seed: Long): TileMap {
-        val walkableLayers = generateWalkableLayers(seed)
+        val walkableTerrainLayers = walkableTerrainGenerator.generateLayers(
+            seed,
+            worldData,
+            dataSet.terrainData,
+            widthInTiles,
+            heightInTiles
+        )
         return TileMap(
-            layers = walkableLayers,
+            layers = walkableTerrainLayers,
             widthInTiles = widthInTiles,
             heightInTiles = heightInTiles
         )
-    }
-
-    private fun generateWalkableLayers(
-        seed: Long
-    ): List<Layer> {
-        val data = terrainGenerator.generate(
-            seed, worldData
-        )
-
-        val resultMap = hashMapOf<TileSet, NormalizedData>()
-
-        /**
-         * Each element type (e.g. biome) refers to a collection of noise values and a tileset.
-         * Former is being normalized for latter.
-         */
-        data.keys.forEach {
-            val targetSet = dataSet.terrainData[it]
-            data[it]?.let { proceduralData ->
-                val normalizedValues = normalizeForTileSet(proceduralData, targetSet!!)
-                resultMap[targetSet] = normalizedValues
-            }
-        }
-
-        val layers: MutableList<Layer> = resultMap.keys.mapIndexed { index, it ->
-            val tileIds = resultMap[it]!!
-                .map {
-                    it.first.toTileId() to it.second
-                }.sortedBy { it.first }
-                .map { it.second }
-                .toMutableList()
-
-            TileLayer(
-                name = "walkable_layer",
-                widthInTiles = widthInTiles,
-                heightInTiles = heightInTiles,
-                set = it,
-                tileIdsData = tileIds, // TODO
-                properties = mutableListOf(),
-                model = null
-            )
-        }.toMutableList()
-
-
-        return layers
-    }
-
-
-    /**
-     * This method maps noise values to tileset tiles' ids.
-     * Firstly it creates a list of available ids. After that each noise value is mapped to a random id.
-     *
-     * @param values is a list of points mapped to noise values, where each point is unique and refers to the start
-     * (top-left corner position) of the tile.
-     * @param set is a target tileset, which will be used as a source for rendering a layer.
-     */
-    private fun normalizeForTileSet(values: List<Pair<Point2D, Float>>, set: TileSet): NormalizedData {
-        val count = set.getUniqueTilesCount()
-        val setOfIds = (0 until count).toList()
-
-        val valueMap = hashMapOf<Float, Pair<Point2D, Int>>()
-        val result: NormalizedData = mutableListOf()
-
-        values.forEach {
-            val noisedValue = it.second
-            if (!valueMap.contains(noisedValue)) {
-                valueMap[noisedValue] = it.first to setOfIds.random()
-            }
-        }
-
-        for (i in values.indices) {
-            result.add(
-                valueMap[values[i].second]!!
-            )
-        }
-
-        return result
-    }
-
-    private fun Point2D.toTileId(): Int {
-        worldData.forEachIndexed { index, it ->
-            if (it == this) {
-                return index
-            }
-        }
-
-        return 0
     }
 }
