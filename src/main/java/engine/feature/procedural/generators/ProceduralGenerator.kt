@@ -5,7 +5,6 @@ import engine.feature.procedural.MapElementType
 import engine.feature.procedural.NoiseParameterType
 import engine.feature.procedural.OpenSimplex2S
 import engine.feature.tiled.data.TileMap
-import engine.feature.tiled.data.TileSet
 
 /**
  * (number in tileIdsData) to (number in tileSet)
