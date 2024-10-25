@@ -35,4 +35,16 @@ object GeneratorUtil {
 
         return result
     }
+
+    fun Point2D.toTileId(
+        worldData: List<Point2D>
+    ): Int {
+        worldData.forEachIndexed { index, it ->
+            if (it == this) {
+                return index
+            }
+        }
+
+        return 0
+    }
 }
