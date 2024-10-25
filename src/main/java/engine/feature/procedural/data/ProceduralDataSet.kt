@@ -12,7 +12,7 @@ data class TerrainData(
 
 data class ProceduralDataSet(
     val terrainData: TerrainData,
-    val unwalkableTerrainData: Map<MapElementType, TileSet>,
+    val unwalkableTerrainData: TerrainData,
     val backgroundStructuresData: List<TileSet>,
     val objectStructuresData: List<TileSet>
 )
