@@ -1,4 +1,4 @@
-package engine.feature.procedural.generators
+package engine.feature.procedural.data
 
 import engine.feature.procedural.MapElementType
 import engine.feature.procedural.NoiseParameterType

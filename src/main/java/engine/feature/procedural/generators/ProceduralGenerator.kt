@@ -2,6 +2,7 @@ package engine.feature.procedural.generators
 
 import engine.core.geometry.Point2D
 import engine.feature.procedural.OpenSimplex2S
+import engine.feature.procedural.data.ProceduralDataSet
 import engine.feature.tiled.data.TileMap
 
 /**
