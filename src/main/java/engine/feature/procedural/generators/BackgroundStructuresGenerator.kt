@@ -3,15 +3,11 @@ package engine.feature.procedural.generators
 import engine.core.geometry.Point2D
 
 class BackgroundStructuresGenerator(
-
+    private val genericNoiseCondition: (noiseValue: Float) -> Boolean
 ) : AbstractGenerator() {
 
     override var noiseFunc: (Long, Double, Double) -> Float = { _, _, _ ->
         0f
-    }
-
-    private val genericNoiseCondition = { value: Float ->
-        true
     }
 
     fun generate(
