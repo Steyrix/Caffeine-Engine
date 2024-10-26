@@ -21,21 +21,27 @@ class ProceduralTileMap private constructor(
     private constructor(builder: Builder) : this(builder.presets, builder.generator, builder.seed)
 
     class Builder {
-        var presets: ProceduralMapPreset? = null
-        var generator: ProceduralGenerator? = null
-        var seed: Long = 0
+        private var presets: ProceduralMapPreset? = null
+        private var generator: ProceduralGenerator? = null
+        private var seed: Long = 0
 
         fun build() = ProceduralTileMap(this)
         fun presets(value: ProceduralMapPreset) {
-            this.presets = value
+            this.apply {
+                presets = value
+            }
         }
 
         fun generator(value: ProceduralGenerator) {
-            this.generator = value
+            this.apply {
+                generator = value
+            }
         }
 
         fun seed(value: Long) {
-            this.seed = value
+            this.apply {
+                seed = value
+            }
         }
     }
 
