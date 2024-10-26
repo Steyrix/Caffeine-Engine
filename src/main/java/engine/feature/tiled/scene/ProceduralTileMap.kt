@@ -12,11 +12,32 @@ import engine.feature.procedural.generators.ProceduralGenerator
 import engine.feature.tiled.data.TileMap
 import org.joml.Matrix4f
 
-class ProceduralTileMap(
-    private val mapPresets: ProceduralMapPreset,
-    private val proceduralGenerator: ProceduralGenerator,
+private class ProceduralTileMap private constructor(
+    private val mapPresets: ProceduralMapPreset?,
+    private val proceduralGenerator: ProceduralGenerator?,
     private val seed: Long = 0,
 ) : SingleGameEntity(), TileMapController {
+
+    private constructor(builder: Builder) : this(builder.presets, builder.generator, builder.seed)
+
+    class Builder {
+        var presets: ProceduralMapPreset? = null
+        var generator: ProceduralGenerator? = null
+        var seed: Long = 0
+
+        fun build() = ProceduralTileMap(this)
+        fun presets(value: ProceduralMapPreset) {
+            this.presets = value
+        }
+
+        fun generator(value: ProceduralGenerator) {
+            this.generator = value
+        }
+
+        fun seed(value: Long) {
+            this.seed = value
+        }
+    }
 
     override var parameters: SetOfStatic2DParameters =
         SetOfStatic2DParameters(
@@ -69,32 +90,36 @@ class ProceduralTileMap(
         renderProjection: Matrix4f,
         collisionContexts: List<CollisionContext<*>>
     ) {
-        parameters = SetOfStatic2DParameters(
-            x = 0f,
-            y = 0f,
-            xSize = mapPresets.width,
-            ySize = mapPresets.height,
-            rotationAngle = 0f
-        )
+        checkParameters()
 
-        mapComponent =
-            proceduralGenerator.generateMap(seed).apply {
-                shaders = TileMapGraphicsProvider.getShaders(mapPresets, renderProjection)
+        mapPresets?.run {
+            parameters = SetOfStatic2DParameters(
+                x = 0f,
+                y = 0f,
+                xSize = width,
+                ySize = height,
+                rotationAngle = 0f
+            )
+
+            mapComponent =
+                proceduralGenerator!!.generateMap(seed).apply {
+                    shaders = TileMapGraphicsProvider.getShaders(mapPresets, renderProjection)
+                }
+
+            addComponent(mapComponent, parameters)
+
+            collisionContexts.forEach {
+                it.addEntity(mapComponent as Entity, parameters)
             }
 
-        addComponent(mapComponent, parameters)
+            mapComponent?.updateParameters(parameters)
+            updateEvents.forEach {
+                val event = it.invoke(mapComponent!!)
+                eventSet.add(event)
+            }
 
-        collisionContexts.forEach {
-            it.addEntity(mapComponent as Entity, parameters)
+            isSpawned = true
         }
-
-        mapComponent?.updateParameters(parameters)
-        mapPresets.updateEvents.forEach {
-            val event = it.invoke(mapComponent!!)
-            eventSet.add(event)
-        }
-
-        isSpawned = true
     }
 
     override fun update(
@@ -116,5 +141,15 @@ class ProceduralTileMap(
 
     override fun getZLevel(): Float {
         return Float.NEGATIVE_INFINITY
+    }
+
+    private fun checkParameters() {
+        if (mapPresets == null) {
+            throw IllegalStateException("presets cannot be null")
+        }
+
+        if (proceduralGenerator == null) {
+            throw IllegalStateException("generator cannot be null")
+        }
     }
 }
