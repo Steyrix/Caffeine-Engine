@@ -24,8 +24,13 @@ class ProceduralTileMap private constructor(
         var presets: ProceduralMapPreset? = null
         var generator: ProceduralGenerator? = null
         var seed: Long = 0
+        private var renderProjection: Matrix4f? = null
+        private var collisionContexts: List<CollisionContext<*>> = emptyList()
 
-        fun build() = ProceduralTileMap(this)
+        fun build() = ProceduralTileMap(this).apply {
+            init(renderProjection!!, collisionContexts)
+        }
+
         fun presets(value: ProceduralMapPreset) =
             this.apply {
                 presets = value
@@ -39,6 +44,16 @@ class ProceduralTileMap private constructor(
         fun seed(value: Long) =
             this.apply {
                 seed = value
+            }
+
+        fun renderProjection(value: Matrix4f) =
+            this.apply {
+                renderProjection =value
+            }
+
+        fun collisionContexts(value: List<CollisionContext<*>>) =
+            this.apply {
+                collisionContexts = value
             }
     }
 
