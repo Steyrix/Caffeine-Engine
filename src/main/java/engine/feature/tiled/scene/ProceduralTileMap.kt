@@ -26,23 +26,20 @@ class ProceduralTileMap private constructor(
         var seed: Long = 0
 
         fun build() = ProceduralTileMap(this)
-        fun presets(value: ProceduralMapPreset) {
+        fun presets(value: ProceduralMapPreset) =
             this.apply {
                 presets = value
             }
-        }
 
-        fun generator(value: ProceduralGenerator) {
+        fun generator(value: ProceduralGenerator) =
             this.apply {
                 generator = value
             }
-        }
 
-        fun seed(value: Long) {
+        fun seed(value: Long) =
             this.apply {
                 seed = value
             }
-        }
     }
 
     override var parameters: SetOfStatic2DParameters =
