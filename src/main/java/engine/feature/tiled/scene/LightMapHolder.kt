@@ -60,8 +60,8 @@ abstract class LightMapHolder {
             parameters = SetOfStatic2DParameters(
                 x = 0f,
                 y = 0f,
-                xSize = approximateWidth * 1.1f,
-                ySize = approximateHeight / 1.35f,
+                xSize = approximateWidth * 1.1f, // TODO: fix
+                ySize = approximateHeight / 1.35f, // TODO: fix
                 rotationAngle = 0f
             ),
             tileMap = holderMap ?: throw IllegalStateException(),
