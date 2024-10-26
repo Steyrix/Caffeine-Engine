@@ -12,7 +12,7 @@ import engine.feature.procedural.generators.ProceduralGenerator
 import engine.feature.tiled.data.TileMap
 import org.joml.Matrix4f
 
-private class ProceduralTileMap private constructor(
+class ProceduralTileMap private constructor(
     private val mapPresets: ProceduralMapPreset?,
     private val proceduralGenerator: ProceduralGenerator?,
     private val seed: Long = 0,
