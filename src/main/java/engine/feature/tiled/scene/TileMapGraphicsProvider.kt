@@ -37,12 +37,13 @@ internal object TileMapGraphicsProvider {
         )
 
         // TODO: cover with debug flag
+        // TODO: remove hardcode
         val debugVertexShaderPath =
-            this.javaClass.getResource("/shaders/boundingBoxShaders/boundingBoxVertexShader.glsl")?.path
+            this.javaClass.getResource("/shaders/debugShaders/mapDebugVertexShader.glsl")?.path
                 ?: throw IllegalStateException()
 
         val debugFragmentShaderPath =
-            this.javaClass.getResource("/shaders/boundingBoxShaders/boundingBoxFragmentShader.glsl")?.path
+            this.javaClass.getResource("/shaders/debugShaders/mapDebugFragmentShader.glsl")?.path
                 ?: throw IllegalStateException()
 
         val debugShader = ShaderLoader.loadFromFile(
