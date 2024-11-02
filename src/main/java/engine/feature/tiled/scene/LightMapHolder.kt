@@ -54,20 +54,14 @@ abstract class LightMapHolder {
         val litLightSources = lightSources.filter { it.isLit }
         val approximateWidth = lightMapScreenWidth * (lightMapScreenWidth / lightmapPrecision) // too small
         val approximateHeight = lightMapScreenHeight * (lightMapScreenHeight / lightmapPrecision) // too large
-        println("Lightmap screenWidth: $lightMapScreenWidth")
-        println("Lightmap screenHeight: $lightMapScreenHeight")
-        println("Lightmap approximateWidth: $approximateWidth")
-        println("Lightmap approximateHeight: $approximateHeight")
-        println("Lightmap worldWidth: $worldWidth")
-        println("Lightmap worldHieght: $worldHeight")
         return LightMap(
             precision = lightmapPrecision,
             projection = lightMapProjection,
             parameters = SetOfStatic2DParameters(
                 x = 0f,
                 y = 0f,
-                xSize = approximateWidth * (lightMapScreenWidth / lightMapScreenHeight), // TODO: fix
-                ySize = approximateHeight * (lightMapScreenWidth / lightMapScreenHeight), // TODO: fix
+                xSize = approximateWidth * 1.1f, // TODO: fix
+                ySize = approximateHeight / 1.35f, // TODO: fix
                 rotationAngle = 0f
             ),
             tileMap = holderMap ?: throw IllegalStateException(),
