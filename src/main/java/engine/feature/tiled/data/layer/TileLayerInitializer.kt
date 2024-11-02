@@ -129,38 +129,6 @@ object TileLayerInitializer {
         ).apply { zLevel = 1f }
     }
 
-    internal fun genLayerModelByData(
-        data: MutableList<Pair<Point2D, Int>>,
-        set: TileSet
-    ): Model {
-        val allVertices: ArrayList<Float> = ArrayList()
-        val allUV: ArrayList<Float> = ArrayList()
-
-        for (num in data.indices) {
-            val pos = data[num].first
-            val verticesArray = genVertices(pos, set)
-
-            val tileNumber = data[num].second
-
-            if (tileNumber != EMPTY_TILE_ID) {
-                val uvArray = set.getTileByNumber(tileNumber).tileUV
-                allVertices.addAll(verticesArray.toList())
-                allUV.addAll(uvArray.toList())
-            } else {
-                val uvArray = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
-                val vertices = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
-                allVertices.addAll(vertices.toList())
-                allUV.addAll(uvArray.toList())
-            }
-        }
-
-        return Model(
-            dataArrays = listOf(allVertices.toFloatArray(), allUV.toFloatArray()),
-            verticesCount = allVertices.size / 2,
-            texture = set.texture2D
-        ).apply { zLevel = 1f }
-    }
-
     internal fun genDebugGraphicalComponent(
         data: List<Int>,
         set: TileSet,
