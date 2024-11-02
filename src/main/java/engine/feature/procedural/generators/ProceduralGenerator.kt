@@ -25,10 +25,9 @@ class ProceduralGenerator(
 
     private val walkableTerrainGenerator = WalkableTerrainGenerator(
         noiseTypeValues = dataSet.terrainData.noiseParameterTypes,
-        targetTypeValues = dataSet.terrainData.elementTypes
-    ).apply {
+        targetTypeValues = dataSet.terrainData.elementTypes,
         noiseFunc = noise
-    }
+    )
 
     init {
         for (row in 0 until heightInTiles) {

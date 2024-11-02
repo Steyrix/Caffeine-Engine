@@ -11,12 +11,9 @@ import engine.feature.tiled.data.layer.TileLayer
 
 class WalkableTerrainGenerator(
     private val noiseTypeValues: List<NoiseParameterType> = listOf(),
-    private val targetTypeValues: List<MapElementType> = listOf()
+    private val targetTypeValues: List<MapElementType> = listOf(),
+    override var noiseFunc: (Long, Double, Double) -> Float
 ) : AbstractGenerator() {
-
-    override var noiseFunc: (Long, Double, Double) -> Float = { _, _, _ ->
-        0f
-    }
 
     fun generateLayers(
         seed: Long,
