@@ -6,12 +6,9 @@ import engine.feature.procedural.autotiling.Autotiler
 class BackgroundStructuresGenerator(
     private val genericNoiseCondition: (noiseValue: Float) -> Boolean,
     private val bitTValueToId: Map<Int,Int>,
-    private val layerWidthInTiles: Int
+    private val layerWidthInTiles: Int,
+    override var noiseFunc: (Long, Double, Double) -> Float
 ) : AbstractGenerator() {
-
-    override var noiseFunc: (Long, Double, Double) -> Float = { _, _, _ ->
-        0f
-    }
 
     fun generate(
         seed: Long,
