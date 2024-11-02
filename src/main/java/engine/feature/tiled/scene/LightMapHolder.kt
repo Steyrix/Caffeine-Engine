@@ -2,7 +2,6 @@ package engine.feature.tiled.scene
 
 import engine.core.shader.Shader
 import engine.core.update.SetOfStatic2DParameters
-import engine.feature.matrix.MatrixComputer
 import engine.feature.tiled.data.TileMap
 import engine.feature.tiled.data.lighting.LightMap
 import engine.feature.tiled.data.lighting.LightSource
@@ -53,24 +52,22 @@ abstract class LightMapHolder {
 
     protected fun generateLightMap(): LightMap {
         val litLightSources = lightSources.filter { it.isLit }
-        val ratio = MatrixComputer.matrixState.screenWidth / MatrixComputer.matrixState.screenHeight
-        val approximateWidth = MatrixComputer.matrixState.screenWidth * (MatrixComputer.matrixState.screenWidth / lightmapPrecision) // too small
-        val approximateHeight = MatrixComputer.matrixState.screenHeight * (MatrixComputer.matrixState.screenHeight / lightmapPrecision) // too large
-        println("Lightmap screenWidth: ${MatrixComputer.matrixState.screenWidth}")
-        println("Lightmap screenHeight: ${MatrixComputer.matrixState.screenHeight}")
+        val approximateWidth = lightMapScreenWidth * (lightMapScreenWidth / lightmapPrecision) // too small
+        val approximateHeight = lightMapScreenHeight * (lightMapScreenHeight / lightmapPrecision) // too large
+        println("Lightmap screenWidth: $lightMapScreenWidth")
+        println("Lightmap screenHeight: $lightMapScreenHeight")
         println("Lightmap approximateWidth: $approximateWidth")
         println("Lightmap approximateHeight: $approximateHeight")
         println("Lightmap worldWidth: $worldWidth")
         println("Lightmap worldHieght: $worldHeight")
-        MatrixComputer.matrixState.screenWidth
         return LightMap(
             precision = lightmapPrecision,
             projection = lightMapProjection,
             parameters = SetOfStatic2DParameters(
                 x = 0f,
                 y = 0f,
-                xSize = approximateWidth * ratio, // TODO: fix
-                ySize = approximateHeight * ratio, // TODO: fix
+                xSize = approximateWidth * (lightMapScreenWidth / lightMapScreenHeight), // TODO: fix
+                ySize = approximateHeight * (lightMapScreenWidth / lightMapScreenHeight), // TODO: fix
                 rotationAngle = 0f
             ),
             tileMap = holderMap ?: throw IllegalStateException(),
