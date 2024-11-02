@@ -8,8 +8,6 @@ import engine.core.update.SetOfStatic2DParameters
 import engine.feature.collision.CollisionContext
 import engine.core.geometry.Point2D
 import engine.core.loop.GameLoopTimeEvent
-import engine.feature.matrix.MatrixComputer
-import engine.feature.matrix.MatrixState
 import engine.feature.tiled.data.TileMap
 import org.joml.Matrix4f
 
@@ -60,15 +58,11 @@ class PresetTileMap(
         renderProjection: Matrix4f,
         collisionContexts: List<CollisionContext<*>>
     ) {
-        val screenWidth = MatrixComputer.matrixState.screenWidth
-        val screenHeight = MatrixComputer.matrixState.screenHeight
-        val ratio = screenWidth / screenHeight
-
         parameters = SetOfStatic2DParameters(
             x = 0f,
             y = 0f,
-            xSize = mapPresets.width * (screenWidth / mapPresets.width) / ratio,
-            ySize = mapPresets.height * (screenHeight / mapPresets.height),
+            xSize = mapPresets.width,
+            ySize = mapPresets.height,
             rotationAngle = 0f
         )
 
