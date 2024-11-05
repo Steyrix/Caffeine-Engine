@@ -25,7 +25,6 @@ class TileSet(
 
     val relativeTileWidth = tileWidthPx / texture2D.getWidthF()
     val relativeTileHeight = tileHeightPx / texture2D.getHeightF()
-    internal val tilesetWidthHeightRatio = relativeTileWidth / relativeTileHeight
 
     private val tiles = generateTiles(this)
     internal fun getTileByNumber(numberInSet: Int) = tiles[numberInSet]
