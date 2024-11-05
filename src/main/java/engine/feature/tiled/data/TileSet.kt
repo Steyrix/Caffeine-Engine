@@ -3,15 +3,15 @@ package engine.feature.tiled.data
 import engine.core.texture.Texture2D
 
 class TileSet(
-    val tileWidthPx: Float,
-    val tileHeightPx: Float,
-    val texture2D: Texture2D,
+    internal val tileWidthPx: Float,
+    internal val tileHeightPx: Float,
+    internal val texture2D: Texture2D,
     private val textureTileCount: Int,
     private val textureColumnCount: Int
 ) {
 
     companion object {
-        fun generateTiles(set: TileSet): MutableList<Tile> {
+        internal fun generateTiles(set: TileSet): MutableList<Tile> {
             val out = mutableListOf<Tile>()
 
             for (i in 0 until set.textureTileCount) {
@@ -23,12 +23,16 @@ class TileSet(
         }
     }
 
+    val relativeTileWidth = tileWidthPx / texture2D.getWidthF()
+    val relativeTileHeight = tileHeightPx / texture2D.getHeightF()
+    internal val tilesetWidthHeightRatio = relativeTileWidth / relativeTileHeight
+
     private val tiles = generateTiles(this)
-    fun getTileByNumber(numberInSet: Int) = tiles[numberInSet]
+    internal fun getTileByNumber(numberInSet: Int) = tiles[numberInSet]
 
     private fun getTileUvByNumber(numberInSet: Int): FloatArray {
-        val x = tileWidthPx / texture2D.getWidthF()
-        val y = tileHeightPx / texture2D.getHeightF()
+        val x = relativeTileWidth
+        val y = relativeTileHeight
 
         val currentRow = (numberInSet / textureColumnCount).toFloat()
         val currentColumn = (numberInSet % textureColumnCount).toFloat()
