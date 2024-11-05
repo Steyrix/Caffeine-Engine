@@ -15,14 +15,14 @@ data class TileMapSettings(
 
     fun tilesCount(): Int = widthInTiles * heightInTiles
 
-    fun worldWidth(): Float = relativeWidth * absoluteWidth
+    fun worldWidth(): Float = absoluteWidth
 
-    fun worldHeight(): Float = relativeHeight * absoluteHeight
+    fun worldHeight(): Float = absoluteHeight
 
     fun update(parameters: SetOfStatic2DParameters) {
         absoluteWidth = parameters.xSize
         absoluteHeight = parameters.ySize
-        absoluteTileWidth = relativeWidth / widthInTiles * absoluteWidth
-        absoluteTileHeight = relativeHeight / heightInTiles * absoluteHeight
+        absoluteTileWidth = absoluteWidth / widthInTiles
+        absoluteTileHeight = absoluteHeight / heightInTiles
     }
 }
