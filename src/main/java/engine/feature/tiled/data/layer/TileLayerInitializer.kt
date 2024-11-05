@@ -35,7 +35,7 @@ object TileLayerInitializer {
                     val value = data[it]
                     val pos = getPositionByTileIndex(it, widthInTiles)
                     objectUv.addAll(set.getTileByNumber(value).tileUV.toList())
-                    objectVertices.addAll(genVertices(pos, set).toList())
+                    objectVertices.addAll(genVertices(pos, set, widthInTiles).toList())
                 }
 
                 val model = Model(
@@ -106,7 +106,13 @@ object TileLayerInitializer {
 
         for (num in data.indices) {
             val pos = getPositionByTileIndex(num, widthInTiles)
-            val verticesArray = genVertices(pos, set)
+            val verticesArray = genVertices(
+                pos,
+                set,
+                widthInTiles
+            )
+
+            if (num % 6 == 0) println(verticesArray.toList())
 
             val tileNumber = data[num]
 
@@ -139,7 +145,7 @@ object TileLayerInitializer {
             val pos = getPositionByTileIndex(num, widthInTiles)
             val tileNumber = data[num]
 
-            val verticesArray = genDebugVertices(pos, set)
+            val verticesArray = genDebugVertices(pos, set, widthInTiles)
 
             if (tileNumber != EMPTY_TILE_ID) {
                 allVertices.addAll(verticesArray.toList())
@@ -167,7 +173,7 @@ object TileLayerInitializer {
 
         for (num in data.indices) {
             val pos = getPositionByTileIndex(num, widthInTiles)
-            val verticesArray = genVertices(pos, set)
+            val verticesArray = genVertices(pos, set, widthInTiles)
             allVertices.addAll(verticesArray.toList())
         }
 
@@ -269,9 +275,10 @@ object TileLayerInitializer {
     private fun genVertices(
         pos: Point2D,
         set: TileSet,
-        width: Float = set.relativeTileWidth,
-        height: Float = set.relativeTileHeight
+        widthInTiles: Int
     ): FloatArray {
+        val width = set.relativeTileWidth / (widthInTiles * set.relativeTileWidth)
+        val height = set.relativeTileHeight / (widthInTiles * set.relativeTileHeight)
         return floatArrayOf(
             width * pos.x, height * (pos.y + 1),
             width * (pos.x + 1), height * pos.y,
@@ -319,16 +326,22 @@ object TileLayerInitializer {
         }
     }
 
-    private fun genDebugVertices(pos: Point2D, set: TileSet): FloatArray {
+    private fun genDebugVertices(
+        pos: Point2D,
+        set: TileSet,
+        widthInTiles: Int
+    ): FloatArray {
+        val width = set.tileWidthPx / (widthInTiles * set.tileHeightPx)
+        val height = set.tileWidthPx / (widthInTiles * set.tileHeightPx)
         return floatArrayOf(
-            set.relativeTileWidth * pos.x, set.relativeTileHeight * pos.y,
-            set.relativeTileWidth * (pos.x + 1), set.relativeTileHeight * pos.y,
-            set.relativeTileWidth * (pos.x + 1), set.relativeTileHeight * pos.y,
-            set.relativeTileWidth * (pos.x + 1), set.relativeTileHeight * (pos.y + 1),
-            set.relativeTileWidth * (pos.x + 1), set.relativeTileHeight * (pos.y + 1),
-            set.relativeTileWidth * pos.x, set.relativeTileHeight * (pos.y + 1),
-            set.relativeTileWidth * pos.x, set.relativeTileHeight * (pos.y + 1),
-            set.relativeTileWidth * pos.x, set.relativeTileHeight * pos.y
+            width * pos.x, height * pos.y,
+            width * (pos.x + 1), height * pos.y,
+            width * (pos.x + 1), height * pos.y,
+            width * (pos.x + 1), height * (pos.y + 1),
+            width * (pos.x + 1), height * (pos.y + 1),
+            width * pos.x, height * (pos.y + 1),
+            width * pos.x, height * (pos.y + 1),
+            width * pos.x, height * pos.y
         )
     }
 
