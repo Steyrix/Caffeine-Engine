@@ -107,8 +107,8 @@ class TileMap(
         val rowIndex = index / settings.widthInTiles
         val columnIndex = index - rowIndex * settings.widthInTiles
 
-        val x = columnIndex * settings.absoluteWidth * set.relativeTileWidth
-        val y = rowIndex * settings.absoluteHeight * set.relativeTileHeight
+        val x = columnIndex * settings.absoluteTileWidth
+        val y = rowIndex * settings.absoluteTileHeight
 
         return Point2D(x, y)
     }
@@ -148,7 +148,6 @@ class TileMap(
 
     override fun updateParameters(parameters: SetOfStatic2DParameters) {
         settings.update(parameters)
-
         layers.forEach {
             it.updateParameters(parameters)
         }
