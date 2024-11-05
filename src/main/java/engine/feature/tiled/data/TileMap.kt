@@ -147,16 +147,11 @@ class TileMap(
     }
 
     override fun updateParameters(parameters: SetOfStatic2DParameters) {
-        val initial = parameters.xSize
-
-        parameters.xSize /= set.tilesetWidthHeightRatio
         settings.update(parameters)
 
         layers.forEach {
             it.updateParameters(parameters)
         }
-
-        parameters.xSize = initial
     }
 
     override fun draw() {
