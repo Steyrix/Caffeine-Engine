@@ -159,8 +159,6 @@ internal object DataGenerator {
             precision,
             screenWidth,
             screenHeight,
-            worldWidth,
-            worldHeight,
             model
         )
     }

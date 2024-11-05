@@ -21,8 +21,6 @@ class Texture2D(
             precision: Float,
             screenWidth: Float,
             screenHeight: Float,
-            worldWidth: Float,
-            worldHeight: Float,
             model: Model
         ): Texture2D {
             return Texture2D(
@@ -30,8 +28,6 @@ class Texture2D(
                     precision,
                     screenWidth,
                     screenHeight,
-                    worldWidth,
-                    worldHeight,
                     model
                 )
             )
