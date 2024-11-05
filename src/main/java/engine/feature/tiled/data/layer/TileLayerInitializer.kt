@@ -112,8 +112,6 @@ object TileLayerInitializer {
                 widthInTiles
             )
 
-            if (num % 6 == 0) println(verticesArray.toList())
-
             val tileNumber = data[num]
 
             if (tileNumber != EMPTY_TILE_ID) {
