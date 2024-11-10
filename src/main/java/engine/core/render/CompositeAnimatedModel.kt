@@ -1,9 +1,11 @@
 package engine.core.render
 
+import engine.core.entity.Entity
+
 
 class CompositeAnimatedModel(
     private val animatedModels: List<AnimatedModel2D>
-) : Animated, Zleveled  {
+) : Animated, Zleveled, Entity  {
 
     override fun setAnimationByKey(key: String) {
         animatedModels.forEach {
