@@ -79,7 +79,7 @@ open class AnimatedModel2D(
             dataArrays = DefaultBufferData.getRectangleSectorBuffers(data.frameWidth, data.frameHeight),
             verticesCount = 6
         ),
-        texture = ResourceLoader.loadTexture(data.texturePath!!),
+        texture = data.texture ?: ResourceLoader.loadTexture(data.texturePath!!),
         arrayTexture = null,
         animationHolder = AnimationHolder2D(data.animations.toMutableList())
     )
