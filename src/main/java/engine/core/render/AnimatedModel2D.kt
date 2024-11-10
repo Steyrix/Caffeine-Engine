@@ -101,11 +101,11 @@ open class AnimatedModel2D(
         animationHolder.setAnimationByKey(key)
     }
 
-    fun resetAnimation(key: String) {
+    override fun resetAnimation(key: String) {
         animationHolder.resetAnimation(key)
     }
 
-    fun changeAnimationSet(new: List<Animation>) {
+    override fun changeAnimationSet(new: List<Animation>) {
         animationHolder.changeAnimationSet(new)
     }
 }
