@@ -9,12 +9,12 @@ import engine.feature.animation.AnimationHolder2D
 import engine.core.render.util.DefaultBufferData
 import engine.feature.animation.AtlasData
 
-class AnimatedModel2D(
+open class AnimatedModel2D(
     mesh: Mesh,
     texture: Texture2D? = null,
     arrayTexture: ArrayTexture2D? = null,
     private val animationHolder: AnimationHolder2D
-) : Model(mesh, texture, arrayTexture), Updatable {
+) : Model(mesh, texture, arrayTexture), Updatable, Animated {
 
     constructor(
         frameWidth: Float,
@@ -97,7 +97,7 @@ class AnimatedModel2D(
         animationHolder.playAnimation(deltaTime)
     }
 
-    fun setAnimationByKey(key: String) {
+    override fun setAnimationByKey(key: String) {
         animationHolder.setAnimationByKey(key)
     }
 
