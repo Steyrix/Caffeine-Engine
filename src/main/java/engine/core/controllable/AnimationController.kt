@@ -1,9 +1,9 @@
 package engine.core.controllable
 
-import engine.core.render.AnimatedModel2D
+import engine.core.render.Animated
 
 abstract class AnimationController(
-    protected var drawableComponent: AnimatedModel2D
+    protected var drawableComponent: Animated
 ) : Controller {
 
     abstract fun getAnimationKey(): String
