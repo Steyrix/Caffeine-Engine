@@ -2,13 +2,12 @@ package engine.core.render
 
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
-import engine.core.update.Updatable
 import engine.feature.animation.Animation
 
 
 class CompositeAnimatedModel(
     private val animatedModels: List<AnimatedModel2D>
-) : CompositeEntity(), Animated, Zleveled, Entity, Updatable {
+) : CompositeEntity(), Animated, Zleveled, Entity {
 
     override var zLevel: Float = animatedModels.maxOf { it.zLevel }
 
