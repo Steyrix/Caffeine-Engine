@@ -8,6 +8,8 @@ abstract class AnimationController(
 
     abstract fun getAnimationKey(): String
 
+    abstract fun getAnimationKeysForComposite(keys: String): List<String>
+
     override fun update(deltaTime: Float) {
         drawableComponent.setAnimationByKey(getAnimationKey())
     }
