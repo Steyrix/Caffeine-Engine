@@ -8,38 +8,37 @@ import engine.feature.animation.Animation
 
 
 class CompositeAnimatedModel(
-    private val animatedModels: List<AnimatedModel2D>
+    val animatedModels: Map<String, AnimatedModel2D>,
+    ordering: List<String>
 ) : CompositeEntity(), Animated, Zleveled, Entity, Parameterized<SetOfParameters> {
 
-    override var zLevel: Float = animatedModels.maxOf { it.zLevel }
+    override var zLevel: Float = animatedModels.values.maxOf { it.zLevel }
 
     init {
-        animatedModels.forEach {
-            this.addComponent(it)
+        ordering.forEach {
+            addComponent(animatedModels[it] as Entity)
         }
     }
 
-    override fun setAnimationByKey(key: String) {
-        animatedModels.forEach {
-            it.setAnimationByKey(key)
-        }
+    fun setAnimationByKey(bodyPartKey: String, animationKey: String) {
+        animatedModels[bodyPartKey]?.setAnimationByKey(animationKey)
     }
 
     override fun resetAnimation(key: String) {
         animatedModels.forEach {
-            it.resetAnimation(key)
+            it.value.resetAnimation(key)
         }
     }
 
     override fun changeAnimationSet(new: List<Animation>) {
         animatedModels.forEach {
-            it.changeAnimationSet(new)
+            it.value.changeAnimationSet(new)
         }
     }
 
     override fun updateParameters(parameters: SetOfParameters) {
         animatedModels.forEach {
-            it.updateParameters(parameters)
+            it.value.updateParameters(parameters)
         }
     }
 }

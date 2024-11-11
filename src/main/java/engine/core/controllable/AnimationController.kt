@@ -1,14 +1,12 @@
 package engine.core.controllable
 
-import engine.core.render.Animated
+import engine.core.render.AnimatedModel2D
 
 abstract class AnimationController(
-    protected var drawableComponent: Animated
+    protected var drawableComponent: AnimatedModel2D
 ) : Controller {
 
     abstract fun getAnimationKey(): String
-
-    abstract fun getAnimationKeysForComposite(keys: String): List<String>
 
     override fun update(deltaTime: Float) {
         drawableComponent.setAnimationByKey(getAnimationKey())

@@ -97,8 +97,8 @@ open class AnimatedModel2D(
         animationHolder.playAnimation(deltaTime)
     }
 
-    override fun setAnimationByKey(key: String) {
-        animationHolder.setAnimationByKey(key)
+    fun setAnimationByKey(animationKey: String) {
+        animationHolder.setAnimationByKey(animationKey)
     }
 
     override fun resetAnimation(key: String) {
