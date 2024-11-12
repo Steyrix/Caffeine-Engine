@@ -8,15 +8,14 @@ import engine.feature.animation.Animation
 
 
 class CompositeAnimatedModel(
-    val animatedModels: Map<String, AnimatedModel2D>,
-    ordering: List<String>
+    val animatedModels: Map<String, AnimatedModel2D>
 ) : CompositeEntity(), Animated, Zleveled, Entity, Parameterized<SetOfParameters> {
 
     override var zLevel: Float = animatedModels.values.maxOf { it.zLevel }
 
     init {
-        ordering.forEach {
-            addComponent(animatedModels[it] as Entity)
+        animatedModels.forEach {
+            addComponent(it.value)
         }
     }
 
