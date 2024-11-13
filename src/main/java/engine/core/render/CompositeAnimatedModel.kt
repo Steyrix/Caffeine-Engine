@@ -40,4 +40,12 @@ class CompositeAnimatedModel(
             it.value.updateParameters(parameters)
         }
     }
+
+    fun addModel(model: AnimatedModel2D) {
+        addComponent(model)
+    }
+
+    fun removeModel(model: AnimatedModel2D) {
+        removeComponent(model)
+    }
 }
