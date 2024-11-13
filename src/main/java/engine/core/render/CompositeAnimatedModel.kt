@@ -8,10 +8,13 @@ import engine.feature.animation.Animation
 
 
 class CompositeAnimatedModel(
-    val animatedModels: Map<String, AnimatedModel2D>
+    private val animatedModels: MutableMap<String, AnimatedModel2D>
 ) : CompositeEntity(), Animated, Zleveled, Entity, Parameterized<SetOfParameters> {
 
     override var zLevel: Float = animatedModels.values.maxOf { it.zLevel }
+
+    val models: Map<String, AnimatedModel2D>
+        get() = animatedModels
 
     init {
         animatedModels.forEach {
@@ -41,11 +44,14 @@ class CompositeAnimatedModel(
         }
     }
 
-    fun addModel(model: AnimatedModel2D) {
+    fun addModel(key: String, model: AnimatedModel2D) {
+        animatedModels[key] = model
         addComponent(model)
     }
 
-    fun removeModel(model: AnimatedModel2D) {
-        removeComponent(model)
+    fun removeModel(key: String) {
+        val target = animatedModels[key]
+        removeComponent(target!!)
+        animatedModels.remove(key)
     }
 }
