@@ -54,4 +54,16 @@ class CompositeAnimatedModel(
         removeComponent(target!!)
         animatedModels.remove(key)
     }
+
+    fun combine(model: CompositeAnimatedModel) {
+        model.animatedModels.forEach {
+            addModel(it.key, it.value)
+        }
+    }
+
+    fun removeAllOf(model: CompositeAnimatedModel) {
+        model.animatedModels.keys.forEach {
+            removeModel(it)
+        }
+    }
 }
