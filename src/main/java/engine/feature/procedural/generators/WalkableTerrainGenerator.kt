@@ -98,7 +98,6 @@ class WalkableTerrainGenerator(
         val result = mutableMapOf<Point2D, MapElementType>()
 
         worldData.forEach {
-
             val noiseParameters = mutableListOf<NoiseParameter>()
 
             noiseTypeValues.forEach { type ->
