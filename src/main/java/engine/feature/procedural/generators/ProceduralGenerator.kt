@@ -5,11 +5,8 @@ import engine.feature.procedural.OpenSimplex2S
 import engine.feature.procedural.data.ProceduralDataSet
 import engine.feature.tiled.data.TileMap
 
-/**
- * (number in tileIdsData) to (number in tileSet)
- */
-typealias NormalizedData = MutableList<Pair<Point2D, Int>>
-typealias ProceduralData = MutableList<Pair<Point2D, Float>>
+typealias PointToTileIdList = MutableList<Pair<Point2D, Int>>
+typealias PointToNoiseValueList = MutableList<Pair<Point2D, Float?>>
 
 class ProceduralGenerator(
     private val dataSet: ProceduralDataSet,
