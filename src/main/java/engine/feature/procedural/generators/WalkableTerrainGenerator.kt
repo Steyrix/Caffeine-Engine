@@ -22,25 +22,26 @@ class WalkableTerrainGenerator(
         widthInTiles: Int,
         heightInTiles: Int
     ): List<Layer> {
-        val data = generate(
+        val data: Map<MapElementType, PointToNoiseValueList> = generate(
             seed, worldData
         )
 
-        val resultMap = hashMapOf<TileSet, NormalizedData>()
+        val resultMap = hashMapOf<TileSet, PointToTileIdList>()
 
-        /**
-         * Each element type (e.g. biome) refers to a collection of noise values and a tileset.
-         * Former is being normalized for latter.
-         */
         data.keys.forEach {
             val targetSet = terrainData[it]
             data[it]?.let { proceduralData ->
-                val normalizedValues = GeneratorUtil.normalizeForTileSet(proceduralData, targetSet!!)
-                resultMap[targetSet] = normalizedValues
+                val normalizedValues = proceduralData.map { pair ->
+                    GeneratorUtil.normalizeForTileSet(pair, targetSet!!)
+                }.toMutableList()
+
+                targetSet?.let { set ->
+                    resultMap[set] = normalizedValues
+                }
             }
         }
 
-        val layers: MutableList<Layer> = resultMap.keys.mapIndexed { _, it ->
+        val layers: MutableList<Layer> = resultMap.keys.mapIndexed { index, it ->
             val tileIds = resultMap[it]!!
                 .map {
                     it.first.toTileId(worldData) to it.second
@@ -49,11 +50,11 @@ class WalkableTerrainGenerator(
                 .toMutableList()
 
             TileLayer(
-                name = "walkable_layer",
+                name = "walkable_layer_$index",
                 widthInTiles = widthInTiles,
                 heightInTiles = heightInTiles,
                 set = it,
-                tileIdsData = tileIds, // TODO
+                tileIdsData = tileIds,
                 properties = mutableListOf(),
                 model = null
             )
@@ -63,28 +64,24 @@ class WalkableTerrainGenerator(
         return layers
     }
 
-    /*
-        Algorithm: distribute biomes among tiles' coordinates.
-        Then generate noise for each tile.
-        Normalize noise afterwards and use it to determine
-        which biome-specific tile to set.
-    */
     private fun generate(
         seed: Long,
         worldData: List<Point2D>,
-    ): Map<MapElementType, ProceduralData> {
-        val result = hashMapOf<MapElementType, ProceduralData>()
+    ): Map<MapElementType, PointToNoiseValueList> {
+        val result = hashMapOf<MapElementType, PointToNoiseValueList>()
+        targetTypeValues.forEach {
+            result[it] = mutableListOf()
+        }
 
         val proceduralData = distributeProceduralTypes(seed, worldData)
 
-        proceduralData.keys.forEach { point ->
-            val noiseValue = getNoiseForCoordinate(seed, point)
-
-            proceduralData[point]?.let { proceduralType ->
-                if (!result.contains(proceduralType)) {
-                    result[proceduralType] = mutableListOf()
+        targetTypeValues.forEach { biome ->
+            worldData.forEach { point ->
+                if (proceduralData[biome]?.contains(point) == true) {
+                    result[biome]?.add(point to getNoiseForCoordinate(seed, point))
+                } else {
+                    result[biome]?.add(point to null)
                 }
-                result[proceduralType]?.add(point to noiseValue)
             }
         }
 
@@ -94,8 +91,11 @@ class WalkableTerrainGenerator(
     private fun distributeProceduralTypes(
         seed: Long,
         worldData: List<Point2D>
-    ): Map<Point2D, MapElementType> {
-        val result = mutableMapOf<Point2D, MapElementType>()
+    ): Map<MapElementType, MutableList<Point2D>> {
+        val result = mutableMapOf<MapElementType, MutableList<Point2D>>()
+        targetTypeValues.forEach {
+            result[it] = mutableListOf()
+        }
 
         worldData.forEach {
             val noiseParameters = mutableListOf<NoiseParameter>()
@@ -106,11 +106,21 @@ class WalkableTerrainGenerator(
                 )
             }
 
-            val proceduralValueType = targetTypeValues.last { type ->
+            val proceduralValueType = targetTypeValues.lastOrNull { type ->
                 type.checkIfMatch(noiseParameters)
             }
 
-            result[it] = proceduralValueType
+            if (proceduralValueType == null) {
+                noiseParameters.forEach { param ->
+                    targetTypeValues.forEach { type ->
+                        if (type.checkIfMatch(listOf(param))) {
+                            result[type]?.add(it)
+                        }
+                    }
+                }
+            } else {
+                result[proceduralValueType]?.add(it)
+            }
         }
 
         return result
