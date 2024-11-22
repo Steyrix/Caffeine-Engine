@@ -41,8 +41,8 @@ class WalkableTerrainGenerator(
             }
         }
 
-        val layers: MutableList<Layer> = resultMap.keys.mapIndexed { index, it ->
-            val tileIds = resultMap[it]!!
+        val layers: MutableList<Layer> = resultMap.keys.mapIndexed { index, tileSet ->
+            val tileIds = resultMap[tileSet]!!
                 .map {
                     it.first.toTileId(worldData) to it.second
                 }.sortedBy { it.first }
@@ -53,7 +53,7 @@ class WalkableTerrainGenerator(
                 name = "walkable_layer_$index",
                 widthInTiles = widthInTiles,
                 heightInTiles = heightInTiles,
-                set = it,
+                set = tileSet,
                 tileIdsData = tileIds,
                 properties = mutableListOf(),
                 model = null
