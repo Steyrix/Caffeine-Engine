@@ -14,7 +14,7 @@ class BackgroundStructuresGenerator(
         seed: Long,
         worldData: List<Point2D>,
     ): List<Int> {
-        val noiseResult: ProceduralData = mutableListOf()
+        val noiseResult: PointToNoiseValueList = mutableListOf()
 
         worldData.forEach {
             val noiseValue = getNoiseForCoordinate(
@@ -31,8 +31,8 @@ class BackgroundStructuresGenerator(
         return performAutotiling(noiseResult)
     }
 
-    private fun performAutotiling(proceduralData: ProceduralData): List<Int> {
-        val binaryData = proceduralData.map {
+    private fun performAutotiling(pointToNoiseValueList: PointToNoiseValueList): List<Int> {
+        val binaryData = pointToNoiseValueList.map {
             if (it.second != 0f) 1 else 0
         }
 
