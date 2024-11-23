@@ -15,6 +15,7 @@ class ProceduralGenerator(
     },
     private val widthInTiles: Int,
     private val heightInTiles: Int,
+    private val frequency: Int,
     tileSize: Float
 ) {
 
