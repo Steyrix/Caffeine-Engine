@@ -7,6 +7,9 @@ import engine.feature.procedural.NoiseParameterType
 class StubParameter : NoiseParameterType
 
 class StubType : MapElementType {
+
     override val rangeMap: Map<NoiseParameterType, MinMax> =
         mapOf(StubParameter() to Pair(Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY))
+
+    override var weight = 0f
 }
