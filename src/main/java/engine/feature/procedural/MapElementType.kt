@@ -3,7 +3,10 @@ package engine.feature.procedural
 typealias MinMax = Pair<Float, Float>
 
 interface MapElementType {
+
     val rangeMap: Map<NoiseParameterType, MinMax>
+
+    var weight: Float
 
     fun checkIfMatch(parameters: List<NoiseParameter>): Boolean {
         parameters.forEach { param ->
