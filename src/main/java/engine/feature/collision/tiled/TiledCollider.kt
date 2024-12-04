@@ -1,9 +1,9 @@
 package engine.feature.collision.tiled
 
 import engine.core.entity.Entity
-import engine.core.update.SetOf2DParametersWithVelocity
 import engine.feature.collision.Collider
 import engine.core.geometry.Point2D
+import engine.core.update.Moving
 import engine.core.update.SetOfParameters
 import engine.core.update.Updatable
 import engine.feature.tiled.data.TileMap
@@ -37,9 +37,9 @@ class TiledCollider(
         parameters.x = previousTilePos.x
         parameters.y = previousTilePos.y
 
-        if (parameters is SetOf2DParametersWithVelocity) {
-            parameters.velocityX = 0f
-            parameters.velocityY = 0f
+        (holderEntity as? Moving)?.let {
+            it.horizontalVelocity = 0f
+            it.verticalVelocity = 0f
         }
     }
 
