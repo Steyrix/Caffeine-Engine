@@ -1,10 +1,8 @@
-package engine.feature.collision.boundingbox
+package engine.feature.collision.bounding_box
 
 import engine.core.entity.Entity
-import engine.core.update.SetOf2DParametersWithVelocity
 import engine.core.update.SetOfParameters
 import engine.feature.collision.Collider
-import engine.feature.collision.CollisionContext
 
 class BoundingBoxCollider(
     override val holderEntity: Entity,

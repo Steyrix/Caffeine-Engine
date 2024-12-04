@@ -1,4 +1,4 @@
-package engine.feature.collision.boundingbox
+package engine.feature.collision.bounding_box
 
 import engine.core.geometry.Point2D
 

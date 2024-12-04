@@ -1,7 +1,7 @@
 package engine.feature.interaction
 
 import engine.core.entity.Entity
-import engine.feature.collision.boundingbox.BoundingBox
+import engine.feature.collision.bounding_box.BoundingBox
 import engine.feature.interaction.broadcast.EventReceiver
 
 class BoxInteractionContext : InteractionContext<BoundingBox> {
