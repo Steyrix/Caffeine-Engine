@@ -3,7 +3,6 @@ package engine.feature.tiled.data.layer
 import engine.core.entity.CompositeEntity
 import engine.core.render.Model
 import engine.core.shader.Shader
-import engine.core.update.ParametersFactory
 import engine.core.update.SetOfStatic2DParameters
 import engine.feature.tiled.data.TileSet
 import engine.feature.tiled.property.Property
