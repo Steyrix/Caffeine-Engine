@@ -26,7 +26,7 @@ open class CompositeEntity : Entity, Updatable {
         component: Entity,
         parameters: SetOfParameters? = null
     ): CompositeEntity {
-        val def = parameters ?: SetOfStatic2DParameters.createEmpty()
+        val def = parameters ?: SetOfStatic2DParameters()
         entitiesMap[component] = def
         component.onAdd()
 

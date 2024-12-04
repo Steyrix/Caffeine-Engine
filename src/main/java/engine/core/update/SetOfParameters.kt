@@ -11,44 +11,31 @@ sealed interface SetOfParameters {
 }
 
 data class SetOfStatic2DParameters(
-    override var x: Float,
-    override var y: Float,
-    override var xSize: Float,
-    override var ySize: Float,
-    override var rotationAngle: Float,
-) : SetOfParameters {
-
-    companion object {
-        fun createEmpty(): SetOfStatic2DParameters {
-            return SetOfStatic2DParameters(
-                x = 0f,
-                y = 0f,
-                xSize = 0f,
-                ySize = 0f,
-                rotationAngle = 0f
-            )
-        }
-    }
-}
+    override var x: Float = 0f,
+    override var y: Float = 0f,
+    override var xSize: Float = 0f,
+    override var ySize: Float = 0f,
+    override var rotationAngle: Float = 0f,
+) : SetOfParameters
 
 data class SetOf2DParametersWithVelocity(
-    override var x: Float,
-    override var y: Float,
-    override var xSize: Float,
-    override var ySize: Float,
-    override var rotationAngle: Float,
-    var velocityX: Float,
-    var velocityY: Float
+    override var x: Float = 0f,
+    override var y: Float = 0f,
+    override var xSize: Float = 0f,
+    override var ySize: Float = 0f,
+    override var rotationAngle: Float = 0f,
+    var velocityX: Float = 0f,
+    var velocityY: Float = 0f
 ) : SetOfParameters
 
 data class SetOfStatic2DParametersWithOffset(
-    override var x: Float,
-    override var y: Float,
-    override var xSize: Float,
-    override var ySize: Float,
-    override var rotationAngle: Float,
-    var xOffset: Float,
-    var yOffset: Float
+    override var x: Float = 0f,
+    override var y: Float = 0f,
+    override var xSize: Float = 0f,
+    override var ySize: Float = 0f,
+    override var rotationAngle: Float = 0f,
+    var xOffset: Float = 0f,
+    var yOffset: Float = 0f
 ) : SetOfParameters
 
 fun SetOfParameters.getCenterPoint(): Point2D {

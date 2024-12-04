@@ -39,7 +39,7 @@ abstract class TileMapScene(
     protected var tiledMap: TileMapController? = null
 
     protected var tileHighlighting: CompositeEntity? = null
-    protected val highlightParams = SetOfStatic2DParameters.createEmpty()
+    protected val highlightParams = SetOfStatic2DParameters()
     private var highlightedTile: Int = -1
     protected var tileNetShader: Shader? = null
 
