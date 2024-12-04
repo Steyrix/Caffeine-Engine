@@ -6,7 +6,6 @@ import engine.core.render.interfaces.Drawable
 import engine.core.render.Model
 import engine.core.shader.Shader
 import engine.core.update.SetOfStatic2DParameters
-import engine.core.update.SetOfStatic2DParametersWithOffset
 import engine.core.render.util.DefaultBufferData
 import engine.core.update.SetOfParameters
 import org.lwjgl.opengl.GL33C.*
@@ -17,21 +16,26 @@ class BoundingBox(
     override var y: Float = 0f,
     override var xSize: Float = 0f,
     override var ySize: Float = 0f,
-    override var xOffset: Float = 0f,
-    override var yOffset: Float = 0f,
     private var rotationAngle: Float = 0f,
+    override var horizontalOffset: Float = 0f,
+    override var verticalOffset: Float = 0f,
     private val isSizeBoundToHolder: Boolean = true
 ) : CompositeEntity(), IntersectableBox, Drawable<SetOfParameters> {
 
-    constructor(initialParams: SetOfStatic2DParametersWithOffset, isSizeBoundToHolder: Boolean) :
+    constructor(
+        parameters: SetOfStatic2DParameters,
+        horizontalOffset: Float,
+        verticalOffset: Float,
+        isSizeBoundToHolder: Boolean
+    ) :
             this(
-                initialParams.x,
-                initialParams.y,
-                initialParams.xSize,
-                initialParams.ySize,
-                initialParams.xOffset,
-                initialParams.yOffset,
-                initialParams.rotationAngle,
+                parameters.x,
+                parameters.y,
+                parameters.xSize,
+                parameters.ySize,
+                horizontalOffset,
+                verticalOffset,
+                parameters.rotationAngle,
                 isSizeBoundToHolder
             )
 
@@ -88,8 +92,8 @@ class BoundingBox(
 
     override fun updateParameters(parameters: SetOfParameters) {
         parameters.let {
-            x = it.x + xOffset
-            y = it.y + yOffset
+            x = it.x + horizontalOffset
+            y = it.y + verticalOffset
             if (isSizeBoundToHolder) {
                 xSize = it.xSize
                 ySize = it.ySize
@@ -115,21 +119,21 @@ class BoundingBox(
 
     fun getActualPosition(): Point2D {
         return Point2D(
-            x = params.x + xOffset,
-            y = params.y + yOffset
+            x = params.x + horizontalOffset,
+            y = params.y + verticalOffset
         )
     }
 
     fun getActualParameters(): SetOfStatic2DParameters {
         return params.copy(
-            x = x + xOffset,
-            y = y + yOffset
+            x = x + horizontalOffset,
+            y = y + verticalOffset
         )
     }
 
     fun applyOffsets(offsetData: OffsetData) {
-        xOffset = offsetData.xOffset
-        yOffset = offsetData.yOffset
+        horizontalOffset = offsetData.xOffset
+        verticalOffset = offsetData.yOffset
         xSize = offsetData.xSize
         ySize = offsetData.ySize
     }

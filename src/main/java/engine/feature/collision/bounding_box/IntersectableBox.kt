@@ -7,25 +7,25 @@ interface IntersectableBox {
 
     var x: Float
     var y: Float
-    var xOffset: Float
-    var yOffset: Float
+    var horizontalOffset: Float
+    var verticalOffset: Float
     var xSize: Float
     var ySize: Float
 
     fun start(): Float {
-        return x + xOffset
+        return x + horizontalOffset
     }
 
     fun end(): Float {
-        return x + xOffset + xSize
+        return x + horizontalOffset + xSize
     }
 
     fun bottom(): Float {
-        return y + yOffset + ySize
+        return y + verticalOffset + ySize
     }
 
     fun top(): Float {
-        return y + yOffset
+        return y + verticalOffset
     }
 
     fun setPosition(nX: Float, nY: Float) {
