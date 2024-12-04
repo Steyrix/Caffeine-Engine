@@ -18,16 +18,6 @@ data class SetOfStatic2DParameters(
     override var rotationAngle: Float = 0f,
 ) : SetOfParameters
 
-data class SetOf2DParametersWithVelocity(
-    override var x: Float = 0f,
-    override var y: Float = 0f,
-    override var xSize: Float = 0f,
-    override var ySize: Float = 0f,
-    override var rotationAngle: Float = 0f,
-    var velocityX: Float = 0f,
-    var velocityY: Float = 0f
-) : SetOfParameters
-
 data class SetOfStatic2DParametersWithOffset(
     override var x: Float = 0f,
     override var y: Float = 0f,
