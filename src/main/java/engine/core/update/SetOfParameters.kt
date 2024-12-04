@@ -18,16 +18,6 @@ data class SetOfStatic2DParameters(
     override var rotationAngle: Float = 0f,
 ) : SetOfParameters
 
-data class SetOfStatic2DParametersWithOffset(
-    override var x: Float = 0f,
-    override var y: Float = 0f,
-    override var xSize: Float = 0f,
-    override var ySize: Float = 0f,
-    override var rotationAngle: Float = 0f,
-    var xOffset: Float = 0f,
-    var yOffset: Float = 0f
-) : SetOfParameters
-
 fun SetOfParameters.getCenterPoint(): Point2D {
     return Point2D(
         x + xSize / 2,
