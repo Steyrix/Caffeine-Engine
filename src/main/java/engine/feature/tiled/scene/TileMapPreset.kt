@@ -1,7 +1,7 @@
 package engine.feature.tiled.scene
 
 import engine.core.loop.AccumulatedTimeEvent
-import engine.core.render.Drawable
+import engine.core.render.interfaces.Drawable
 
 sealed interface MapPreset
 

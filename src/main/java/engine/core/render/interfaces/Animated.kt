@@ -1,4 +1,4 @@
-package engine.core.render
+package engine.core.render.interfaces
 
 import engine.feature.animation.Animation
 

@@ -1,6 +1,7 @@
 package engine.core.render
 
 import engine.core.ResourceLoader
+import engine.core.render.interfaces.Animated
 import engine.core.texture.ArrayTexture2D
 import engine.core.texture.Texture2D
 import engine.core.update.Updatable

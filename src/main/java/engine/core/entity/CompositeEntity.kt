@@ -1,7 +1,7 @@
 package engine.core.entity
 
 import engine.core.controllable.Controllable
-import engine.core.render.Drawable
+import engine.core.render.interfaces.Drawable
 import engine.core.update.SetOfParameters
 import engine.core.update.SetOfStatic2DParameters
 import engine.core.update.Updatable

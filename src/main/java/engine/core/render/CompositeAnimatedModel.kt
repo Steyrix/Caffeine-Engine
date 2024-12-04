@@ -2,6 +2,8 @@ package engine.core.render
 
 import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
+import engine.core.render.interfaces.Animated
+import engine.core.render.interfaces.Zleveled
 import engine.core.update.SetOfParameters
 import engine.core.update.update2D.Parameterized
 import engine.feature.animation.Animation

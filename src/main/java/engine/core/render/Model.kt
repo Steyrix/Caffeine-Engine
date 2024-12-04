@@ -1,6 +1,7 @@
 package engine.core.render
 
 import engine.core.entity.Entity
+import engine.core.render.interfaces.Drawable
 import engine.core.shader.Shader
 import engine.core.texture.ArrayTexture2D
 import engine.core.texture.Texture2D

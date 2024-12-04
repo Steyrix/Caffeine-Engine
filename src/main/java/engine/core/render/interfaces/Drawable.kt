@@ -1,4 +1,4 @@
-package engine.core.render
+package engine.core.render.interfaces
 
 import engine.core.shader.Shader
 import engine.core.update.SetOfParameters
