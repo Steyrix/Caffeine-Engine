@@ -3,7 +3,7 @@ package engine.core.entity
 import engine.core.controllable.Controllable
 import engine.core.render.interfaces.Drawable
 import engine.core.update.SetOfParameters
-import engine.core.update.SetOfStatic2DParameters
+import engine.core.update.SetOfStaticParameters
 import engine.core.update.Updatable
 import engine.core.update.Parameterized
 import engine.core.window.Window
@@ -26,7 +26,7 @@ open class CompositeEntity : Entity, Updatable {
         component: Entity,
         parameters: SetOfParameters? = null
     ): CompositeEntity {
-        val def = parameters ?: SetOfStatic2DParameters()
+        val def = parameters ?: SetOfStaticParameters()
         entitiesMap[component] = def
         component.onAdd()
 

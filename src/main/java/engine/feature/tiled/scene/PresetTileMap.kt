@@ -4,7 +4,7 @@ import engine.core.entity.CompositeEntity
 import engine.core.entity.Entity
 import engine.core.game_object.SingleGameEntity
 import engine.core.update.SetOfParameters
-import engine.core.update.SetOfStatic2DParameters
+import engine.core.update.SetOfStaticParameters
 import engine.feature.collision.CollisionContext
 import engine.core.geometry.Point2D
 import engine.core.loop.GameLoopTimeEvent
@@ -15,8 +15,8 @@ class PresetTileMap(
     private val mapPresets: TileMapPreset
 ) : SingleGameEntity(), TileMapController {
 
-    override var parameters: SetOfStatic2DParameters =
-        SetOfStatic2DParameters(
+    override var parameters: SetOfStaticParameters =
+        SetOfStaticParameters(
             0f, 0f, 0f, 0f, 0f
         )
 
@@ -58,7 +58,7 @@ class PresetTileMap(
         renderProjection: Matrix4f,
         collisionContexts: List<CollisionContext<*>>
     ) {
-        parameters = SetOfStatic2DParameters(
+        parameters = SetOfStaticParameters(
             x = 0f,
             y = 0f,
             xSize = mapPresets.width,

@@ -1,6 +1,6 @@
 package engine.feature.matrix
 
-import engine.core.update.SetOfStatic2DParameters
+import engine.core.update.SetOfStaticParameters
 import org.joml.Matrix4f
 import org.joml.Vector2f
 import org.joml.Vector3f
@@ -15,7 +15,7 @@ object DefaultMatrixState : MatrixState {
     override var screenWidth = 0f
     override var screenHeight = 0f
 
-    override val nonTranslatedParams: MutableList<SetOfStatic2DParameters> = mutableListOf()
+    override val nonTranslatedParams: MutableList<SetOfStaticParameters> = mutableListOf()
 
     override fun getResultMatrix(
         posX: Float,

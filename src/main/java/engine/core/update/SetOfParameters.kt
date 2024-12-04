@@ -10,7 +10,7 @@ sealed interface SetOfParameters {
     var rotationAngle: Float
 }
 
-data class SetOfStatic2DParameters(
+data class SetOfStaticParameters(
     override var x: Float = 0f,
     override var y: Float = 0f,
     override var xSize: Float = 0f,

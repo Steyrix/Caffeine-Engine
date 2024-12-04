@@ -3,7 +3,7 @@ package engine.feature.tiled.data
 import engine.core.entity.Entity
 import engine.core.render.interfaces.Drawable
 import engine.core.shader.Shader
-import engine.core.update.SetOfStatic2DParameters
+import engine.core.update.SetOfStaticParameters
 import engine.core.geometry.Point2D
 import engine.core.render.Model
 import engine.feature.tiled.data.layer.*
@@ -17,7 +17,7 @@ class TileMap(
     val layers: List<Layer>,
     widthInTiles: Int = 0,
     heightInTiles: Int = 0
-) : Drawable<SetOfStatic2DParameters>, Entity {
+) : Drawable<SetOfStaticParameters>, Entity {
 
     companion object {
         private const val NOT_FOUND = -1
@@ -146,7 +146,7 @@ class TileMap(
         return roundedPos / roundedTileSize
     }
 
-    override fun updateParameters(parameters: SetOfStatic2DParameters) {
+    override fun updateParameters(parameters: SetOfStaticParameters) {
         settings.update(parameters)
         layers.forEach {
             it.updateParameters(parameters)

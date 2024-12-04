@@ -1,7 +1,7 @@
 package engine.feature.tiled.scene
 
 import engine.core.shader.Shader
-import engine.core.update.SetOfStatic2DParameters
+import engine.core.update.SetOfStaticParameters
 import engine.feature.tiled.data.TileMap
 import engine.feature.tiled.data.lighting.LightMap
 import engine.feature.tiled.data.lighting.LightSource
@@ -57,7 +57,7 @@ abstract class LightMapHolder {
         return LightMap(
             precision = lightmapPrecision,
             projection = lightMapProjection,
-            parameters = SetOfStatic2DParameters(
+            parameters = SetOfStaticParameters(
                 x = 0f,
                 y = 0f,
                 xSize = approximateWidth,

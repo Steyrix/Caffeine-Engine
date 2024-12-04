@@ -11,7 +11,7 @@ import engine.core.scene.Scene
 import engine.core.scene.SceneIntent
 import engine.core.session.Session
 import engine.core.shader.Shader
-import engine.core.update.SetOfStatic2DParameters
+import engine.core.update.SetOfStaticParameters
 import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.matrix.MatrixState
 import engine.feature.tiled.data.TileMap
@@ -39,7 +39,7 @@ abstract class TileMapScene(
     protected var tiledMap: TileMapController? = null
 
     protected var tileHighlighting: CompositeEntity? = null
-    protected val highlightParams = SetOfStatic2DParameters()
+    protected val highlightParams = SetOfStaticParameters()
     private var highlightedTile: Int = -1
     protected var tileNetShader: Shader? = null
 

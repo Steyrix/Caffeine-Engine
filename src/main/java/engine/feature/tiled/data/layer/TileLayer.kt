@@ -3,7 +3,7 @@ package engine.feature.tiled.data.layer
 import engine.core.entity.CompositeEntity
 import engine.core.render.Model
 import engine.core.shader.Shader
-import engine.core.update.SetOfStatic2DParameters
+import engine.core.update.SetOfStaticParameters
 import engine.feature.tiled.data.TileSet
 import engine.feature.tiled.property.Property
 
@@ -49,13 +49,13 @@ class TileLayer(
         tileIdsData, set, widthInTiles
     )
 
-    private val paramsKey = SetOfStatic2DParameters()
+    private val paramsKey = SetOfStaticParameters()
 
     init {
         addComponent(graphicalComponent, paramsKey)
     }
 
-    override fun updateParameters(parameters: SetOfStatic2DParameters) {
+    override fun updateParameters(parameters: SetOfStaticParameters) {
         graphicalComponent.updateParameters(parameters)
         debugGraphicalComponent.updateParameters(parameters)
     }

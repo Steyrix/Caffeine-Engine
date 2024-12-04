@@ -3,7 +3,7 @@ package engine.feature.tiled.scene
 import engine.core.entity.Entity
 import engine.core.geometry.Point2D
 import engine.core.loop.GameLoopTimeEvent
-import engine.core.update.SetOfStatic2DParameters
+import engine.core.update.SetOfStaticParameters
 import engine.feature.collision.CollisionContext
 import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.tiled.data.TileMap
@@ -13,7 +13,7 @@ import org.joml.Matrix4f
 
 interface TileMapController {
 
-    var parameters: SetOfStatic2DParameters
+    var parameters: SetOfStaticParameters
 
     val worldSize: Point2D
 

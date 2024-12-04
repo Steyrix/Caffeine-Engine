@@ -3,7 +3,7 @@ package engine.feature.tiled.data.layer
 import engine.core.entity.CompositeEntity
 import engine.core.render.Model
 import engine.core.shader.Shader
-import engine.core.update.SetOfStatic2DParameters
+import engine.core.update.SetOfStaticParameters
 
 class LayerObject(
     val tileIndices: Set<Int>,
@@ -26,14 +26,14 @@ class LayerObject(
         }
 
     init {
-        addComponent(graphicalComponent, SetOfStatic2DParameters())
+        addComponent(graphicalComponent, SetOfStaticParameters())
     }
 
     override fun update(deltaTime: Float) {
         Unit //TODO: That's a hack
     }
 
-    fun updateParameters(parameters: SetOfStatic2DParameters) {
+    fun updateParameters(parameters: SetOfStaticParameters) {
         graphicalComponent.updateParameters(parameters)
         graphicalComponent.shader?.let {
             it.bind()

@@ -5,7 +5,7 @@ import engine.core.geometry.Point2D
 import engine.core.render.interfaces.Drawable
 import engine.core.render.Model
 import engine.core.shader.Shader
-import engine.core.update.SetOfStatic2DParameters
+import engine.core.update.SetOfStaticParameters
 import engine.core.render.util.DefaultBufferData
 import engine.core.update.SetOfParameters
 import org.lwjgl.opengl.GL33C.*
@@ -23,7 +23,7 @@ class BoundingBox(
 ) : CompositeEntity(), IntersectableBox, Drawable<SetOfParameters> {
 
     constructor(
-        parameters: SetOfStatic2DParameters,
+        parameters: SetOfStaticParameters,
         horizontalOffset: Float,
         verticalOffset: Float,
         isSizeBoundToHolder: Boolean
@@ -72,7 +72,7 @@ class BoundingBox(
 
     override var zLevel: Float = 1f
 
-    private var params = SetOfStatic2DParameters(
+    private var params = SetOfStaticParameters(
         x,
         y,
         xSize,
@@ -108,7 +108,7 @@ class BoundingBox(
         params.rotationAngle = rotationAngle
     }
 
-    fun getParameters(): SetOfStatic2DParameters {
+    fun getParameters(): SetOfStaticParameters {
         return params
     }
 
@@ -124,7 +124,7 @@ class BoundingBox(
         )
     }
 
-    fun getActualParameters(): SetOfStatic2DParameters {
+    fun getActualParameters(): SetOfStaticParameters {
         return params.copy(
             x = x + horizontalOffset,
             y = y + verticalOffset

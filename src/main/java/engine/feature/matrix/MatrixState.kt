@@ -1,6 +1,6 @@
 package engine.feature.matrix
 
-import engine.core.update.SetOfStatic2DParameters
+import engine.core.update.SetOfStaticParameters
 import org.joml.Matrix4f
 import org.joml.Vector2f
 
@@ -14,7 +14,7 @@ interface MatrixState {
     var screenWidth: Float
     var screenHeight: Float
 
-    val nonTranslatedParams: MutableList<SetOfStatic2DParameters>
+    val nonTranslatedParams: MutableList<SetOfStaticParameters>
 
     fun getResultMatrix(
         posX: Float,

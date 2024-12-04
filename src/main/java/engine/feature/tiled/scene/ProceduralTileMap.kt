@@ -6,7 +6,7 @@ import engine.core.game_object.SingleGameEntity
 import engine.core.geometry.Point2D
 import engine.core.loop.GameLoopTimeEvent
 import engine.core.update.SetOfParameters
-import engine.core.update.SetOfStatic2DParameters
+import engine.core.update.SetOfStaticParameters
 import engine.feature.collision.CollisionContext
 import engine.feature.procedural.generators.ProceduralGenerator
 import engine.feature.tiled.data.TileMap
@@ -57,8 +57,8 @@ class ProceduralTileMap private constructor(
             }
     }
 
-    override var parameters: SetOfStatic2DParameters =
-        SetOfStatic2DParameters(
+    override var parameters: SetOfStaticParameters =
+        SetOfStaticParameters(
             0f, 0f, 0f, 0f, 0f
         )
 
@@ -111,7 +111,7 @@ class ProceduralTileMap private constructor(
         checkParameters()
 
         mapPresets?.run {
-            parameters = SetOfStatic2DParameters(
+            parameters = SetOfStaticParameters(
                 x = 0f,
                 y = 0f,
                 xSize = width,
