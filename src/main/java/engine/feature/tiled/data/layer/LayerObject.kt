@@ -27,7 +27,7 @@ class LayerObject(
         }
 
     init {
-        addComponent(graphicalComponent, ParametersFactory.createEmptyStatic())
+        addComponent(graphicalComponent, SetOfStatic2DParameters())
     }
 
     override fun update(deltaTime: Float) {

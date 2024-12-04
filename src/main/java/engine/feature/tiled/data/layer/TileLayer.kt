@@ -50,7 +50,7 @@ class TileLayer(
         tileIdsData, set, widthInTiles
     )
 
-    private val paramsKey = ParametersFactory.createEmptyStatic()
+    private val paramsKey = SetOfStatic2DParameters()
 
     init {
         addComponent(graphicalComponent, paramsKey)
