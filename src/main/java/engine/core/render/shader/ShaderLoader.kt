@@ -19,4 +19,17 @@ object ShaderLoader {
             link()
         }
     }
+
+    fun loadFromFile(
+        resource: ShaderResource
+    ): Shader {
+        return Shader().apply {
+            val encodedVertexShader = Files.readAllBytes(Path(resource.vertexShaderPath))
+            val encodedFragmentShader = Files.readAllBytes(Path(resource.fragmentShaderPath))
+            val charset = Charset.defaultCharset()
+            createVertexShader(String(encodedVertexShader, charset))
+            createFragmentShader(String(encodedFragmentShader, charset))
+            link()
+        }
+    }
 }
