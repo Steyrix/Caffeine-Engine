@@ -4,7 +4,5 @@ interface CollisionReactive {
 
     fun reactToCollision()
 
-    fun onCollisionExit() {
-
-    }
+    fun onCollisionExit()
 }
