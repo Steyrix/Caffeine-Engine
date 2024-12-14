@@ -1,4 +1,4 @@
-package engine.core.render
+package engine.core.render.model
 
 import engine.core.render.opengl_wrapper.buffer.Buffer
 import engine.core.render.opengl_wrapper.VertexArray

@@ -1,6 +1,6 @@
 package engine.feature.text
 
-import engine.core.render.Model
+import engine.core.render.model.Model
 import engine.core.render.shader.Shader
 import engine.core.texture.Texture2D
 import engine.core.geometry.Point2D

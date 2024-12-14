@@ -1,4 +1,4 @@
-package engine.core.render
+package engine.core.render.model
 
 import engine.core.entity.Entity
 import engine.core.render.interfaces.Drawable

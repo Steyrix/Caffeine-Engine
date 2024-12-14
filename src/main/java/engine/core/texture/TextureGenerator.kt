@@ -1,6 +1,6 @@
 package engine.core.texture
 
-import engine.core.render.Model
+import engine.core.render.model.Model
 import org.lwjgl.opengl.GL32.*
 
 internal object TextureGenerator {

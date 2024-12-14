@@ -1,6 +1,6 @@
 package engine.core.controllable
 
-import engine.core.render.AnimatedModel2D
+import engine.core.render.model.AnimatedModel2D
 
 abstract class CompositeAnimationController(
     protected var drawableComponents: Map<String, AnimatedModel2D>

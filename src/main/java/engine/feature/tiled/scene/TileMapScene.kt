@@ -4,7 +4,7 @@ import engine.core.entity.CompositeEntity
 import engine.core.game_object.GameEntity
 import engine.core.game_object.SpawnOptions
 import engine.core.geometry.Point2D
-import engine.core.render.Model
+import engine.core.render.model.Model
 import engine.core.render.util.DefaultBufferData
 import engine.core.scene.GameContext
 import engine.core.scene.Scene

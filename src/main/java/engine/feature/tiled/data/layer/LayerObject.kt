@@ -1,7 +1,7 @@
 package engine.feature.tiled.data.layer
 
 import engine.core.entity.CompositeEntity
-import engine.core.render.Model
+import engine.core.render.model.Model
 import engine.core.render.shader.Shader
 import engine.core.update.SetOfStaticParameters
 

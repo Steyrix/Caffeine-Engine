@@ -1,6 +1,6 @@
 package engine.core.render.primitive
 
-import engine.core.render.Model
+import engine.core.render.model.Model
 import engine.core.render.util.DefaultBufferData
 
 class Rectangle(r: Float, g: Float, b: Float) : Model(

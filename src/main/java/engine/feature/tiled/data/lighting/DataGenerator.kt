@@ -1,7 +1,7 @@
 package engine.feature.tiled.data.lighting
 
 import engine.core.geometry.Point2D
-import engine.core.render.Model
+import engine.core.render.model.Model
 import engine.core.render.shader.Shader
 import engine.core.render.shader.ShaderLoader
 import engine.core.texture.Texture2D

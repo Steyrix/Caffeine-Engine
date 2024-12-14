@@ -1,6 +1,6 @@
 package engine.feature.animation
 
-import engine.core.render.Model
+import engine.core.render.model.Model
 import engine.core.render.shader.Shader
 
 class AnimationHolder2D(

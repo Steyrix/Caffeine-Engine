@@ -3,7 +3,7 @@ package engine.feature.collision.bounding_box
 import engine.core.entity.CompositeEntity
 import engine.core.geometry.Point2D
 import engine.core.render.interfaces.Drawable
-import engine.core.render.Model
+import engine.core.render.model.Model
 import engine.core.render.shader.Shader
 import engine.core.update.SetOfStaticParameters
 import engine.core.render.util.DefaultBufferData

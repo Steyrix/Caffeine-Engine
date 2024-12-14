@@ -1,6 +1,6 @@
 package engine.feature.text.data
 
-import engine.core.render.Model
+import engine.core.render.model.Model
 
 data class Font(
     val name: String,

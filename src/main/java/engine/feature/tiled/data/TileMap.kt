@@ -5,7 +5,7 @@ import engine.core.render.interfaces.Drawable
 import engine.core.render.shader.Shader
 import engine.core.update.SetOfStaticParameters
 import engine.core.geometry.Point2D
-import engine.core.render.Model
+import engine.core.render.model.Model
 import engine.feature.tiled.data.layer.*
 import engine.feature.tiled.scene.TileSelectionData
 import engine.feature.tiled.traversing.TileGraph
