@@ -5,6 +5,11 @@ import org.joml.Vector2f
 import org.lwjgl.opengl.GL33C.*
 import org.lwjgl.system.MemoryStack
 
+data class ShaderResource(
+    val vertexShaderPath: String,
+    val fragmentShaderPath: String
+)
+
 class Shader {
 
     companion object {
