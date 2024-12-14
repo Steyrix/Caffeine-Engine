@@ -2,7 +2,7 @@ package engine.feature.tiled.data.layer
 
 import engine.core.render.Model
 import engine.core.geometry.Point2D
-import engine.core.shader.Shader
+import engine.core.render.shader.Shader
 import engine.feature.tiled.data.TileSet
 import engine.feature.tiled.scene.TileSelectionData
 import engine.feature.tiled.traversing.TileGraph

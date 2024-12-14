@@ -10,7 +10,7 @@ import engine.core.scene.GameContext
 import engine.core.scene.Scene
 import engine.core.scene.SceneIntent
 import engine.core.session.Session
-import engine.core.shader.Shader
+import engine.core.render.shader.Shader
 import engine.core.update.SetOfStaticParameters
 import engine.feature.collision.tiled.TiledCollisionContext
 import engine.feature.matrix.MatrixState

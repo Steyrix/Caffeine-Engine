@@ -1,6 +1,6 @@
 package engine.feature.tiled.scene
 
-import engine.core.shader.Shader
+import engine.core.render.shader.Shader
 import engine.core.update.SetOfStaticParameters
 import engine.feature.tiled.data.TileMap
 import engine.feature.tiled.data.lighting.LightMap

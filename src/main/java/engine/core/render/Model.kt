@@ -2,7 +2,7 @@ package engine.core.render
 
 import engine.core.entity.Entity
 import engine.core.render.interfaces.Drawable
-import engine.core.shader.Shader
+import engine.core.render.shader.Shader
 import engine.core.texture.ArrayTexture2D
 import engine.core.texture.Texture2D
 import engine.feature.matrix.MatrixComputer

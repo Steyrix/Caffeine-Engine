@@ -1,7 +1,7 @@
 package engine.feature.tiled.scene
 
-import engine.core.shader.Shader
-import engine.core.shader.ShaderLoader
+import engine.core.render.shader.Shader
+import engine.core.render.shader.ShaderLoader
 import engine.feature.tiled.data.TileMap
 import engine.feature.tiled.data.TileMapShaders
 import engine.feature.tiled.parser.TiledResourceParser

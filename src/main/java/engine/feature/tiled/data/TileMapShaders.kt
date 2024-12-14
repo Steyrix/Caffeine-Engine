@@ -1,6 +1,6 @@
 package engine.feature.tiled.data
 
-import engine.core.shader.Shader
+import engine.core.render.shader.Shader
 
 data class TileMapShaders(
     var mainShader: Shader? = null,

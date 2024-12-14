@@ -1,7 +1,7 @@
 package engine.feature.text
 
 import engine.core.render.Model
-import engine.core.shader.Shader
+import engine.core.render.shader.Shader
 import engine.core.texture.Texture2D
 import engine.core.geometry.Point2D
 import engine.feature.text.TextRendererUtil.generateMap

@@ -4,7 +4,7 @@ import engine.core.entity.CompositeEntity
 import engine.core.geometry.Point2D
 import engine.core.render.interfaces.Drawable
 import engine.core.render.Model
-import engine.core.shader.Shader
+import engine.core.render.shader.Shader
 import engine.core.update.SetOfStaticParameters
 import engine.core.render.util.DefaultBufferData
 import engine.core.update.SetOfParameters

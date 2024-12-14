@@ -1,6 +1,6 @@
 package engine.core.render.interfaces
 
-import engine.core.shader.Shader
+import engine.core.render.shader.Shader
 import engine.core.update.SetOfParameters
 import engine.core.update.Parameterized
 

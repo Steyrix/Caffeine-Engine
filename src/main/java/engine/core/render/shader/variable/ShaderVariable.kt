@@ -1,4 +1,4 @@
-package engine.core.shader.variable
+package engine.core.render.shader.variable
 
 data class ShaderVariable<T>(
     var value: T,

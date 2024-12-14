@@ -1,4 +1,4 @@
-package engine.core.shader
+package engine.core.render.shader
 
 import org.joml.Matrix4f
 import org.joml.Vector2f

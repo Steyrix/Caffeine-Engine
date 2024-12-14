@@ -1,7 +1,7 @@
 package engine.feature.animation
 
 import engine.core.render.Model
-import engine.core.shader.Shader
+import engine.core.render.shader.Shader
 
 class AnimationHolder2D(
     private val animations: MutableList<Animation>

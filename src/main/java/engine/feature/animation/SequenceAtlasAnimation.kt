@@ -1,6 +1,6 @@
 package engine.feature.animation
 
-import engine.core.shader.Shader
+import engine.core.render.shader.Shader
 
 // TODO: ability to reset animations
 class SequenceAtlasAnimation(

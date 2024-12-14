@@ -2,8 +2,8 @@ package engine.feature.tiled.data.lighting
 
 import engine.core.geometry.Point2D
 import engine.core.render.Model
-import engine.core.shader.Shader
-import engine.core.shader.ShaderLoader
+import engine.core.render.shader.Shader
+import engine.core.render.shader.ShaderLoader
 import engine.core.texture.Texture2D
 import engine.feature.tiled.data.TileMap
 import org.joml.Matrix4f

@@ -1,4 +1,4 @@
-package engine.core.shader
+package engine.core.render.shader
 
 import java.nio.charset.Charset
 import java.nio.file.Files
