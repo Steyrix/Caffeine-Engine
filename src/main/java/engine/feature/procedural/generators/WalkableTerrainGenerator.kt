@@ -97,12 +97,19 @@ class WalkableTerrainGenerator(
             result[it] = mutableListOf()
         }
 
-        worldData.forEach {
+        worldData.forEach { mapPoint ->
             val noiseParameters = mutableListOf<NoiseParameter>()
 
             noiseTypeValues.forEach { type ->
                 noiseParameters.add(
-                    NoiseParameter(getNoiseForCoordinateWithFrequency(seed, it), type)
+                    NoiseParameter(
+                        getNoiseForCoordinateWithFrequency(
+                            seed,
+                            mapPoint,
+                            frequency = 0.1
+                        ),
+                        type
+                    )
                 )
             }
 
@@ -114,12 +121,12 @@ class WalkableTerrainGenerator(
                 noiseParameters.forEach { param ->
                     targetTypeValues.forEach { type ->
                         if (type.checkIfMatch(listOf(param))) {
-                            result[type]?.add(it)
+                            result[type]?.add(mapPoint)
                         }
                     }
                 }
             } else {
-                result[proceduralValueType]?.add(it)
+                result[proceduralValueType]?.add(mapPoint)
             }
         }
 
