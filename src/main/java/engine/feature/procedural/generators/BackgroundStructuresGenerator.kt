@@ -17,7 +17,7 @@ class BackgroundStructuresGenerator(
         val noiseResult: PointToNoiseValueList = mutableListOf()
 
         worldData.forEach {
-            val noiseValue = getNoiseForCoordinate(
+            val noiseValue = getNoiseForCoordinateWithFrequency(
                 seed, it
             )
 

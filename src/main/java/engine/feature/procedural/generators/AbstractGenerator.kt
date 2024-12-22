@@ -6,14 +6,27 @@ abstract class AbstractGenerator {
 
     abstract var noiseFunc: (Long, Double, Double) -> Float
 
-    protected fun getNoiseForCoordinate(
+    protected fun getNoiseForCoordinateWithFrequency(
         seed: Long,
-        pos: Point2D
+        pos: Point2D,
+        frequency: Double = 1.0,
     ): Float {
         return noiseFunc(
             seed,
-            pos.x.toDouble(),
-            pos.y.toDouble()
+            pos.x.toDouble() * frequency,
+            pos.y.toDouble() * frequency
+        )
+    }
+
+    protected fun getNoiseForCoordinateWithWaveLength(
+        seed: Long,
+        pos: Point2D,
+        wavelength: Double = 1.0,
+    ): Float {
+        return noiseFunc(
+            seed,
+            pos.x.toDouble() * wavelength,
+            pos.y.toDouble() * wavelength
         )
     }
 }

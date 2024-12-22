@@ -78,7 +78,7 @@ class WalkableTerrainGenerator(
         targetTypeValues.forEach { biome ->
             worldData.forEach { point ->
                 if (proceduralData[biome]?.contains(point) == true) {
-                    result[biome]?.add(point to getNoiseForCoordinate(seed, point))
+                    result[biome]?.add(point to getNoiseForCoordinateWithFrequency(seed, point))
                 } else {
                     result[biome]?.add(point to null)
                 }
@@ -102,7 +102,7 @@ class WalkableTerrainGenerator(
 
             noiseTypeValues.forEach { type ->
                 noiseParameters.add(
-                    NoiseParameter(getNoiseForCoordinate(seed, it), type)
+                    NoiseParameter(getNoiseForCoordinateWithFrequency(seed, it), type)
                 )
             }
 
