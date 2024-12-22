@@ -10,20 +10,34 @@ import engine.core.update.SetOfStaticParameters
 import engine.feature.collision.CollisionContext
 import engine.feature.procedural.generators.ProceduralGenerator
 import engine.feature.tiled.data.TileMap
+import engine.feature.tiled.data.TileSet
 import org.joml.Matrix4f
 
 class ProceduralTileMap private constructor(
     private val mapPresets: ProceduralMapPreset?,
-    private val proceduralGenerator: ProceduralGenerator?,
-    private val seed: Long = 0,
+    private val widthInTiles: Int,
+    private val heightInTiles: Int,
+    private val biomeMap: Map<String, TileSet>?,
+    private val numSeeds: Int,
+    private val seed: Int = 0,
 ) : SingleGameEntity(), TileMapController {
 
-    private constructor(builder: Builder) : this(builder.presets, builder.generator, builder.seed)
+    private constructor(builder: Builder) : this(
+        builder.presets,
+        builder.widthInTiles,
+        builder.heightInTiles,
+        builder.biomeMap,
+        builder.numSeeds,
+        builder.seed
+    )
 
     class Builder {
         var presets: ProceduralMapPreset? = null
-        var generator: ProceduralGenerator? = null
-        var seed: Long = 0
+        var widthInTiles: Int = 0
+        var heightInTiles: Int = 0
+        var biomeMap: Map<String, TileSet>? = null
+        var numSeeds: Int = 0
+        var seed: Int = 0
         private var renderProjection: Matrix4f? = null
         private var collisionContexts: List<CollisionContext<*>> = emptyList()
 
@@ -36,19 +50,34 @@ class ProceduralTileMap private constructor(
                 presets = value
             }
 
-        fun generator(value: ProceduralGenerator) =
+        fun widthInTiles(value: Int) =
             this.apply {
-                generator = value
+                widthInTiles = value
             }
 
-        fun seed(value: Long) =
+        fun heightInTiles(value: Int) =
+            this.apply {
+                heightInTiles = value
+            }
+
+        fun biomeMap(value: Map<String, TileSet>) =
+            this.apply {
+                biomeMap = value
+            }
+
+        fun numSeeds(value: Int) =
+            this.apply {
+                numSeeds = value
+            }
+
+        fun seed(value: Int) =
             this.apply {
                 seed = value
             }
 
         fun renderProjection(value: Matrix4f) =
             this.apply {
-                renderProjection =value
+                renderProjection = value
             }
 
         fun collisionContexts(value: List<CollisionContext<*>>) =
@@ -120,7 +149,13 @@ class ProceduralTileMap private constructor(
             )
 
             mapComponent =
-                proceduralGenerator!!.generateMap(seed).apply {
+                ProceduralGenerator.generateMap(
+                    widthInTiles,
+                    heightInTiles,
+                    numSeeds,
+                    biomeMap!!,
+                    seed
+                ).apply {
                     shaders = TileMapGraphicsProvider.getShaders(mapPresets, renderProjection)
                 }
 
@@ -164,10 +199,6 @@ class ProceduralTileMap private constructor(
     private fun checkParameters() {
         if (mapPresets == null) {
             throw IllegalStateException("presets cannot be null")
-        }
-
-        if (proceduralGenerator == null) {
-            throw IllegalStateException("generator cannot be null")
         }
     }
 }

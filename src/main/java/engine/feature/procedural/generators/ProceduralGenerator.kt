@@ -1,58 +1,76 @@
 package engine.feature.procedural.generators
 
-import engine.core.geometry.Point2D
-import engine.feature.procedural.OpenSimplex2S
-import engine.feature.procedural.data.ProceduralDataSet
 import engine.feature.tiled.data.TileMap
+import engine.feature.tiled.data.TileSet
+import engine.feature.tiled.data.layer.Layer
+import engine.feature.tiled.data.layer.TileLayer
 
-typealias PointToTileIdList = MutableList<Pair<Point2D, Int>>
-typealias PointToNoiseValueList = MutableList<Pair<Point2D, Float?>>
+object ProceduralGenerator {
 
-class ProceduralGenerator(
-    private val dataSet: ProceduralDataSet,
-    private val noise: (Long, Double, Double) -> Float = { l, x, y ->
-        OpenSimplex2S.noise2(l, x, y)
-    },
-    private val widthInTiles: Int,
-    private val heightInTiles: Int,
-    private val frequency: Int,
-    tileSize: Float
-) {
+    fun generateMap(
+        widthInTiles: Int,
+        heightInTiles: Int,
+        numSeeds: Int,
+        biomeMap: Map<String, TileSet>,
+        seed: Int,
+    ): TileMap {
+        val voronoiMapData =
+            VoronoiBasedGenerator.generate(
+                widthInTiles,
+                heightInTiles,
+                numSeeds,
+                biomeMap.map { it.key },
+                seed
+            )
 
-    private val worldData: MutableList<Point2D> = mutableListOf()
+        var index = 0
+        val tileLayers = biomeMap.map {
+            generateLayers(
+                index++,
+                widthInTiles,
+                heightInTiles,
+                targetBiome = it.key,
+                targetSet = it.value,
+                voronoiMapData
+            )
+        }
 
-    private val walkableTerrainGenerator = WalkableTerrainGenerator(
-        noiseTypeValues = dataSet.terrainData.noiseParameterTypes,
-        targetTypeValues = dataSet.terrainData.elementTypes,
-        noiseFunc = noise
-    )
+        return TileMap(
+            layers = tileLayers,
+            widthInTiles = widthInTiles,
+            heightInTiles = heightInTiles
+        )
+    }
 
-    init {
-        for (row in 0 until heightInTiles) {
-            for (column in 0 until widthInTiles) {
-                worldData.add(
-                    Point2D(row * tileSize, column * tileSize)
-                )
+    private fun generateLayers(
+        layerIndex: Int,
+        widthInTiles: Int,
+        heightInTiles: Int,
+        targetBiome: String,
+        targetSet: TileSet,
+        voronoiMapData: Array<Array<String>>
+    ): Layer {
+
+        val tileIds = mutableListOf<Int>()
+        for (i in 0 .. widthInTiles) {
+            for (j in 0 .. heightInTiles) {
+                if (voronoiMapData[i][j] != targetBiome) {
+                    tileIds.add(-1)
+                } else {
+                    val setOfIds = (0 until targetSet.getUniqueTilesCount()).toList()
+                    tileIds.add(setOfIds.random())
+                }
             }
         }
 
-        if (widthInTiles * heightInTiles != worldData.size) {
-            throw IllegalStateException("Tiles count is not valid")
-        }
-    }
-
-    fun generateMap(seed: Long): TileMap {
-        val walkableTerrainLayers = walkableTerrainGenerator.generateLayers(
-            seed,
-            worldData,
-            dataSet.terrainData.value,
-            widthInTiles,
-            heightInTiles
-        )
-        return TileMap(
-            layers = walkableTerrainLayers,
+        return TileLayer(
+            name = "walkable_layer_$layerIndex",
             widthInTiles = widthInTiles,
-            heightInTiles = heightInTiles
+            heightInTiles = heightInTiles,
+            set = targetSet,
+            tileIdsData = tileIds,
+            properties = mutableListOf(),
+            model = null
         )
     }
 }
