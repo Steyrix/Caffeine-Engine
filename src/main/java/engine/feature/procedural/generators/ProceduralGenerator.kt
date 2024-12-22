@@ -52,8 +52,8 @@ object ProceduralGenerator {
     ): Layer {
 
         val tileIds = mutableListOf<Int>()
-        for (i in 0 .. widthInTiles) {
-            for (j in 0 .. heightInTiles) {
+        for (i in 0 until  widthInTiles) {
+            for (j in 0 until  heightInTiles) {
                 if (voronoiMapData[i][j] != targetBiome) {
                     tileIds.add(-1)
                 } else {
