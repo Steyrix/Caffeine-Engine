@@ -12,6 +12,7 @@ object ProceduralGenerator {
         heightInTiles: Int,
         numSeeds: Int,
         biomeMap: Map<String, TileSet>,
+        maxDisplacement: Int,
         seed: Int,
     ): TileMap {
         val voronoiMapData =
@@ -20,6 +21,7 @@ object ProceduralGenerator {
                 heightInTiles,
                 numSeeds,
                 biomeMap.map { it.key },
+                maxDisplacement,
                 seed
             )
 

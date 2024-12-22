@@ -19,6 +19,7 @@ class ProceduralTileMap private constructor(
     private val heightInTiles: Int,
     private val biomeMap: Map<String, TileSet>?,
     private val numSeeds: Int,
+    private val maxPolygonDisplacement: Int,
     private val seed: Int = 0,
 ) : SingleGameEntity(), TileMapController {
 
@@ -37,6 +38,7 @@ class ProceduralTileMap private constructor(
         var heightInTiles: Int = 0
         var biomeMap: Map<String, TileSet>? = null
         var numSeeds: Int = 0
+        var maxPolygonDisplacement: Int = 0
         var seed: Int = 0
         private var renderProjection: Matrix4f? = null
         private var collisionContexts: List<CollisionContext<*>> = emptyList()
@@ -68,6 +70,11 @@ class ProceduralTileMap private constructor(
         fun numSeeds(value: Int) =
             this.apply {
                 numSeeds = value
+            }
+
+        fun maxPolygonDisplacement(value: Int) =
+            this.apply {
+                maxPolygonDisplacement = value
             }
 
         fun seed(value: Int) =
@@ -154,6 +161,7 @@ class ProceduralTileMap private constructor(
                     heightInTiles,
                     numSeeds,
                     biomeMap!!,
+                    maxPolygonDisplacement,
                     seed
                 ).apply {
                     shaders = TileMapGraphicsProvider.getShaders(mapPresets, renderProjection)

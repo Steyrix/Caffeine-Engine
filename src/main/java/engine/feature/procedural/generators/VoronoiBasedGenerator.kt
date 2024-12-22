@@ -10,9 +10,16 @@ object VoronoiBasedGenerator {
         mapHeight: Int,
         numSeeds: Int,
         biomeStringKeys: List<String> = listOf("Grass", "Stone", "Dirt"),
+        maxDisplacement: Int,
         seed: Int
     ): Array<Array<String>> {
-        val points = generateSeedPoints(mapWidth, mapHeight, numSeeds, seed)
+        val points = generateSeedPoints(
+            mapWidth,
+            mapHeight,
+            numSeeds,
+            seed,
+            maxDisplacement
+        )
         val voronoiMap = calculateVoronoiMap(mapWidth, mapHeight, points)
         return assignBiomes(voronoiMap, biomeStringKeys)
     }
@@ -21,17 +28,19 @@ object VoronoiBasedGenerator {
         width: Int,
         height: Int,
         numSeeds: Int,
-        seed: Int
+        seed: Int,
+        maxDisplacement: Int
     ): List<Pair<Float, Float>> {
         val xRand = Random(seed)
         val yRand = Random(seed)
 
-        return List(numSeeds) {
+        val rawData = List(numSeeds) {
             Pair(
-                xRand.nextInt(0, width).toFloat(),
-                yRand.nextInt(0, height).toFloat()
+                xRand.nextInt(0, width),
+                yRand.nextInt(0, height)
             )
         }
+        return perturbSeedPoints(rawData, maxDisplacement)
     }
 
     private fun calculateVoronoiMap(
@@ -75,5 +84,14 @@ object VoronoiBasedGenerator {
         return biomeMap
     }
 
-
+    fun perturbSeedPoints(
+        seedPoints: List<Pair<Int, Int>>,
+        maxDisplacement: Int
+    ): List<Pair<Float, Float>> {
+        return seedPoints.map { (x, y) ->
+            val dx = Random.nextInt(-maxDisplacement, maxDisplacement).toFloat()
+            val dy = Random.nextInt(-maxDisplacement, maxDisplacement).toFloat()
+            Pair(x + dx, y + dy)
+        }
+    }
 }
